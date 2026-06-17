@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Orch term · 오케스트레이션(지휘자) 안내</title>
+<style>
+  :root {
+    --bg-0: #1b1b1d; --bg-1: #232327; --bg-2: #2b2b30; --line: #3a3a40;
+    --text: #e7e4de; --dim: #aaa69d; --faint: #76726a;
+    --amber: #d8a657; --amber-deep: #b8801f; --amber-soft: rgba(216,166,87,0.13);
+    --green: #6fbf73; --blue: #61afef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg-0); color: var(--text);
+    font: 15px/1.65 "Segoe UI", system-ui, sans-serif; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 22px 80px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .topbar .brand-mini { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+  .topbar .brand-mini img.glyph { width: 26px; height: 26px; }
+  .topbar .brand-mini img.wordmark { height: 22px; filter: invert(1); display: block; }
+  .topnav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .topnav a { color: var(--dim); text-decoration: none; font-size: 14px; }
+  .topnav a:hover { color: var(--amber); }
+  .topnav a.dl { color: var(--amber); border: 1px solid var(--amber); border-radius: 7px; padding: 5px 12px; }
+  .topnav a.dl:hover { background: var(--amber); color: #1b1b1d; }
+  h2 { font-size: 19px; margin: 38px 0 12px; padding-top: 8px;
+    border-top: 1px solid var(--line); color: var(--text); }
+  h2 .n { color: var(--amber); font-weight: 700; margin-right: 8px; }
+  h3 { font-size: 15px; color: var(--amber); margin: 22px 0 6px; }
+  p { margin: 8px 0; }
+  ul, ol { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  code { background: var(--amber-soft); color: var(--amber); padding: 1px 6px;
+    border-radius: 4px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 13px; }
+  .card { background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px;
+    padding: 4px 20px 16px; margin: 14px 0; }
+  .badge { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 999px;
+    border: 1px solid var(--amber); color: var(--amber); margin-bottom: 2px; }
+  .crosslink { background: var(--bg-1); border: 1px solid var(--line); border-left: 3px solid var(--amber);
+    border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 14px; color: var(--dim); }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--amber); }
+  kbd { background: var(--bg-2); border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 5px; padding: 1px 7px; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; }
+  .note { color: var(--faint); font-size: 13px; }
+  .note b, .lead b { color: var(--amber); }
+  .lead { font-size: 16px; color: var(--dim); }
+  pre { background: #141416; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;
+    overflow: auto; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; color: #d6d3cc; }
+  a { color: var(--blue); }
+  .toc { columns: 2; font-size: 14px; color: var(--dim); }
+  .toc a { color: var(--dim); text-decoration: none; }
+  .toc a:hover { color: var(--amber); }
+  .site-footer { margin-top: 50px; padding: 30px 0 10px; border-top: 1px solid var(--line);
+    text-align: center; color: var(--faint); font-size: 13px; }
+  .site-footer .footer-links { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 10px; }
+  .site-footer a { color: var(--dim); text-decoration: none; }
+  .site-footer a:hover { color: var(--amber); }
+  .site-footer .sponsor-row { display: flex; justify-content: center; margin: 4px 0 12px; }
+  .btn-sponsor { display: inline-flex; align-items: center; gap: 6px; padding: 4px 13px;
+    border: 1px solid var(--line); border-radius: 7px; background: var(--bg-1); color: var(--text);
+    font-size: 13px; font-weight: 500; }
+  .btn-sponsor:hover { border-color: #db61a2; }
+  .btn-sponsor svg { color: #db61a2; flex: 0 0 14px; }
+  .footer-copy { color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <a class="brand-mini" href="./index.html"><img class="glyph" src="./assets/app-icon.png" alt="" /><img class="wordmark" src="./assets/orch-term-wordmark.svg" alt="Orch term" /></a>
+    <nav class="topnav">
+      <a href="./orchestrate.html">오케스트레이션</a>
+      <a href="./gateway.html">게이트웨이</a>
+      <a class="dl" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe">다운로드</a>
+    </nav>
+  </header>
+
+  <p class="lead">Orch term은 여러 AI 코딩 에이전트(<b>claude · codex · agy</b>)를
+  한 곳에서 <b>부려 조율</b>하는 멀티에이전트 워크스테이션입니다. 이 문서는 <b>오케스트레이션(지휘자)</b> 기능 —
+  대화 중인 AI가 다른 AI를 워커로 띄워 다중 턴으로 협업시키는 기능 — 만 다룹니다.</p>
+
+  <div class="crosslink">외부 프로그램이 HTTP(OpenAI 호환)로 AI를 호출하는 <b>AI 게이트웨이</b>는 성격이 다른
+  기능입니다 → <a href="./gateway.html">AI 게이트웨이 소개 페이지</a>를 보세요.</div>
+
+  <div class="card">
+    <div class="toc">
+      <a href="#what">1. Orch term이란</a><br />
+      <a href="#concept">2. 오케스트레이션(지휘자)이란</a><br />
+      <a href="#setup">3. 설정 방법</a><br />
+      <a href="#use">4. 사용법</a><br />
+      <a href="#skill">5. 스킬 소개</a><br />
+    </div>
+  </div>
+
+  <h2 id="what"><span class="n">1</span>Orch term이란</h2>
+  <p>터미널·코드 에디터·내장 브라우저를 한 창에서 쓰는 데스크톱 앱입니다. 핵심 차별점은
+  <b>로컬 멀티에이전트 control plane</b> — 외부(또는 내부)의 AI가 Orch term 안에서 다른 AI를 작업자(워커)로
+  띄우고, 격리된 작업 공간에서 일을 시키고, 결과를 받아 조율할 수 있습니다.</p>
+  <ul>
+    <li><b>지휘관(commander)</b>: 일을 지시하는 에이전트(보통 당신이 대화 중인 Claude).</li>
+    <li><b>워커(worker)</b>: 지휘관이 띄운 codex·agy·claude 인스턴스. 각자 자기 탭/세션에서 실행.</li>
+    <li><b>지휘자 대시보드</b>: 살아있는 워커를 한눈에 보고 이동·종료하는 패널.</li>
+  </ul>
+
+  <h2 id="concept"><span class="n">2</span>오케스트레이션(지휘자)이란</h2>
+  <p>외부 Claude Code(또는 내부 에이전트)가 <b>MCP</b>로 Orch term 안의 다른 AI를 인터랙티브 탭에 띄우고,
+  <b>컨텍스트를 유지하며 다중 턴</b>으로 대화·협업시키는 기능입니다.</p>
+  <div class="card">
+    <p><span class="badge">지휘자 · MCP · 지속 세션</span></p>
+    <ul>
+      <li>프로토콜: <b>MCP</b>(<code>orchterm-agent-orch</code>), 포트 <code>9611</code>.</li>
+      <li>도구: <code>list_agents</code> · <code>open_session</code> · <code>send</code> · <code>close_session</code>.</li>
+      <li>워커를 <b>인터랙티브 탭</b>에 띄워 <b>다중 턴</b> 대화(컨텍스트 유지).</li>
+      <li>적합: 한 작업자에게 여러 번 지시·되묻기, 워크트리 멀티에이전트 협업.</li>
+      <li>보안: <b>127.0.0.1 바인딩 + Bearer 토큰</b>, <b>기본 off</b>(설정에서 켬).</li>
+    </ul>
+  </div>
+
+  <h2 id="setup"><span class="n">3</span>설정 방법</h2>
+  <p>햄버거 메뉴 → <b>설정</b>에서 켭니다. <b>활성화/포트 변경은 앱 재시작 후 적용</b>됩니다(부팅 시 1회 배선).</p>
+  <table>
+    <tr><th>항목</th><th>설명</th></tr>
+    <tr><td>오케스트레이션(지휘자)</td><td>토글로 켜면 MCP 서버(<code>:9611</code>)가 뜨고 토큰이 발급됩니다. 토큰은 <code>~/.claude.json</code> 등에 자동 등록되어 외부 Claude Code가 바로 씁니다. <b>기본 off.</b></td></tr>
+    <tr><td>헤드리스 모드</td><td>워커를 탭 없이(exec stdout) 돌릴지 여부. 끄면 워커가 보이는 탭으로 떠 진행을 눈으로 봅니다.</td></tr>
+  </table>
+  <p class="note">자동 등록 위치는 에이전트마다 다릅니다 — claude=<code>~/.claude.json</code>(인라인), codex=<code>~/.codex/config.toml</code>(토큰은 env), agy=<code>~/.gemini</code> 설정. 오케스트레이션 스킬도 세 에이전트의 skills 디렉터리에 함께 설치됩니다.</p>
+
+  <h2 id="use"><span class="n">4</span>사용법</h2>
+  <h3>워커 띄우기 (외부 Claude Code에서)</h3>
+  <p>지휘자 MCP가 켜져 있으면, 대화 중인 Claude에게 자연어로 지시하면 됩니다. 예:</p>
+  <pre>"워크트리 멀티에이전트로 A는 claude, B는 codex로 시켜줘.
+ 막히면 서로 결과를 넘겨서 조율해줘."</pre>
+  <p>그러면 지휘관이 <code>open_session</code>으로 워커를 띄우고 <code>send</code>로 턴을 주고받습니다. 완료된 워크트리
+  작업의 머지는 <b>항상 사용자 승인 후</b>에만 이루어지도록 설계되어 있습니다.</p>
+  <div class="crosslink"><b>최초 1회 폴더 승인</b> — 워커는 작업 폴더(보통 워크트리)에서 실행되는데, 각 에이전트가 그 폴더에서
+  <b>처음</b> 실행될 때 "이 폴더를 신뢰하시겠습니까?" 확인이 워커 탭에 한 번 뜹니다. <b>한 번 승인하면</b> 그 폴더는 다시 묻지 않습니다(워크트리가 바뀌면 새로 1회).
+  무인으로 승인 없이 돌리려면 <b>설정 → 에이전트 오케스트레이션 → "워커 위험 권한 우회"</b>를 켜세요(빠르지만 비권장 — 기본은 안전 모드).
+  (게이트웨이 워커 고정 폴더 안내는 <a href="./gateway.html">게이트웨이 페이지</a> 참고.)</div>
+  <h3>지휘자 대시보드 열기 <span style="color:var(--faint);font-weight:400;font-size:13px;">(보조 도구)</span></h3>
+  <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>로 명령 팔레트를 열고 <b>“오케스트레이션 워커 지휘자”</b>을 실행합니다.
+  살아있는 워커가 행으로 보이고, 각 행에서:</p>
+  <ul>
+    <li><b>상태</b>: 작업중 / 완료 / 주의 / 대기.</li>
+    <li><b>이동</b>: 해당 워커 탭으로 점프(다른 Space에 있어도 따라감).</li>
+    <li><b>닫기</b>: 워커 세션·탭 종료. (워커 탭을 직접 닫아도 지휘자 목록에서 자동 정리됩니다.)</li>
+  </ul>
+
+  <h2 id="skill"><span class="n">5</span>스킬 소개</h2>
+  <h3>orchestrate-workers</h3>
+  <p>메인 에이전트가 지휘자 MCP(<code>orchterm-agent-orch</code>)로 워커(codex·agy·claude)를 <b>격리된 git
+  워크트리</b>에 부려 조율하는 스킬입니다. 한 워커가 막혀 다른 산출물이 필요하면 메인이 다른 워커에게 위임하고
+  결과를 되돌려줍니다.</p>
+  <ul>
+    <li>트리거 예: “워크트리 멀티에이전트로”, “졸병 띄워서”, “워커에게 위임”, “A는 claude B는 codex로 시켜”.</li>
+    <li>완료된 워크트리 작업은 준비(rebase·충돌해결·빌드/테스트)까지 자율, <b>머지는 사용자 승인 후</b>.</li>
+    <li>전제: <code>orchterm-agent-orch</code> MCP가 등록·실행 중이어야 합니다(설정에서 지휘자 활성화).</li>
+  </ul>
+  <p class="note">스킬은 지휘자을 켜고 앱을 재시작하면 claude·codex·agy 각 skills 디렉터리에 자동 설치됩니다. 세
+  에이전트 모두 동일한 SKILL.md를 네이티브로 읽습니다.</p>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a>
+      <a href="./orchestrate.html">오케스트레이션</a>
+      <a href="./gateway.html">게이트웨이</a>
+    </div>
+    <div class="sponsor-row">
+      <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a>
+    </div>
+    <div class="footer-copy">Orch term · © 2026</div>
+  </footer>
+</div>
+</body>
+</html>

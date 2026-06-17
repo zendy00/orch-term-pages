@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Orch term — 멀티에이전트 터미널 워크스테이션</title>
+<meta name="description" content="여러 AI 코딩 에이전트(claude·codex·agy)를 한 곳에서 부려 조율하는 멀티에이전트 터미널 워크스테이션. 오케스트레이션(지휘자)과 AI 게이트웨이." />
+<meta property="og:title" content="Orch term" />
+<meta property="og:description" content="멀티에이전트 터미널 워크스테이션 — 오케스트레이션 + AI 게이트웨이" />
+<meta property="og:type" content="website" />
+<link rel="icon" href="./assets/app-icon.png" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ── 상단 내비 ── -->
+  <header class="topbar">
+    <a class="brand-mini" href="#hero"><img class="glyph" src="./assets/app-icon.png" alt="" /><img class="wordmark" src="./assets/orch-term-wordmark.svg" alt="Orch term" /></a>
+    <nav class="topnav">
+      <a href="./orchestrate.html">오케스트레이션</a>
+      <a href="./gateway.html">게이트웨이</a>
+      <a class="dl" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe">다운로드</a>
+    </nav>
+  </header>
+
+  <!-- ── 히어로 ── -->
+  <section id="hero">
+    <h1 class="sr-only">Orch term — 멀티에이전트 터미널 워크스테이션</h1>
+    <img class="hero-banner" src="./assets/orch-term-banner.png" alt="Orch term — claude·codex·agy AI 에이전트 오케스트레이션 터미널" />
+    <p class="tagline">여러 AI 코딩 에이전트를 한 곳에서 <b>부려 조율</b>하는 멀티에이전트 터미널 워크스테이션.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe">다운로드 (Windows)</a>
+      <a class="btn" href="#highlight">기능 보기</a>
+    </div>
+  </section>
+
+  <!-- ── 강조: 오케스트레이션 + 게이트웨이 ── -->
+  <section id="highlight">
+    <h2><span class="hash">##</span>orchestrate + gateway</h2>
+    <p class="section-lead">이름값 그대로 — Orch term의 핵심은 <b>로컬 멀티에이전트 control plane</b>입니다.</p>
+    <div class="cards">
+      <div class="card hl">
+        <h3>오케스트레이션 (지휘자)</h3>
+        <p>대화 중인 AI가 다른 AI(<b>claude·codex·agy</b>)를 워커로 띄워 <b>컨텍스트 유지 다중 턴</b>으로 협업시킵니다. commander/worker · 지휘자 대시보드.</p>
+        <div class="meta">MCP orchterm-agent-orch · :9611 · open/send/close · 127.0.0.1+Bearer · 기본 off</div>
+        <p><a class="more" href="./orchestrate.html">→ 오케스트레이션 가이드</a></p>
+      </div>
+      <div class="card hl">
+        <h3>AI 게이트웨이</h3>
+        <p>외부 프로그램이 로컬 API(<code>POST /run</code>, OpenAI 호환)로 AI를 호출합니다. 단발 호출도, <code>session</code>으로 멀티턴 대화도. machine-to-machine 자동화에 적합.</p>
+        <div class="meta">HTTP :9610 · 127.0.0.1+Bearer · Host 검증 · 기본 off</div>
+        <p><a class="more" href="./gateway.html">→ 게이트웨이 소개</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 주요 기능 ── -->
+  <section id="main-features">
+    <h2><span class="hash">##</span>한 창에 세 가지</h2>
+    <p class="section-lead">터미널·에디터·브라우저를 하나의 워크스테이션에서.</p>
+    <div class="cards">
+      <div class="card"><h3>터미널</h3><p>ConPTY 세션, 복사/붙여넣기, WebGL 렌더러, 셸 종료 시 탭 자동 닫기.</p></div>
+      <div class="card"><h3>코드 에디터</h3><p>파일 외부 변경 자동 리로드, CRLF 처리. 탐색기에서 바로 열기.</p></div>
+      <div class="card"><h3>인앱 브라우저</h3><p>Tauri 네이티브 자식 웹뷰(iframe 아님) — 링크·뒤로/앞으로가 자연스럽게 동작.</p></div>
+    </div>
+  </section>
+
+  <!-- ── 중간 기능 ── -->
+  <section id="mid-features">
+    <h2><span class="hash">##</span>더 깊이</h2>
+    <div class="cards">
+      <div class="card"><h3>Spaces</h3><p>전환 가능한 독립 레이아웃(타이틀바 칩), Space별 분할 트리/탐색기, 실시간 영속화+복원. <kbd>Ctrl</kbd>+<kbd>1</kbd>‥<kbd>9</kbd>.</p></div>
+      <div class="card"><h3>분할 탭·패널</h3><p>바이너리 분할 트리, 패널 최대화(<kbd>Shift</kbd>+<kbd>Esc</kbd>), 탭 인라인 rename.</p></div>
+      <div class="card"><h3>CDP 미러</h3><p>에이전트(chrome-devtools-mcp)의 브라우징을 인앱 패널에 실시간 미러.</p></div>
+      <div class="card"><h3>파일 탐색기</h3><p>멀티 프로젝트, 키보드 네비, 멀티셀렉트, 인라인 생성/rename, 드래그&드롭.</p></div>
+      <div class="card"><h3>완료 배지 · 알림</h3><p>비활성 탭에 에이전트 완료(초록)/입력 대기(주황) 배지. 알림에서 전체 메시지를 확인하고 클릭하면 <b>해당 탭으로 바로 이동</b>.</p></div>
+    </div>
+  </section>
+
+  <!-- ── 자잘한 기능 ── -->
+  <section id="minor-features">
+    <h2><span class="hash">##</span>그 외</h2>
+    <ul class="oneliners">
+      <li><b>외관</b> — Zed 기본 폰트 · 한글 코딩폰트 피커 · 창 투명도 · 상태바</li>
+      <li><b>창 상태 복원</b> — 크기·위치·최대화 재시작 복원</li>
+      <li><b>셸 자동 감지</b> — 설치된 셸을 탐지해 목록 제공</li>
+      <li><b>클립보드 이미지</b> — 붙여넣기 시 임시 PNG 경로로 변환</li>
+    </ul>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a>
+      <a href="./orchestrate.html">오케스트레이션</a>
+      <a href="./gateway.html">게이트웨이</a>
+    </div>
+    <div class="sponsor-row">
+      <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a>
+    </div>
+    <div class="footer-copy">Orch term · © 2026</div>
+  </footer>
+</div>
+</body>
+</html>

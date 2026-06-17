@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Orch term · AI 게이트웨이</title>
+<style>
+  :root {
+    --bg-0: #1b1b1d; --bg-1: #232327; --bg-2: #2b2b30; --line: #3a3a40;
+    --text: #e6e3dd; --dim: #a6a29a; --faint: #6f6b63;
+    --amber: #d8a657; --amber-soft: rgba(216,166,87,0.14);
+    --green: #6fbf73; --red: #e06c75; --blue: #61afef;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg-0); color: var(--text);
+    font: 14px/1.55 "Segoe UI", system-ui, sans-serif;
+    padding: 0 0 60px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .topbar .brand-mini { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+  .topbar .brand-mini img.glyph { width: 26px; height: 26px; }
+  .topbar .brand-mini img.wordmark { height: 22px; filter: invert(1); display: block; }
+  .topnav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .topnav a { color: var(--dim); text-decoration: none; font-size: 14px; }
+  .topnav a:hover { color: var(--amber); }
+  .topnav a.dl { color: var(--amber); border: 1px solid var(--amber); border-radius: 7px; padding: 5px 12px; }
+  .topnav a.dl:hover { background: var(--amber); color: #1b1b1d; }
+  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin: 26px 0 10px; }
+  .card { background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .row { display: grid; grid-template-columns: 130px 1fr; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .row > label { color: var(--dim); font-size: 13px; }
+  input, select, textarea {
+    width: 100%; background: var(--bg-2); border: 1px solid var(--line); color: var(--text);
+    border-radius: 6px; padding: 8px 10px; font: inherit;
+  }
+  textarea { min-height: 84px; resize: vertical; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 13px; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--amber); }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  button {
+    font: inherit; cursor: pointer; border-radius: 6px; padding: 8px 16px;
+    border: 1px solid var(--line); background: var(--bg-2); color: var(--text);
+  }
+  button:hover { border-color: var(--amber); }
+  button.primary { background: var(--amber); color: #2a1e08; border-color: var(--amber); font-weight: 600; }
+  button.primary:hover { filter: brightness(1.06); }
+  pre {
+    background: #141416; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px; overflow: auto; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 12.5px; color: #d6d3cc; white-space: pre-wrap; word-break: break-word; margin: 8px 0 0;
+  }
+  .cmdblock { position: relative; }
+  .cmdblock .copy { position: absolute; top: 8px; right: 8px; padding: 3px 10px; font-size: 12px; }
+  .note { color: var(--faint); font-size: 12.5px; margin-top: 8px; }
+  .note b { color: var(--amber); }
+  .lead { font-size: 15px; color: var(--dim); margin: 4px 0 0; }
+  .lead b { color: var(--amber); }
+  .badge { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--amber); color: var(--amber); }
+  .crosslink { background: var(--bg-1); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 8px; padding: 11px 15px; margin: 14px 0 4px; font-size: 13px; color: var(--dim); }
+  ul.intro { margin: 10px 0; padding-left: 20px; }
+  ul.intro li { margin: 4px 0; }
+  a { color: var(--blue); }
+  .log .line { padding: 2px 0; }
+  .log .ok { color: var(--green); }
+  .log .err { color: var(--red); }
+  .log .info { color: var(--blue); }
+  .log .muted { color: var(--faint); }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; color: var(--dim); }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--amber); font-weight: 600; }
+  code { background: var(--amber-soft); color: var(--amber); padding: 1px 5px; border-radius: 4px; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; }
+  .site-footer { margin-top: 50px; padding: 30px 0 10px; border-top: 1px solid var(--line);
+    text-align: center; color: var(--faint); font-size: 13px; }
+  .site-footer .footer-links { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 10px; }
+  .site-footer a { color: var(--dim); text-decoration: none; }
+  .site-footer a:hover { color: var(--amber); }
+  .site-footer .sponsor-row { display: flex; justify-content: center; margin: 4px 0 12px; }
+  .btn-sponsor { display: inline-flex; align-items: center; gap: 6px; padding: 4px 13px;
+    border: 1px solid var(--line); border-radius: 7px; background: var(--bg-1); color: var(--text);
+    font-size: 13px; font-weight: 500; }
+  .btn-sponsor:hover { border-color: #db61a2; }
+  .btn-sponsor svg { color: #db61a2; flex: 0 0 14px; }
+  .footer-copy { color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <a class="brand-mini" href="./index.html"><img class="glyph" src="./assets/app-icon.png" alt="" /><img class="wordmark" src="./assets/orch-term-wordmark.svg" alt="Orch term" /></a>
+    <nav class="topnav">
+      <a href="./orchestrate.html">오케스트레이션</a>
+      <a href="./gateway.html">게이트웨이</a>
+      <a class="dl" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe">다운로드</a>
+    </nav>
+  </header>
+
+  <h2>소개</h2>
+  <p class="lead"><span class="badge">게이트웨이 · HTTP · OpenAI 호환</span></p>
+  <p class="lead" style="margin-top:8px;">AI 게이트웨이는 외부 프로그램·스크립트가 로컬 HTTP로 Orch term 안의 AI에게
+  <b>프롬프트를 보내 결과를 동기로 돌려받는</b> 기능입니다. 단발 호출도, <code>session</code>으로 <b>멀티턴 대화</b>도 됩니다.
+  OpenAI <code>chat.completion</code> 호환 응답이라 기존 OpenAI 클라이언트도 base URL만 바꿔 붙일 수 있습니다.</p>
+  <ul class="intro">
+    <li>프로토콜: <b>HTTP</b>, 기본 포트 <code>9610</code>. 보안: <b>127.0.0.1 + Bearer 토큰</b>.</li>
+    <li>기본 활성화: <b>신규 설치 시 on</b>(설정에서 끄거나 다시 켤 수 있음).</li>
+    <li>엔드포인트: <code>POST /run</code>(또는 OpenAI 별칭 <code>POST /v1/chat/completions</code>) — 폴링 없음, 동기.</li>
+  </ul>
+  <div class="crosslink">AI가 <b>다른 AI를 워커로 띄워</b> 협업·조율시키는 건 게이트웨이가 아니라
+  <b>오케스트레이션(지휘자)</b> 기능입니다 → <a href="./orchestrate.html">오케스트레이션 소개 페이지</a>.</div>
+
+  <h2>워커 실행 폴더 · 최초 1회 승인</h2>
+  <div class="card">
+    <p>게이트웨이 요청을 받으면 안에서 AI 워커(claude·codex·agy)가 <b>고정된 작업 폴더</b>에서 실행됩니다.</p>
+    <p class="note">실행 폴더(고정): <code>~/.orchterm/gateway</code> — 설정에서 변경할 수 있습니다.</p>
+    <p class="note"><b>최초 1회 승인 필요</b> — 이 폴더에서 각 에이전트가 <b>처음</b> 실행될 때 "이 폴더를 신뢰하시겠습니까?"(folder trust) 확인이
+    워커 탭에 한 번 뜹니다. <b>한 번 승인하면</b> 폴더 경로가 고정이라 이후에는 다시 묻지 않습니다. (claude·codex는 정확한 경로 단위로,
+    agy는 상위 경로 prefix로 신뢰가 저장됩니다.) 첫 게이트웨이 호출이 응답 없이 멈춘 것 같으면, 워커 탭에서 신뢰 승인을 한 번 처리해 주세요.</p>
+    <p class="note">폴더는 <b>설정 → AI 게이트웨이 → 워커 폴더</b>에서 원하는 경로로 바꿀 수 있습니다(다음 호출부터 적용). 바꾸면 새 폴더를 다시 1회 승인하면 됩니다.</p>
+    <p class="note"><b>안전 모드 기본</b> — 위험 권한 우회 플래그를 쓰지 않습니다(그래서 위 1회 승인이 필요). 무인 자동화로 승인 없이 바로 돌리려면 <b>설정 → AI 게이트웨이 → "워커 위험 권한 우회"</b>를 켜세요(빠르지만 비권장). 안전 모드의 claude는 이 폴더에 자동 생성된 <code>.claude/settings.local.json</code>으로 파일/명령 프롬프트가 폴더 한정 억제됩니다.</p>
+  </div>
+
+  <h2>curl / PowerShell 예제</h2>
+  <div class="card">
+    <p>포트·토큰은 앱의 <b>설정 → AI 게이트웨이</b>에서 확인합니다(기본 포트 <code>9610</code>). 토큰은 항상 <code>Authorization: Bearer &lt;토큰&gt;</code> 헤더로 전송됩니다.</p>
+    <p style="font-weight:600; margin-top:14px;">curl</p>
+    <pre>curl -s -X POST http://127.0.0.1:9610/run \
+  -H "Authorization: Bearer <토큰>" \
+  -H "Content-Type: application/json" \
+  -d '{"agent":"claude","prompt":"안녕하세요. 자기소개 해주세요."}'</pre>
+    <p style="font-weight:600; margin-top:14px;">PowerShell</p>
+    <pre>$h = @{ Authorization = 'Bearer <토큰>' }
+$body = '{"agent":"claude","prompt":"안녕하세요. 자기소개 해주세요."}'
+$r = Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:9610/run' -Headers $h -ContentType 'application/json' -Body $body
+$r.choices[0].message.content</pre>
+    <div class="note">응답은 <b>동기</b>입니다 — 에이전트가 답할 때까지(최대 약 6분) 연결이 열려 있다가 OpenAI <code>chat.completion</code> 형태로 돌아옵니다.</div>
+  </div>
+
+  <h2>session · 대화 이어가기(멀티턴)</h2>
+  <div class="card">
+    <p><code>session</code> 필드가 핵심입니다 — 워커를 1회성으로 쓸지, 대화를 이어갈지 결정합니다.</p>
+    <table>
+      <tr><th>session 값</th><th>동작</th></tr>
+      <tr><td><b>비움</b>(미전송)</td><td><b>1회성</b> — 응답 직후 워커를 닫습니다. 매 호출이 새 워커(컨텍스트 없음).</td></tr>
+      <tr><td><b>임의 문자열</b>(예: <code>chat-42</code>)</td><td><b>keepalive</b> — 그 워커를 살려두고, <b>같은 값으로 다시 호출하면 같은 워커가 컨텍스트를 유지</b>한 채 이어서 답합니다.</td></tr>
+    </table>
+    <p class="note">예: turn1 <code>session=chat-42</code> "비밀 단어는 바나나73, OK?" → <code>OK</code> · turn2 <code>session=chat-42</code> "비밀 단어 뭐였지?" → <b>바나나73</b>(기억함). session을 비우면 turn2는 기억하지 못합니다.</p>
+    <pre>$h = @{ Authorization = 'Bearer &lt;토큰&gt;' }
+# 1턴
+Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:9610/run' -Headers $h -ContentType 'application/json' `
+  -Body '{"agent":"claude","session":"chat-42","prompt":"내 이름은 Zendy. OK라고만 답해"}'
+# 2턴 — 같은 session → 이름 기억
+Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:9610/run' -Headers $h -ContentType 'application/json' `
+  -Body '{"agent":"claude","session":"chat-42","prompt":"내 이름이 뭐였지?"}'</pre>
+    <p class="note">세션 종료: 같은 session을 더 안 쓰면 워커는 남아 있다가 앱 재시작/워커 탭 닫기로 정리됩니다(명시적 close API는 게이트웨이엔 없음 — 다회 대화는 오케스트레이션 MCP의 <code>close_session</code> 사용).</p>
+  </div>
+
+  <h2>옵션 · 필드 매뉴얼</h2>
+  <div class="card">
+    <h2 style="font-size:13px;margin:6px 0 2px;">요청 본문 필드 (<code>POST /run</code>)</h2>
+    <table>
+      <tr><th>필드</th><th>타입</th><th>기본</th><th>설명</th></tr>
+      <tr><td><code>agent</code></td><td>string</td><td>—</td><td>엔진: <code>claude</code>·<code>codex</code>·<code>agy</code>. (<code>ai</code>는 레거시 별칭)</td></tr>
+      <tr><td><code>ai</code></td><td>string</td><td>—</td><td>레거시 별칭. 우선순위 <code>agent &gt; ai &gt; "claude"</code>.</td></tr>
+      <tr><td><code>prompt</code></td><td>string</td><td>—</td><td>프롬프트(우선). 없으면 <code>messages</code> 사용. 둘 다 없으면 400.</td></tr>
+      <tr><td><code>messages</code></td><td>array</td><td>—</td><td>OpenAI식 <code>[{role,content}]</code>. <code>content</code>만 추출해 <code>\n\n</code>로 결합.</td></tr>
+      <tr><td><code>model</code></td><td>string</td><td>에이전트 기본</td><td>선택. 에이전트에 전달.</td></tr>
+      <tr><td><code>session</code></td><td>string</td><td>비움=1회성</td><td>위 표 참조 — 값 지정 시 keepalive(멀티턴).</td></tr>
+    </table>
+    <h2 style="font-size:13px;margin:14px 0 2px;">설정 화면 옵션 (설정 → AI 게이트웨이)</h2>
+    <table>
+      <tr><th>옵션</th><th>기본</th><th>설명</th></tr>
+      <tr><td>게이트웨이 사용</td><td><b>신규 설치 on</b></td><td>HTTP 서버 on/off. <b>변경 시 앱 재시작</b> 후 적용.</td></tr>
+      <tr><td>포트</td><td>9610</td><td>기본 <code>9610</code>. 설정에서 변경할 수 있습니다.</td></tr>
+      <tr><td>토큰</td><td>랜덤 48hex</td><td><code>Authorization: Bearer &lt;토큰&gt;</code>. 복사 아이콘으로 복사.</td></tr>
+      <tr><td>워커 폴더</td><td><code>&lt;datadir&gt;/gateway</code></td><td>워커 실행 폴더(고정). 비우면 기본값. 바꾸면 새 폴더 1회 트러스트 승인.</td></tr>
+      <tr><td>워커 위험 권한 우회</td><td><b>off(안전)</b></td><td>off=위험 플래그 미사용(최초 1회 트러스트 승인 필요). on=무인 우회(빠름·비권장).</td></tr>
+      <tr><td>에이전트 실행을 탭으로 보기</td><td>off</td><td>exec 에이전트 출력을 탭으로 표시.</td></tr>
+    </table>
+    <h2 style="font-size:13px;margin:14px 0 2px;">엔드포인트 · 응답 · 상태 코드</h2>
+    <table>
+      <tr><th>항목</th><th>값</th></tr>
+      <tr><td>경로</td><td><code>POST /run</code> · <code>POST /v1/chat/completions</code>(OpenAI 별칭, 동일)</td></tr>
+      <tr><td>응답</td><td><code>{ id, object:"chat.completion", choices:[{message:{role,content}}], result, error }</code> — 답은 <code>choices[0].message.content</code>(또는 <code>result</code>)</td></tr>
+      <tr><td>상태 코드</td><td><code>200</code> 정상 · <code>400</code> 프롬프트 없음 · <code>401</code> 토큰 불일치 · <code>403</code> Host 불일치 · <code>500</code> 처리 실패 · <code>504</code> 시간 초과(~6분)</td></tr>
+      <tr><td>CORS</td><td>로컬 origin(localhost·127.0.0.1·사설 LAN IP·file://)만 허용, 그 외 차단. 토큰 게이트는 별개로 항상 적용.</td></tr>
+    </table>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a>
+      <a href="./orchestrate.html">오케스트레이션</a>
+      <a href="./gateway.html">게이트웨이</a>
+    </div>
+    <div class="sponsor-row">
+      <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a>
+    </div>
+    <div class="footer-copy">Orch term · © 2026</div>
+  </footer>
+</div>
+</body>
+</html>
