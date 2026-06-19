@@ -16,9 +16,18 @@ export function pickLatest(releases) {
   return sorted.find((r) => !r.prerelease) || sorted[0];
 }
 
-/** 한 릴리즈의 에셋 다운로드 합계. */
+// 실제 사용자 다운로드 통계에서 제외할 에셋 이름. latest.json은 Tauri updater 매니페스트라
+// 앱이 업데이트를 확인할 때마다 받아가 카운트를 부풀린다 — 설치 다운로드가 아니라 폴링 노이즈다.
+const NON_DOWNLOAD_ASSETS = new Set(['latest.json']);
+
+/** 다운로드로 집계할 에셋만(업데이터 매니페스트 제외). */
+export function countedAssets(release) {
+  return (release.assets || []).filter((a) => !NON_DOWNLOAD_ASSETS.has(a.name));
+}
+
+/** 한 릴리즈의 에셋 다운로드 합계(업데이터 매니페스트 제외). */
 export function releaseDownloads(release) {
-  return (release.assets || []).reduce((sum, a) => sum + (a.download_count || 0), 0);
+  return countedAssets(release).reduce((sum, a) => sum + (a.download_count || 0), 0);
 }
 
 /** 여러 릴리즈의 다운로드 총합. */
@@ -26,9 +35,9 @@ export function totalDownloads(releases) {
   return releases.reduce((sum, r) => sum + releaseDownloads(r), 0);
 }
 
-/** 다운로드 많은 순으로 정렬한 에셋 목록(원본 불변). */
+/** 다운로드 많은 순으로 정렬한 에셋 목록(업데이터 매니페스트 제외, 원본 불변). */
 export function sortedAssets(release) {
-  return (release.assets || []).slice().sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
+  return countedAssets(release).slice().sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
 }
 
 export function fmtInt(n) {
