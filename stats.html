@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Orch term — 릴리즈 다운로드 통계</title>
+<link rel="icon" href="./assets/app-icon.png" />
+<link rel="stylesheet" href="./styles.css" />
+<style>
+  .stats-head { margin: 20px 0 6px; }
+  .stats-head h1 { font-size: 24px; margin: 0 0 4px; }
+  .stats-head .sub { color: var(--dim); margin: 0; font-size: 14px; }
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 22px 0; }
+  .summary .box { background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .summary .box .num { font: 700 28px var(--mono); color: var(--amber); word-break: break-all; }
+  .summary .box .lbl { color: var(--faint); font-size: 13px; margin-top: 4px; }
+  .toolbar { display: flex; align-items: center; gap: 12px; margin: 4px 0 8px; }
+  .refresh { background: none; border: 1px solid var(--line); color: var(--dim); border-radius: 7px;
+    padding: 4px 12px; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .refresh:hover { border-color: var(--amber); color: var(--amber); }
+  .toolbar .ts { color: var(--faint); font-size: 12.5px; font-family: var(--mono); }
+  .release { background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
+  .release.is-latest { border-left: 3px solid var(--amber); }
+  .release .rh { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .release .rh .tag { font: 600 18px var(--mono); color: var(--text); }
+  .release .rh .badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 600; }
+  .release .rh .badge.latest { background: var(--amber); color: #1b1b1d; }
+  .release .rh .badge.pre { background: var(--bg-2); color: var(--dim); border: 1px solid var(--line); }
+  .release .rh .dl { color: var(--green); font: 14px var(--mono); }
+  .release .rh .date { color: var(--faint); font-size: 13px; margin-left: auto; }
+  .asset-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+  .asset-table th, .asset-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  .asset-table th { color: var(--faint); font-weight: 500; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; }
+  .asset-table td.r, .asset-table th.r { text-align: right; font-family: var(--mono); white-space: nowrap; }
+  .asset-table td.dl { color: var(--green); }
+  .asset-table a { color: var(--text); word-break: break-all; }
+  .asset-table .none { color: var(--faint); }
+  .rlink { font-size: 13px; margin-top: 10px; display: inline-block; }
+  .state { text-align: center; color: var(--dim); padding: 40px 0; }
+  .state.err { color: #e06c75; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <img class="glyph" src="./assets/app-icon.png" alt="" />
+    <img class="wordmark" src="./assets/orch-term-wordmark.svg" alt="Orch term" />
+    <a class="home" href="./index.html">← 홈</a>
+  </header>
+
+  <div class="stats-head">
+    <h1>릴리즈 다운로드 통계</h1>
+    <p class="sub">zendy00/orch-term-pages · GitHub Release 에셋 누적 다운로드 (공개 API, 실시간)</p>
+  </div>
+
+  <div id="summary"></div>
+
+  <div class="toolbar">
+    <button id="refresh" class="refresh" type="button">↻ 새로고침</button>
+    <span class="ts" id="updated"></span>
+  </div>
+
+  <div id="releases"><div class="state">불러오는 중…</div></div>
+
+  <footer class="site-footer">
+    <div class="footer-copy">Orch term · 비공개 대시보드 (검색 미노출)</div>
+  </footer>
+</div>
+
+<script type="module">
+import {
+  sortByPublished, pickLatest, releaseDownloads, totalDownloads,
+  sortedAssets, fmtInt, fmtBytes, fmtDate,
+} from './stats.js';
+
+const REPO = 'zendy00/orch-term-pages';
+const API = `https://api.github.com/repos/${REPO}/releases?per_page=100`;
+const elSummary = document.getElementById('summary');
+const elReleases = document.getElementById('releases');
+const elUpdated = document.getElementById('updated');
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+async function load() {
+  elReleases.innerHTML = '<div class="state">불러오는 중…</div>';
+  try {
+    const res = await fetch(API, { headers: { Accept: 'application/vnd.github+json' } });
+    if (!res.ok) {
+      if (res.status === 403) throw new Error('GitHub API 레이트리밋(미인증 시간당 60회) 초과 — 잠시 후 다시 시도하세요.');
+      throw new Error(`GitHub API 오류: ${res.status}`);
+    }
+    const all = await res.json();
+    render(all.filter((r) => !r.draft));
+    elUpdated.textContent = `업데이트 ${new Date().toLocaleTimeString('ko-KR')}`;
+  } catch (e) {
+    elSummary.innerHTML = '';
+    elReleases.innerHTML = `<div class="state err">불러오기 실패: ${esc(e.message)}</div>`;
+  }
+}
+
+function render(releases) {
+  if (!releases.length) {
+    elSummary.innerHTML = '';
+    elReleases.innerHTML = '<div class="state">공개된 릴리즈가 없습니다.</div>';
+    return;
+  }
+  const latest = pickLatest(releases);
+  const total = totalDownloads(releases);
+
+  elSummary.innerHTML = `
+    <div class="summary">
+      <div class="box"><div class="num">${fmtInt(total)}</div><div class="lbl">총 다운로드</div></div>
+      <div class="box"><div class="num">${fmtInt(releases.length)}</div><div class="lbl">릴리즈 수</div></div>
+      <div class="box"><div class="num">${esc(latest ? latest.tag_name : '—')}</div><div class="lbl">최신 버전</div></div>
+    </div>`;
+
+  elReleases.innerHTML = sortByPublished(releases).map((r) => {
+    const isLatest = latest && r.id === latest.id;
+    const assets = sortedAssets(r);
+    const rows = assets.length
+      ? assets.map((a) => `
+          <tr>
+            <td><a href="${esc(a.browser_download_url)}" target="_blank" rel="noopener">${esc(a.name)}</a></td>
+            <td class="r">${fmtBytes(a.size)}</td>
+            <td class="r dl">${fmtInt(a.download_count)}</td>
+          </tr>`).join('')
+      : '<tr><td class="none" colspan="3">에셋 없음</td></tr>';
+    return `
+      <div class="release${isLatest ? ' is-latest' : ''}">
+        <div class="rh">
+          <span class="tag">${esc(r.tag_name)}</span>
+          ${isLatest ? '<span class="badge latest">LATEST</span>' : ''}
+          ${r.prerelease ? '<span class="badge pre">pre-release</span>' : ''}
+          <span class="dl">↓ ${fmtInt(releaseDownloads(r))}</span>
+          <span class="date">${fmtDate(r.published_at)}</span>
+        </div>
+        <table class="asset-table">
+          <thead><tr><th>에셋</th><th class="r">크기</th><th class="r">다운로드</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <a class="rlink" href="${esc(r.html_url)}" target="_blank" rel="noopener">→ GitHub 릴리즈</a>
+      </div>`;
+  }).join('');
+}
+
+document.getElementById('refresh').addEventListener('click', load);
+load();
+</script>
+</body>
+</html>
