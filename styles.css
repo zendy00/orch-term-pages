@@ -18,6 +18,19 @@ kbd { background:var(--bg-2); border:1px solid var(--line); border-bottom-width:
 pre { background:var(--pre); border:1px solid var(--line); border-radius:8px; padding:12px 14px;
   overflow:auto; font-family:var(--mono); font-size:12.5px; color:#d6d3cc; }
 
+/* 코드블록 + 우상단 복사 버튼 */
+.codeblock { position:relative; }
+.codeblock pre { padding-right:46px; }
+.copy-btn { position:absolute; top:8px; right:8px; width:30px; height:30px; padding:0;
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
+  background:var(--bg-2); border:1px solid var(--line); border-radius:7px; color:var(--dim);
+  transition:color .15s, border-color .15s, background .15s; }
+.copy-btn:hover { color:var(--amber); border-color:var(--amber); background:var(--bg-1); }
+.copy-btn .ic-check { display:none; }
+.copy-btn.copied { color:var(--green); border-color:var(--green); }
+.copy-btn.copied .ic-copy { display:none; }
+.copy-btn.copied .ic-check { display:inline-flex; }
+
 /* 공용 헤더(딥다이브의 홈 링크) */
 .site-head { display:flex; align-items:center; gap:14px; padding:26px 0 18px;
   border-bottom:1px solid var(--line); margin-bottom:8px; }

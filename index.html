@@ -52,10 +52,22 @@
       <div class="card hl">
         <h3>macOS</h3>
         <p><b>가장 쉬운 방법</b> — 터미널 한 줄(Apple Silicon·Intel 자동 판별 → 다운로드·설치·Gatekeeper 해제):</p>
-        <pre>curl -fsSL https://github.com/zendy00/orch-term-pages/releases/latest/download/install.sh | sh</pre>
+        <div class="codeblock">
+          <pre>curl -fsSL https://github.com/zendy00/orch-term-pages/releases/latest/download/install.sh | sh</pre>
+          <button type="button" class="copy-btn" aria-label="명령어 복사" title="복사">
+            <svg class="ic-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="ic-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
         <p><code>curl</code> 다운로드는 격리(quarantine)가 붙지 않아 <b>"손상되어 열 수 없습니다"</b> 경고를 애초에 피합니다.</p>
         <p>직접 <code>.dmg</code>를 받았다면(<a href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-aarch64.dmg">Apple Silicon</a> · <a href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-x64.dmg">Intel</a>) <code>/Applications</code>로 옮긴 뒤 한 번 실행:</p>
-        <pre>xattr -dr com.apple.quarantine /Applications/orchterm.app</pre>
+        <div class="codeblock">
+          <pre>xattr -dr com.apple.quarantine /Applications/orchterm.app</pre>
+          <button type="button" class="copy-btn" aria-label="명령어 복사" title="복사">
+            <svg class="ic-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="ic-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
         <div class="meta">install.sh·Intel 빌드는 다음 릴리즈부터 제공</div>
       </div>
     </div>
@@ -127,5 +139,29 @@
     <div class="footer-copy">Orch term · © 2026</div>
   </footer>
 </div>
+<script>
+  // 코드블록 복사 버튼: 같은 .codeblock 안의 <pre> 텍스트를 클립보드로. 성공 시 체크 아이콘 1.5초.
+  document.querySelectorAll(".copy-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = btn.closest(".codeblock") && btn.closest(".codeblock").querySelector("pre");
+      if (!pre) return;
+      var text = pre.textContent.trim();
+      var ok = function () {
+        btn.classList.add("copied");
+        setTimeout(function () { btn.classList.remove("copied"); }, 1500);
+      };
+      var fallback = function () {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        try { document.execCommand("copy"); ok(); } catch (e) {}
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, fallback);
+      } else { fallback(); }
+    });
+  });
+</script>
 </body>
 </html>
