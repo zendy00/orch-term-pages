@@ -34,6 +34,11 @@
   .asset-table th { color: var(--faint); font-weight: 500; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; }
   .asset-table td.r, .asset-table th.r { text-align: right; font-family: var(--mono); white-space: nowrap; }
   .asset-table td.dl { color: var(--green); }
+  .asset-table tr.uncounted td,
+  .asset-table tr.uncounted td.dl { color: var(--faint); }
+  .asset-table tr.uncounted a { color: var(--faint); }
+  .tag-uncounted { font-size: 10.5px; color: var(--faint); border: 1px solid var(--line);
+    border-radius: 99px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
   .asset-table a { color: var(--text); word-break: break-all; }
   .asset-table .none { color: var(--faint); }
   .rlink { font-size: 13px; margin-top: 10px; display: inline-block; }
@@ -71,7 +76,7 @@
 <script type="module">
 import {
   sortByPublished, pickLatest, releaseDownloads, totalDownloads,
-  sortedAssets, fmtInt, fmtBytes, fmtDate,
+  sortedAssets, isCounted, fmtInt, fmtBytes, fmtDate,
 } from './stats.js';
 
 const REPO = 'zendy00/orch-term-pages';
@@ -119,12 +124,16 @@ function render(releases) {
     const isLatest = latest && r.id === latest.id;
     const assets = sortedAssets(r);
     const rows = assets.length
-      ? assets.map((a) => `
-          <tr>
-            <td><a href="${esc(a.browser_download_url)}" target="_blank" rel="noopener">${esc(a.name)}</a></td>
+      ? assets.map((a) => {
+          const counted = isCounted(a);
+          const badge = counted ? '' : ' <span class="tag-uncounted" title="업데이터 매니페스트 — 집계 제외(폴링)">미집계</span>';
+          return `
+          <tr${counted ? '' : ' class="uncounted"'}>
+            <td><a href="${esc(a.browser_download_url)}" target="_blank" rel="noopener">${esc(a.name)}</a>${badge}</td>
             <td class="r">${fmtBytes(a.size)}</td>
             <td class="r dl">${fmtInt(a.download_count)}</td>
-          </tr>`).join('')
+          </tr>`;
+        }).join('')
       : '<tr><td class="none" colspan="3">에셋 없음</td></tr>';
     return `
       <div class="release${isLatest ? ' is-latest' : ''}">

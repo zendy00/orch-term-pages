@@ -20,9 +20,14 @@ export function pickLatest(releases) {
 // 앱이 업데이트를 확인할 때마다 받아가 카운트를 부풀린다 — 설치 다운로드가 아니라 폴링 노이즈다.
 const NON_DOWNLOAD_ASSETS = new Set(['latest.json']);
 
+/** 이 에셋을 다운로드 통계로 집계하는가(업데이터 매니페스트는 false). */
+export function isCounted(asset) {
+  return !NON_DOWNLOAD_ASSETS.has(asset.name);
+}
+
 /** 다운로드로 집계할 에셋만(업데이터 매니페스트 제외). */
 export function countedAssets(release) {
-  return (release.assets || []).filter((a) => !NON_DOWNLOAD_ASSETS.has(a.name));
+  return (release.assets || []).filter(isCounted);
 }
 
 /** 한 릴리즈의 에셋 다운로드 합계(업데이터 매니페스트 제외). */
@@ -35,9 +40,14 @@ export function totalDownloads(releases) {
   return releases.reduce((sum, r) => sum + releaseDownloads(r), 0);
 }
 
-/** 다운로드 많은 순으로 정렬한 에셋 목록(업데이터 매니페스트 제외, 원본 불변). */
+// 목록 표시용 에셋: 집계 대상을 다운로드 순으로 앞에, 미집계 매니페스트(latest.json)는 그 뒤에.
+// 카운트엔 안 들어가지만 목록에선 보여 준다(미집계임은 렌더러가 isCounted로 구분 표기).
 export function sortedAssets(release) {
-  return countedAssets(release).slice().sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
+  const byDownloads = (a, b) => (b.download_count || 0) - (a.download_count || 0);
+  const all = release.assets || [];
+  const counted = all.filter(isCounted).sort(byDownloads);
+  const uncounted = all.filter((a) => !isCounted(a)).sort(byDownloads);
+  return [...counted, ...uncounted];
 }
 
 export function fmtInt(n) {
