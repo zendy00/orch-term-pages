@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>멀티에이전트 워크스테이션 — Orch term 가이드</title>
+<meta name="description" content="한 창에 터미널·에디터·브라우저를 이진 분할 트리로 펼치고, 각 패널에 다른 AI·셸을 띄워 한눈에. 분할·패널 최대화(Shift+Esc)·사이드바 4모드." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 분할 레이아웃 · 에디터/브라우저 패널 재현 (디자인 시스템 토큰만 사용) */
+  .wcol { display:flex; flex-direction:column; gap:var(--pane-gap); flex:1 1 auto; min-width:0; min-height:0; }
+  .wcol > .pane { flex:1 1 0; min-height:0; }
+
+  /* 에디터(CodeMirror) 패널 재현 */
+  .ed { position:absolute; inset:0; display:flex; font-family:var(--code-font); font-size:var(--code-fs); line-height:1.6; overflow:hidden; }
+  .ed-gutter { flex:none; padding:6px 9px 0; text-align:right; color:var(--text-faint); background:var(--bg-1); border-right:1px solid var(--line-faint); white-space:pre; user-select:none; }
+  .ed-code { flex:1 1 auto; padding:6px 12px 0; color:var(--text); white-space:pre; overflow:hidden; }
+  .ed .k { color:var(--accent); } .ed .t { color:var(--term-cyan); } .ed .s { color:var(--term-green); } .ed .c { color:var(--text-faint); }
+
+  /* 인앱 브라우저(네이티브 자식 웹뷰) 패널 재현 */
+  .bweb { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--bg-1); }
+  .bweb-url { display:flex; align-items:center; gap:7px; height:24px; margin:5px 5px 0; padding:0 11px; background:var(--bg-2); border:1px solid var(--line); border-radius:999px; font-family:var(--code-font); font-size:11px; color:var(--text-dim); }
+  .bweb-url .lk { color:var(--success); display:inline-grid; place-items:center; }
+  .bweb-page { flex:1 1 auto; margin:6px 5px 5px; padding:13px 15px; background:var(--bg-0); border:1px solid var(--line-faint); border-radius:var(--r-sm); overflow:hidden; }
+  .bweb-h { font-family:var(--ui); font-weight:700; font-size:16px; color:var(--text-strong); }
+  .bweb-sub { font-size:11.5px; color:var(--text-dim); margin-top:3px; }
+  .bweb-bar { height:2px; width:46px; border-radius:2px; background:var(--accent); margin:11px 0; }
+  .bweb-row { height:7px; border-radius:3px; background:var(--line-faint); margin:7px 0; }
+
+  /* 브라우저 탭 글로브 글리프(앱은 Material 글로브 사용 — 하베스트 SVG 세트 외) */
+  .tab-glb { font-size:11px; line-height:1; }
+
+  /* 최대화 토글 강조 버튼(헤더 .active) 재현 */
+  .pane-act.on { color:var(--accent); background:var(--accent-soft); }
+</style>
+</head>
+<body data-page="workstation">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>대형 기능</span><span class="sep">/</span><span>멀티에이전트 워크스테이션</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 대형 기능 · 멀티에이전트 워크스테이션 <span class="flag">split tree</span></p>
+    <h1 class="page-title">멀티에이전트 워크스테이션</h1>
+    <p class="lede">한 창에 <b>터미널·에디터·브라우저</b>를 <b>이진 분할 트리</b>로 펼치고, 각 패널에 <b>다른 AI·셸</b>을 띄워 한눈에 봅니다. 단순 터미널이 아니라 여러 에이전트를 동시에 부리는 작업대입니다.</p>
+
+    <!-- 한 창의 구조 -->
+    <h2 class="sec" id="what"><span class="hash"></span> 한 창의 구조</h2>
+    <p>화면을 가로·세로로 나눈 각 칸이 <b>패널(pane)</b>이고, 각 패널은 <b>터미널·에디터·브라우저</b> 탭을 담습니다. 이진 분할 트리라서 어떤 패널이든 다시 둘로 나눌 수 있어, 한 창 안에 세 종류가 자유롭게 공존합니다.</p>
+
+    <figure class="fig">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 터미널 · 에디터 · 브라우저</span><span class="badge ok">3-way split</span></div>
+        <div class="shot-stage" style="--shot-h:472px">
+          <div class="app">
+            <!-- 타이틀바 + Space 칩 -->
+            <div class="titlebar">
+              <div class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></div>
+              <div class="titlebar-spaces">
+                <div class="space-chip active"><span class="space-chip-num">1</span> dev</div>
+                <div class="space-chip"><span class="space-chip-num">2</span> agents</div>
+                <div class="space-chip-add">+</div>
+              </div>
+              <div class="titlebar-title"></div>
+              <div class="titlebar-actions">
+                <button class="titlebar-btn" data-icon="contrast"></button>
+                <button class="titlebar-btn" data-icon="bell"></button>
+              </div>
+              <div class="titlebar-controls">
+                <button class="titlebar-btn" data-icon="window-minimize"></button>
+                <button class="titlebar-btn" data-icon="window-maximize"></button>
+                <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
+              </div>
+            </div>
+            <!-- 본문: 좌 탐색기 + 3분할 -->
+            <div class="body">
+              <div class="explorer-col">
+                <div class="explorer">
+                  <div class="explorer-header"><span class="proj">orch-term</span></div>
+                  <div class="explorer-body" style="font-size:12px">
+                    <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">src</span></div>
+                    <div class="tree-row" style="padding-left:24px"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">workspace</span></div>
+                    <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">types.ts</span></div>
+                    <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">pane-manager.ts</span></div>
+                    <div class="tree-row"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">src-tauri</span></div>
+                    <div class="tree-row"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">README.md</span></div>
+                  </div>
+                  <div class="explorer-footer"><span class="explorer-foot-git"><span class="i dim" data-icon="git-branch" style="width:11px"></span> main</span><span class="explorer-foot-sp">Space 1</span></div>
+                </div>
+                <div class="sidebar-modebar"><button class="active" data-icon="folder"></button><button data-icon="search"></button><button data-icon="git"></button><button data-icon="tasks"></button><span class="sp"></span></div>
+              </div>
+              <div class="main-col">
+                <div class="panes">
+                  <!-- ② 터미널 패널 -->
+                  <div class="pane active-pane">
+                    <div class="pane-tabbar">
+                      <div class="pane-tabs">
+                        <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span><span class="tab-dot on"></span></div>
+                      </div>
+                      <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="maximize-pane"></button></div>
+                    </div>
+                    <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">claude</span>
+<span class="d">workspace의 분할 트리 구조를 요약해줘</span>
+<span class="a">●</span> <span class="d">leaf=패널, split=노드. 각 패널은 terminal·</span>
+<span class="d">  editor·browser 종류의 탭을 가집니다. SSOT는</span>
+<span class="d">  조정자(index.ts)가 보유…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+                  </div>
+                  <div class="divider-v"></div>
+                  <!-- 우측 세로 스택: ③ 에디터 / ④ 브라우저 -->
+                  <div class="wcol">
+                    <div class="pane">
+                      <div class="pane-tabbar">
+                        <div class="pane-tabs">
+                          <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">types.ts</span></div>
+                        </div>
+                        <div class="pane-actions"><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="close"></button></div>
+                      </div>
+                      <div class="pane-content"><div class="ed"><div class="ed-gutter">1
+2
+3
+4
+5
+6</div><div class="ed-code"><span class="c">// src/workspace/types.ts</span>
+<span class="k">export type</span> <span class="t">Tab</span> =
+  | <span class="s">{ kind: "terminal" }</span>
+  | <span class="s">{ kind: "editor" }</span>
+  | <span class="s">{ kind: "browser" }</span>;
+<span class="c">// leaf=패널, split=노드</span></div></div></div>
+                    </div>
+                    <div class="pane">
+                      <div class="pane-tabbar">
+                        <div class="pane-tabs">
+                          <div class="tab active"><span class="tab-icon tab-glb">🌐</span><span class="tab-label">localhost:5173</span></div>
+                        </div>
+                        <div class="pane-actions"><button class="pane-act" data-icon="external-link"></button><button class="pane-act" data-icon="close"></button></div>
+                      </div>
+                      <div class="pane-content"><div class="bweb"><div class="bweb-url"><span class="lk" data-icon="lock"></span>localhost:5173</div><div class="bweb-page"><div class="bweb-h">Orch term</div><div class="bweb-sub">멀티에이전트 터미널 워크스테이션 · dev preview</div><div class="bweb-bar"></div><div class="bweb-row"></div><div class="bweb-row" style="width:82%"></div><div class="bweb-row" style="width:64%"></div></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 푸터 -->
+            <div class="statusbar">
+              <span class="statusbar-encoding">UTF-8</span>
+              <span class="statusbar-spacer"></span>
+              <span class="statusbar-sys"><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">CPU</span><span class="statusbar-sys-v">19%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:19%"></span></span></span><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">MEM</span><span class="statusbar-sys-v">44%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:44%"></span></span></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 좌측 탐색기 · <span class="n">②</span> 터미널·에디터·브라우저 패널이 한 분할 트리 안에 공존.</div>
+      </div>
+    </figure>
+
+    <!-- 탭 종류 3종 -->
+    <h2 class="sec" id="kinds"><span class="hash"></span> 탭 종류 3종 — 한 패널에 섞어서</h2>
+    <p>패널 하나의 탭바에 <b>세 종류의 탭을 섞어</b> 둘 수 있습니다. 활성 탭만 본문에 보이고, 나머지는 탭으로 대기합니다.</p>
+
+    <div class="feature-cards">
+      <div class="fcard"><span class="fc-ic" data-icon="terminal"></span><h4>터미널</h4><p>셸 세션. PowerShell·cmd·Git Bash·WSL을 자동 탐지하고, 새 터미널은 프로젝트 루트에서 시작.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="file"></span><h4>에디터</h4><p>코드 에디터. 외부 변경 자동 리로드 · 인코딩 표시(UTF-8) · Ctrl+F 찾기 · 앱 테마 추종.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="external-link"></span><h4>브라우저</h4><p>네이티브 창(iframe 아님). 주소창 자물쇠 · 로컬 파일 열기 · 네이티브 줌.</p></div>
+    </div>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">한 패널 · 섞인 탭</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:236px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span></div>
+                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">README.md</span></div>
+                <div class="tab"><span class="tab-icon tab-glb">🌐</span><span class="tab-label">localhost:5173</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="add"></button></div>
+            </div>
+            <div class="pane-content"><div class="ed"><div class="ed-gutter">1
+2
+3
+4
+5
+6</div><div class="ed-code"><span class="k"># Orch term</span>
+
+<span class="t">멀티에이전트 터미널 워크스테이션.</span>
+
+- 터미널 · 에디터 · 브라우저를 한 창에
+- 분할 트리 · Space로 작업 묶음 분리</div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 한 탭바에 터미널(pwsh)·에디터(README.md)·브라우저(localhost) 탭이 섞여 있고, 활성 탭이 본문에 렌더됩니다.</div>
+      </div>
+    </figure>
+    <p class="dim">탭을 더블클릭하면 이름과 색(9색 피커)을 함께 바꾸고, 패널 사이로 드래그해 옮길 수 있습니다. 우클릭 메뉴는 이름변경 · 색상변경 · 닫기.</p>
+
+    <!-- 분할 · 최대화 -->
+    <h2 class="sec" id="split"><span class="hash"></span> 분할 · 패널 최대화</h2>
+    <p>패널 헤더의 <b>분할 버튼</b>으로 활성 패널을 나눠 새 터미널을 엽니다(또는 패널 가장자리 <b>드롭 영역</b>으로 분할). 분할 방향은 두 버튼으로 구분합니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">세로 분할 — 패널 둘</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="panes" style="height:228px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> npm run tauri dev
+<span class="d">  vite ready · app 부팅…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">git-bash</span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">git</span> status
+<span class="am">  On branch worktree-ssh-core</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="i dim" data-icon="split-vertical"></span> 오른쪽으로 · <span class="i dim" data-icon="split-horizontal"></span> 아래로 분할 · <span class="i dim" data-icon="maximize-pane"></span> 패널 최대화. 활성 패널은 액센트 테두리로 표시됩니다.</div>
+      </div>
+    </figure>
+
+    <div class="tip"><b>패널 최대화</b> — <kbd>Shift</kbd>+<kbd>Esc</kbd> 또는 헤더의 <span class="i dim" data-icon="maximize-pane"></span> 버튼으로 활성 패널을 창처럼 키웁니다. 다시 누르면 복원(토글)됩니다.</div>
+    <p class="dim">탭바의 빈 영역을 끌면 패널 전체를 옮깁니다 — 다른 패널 <b>중앙</b>에 드롭하면 위치 교환, <b>가장자리</b>면 그쪽으로 재배치, <b>Space 칩</b>에 드롭하면 그 Space로 이동. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+방향키로 인접 패널로 포커스를 옮깁니다.</p>
+
+    <!-- 사이드바 ↔ 패널 -->
+    <h2 class="sec" id="sidebar"><span class="hash"></span> 좌측 사이드바 ↔ 본문 패널</h2>
+    <p>본문 왼쪽은 <b>사이드바 카드 + 모드바</b>입니다. 모드바로 <b>탐색기 · 검색 · Git · 할일</b> 4모드를 전환하고, 탐색기에서 파일을 클릭하면 <b>본문 패널에 에디터(또는 브라우저) 탭</b>으로 열립니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">좌측 사이드바 · 4모드</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="explorer-col" style="height:262px;width:244px;flex:none">
+            <div class="explorer">
+              <div class="explorer-header"><span class="proj">orch-term</span></div>
+              <div class="explorer-body" style="font-size:12px">
+                <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">src</span></div>
+                <div class="tree-row" style="padding-left:24px"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">workspace</span></div>
+                <div class="tree-row selected" style="padding-left:40px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">index.ts</span></div>
+                <div class="tree-row" style="padding-left:40px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">pane-manager.ts</span></div>
+                <div class="tree-row" style="padding-left:40px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">tab-manager.ts</span></div>
+                <div class="tree-row"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">src-tauri</span></div>
+                <div class="tree-row"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">README.md</span></div>
+              </div>
+              <div class="explorer-footer"><span class="explorer-foot-git"><span class="i dim" data-icon="git-branch" style="width:11px"></span> main</span><span class="explorer-foot-sp">Space 1</span></div>
+            </div>
+            <div class="sidebar-modebar"><button class="active" data-icon="folder"></button><button data-icon="search"></button><button data-icon="git"></button><button data-icon="tasks"></button><span class="sp"></span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="i" data-icon="folder"></span> 탐색기 · <span class="i dim" data-icon="search"></span> 검색 · <span class="i dim" data-icon="git"></span> Git · <span class="i dim" data-icon="tasks"></span> 할일 — 모드바로 전환, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>로 토글.</div>
+      </div>
+    </figure>
+
+    <!-- 왜 멀티에이전트 -->
+    <h2 class="sec" id="multiagent"><span class="hash"></span> 왜 멀티에이전트 — 한눈에</h2>
+    <p>각 패널은 <b>독립 셸</b>입니다. 한 패널엔 <code>claude</code>, 옆엔 <code>codex</code>, 또 옆엔 <code>agy</code>를 띄워 <b>서로 다른 AI를 동시에</b> 굴리고, 분할과 Space로 작업 묶음을 갈라 한 화면에서 진척을 봅니다.</p>
+
+    <figure class="fig">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">한눈에 — claude · codex · agy</span><span class="badge ok">3 agents</span></div>
+        <div class="shot-stage" style="padding:14px">
+          <div class="panes" style="height:236px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">claude</span>
+<span class="a">●</span> <span class="d">SFTP 전송 모듈</span>
+<span class="d">  구현 중…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">codex</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">codex</span>
+<span class="am">⟳</span> <span class="d">터널 모듈</span>
+<span class="d">  리뷰 중…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">agy</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">agy</span>
+<span class="a">●</span> <span class="d">문서 초안</span>
+<span class="d">  작성 중…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> 패널 셋이 각각 독립 셸 — <code>claude</code>·<code>codex</code>·<code>agy</code>를 한 화면에서 병렬로.</div>
+      </div>
+    </figure>
+
+    <p>이렇게 한 화면에 띄운 워커들을 <b>대화 중인 AI가 직접 부리는</b> 단계가 <a href="orchestration.html">에이전트 오케스트레이션</a>입니다. 워크스테이션은 그 토대 — 사람이 여러 에이전트를 한눈에 보고 손으로 조율하는 작업대입니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="keys"><span class="hash"></span> 단축키 (패널 · 탭)</h2>
+    <table class="kbds">
+      <thead><tr><th>단축키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>활성 패널 최대화 / 복원(토글)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>←↑→↓</kbd></td><td>인접 패널로 포커스 이동</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd></td><td>좌측 탐색기(사이드바) 토글</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd></td><td>활성 탭 닫기</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>PageUp</kbd> / <kbd>PageDown</kbd></td><td>패널 안에서 이전 / 다음 탭으로 순환</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>에이전트 오케스트레이션</a>
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>탭 · 패널</a>
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>코드 에디터</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>인앱 브라우저</a>
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="folder"></span>스페이스</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="orchestration.html">다음 → 에이전트 오케스트레이션</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

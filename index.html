@@ -1,167 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Orch term — 멀티에이전트 터미널 워크스테이션</title>
-<meta name="description" content="여러 AI 코딩 에이전트(claude·codex·agy)를 한 곳에서 부려 조율하는 멀티에이전트 터미널 워크스테이션. 오케스트레이션(지휘자)과 AI 게이트웨이." />
-<meta property="og:title" content="Orch term" />
-<meta property="og:description" content="멀티에이전트 터미널 워크스테이션 — 오케스트레이션 + AI 게이트웨이" />
-<meta property="og:type" content="website" />
 <link rel="icon" href="./assets/app-icon.png" />
-<link rel="stylesheet" href="./styles.css" />
+<title>Orch term — 멀티에이전트 터미널 워크스테이션 · 가이드</title>
+<meta name="description" content="여러 AI 코딩 에이전트(claude·codex·agy)를 한 곳에서 부려 조율하는 멀티에이전트 터미널 워크스테이션. 전 기능 사용설명 가이드." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
 </head>
-<body>
-<div class="wrap">
+<body data-page="index">
+<a class="skip" href="#main">본문 바로가기</a>
 
-  <!-- ── 상단 내비 ── -->
-  <header class="topbar">
-    <a class="brand-mini" href="#hero"><img class="glyph" src="./assets/app-icon.png" alt="" /><img class="wordmark" src="./assets/orch-term-wordmark.svg" alt="Orch term" /></a>
-    <nav class="topnav">
-      <a href="./orchestrate.html">오케스트레이션</a>
-      <a href="./gateway.html">게이트웨이</a>
-      <a class="dl" href="#download">다운로드</a>
-    </nav>
-  </header>
+<!-- ── 상단바 ── -->
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
 
-  <!-- ── 히어로 ── -->
-  <section id="hero">
-    <h1 class="sr-only">Orch term — 멀티에이전트 터미널 워크스테이션</h1>
-    <img class="hero-banner" src="./assets/orch-term-banner.png" alt="Orch term — claude·codex·agy AI 에이전트 오케스트레이션 터미널" />
-    <p class="tagline">여러 AI 코딩 에이전트를 한 곳에서 <b>부려 조율</b>하는 멀티에이전트 터미널 워크스테이션.</p>
-    <div class="btns">
-      <a class="btn primary" href="#download">다운로드 · 설치</a>
-      <a class="btn" href="#highlight">기능 보기</a>
-    </div>
-  </section>
+<div class="doc no-toc">
+  <aside class="side" id="sidebar"></aside>
 
-  <!-- ── 다운로드 / 설치 ── -->
-  <section id="download">
-    <h2><span class="hash">##</span>다운로드 · 설치</h2>
-    <p class="section-lead">미서명 빌드입니다 — 아래 안내대로 첫 실행 경고만 넘기면 됩니다(정식 코드서명/공증은 추후).</p>
-    <div class="cards">
-      <div class="card hl">
-        <h3>Windows</h3>
-        <p>설치 관리자를 받아 실행합니다.</p>
-        <div class="btns">
-          <a class="btn primary" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe">orchterm-setup.exe</a>
-          <a class="btn" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-x64.msi">.msi</a>
+  <main class="content home" id="main">
+
+    <!-- ── 히어로 ── -->
+    <section class="hero">
+      <div class="hero-rail"></div>
+      <p class="hero-eyebrow reveal d1"><span class="hash"></span> orchterm · multi-agent terminal workstation</p>
+      <h1 class="reveal d2">여러 AI를 한 창에서<br><span class="grad">부려 조율하는</span> 터미널.</h1>
+      <p class="sub reveal d3">터미널 · 에디터 · 브라우저를 한 워크스테이션에. 그 위에서 <b>claude·codex·agy</b>를 워커로 띄워 컨텍스트를 유지한 채 협업시키는 <b>로컬 멀티에이전트 관제탑(control plane)</b>. Windows · macOS.</p>
+      <div class="hero-cta reveal d4">
+        <a class="bigbtn primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드 · 설치</a>
+        <a class="bigbtn ghost" href="quickstart.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>빠른 시작</a>
+      </div>
+    </section>
+
+    <!-- 히어로 스크린샷 -->
+    <div class="hero-shot reveal d5">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — backend (codex) · commander (claude)</span><span class="badge ok">orchestrating</span></div>
+        <div class="shot-stage">
+          <div class="app">
+            <!-- 타이틀바 + Space 칩 -->
+            <div class="titlebar">
+              <div class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></div>
+              <div class="titlebar-spaces">
+                <div class="space-chip active"><span class="space-chip-num">1</span> orch</div>
+                <div class="space-chip"><span class="space-chip-num">2</span> api</div>
+                <div class="space-chip-add">+</div>
+              </div>
+              <div class="titlebar-title"></div>
+              <div class="titlebar-actions">
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg></button>
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+              </div>
+            </div>
+            <!-- 본문 -->
+            <div class="body">
+              <div class="explorer-col">
+                <div class="explorer">
+                  <div class="explorer-header"><span class="proj">orch-term</span></div>
+                  <div class="explorer-body" style="font-size:12px">
+                    <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">src</span></div>
+                    <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">workspace</span></div>
+                    <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">orchestration.ts</span></div>
+                    <div class="tree-row"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">src-tauri</span></div>
+                    <div class="tree-row"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">README.md</span></div>
+                  </div>
+                  <div class="explorer-footer"><span class="explorer-foot-git">⎇ main</span><span class="explorer-foot-sp">Space 1</span></div>
+                </div>
+                <div class="sidebar-modebar"><button class="active">🗂</button><button>🔍</button><button>⎇</button><button>☑</button><span class="sp"></span></div>
+              </div>
+              <div class="main-col">
+                <div class="panes">
+                  <div class="pane active-pane">
+                    <div class="pane-tabbar">
+                      <div class="pane-tabs">
+                        <div class="tab active"><span class="tab-icon">❯</span><span class="tab-label">commander · claude</span><span class="tab-dot on"></span></div>
+                        <div class="tab"><span class="tab-icon">❯</span><span class="tab-label">backend · codex</span></div>
+                      </div>
+                      <div class="pane-actions">
+                        <button class="pane-act"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></button>
+                        <button class="pane-act"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="pane-content">
+                      <div class="term-pane-terminal">
+                        <div class="term"><span class="g">❯</span> <span class="c">claude</span> <span class="d">orchestrate "backend에게 SSH 터널 모듈 리뷰 요청"</span>
+<span class="d">────────────────────────────────────────────</span>
+<span class="a">▸ open_session</span> backend(codex) ← worktree:ssh-core
+<span class="a">▸ send</span> "channel_open_direct_tcpip 안전성 검토해줘"
+<span class="am">  ⟳ backend 작업 중…</span>
+<span class="g">◂ report</span> codex: <span class="d">"&self 차용이라 동시성 안전. -L/-D 리스너 127.0.0.1 바인드 확인."</span>
+<span class="g">❯</span> <span class="cursor"></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="rrail">
+                <button class="rrail-btn active"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v5M15 2v5"/><path d="M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0z"/><path d="M12 16.5V22"/></svg></button>
+                <span class="rrail-sp"></span>
+              </div>
+            </div>
+            <!-- 푸터 -->
+            <div class="statusbar">
+              <span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>orch :9611</span>
+              <span class="statusbar-encoding">UTF-8</span>
+              <span class="statusbar-spacer"></span>
+              <span class="statusbar-sys"><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">CPU</span><span class="statusbar-sys-v">23%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:23%"></span></span></span><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">MEM</span><span class="statusbar-sys-v">41%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:41%"></span></span></span></span>
+            </div>
+          </div>
         </div>
-        <p>미서명이라 SmartScreen <b>"알 수 없는 게시자"</b> 경고가 뜨면 <b>추가 정보 → 실행</b>을 누르세요.</p>
+        <div class="shot-cap"><span class="n">▲</span> 한 창에서 여러 AI를 워커로 띄워 조율하는 모습 — 터미널·에디터·브라우저가 한 워크스테이션에.</div>
       </div>
-      <div class="card hl">
-        <h3>macOS</h3>
-        <p><b>가장 쉬운 방법</b> — 터미널 한 줄(Apple Silicon·Intel 자동 판별 → 다운로드·설치·Gatekeeper 해제):</p>
-        <div class="codeblock">
-          <pre>curl -fsSL https://github.com/zendy00/orch-term-pages/releases/latest/download/install.sh | sh</pre>
-          <button type="button" class="copy-btn" aria-label="명령어 복사" title="복사">
-            <svg class="ic-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <svg class="ic-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          </button>
+    </div>
+
+    <!-- ── 대형 기능 ── -->
+    <section class="home-section">
+      <div class="inner">
+        <p class="sec-eyebrow">대형 기능</p>
+        <h2>이름값 하는 다섯 기둥</h2>
+        <p class="sec-lede">Orch term을 단순 터미널이 아니라 <b>멀티에이전트 워크스테이션</b>으로 만드는 핵심 기능들. 각 카드는 상세 사용설명으로 이어집니다.</p>
+        <div class="flagship">
+          <a class="flag-card" href="workstation.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M13 9v11"/></svg></span>
+            <h3>멀티에이전트 워크스테이션</h3>
+            <p>터미널·에디터·브라우저를 한 창의 분할 패널에. 탭 종류 3종을 자유롭게 배치.</p>
+            <span class="more">→ 한 창의 구조</span>
+          </a>
+          <a class="flag-card" href="orchestration.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2v4.3M12 11.5L6.4 17M12 11.5L17.6 17"/></svg></span>
+            <h3>에이전트 오케스트레이션</h3>
+            <p>대화 중인 AI가 다른 AI를 워커로 띄워 다중 턴으로 협업. 지휘자/워커 모델.</p>
+            <span class="more">→ 지휘자 가이드</span>
+            <span class="meta">MCP :9611 · open/send/close</span>
+          </a>
+          <a class="flag-card" href="gateway.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4 4-4 4M20 8l-4 4 4 4M14 4l-4 16"/></svg></span>
+            <h3>AI 게이트웨이</h3>
+            <p>외부 프로그램이 로컬 API(OpenAI 호환)로 AI를 호출. machine-to-machine 자동화.</p>
+            <span class="more">→ 게이트웨이</span>
+            <span class="meta">HTTP :9610 · /run · Bearer</span>
+          </a>
+          <a class="flag-card" href="ssh.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="11" rx="2"/><path d="M7 19h10M12 15v4M6.5 8l2.2 1.8L6.5 11.6M11 11.5h4"/></svg></span>
+            <h3>SSH · SFTP</h3>
+            <p>native russh 인-탭 접속. 원격 탐색기·SFTP 편집·볼트·포트 포워딩 터널.</p>
+            <span class="more">→ SSH 가이드</span>
+          </a>
+          <a class="flag-card" href="mirror.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9a5 5 0 0 1 5 5"/></svg></span>
+            <h3>CDP 브라우저 미러</h3>
+            <p>에이전트(chrome-devtools-mcp)의 브라우징을 인앱 패널에 실시간으로 비춤.</p>
+            <span class="more">→ 미러 가이드</span>
+          </a>
         </div>
-        <p><code>curl</code> 다운로드는 격리(quarantine)가 붙지 않아 <b>"손상되어 열 수 없습니다"</b> 경고를 애초에 피합니다.</p>
-        <p>직접 <code>.dmg</code>를 받았다면(<a href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-aarch64.dmg">Apple Silicon</a> · <a href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-x64.dmg">Intel</a>) <code>/Applications</code>로 옮긴 뒤 한 번 실행:</p>
-        <div class="codeblock">
-          <pre>xattr -dr com.apple.quarantine /Applications/orchterm.app</pre>
-          <button type="button" class="copy-btn" aria-label="명령어 복사" title="복사">
-            <svg class="ic-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <svg class="ic-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          </button>
+      </div>
+    </section>
+
+    <!-- ── 핵심 기능 ── -->
+    <section class="home-section">
+      <div class="inner">
+        <p class="sec-eyebrow">핵심 기능</p>
+        <h2>워크스테이션의 기본기</h2>
+        <p class="sec-lede">매일 쓰는 편집·탐색·검색·버전관리. 각 항목마다 단계별 사용법을 화면과 함께 정리했습니다.</p>
+        <div class="feature-cards">
+          <a class="fcard" href="terminal.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span><h4>터미널</h4><p>PTY 세션 · 복사/붙여넣기 · WebGL · 셸 자동닫기</p></a>
+          <a class="fcard" href="tabs-panes.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M11 4v16M11 12h10"/></svg></span><h4>탭 · 패널</h4><p>분할 트리 · 최대화 · 인라인 rename · 탭 색</p></a>
+          <a class="fcard" href="spaces.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5-8 4.5-8-4.5z"/><path d="M4 12l8 4.5 8-4.5"/></svg></span><h4>스페이스</h4><p>전환 가능한 독립 레이아웃 · 영속+복원</p></a>
+          <a class="fcard" href="explorer.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><h4>탐색기</h4><p>멀티 프로젝트 · 키보드 네비 · 드래그&드롭</p></a>
+          <a class="fcard" href="editor.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></span><h4>코드 에디터</h4><p>외부변경 자동리로드 · 인코딩 · CRLF</p></a>
+          <a class="fcard" href="browser.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18"/></svg></span><h4>인앱 브라우저</h4><p>네이티브 자식 웹뷰 · 자연스러운 링크/뒤로</p></a>
+          <a class="fcard" href="search.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><h4>전체 파일 검색</h4><p>Ctrl+Shift+F · ripgrep 병렬 · 스트리밍</p></a>
+          <a class="fcard" href="source-control.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="17" cy="8" r="2.4"/><path d="M6 8.4v7.2M17 10.4c0 4-5 2.6-5 6.6"/></svg></span><h4>소스 컨트롤</h4><p>Ctrl+Shift+G · 로그 그래프 · diff · blame</p></a>
+          <a class="fcard" href="tasks.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 12l2.2 2.2L13 10"/></svg></span><h4>할 일 보드</h4><p>Space별 to-do · 마감 달력 · 검색</p></a>
+          <a class="fcard" href="task-ai-sharing.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l2 2 4-4"/><circle cx="18" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M16.3 7.2l-5 3M16.3 16.8l-5-3"/></svg></span><h4>AI 할 일 공유</h4><p>앱 안 AI가 자기 Space 할 일을 CRUD</p></a>
         </div>
-        <div class="meta">install.sh·Intel 빌드는 다음 릴리즈부터 제공</div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── 강조: 오케스트레이션 + 게이트웨이 ── -->
-  <section id="highlight">
-    <h2><span class="hash">##</span>orchestrate + gateway</h2>
-    <p class="section-lead">이름값 그대로 — Orch term의 핵심은 <b>로컬 멀티에이전트 control plane</b>입니다.</p>
-    <div class="cards">
-      <div class="card hl">
-        <h3>오케스트레이션 (지휘자)</h3>
-        <p>대화 중인 AI가 다른 AI(<b>claude·codex·agy</b>)를 워커로 띄워 <b>컨텍스트 유지 다중 턴</b>으로 협업시킵니다. commander/worker · 지휘자 대시보드.</p>
-        <div class="meta">MCP orchterm-agent-orch · :9611 · open/send/close · 127.0.0.1+Bearer · 기본 off</div>
-        <p><a class="more" href="./orchestrate.html">→ 오케스트레이션 가이드</a></p>
+    <!-- ── 그 외 · 시스템 ── -->
+    <section class="home-section">
+      <div class="inner">
+        <p class="sec-eyebrow">그 외 · 시스템</p>
+        <h2>오래 쓰기 좋은 바탕</h2>
+        <div class="feature-cards">
+          <a class="fcard" href="appearance.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 12h9M5 18h14"/><circle cx="17" cy="12" r="2.3"/></svg></span><h4>외관 · 폰트 · 단축키</h4><p>한글 코딩폰트 · 투명도 · 단축키 편집</p></a>
+          <a class="fcard" href="persistence.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.8"/><path d="M5 5.5v13c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-13"/></svg></span><h4>저장 · 백업</h4><p>SQLite 영속 · 자동 손상 복구 · 전체 백업</p></a>
+          <a class="fcard" href="auto-update.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v5h-5"/></svg></span><h4>자동 업데이트</h4><p>새 버전 감지 → 타이틀바 알림 → 재시작 설치</p></a>
+          <a class="fcard" href="notifications.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg></span><h4>완료 배지 · 알림</h4><p>에이전트 완료/대기 배지 · 통합 알림센터</p></a>
+        </div>
       </div>
-      <div class="card hl">
-        <h3>AI 게이트웨이</h3>
-        <p>외부 프로그램이 로컬 API(<code>POST /run</code>, OpenAI 호환)로 AI를 호출합니다. 단발 호출도, <code>session</code>으로 멀티턴 대화도. machine-to-machine 자동화에 적합.</p>
-        <div class="meta">HTTP :9610 · 127.0.0.1+Bearer · Host 검증 · 기본 off</div>
-        <p><a class="more" href="./gateway.html">→ 게이트웨이 소개</a></p>
+    </section>
+
+    <!-- ── 다운로드 CTA ── -->
+    <section class="home-section" style="text-align:center">
+      <div class="inner">
+        <p class="sec-eyebrow" style="justify-content:center">지금 시작</p>
+        <h2>설치는 2분, 첫 오케스트레이션은 5분.</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">Windows 설치 관리자 또는 macOS 한 줄 설치. 미서명 빌드 안내는 다운로드 페이지에서.</p>
+        <div class="hero-cta" style="justify-content:center">
+          <a class="bigbtn primary" href="download.html">다운로드 · 설치</a>
+          <a class="bigbtn ghost" href="quickstart.html">빠른 시작 가이드</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── 주요 기능 ── -->
-  <section id="main-features">
-    <h2><span class="hash">##</span>한 창에 세 가지</h2>
-    <p class="section-lead">터미널·에디터·브라우저를 하나의 워크스테이션에서.</p>
-    <div class="cards">
-      <div class="card"><h3>터미널</h3><p>ConPTY 세션, 복사/붙여넣기, WebGL 렌더러, 셸 종료 시 탭 자동 닫기.</p></div>
-      <div class="card"><h3>코드 에디터</h3><p>파일 외부 변경 자동 리로드, CRLF 처리. 탐색기에서 바로 열기.</p></div>
-      <div class="card"><h3>인앱 브라우저</h3><p>Tauri 네이티브 자식 웹뷰(iframe 아님) — 링크·뒤로/앞으로가 자연스럽게 동작.</p></div>
-    </div>
-  </section>
-
-  <!-- ── 중간 기능 ── -->
-  <section id="mid-features">
-    <h2><span class="hash">##</span>더 깊이</h2>
-    <div class="cards">
-      <div class="card"><h3>Spaces</h3><p>전환 가능한 독립 레이아웃(타이틀바 칩), Space별 분할 트리/탐색기, 실시간 영속화+복원. <kbd>Ctrl</kbd>+<kbd>1</kbd>‥<kbd>9</kbd>.</p></div>
-      <div class="card"><h3>분할 탭·패널</h3><p>바이너리 분할 트리, 패널 최대화(<kbd>Shift</kbd>+<kbd>Esc</kbd>), 탭 인라인 rename.</p></div>
-      <div class="card"><h3>CDP 미러</h3><p>에이전트(chrome-devtools-mcp)의 브라우징을 인앱 패널에 실시간 미러.</p></div>
-      <div class="card"><h3>파일 탐색기</h3><p>멀티 프로젝트, 키보드 네비, 멀티셀렉트, 인라인 생성/rename, 드래그&드롭.</p></div>
-      <div class="card"><h3>완료 배지 · 알림</h3><p>비활성 탭에 에이전트 완료(초록)/입력 대기(주황) 배지. 알림에서 전체 메시지를 확인하고 클릭하면 <b>해당 탭으로 바로 이동</b>.</p></div>
-    </div>
-  </section>
-
-  <!-- ── 자잘한 기능 ── -->
-  <section id="minor-features">
-    <h2><span class="hash">##</span>그 외</h2>
-    <ul class="oneliners">
-      <li><b>외관</b> — Zed 기본 폰트 · 한글 코딩폰트 피커 · 창 투명도 · 상태바</li>
-      <li><b>창 상태 복원</b> — 크기·위치·최대화 재시작 복원</li>
-      <li><b>셸 자동 감지</b> — 설치된 셸을 탐지해 목록 제공</li>
-      <li><b>클립보드 이미지</b> — 붙여넣기 시 임시 PNG 경로로 변환</li>
-    </ul>
-  </section>
-
-  <footer class="site-footer">
-    <div class="footer-links">
-      <a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a>
-      <a href="./orchestrate.html">오케스트레이션</a>
-      <a href="./gateway.html">게이트웨이</a>
-    </div>
-    <div class="sponsor-row">
-      <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a>
-    </div>
-    <div class="footer-copy">Orch term · © 2026</div>
-  </footer>
+    <footer class="docfoot" style="max-width:none;padding:30px var(--gut)">
+      <span>Orch term · © 2026</span>
+      <span><a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a></span>
+    </footer>
+  </main>
 </div>
-<script>
-  // 코드블록 복사 버튼: 같은 .codeblock 안의 <pre> 텍스트를 클립보드로. 성공 시 체크 아이콘 1.5초.
-  document.querySelectorAll(".copy-btn").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var pre = btn.closest(".codeblock") && btn.closest(".codeblock").querySelector("pre");
-      if (!pre) return;
-      var text = pre.textContent.trim();
-      var ok = function () {
-        btn.classList.add("copied");
-        setTimeout(function () { btn.classList.remove("copied"); }, 1500);
-      };
-      var fallback = function () {
-        var ta = document.createElement("textarea");
-        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
-        document.body.appendChild(ta); ta.focus(); ta.select();
-        try { document.execCommand("copy"); ok(); } catch (e) {}
-        document.body.removeChild(ta);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(ok, fallback);
-      } else { fallback(); }
-    });
-  });
-</script>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>탭 · 패널 — Orch term 가이드</title>
+<meta name="description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 패널 최대화(Shift+Esc·glassmorphism), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 패널 최대화 glassmorphism 재현 (디자인 시스템 토큰만 사용) */
+  .tp-maxstage { position: relative; height: 320px; overflow: hidden; background: var(--bg-0); }
+  .tp-back { position: absolute; inset: 0; display: flex; gap: var(--pane-gap); padding: var(--pane-gap); }
+  .tp-back .explorer-col { flex: 0 0 128px; width: 128px; }
+  .tp-scrim { position: absolute; inset: 0; z-index: 1; background: color-mix(in srgb, var(--bg-0) 58%, transparent); }
+  .tp-maxed { position: absolute; inset: 5px; z-index: 2;
+    background: color-mix(in srgb, var(--bg-1) 80%, transparent);
+    backdrop-filter: blur(7px) saturate(1.1); -webkit-backdrop-filter: blur(7px) saturate(1.1);
+    border: 1px solid var(--accent-line);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 9%, transparent) inset,
+                0 22px 60px -16px color-mix(in srgb, var(--accent) 55%, transparent),
+                0 0 30px -6px color-mix(in srgb, var(--accent) 42%, transparent); }
+</style>
+</head>
+<body data-page="tabs-panes">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>탭 · 패널</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 탭 · 패널</p>
+    <h1 class="page-title">탭 · 패널</h1>
+    <p class="lede">하나의 화면을 가로·세로로 쪼개 터미널·에디터·브라우저 탭을 자유롭게 배치합니다. 패널을 나누고, 한 패널을 <b>유리창처럼 최대화</b>하고, 탭마다 이름과 색을 붙여 한눈에 구분합니다.</p>
+
+    <!-- 분할 -->
+    <h2 class="sec" id="split"><span class="hash"></span> 패널 분할</h2>
+    <p>패널 헤더 우상단의 <span class="i" data-icon="split-horizontal"></span> <b>아래로 분할</b> · <span class="i" data-icon="split-vertical"></span> <b>오른쪽 분할</b> 버튼으로 패널을 가로/세로로 나눠 새 터미널을 띄웁니다. 탭바 옆 드롭 영역으로 끌어 나눌 수도 있습니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 오른쪽 분할</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="panes" style="height:288px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs">
+                  <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+                  <div class="tab"><span class="tab-icon" data-icon="file"></span><span class="tab-label">pty.rs</span></div>
+                </div>
+                <div class="pane-actions">
+                  <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                  <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                  <span class="pane-act-sep"></span>
+                  <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+                  <button class="pane-act" title="닫기" data-icon="close"></button>
+                </div>
+              </div>
+              <div class="pane-content">
+                <div class="term-pane-terminal">
+                  <div class="term"><span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> npm run tauri dev
+<span class="d">  VITE v8.0  ready in 412 ms</span>
+<span class="g">  ➜  Local:</span>   http://localhost:5181/
+<span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> <span class="cursor"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs">
+                  <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">Git Bash</span></div>
+                </div>
+                <div class="pane-actions">
+                  <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                  <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                  <span class="pane-act-sep"></span>
+                  <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+                  <button class="pane-act" title="닫기" data-icon="close"></button>
+                </div>
+              </div>
+              <div class="pane-content">
+                <div class="term-pane-terminal">
+                  <div class="term"><span class="g">user@host</span><span class="d">:</span><span class="c">~/orch-term</span><span class="d">$</span> git status
+<span class="d">On branch</span> <span class="a">main</span>
+<span class="g">nothing to commit, working tree clean</span>
+<span class="g">user@host</span><span class="d">:</span><span class="c">~/orch-term</span><span class="d">$</span> <span class="cursor"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 활성 패널은 액센트 테두리로 강조됩니다. 우상단 <span class="i dim" data-icon="split-vertical"></span> 오른쪽 분할로 두 번째 패널이 생겼습니다.</div>
+      </div>
+    </figure>
+
+    <p>키보드로는 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>방향키</kbd>로 인접 패널 사이를 이동하고, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>로 탐색기를 토글합니다.</p>
+    <p>탭바의 빈 영역을 잡으면 패널 전체를 끌 수 있습니다. 다른 패널 <b>중앙</b>에 드롭하면 두 패널이 자리를 바꾸고, <b>가장자리</b>에 드롭하면 그쪽으로 재배치됩니다. <b>Space 칩</b>에 드롭하면 패널째 그 Space로 옮겨집니다(마지막 패널은 불가).</p>
+
+    <!-- 최대화 -->
+    <h2 class="sec" id="maximize"><span class="hash"></span> 패널 최대화 (Shift+Esc)</h2>
+    <p>활성 패널을 워크스페이스 위에 띄운 유리창처럼 확대합니다. <kbd>Shift</kbd>+<kbd>Esc</kbd>로 토글하거나(같은 패널에서 다시 누르면 복원) 패널 헤더의 토글 버튼으로도 됩니다. 최대화 중에는 버튼이 <span class="i" data-icon="restore-pane"></span> 복원 아이콘으로 바뀝니다. 최대화된 패널은 frosted glass(흐림) 효과로 떠오르고, 뒤 워크스페이스는 어둡게 가려집니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">패널 최대화 — Shift+Esc</span><span class="badge phase">glassmorphism</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="tp-maxstage">
+            <!-- 뒤 워크스페이스(dim) -->
+            <div class="tp-back">
+              <div class="explorer-col">
+                <div class="explorer">
+                  <div class="explorer-header"><span class="proj">orch-term</span></div>
+                  <div class="explorer-body">
+                    <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src</span></div>
+                    <div class="tree-row selected"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">terminal.ts</span></div>
+                    <div class="tree-row"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">workspace.ts</span></div>
+                    <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src-tauri</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pane">
+                <div class="pane-tabbar"><div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div></div></div>
+                <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="a">PS</span> <span class="d">&gt;</span> cargo test</div></div></div>
+              </div>
+              <div class="divider-v"></div>
+              <div class="pane">
+                <div class="pane-tabbar"><div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">README.md</span></div></div></div>
+                <div class="pane-content"><div class="term-pane-terminal"><div class="term d"># Orch term</div></div></div>
+              </div>
+            </div>
+            <!-- dim 레이어 -->
+            <div class="tp-scrim"></div>
+            <!-- 최대화된 유리 패널 -->
+            <div class="pane tp-maxed">
+              <div class="pane-tabbar">
+                <div class="pane-actions" style="padding-left:6px;padding-right:0">
+                  <button class="pane-act" title="복원" data-icon="restore-pane" style="color:var(--accent)"></button>
+                </div>
+                <div class="pane-tabs">
+                  <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude · ssh-core</span></div>
+                  <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">codex</span></div>
+                </div>
+                <div class="pane-actions">
+                  <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                  <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                  <span class="pane-act-sep"></span>
+                  <button class="pane-act" title="복원" data-icon="restore-pane" style="color:var(--accent)"></button>
+                  <button class="pane-act" title="닫기" data-icon="close"></button>
+                </div>
+              </div>
+              <div class="pane-content">
+                <div class="term-pane-terminal">
+                  <div class="term"><span class="g">❯</span> <span class="d">SSH 터널 모듈 리뷰 결과 정리해줘</span>
+<span class="a">●</span> channel_open_direct_tcpip 는 <span class="c">&amp;self</span> 차용이라 동시성 안전.
+<span class="a">●</span> -L / -D 리스너 모두 <span class="c">127.0.0.1</span> 바인드 확인.
+<span class="g">❯</span> <span class="cursor"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 최대화된 패널은 흐림 + 액센트 글로우의 유리 카드로 떠오릅니다. <span class="n">②</span> 뒤 워크스페이스는 어둡게 가려지고, 헤더의 토글이 <span class="i dim" data-icon="restore-pane"></span> 복원으로 바뀝니다.</div>
+      </div>
+    </figure>
+
+    <!-- 이름 + 색 통합 편집 -->
+    <h2 class="sec" id="rename"><span class="hash"></span> 탭 이름 + 색 통합 편집</h2>
+    <p>탭을 <b>더블클릭</b>하면 Space 칩처럼 <b>이름 입력란 + 9색 색 피커</b>가 한 팝업으로 열립니다. 이름을 빈 값으로 두면 기존 이름이 유지됩니다. 종류별로 <b>터미널</b>은 표시 라벨, <b>에디터</b>는 파일명(확장자를 바꾸면 확인), <b>브라우저</b>는 커스텀 라벨을 편집하며, 색은 즉시 적용되고 다음 실행에도 유지됩니다.</p>
+
+    <!-- 탭 색 -->
+    <h2 class="sec" id="color"><span class="hash"></span> 탭 색 (hue)</h2>
+    <p>탭마다 9색 중 하나를 지정하면 라벨 아래 <b>하단 보더 틴트</b>로 표시됩니다(재시작 시 복원). 기본은 색 없음이고, 피커 첫 칸 <b>“기본”</b>으로 해제합니다. Space와 같은 색 팔레트를 씁니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">탭 색 — 하단 틴트</span></div>
+        <div class="shot-stage" style="padding:18px;display:grid;place-items:center;min-height:120px">
+          <div class="pane active-pane" style="width:340px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active has-hue"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span></div>
+                <div class="tab has-hue"><span class="tab-icon" data-icon="file"></span><span class="tab-label">pty.rs</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">codex</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button><button class="pane-act" title="닫기" data-icon="close"></button></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 색이 지정된 탭은 라벨 아래 얇은 틴트 보더로 표시됩니다. 세 번째 탭은 색 없음(기본).</div>
+      </div>
+    </figure>
+
+    <!-- 닫기 · 우클릭 메뉴 -->
+    <h2 class="sec" id="close"><span class="hash"></span> 탭 닫기 · 우클릭 메뉴</h2>
+    <p>활성 탭은 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd>로 닫습니다 — 셸의 단어삭제(<kbd>Ctrl</kbd>+<kbd>W</kbd>)와 겹치지 않도록 <kbd>Shift</kbd>를 더했습니다. 탭바 안에서는 <kbd>Ctrl</kbd>+<kbd>PageUp</kbd>/<kbd>PageDown</kbd>으로 이전/다음 탭을 순환합니다(끝↔처음 wrap).</p>
+    <p>탭을 <b>우클릭</b>하면 <b>이름변경 / 색상변경 / 닫기 / 다른 탭 닫기 / 모두 닫기</b> 메뉴가 뜹니다. 닫기류 대상은 그 탭이 속한 <b>패널</b>이며(분할된 다른 패널은 유지), 여러 개를 닫을 때 저장 안 된 에디터나 실행 중인 터미널이 있으면 한 번 요약 확인을 거칩니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">탭 우클릭 — 컨텍스트 메뉴</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:240px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active has-hue"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">codex</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="file"></span><span class="tab-label">pty.rs</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button><button class="pane-act" title="닫기" data-icon="close"></button></div>
+            </div>
+            <div class="pane-content">
+              <div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">npm test</span>
+<span class="g">  ✓ 1081 passed</span> <span class="d">(8.4s)</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div>
+            </div>
+            <div class="ctx-menu" style="top:28px;left:18px;z-index:5">
+              <button class="ctx-item"><span class="i dim" data-icon="edit" style="vertical-align:-.2em;margin-right:6px"></span>이름 변경</button>
+              <button class="ctx-item">색상 변경…</button>
+              <div class="ctx-sep"></div>
+              <button class="ctx-item">닫기</button>
+              <button class="ctx-item">다른 탭 닫기</button>
+              <button class="ctx-item danger">모두 닫기</button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 우클릭 메뉴는 구분선·바깥 클릭/<kbd>Esc</kbd>로 닫힙니다. <span class="n">②</span> <b>이름변경</b>은 종류별, <b>색상변경</b>은 9색+해제 피커입니다.</div>
+      </div>
+    </figure>
+    <p class="dim">단일 클릭으로 연 탭은 이탤릭(미리보기)으로 표시되고, 더블클릭하거나 편집하면 고정됩니다. 탭이 넘치면 좌우 chevron이 생기고 탭바에서 휠로 가로 스크롤할 수 있으며, 탭은 패널 간 드래그로도 옮길 수 있습니다.</p>
+
+    <!-- 브라우저 라벨 -->
+    <h2 class="sec" id="browser-label"><span class="hash"></span> 브라우저 탭 커스텀 라벨</h2>
+    <p>브라우저 탭은 페이지 제목 대신 <b>커스텀 라벨</b>을 붙일 수 있습니다. 다른 탭처럼 더블클릭 또는 우클릭 → 이름변경으로 편집합니다. 브라우저 탭은 네이티브 웹뷰라, 편집하는 동안 잠깐 숨겨졌다 끝나면 복원됩니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>활성 패널 최대화 토글</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd></td><td>활성 탭 닫기</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>PageUp</kbd> / <kbd>PageDown</kbd></td><td>이전/다음 탭</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>방향키</kbd></td><td>인접 패널로 이동</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd></td><td>탐색기 토글</td></tr>
+        <tr><td>탭 더블클릭</td><td>이름 + 색 편집</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="split-horizontal"></span>스페이스</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>탐색기</a>
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>코드 에디터</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>인앱 브라우저</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="spaces.html">다음 → 스페이스</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

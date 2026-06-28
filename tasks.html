@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>할 일 보드 — Orch term 가이드</title>
+<meta name="description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 할 일 패널 재현 (디자인 시스템 토큰만 사용) */
+  .tk-panel { width: 308px; background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-pane); }
+  .tk-head { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; background: var(--bg-2); border-bottom: 1px solid var(--line-faint); font-size: 13px; color: var(--text-strong); font-weight: 600; }
+  .tk-head .sp { flex: 1; }
+  .tk-head .iconbtn { color: var(--text-faint); }
+  .tk-tabs { display: flex; align-items: center; gap: 4px; padding: 7px 9px; border-bottom: 1px solid var(--line-faint); }
+  .tk-tab { padding: 3px 11px; border-radius: 999px; font-size: 12px; color: var(--text-dim); }
+  .tk-tab.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .tk-search { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--text-faint); font-size: 11.5px; }
+  .tk-add { width: 22px; height: 22px; display: grid; place-items: center; border-radius: var(--r-sm); color: var(--accent); background: var(--accent-soft); }
+  .tk-add.open { color: #fff; background: var(--accent); transform: rotate(45deg); }
+  .tk-compose { padding: 9px 10px; border-bottom: 1px solid var(--line-faint); display: grid; gap: 7px; background: var(--bg-2-tint); }
+  .tk-compose .ci { width: 100%; background: var(--bg-0); border: 1px solid var(--line); border-radius: var(--r-sm); color: var(--text-strong); font-size: 12.5px; padding: 6px 8px; }
+  .tk-compose .ci.memo { color: var(--text-faint); }
+  .tk-compose .crow { display: flex; align-items: center; gap: 7px; }
+  .tk-compose .crow .due { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--text-dim); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 4px 8px; }
+  .tk-compose .crow .due .i { color: var(--accent); }
+  .tk-compose .crow .sp { flex: 1; }
+  .tk-row { display: flex; align-items: flex-start; gap: 9px; padding: 9px 11px; border-bottom: 1px solid var(--line-faint); }
+  .tk-row:hover { background: var(--bg-hover); }
+  .tk-check { width: 15px; height: 15px; border: 1.5px solid var(--line-strong); border-radius: 4px; flex: none; margin-top: 1px; display: grid; place-items: center; color: transparent; }
+  .tk-check.done { background: var(--success); border-color: var(--success); color: #fff; }
+  .tk-check.done .i { color: #fff; }
+  .tk-b { min-width: 0; flex: 1; }
+  .tk-t { font-size: 13px; color: var(--text-strong); line-height: 1.4; }
+  .tk-t.done { color: var(--text-faint); text-decoration: line-through; }
+  .tk-m { display: flex; align-items: center; gap: 9px; margin-top: 5px; font-size: 11px; color: var(--text-faint); }
+  .tk-m .due { display: inline-flex; align-items: center; gap: 4px; }
+  .tk-m .due.urgent { color: var(--danger); }
+  .tk-m .badge-memo { display: inline-flex; align-items: center; gap: 3px; }
+  .tk-acts { display: flex; gap: 1px; margin-left: auto; }
+  .tk-acts .iconbtn { width: 22px; height: 20px; color: var(--text-faint); }
+  .tk-acts .iconbtn:hover { color: var(--text-strong); background: var(--bg-hover); }
+  .tk-foot { display: flex; align-items: center; gap: 8px; padding: 8px 11px; color: var(--text-faint); font-size: 11px; border-top: 1px solid var(--line-faint); }
+  /* 미니 달력 팝업 */
+  .tk-cal { width: 232px; background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow-pop); padding: 10px; }
+  .tk-cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 12.5px; color: var(--text-strong); font-weight: 600; }
+  .tk-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .tk-cal-grid .dow { font-size: 9.5px; color: var(--text-faint); text-align: center; padding: 2px 0; }
+  .tk-cal-grid .d { aspect-ratio: 1; display: grid; place-items: center; font-size: 11px; color: var(--text-dim); border-radius: var(--r-sm); position: relative; }
+  .tk-cal-grid .d.dim { color: var(--text-faint); opacity: .45; }
+  .tk-cal-grid .d.sel { background: var(--accent); color: #fff; font-weight: 600; }
+  .tk-cal-grid .d.has::after { content: ""; position: absolute; bottom: 2px; width: 3px; height: 3px; border-radius: 50%; background: var(--accent); }
+</style>
+</head>
+<body data-page="tasks">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>할 일 보드</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 할 일 보드</p>
+    <h1 class="page-title">할 일 보드</h1>
+    <p class="lede">Space마다 독립된 to-do 보드입니다. 제목·메모·마감일을 적고 할일/완료 탭과 월 달력으로 관리하며, 같은 Space의 앱 안 AI도 같은 보드를 함께 씁니다.</p>
+
+    <!-- 열기 -->
+    <h2 class="sec" id="open"><span class="hash"></span> 할 일 패널 열기</h2>
+    <p>사이드바 모드바의 <span class="i" data-icon="tasks"></span> <b>할 일</b> 아이콘이나 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>로 엽니다(명령 팔레트의 "할 일"도 가능). 보드는 <b>현재 Space 전용</b>이라 Space를 바꾸면 그 Space의 할 일이 나옵니다.</p>
+
+    <!-- 신규 입력 -->
+    <h2 class="sec" id="compose"><span class="hash"></span> 새 할 일 — 제목 · 메모 · 마감</h2>
+    <p>탭 줄 우측 <span class="i" data-icon="plus-small"></span> <b>+ 버튼</b>으로 입력 영역을 펼칩니다. 제목은 한 줄, 메모는 여러 줄(<kbd>Shift</kbd>+<kbd>Enter</kbd> 줄바꿈), 마감일은 <span class="i" data-icon="calendar"></span> 달력 팝업으로 고릅니다.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="plus-small"></span> + 토글로 입력 펼치기</div>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">할 일 — 새 항목 작성</span></div>
+            <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+              <div class="tk-panel">
+                <div class="tk-head"><span class="i" data-icon="tasks" style="color:var(--accent)"></span> 할 일 <span class="sp"></span><button class="iconbtn" data-icon="refresh-alt" title="새로고침"></button></div>
+                <div class="tk-tabs">
+                  <span class="tk-tab active">할 일 <b>3</b></span>
+                  <span class="tk-tab">완료 5</span>
+                  <span class="tk-search"><span class="i" data-icon="search-alt"></span> 검색</span>
+                  <span class="tk-add open" data-icon="plus-small" title="입력 접기"></span>
+                </div>
+                <div class="tk-compose">
+                  <input class="ci" value="SSH 터널 e2e 스모크 돌리기" readonly />
+                  <input class="ci memo" value="메모 — WSL2에서 -L/-D 둘 다 (Shift+Enter 줄바꿈)" readonly />
+                  <div class="crow">
+                    <span class="due"><span class="i" data-icon="calendar"></span> 6/30 (월)</span>
+                    <span class="sp"></span>
+                    <button class="btn sm">취소</button><button class="btn sm primary">추가</button>
+                  </div>
+                </div>
+                <div class="tk-row"><span class="tk-check"></span><span class="tk-b"><span class="tk-t">볼트 실서버 e2e 스모크</span><span class="tk-m"><span class="due urgent"><span class="i" data-icon="calendar"></span> 어제 (지남)</span><span class="badge-memo"><span class="i" data-icon="note"></span> 메모</span></span></span></div>
+                <div class="tk-row"><span class="tk-check"></span><span class="tk-b"><span class="tk-t">포트 포워딩 터널 문서화</span><span class="tk-m"><span class="due"><span class="i" data-icon="calendar"></span> 7/2 (수)</span></span></span></div>
+                <div class="tk-foot"><span class="i" data-icon="calendar"></span> 6월 · 마감 2건</div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> + 토글로 펼친 입력 영역. <span class="n">②</span> 마감 지난 항목은 <b style="color:var(--danger)">빨강(긴급)</b>, 메모가 있으면 <span class="i dim" data-icon="note"></span> 표시.</div>
+          </div>
+        </figure>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="calendar"></span> 마감일 — 달력 팝업</div>
+        <p>마감일 버튼을 누르면 월 달력이 뜹니다. 날짜를 고르면 마감 배지가 붙습니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">마감일 선택</span></div>
+            <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+              <div class="tk-cal">
+                <div class="tk-cal-head"><span>2026년 6월</span><span style="color:var(--text-faint)">‹ ›</span></div>
+                <div class="tk-cal-grid">
+                  <span class="dow">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
+                  <span class="d dim">25</span><span class="d dim">26</span><span class="d dim">27</span><span class="d dim">28</span><span class="d dim">29</span><span class="d dim">30</span><span class="d dim">31</span>
+                  <span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span><span class="d">6</span><span class="d">7</span>
+                  <span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span><span class="d">13</span><span class="d">14</span>
+                  <span class="d has">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d">19</span><span class="d">20</span><span class="d">21</span>
+                  <span class="d">22</span><span class="d">23</span><span class="d">24</span><span class="d">25</span><span class="d">26</span><span class="d">27</span><span class="d has">28</span>
+                  <span class="d">29</span><span class="d sel">30</span><span class="d dim">1</span><span class="d dim">2</span><span class="d dim">3</span><span class="d dim">4</span><span class="d dim">5</span>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> 선택일(채움)과 마감이 있는 날(점)을 한눈에 봅니다.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+
+    <!-- 카드 -->
+    <h2 class="sec" id="cards"><span class="hash"></span> 카드 — 완료 · 메모 · 액션</h2>
+    <p>각 카드는 <b>완료 토글</b>(왼쪽 체크)·마감 배지·메모 표시를 보여주고, 펼치면 메모 본문과 액션 아이콘(마감 · 편집 · 복사 · 삭제)이 나옵니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">할 일 — 펼친 카드 + 완료</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="tk-panel">
+            <div class="tk-head"><span class="i" data-icon="tasks" style="color:var(--accent)"></span> 할 일 <span class="sp"></span><button class="iconbtn" data-icon="refresh-alt" title="새로고침"></button></div>
+            <div class="tk-tabs"><span class="tk-tab active">할 일 <b>2</b></span><span class="tk-tab">완료 5</span><span class="tk-search"><span class="i" data-icon="search-alt"></span> 검색</span><span class="tk-add" data-icon="plus-small" title="새 할 일"></span></div>
+            <div class="tk-row">
+              <span class="tk-check"></span>
+              <span class="tk-b">
+                <span class="tk-t">포트 포워딩 터널 문서화</span>
+                <span class="tk-m"><span class="due"><span class="i" data-icon="calendar"></span> 7/2 (수)</span><span class="badge-memo"><span class="i" data-icon="note"></span> 메모</span></span>
+                <div style="margin-top:7px;font-size:12px;color:var(--text-dim);background:var(--bg-0);border:1px solid var(--line-faint);border-radius:var(--r-sm);padding:7px 9px">-L 로컬·-D SOCKS5 두 모드, 레일 오버레이 스크린샷 포함</div>
+                <span class="tk-acts" style="margin-top:7px">
+                  <button class="iconbtn" data-icon="calendar" title="마감일"></button>
+                  <button class="iconbtn" data-icon="edit" title="편집"></button>
+                  <button class="iconbtn" data-icon="copy-alt" title="복사"></button>
+                  <button class="iconbtn" data-icon="trash-alt" title="삭제"></button>
+                </span>
+              </span>
+            </div>
+            <div class="tk-row"><span class="tk-check done"><span class="i" data-icon="check"></span></span><span class="tk-b"><span class="tk-t done">SSH Phase 2 reference 문서</span><span class="tk-m">완료</span></span></div>
+            <div class="tk-foot"><span class="i" data-icon="calendar"></span> 6월 · 마감 1건</div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 펼친 카드의 메모 본문 + 액션(마감 · 편집 · 복사 · 삭제). <span class="n">②</span> 완료하면 체크 + 취소선.</div>
+      </div>
+    </figure>
+
+    <!-- 탭/검색/달력 -->
+    <h2 class="sec" id="tabs"><span class="hash"></span> 할일/완료 탭 · 검색 · 달력</h2>
+    <ul>
+      <li><b>할일 / 완료 탭</b> — 미완료와 완료를 분리. 탭 옆에 개수가 표시됩니다.</li>
+      <li><b>단어 검색</b> — 제목·메모를 단어로 필터링.</li>
+      <li><b>월 달력(하단)</b> — 날짜별 마감 개수 배지. 접기/펼치기 가능.</li>
+      <li><b>새로고침</b>(<span class="i" data-icon="refresh-alt"></span>) — 외부나 AI가 바꾼 할 일을 다시 불러옵니다.</li>
+    </ul>
+    <p>앱 안의 AI(claude·codex·gemini)도 <a href="task-ai-sharing.html">MCP로 같은 보드</a>를 조작하니, 에이전트가 추가한 할 일이 새로고침으로 바로 보입니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></td><td>할 일 모드 열기 (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>)</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>메모 줄바꿈 (작성 중)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>명령 팔레트 → "할 일(Tasks)"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="check"></span>AI 할 일 공유</a>
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="split-horizontal"></span>스페이스</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="settings"></span>저장 · 백업</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="task-ai-sharing.html">다음 → AI 할 일 공유</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

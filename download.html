@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>다운로드 · 설치 — Orch term 가이드</title>
+<meta name="description" content="Orch term 다운로드·설치: Windows 설치 관리자(orchterm-setup.exe)/MSI, macOS install.sh 한 줄 설치와 .dmg, 미서명 빌드 첫 실행 경고 넘기기." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 설치 명령 코드블록 + 다운로드 버튼 행 (디자인 시스템 토큰만 사용) */
+  pre.cmd { font-family: var(--code-font); font-size: 13px; line-height: 1.65; background: var(--bg-0);
+    border: 1px solid var(--line); border-left: 3px solid var(--accent-line); border-radius: var(--r-md);
+    padding: 13px 16px; margin: 14px 0; max-width: var(--read); color: var(--text);
+    overflow-x: auto; white-space: pre; }
+  pre.cmd .p { color: var(--text-faint); user-select: none; }
+  pre.cmd .c { color: var(--term-cyan); }
+  pre.cmd .d { color: var(--text-faint); }
+  .dlrow { display: flex; flex-wrap: wrap; gap: 11px; margin: 16px 0 8px; max-width: var(--read); }
+  .dlrow .bigbtn { font-size: 14px; padding: 11px 18px; }
+  /* 명령 + 바깥 우측 복사 버튼 */
+  .cmdrow { display: flex; align-items: stretch; gap: 8px; margin: 14px 0; max-width: var(--read); }
+  .cmdrow pre.cmd { flex: 1 1 auto; min-width: 0; margin: 0; }
+  .copy-btn { flex: none; width: 42px; display: grid; place-items: center; background: var(--bg-1);
+    border: 1px solid var(--line); border-radius: var(--r-md); color: var(--text-dim); cursor: pointer;
+    transition: color .15s, border-color .15s, background .15s; }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent-line); background: var(--bg-2); }
+  .copy-btn .ci-ok { display: none; }
+  .copy-btn.copied { color: var(--success); border-color: var(--success); }
+  .copy-btn.copied .ci-copy { display: none; }
+  .copy-btn.copied .ci-ok { display: inline-grid; }
+  .copy-btn span[data-icon] { display: inline-grid; place-items: center; }
+  .copy-btn span[data-icon] svg { width: 16px; height: 16px; }
+</style>
+</head>
+<body data-page="download">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>시작하기</span><span class="sep">/</span><span>다운로드 · 설치</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 시작하기 · 다운로드 · 설치</p>
+    <h1 class="page-title">다운로드 · 설치</h1>
+    <p class="lede">Windows·macOS용 빌드를 <b>GitHub Release</b>에서 받습니다. <b>미서명</b> 빌드라 첫 실행 때 OS 경고가 한 번 뜨지만, 아래 안내대로 넘기면 됩니다.</p>
+
+    <!-- Windows -->
+    <h2 class="sec" id="windows"><span class="hash"></span> Windows</h2>
+    <p>설치 관리자(<code>orchterm-setup.exe</code>) 또는 MSI(<code>orchterm-x64.msi</code>)를 받아 실행합니다. 두 링크 모두 항상 최신 빌드를 가리킵니다.</p>
+
+    <div class="dlrow">
+      <a class="bigbtn primary" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe"><span data-icon="download"></span>orchterm-setup.exe</a>
+      <a class="bigbtn ghost" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-x64.msi"><span data-icon="download"></span>.msi (x64)</a>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="download"></span> 받아서 실행</div>
+        <p>둘 중 하나를 내려받아 더블클릭합니다.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="info"></span> SmartScreen 경고 넘기기</div>
+        <p>미서명이라 Windows가 <b>"알 수 없는 게시자(Unknown publisher)"</b> 경고를 띄울 수 있습니다. <b>추가 정보(More info) → 실행(Run anyway)</b>을 누르면 설치가 진행됩니다.</p>
+      </li>
+    </ol>
+
+    <!-- macOS -->
+    <h2 class="sec" id="macos"><span class="hash"></span> macOS</h2>
+    <p><b>가장 쉬운 방법</b>은 터미널 한 줄입니다. <code>install.sh</code>가 <b>Apple Silicon 빌드</b>를 받아 설치하고, <b>격리(quarantine)까지 해제</b>합니다. <code>curl</code>로 받은 파일은 격리 속성이 붙지 않아 <b>"손상되어 열 수 없습니다"</b> 경고를 애초에 피합니다.</p>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> curl -fsSL <span class="c">https://github.com/zendy00/orch-term-pages/releases/latest/download/install.sh</span> | sh</pre><button class="copy-btn" type="button" aria-label="명령어 복사" title="복사"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+
+    <h3 class="sub">직접 .dmg로 설치</h3>
+    <p>직접 <code>.dmg</code>를 받아 설치할 수도 있습니다.</p>
+    <div class="dlrow">
+      <a class="bigbtn ghost" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-aarch64.dmg"><span data-icon="download"></span>Apple Silicon (.dmg)</a>
+    </div>
+    <p><code>.dmg</code>를 열어 앱을 <code>/Applications</code>로 옮긴 뒤, 첫 실행 전에 격리 속성을 한 번 벗겨 줍니다.</p>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> xattr -dr com.apple.quarantine /Applications/orchterm.app</pre><button class="copy-btn" type="button" aria-label="명령어 복사" title="복사"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+    <p class="dim"><code>install.sh</code>는 다음 릴리즈부터 제공됩니다.</p>
+
+    <!-- 미서명 안내 -->
+    <h2 class="sec" id="unsigned"><span class="hash"></span> 미서명 안내</h2>
+    <p>현재 빌드는 코드서명·공증(notarization)이 되어 있지 않습니다. 첫 실행 때 OS가 한 번씩 경고를 띄우지만, 위 안내대로 넘기면 정상 동작합니다.</p>
+    <div class="warn">Windows는 SmartScreen <b>"알 수 없는 게시자"</b>, macOS는 Gatekeeper <b>격리(quarantine)</b> 경고입니다 — 모두 위 절차로 한 번만 넘기면 됩니다. 코드서명/공증은 추후 과제입니다.</div>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>오케스트레이션</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI 게이트웨이</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="terminal.html">다음 → 터미널</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+<script>
+(function () {
+  function fb(t, d) { var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.focus(); a.select(); try { document.execCommand('copy'); d(); } catch (e) {} document.body.removeChild(a); }
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.closest('.cmdrow'); var pre = row && row.querySelector('.cmd'); if (!pre) return;
+      var text = pre.textContent.replace(/^\s*\$\s+/, '').trim();
+      var done = function () { btn.classList.add('copied'); setTimeout(function () { btn.classList.remove('copied'); }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fb(text, done); }); } else { fb(text, done); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

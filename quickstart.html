@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>빠른 시작 — Orch term 가이드</title>
+<meta name="description" content="Orch term 첫 5분 가이드: 첫 터미널 자동 열기, 셸 추가(＋), 패널 분할, 파일 더블클릭으로 에디터, 주소 입력으로 인앱 브라우저, (옵션) 에이전트 오케스트레이션." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 에디터/브라우저 화면 재현 (디자인 시스템 토큰만 사용) */
+  .qs-ed { position:absolute; inset:0; padding:9px 4px; overflow:hidden; font-family:var(--code-font); font-size:var(--code-fs); line-height:1.75; }
+  .qs-ed .row { display:grid; grid-template-columns:30px 1fr; }
+  .qs-ed .ln { color:var(--text-faint); text-align:right; padding-right:13px; user-select:none; }
+  .qs-ed .li { white-space:pre; color:var(--text); }
+  .qs-ed .k { color:var(--accent); } .qs-ed .s { color:var(--term-green); } .qs-ed .c2 { color:var(--text-dim); } .qs-ed .fn { color:var(--term-cyan); }
+  .qs-bbar { display:flex; align-items:center; gap:8px; height:34px; padding:0 8px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); flex:0 0 auto; }
+  .qs-bbar .navg { display:flex; gap:1px; }
+  .qs-bbar .navg .iconbtn { font-size:15px; }
+  .qs-url { flex:1; display:flex; align-items:center; gap:8px; height:24px; padding:0 11px; background:var(--bg-0); border:1px solid var(--line); border-radius:999px; color:var(--text-dim); font-family:var(--code-font); font-size:11px; }
+  .qs-url .lk { color:var(--success); display:inline-grid; place-items:center; width:13px; flex:none; }
+  .qs-url .lk svg { width:12px; height:12px; }
+  .qs-page { position:absolute; inset:0; display:grid; place-items:center; background:var(--bg-0); color:var(--text-faint); text-align:center; padding:20px; }
+  .qs-page .ttl { font-family:var(--ui); font-weight:700; font-size:19px; color:var(--text-strong); margin-bottom:6px; letter-spacing:-.01em; }
+  .qs-page .sub { font-size:12.5px; }
+</style>
+</head>
+<body data-page="quickstart">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>시작하기</span><span class="sep">/</span><span>빠른 시작</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 시작하기 · 빠른 시작</p>
+    <h1 class="page-title">빠른 시작</h1>
+    <p class="lede">처음 켠 순간부터 <b>5분 안에 한 바퀴</b> — 첫 터미널, 셸 추가, 패널 분할, 파일 편집, 인앱 브라우저, 그리고 (옵션) 다른 AI를 워커로 부리는 <b>오케스트레이션</b>까지.</p>
+
+    <!-- 5분 워크스루 -->
+    <h2 class="sec" id="walkthrough"><span class="hash"></span> 5분 안에 한 바퀴</h2>
+    <p>설치는 <a href="download.html">다운로드 · 설치</a>를 참고하세요. 앱이 떠 있다면 아래 단계를 순서대로 따라가며 핵심 화면을 만져봅니다.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> 앱 실행 — 첫 터미널이 자동으로</div>
+        <p>앱을 실행하면 별도 조작 없이 <b>첫 터미널 탭이 자동으로 열립니다</b>. 새 터미널은 탐색기의 <b>활성 프로젝트 루트</b>에서 시작합니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 첫 실행</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:248px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+                  </div>
+                  <div class="pane-actions">
+                    <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                    <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                    <span class="pane-act-sep"></span>
+                    <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+                    <button class="pane-act" title="닫기" data-icon="close"></button>
+                  </div>
+                </div>
+                <div class="pane-content">
+                  <div class="term-pane-terminal">
+                    <div class="term"><span class="d"># 앱을 켜면 첫 터미널이 자동으로 열립니다 (활성 프로젝트 루트에서 시작)</span>
+<span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> <span class="cursor"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> 콜드 스타트 중 친 <b>첫 키도 버퍼링</b>되어 유실되지 않습니다. 더 보기 → <a href="terminal.html">터미널</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="add"></span> 새 터미널 · 셸 선택 (＋)</div>
+        <p>탭바의 <b>＋</b> 또는 패널 우상단 액션으로 새 터미널을 엽니다. 설치된 셸을 자동 감지해 드롭다운에 보여줍니다 — PowerShell · cmd · Git Bash · WSL 등.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">새 터미널 — 셸 선택</span></div>
+            <div class="shot-stage" style="padding:26px;display:grid;place-items:center;min-height:230px">
+              <div class="shell-dropdown" style="position:relative;box-shadow:var(--shadow-pop)">
+                <div class="shell-menu-title">새 터미널</div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#4d96ff">⌷</span> PowerShell</button><button class="shell-default" disabled>기본</button></div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#f1502f">⎇</span> Git Bash</button><button class="shell-default">기본 설정</button></div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">▮</span> cmd</button><button class="shell-default">기본 설정</button></div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">🐧</span> Ubuntu (WSL)</button><button class="shell-default">기본 설정</button></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">②</span> 목록에 뜬 셸을 고르면 활성 패널의 새 탭으로 열립니다. 더 보기 → <a href="terminal.html">터미널</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="split-vertical"></span> 패널 분할 — 화면 나누기</div>
+        <p>패널 우상단의 분할 액션으로 화면을 나눕니다 — <span class="i dim" data-icon="split-horizontal"></span> <b>아래로</b>, <span class="i dim" data-icon="split-vertical"></span> <b>오른쪽</b>. 각 패널은 독립된 셸이고, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>방향키</kbd>로 인접 패널을 오갑니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 패널 2개 (오른쪽 분할)</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="panes" style="height:262px">
+                <div class="pane active-pane">
+                  <div class="pane-tabbar">
+                    <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div></div>
+                    <div class="pane-actions"><button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button><button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button></div>
+                  </div>
+                  <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> npm run dev
+<span class="g">  ➜  Local:</span>   http://localhost:5181/
+<span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> <span class="cursor"></span></div></div></div>
+                </div>
+                <div class="divider-v"></div>
+                <div class="pane">
+                  <div class="pane-tabbar">
+                    <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">Git Bash</span></div></div>
+                    <div class="pane-actions"><button class="pane-act" title="닫기" data-icon="close"></button></div>
+                  </div>
+                  <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">user@pc</span><span class="d">:</span><span class="c">~/orch-term</span><span class="d">$</span> git status
+<span class="d">On branch main</span>
+<span class="d">nothing to commit, working tree clean</span></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">③</span> 활성 패널은 액센트 테두리로 강조됩니다. 더 보기 → <a href="tabs-panes.html">탭 · 패널</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="file"></span> 파일 더블클릭 → 에디터 탭</div>
+        <p>탐색기에서 파일을 <b>더블클릭</b>하면 활성 패널에 <b>에디터 탭</b>으로 열립니다(단일 클릭은 미리보기). 외부 변경 자동 리로드 · 인코딩 표시 · <kbd>Ctrl</kbd>+<kbd>F</kbd> 찾기를 지원합니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 에디터</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:206px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+                    <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">terminal.ts</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button><button class="pane-act" title="닫기" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content">
+                  <div class="qs-ed">
+                    <div class="row"><span class="ln">1</span><span class="li"><span class="k">import</span> { invoke } <span class="k">from</span> <span class="s">"@tauri-apps/api/core"</span>;</span></div>
+                    <div class="row"><span class="ln">2</span><span class="li"> </span></div>
+                    <div class="row"><span class="ln">3</span><span class="li"><span class="c2">// 새 터미널을 활성 프로젝트 루트에서 연다</span></span></div>
+                    <div class="row"><span class="ln">4</span><span class="li"><span class="k">export async function</span> <span class="fn">openTerminal</span>(cwd?: <span class="k">string</span>) {</span></div>
+                    <div class="row"><span class="ln">5</span><span class="li">  <span class="k">return</span> <span class="fn">invoke</span>(<span class="s">"pty_spawn"</span>, { cwd });</span></div>
+                    <div class="row"><span class="ln">6</span><span class="li">}<span class="cursor"></span></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="statusbar">
+                <span class="mono faint">terminal.ts</span>
+                <span class="statusbar-spacer"></span>
+                <span class="statusbar-encoding">UTF-8</span>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">④</span> 로드한 인코딩은 하단 <b>상태바 우측</b>에 표시됩니다(에디터 탭일 때만). 더 보기 → <a href="editor.html">코드 에디터</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="external-link"></span> 주소 입력 → 인앱 브라우저 탭</div>
+        <p>주소창에 URL을 입력하면 <b>인앱 브라우저 탭</b>으로 엽니다. https면 자물쇠가 뜨고, <span class="i dim" data-icon="external-link"></span> 버튼으로 시스템 브라우저에서 엽니다. 로컬 파일도 바로 봅니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 인앱 브라우저</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:236px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="external-link"></span><span class="tab-label">Orch term 가이드</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button><button class="pane-act" title="닫기" data-icon="close"></button></div>
+                </div>
+                <div class="qs-bbar">
+                  <div class="navg"><button class="iconbtn" title="뒤로">‹</button><button class="iconbtn" title="앞으로">›</button><button class="iconbtn" title="새로고침" data-icon="refresh"></button></div>
+                  <div class="qs-url"><span class="lk" data-icon="lock"></span><span>github.com/zendy00/orch-term-pages</span></div>
+                  <button class="iconbtn" title="시스템 브라우저로 열기" data-icon="external-link"></button>
+                </div>
+                <div class="pane-content"><div class="qs-page"><div><div class="ttl">Orch term · 문서</div><div class="sub">주소창에 친 URL이 이 자식 웹뷰 탭으로 열렸습니다.</div></div></div></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">⑤</span> https면 <span class="i" data-icon="lock"></span> 자물쇠 · 새 창 링크는 제자리 이동으로 가로챕니다. 더 보기 → <a href="browser.html">인앱 브라우저</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> (옵션) 오케스트레이션 — 워커 부르기</div>
+        <p>설정에서 <b>오케스트레이션</b>을 켜면(기본 꺼짐), 지휘자(claude) 탭에서 자연어로 다른 AI(<b>codex · agy · claude</b>)를 <b>워커</b>로 띄워 다중 턴으로 협업시킬 수 있습니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">commander · claude</span><span class="badge ok">orchestrating</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:248px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">commander · claude</span><span class="tab-dot on"></span></div>
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">backend · codex</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">backend(codex)에게 SSH 터널 모듈 리뷰를 맡겨줘</span>
+<span class="a">▸ open_session</span> <span class="c">codex</span> <span class="d">from=ep_claude_8f3a… → { session_id: s_4c1e }</span>
+<span class="a">▸ send</span> <span class="d">"channel_open_direct_tcpip 동시성 안전한지 봐줘"</span>
+<span class="am">  ⟳ codex 작업 중… (출력 idle 대기)</span>
+<span class="g">◂ reply</span> <span class="d">codex: "&self 차용이라 동시성 안전. 리스너 127.0.0.1 바인드 확인."</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">⑥</span> 워커를 열고 → 지시하고 → 응답을 받는 한 사이클. 더 보기 → <a href="orchestration.html">에이전트 오케스트레이션</a>.</div>
+          </div>
+        </figure>
+        <p class="dim">켜려면 재시작이 필요하고(127.0.0.1 전용), 앱 안 에이전트 협업이 필요 없으면 이 단계는 건너뛰어도 됩니다.</p>
+      </li>
+    </ol>
+
+    <!-- 다음 단계 -->
+    <h2 class="sec" id="next"><span class="hash"></span> 다음엔 어디로</h2>
+    <p>한 바퀴를 돌았다면, 각 기능의 디테일은 아래에서 이어집니다.</p>
+    <div class="feature-cards">
+      <a class="fcard" href="terminal.html"><span class="fc-ic" data-icon="terminal"></span><h4>터미널</h4><p>복사·붙여넣기, 줄바꿈(Shift/Ctrl+Enter), 스크롤백, 셸 종료 자동 닫기.</p></a>
+      <a class="fcard" href="tabs-panes.html"><span class="fc-ic" data-icon="split-vertical"></span><h4>탭 · 패널</h4><p>가로/세로 분할, 패널 최대화(Shift+Esc), 탭 색·드래그, 패널 네비게이션.</p></a>
+      <a class="fcard" href="editor.html"><span class="fc-ic" data-icon="file"></span><h4>코드 에디터</h4><p>외부 변경 자동 리로드, 인코딩 표시, 마크다운 스타일, 테마 추종.</p></a>
+      <a class="fcard" href="orchestration.html"><span class="fc-ic" data-icon="settings"></span><h4>오케스트레이션</h4><p>다른 AI를 워커로 띄워 다중 턴으로 협업.</p></a>
+    </div>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 알아두면 좋은 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>선택 시 복사(없으면 인터럽트) / 붙여넣기</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd> · <kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>줄바꿈 (제출 안 함)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>방향키</kbd></td><td>인접 패널로 이동</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd></td><td>탐색기 토글</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>활성 패널 최대화</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>에디터 찾기</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>탭 · 패널</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>인앱 브라우저</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>탐색기</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="ssh"></span>SSH · SFTP</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="workstation.html">다음 → 멀티에이전트 워크스테이션</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

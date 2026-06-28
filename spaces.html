@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>스페이스 — Orch term 가이드</title>
+<meta name="description" content="Orch term 스페이스(Space): 타이틀바 칩으로 전환하는 독립 레이아웃. Ctrl+1‥9 전환, Space별 분할 트리·탐색기, 우클릭 메뉴·복제, 실시간 영속화·복원." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 완료 배지 점(디자인 시스템 토큰만 사용) */
+  .space-chip-dot { width:7px; height:7px; border-radius:50%; background:var(--success); box-shadow:0 0 0 3px color-mix(in srgb,var(--success) 26%,transparent); flex:none; }
+  .chip-hue { width:7px; height:7px; border-radius:2px; flex:none; }
+</style>
+</head>
+<body data-page="spaces">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>스페이스</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 스페이스 <span class="flag">전환 가능한 레이아웃</span></p>
+    <h1 class="page-title">스페이스</h1>
+    <p class="lede"><b>Space</b>는 tmux·i3 워크스페이스처럼 <b>통째로 전환되는 독립 레이아웃</b>입니다. 각 Space가 자기 분할 트리(패널·탭)와 파일 탐색기를 따로 가져, 타이틀바 칩으로 한 번에 갈아탑니다.</p>
+
+    <!-- Space 칩 -->
+    <h2 class="sec" id="chips"><span class="hash"></span> Space 칩 — 타이틀바에서 전환</h2>
+    <p>Space 목록은 <b>타이틀바</b>에 칩으로 늘어섭니다. 활성 칩은 액센트 밑줄로 강조되고, 칩 번호는 <kbd>Ctrl</kbd>+<kbd>번호</kbd> 전환 위치를 가리킵니다. 맨 끝 <span class="i" data-icon="add"></span> 로 <b>새 Space</b>(빈 탐색기 + 터미널 1개)를 엽니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 타이틀바 · Space 칩</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="titlebar">
+            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
+            <div class="titlebar-spaces">
+              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
+              <div class="space-chip"><span class="chip-hue" style="background:var(--accent)"></span><span class="space-chip-num">2</span> docs</div>
+              <div class="space-chip"><span class="chip-hue" style="background:var(--success)"></span><span class="space-chip-num">3</span> 릴리즈</div>
+              <button class="space-chip-add">＋</button>
+            </div>
+            <span class="titlebar-title"></span>
+            <div class="titlebar-controls">
+              <button class="titlebar-btn" data-icon="window-minimize"></button>
+              <button class="titlebar-btn" data-icon="window-maximize"></button>
+              <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 활성 칩은 액센트 밑줄로 떠 보입니다. <span class="n">②</span> 칩 앞 색 사각형은 <b>9색 hue</b> 틴트, 끝의 <b>＋</b>는 새 Space.</div>
+      </div>
+    </figure>
+
+    <p>칩은 <b>더블클릭</b>으로 이름·색을 인라인 편집하고, 호버 시 뜨는 <b>×</b>로 닫습니다(마지막 1개 Space는 닫기 불가). 드래그로 칩 순서를 바꾸거나, 칩 위로 <b>탭을 드롭</b>해 다른 Space로 옮길 수 있습니다.</p>
+
+    <!-- 전환 -->
+    <h2 class="sec" id="switch"><span class="hash"></span> 전환 (Ctrl+1‥9)</h2>
+    <p>칩을 클릭하거나 <kbd>Ctrl</kbd>+<kbd>1</kbd>‥<kbd>9</kbd>(타이틀바 <b>위치순</b>)로 전환합니다. 전환은 화면을 부분 갱신하는 게 아니라 <b>레이아웃을 통째로 교체</b>합니다. 나가는 Space의 터미널·브라우저는 <b>그대로 살아 있어</b>, 돌아왔을 때 진행 중이던 명령의 출력과 스크롤백이 보존됩니다.</p>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd> ‥ <kbd>9</kbd></td><td>위치순으로 1‥9번째 Space로 전환</td></tr>
+        <tr><td>칩 클릭</td><td>해당 Space로 전환</td></tr>
+        <tr><td>칩 더블클릭</td><td>이름 + 색 인라인 편집</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Space별 레이아웃·탐색기 -->
+    <h2 class="sec" id="layout"><span class="hash"></span> Space별 분할 트리 · 탐색기</h2>
+    <p>각 Space가 자기 상태를 통째로 소유합니다. 전환은 그 묶음을 갈아끼우는 일입니다.</p>
+    <div class="feature-cards">
+      <div class="fcard"><span class="fc-ic" data-icon="split-vertical"></span><h4>독립 분할 트리</h4><p>분할 트리·활성 패널·최대화 상태를 Space마다 따로 가집니다. 한 Space는 4분할로, 다른 Space는 단일 터미널로 유지할 수 있습니다.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="folder"></span><h4>Space별 탐색기</h4><p>자기 프로젝트 목록과 활성 프로젝트를 가집니다. 전환하면 좌측 탐색기가 그 Space의 트리로 바뀌고, 새 터미널은 활성 프로젝트 루트에서 시작합니다.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="sidebar"></span><h4>접힘 · 폭 · 모드</h4><p>탐색기 접힘/폭과 사이드바 모드(파일·검색·Git)도 Space별로 기억해 전환·재시작 시 복원합니다.</p></div>
+    </div>
+
+    <!-- 우클릭 메뉴 + 복제 -->
+    <h2 class="sec" id="menu"><span class="hash"></span> 우클릭 메뉴 · 전체 복제</h2>
+    <p>칩을 <b>우클릭</b>하면 <b>이름 변경 / 색상 변경 / 복제 / 닫기</b> 메뉴가 열립니다. 이름·색은 더블클릭과 같은 인라인 편집기를 엽니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Space 칩 — 우클릭 메뉴</span></div>
+        <div class="shot-stage" style="padding:0;min-height:200px">
+          <div class="titlebar">
+            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
+            <div class="titlebar-spaces">
+              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
+              <div class="space-chip"><span class="chip-hue" style="background:var(--accent)"></span><span class="space-chip-num">2</span> docs</div>
+              <button class="space-chip-add">＋</button>
+            </div>
+            <span class="titlebar-title"></span>
+          </div>
+          <div class="ctx-menu" style="position:absolute;top:34px;left:96px">
+            <button class="ctx-item"><span class="i" data-icon="edit"></span> 이름 변경</button>
+            <button class="ctx-item"><span class="chip-hue" style="background:var(--accent);display:inline-block;vertical-align:middle;margin-right:7px"></span>색상 변경</button>
+            <button class="ctx-item"><span class="i" data-icon="copy-alt"></span> 복제</button>
+            <div class="ctx-sep"></div>
+            <button class="ctx-item danger"><span class="i" data-icon="close"></span> 닫기</button>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 이름·색은 더블클릭과 같은 인라인 편집기. <span class="n">②</span> <b>닫기</b>는 위험 항목(<span style="color:var(--danger)">빨강</span>).</div>
+      </div>
+    </figure>
+
+    <p><b>복제</b>는 그 Space 전체(탭·프로젝트·레이아웃·색)를 새 Space로 복사하고 곧바로 전환합니다. Space가 이미 9개면 메뉴에서 비활성화됩니다.</p>
+    <div class="warn"><b>실행 중 프로세스는 복사되지 않습니다.</b> 복제본의 터미널은 같은 셸·디렉터리에서 새로 시작합니다 — 스크롤백이나 진행 중이던 명령은 따라오지 않습니다.</div>
+
+    <!-- 영속화 + 복원 -->
+    <h2 class="sec" id="persist"><span class="hash"></span> 실시간 영속화 · 복원</h2>
+    <p>Space를 바꾸거나 탭·분할·프로젝트를 건드릴 때마다 상태가 자동 저장돼, 앱을 다시 켜면 레이아웃이 복원됩니다. 저장본이 깨졌으면 기본 단일 Space로 안전하게 되돌립니다.</p>
+    <ul>
+      <li><b>구조만 저장.</b> 터미널은 디렉터리(cwd)만 기억했다가 재시작 시 그 위치에서 새로 시작합니다(스크롤백은 소실). 에디터·브라우저 탭은 다시 열립니다.</li>
+      <li><b>커스텀 탭 이름 유지.</b> 인라인으로 바꾼 터미널 탭 이름은 재시작 후에도 그대로 유지됩니다(아이콘은 셸 기준).</li>
+    </ul>
+
+    <!-- 완료 알림 seam -->
+    <h2 class="sec" id="done"><span class="hash"></span> 백그라운드 완료 알림</h2>
+    <p>백그라운드 Space에서 돌던 작업이 끝나면, 그 Space 칩에 초록 점이 깜빡여 알려 줍니다 — 다른 Space로 가 있어도 칩만 보고 완료를 알 수 있게요.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">완료 배지 — 백그라운드 Space 칩</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="titlebar">
+            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
+            <div class="titlebar-spaces">
+              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
+              <div class="space-chip"><span class="space-chip-dot"></span><span class="space-chip-num">2</span> docs</div>
+              <button class="space-chip-add">＋</button>
+            </div>
+            <span class="titlebar-title"></span>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 백그라운드 Space(<code>docs</code>) 칩 앞 깜빡이는 <b style="color:var(--success)">초록 점</b> = 그 Space의 작업 완료 신호.</div>
+      </div>
+    </figure>
+
+    <div class="warn"><b>이 알림은 곧 제공될 기능입니다.</b> 현재 빌드에서는 칩의 초록 점이 아직 켜지지 않습니다.</div>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>탭 · 패널</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>탐색기</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="download"></span>저장 · 백업</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>완료 배지 · 알림</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="explorer.html">다음 → 탐색기</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

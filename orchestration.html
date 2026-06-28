@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>에이전트 오케스트레이션 — Orch term 가이드</title>
+<meta name="description" content="대화 중인 AI가 다른 AI를 워커로 띄워 다중 턴으로 협업시키는 control plane. MCP open/send/close, 지휘자 대시보드." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — A2A 플로우 다이어그램 (디자인 시스템 토큰만 사용) */
+  .a2a { display:flex; align-items:stretch; gap:0; margin:22px 0; max-width:var(--read); flex-wrap:wrap; }
+  .a2a-node { flex:1 1 200px; min-width:180px; background:var(--bg-1); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; }
+  .a2a-node.cmd { border-color:var(--accent-line); }
+  .a2a-node .role { font-family:var(--code-font); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+  .a2a-node .who { font-size:15px; color:var(--text-strong); font-weight:600; }
+  .a2a-node .who b { color:var(--accent); }
+  .a2a-arrow { flex:0 0 100%; display:flex; align-items:center; gap:10px; padding:8px 2px; color:var(--text-dim); font-size:13px; }
+  .a2a-arrow .line { flex:1; height:1px; background:linear-gradient(90deg,var(--accent-line),transparent); }
+  .a2a-arrow code { white-space:nowrap; }
+  @media(min-width:640px){ .a2a{flex-wrap:nowrap;align-items:center} .a2a-arrow{flex:0 0 132px;flex-direction:column;gap:4px} .a2a-arrow .line{width:100%;flex:none} }
+  /* 지휘자 대시보드 세션 리스트 */
+  .orch-dash { background:var(--bg-1); border:1px solid var(--line-faint); border-radius:var(--r-lg); overflow:hidden; }
+  .orch-dash-head { display:flex; align-items:center; gap:8px; padding:9px 13px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); }
+  .orch-dash-head .ttl { font-weight:600; color:var(--text-strong); font-size:13px; }
+  .orch-dash-head .pill { margin-left:auto; font-family:var(--code-font); font-size:11px; color:var(--success); background:color-mix(in srgb,var(--success) 16%,transparent); padding:2px 9px; border-radius:999px; }
+  .orch-row { display:flex; align-items:center; gap:11px; padding:11px 13px; border-bottom:1px solid var(--line-faint); }
+  .orch-row:last-child{border-bottom:none}
+  .orch-row .st { width:8px; height:8px; border-radius:50%; flex:none; }
+  .orch-row .st.run { background:var(--attention); box-shadow:0 0 0 3px color-mix(in srgb,var(--attention) 26%,transparent); }
+  .orch-row .st.idle { background:var(--success); }
+  .orch-row .nm { color:var(--text-strong); font-size:13.5px; }
+  .orch-row .nm small { color:var(--text-faint); font-family:var(--code-font); font-size:11px; margin-left:6px; }
+  .orch-row .turn { color:var(--text-dim); font-size:12px; margin-left:4px; }
+  .orch-row .acts { margin-left:auto; display:flex; gap:4px; }
+  .orch-row .acts .iconbtn { color:var(--text-faint); }
+  .orch-row .acts .iconbtn:hover { color:var(--text-strong); background:var(--bg-hover); }
+</style>
+</head>
+<body data-page="orchestration">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>대형 기능</span><span class="sep">/</span><span>에이전트 오케스트레이션</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 대형 기능 · control plane <span class="flag">MCP A2A</span></p>
+    <h1 class="page-title">에이전트 오케스트레이션</h1>
+    <p class="lede">대화 중인 AI가 <b>다른 AI(claude·codex·agy)를 워커로 띄워</b>, 컨텍스트를 유지한 채 <b>여러 턴에 걸쳐 협업</b>시킵니다. 지휘자(commander)–워커(worker) 모델로 한 자리에서 팀을 부립니다.</p>
+
+    <!-- 개념 -->
+    <h2 class="sec" id="concept"><span class="hash"></span> 무엇을 하는가</h2>
+    <p>지휘자 AI가 orchterm 안의 워커를 <b>인터랙티브 TUI 탭</b>에 띄우고 메시지를 주고받습니다. 워커도 지휘자에게 먼저 말을 걸 수 있는 <b>양방향 1:1 채널</b>이며, 자기 세션이 아닌 워커는 건드릴 수 없어 남의 작업을 가로채지 못합니다.</p>
+
+    <div class="a2a">
+      <div class="a2a-node cmd"><div class="role">commander</div><div class="who">외부 <b>Claude Code</b><br><small style="color:var(--text-faint)">지휘자</small></div></div>
+      <div class="a2a-arrow"><code>세션 열기</code><div class="line"></div><code>지시 · 응답</code></div>
+      <div class="a2a-node"><div class="role">orchterm</div><div class="who">MCP 서버<br><small style="color:var(--text-faint)">:9611</small></div></div>
+      <div class="a2a-arrow"><code>워커 탭</code><div class="line"></div><code>응답 반환</code></div>
+      <div class="a2a-node"><div class="role">worker</div><div class="who"><b>codex</b> · agy · claude<br><small style="color:var(--text-faint)">인터랙티브 탭</small></div></div>
+    </div>
+
+    <!-- 시작하기 -->
+    <h2 class="sec" id="start"><span class="hash"></span> 시작하기 — 지휘자에게 시키기</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> 오케스트레이션 켜기</div>
+        <p>설정에서 오케스트레이션을 켜고(기본 off) 앱을 재시작합니다. 그러면 외부 Claude Code가 별도 설정 없이 바로 워커를 부릴 수 있습니다.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> 지휘자 탭에서 일 맡기기</div>
+        <p>지휘자(claude) 탭에 자연어로 위임하면 워커 탭이 뜨고 응답이 돌아옵니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">commander · claude</span><span class="badge ok">orchestrating</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:286px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">commander · claude</span><span class="tab-dot on"></span></div>
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">backend · codex</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">backend(codex)에게 SSH 터널 모듈 리뷰를 맡겨줘</span>
+<span class="a">▸ open_session</span> <span class="c">codex</span> <span class="d">from=ep_claude_8f3a… → { session_id: s_4c1e }</span>
+<span class="a">▸ send</span> <span class="d">"channel_open_direct_tcpip 동시성 안전한지 봐줘"</span>
+<span class="am">  ⟳ codex 작업 중… (출력 idle 대기)</span>
+<span class="g">◂ reply</span> <span class="d">codex: "&self 차용이라 동시성 안전. -L/-D 리스너는 127.0.0.1 바인드 확인."</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">▲</span> 지휘자가 워커를 열고 지시한 뒤 응답을 받는 한 사이클.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+
+    <!-- 감독 대시보드 -->
+    <h2 class="sec" id="dashboard"><span class="hash"></span> 감독 대시보드 (Space당 1개)</h2>
+    <p>명령 팔레트에서 <b>"오케스트레이션 워커 지휘자"</b>를 실행하면 감독 대시보드 탭이 열립니다. 현재 Space의 라이브 세션을 모아 보여주고, 각 워커로 <b>이동</b>·진행 중 턴 <b>중지</b>·세션 <b>닫기</b>를 한곳에서 합니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">오케스트레이션 — 감독 대시보드</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="orch-dash">
+            <div class="orch-dash-head"><span class="ic" data-icon="more" style="color:var(--accent);display:inline-grid;width:16px"></span><span class="ttl">오케스트레이션 · Space 1</span><span class="pill">● 2 세션</span></div>
+            <div class="orch-row"><span class="st run"></span><span class="nm">codex <small>s_4c1e · ssh-core</small></span><span class="turn">⟳ 턴 진행 중</span><span class="acts"><button class="iconbtn" title="이동">↗</button><button class="iconbtn" title="중지" data-icon="stop"></button><button class="iconbtn" title="닫기" data-icon="close"></button></span></div>
+            <div class="orch-row"><span class="st idle"></span><span class="nm">agy <small>s_91b7 · docs</small></span><span class="turn">대기(idle)</span><span class="acts"><button class="iconbtn" title="이동">↗</button><button class="iconbtn" title="중지" data-icon="stop"></button><button class="iconbtn" title="닫기" data-icon="close"></button></span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 상태 dot — <b style="color:var(--attention)">주황</b> 진행 중 · <b style="color:var(--success)">초록</b> 대기. <span class="n">②</span> 행에서 이동 · 중지 · 닫기.</div>
+      </div>
+    </figure>
+
+    <!-- MCP 도구 -->
+    <h2 class="sec" id="tools"><span class="hash"></span> 무엇을 주고받나</h2>
+    <p>지휘자 AI가 자연어 뒤에서 호출하는 도구입니다 — 사용자가 직접 칠 일은 없고, 흐름을 이해할 때 참고하세요.</p>
+    <table class="kbds">
+      <thead><tr><th>도구</th><th>하는 일</th></tr></thead>
+      <tbody>
+        <tr><td><code>list_agents</code></td><td>쓸 수 있는 워커 목록 (codex · agy · claude)</td></tr>
+        <tr><td><code>open_session</code></td><td>워커를 인터랙티브 탭으로 연다</td></tr>
+        <tr><td><code>send</code></td><td>상대에게 지시하고 응답을 기다린다</td></tr>
+        <tr><td><code>close_session</code></td><td>워커 탭을 닫는다</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 보안 -->
+    <h2 class="sec" id="security"><span class="hash"></span> 안전 기본값</h2>
+    <ul>
+      <li><b>로컬(127.0.0.1) 전용</b> + 일회성 토큰으로만 접속됩니다.</li>
+      <li><b>기본 off</b> — 설정에서 켜고 재시작해야 동작합니다.</li>
+      <li><b>워커 안전 모드 기본 ON</b> — 워커는 위험 권한 우회 플래그를 쓰지 않습니다.</li>
+    </ul>
+    <div class="warn"><b>주의</b> — 오케스트레이션은 외부 프로그램이 로컬에서 AI를 부리는 통로입니다. 토큰·로컬 바인딩·안전 모드 기본값을 함부로 끄지 마세요.</div>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI 게이트웨이</a>
+        <a class="relchip" href="mirror.html"><span class="ri" data-icon="external-link"></span>CDP 브라우저 미러</a>
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="tasks"></span>AI 할 일 공유</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>완료 배지 · 알림</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="gateway.html">다음 → AI 게이트웨이</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

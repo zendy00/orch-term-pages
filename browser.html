@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>인앱 브라우저 — Orch term 가이드</title>
+<meta name="description" content="Orch term 인앱 브라우저: 네이티브 자식 웹뷰(iframe 아님), 주소창·뒤로/앞으로/새로고침, 새 창 링크 가로채기, 로컬 파일 열기, 시스템 브라우저로 열기." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 인앱 브라우저 패널 재현(디자인 시스템 토큰만 사용) */
+  .brz { position:absolute; inset:5px; display:flex; flex-direction:column; min-height:0;
+    border-radius:var(--r-md); overflow:hidden; background:var(--bg-0); border:1px solid var(--line-faint); }
+  .brz-nav { display:flex; align-items:center; gap:3px; height:34px; padding:0 8px; flex:0 0 auto;
+    background:var(--bg-2); border-bottom:1px solid var(--line-faint); }
+  .brz-btn { width:26px; height:24px; display:grid; place-items:center; border:none; background:none;
+    color:var(--text-dim); border-radius:var(--r-sm); font-size:18px; line-height:1; cursor:default; }
+  .brz-btn:hover { background:var(--bg-hover); color:var(--text-strong); }
+  .brz-btn.off { color:var(--text-faint); opacity:.45; }
+  .brz-btn.reload { font-size:15px; }
+  .brz-btn.ext { font-size:13px; color:var(--text-faint); margin-left:1px; }
+  .brz-btn.ext:hover { color:var(--accent); }
+  .brz-url { flex:1 1 auto; display:flex; align-items:center; gap:6px; height:26px; padding:0 12px; margin:0 5px;
+    min-width:0; background:var(--bg-0); border:1px solid var(--line); border-radius:999px;
+    font-family:var(--code-font); font-size:12px; color:var(--text); overflow:hidden; white-space:nowrap; }
+  .brz-url.classic { border-radius:var(--r-sm); }
+  .brz-url .lk { display:inline-grid; place-items:center; width:1.05em; height:1.05em; color:var(--text-faint); flex:none; }
+  .brz-url .lk svg { width:1em; height:1em; }
+  .brz-url .host { color:var(--text-strong); }
+  .brz-url .path { color:var(--text-faint); overflow:hidden; text-overflow:ellipsis; }
+  .brz-page { flex:1 1 auto; position:relative; overflow:hidden; background:var(--bg-1); }
+  .brz-skel { height:9px; background:var(--bg-2); border-radius:5px; }
+  .brz-hide { position:absolute; inset:0; display:grid; place-items:center; gap:8px; text-align:center;
+    background:repeating-linear-gradient(45deg, var(--bg-0), var(--bg-0) 9px, var(--bg-2) 9px, var(--bg-2) 10px); }
+  .brz-hide .lab { font-family:var(--code-font); font-size:11.5px; color:var(--text-faint); }
+</style>
+</head>
+<body data-page="browser">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>인앱 브라우저</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 인앱 브라우저</p>
+    <h1 class="page-title">인앱 브라우저</h1>
+    <p class="lede">인앱 브라우저 탭은 iframe이 아니라 <b>네이티브 자식 웹뷰</b>라, 링크 클릭과 <b>뒤로/앞으로</b>가 진짜 브라우저처럼 자연스럽습니다. 주소창·네비게이션은 위쪽에 있고, 페이지는 그 아래 영역에 또렷하게 그려집니다.</p>
+
+    <!-- 주소창 / 네비게이션 -->
+    <h2 class="sec" id="urlbar"><span class="hash"></span> 주소창 · 뒤로 · 앞으로 · 새로고침</h2>
+    <p>네비게이션 버튼 <b>뒤로(‹)</b> · <b>앞으로(›)</b> · <b>새로고침(⟳)</b>이 주소창 왼쪽에 있습니다. 가운데 캡슐 주소창은 https일 때 왼쪽에 자물쇠<span class="i dim" data-icon="lock"></span>를 보여주고, 오른쪽 끝 버튼으로 현재 페이지를 시스템 브라우저로 넘깁니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 인앱 브라우저</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:300px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">orch-term · GitHub</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+                <button class="pane-act" title="닫기" data-icon="close"></button>
+              </div>
+            </div>
+            <div class="pane-content">
+              <div class="brz">
+                <div class="brz-nav">
+                  <button class="brz-btn" title="뒤로">‹</button>
+                  <button class="brz-btn off" title="앞으로">›</button>
+                  <button class="brz-btn reload" title="새로고침">⟳</button>
+                  <div class="brz-url"><span class="lk" data-icon="lock"></span><span class="host">github.com</span><span class="path">/zendy00/orch-term</span></div>
+                  <button class="brz-btn ext" title="시스템 브라우저로 열기" data-icon="external-link"></button>
+                </div>
+                <div class="brz-page">
+                  <div style="padding:15px 18px">
+                    <div style="display:flex;align-items:center;gap:7px;font-family:var(--code-font);font-size:12.5px;color:var(--text-dim)">
+                      <span style="width:18px;height:18px;border-radius:50%;background:var(--bg-3);display:inline-block;flex:none"></span>
+                      zendy00 <span style="color:var(--text-faint)">/</span> <b style="color:var(--text-strong)">orch-term</b>
+                      <span style="margin-left:6px;font-size:10px;color:var(--text-faint);border:1px solid var(--line);border-radius:999px;padding:1px 7px">Public</span>
+                    </div>
+                    <div style="height:1px;background:var(--line-faint);margin:13px 0"></div>
+                    <div style="font-size:19px;color:var(--text-strong);font-weight:600;margin-bottom:5px">Orch term</div>
+                    <div style="font-size:12.5px;color:var(--text-dim);margin-bottom:15px">A Tauri 2 desktop terminal — Windows · macOS.</div>
+                    <div style="display:flex;flex-direction:column;gap:9px;max-width:78%">
+                      <div class="brz-skel" style="width:94%"></div>
+                      <div class="brz-skel" style="width:80%"></div>
+                      <div class="brz-skel" style="width:88%"></div>
+                      <div class="brz-skel" style="width:58%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 뒤로 <b>‹</b> · 앞으로 <b>›</b>(히스토리 없으면 흐려짐) · 새로고침 <b>⟳</b> · https면 왼쪽 자물쇠 <span class="i dim" data-icon="lock"></span>, 오른쪽 <span class="i dim" data-icon="external-link"></span> 시스템 브라우저로 열기.</div>
+      </div>
+    </figure>
+
+    <!-- 링크 가로채기 -->
+    <h2 class="sec" id="links"><span class="hash"></span> 새 창 링크는 그 자리에서</h2>
+    <p>메일함의 '새 창' 링크처럼 보통 새 창·새 탭으로 열리는 링크도 같은 탭 <b>그 자리에서</b> 열립니다. 링크가 죽지 않고 자연스럽게 이어집니다.</p>
+    <div class="warn"><b>진짜 새 창이 필요한 흐름은 예외</b> — OAuth 로그인·결제 팝업처럼 새 창이 떠야 하는 흐름은 인앱 웹뷰에서 동작하지 않습니다. 주소창 오른쪽 <span class="i dim" data-icon="external-link"></span> 로 시스템 브라우저에서 진행하세요.</div>
+
+    <!-- 로컬 파일 -->
+    <h2 class="sec" id="localfile"><span class="hash"></span> 로컬 파일 열기</h2>
+    <p>탐색기의 HTML·이미지 같은 로컬 파일은 인앱 브라우저 탭에서 바로 열립니다. 빌드 리포트나 미리보기 HTML을 앱을 떠나지 않고 확인할 수 있습니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">로컬 파일 — asset 프로토콜</span><span class="badge phase">convertFileSrc</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:226px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">report.html</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="닫기" data-icon="close"></button>
+              </div>
+            </div>
+            <div class="pane-content">
+              <div class="brz">
+                <div class="brz-nav">
+                  <button class="brz-btn" title="뒤로">‹</button>
+                  <button class="brz-btn off" title="앞으로">›</button>
+                  <button class="brz-btn reload" title="새로고침">⟳</button>
+                  <div class="brz-url"><span class="host">asset.localhost</span><span class="path">/D%3A/orch-term/target/report.html</span></div>
+                  <button class="brz-btn ext" title="시스템 브라우저로 열기" data-icon="external-link"></button>
+                </div>
+                <div class="brz-page">
+                  <div style="padding:15px 18px">
+                    <div style="font-size:16px;color:var(--text-strong);font-weight:600;margin-bottom:4px">빌드 리포트</div>
+                    <div style="font-size:11.5px;color:var(--text-faint);font-family:var(--code-font);margin-bottom:13px">file:// → asset.localhost (http 스킴, 자물쇠 없음)</div>
+                    <div style="display:flex;flex-direction:column;gap:8px;max-width:74%">
+                      <div class="brz-skel" style="width:88%"></div>
+                      <div class="brz-skel" style="width:66%"></div>
+                      <div class="brz-skel" style="width:80%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 로컬 파일은 사설 호스트로 열려 주소에 자물쇠가 없습니다.</div>
+      </div>
+    </figure>
+
+    <!-- 시스템 브라우저 -->
+    <h2 class="sec" id="external"><span class="hash"></span> 시스템 브라우저로 열기</h2>
+    <p>주소창 오른쪽 <span class="i dim" data-icon="external-link"></span> 버튼을 누르면 현재 페이지를 <b>OS 기본 브라우저</b>로 엽니다. 인앱 웹뷰가 지원하지 못하는 팝업·로그인 흐름이 필요할 때 한 번에 넘어갑니다. 페이지 확대·축소는 <kbd>Ctrl</kbd>+<kbd>+</kbd> / <kbd>Ctrl</kbd>+<kbd>−</kbd> / <kbd>Ctrl</kbd>+<kbd>휠</kbd>로 합니다.</p>
+
+    <!-- 오른쪽 클릭 메뉴 -->
+    <h2 class="sec" id="occlusion"><span class="hash"></span> 오른쪽 클릭 · 화면 위 메뉴</h2>
+    <p>페이지를 오른쪽 클릭하면 새로고침 · 주소 복사 · 시스템 브라우저로 열기 · 탭 닫기 메뉴가 뜹니다. 메뉴나 모달이 열려 있는 동안엔 페이지가 잠깐 숨었다가, 닫히면 다시 나타납니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">팝업이 뜨면 웹뷰를 숨김</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:262px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">orch-term · GitHub</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="닫기" data-icon="close"></button>
+              </div>
+            </div>
+            <div class="pane-content">
+              <div class="brz">
+                <div class="brz-nav">
+                  <button class="brz-btn" title="뒤로">‹</button>
+                  <button class="brz-btn off" title="앞으로">›</button>
+                  <button class="brz-btn reload" title="새로고침">⟳</button>
+                  <div class="brz-url"><span class="lk" data-icon="lock"></span><span class="host">github.com</span><span class="path">/zendy00/orch-term</span></div>
+                  <button class="brz-btn ext" title="시스템 브라우저로 열기" data-icon="external-link"></button>
+                </div>
+                <div class="brz-page">
+                  <div class="brz-hide">
+                    <span class="lab">웹뷰 일시 숨김 · DOM 팝업 표시 중</span>
+                  </div>
+                  <div class="ctx-menu" style="position:absolute;top:30px;left:46px;min-width:184px">
+                    <button class="ctx-item">새로고침</button>
+                    <button class="ctx-item">주소 복사</button>
+                    <button class="ctx-item">시스템 브라우저로 열기</button>
+                    <div class="ctx-sep"></div>
+                    <button class="ctx-item danger">탭 닫기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 메뉴가 뜨면 페이지가 잠시 빠지고(빗금 영역), 닫히면 복원됩니다.</div>
+      </div>
+    </figure>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>+</kbd></td><td>확대</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>−</kbd></td><td>축소</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>휠</kbd></td><td>줌 인/아웃</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>탐색기</a>
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>에디터</a>
+        <a class="relchip" href="mirror.html"><span class="ri" data-icon="external-link"></span>CDP 브라우저 미러</a>
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="editor.html">다음 → 에디터</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

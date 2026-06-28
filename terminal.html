@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>터미널 — Orch term 가이드</title>
+<meta name="description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+</head>
+<body data-page="terminal">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>터미널</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 터미널</p>
+    <h1 class="page-title">터미널</h1>
+    <p class="lede">Orch term의 바탕. 진짜 셸 세션을 빠르게 그리고, 한/영 입력·이모지·줄바꿈까지 매끄럽게 다룹니다.</p>
+
+    <!-- 새 터미널 -->
+    <h2 class="sec" id="open"><span class="hash"></span> 새 터미널 열기</h2>
+    <p>새 탭의 <span class="i" data-icon="add"></span> 버튼이나 패널 우상단 액션으로 엽니다. 새 터미널은 <b>활성 프로젝트 루트</b>(탐색기 기준)에서 시작합니다. ＋를 누르면 설치된 셸을 자동 감지한 선택 드롭다운이 열립니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">새 터미널 — 셸 선택</span></div>
+        <div class="shot-stage" style="padding:26px;display:grid;place-items:center;min-height:230px">
+          <div class="shell-dropdown" style="position:relative;box-shadow:var(--shadow-pop)">
+            <div class="shell-menu-title">새 터미널</div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#4d96ff">⌷</span> PowerShell</button><button class="shell-default" disabled>기본</button></div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#f1502f">⎇</span> Git Bash</button><button class="shell-default">기본 설정</button></div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">▮</span> cmd</button><button class="shell-default">기본 설정</button></div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">🐧</span> Ubuntu (WSL)</button><button class="shell-default">기본 설정</button></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 설치된 셸 목록 — 골라서 열고, <b>기본</b>으로 지정할 수 있습니다.</div>
+      </div>
+    </figure>
+    <p>고른 셸이 활성 패널의 새 탭으로 열립니다. 시작 직후 친 <b>첫 키도 유실되지 않습니다</b>.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 터미널</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:280px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">Git Bash</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                <span class="pane-act-sep"></span>
+                <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+                <button class="pane-act" title="닫기" data-icon="close"></button>
+              </div>
+            </div>
+            <div class="pane-content">
+              <div class="term-pane-terminal">
+                <div class="term"><span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> npm run tauri dev
+<span class="d">  VITE v8.0  ready in 412 ms</span>
+<span class="g">  ➜  Local:</span>   http://localhost:5181/
+<span class="d">  Compiling app v0.2.0 …</span>
+<span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> <span class="cursor"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">②</span> 패널 우상단 액션: <span class="i dim" data-icon="split-horizontal"></span> 아래로 분할 · <span class="i dim" data-icon="split-vertical"></span> 오른쪽 분할 · <span class="i dim" data-icon="maximize-pane"></span> 최대화 · <span class="i dim" data-icon="close"></span> 닫기.</div>
+      </div>
+    </figure>
+
+    <!-- 복사/붙여넣기 -->
+    <h2 class="sec" id="clipboard"><span class="hash"></span> 복사 · 붙여넣기</h2>
+    <p><kbd>Ctrl</kbd>+<kbd>C</kbd>는 <b>선택 영역이 있으면 복사</b>, 없으면 인터럽트로 동작하고, <kbd>Ctrl</kbd>+<kbd>V</kbd>는 붙여넣기입니다 — 한/영 입력 상태와 무관하게 작동합니다. Windows 클립보드 기록(<kbd>Win</kbd>+<kbd>V</kbd>)도 지원하며, <b>이미지를 붙여넣으면 파일로 첨부</b>되어 claude 등이 그대로 읽습니다.</p>
+
+    <!-- 줄바꿈 -->
+    <h2 class="sec" id="newline"><span class="hash"></span> 줄바꿈 (제출 없이)</h2>
+    <p>AI CLI(Claude Code 등)에 <b>여러 줄</b>을 입력할 때 <kbd>Shift</kbd>+<kbd>Enter</kbd> 또는 <kbd>Ctrl</kbd>+<kbd>Enter</kbd>로 제출 대신 줄바꿈을 보냅니다. 한글 입력 조합 중에도 글자와 순서가 보존됩니다.</p>
+
+    <!-- 스크롤백 -->
+    <h2 class="sec" id="scrollback"><span class="hash"></span> 스크롤백 · 맨 아래로</h2>
+    <p>터미널이 보관하는 히스토리 줄 수(스크롤백)는 기본 <b>1000줄</b>, 설정 → 터미널 → 스크롤백에서 <b>100~50,000줄</b>로 조정하며 즉시 반영됩니다. 위로 스크롤하면 우하단에 <span class="i" data-icon="scroll-down"></span> <b>맨 아래로</b> 버튼이 나타나 최신 출력으로 점프합니다.</p>
+
+    <!-- 자동닫기 -->
+    <h2 class="sec" id="exit"><span class="hash"></span> 셸 종료 · 자동 닫기</h2>
+    <p>셸이 끝나면(<code>exit</code>) 탭이 자동으로 닫힙니다. <b>단일 패널·단일 탭</b>이면 빈 화면 대신 새 터미널로 대체합니다. 탭을 닫으면 그 아래 프로세스 트리 전체가 정리되어 좀비 프로세스를 남기지 않습니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>선택 시 복사, 없으면 인터럽트</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>붙여넣기 (Win+V 포함)</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>줄바꿈 (제출 안 함)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>줄바꿈 (제출 안 함)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>탭 · 패널</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>탐색기</a>
+        <a class="relchip" href="appearance.html"><span class="ri" data-icon="settings"></span>외관 · 폰트</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="ssh"></span>SSH · SFTP</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="tabs-panes.html">다음 → 탭 · 패널</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

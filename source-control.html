@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>소스 컨트롤 (Git) — Orch term 가이드</title>
+<meta name="description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+인라인 diff, GitLens식 blame(Ctrl+Shift+B)." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — Git 패널 재현 (디자인 시스템 토큰만 사용) */
+  .gp { width: 314px; background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-pane); }
+  .gp-head { display: flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; background: var(--bg-2); border-bottom: 1px solid var(--line-faint); font-size: 12.5px; color: var(--text-strong); font-weight: 600; }
+  .gp-head .sp { flex: 1; }
+  .gp-head .iconbtn { color: var(--text-faint); }
+  .gp-sync { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-bottom: 1px solid var(--line-faint); font-size: 12px; }
+  .gp-sync .br { display: inline-flex; align-items: center; gap: 5px; color: var(--text); }
+  .gp-sync .br .i { color: var(--success); }
+  .gp-sync .ahead { color: var(--text-dim); font-family: var(--code-font); font-size: 11px; }
+  .gp-sync .sp { flex: 1; }
+  .gp-sync .syncbtn { font-size: 11px; color: var(--text-dim); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 2px 8px; }
+  .gp-sec-h { display: flex; align-items: center; gap: 6px; padding: 7px 10px 5px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-faint); font-weight: 600; }
+  .gp-sec-h .cnt { margin-left: auto; color: var(--text-faint); font-family: var(--code-font); }
+  .gp-file { display: flex; align-items: center; gap: 8px; padding: 5px 10px; font-size: 12.5px; color: var(--text); }
+  .gp-file:hover { background: var(--bg-hover); }
+  .gp-file .st { width: 14px; text-align: center; font-family: var(--code-font); font-weight: 700; font-size: 11px; flex: none; }
+  .gp-file .st.m { color: var(--attention); } .gp-file .st.a { color: var(--success); } .gp-file .st.u { color: var(--term-green); } .gp-file .st.d { color: var(--danger); }
+  .gp-file .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .gp-file .dir { color: var(--text-faint); }
+  .gp-file .act { margin-left: auto; color: var(--text-faint); font-size: 14px; opacity: 0; }
+  .gp-file:hover .act { opacity: 1; }
+  .gp-commit { padding: 8px 10px; border-top: 1px solid var(--line-faint); border-bottom: 1px solid var(--line-faint); background: var(--bg-2-tint); }
+  .gp-commit textarea { width: 100%; background: var(--bg-0); border: 1px solid var(--line); border-radius: var(--r-sm); color: var(--text-strong); font: inherit; font-size: 12.5px; padding: 6px 8px; resize: none; }
+  .gp-commit .row { display: flex; align-items: center; gap: 7px; margin-top: 7px; }
+  .gp-commit .row .sp { flex: 1; }
+  /* 로그 + 레인 그래프 */
+  .gp-log-row { display: flex; gap: 9px; padding: 0 10px; align-items: stretch; }
+  .gp-lane { position: relative; width: 26px; flex: none; }
+  .gp-lane::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 1.5px; background: var(--accent-line); }
+  .gp-lane.branch::after { content: ""; position: absolute; left: 18px; top: 14px; bottom: 0; width: 1.5px; background: var(--success); opacity: .7; }
+  .gp-lane .dot { position: absolute; left: 2.5px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--bg-1); z-index: 1; }
+  .gp-lane .dot.b { left: 14.5px; background: var(--success); }
+  .gp-log-msg { padding: 7px 0 9px; min-width: 0; flex: 1; border-bottom: 1px solid var(--line-faint); }
+  .gp-log-row.sel .gp-log-msg { background: var(--accent-soft); margin: 0 -10px; padding-left: 10px; padding-right: 10px; border-radius: 0; }
+  .gp-log-t { font-size: 12.5px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .gp-log-meta { font-size: 10.5px; color: var(--text-faint); font-family: var(--code-font); margin-top: 2px; }
+  /* 인라인 diff */
+  .gp-diff { font-family: var(--code-font); font-size: 11.5px; background: var(--bg-0); border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; }
+  .gp-diff div { padding: 1px 10px; white-space: pre; }
+  .gp-diff .add { background: color-mix(in srgb, var(--success) 14%, transparent); color: var(--term-green); }
+  .gp-diff .del { background: color-mix(in srgb, var(--danger) 14%, transparent); color: var(--danger); }
+  .gp-diff .ctx { color: var(--text-dim); }
+  .gp-diff .hnk { color: var(--term-cyan); background: var(--bg-1); }
+  /* blame gutter */
+  .blame-line { display: flex; gap: 0; font-family: var(--code-font); font-size: 12px; }
+  .blame-g { flex: none; width: 178px; padding: 1px 10px; color: var(--text-faint); border-right: 1px solid var(--line-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: var(--bg-0); }
+  .blame-g.uncommitted { color: var(--accent); }
+  .blame-c { padding: 1px 12px; color: var(--text); white-space: pre; }
+</style>
+</head>
+<body data-page="source-control">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>소스 컨트롤 (Git)</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 소스 컨트롤</p>
+    <h1 class="page-title">소스 컨트롤 (Git)</h1>
+    <p class="lede">사이드바 세 번째 모드 <b>Git</b>. 변경 파일 스테이징·커밋·브랜치 그래프·커밋 세부 인라인 diff·<b>GitLens식 blame</b>까지 한 패널에서 다룹니다.</p>
+
+    <!-- Source Control -->
+    <h2 class="sec" id="stage"><span class="hash"></span> Source Control — stage · commit</h2>
+    <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd> 또는 사이드바 모드바의 <span class="i" data-icon="git"></span> Git 아이콘으로 엽니다. 파일을 stage/unstage한 뒤 메시지를 적고 커밋합니다. 상태 글자 — <b style="color:var(--attention)">M</b> 수정 · <b style="color:var(--success)">A</b> 추가 · <b style="color:var(--term-green)">U</b> untracked · <b style="color:var(--danger)">D</b> 삭제.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git — Source Control</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="gp">
+            <div class="gp-head"><span class="i" data-icon="git" style="color:var(--accent)"></span> 소스 컨트롤 <span class="sp"></span><button class="iconbtn" data-icon="refresh" title="새로고침"></button><button class="iconbtn" data-icon="sidebar-maximize" title="최대화"></button></div>
+            <div class="gp-sync"><span class="br"><span class="i" data-icon="git-branch"></span> main</span><span class="ahead">↑2 ↓1</span><span class="sp"></span><button class="syncbtn">Pull</button><button class="syncbtn">Push</button></div>
+            <div class="gp-sec-h">스테이지됨 <span class="cnt">1</span></div>
+            <div class="gp-file"><span class="st a">A</span><span class="nm"><span class="dir">docs/site/</span>ssh.html</span><span class="act">−</span></div>
+            <div class="gp-sec-h">변경 사항 <span class="cnt">2</span></div>
+            <div class="gp-file"><span class="st m">M</span><span class="nm"><span class="dir">src/workspace/</span>git-host.ts</span><span class="act">+</span></div>
+            <div class="gp-file"><span class="st u">U</span><span class="nm"><span class="dir">docs/site/</span>tasks.html</span><span class="act">+</span></div>
+            <div class="gp-commit">
+              <textarea rows="2" readonly>docs: Git 패널 가이드 페이지 추가</textarea>
+              <div class="row"><span class="sp"></span><button class="btn sm primary">커밋 (1)</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> sync 바 — 브랜치 + ahead/behind(↑2 ↓1) + Pull/Push. <span class="n">②</span> 각 행에서 stage(+)/unstage(−).</div>
+      </div>
+    </figure>
+
+    <!-- 로그 + 그래프 -->
+    <h2 class="sec" id="log"><span class="hash"></span> 로그 + 브랜치 그래프</h2>
+    <p>커밋을 최신→과거로 보여주고, 분기·병합을 레인 그래프로 시각화합니다. 행을 클릭하면 커밋 세부가 열립니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git — 로그 그래프</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="gp" style="width:340px">
+            <div class="gp-sec-h">로그 이력</div>
+            <div class="gp-log-row sel"><div class="gp-lane"><span class="dot"></span></div><div class="gp-log-msg"><div class="gp-log-t">docs(site): 문서 사이트 리뉴얼</div><div class="gp-log-meta">d3ae1a8 · Zendy Kim · 방금 전</div></div></div>
+            <div class="gp-log-row"><div class="gp-lane branch"><span class="dot"></span></div><div class="gp-log-msg"><div class="gp-log-t">chore(release): v0.2.0</div><div class="gp-log-meta">895bd56 · 2시간 전</div></div></div>
+            <div class="gp-log-row"><div class="gp-lane branch"><span class="dot"></span><span class="dot b"></span></div><div class="gp-log-msg"><div class="gp-log-t">fix(windows): wry 멀티웹뷰 포커스 복귀</div><div class="gp-log-meta">70879a7 · 어제</div></div></div>
+            <div class="gp-log-row"><div class="gp-lane"><span class="dot"></span></div><div class="gp-log-msg"><div class="gp-log-t">fix(ui): SSH/SFTP 프론트 경합·누수 정리</div><div class="gp-log-meta">a825484 · 어제</div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 선택된 커밋(액센트 배경). <span class="n">②</span> 초록 점은 병합된 다른 레인입니다.</div>
+      </div>
+    </figure>
+
+    <!-- 커밋 세부 + diff -->
+    <h2 class="sec" id="detail"><span class="hash"></span> 커밋 세부 + 인라인 diff</h2>
+    <p>커밋을 클릭하면 메시지·작성자·시각·변경 파일이 열리고, 파일을 클릭하면 패널 안에 읽기 전용 diff가 인라인으로 펼쳐집니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git — 커밋 세부 · 인라인 diff</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="gp" style="width:380px">
+            <div class="gp-sec-h">커밋 세부 <span class="cnt">+12 −3</span></div>
+            <div style="padding:8px 12px;border-bottom:1px solid var(--line-faint)">
+              <div style="font-size:13px;color:var(--text-strong)">fix(db): 부팅 DB open/migrate 패닉 처리</div>
+              <div style="font-size:11px;color:var(--text-faint);font-family:var(--code-font);margin-top:3px">7f27569 · Zendy Kim &lt;zendy00@gmail.com&gt; · 2026-06-27</div>
+            </div>
+            <div class="gp-file"><span class="st m">M</span><span class="nm"><span class="dir">src-tauri/src/</span>db.rs</span><span class="ahead" style="margin-left:auto">+12 −3</span></div>
+            <div style="padding:8px 12px">
+              <div class="gp-diff">
+                <div class="hnk">@@ -41,7 +41,9 @@ fn open_db()</div>
+                <div class="ctx">  let conn = Connection::open(path)?;</div>
+                <div class="del">-  conn.execute_batch(MIGRATIONS)?;</div>
+                <div class="add">+  conn.busy_timeout(Duration::from_secs(5))?;</div>
+                <div class="add">+  migrate(&conn).map_err(fatal_dialog)?;</div>
+                <div class="ctx">  Ok(conn)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 변경 파일 + <code>+n/−n</code>. <span class="n">②</span> 추가(초록)·삭제(빨강)·헌크(시안) diff가 패널 안에 인라인으로.</div>
+      </div>
+    </figure>
+
+    <!-- blame -->
+    <h2 class="sec" id="blame"><span class="hash"></span> GitLens식 blame</h2>
+    <p>에디터에서 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>(또는 우상단 <span class="i" data-icon="blame"></span> 아이콘)로 토글합니다. 거터에 줄별 <b>작성자 · 상대 시각</b>이 붙고, 거터를 클릭하면 그 커밋 세부가 Git 패널에서 열립니다. 아직 커밋 안 된 줄은 "미커밋"으로 표시됩니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">에디터 — GitLens blame 거터</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:188px">
+            <div class="pane-tabbar"><div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">git.rs</span></div></div><div class="pane-actions"><button class="pane-act" title="blame 토글" data-icon="blame" style="color:var(--accent)"></button></div></div>
+            <div class="pane-content"><div class="term-pane-terminal" style="inset:0;overflow:auto">
+              <div class="blame-line"><span class="blame-g">Zendy Kim · 3주 전</span><span class="blame-c"><span style="color:var(--term-cyan)">pub fn</span> run_git(args) {</span></div>
+              <div class="blame-line"><span class="blame-g">Zendy Kim · 3주 전</span><span class="blame-c">  cmd.env("GIT_TERMINAL_PROMPT", "0");</span></div>
+              <div class="blame-line"><span class="blame-g uncommitted">미커밋 · 나</span><span class="blame-c">  cmd.stdin(Stdio::null());</span></div>
+              <div class="blame-line"><span class="blame-g">Zendy Kim · 5일 전</span><span class="blame-c">  spawn_blocking(move || run()).await</span></div>
+              <div class="blame-line"><span class="blame-g">Zendy Kim · 5일 전</span><span class="blame-c">}</span></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 거터의 "작성자 · 상대시각" — 클릭하면 그 커밋 세부로. <span class="n">②</span> <span style="color:var(--accent)">미커밋</span> 줄은 아직 커밋 안 된 변경입니다.</div>
+      </div>
+    </figure>
+
+    <!-- 사이드바 -->
+    <h2 class="sec" id="sidebar-layout"><span class="hash"></span> 사이드바 레이아웃 · 최대화</h2>
+    <p>files·search·git 모드가 공통 헤더(프로젝트 스위처)를 공유합니다. <b>변경 사항 · 로그 · 커밋 세부</b> 세 영역은 각각 독립 스크롤되고, 경계를 드래그해 크기를 바꿉니다. 사이드바 <b>최대화</b>는 <span class="i" data-icon="sidebar-maximize"></span> 버튼 또는 <kbd>Shift</kbd>+<kbd>Esc</kbd>이며, 파일을 열면 자동 복원됩니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd></td><td>Git 패널 열기</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd></td><td>blame 토글 (에디터 포커스 시)</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>사이드바 최대화 토글</td></tr>
+      </tbody>
+    </table>
+    <div class="warn"><b>git 필요</b> — 시스템에 git이 설치돼 있어야 합니다(없으면 안내 메시지). 자격증명 프롬프트는 자동 차단되어 멈추지 않습니다.</div>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>코드 에디터</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>탐색기</a>
+        <a class="relchip" href="search.html"><span class="ri" data-icon="search"></span>전체 파일 검색</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="tasks.html">다음 → 할 일 보드</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

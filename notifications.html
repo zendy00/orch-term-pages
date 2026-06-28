@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>완료 배지 · 알림 — Orch term 가이드</title>
+<meta name="description" content="비활성 탭의 에이전트 완료(초록)·승인/입력 대기(주황) 배지와 상단 종(통합 알림센터). 카드 클릭 이동·삭제." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* notifications.html 전용 — 탭 완료 배지 · 통합 알림센터 드롭다운 재현 (디자인 시스템 토큰만 사용) */
+
+  /* 탭의 완료/주의 배지 — 실제 앱: tab-manager.ts ICON_BELL(filled)을 done=초록 / attention=주황으로 깜빡임 */
+  .tab-badge { width: 14px; height: 14px; flex: none; display: inline-grid; place-items: center; }
+  .tab-badge svg { width: 13px; height: 13px; }
+  .tab-badge.done { color: var(--success); }
+  .tab-badge.att  { color: var(--attention); }
+  @keyframes nbBlink { 50% { opacity: .28; } }
+  .tab-badge.blink { animation: nbBlink 1.1s steps(1, end) infinite; }
+  @media (prefers-reduced-motion: reduce) { .tab-badge.blink { animation: none; } }
+
+  /* 통합 알림센터 드롭다운 (src/notifications.ts · NotificationBell) */
+  .nc-bell { position: relative; }
+  .nc-count { position: absolute; top: 4px; right: 6px; min-width: 14px; height: 14px; padding: 0 3px;
+    border-radius: 999px; background: var(--danger); color: #fff; font-family: var(--code-font);
+    font-size: 9px; font-weight: 700; line-height: 14px; text-align: center; }
+  .nc { position: absolute; top: 33px; right: 6px; z-index: 9; width: 302px; background: var(--bg-3);
+    border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow-pop); overflow: hidden; }
+  .nc-head { display: flex; align-items: center; gap: 8px; padding: 8px 11px; border-bottom: 1px solid var(--line-faint); }
+  .nc-head .ttl { font-size: var(--fs-md); color: var(--text-strong); font-weight: 600; }
+  .nc-head .cnt { font-family: var(--code-font); font-size: 10.5px; color: var(--text-faint); }
+  .nc-head .clr { margin-left: auto; font-size: 11px; color: var(--text-faint); background: none; border: none;
+    cursor: default; padding: 2px 6px; border-radius: var(--r-sm); }
+  .nc-head .clr:hover { color: var(--text); background: var(--bg-hover); }
+  .nc-grp { padding: 7px 11px 3px; font-family: var(--code-font); font-size: 10px; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--text-faint); }
+  .nc-grp .num { color: var(--accent); }
+  .nc-card { position: relative; display: flex; gap: 9px; align-items: flex-start; padding: 8px 9px 9px 14px;
+    border-bottom: 1px solid var(--line-faint); cursor: default; }
+  .nc-card:last-child { border-bottom: none; }
+  .nc-card:hover { background: var(--bg-hover); }
+  .nc-card::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 0 2px 2px 0; }
+  .nc-card.done::before { background: var(--success); }
+  .nc-card.att::before  { background: var(--attention); }
+  .nc-card .body { min-width: 0; flex: 1; }
+  .nc-card .nm { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-strong); font-weight: 600; }
+  .nc-card .nm .bi { display: inline-grid; place-items: center; width: 12px; height: 12px; flex: none; }
+  .nc-card .nm .bi.done { color: var(--success); }
+  .nc-card .nm .bi.att  { color: var(--attention); }
+  .nc-card .msg { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; }
+  .nc-card .msg .q { color: var(--text-faint); }
+  .nc-card .msg.ph { color: var(--text-faint); font-style: italic; }
+  .nc-card .x { flex: none; width: 18px; height: 18px; display: grid; place-items: center; border: none;
+    background: none; color: var(--text-faint); border-radius: var(--r-sm); cursor: default; }
+  .nc-card .x:hover { color: var(--text); background: var(--bg-hover); }
+</style>
+</head>
+<body data-page="notifications">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>그 외 · 시스템</span><span class="sep">/</span><span>완료 배지 · 알림</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 그 외 · 시스템 · 완료 배지 · 알림</p>
+    <h1 class="page-title">완료 배지 · 알림</h1>
+    <p class="lede">다른 탭에서 돌던 AI 에이전트가 작업을 끝내면, <b>그 탭이 보이지 않을 때</b> 탭에 색 딩벳을 깜빡여 알리고, 상단 <span class="i" data-icon="bell"></span> <b>종</b>이 모든 Space·탭의 완료·주의 신호를 한곳에 모읍니다.</p>
+
+    <!-- 완료 배지 -->
+    <h2 class="sec" id="badge"><span class="hash"></span> 완료 배지 — 비활성 탭</h2>
+    <p>여러 탭으로 일하다 보면 다른 탭에서 돌던 에이전트(<code>claude</code>·<code>codex</code>·<code>gemini</code>·<code>antigravity</code>)가 언제 끝났는지 놓치기 쉽습니다. <b>보고 있지 않은(비활성) 터미널 탭</b>이 완료 신호를 받으면 탭 아이콘 옆에 색 딩벳을 깜빡입니다 — <span style="color:var(--success)">초록</span>은 작업 완료, <span style="color:var(--attention)">주황</span>은 승인·입력 대기. 그 탭을 다시 보면 배지는 바로 사라집니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 탭 배지</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:264px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude · build</span><span class="tab-badge done blink" data-icon="attention" title="작업 완료"></span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude · refactor</span><span class="tab-badge att blink" data-icon="attention" title="승인/입력 대기"></span></div>
+                <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                <span class="pane-act-sep"></span>
+                <button class="pane-act" title="닫기" data-icon="close"></button>
+              </div>
+            </div>
+            <div class="pane-content">
+              <div class="term-pane-terminal">
+                <div class="term"><span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="d"># 옆 탭의 claude가 방금 끝남 — 비활성 탭에만 배지가 뜬다</span>
+<span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="cursor"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> <b>비활성 탭만</b> 배지: <span class="i" data-icon="attention" style="color:var(--success)"></span> 초록=완료 · <span class="i" data-icon="attention" style="color:var(--attention)"></span> 주황=승인·입력 대기. <span class="n">②</span> 보고 있는 활성 탭(<code>pwsh</code>)엔 배지가 없습니다.</div>
+      </div>
+    </figure>
+
+    <p>같은 신호는 그 탭이 속한 <b>Space 칩</b> 옆 작은 종으로도 깜빡여, 다른 Space에서 끝난 작업까지 묶어 보여줍니다.</p>
+
+    <!-- 에이전트별 지원 -->
+    <h2 class="sec" id="signals"><span class="hash"></span> 에이전트별 지원</h2>
+    <p>에이전트가 완료를 알리는 방법은 두 가지입니다 — 거의 모든 셸이 보낼 수 있는 단순한 <b>터미널 벨</b>(자동완성·에러에도 울려 오탐이 있고 완료/승인을 구분 못 해 항상 <span style="color:var(--success)">초록</span>으로 처리), 그리고 완료·승인을 색으로 구분하고 마지막 프롬프트·응답까지 담는 <b>정밀 신호</b>. 정밀 신호는 현재 <code>claude</code>를 인터랙티브 화면으로 실행할 때 나옵니다.</p>
+    <p class="dim">각 CLI를 실제 dev 앱 터미널에서 돌려 측정한 결과입니다(2026-06, Windows).</p>
+    <table class="kbds">
+      <thead><tr><th>에이전트</th><th>정밀 색 배지</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td><code>claude</code></td><td><b style="color:var(--success)">✓ 작동</b></td><td>인터랙티브 화면으로 실행 시 완료·승인 색 구분 + 내용 보존. claude-code-warp 플러그인 설치·활성 전제.</td></tr>
+        <tr><td><code>gemini</code></td><td><b style="color:var(--danger)">✗</b></td><td>벨만 보냄 → 색 구분 없는 완료 배지만.</td></tr>
+        <tr><td><code>antigravity</code></td><td><b style="color:var(--danger)">✗</b></td><td>현재 배지 신호를 보내지 않음.</td></tr>
+        <tr><td><code>codex</code></td><td><b style="color:var(--attention)">미확인</b></td><td>벨은 가능.</td></tr>
+      </tbody>
+    </table>
+    <p class="dim">다른 에이전트도 각 CLI에서 <b>완료 시 터미널 벨</b> 옵션을 켜면 벨 fallback으로 <span style="color:var(--success)">완료 배지</span>만 받습니다(승인 구분 없음·오탐 가능).</p>
+
+    <!-- 통합 알림센터 -->
+    <h2 class="sec" id="center"><span class="hash"></span> 통합 알림센터 — 상단 종</h2>
+    <p>상단 타이틀바의 <span class="i" data-icon="bell"></span> <b>종</b>은 모든 Space·탭의 완료·주의 신호를 한곳에 모읍니다(<b>메인 창 전용</b>). 탭 배지와 같은 기준으로 <b>완료</b>와 <b>승인·입력 대기</b>만 모으고, 빨간 숫자 배지가 총 개수를 보여줍니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">상단 종 — 알림 드롭다운</span><span class="badge danger">3</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="app" style="height:340px">
+            <div class="titlebar">
+              <div class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></div>
+              <div class="titlebar-spaces">
+                <div class="space-chip active"><span class="space-chip-num">1</span> 작업</div>
+                <div class="space-chip"><span class="space-chip-num">2</span> 리뷰</div>
+                <button class="space-chip-add">＋</button>
+              </div>
+              <div class="titlebar-title"></div>
+              <div class="titlebar-actions">
+                <button class="titlebar-btn nc-bell"><span data-icon="bell"></span><span class="nc-count">3</span></button>
+                <button class="titlebar-btn"><span data-icon="contrast"></span></button>
+              </div>
+              <div class="titlebar-controls">
+                <button class="titlebar-btn"><span data-icon="window-minimize"></span></button>
+                <button class="titlebar-btn"><span data-icon="window-maximize"></span></button>
+                <button class="titlebar-btn titlebar-close"><span data-icon="window-close"></span></button>
+              </div>
+
+              <div class="nc">
+                <div class="nc-head"><span class="ttl">알림</span><span class="cnt">3건</span><button class="clr">전체 삭제</button></div>
+
+                <div class="nc-grp">작업 <span class="num">· Space 1</span></div>
+                <div class="nc-card att">
+                  <div class="body">
+                    <div class="nm"><span class="bi att" data-icon="attention"></span> claude · refactor</div>
+                    <div class="msg"><span class="q">▸</span> 권한 요청 — 파일 쓰기 승인?</div>
+                  </div>
+                  <button class="x" data-icon="notification-close" title="삭제"></button>
+                </div>
+                <div class="nc-card done">
+                  <div class="body">
+                    <div class="nm"><span class="bi done" data-icon="attention"></span> claude · build</div>
+                    <div class="msg"><span class="q">◂</span> 테스트 12개 통과 · 린트 0</div>
+                  </div>
+                  <button class="x" data-icon="notification-close" title="삭제"></button>
+                </div>
+
+                <div class="nc-grp">리뷰 <span class="num">· Space 2</span></div>
+                <div class="nc-card done">
+                  <div class="body">
+                    <div class="nm"><span class="bi done" data-icon="attention"></span> gemini · docs</div>
+                    <div class="msg ph">에이전트 완료</div>
+                  </div>
+                  <button class="x" data-icon="notification-close" title="삭제"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="body">
+              <div class="main-col">
+                <div class="pane active-pane">
+                  <div class="pane-tabbar">
+                    <div class="pane-tabs">
+                      <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span></div>
+                    </div>
+                    <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                  </div>
+                  <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="d"># 종을 열면 모든 Space·탭의 완료·주의가 한 목록에</span>
+<span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="cursor"></span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> <span class="i dim" data-icon="bell"></span> 종 + <b>빨간 카운트</b>(총 개수) → 클릭하면 드롭다운. <span class="n">②</span> 카드 <b>좌측 색띠</b> = <span style="color:var(--success)">완료</span>/<span style="color:var(--attention)">주의</span>, Space별로 묶입니다. <span class="n">③</span> <span class="i dim" data-icon="notification-close"></span> X로 카드만 삭제 · 헤더 <b>전체 삭제</b>.</div>
+      </div>
+    </figure>
+
+    <p class="dim">알림은 메모리에만 보관해 앱을 재시작하면 비워지고, 최대 100건까지 쌓입니다. 임베디드 팝업 창에는 종이 없고 메인 창이 전체를 집계합니다.</p>
+
+    <!-- 카드 내용 -->
+    <h2 class="sec" id="cards"><span class="hash"></span> 카드 내용</h2>
+    <p>카드의 마지막 프롬프트·응답(각 ~20자)은 <code>claude</code>처럼 내용을 함께 보내는 에이전트에서만 채워집니다. 벨만 울린 경우엔 내용이 없어 <b>에이전트 완료</b> 플레이스홀더로 표시됩니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">카드 내용 — claude vs 벨</span></div>
+        <div class="shot-stage" style="padding:20px;display:grid;place-items:center">
+          <div class="nc" style="position:static;width:302px;box-shadow:var(--shadow-pop)">
+            <div class="nc-card done">
+              <div class="body">
+                <div class="nm"><span class="bi done" data-icon="attention"></span> claude · build</div>
+                <div class="msg"><span class="q">◂</span> 테스트 12개 통과 · 린트 0</div>
+              </div>
+              <button class="x" data-icon="notification-close"></button>
+            </div>
+            <div class="nc-card done">
+              <div class="body">
+                <div class="nm"><span class="bi done" data-icon="attention"></span> gemini · docs</div>
+                <div class="msg ph">에이전트 완료</div>
+              </div>
+              <button class="x" data-icon="notification-close"></button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> claude: 마지막 프롬프트·응답을 그대로 보존. <span class="n">②</span> 벨만 울린 경우: 내용이 없어 <b>에이전트 완료</b> 플레이스홀더(이탤릭).</div>
+      </div>
+    </figure>
+
+    <!-- 카드 클릭 이동 -->
+    <h2 class="sec" id="activate"><span class="hash"></span> 카드 클릭 → 이동 · 삭제</h2>
+    <p>카드 본문을 클릭하면 그 <b>Space로 전환</b>하고 그 <b>탭을 활성화</b>한 뒤 카드를 지웁니다. 카드 위쪽의 <b>탭 이름</b>으로 같은 Space 안에서 어느 탭인지 알 수 있습니다.</p>
+    <table class="kbds">
+      <thead><tr><th>동작</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr><td>카드 본문 클릭</td><td>그 Space로 전환 + 탭 활성화 → 카드 삭제</td></tr>
+        <tr><td>카드 <span class="i dim" data-icon="notification-close"></span> X</td><td>이동 없이 그 카드만 삭제</td></tr>
+        <tr><td>헤더 <b>전체 삭제</b></td><td>모든 카드를 한 번에 비움</td></tr>
+        <tr><td>빨간 카운트 배지</td><td>현재 카드 총 개수</td></tr>
+      </tbody>
+    </table>
+    <p>반대로 카드를 거치지 않고 <b>탭을 직접 봐도</b> 그 탭의 배지와 종 카드가 함께 사라집니다 — 이미 봤으니 알림이 남을 이유가 없습니다. 탭을 빠르게 넘겨도 열린 드롭다운이 그때마다 닫히지는 않습니다.</p>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>탭 · 패널</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>에이전트 오케스트레이션</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="audit-log"></span>AI 게이트웨이</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="gateway.html">다음 → AI 게이트웨이</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

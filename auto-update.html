@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>자동 업데이트 — Orch term 가이드</title>
+<meta name="description" content="Orch term 자동 업데이트: 릴리즈 빌드가 새 버전을 감지해 타이틀바 액센트 pill로 알리고, 클릭하면 다운로드+재시작으로 설치. 부팅 1회 체크 + About 수동 확인이 전역 단일 Updater 공유." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 타이틀바 업데이트 pill + 상태 데모 + About 재현 (디자인 시스템 토큰만 사용).
+     pill 스타일은 src/styles.css(.update-pill*)를 옮긴 것(커서만 default). */
+  .titlebar-update-slot { display:inline-flex; align-items:center; height:100%; }
+  .update-pill { display:inline-flex; align-items:center; gap:1px; height:20px; margin:0 6px; padding:0 3px 0 7px;
+    border:1px solid var(--accent); border-radius:var(--r-sm); background:transparent; color:var(--accent);
+    font-size:var(--fs-sm); line-height:1; white-space:nowrap; }
+  .update-pill-action { display:inline-flex; align-items:center; gap:5px; background:none; border:none; color:inherit;
+    font:inherit; font-size:var(--fs-sm); cursor:default; padding:2px 1px; }
+  .update-pill-icon { display:inline-flex; }
+  .update-pill-icon svg { width:10px; height:10px; }
+  .update-pill-close { display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px;
+    background:none; border:none; color:inherit; opacity:.7; cursor:default; padding:0; border-radius:var(--r-sm); }
+  .update-pill-close svg { width:7px; height:7px; }
+  /* 상태별 pill 목록 */
+  .statelist { list-style:none; padding:0; margin:16px 0; display:grid; gap:8px; max-width:var(--read); }
+  .statelist li { display:flex; align-items:center; gap:14px; padding:10px 13px; background:var(--bg-1);
+    border:1px solid var(--line-faint); border-radius:var(--r-md); }
+  .statelist .pillcell { flex:0 0 176px; display:flex; }
+  .statelist .txt { font-size:13px; color:var(--text-dim); min-width:0; }
+  .statelist .txt b { color:var(--text-strong); font-weight:600; }
+  /* About(정보) 모달 보강 */
+  .about-brandrow { display:flex; align-items:center; gap:11px; margin-bottom:2px; }
+  .about-glyph { width:34px; height:34px; border-radius:9px; background:var(--accent-grad); display:grid; place-items:center;
+    color:#fff; font-family:var(--code-font); font-weight:700; font-size:16px; flex:none; }
+  .about-wm { font-family:var(--display); font-weight:700; font-size:19px; color:var(--text-strong); letter-spacing:-.01em; }
+  .about-wm b { color:var(--accent); }
+  .about-verrow { display:flex; align-items:center; gap:12px; font-size:12px; color:var(--text-dim); margin:8px 0 2px; }
+  .about-link { background:none; border:none; padding:0; font:inherit; color:var(--accent); cursor:default; }
+  .about-msg { font-size:12px; color:var(--text-dim); margin-top:4px; }
+  .about-meta { font-size:12px; color:var(--text-dim); margin-top:6px; }
+  .about-meta .desc { color:var(--text); }
+  .about-lictoggle { display:flex; align-items:center; gap:8px; margin-top:12px; padding-top:11px;
+    border-top:1px solid var(--line-faint); font-family:var(--code-font); font-size:11px; color:var(--text-faint); }
+</style>
+</head>
+<body data-page="auto-update">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>그 외 · 시스템</span><span class="sep">/</span><span>자동 업데이트</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 그 외 · 시스템 · 자동 업데이트</p>
+    <h1 class="page-title">자동 업데이트</h1>
+    <p class="lede">새 버전이 나오면 타이틀바에 <b>액센트 pill</b>로 알립니다. 클릭하면 <b>다운로드 → 재시작</b>으로 설치합니다. 앱을 켤 때 한 번 자동으로, 그리고 <b>정보(About)</b> 창에서 직접 확인할 수 있습니다.</p>
+
+    <!-- ① 새 버전 알림 -->
+    <h2 class="sec" id="notify"><span class="hash"></span> 새 버전 알림 (타이틀바 pill)</h2>
+    <p>새 버전이 감지되면 타이틀바 오른쪽에 <span class="i" data-icon="download"></span> <b>액센트 pill</b>이 나타납니다. 클릭하면 설치로 진행하고, 닫기를 누르면 그 알림만 숨깁니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 타이틀바 · 업데이트 pill</span><span class="badge phase">release</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="titlebar">
+            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
+            <div class="titlebar-spaces">
+              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
+              <div class="space-chip"><span class="space-chip-num">2</span> docs</div>
+              <button class="space-chip-add">＋</button>
+            </div>
+            <span class="titlebar-title"></span>
+            <div class="titlebar-update-slot">
+              <div class="update-pill">
+                <button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">업데이트 0.2.1</span></button>
+                <button class="update-pill-close" title="닫기" data-icon="window-close"></button>
+              </div>
+            </div>
+            <div class="titlebar-controls">
+              <button class="titlebar-btn" data-icon="window-minimize"></button>
+              <button class="titlebar-btn" data-icon="window-maximize"></button>
+              <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 다운로드 아이콘 + <b>업데이트 버전</b> 라벨 + 닫기 — 창 컨트롤 왼쪽 슬롯에.</div>
+      </div>
+    </figure>
+
+    <p>pill 라벨은 진행 상황에 따라 바뀝니다.</p>
+    <ul class="statelist">
+      <li>
+        <span class="pillcell"><span class="update-pill"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">업데이트 0.2.1</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>새 버전</b> — 클릭하면 설치를 시작합니다.</span>
+      </li>
+      <li>
+        <span class="pillcell"><span class="update-pill update-pill-busy"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">다운로드 중 62%</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>다운로드 중</b> — 진행률을 표시합니다.</span>
+      </li>
+      <li>
+        <span class="pillcell"><span class="update-pill"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">재시작하여 업데이트</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>설치 준비됨</b> — 재시작하면 새 버전으로 바뀝니다.</span>
+      </li>
+      <li>
+        <span class="pillcell"><span class="update-pill"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">업데이트 실패 · 다시</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>실패</b> — 클릭하면 다시 시도합니다.</span>
+      </li>
+    </ul>
+
+    <!-- ② 다운로드 · 재시작 설치 -->
+    <h2 class="sec" id="install"><span class="hash"></span> 다운로드 · 재시작 설치</h2>
+    <p>pill을 클릭하면 설치 전 <b>확인 창</b>이 뜹니다. 동의하면 새 버전을 내려받아 설치하고 앱을 재시작합니다. 취소하면 아무것도 받지 않고 알림 상태로 돌아갑니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">업데이트 설치 — 확인</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="modal-overlay" style="min-height:230px">
+            <div class="modal-box" style="width:380px">
+              <div class="modal-head"><span class="i" data-icon="download"></span><h3>업데이트 설치</h3></div>
+              <div class="modal-body">
+                <p style="margin:2px 0 8px;color:var(--text)">새 버전 <b style="color:var(--text-strong)">0.2.1</b>을 내려받아 설치합니다. 설치가 끝나면 앱이 <b>재시작</b>됩니다.</p>
+                <p style="margin:0;color:var(--text-faint);font-size:12px">진행 중 작업이 있으면 먼저 저장하세요.</p>
+              </div>
+              <div class="modal-btns">
+                <button class="btn ghost">취소</button>
+                <button class="btn primary"><span class="i" data-icon="download" style="color:#fff"></span> 설치하고 재시작</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 설치 확인 창. <b>취소</b>하면 네트워크를 건드리지 않습니다.</div>
+      </div>
+    </figure>
+    <div class="warn"><b>설치하면 앱이 재시작됩니다.</b> 진행 중인 작업을 먼저 저장하세요.</div>
+
+    <!-- ③ 부팅 체크 · About 수동 확인 -->
+    <h2 class="sec" id="check"><span class="hash"></span> 부팅 체크 · About 수동 확인</h2>
+    <p>업데이트 확인은 두 갈래입니다 — 앱이 뜰 때 <b>자동으로 한 번</b>, 그리고 <b>정보(About)</b> 창의 <b>Check for Updates</b> 버튼으로 직접. 둘은 결과를 공유하므로 About에서 확인한 새 버전이 타이틀바 pill에도 그대로 나타납니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">정보(About) — 업데이트 수동 확인</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="modal-overlay" style="min-height:300px">
+            <div class="modal-box" style="width:420px">
+              <div class="modal-head"><span class="i" data-icon="info"></span><h3>정보</h3></div>
+              <div class="modal-body">
+                <div class="about-brandrow">
+                  <span class="about-glyph">O</span>
+                  <span class="about-wm">Orch <b>term</b></span>
+                </div>
+                <div class="about-verrow">
+                  <span>버전 0.2.0</span>
+                  <button class="about-link">Check for Updates</button>
+                </div>
+                <div class="about-msg">최신 버전입니다 (0.2.0)</div>
+                <div class="about-meta"><span class="desc">멀티에이전트 워크스테이션</span></div>
+                <div class="about-meta">제작 · Zendy · zendy00@gmail.com</div>
+                <div class="about-lictoggle"><span style="font-size:10px">▸</span> 오픈소스 라이선스 (412)</div>
+              </div>
+              <div class="modal-foot"><button class="btn primary">확인</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> <b>Check for Updates</b>를 누르면 결과 메시지가 뜹니다 — 최신 / 새 버전 사용 가능 / 확인 실패.</div>
+      </div>
+    </figure>
+
+    <!-- ④ 서명 · 릴리즈 노트 -->
+    <h2 class="sec" id="publish"><span class="hash"></span> 서명 · 릴리즈 노트</h2>
+    <p>업데이트는 서명으로 검증되어 변조된 빌드가 설치되지 않습니다. 릴리즈 노트(변경 사항)는 커밋에서 자동으로 만들어져 GitHub 릴리즈와 인앱 알림에 함께 표시됩니다 — 손으로 쓰지 않습니다.</p>
+
+    <!-- ⑤ DEV 미지원 · 플랫폼 제약 -->
+    <h2 class="sec" id="dev"><span class="hash"></span> DEV 미지원 · 플랫폼 제약</h2>
+    <p>자동 업데이트는 <b>릴리즈 빌드 전용</b>입니다. 개발(dev) 빌드는 부팅 자동 체크가 없고, <b>Check for Updates</b>를 눌러도 미지원 안내만 뜹니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">정보(About) — dev 빌드</span></div>
+        <div class="shot-stage pad" style="min-height:150px">
+          <div class="modal-box" style="width:360px;box-shadow:var(--shadow-pop)">
+            <div class="modal-head"><span class="i" data-icon="info"></span><h3>정보</h3></div>
+            <div class="modal-body">
+              <div class="about-verrow" style="margin-top:0"><span>버전 0.2.0-dev</span><button class="about-link">Check for Updates</button></div>
+              <div class="about-msg" style="color:var(--attention)">dev 빌드는 업데이트 미지원</div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> dev 빌드에서는 수동 버튼도 미지원 안내만 띄웁니다(네트워크 호출 없음).</div>
+      </div>
+    </figure>
+    <p class="dim">설치 파일은 Windows는 설치 관리자(.exe · MSI), macOS는 <code>.dmg</code>로 배포됩니다.</p>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="download.html"><span class="ri" data-icon="download"></span>다운로드 · 설치</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="settings"></span>저장 · 백업</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>완료 배지 · 알림</a>
+        <a class="relchip" href="appearance.html"><span class="ri" data-icon="info"></span>외관 · 시스템</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="notifications.html">다음 → 완료 배지 · 알림</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

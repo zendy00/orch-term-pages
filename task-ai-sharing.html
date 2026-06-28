@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>AI 할 일 공유 — Orch term 가이드</title>
+<meta name="description" content="앱 안 AI(claude/codex/gemini)가 자기가 붙어 있는 Space의 할 일을 MCP로 읽기/추가/수정/이동/삭제. from 스코핑, SSOT 경유, 기본 ON." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 스코핑 다이어그램 (디자인 시스템 토큰만 사용) */
+  .scope { display: grid; gap: 12px; margin: 20px 0; max-width: var(--read); }
+  .scope-space { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+  .scope-space.allow { border-color: var(--accent-line); }
+  .scope-space.deny { opacity: .8; }
+  .scope-head { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg-2); font-size: 12.5px; color: var(--text-strong); font-weight: 600; }
+  .scope-head .tag { margin-left: auto; font-family: var(--code-font); font-size: 10.5px; padding: 1px 8px; border-radius: 999px; }
+  .scope-head .tag.ok { color: var(--success); background: color-mix(in srgb, var(--success) 16%, transparent); }
+  .scope-head .tag.no { color: var(--danger); background: color-mix(in srgb, var(--danger) 16%, transparent); }
+  .scope-body { padding: 10px 12px; font-size: 12.5px; color: var(--text-dim); display: flex; align-items: center; gap: 10px; }
+  .scope-body .ep { font-family: var(--code-font); font-size: 11px; color: var(--accent); }
+</style>
+</head>
+<body data-page="task-ai-sharing">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>AI 할 일 공유</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · AI 할 일 공유 <span class="flag">MCP</span></p>
+    <h1 class="page-title">AI 할 일 공유</h1>
+    <p class="lede">앱 안 터미널의 AI(<b>claude·codex·gemini</b>)가 <b>자기가 붙어 있는 Space의 할 일</b>을 읽고·추가·수정·이동·삭제합니다. 결과는 옆 <a href="tasks.html">할 일 보드</a>에 실시간으로 나타납니다.</p>
+
+    <!-- 무엇을 -->
+    <h2 class="sec" id="what"><span class="hash"></span> 무엇을 하는가</h2>
+    <p>AI가 할 수 있는 동작은 다섯 가지입니다. 할 일(task)만 다루며, 컬럼(목록) 자체는 추가·삭제하지 않습니다.</p>
+    <table class="kbds">
+      <thead><tr><th>동작</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td><code>list_tasks</code></td><td>할 일 목록 읽기</td></tr>
+        <tr><td><code>create_task</code></td><td>새 할 일 추가</td></tr>
+        <tr><td><code>update_task</code></td><td>제목·메모·마감 수정</td></tr>
+        <tr><td><code>set_task_status</code></td><td>완료 토글 · 다른 컬럼으로 이동</td></tr>
+        <tr><td><code>delete_task</code></td><td>할 일 삭제</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 사용 -->
+    <h2 class="sec" id="use"><span class="hash"></span> 사용 — 에이전트가 직접 추가</h2>
+    <p>지휘자나 워커가 작업 계획을 세우며 to-do를 남기면, 새로고침 없이 보드에 바로 반영됩니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">claude · Space 1 — 할 일 MCP</span><span class="badge ok">task added</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:230px">
+            <div class="pane-tabbar"><div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude · Space 1</span><span class="tab-dot on"></span></div></div></div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">남은 SSH 스모크 항목들 할 일로 정리해줘</span>
+<span class="a">▸ create_task</span> <span class="d">from=ep_claude_8f3a…  "볼트 실서버 e2e 스모크"  due=6/30</span>
+<span class="g">  ✓ task#42 created</span> <span class="d">(Space 1)</span>
+<span class="a">▸ create_task</span> <span class="d">"터널 -L/-D 실 포트 점유 확인"</span>
+<span class="g">  ✓ task#43 created</span>
+<span class="am">  ↳ 사이드바 할 일 보드에 2건 반영됨</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 에이전트가 추가한 할 일이 <span class="n">②</span> 자기 Space(여기선 Space 1)의 보드에만 나타납니다.</div>
+      </div>
+    </figure>
+
+    <!-- 스코핑 -->
+    <h2 class="sec" id="scope"><span class="hash"></span> Space 스코핑 — 격리</h2>
+    <p>각 AI는 <b>자기가 붙어 있는 Space</b>의 할 일만 건드릴 수 있습니다. 다른 Space의 보드에는 접근할 수 없습니다.</p>
+    <div class="scope">
+      <div class="scope-space allow">
+        <div class="scope-head"><span class="i" data-icon="tasks" style="color:var(--accent)"></span> Space 1 — orch <span class="tag ok">허용</span></div>
+        <div class="scope-body">이 Space의 할 일만 읽기·추가·수정·삭제 <span class="i" data-icon="check" style="color:var(--success)"></span></div>
+      </div>
+      <div class="scope-space deny">
+        <div class="scope-head"><span class="i dim" data-icon="tasks"></span> Space 2 — api <span class="tag no">거부</span></div>
+        <div class="scope-body">다른 Space의 보드에 접근 시도 → 거부</div>
+      </div>
+    </div>
+    <p class="dim">사람이 보드를 편집하는 중에 AI가 동시에 바꿔도 서로 덮어쓰지 않고 <a href="persistence.html">안전하게 저장</a>됩니다.</p>
+
+    <!-- 설정 -->
+    <h2 class="sec" id="settings"><span class="hash"></span> 설정</h2>
+    <p>기본 <b>ON</b>입니다. 설정의 <b>"AI에 할 일(Task) 공유"</b> 토글로 끌 수 있습니다(재시작 적용). MCP 포트는 <code>9612</code>입니다.</p>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="tasks.html"><span class="ri" data-icon="tasks"></span>할 일 보드</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="terminal"></span>에이전트 오케스트레이션</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="settings"></span>저장 · 백업</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="appearance.html">다음 → 외관 · 폰트 · 단축키</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

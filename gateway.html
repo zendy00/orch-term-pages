@@ -1,205 +1,293 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Orch term · AI 게이트웨이</title>
+<link rel="icon" href="./assets/app-icon.png" />
+<title>AI 게이트웨이 — Orch term 가이드</title>
+<meta name="description" content="외부 프로그램이 로컬 HTTP API(POST /run)로 AI(claude·codex·agy)를 동기 호출하는 machine-to-machine 게이트웨이. OpenAI 호환 응답·세션 keepalive·워커 안전 모드·감사 로그." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
 <style>
-  :root {
-    --bg-0: #1b1b1d; --bg-1: #232327; --bg-2: #2b2b30; --line: #3a3a40;
-    --text: #e6e3dd; --dim: #a6a29a; --faint: #6f6b63;
-    --amber: #d8a657; --amber-soft: rgba(216,166,87,0.14);
-    --green: #6fbf73; --red: #e06c75; --blue: #61afef;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg-0); color: var(--text);
-    font: 14px/1.55 "Segoe UI", system-ui, sans-serif;
-    padding: 0 0 60px;
-  }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    padding: 16px 0; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
-  .topbar .brand-mini { display: flex; align-items: center; gap: 9px; text-decoration: none; }
-  .topbar .brand-mini img.glyph { width: 26px; height: 26px; }
-  .topbar .brand-mini img.wordmark { height: 22px; filter: invert(1); display: block; }
-  .topnav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .topnav a { color: var(--dim); text-decoration: none; font-size: 14px; }
-  .topnav a:hover { color: var(--amber); }
-  .topnav a.dl { color: var(--amber); border: 1px solid var(--amber); border-radius: 7px; padding: 5px 12px; }
-  .topnav a.dl:hover { background: var(--amber); color: #1b1b1d; }
-  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin: 26px 0 10px; }
-  .card { background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
-  .row { display: grid; grid-template-columns: 130px 1fr; gap: 10px; align-items: center; margin-bottom: 10px; }
-  .row > label { color: var(--dim); font-size: 13px; }
-  input, select, textarea {
-    width: 100%; background: var(--bg-2); border: 1px solid var(--line); color: var(--text);
-    border-radius: 6px; padding: 8px 10px; font: inherit;
-  }
-  textarea { min-height: 84px; resize: vertical; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 13px; }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--amber); }
-  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-  button {
-    font: inherit; cursor: pointer; border-radius: 6px; padding: 8px 16px;
-    border: 1px solid var(--line); background: var(--bg-2); color: var(--text);
-  }
-  button:hover { border-color: var(--amber); }
-  button.primary { background: var(--amber); color: #2a1e08; border-color: var(--amber); font-weight: 600; }
-  button.primary:hover { filter: brightness(1.06); }
-  pre {
-    background: #141416; border: 1px solid var(--line); border-radius: 8px;
-    padding: 12px 14px; overflow: auto; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-    font-size: 12.5px; color: #d6d3cc; white-space: pre-wrap; word-break: break-word; margin: 8px 0 0;
-  }
-  .cmdblock { position: relative; }
-  .cmdblock .copy { position: absolute; top: 8px; right: 8px; padding: 3px 10px; font-size: 12px; }
-  .note { color: var(--faint); font-size: 12.5px; margin-top: 8px; }
-  .note b { color: var(--amber); }
-  .lead { font-size: 15px; color: var(--dim); margin: 4px 0 0; }
-  .lead b { color: var(--amber); }
-  .badge { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--amber); color: var(--amber); }
-  .crosslink { background: var(--bg-1); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 8px; padding: 11px 15px; margin: 14px 0 4px; font-size: 13px; color: var(--dim); }
-  ul.intro { margin: 10px 0; padding-left: 20px; }
-  ul.intro li { margin: 4px 0; }
-  a { color: var(--blue); }
-  .log .line { padding: 2px 0; }
-  .log .ok { color: var(--green); }
-  .log .err { color: var(--red); }
-  .log .info { color: var(--blue); }
-  .log .muted { color: var(--faint); }
-  details { margin-top: 8px; }
-  summary { cursor: pointer; color: var(--dim); }
-  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
-  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { color: var(--amber); font-weight: 600; }
-  code { background: var(--amber-soft); color: var(--amber); padding: 1px 5px; border-radius: 4px; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; }
-  .site-footer { margin-top: 50px; padding: 30px 0 10px; border-top: 1px solid var(--line);
-    text-align: center; color: var(--faint); font-size: 13px; }
-  .site-footer .footer-links { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 10px; }
-  .site-footer a { color: var(--dim); text-decoration: none; }
-  .site-footer a:hover { color: var(--amber); }
-  .site-footer .sponsor-row { display: flex; justify-content: center; margin: 4px 0 12px; }
-  .btn-sponsor { display: inline-flex; align-items: center; gap: 6px; padding: 4px 13px;
-    border: 1px solid var(--line); border-radius: 7px; background: var(--bg-1); color: var(--text);
-    font-size: 13px; font-weight: 500; }
-  .btn-sponsor:hover { border-color: #db61a2; }
-  .btn-sponsor svg { color: #db61a2; flex: 0 0 14px; }
-  .footer-copy { color: var(--faint); }
+  /* 이 페이지 전용 — 데이터 흐름 다이어그램 · API 코드블록 · 감사 로그 뷰어 (디자인 시스템 토큰만 사용) */
+
+  /* 흐름 다이어그램 (외부 → orchterm → 워커) */
+  .gflow { display:flex; align-items:stretch; gap:0; margin:22px 0; max-width:var(--read); flex-wrap:wrap; }
+  .gnode { flex:1 1 200px; min-width:180px; background:var(--bg-1); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; }
+  .gnode.mid { border-color:var(--accent-line); }
+  .gnode .role { font-family:var(--code-font); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+  .gnode .who { font-size:15px; color:var(--text-strong); font-weight:600; }
+  .gnode .who b { color:var(--accent); }
+  .gnode .who small { display:block; color:var(--text-faint); font-weight:400; font-size:11px; margin-top:3px; font-family:var(--code-font); }
+  .garr { flex:0 0 100%; display:flex; align-items:center; gap:10px; padding:8px 2px; color:var(--text-dim); font-size:13px; }
+  .garr .line { flex:1; height:1px; background:linear-gradient(90deg,var(--accent-line),transparent); }
+  .garr code { white-space:nowrap; }
+  @media(min-width:640px){ .gflow{flex-wrap:nowrap;align-items:center} .garr{flex:0 0 142px;flex-direction:column;gap:4px} .garr .line{width:100%;flex:none} }
+
+  /* API 코드블록 (요청 curl / 응답 JSON) — .term의 색 span을 그대로 재사용 */
+  .api-row { padding:12px 15px; }
+  .api-row + .api-row { border-top:1px solid var(--line-faint); background:var(--bg-0); }
+  .api-lbl { display:flex; align-items:center; gap:7px; margin:0 0 8px; font-family:var(--code-font); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); }
+  .api-lbl .verb { color:var(--success); font-weight:600; }
+  .api-lbl .verb.res { color:var(--accent); }
+  pre.term { margin:0; overflow-x:auto; }
+
+  /* 감사 로그 뷰어 재현 (orch 대시보드 탭 패턴) */
+  .gl { position:relative; display:flex; flex-direction:column; height:100%; min-height:0; font-size:12px; }
+  .gl-bar { display:flex; align-items:center; gap:8px; padding:7px 10px; border-bottom:1px solid var(--line-faint); background:var(--bg-2); flex:0 0 auto; }
+  .gl-date { display:inline-flex; align-items:center; gap:8px; background:var(--bg-0); border:1px solid var(--line); border-radius:var(--r-sm); padding:4px 10px; font-family:var(--code-font); font-size:12px; color:var(--text-strong); }
+  .gl-date .ic { color:var(--accent); display:inline-grid; place-items:center; width:14px; height:14px; }
+  .gl-bar .sp { flex:1; }
+  .gl-del { width:24px; height:22px; display:grid; place-items:center; border-radius:var(--r-md); color:var(--text-faint); border:none; background:none; cursor:default; }
+  .gl-del:hover { color:var(--danger); background:var(--bg-hover); }
+  .gl-h { display:flex; align-items:center; gap:7px; padding:6px 11px; font-family:var(--code-font); font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text-faint); background:var(--bg-1); border-bottom:1px solid var(--line-faint); flex:0 0 auto; }
+  .gl-h .cap { margin-left:auto; color:var(--accent); text-transform:none; letter-spacing:0; }
+  .gl-rows { overflow:auto; flex:0 0 auto; max-height:116px; }
+  .gl-row { display:flex; align-items:center; gap:10px; padding:6px 11px; border-bottom:1px solid var(--line-faint); font-family:var(--code-font); font-size:11.5px; color:var(--text-dim); }
+  .gl-row:hover { background:var(--bg-hover); }
+  .gl-row.sel { background:var(--accent-soft); }
+  .gl-row .ts { color:var(--text-faint); flex:none; }
+  .gl-row .pr { color:var(--text); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .gl-row .ms { color:var(--text-faint); flex:none; }
+  .gl-st { font-size:10px; padding:1px 7px; border-radius:999px; flex:none; }
+  .gl-st.ok { background:color-mix(in srgb, var(--success) 16%, transparent); color:var(--success); }
+  .gl-st.to { background:color-mix(in srgb, var(--attention) 18%, transparent); color:var(--attention); }
+  .gl-drag { height:11px; display:grid; place-items:center; color:var(--text-faint); background:var(--bg-2); border-top:1px solid var(--line-faint); border-bottom:1px solid var(--line-faint); letter-spacing:3px; font-size:9px; flex:0 0 auto; cursor:row-resize; }
+  .gl-detail { flex:1 1 auto; overflow:auto; padding:10px 12px; display:grid; gap:9px; min-height:0; }
+  .gl-blk .lbl { font-family:var(--code-font); font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text-faint); margin-bottom:5px; }
+  .gl-blk pre { margin:0; font-family:var(--code-font); font-size:11.5px; line-height:1.55; color:var(--text); white-space:pre-wrap; word-break:break-word; background:var(--bg-0); border:1px solid var(--line-faint); border-radius:var(--r-sm); padding:8px 10px; }
+  .gl-blk pre .c { color:var(--term-cyan); } .gl-blk pre .g { color:var(--term-green); } .gl-blk pre .d { color:var(--text-dim); }
+  /* 달력 팝업 */
+  .gl-cal { position:absolute; top:41px; left:10px; z-index:6; width:188px; background:var(--bg-3); border:1px solid var(--line); border-radius:var(--r-md); box-shadow:var(--shadow-pop); padding:9px; }
+  .gl-cal-h { display:flex; align-items:center; justify-content:space-between; font-family:var(--code-font); font-size:11px; color:var(--text); margin-bottom:7px; }
+  .gl-cal-h span { color:var(--text-faint); }
+  .gl-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+  .gl-cal-grid .d { aspect-ratio:1; display:grid; place-items:center; font-size:10px; color:var(--text-faint); border-radius:50%; font-family:var(--code-font); }
+  .gl-cal-grid .dow { color:var(--text-faint); opacity:.6; font-size:9px; }
+  .gl-cal-grid .d.has { color:var(--text-strong); box-shadow:inset 0 0 0 1.5px var(--accent-line); }
+  .gl-cal-grid .d.sel { background:var(--accent); color:#fff; box-shadow:none; }
+  .gl-cal-grid .d.mute { opacity:.25; }
 </style>
 </head>
-<body>
-<div class="wrap">
-  <header class="topbar">
-    <a class="brand-mini" href="./index.html"><img class="glyph" src="./assets/app-icon.png" alt="" /><img class="wordmark" src="./assets/orch-term-wordmark.svg" alt="Orch term" /></a>
-    <nav class="topnav">
-      <a href="./orchestrate.html">오케스트레이션</a>
-      <a href="./gateway.html">게이트웨이</a>
-      <a class="dl" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe">다운로드</a>
-    </nav>
-  </header>
+<body data-page="gateway">
+<a class="skip" href="#main">본문 바로가기</a>
 
-  <h2>소개</h2>
-  <p class="lead"><span class="badge">게이트웨이 · HTTP · OpenAI 호환</span></p>
-  <p class="lead" style="margin-top:8px;">AI 게이트웨이는 외부 프로그램·스크립트가 로컬 HTTP로 Orch term 안의 AI에게
-  <b>프롬프트를 보내 결과를 동기로 돌려받는</b> 기능입니다. 단발 호출도, <code>session</code>으로 <b>멀티턴 대화</b>도 됩니다.
-  OpenAI <code>chat.completion</code> 호환 응답이라 기존 OpenAI 클라이언트도 base URL만 바꿔 붙일 수 있습니다.</p>
-  <ul class="intro">
-    <li>프로토콜: <b>HTTP</b>, 기본 포트 <code>9610</code>. 보안: <b>127.0.0.1 + Bearer 토큰</b>.</li>
-    <li>기본 활성화: <b>신규 설치 시 on</b>(설정에서 끄거나 다시 켤 수 있음).</li>
-    <li>엔드포인트: <code>POST /run</code>(또는 OpenAI 별칭 <code>POST /v1/chat/completions</code>) — 폴링 없음, 동기.</li>
-  </ul>
-  <div class="crosslink">AI가 <b>다른 AI를 워커로 띄워</b> 협업·조율시키는 건 게이트웨이가 아니라
-  <b>오케스트레이션(지휘자)</b> 기능입니다 → <a href="./orchestrate.html">오케스트레이션 소개 페이지</a>.</div>
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
 
-  <h2>워커 실행 폴더 · 최초 1회 승인</h2>
-  <div class="card">
-    <p>게이트웨이 요청을 받으면 안에서 AI 워커(claude·codex·agy)가 <b>고정된 작업 폴더</b>에서 실행됩니다.</p>
-    <p class="note">실행 폴더(고정): <code>~/.orchterm/gateway</code> — 설정에서 변경할 수 있습니다.</p>
-    <p class="note"><b>최초 1회 승인 필요</b> — 이 폴더에서 각 에이전트가 <b>처음</b> 실행될 때 "이 폴더를 신뢰하시겠습니까?"(folder trust) 확인이
-    워커 탭에 한 번 뜹니다. <b>한 번 승인하면</b> 폴더 경로가 고정이라 이후에는 다시 묻지 않습니다. (claude·codex는 정확한 경로 단위로,
-    agy는 상위 경로 prefix로 신뢰가 저장됩니다.) 첫 게이트웨이 호출이 응답 없이 멈춘 것 같으면, 워커 탭에서 신뢰 승인을 한 번 처리해 주세요.</p>
-    <p class="note">폴더는 <b>설정 → AI 게이트웨이 → 워커 폴더</b>에서 원하는 경로로 바꿀 수 있습니다(다음 호출부터 적용). 바꾸면 새 폴더를 다시 1회 승인하면 됩니다.</p>
-    <p class="note"><b>안전 모드 기본</b> — 위험 권한 우회 플래그를 쓰지 않습니다(그래서 위 1회 승인이 필요). 무인 자동화로 승인 없이 바로 돌리려면 <b>설정 → AI 게이트웨이 → "워커 위험 권한 우회"</b>를 켜세요(빠르지만 비권장). 안전 모드의 claude는 이 폴더에 자동 생성된 <code>.claude/settings.local.json</code>으로 파일/명령 프롬프트가 폴더 한정 억제됩니다.</p>
-  </div>
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
 
-  <h2>curl / PowerShell 예제</h2>
-  <div class="card">
-    <p>포트·토큰은 앱의 <b>설정 → AI 게이트웨이</b>에서 확인합니다(기본 포트 <code>9610</code>). 토큰은 항상 <code>Authorization: Bearer &lt;토큰&gt;</code> 헤더로 전송됩니다.</p>
-    <p style="font-weight:600; margin-top:14px;">curl</p>
-    <pre>curl -s -X POST http://127.0.0.1:9610/run \
-  -H "Authorization: Bearer <토큰>" \
-  -H "Content-Type: application/json" \
-  -d '{"agent":"claude","prompt":"안녕하세요. 자기소개 해주세요."}'</pre>
-    <p style="font-weight:600; margin-top:14px;">PowerShell</p>
-    <pre>$h = @{ Authorization = 'Bearer <토큰>' }
-$body = '{"agent":"claude","prompt":"안녕하세요. 자기소개 해주세요."}'
-$r = Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:9610/run' -Headers $h -ContentType 'application/json' -Body $body
-$r.choices[0].message.content</pre>
-    <div class="note">응답은 <b>동기</b>입니다 — 에이전트가 답할 때까지(최대 약 6분) 연결이 열려 있다가 OpenAI <code>chat.completion</code> 형태로 돌아옵니다.</div>
-  </div>
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>대형 기능</span><span class="sep">/</span><span>AI 게이트웨이</span></nav>
 
-  <h2>session · 대화 이어가기(멀티턴)</h2>
-  <div class="card">
-    <p><code>session</code> 필드가 핵심입니다 — 워커를 1회성으로 쓸지, 대화를 이어갈지 결정합니다.</p>
-    <table>
-      <tr><th>session 값</th><th>동작</th></tr>
-      <tr><td><b>비움</b>(미전송)</td><td><b>1회성</b> — 응답 직후 워커를 닫습니다. 매 호출이 새 워커(컨텍스트 없음).</td></tr>
-      <tr><td><b>임의 문자열</b>(예: <code>chat-42</code>)</td><td><b>keepalive</b> — 그 워커를 살려두고, <b>같은 값으로 다시 호출하면 같은 워커가 컨텍스트를 유지</b>한 채 이어서 답합니다.</td></tr>
-    </table>
-    <p class="note">예: turn1 <code>session=chat-42</code> "비밀 단어는 바나나73, OK?" → <code>OK</code> · turn2 <code>session=chat-42</code> "비밀 단어 뭐였지?" → <b>바나나73</b>(기억함). session을 비우면 turn2는 기억하지 못합니다.</p>
-    <pre>$h = @{ Authorization = 'Bearer &lt;토큰&gt;' }
-# 1턴
-Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:9610/run' -Headers $h -ContentType 'application/json' `
-  -Body '{"agent":"claude","session":"chat-42","prompt":"내 이름은 Zendy. OK라고만 답해"}'
-# 2턴 — 같은 session → 이름 기억
-Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:9610/run' -Headers $h -ContentType 'application/json' `
-  -Body '{"agent":"claude","session":"chat-42","prompt":"내 이름이 뭐였지?"}'</pre>
-    <p class="note">세션 종료: 같은 session을 더 안 쓰면 워커는 남아 있다가 앱 재시작/워커 탭 닫기로 정리됩니다(명시적 close API는 게이트웨이엔 없음 — 다회 대화는 오케스트레이션 MCP의 <code>close_session</code> 사용).</p>
-  </div>
+    <p class="eyebrow"><span class="hash"></span> 대형 기능 · AI 게이트웨이 <span class="flag">HTTP API</span></p>
+    <h1 class="page-title">AI 게이트웨이</h1>
+    <p class="lede">외부 프로그램이 로컬 HTTP API로 <code>{ai, prompt}</code>를 보내면, orchterm가 그 AI(<b>claude·codex·agy</b>)를 워커 탭에 띄워 한 턴 실행하고 응답을 <b>동기로</b> 돌려줍니다 — 사람 개입 없는 자동 호출.</p>
 
-  <h2>옵션 · 필드 매뉴얼</h2>
-  <div class="card">
-    <h2 style="font-size:13px;margin:6px 0 2px;">요청 본문 필드 (<code>POST /run</code>)</h2>
-    <table>
-      <tr><th>필드</th><th>타입</th><th>기본</th><th>설명</th></tr>
-      <tr><td><code>agent</code></td><td>string</td><td>—</td><td>엔진: <code>claude</code>·<code>codex</code>·<code>agy</code>. (<code>ai</code>는 레거시 별칭)</td></tr>
-      <tr><td><code>ai</code></td><td>string</td><td>—</td><td>레거시 별칭. 우선순위 <code>agent &gt; ai &gt; "claude"</code>.</td></tr>
-      <tr><td><code>prompt</code></td><td>string</td><td>—</td><td>프롬프트(우선). 없으면 <code>messages</code> 사용. 둘 다 없으면 400.</td></tr>
-      <tr><td><code>messages</code></td><td>array</td><td>—</td><td>OpenAI식 <code>[{role,content}]</code>. <code>content</code>만 추출해 <code>\n\n</code>로 결합.</td></tr>
-      <tr><td><code>model</code></td><td>string</td><td>에이전트 기본</td><td>선택. 에이전트에 전달.</td></tr>
-      <tr><td><code>session</code></td><td>string</td><td>비움=1회성</td><td>위 표 참조 — 값 지정 시 keepalive(멀티턴).</td></tr>
-    </table>
-    <h2 style="font-size:13px;margin:14px 0 2px;">설정 화면 옵션 (설정 → AI 게이트웨이)</h2>
-    <table>
-      <tr><th>옵션</th><th>기본</th><th>설명</th></tr>
-      <tr><td>게이트웨이 사용</td><td><b>신규 설치 on</b></td><td>HTTP 서버 on/off. <b>변경 시 앱 재시작</b> 후 적용.</td></tr>
-      <tr><td>포트</td><td>9610</td><td>기본 <code>9610</code>. 설정에서 변경할 수 있습니다.</td></tr>
-      <tr><td>토큰</td><td>랜덤 48hex</td><td><code>Authorization: Bearer &lt;토큰&gt;</code>. 복사 아이콘으로 복사.</td></tr>
-      <tr><td>워커 폴더</td><td><code>&lt;datadir&gt;/gateway</code></td><td>워커 실행 폴더(고정). 비우면 기본값. 바꾸면 새 폴더 1회 트러스트 승인.</td></tr>
-      <tr><td>워커 위험 권한 우회</td><td><b>off(안전)</b></td><td>off=위험 플래그 미사용(최초 1회 트러스트 승인 필요). on=무인 우회(빠름·비권장).</td></tr>
-      <tr><td>에이전트 실행을 탭으로 보기</td><td>off</td><td>exec 에이전트 출력을 탭으로 표시.</td></tr>
-    </table>
-    <h2 style="font-size:13px;margin:14px 0 2px;">엔드포인트 · 응답 · 상태 코드</h2>
-    <table>
-      <tr><th>항목</th><th>값</th></tr>
-      <tr><td>경로</td><td><code>POST /run</code> · <code>POST /v1/chat/completions</code>(OpenAI 별칭, 동일)</td></tr>
-      <tr><td>응답</td><td><code>{ id, object:"chat.completion", choices:[{message:{role,content}}], result, error }</code> — 답은 <code>choices[0].message.content</code>(또는 <code>result</code>)</td></tr>
-      <tr><td>상태 코드</td><td><code>200</code> 정상 · <code>400</code> 프롬프트 없음 · <code>401</code> 토큰 불일치 · <code>403</code> Host 불일치 · <code>500</code> 처리 실패 · <code>504</code> 시간 초과(~6분)</td></tr>
-      <tr><td>CORS</td><td>로컬 origin(localhost·127.0.0.1·사설 LAN IP·file://)만 허용, 그 외 차단. 토큰 게이트는 별개로 항상 적용.</td></tr>
-    </table>
-  </div>
+    <!-- 무엇을 -->
+    <h2 class="sec" id="what"><span class="hash"></span> 무엇을 하는가</h2>
+    <p>외부 프로그램(스크립트·CI·인앱 브라우저 페이지)이 한 줄 프롬프트를 보내면, 게이트웨이가 워커 AI를 탭에 띄워 한 턴 돌리고 <b>연결을 잡은 채</b> OpenAI 호환 응답을 반환합니다.</p>
 
-  <footer class="site-footer">
-    <div class="footer-links">
-      <a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a>
-      <a href="./orchestrate.html">오케스트레이션</a>
-      <a href="./gateway.html">게이트웨이</a>
+    <div class="gflow">
+      <div class="gnode"><div class="role">caller</div><div class="who">외부 <b>프로그램</b><small>HTTP 클라이언트</small></div></div>
+      <div class="garr"><code>POST /run</code><div class="line"></div><code>{ai, prompt}</code></div>
+      <div class="gnode mid"><div class="role">orchterm</div><div class="who">HTTP 서버<small>:9610 · Bearer</small></div></div>
+      <div class="garr"><code>워커 탭</code><div class="line"></div><code>1턴 실행</code></div>
+      <div class="gnode"><div class="role">worker</div><div class="who"><b>claude</b> · codex · agy<small>워커 탭(1턴)</small></div></div>
     </div>
-    <div class="sponsor-row">
-      <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a>
+
+    <!-- 시작하기 -->
+    <h2 class="sec" id="start"><span class="hash"></span> 시작하기</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> 게이트웨이 켜기 (재시작 후 적용)</div>
+        <p>새 설치는 게이트웨이가 <b>켜진 채</b> 시작합니다. 끄거나 다시 켜는 변경은 <b>앱 재시작 후</b> 적용됩니다.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="copy"></span> Bearer 토큰 확인 · 복사</div>
+        <p>토큰은 최초 1회 <b>랜덤</b>으로 발급됩니다. 설정 → AI 게이트웨이에서 확인·복사해 호출자에게 전달하세요. 모든 요청에 <code>Authorization: Bearer …</code>가 필요하고, 불일치하면 <code>401</code>입니다.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 — AI 게이트웨이</span></div>
+            <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+              <div class="modal-box" style="width:380px">
+                <div class="modal-head"><span class="i" data-icon="settings" style="color:var(--accent)"></span><h3 class="modal-title">AI 게이트웨이</h3><span class="badge ok" style="margin-left:auto">켜짐</span></div>
+                <div class="modal-body">
+                  <div class="field row-inline" style="justify-content:space-between"><label>포트</label><span class="mono dim" style="font-size:12px">127.0.0.1 : 9610 <span class="faint">(+base)</span></span></div>
+                  <div class="field">
+                    <label>Bearer 토큰 <span class="faint" style="font-size:11px">· 최초 1회 랜덤(192비트)</span></label>
+                    <div class="input-icon">
+                      <input class="input mono" value="b6f2c1a9…d04e7f" readonly />
+                      <span class="ic" data-icon="copy"></span>
+                    </div>
+                  </div>
+                  <div class="field row-inline" style="justify-content:space-between"><label>워커 폴더</label><span class="mono faint" style="font-size:11px">~/.orchterm/gateway</span></div>
+                </div>
+                <div class="modal-foot"><button class="btn sm">기본값</button><button class="btn primary sm"><span class="i" data-icon="copy" style="color:#fff"></span> 토큰 복사</button></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> 127.0.0.1 전용이라 외부 네트워크 노출이 없습니다 · <span class="i dim" data-icon="copy"></span> 토큰을 복사해 호출자에 전달.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+    <p class="dim">워커는 고정 폴더(<code>~/.orchterm/gateway</code>)에서 실행돼 에이전트 신뢰 승인은 <b>최초 1회</b>만 필요합니다.</p>
+
+    <!-- API 호출 -->
+    <h2 class="sec" id="api"><span class="hash"></span> API 호출 — POST /run</h2>
+    <p>요청은 <code>POST /run</code>(별칭 <code>POST /v1/chat/completions</code>). 본문에 보낼 AI와 프롬프트를 담으면, 응답이 올 때까지 <b>연결을 잡고</b> OpenAI <code>chat.completion</code> JSON을 동기 반환합니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">curl — 동기 호출</span><span class="badge ok">200 · chat.completion</span></div>
+        <div class="shot-stage">
+          <div class="api-row">
+            <p class="api-lbl"><span class="verb">POST</span> /run · 요청</p>
+            <pre class="term"><span class="g">$</span> curl -s http://127.0.0.1:9610/run <span class="d">\</span>
+    -H <span class="c">"Authorization: Bearer $ORCHTERM_GATEWAY_TOKEN"</span> <span class="d">\</span>
+    -H <span class="c">"Content-Type: application/json"</span> <span class="d">\</span>
+    -d <span class="c">'{ "agent": "claude", "prompt": "PING", "session": "s1" }'</span></pre>
+          </div>
+          <div class="api-row">
+            <p class="api-lbl"><span class="verb res">200</span> OpenAI chat.completion · 응답</p>
+            <pre class="term">{
+  <span class="c">"id"</span>: <span class="g">"req_8f3a…"</span>, <span class="c">"object"</span>: <span class="g">"chat.completion"</span>,
+  <span class="c">"choices"</span>: [
+    { <span class="c">"index"</span>: 0,
+      <span class="c">"message"</span>: { <span class="c">"role"</span>: <span class="g">"assistant"</span>, <span class="c">"content"</span>: <span class="g">"PONG"</span> },
+      <span class="c">"finish_reason"</span>: <span class="g">"stop"</span> }
+  ],
+  <span class="c">"result"</span>: <span class="g">"PONG"</span>, <span class="c">"error"</span>: null <span class="d">// result·error = 레거시 호환</span>
+}</pre>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 동기 모델 — 서버는 최대 <b>360초</b> 대기 후 미완료면 <code>504</code>.</div>
+      </div>
+    </figure>
+
+    <table class="kbds">
+      <thead><tr><th>본문 필드</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td><code>agent</code> / <code>ai</code></td><td>워커 종류 — claude · codex · agy (기본 <code>claude</code>)</td></tr>
+        <tr><td><code>prompt</code> / <code>messages</code></td><td>보낼 프롬프트. 둘 다 비면 <code>400</code></td></tr>
+        <tr><td><code>session</code></td><td>keepalive 키(옵션) — 값이면 워커 재사용, 비우면 1회성</td></tr>
+        <tr><td><code>model</code></td><td>받지만 현재는 무시됩니다(추후)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 세션 keepalive -->
+    <h2 class="sec" id="session"><span class="hash"></span> 세션 keepalive (멀티턴)</h2>
+    <p><code>session</code> 값을 주면 <b>같은 session은 같은 워커를 재사용</b>합니다 — 컨텍스트가 유지되는 멀티턴. 값을 비우면 응답 후 워커를 닫는 <b>1회성</b>입니다(“응답 후 워커가 사라졌다”는 버그가 아니라 이 동작).</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">session "s1" — 컨텍스트 유지</span></div>
+        <div class="shot-stage" style="padding:16px">
+          <div class="term"><span class="d"># turn 1 — 같은 session으로 첫 호출</span>
+<span class="g">$</span> curl …/run -d <span class="c">'{ "agent":"claude", "session":"s1", "prompt":"기억해: 바나나73" }'</span>
+<span class="d">  ◂</span> <span class="a">"알겠습니다. '바나나73' 기억했어요."</span>
+
+<span class="d"># turn 2 — 같은 session, 워커 재사용 → 회상</span>
+<span class="g">$</span> curl …/run -d <span class="c">'{ "agent":"claude", "session":"s1", "prompt":"아까 코드 뭐였지?" }'</span>
+<span class="d">  ◂</span> <span class="a">"바나나73 입니다."</span> <span class="cursor"></span></div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> turn1의 “바나나73”을 turn2가 회상 — 같은 워커·같은 세션을 재사용.</div>
+      </div>
+    </figure>
+
+    <!-- 안전 모드 -->
+    <h2 class="sec" id="safe"><span class="hash"></span> 워커 안전 모드 (기본 ON)</h2>
+    <p>게이트웨이 워커는 기본적으로 <b>안전 모드</b>로 돌아갑니다 — 위험 권한 우회 플래그를 쓰지 않습니다. 우회 모드(무인·빠르지만 비권장)는 설정 <b>“워커 위험 권한 우회”</b>로만 켭니다.</p>
+    <div class="warn"><b>주의</b> — 게이트웨이는 외부 프로그램이 로컬에서 AI를 부리는 관제탑(control plane)입니다. 토큰·로컬 바인딩·안전 모드 기본값을 함부로 끄지 마세요.</div>
+
+    <!-- 감사 로그 -->
+    <h2 class="sec" id="audit"><span class="hash"></span> 감사 로그 (요청/응답 기록 + 뷰어 탭)</h2>
+    <p>게이트웨이가 켜져 있으면 인증을 통과한 <b>모든 요청</b>을 일자별로 기록합니다 — 프롬프트·시각·총소요·상태(ok·error·timeout)·응답 원문까지. 팔레트 명령 <b>“게이트웨이 감사 로그”</b>로 뷰어 탭을 엽니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">게이트웨이 감사 로그 — 뷰어 탭</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:368px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="audit-log"></span><span class="tab-label">게이트웨이 감사 로그</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" data-icon="close"></button></div>
+            </div>
+            <div class="pane-content">
+              <div class="gl">
+                <div class="gl-bar">
+                  <span class="gl-date"><span class="ic" data-icon="calendar"></span> 2026-06-28</span>
+                  <span class="sp"></span>
+                  <button class="gl-del" title="이 날짜 로그 삭제" data-icon="trash"></button>
+                </div>
+                <div class="gl-h">요청 <span class="cap">(최근 24 / 총 24)</span></div>
+                <div class="gl-rows">
+                  <div class="gl-row sel"><span class="ts">14:02:51</span><span class="pr">기억해: 바나…나나73</span><span class="ms">3.1s</span><span class="gl-st ok">ok</span></div>
+                  <div class="gl-row"><span class="ts">14:02:09</span><span class="pr">PING</span><span class="ms">2.4s</span><span class="gl-st ok">ok</span></div>
+                  <div class="gl-row"><span class="ts">13:58:44</span><span class="pr">SSH 터널…전성 검토</span><span class="ms">41.8s</span><span class="gl-st ok">ok</span></div>
+                  <div class="gl-row"><span class="ts">13:55:02</span><span class="pr">대용량 리…파싱 요약</span><span class="ms">360s</span><span class="gl-st to">timeout</span></div>
+                </div>
+                <div class="gl-drag">═══ 드래그 ═══</div>
+                <div class="gl-detail">
+                  <div class="gl-blk"><div class="lbl">요청 원문</div><pre>{ <span class="c">"agent"</span>: <span class="g">"claude"</span>, <span class="c">"session"</span>: <span class="g">"s1"</span>,
+  <span class="c">"prompt"</span>: <span class="g">"기억해: 바나나73"</span> }</pre></div>
+                  <div class="gl-blk"><div class="lbl">응답 원문</div><pre>{ <span class="c">"result"</span>: <span class="g">"알겠습니다. '바나나73' 기억했어요."</span>,
+  <span class="c">"error"</span>: null } <span class="d">// totalMs 3142 · status ok</span></pre></div>
+                </div>
+                <div class="gl-cal">
+                  <div class="gl-cal-h"><span>‹</span> 2026 · 6월 <span>›</span></div>
+                  <div class="gl-cal-grid">
+                    <span class="d dow">일</span><span class="d dow">월</span><span class="d dow">화</span><span class="d dow">수</span><span class="d dow">목</span><span class="d dow">금</span><span class="d dow">토</span>
+                    <span class="d mute">31</span><span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span><span class="d">6</span>
+                    <span class="d">7</span><span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span><span class="d">13</span>
+                    <span class="d">14</span><span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d has">19</span><span class="d">20</span>
+                    <span class="d">21</span><span class="d">22</span><span class="d has">23</span><span class="d">24</span><span class="d">25</span><span class="d has">26</span><span class="d">27</span>
+                    <span class="d sel">28</span><span class="d">29</span><span class="d">30</span><span class="d mute">1</span><span class="d mute">2</span><span class="d mute">3</span><span class="d mute">4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 날짜 <span class="i dim" data-icon="calendar"></span> → 달력 팝업(로그 있는 날만 선택). <span class="n">②</span> 위쪽 <b>요청 목록</b> ↕ 아래쪽 <b>상세</b>(요청·응답 원문).</div>
+      </div>
+    </figure>
+    <p class="dim">보관 일수는 설정에서 정합니다(기본 10일) — 초과 날짜는 자동 삭제됩니다. 응답은 원문 전량을 저장합니다.</p>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>에이전트 오케스트레이션</a>
+        <a class="relchip" href="mirror.html"><span class="ri" data-icon="external-link"></span>CDP 브라우저 미러</a>
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="tasks"></span>AI 할 일 공유</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>완료 배지 · 알림</a>
+      </div>
     </div>
-    <div class="footer-copy">Orch term · © 2026</div>
-  </footer>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="mirror.html">다음 → CDP 브라우저 미러</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
 </div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>CDP 브라우저 미러 — Orch term 가이드</title>
+<meta name="description" content="에이전트(chrome-devtools-mcp)의 브라우징을 터미널 옆 인앱 브라우저 패널에 실시간 미러. Rust 내장 필터링 프록시가 앱 UI를 숨기고 new_page를 인앱 탭으로 매핑한다." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 프록시 파이프라인 다이어그램 + 인앱 브라우저 패널 재현 (디자인 토큰만 사용) */
+  .mflow { margin:22px 0; max-width:var(--read); background:var(--bg-1); border:1px solid var(--line-faint); border-radius:var(--r-lg); padding:26px 18px 18px; }
+  .mflow-row { display:flex; align-items:stretch; gap:0; flex-wrap:wrap; }
+  .mnode { position:relative; flex:1 1 150px; min-width:140px; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-md); padding:13px 13px; text-align:center; }
+  .mnode .t { font-size:13.5px; font-weight:600; color:var(--text-strong); }
+  .mnode .s { font-family:var(--code-font); font-size:10.5px; color:var(--text-faint); margin-top:4px; line-height:1.5; }
+  .mnode.proxy { border-color:var(--accent-line); box-shadow:0 0 26px -8px var(--accent); }
+  .mnode.proxy .t { color:var(--accent); }
+  .mnode .ftag { position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-family:var(--code-font); font-size:9px; letter-spacing:.16em; color:var(--accent); background:var(--bg-1); border:1px solid var(--accent-line); border-radius:999px; padding:1px 8px; white-space:nowrap; }
+  .marrow { flex:0 0 100%; display:flex; align-items:center; gap:8px; padding:9px 2px; color:var(--text-faint); font-family:var(--code-font); font-size:10px; }
+  .marrow .line { flex:1; height:0; border-top:1.5px dashed var(--accent-line); }
+  @media(min-width:660px){ .mflow-row{flex-wrap:nowrap;align-items:center} .marrow{flex:0 0 90px;flex-direction:column;gap:3px} .marrow .line{width:100%;flex:none} }
+  .mbranch { display:grid; gap:8px; margin-top:18px; }
+  .mout { display:flex; align-items:center; gap:9px; padding:10px 13px; border-radius:var(--r-md); font-size:13px; border:1px solid var(--line-faint); }
+  .mout b { font-weight:600; }
+  .mout.ok { background:color-mix(in srgb,var(--success) 8%,transparent); border-color:color-mix(in srgb,var(--success) 34%,transparent); color:var(--text); }
+  .mout.ok .i { color:var(--success); }
+  .mout.no { background:color-mix(in srgb,var(--danger) 8%,transparent); border-color:color-mix(in srgb,var(--danger) 30%,transparent); color:var(--text-dim); }
+  .mout.no .x { color:var(--danger); font-weight:700; width:1.25em; text-align:center; flex:none; }
+  .mout .lbl { margin-left:auto; font-family:var(--code-font); font-size:10px; color:var(--text-faint); }
+
+  /* 인앱 브라우저 패널 재현 — 주소창(메인 웹뷰 렌더) + 페이지(자식 웹뷰) */
+  .mbnav { display:flex; align-items:center; gap:7px; height:27px; padding:0 9px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); flex:0 0 auto; }
+  .mbnav .nb { width:14px; text-align:center; color:var(--text-faint); font-size:13px; }
+  .mbnav .rl { display:inline-grid; place-items:center; width:15px; height:15px; color:var(--text-faint); }
+  .mbnav .url { flex:1; display:flex; align-items:center; gap:7px; height:18px; padding:0 10px; background:var(--bg-0); border:1px solid var(--line); border-radius:999px; font-family:var(--code-font); font-size:10.5px; color:var(--text-dim); overflow:hidden; white-space:nowrap; }
+  .mbnav .url .lk { color:var(--success); display:inline-grid; place-items:center; width:11px; flex:none; }
+  .mbnav .url .lk svg { width:11px; height:11px; }
+  .mbpage { position:absolute; inset:0; background:var(--bg-0); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:13px; padding:26px; text-align:center; }
+  .mbpage h4 { margin:0; font-family:var(--ui); font-size:20px; font-weight:700; color:var(--text-strong); letter-spacing:-.01em; }
+  .mbpage p { margin:0; font-family:var(--ui); font-size:12px; line-height:1.65; color:var(--text-dim); max-width:280px; }
+  .mbpage .pbtn { font-family:var(--ui); font-size:12px; color:#fff; background:var(--accent); border-radius:var(--r-sm); padding:5px 14px; }
+</style>
+</head>
+<body data-page="mirror">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>대형 기능</span><span class="sep">/</span><span>CDP 브라우저 미러</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 대형 기능 · CDP 브라우저 미러 <span class="flag">WebView2 CDP</span></p>
+    <h1 class="page-title">CDP 브라우저 미러</h1>
+    <p class="lede">대화 중인 AI가 브라우저로 웹을 탐색하면, 그 모든 동작(페이지 이동·클릭·입력)이 <b>터미널 옆 인앱 브라우저 패널</b>에 실시간으로 비칩니다. 앱 자신의 화면은 에이전트에게 <b>보이지 않아</b> 실수로 조작되지 않습니다.</p>
+
+    <!-- 무엇을 -->
+    <h2 class="sec" id="concept"><span class="hash"></span> 무엇을 하는가</h2>
+    <p>에이전트에게 웹 작업을 시키면 보통 무엇을 열었는지, 어디서 헤매는지 보이지 않습니다. 미러는 에이전트의 브라우저를 <b>내 화면 안의 진짜 패널</b>로 만들어, 일하는 모습을 어깨너머로 보듯 실시간 관찰하게 합니다. 에이전트는 그 패널만 보고 운전하며, 앱 자신의 UI는 보이지도 잡히지도 않습니다.</p>
+
+    <div class="mflow">
+      <div class="mflow-row">
+        <div class="mnode"><div class="t">AI 에이전트</div><div class="s">브라우저로 웹 탐색</div></div>
+        <div class="marrow"><div class="line"></div></div>
+        <div class="mnode proxy"><span class="ftag">미러</span><div class="t">앱 내장 미러</div><div class="s">앱 UI 숨김<br>새 페이지 → 인앱 탭</div></div>
+        <div class="marrow"><div class="line"></div></div>
+        <div class="mnode"><div class="t">인앱 브라우저 패널</div><div class="s">내 화면에 실시간 표시</div></div>
+      </div>
+      <div class="mbranch">
+        <div class="mout ok"><span class="i" data-icon="external-link"></span><span>에이전트 브라우저 — <b>패널에 미러 · 이어서 사용</b></span><span class="lbl">보임</span></div>
+        <div class="mout no"><span class="x">✕</span><span>앱 자신의 UI — <b>에이전트에게 숨김</b></span><span class="lbl">숨김</span></div>
+      </div>
+    </div>
+
+    <!-- 켜기 -->
+    <h2 class="sec" id="enable"><span class="hash"></span> 켜기</h2>
+    <p><b>dev</b>에서는 <code>npm run dev:app</code>으로 앱을 띄우면 미러가 항상 켜지고 에이전트 연결도 자동입니다(프록시 <code>9522+base</code>). <b>릴리즈</b>에서는 설정 → <b>에이전트 브라우저 미러</b>를 켜고 <b>앱을 재시작</b>하면 에이전트 세션이 자동으로 연결됩니다(기본 포트 <code>9422</code>, 설정에서 변경 가능). 켜져 있는 동안은 상태바에 <b>미러 :포트</b>가 표시됩니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — dev</span><span class="badge ok">mirror live</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane" style="height:172px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div></div>
+              <div class="pane-actions"><button class="pane-act" data-icon="close"></button></div>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">$</span> npm run dev:app
+<span class="d">[dev] base=0 vite=1420 bridge=9323 cdp=9222</span> <span class="a">proxy=9522</span>
+<span class="d">[mirror] proxy 127.0.0.1:9522 → 127.0.0.1:9222</span>
+<span class="d">[mirror] .mcp.json 패치 → </span><span class="c">orchterm-mirror</span><span class="d"> @ :9522</span>
+<span class="g">$</span> <span class="cursor"></span></div></div></div>
+          </div>
+          <div class="statusbar" style="border:1px solid var(--line-faint);border-radius:var(--r-md);margin-top:12px;height:25px">
+            <span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>미러 :9522</span>
+            <span class="statusbar-spacer"></span>
+            <span class="statusbar-encoding">UTF-8 · CRLF</span>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 런처가 미러를 함께 띄우고 에이전트 연결을 자동 설정 · 상태바에 <b>미러 :포트</b> 표시.</div>
+      </div>
+    </figure>
+    <p class="dim">에이전트 세션은 시작할 때 미러 연결을 읽습니다. 이미 떠 있던 세션은 한 번 재시작해야 미러에 붙습니다.</p>
+
+    <!-- 사용 -->
+    <h2 class="sec" id="usage"><span class="hash"></span> 사용</h2>
+    <p>"브라우저로 ○○ 열어서 확인해줘" 한마디면, 에이전트가 연 페이지가 떠다니는 임시 창이 아니라 <b>정식 인앱 브라우저 탭</b>으로 열리고, 이후 모든 이동·클릭·입력이 그 패널에 실시간으로 보입니다. 에이전트가 페이지를 바꾸면 내가 보던 화면도 따라 전환되고, 일을 마치면 그 탭은 <b>사용자가 그대로 이어서</b> 씁니다.</p>
+    <figure class="fig">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 에이전트 ↔ 미러 패널</span><span class="badge ok">미러 :9422</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="panes" style="height:288px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">example.com 열어서 페이지 제목 확인해줘</span>
+<span class="a">▸ new_page</span> <span class="c">https://example.com</span>
+<span class="d">  → 인앱 브라우저 탭 생성 + 자동 선택</span>
+<span class="a">▸ take_snapshot</span> <span class="d">→ h1 "Example Domain"</span>
+<span class="g">◂</span> <span class="d">제목은 "Example Domain"이에요.</span>
+<span class="d">  오른쪽 패널에 그대로 떠 있어요.</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="external-link"></span><span class="tab-label">Example Domain</span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+              </div>
+              <div class="mbnav">
+                <span class="nb">‹</span><span class="nb">›</span>
+                <span class="rl" data-icon="refresh"></span>
+                <div class="url"><span class="lk" data-icon="lock"></span>https://example.com</div>
+                <span class="rl" data-icon="external-link"></span>
+              </div>
+              <div class="pane-content"><div class="mbpage">
+                <h4>Example Domain</h4>
+                <p>This domain is for use in illustrative examples in documents. 에이전트가 연 페이지가 이 패널에 그대로 렌더됩니다.</p>
+                <span class="pbtn">More information →</span>
+              </div></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 에이전트가 연 페이지 = 정식 브라우저 탭. <span class="n">②</span> 이후 동작이 이 패널에 실시간 미러 — 끝나면 탭은 사용자 것.</div>
+      </div>
+    </figure>
+
+    <!-- 한계 / 주의 -->
+    <h2 class="sec" id="limits"><span class="hash"></span> 한계 · 주의</h2>
+    <p><b>멀티 에이전트는 Space 단위로 분리됩니다.</b> 앱 터미널에서 띄운 에이전트는 자기 Space의 패널만 보고 운전하며, 새 페이지도 자기 Space에 열립니다. 단, 같은 Space 안의 에이전트끼리는 서로의 패널이 보이고, 터미널 탭을 다른 Space로 옮겨도 셸을 재시작하기 전까지는 옛 Space를 가리킵니다. 새 페이지는 한 번에 하나씩 열립니다(동시에 두 개를 열면 두 번째는 거부, 재시도 가능).</p>
+    <div class="warn"><b>미러 모드는 브라우저 프로필이 분리됩니다</b> — 미러를 켜면 인앱 브라우저가 별도 프로필을 쓰므로, 일반 모드의 로그인·쿠키가 미러 모드로 이어지지 않습니다. 미러 모드에서 필요한 사이트는 다시 로그인해야 합니다.</div>
+
+    <!-- 참조 -->
+    <h2 class="sec" id="reference"><span class="hash"></span> 참조</h2>
+    <table class="kbds">
+      <thead><tr><th>항목</th><th>값</th></tr></thead>
+      <tbody>
+        <tr><td>프록시 포트</td><td>dev <code>9522+base</code> · 릴리즈 기본 <code>9422</code> (설정 변경 가능)</td></tr>
+        <tr><td>켜기 / 끄기</td><td>설정 → <b>에이전트 브라우저 미러</b> → 앱 재시작</td></tr>
+        <tr><td>멀티 에이전트</td><td>Space마다 분리</td></tr>
+        <tr><td>미러 프로필</td><td>미러 ON일 때 로그인·쿠키 별도 보관</td></tr>
+        <tr><td>상태 표시</td><td>상태바 <b>미러 :포트</b></td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>인앱 브라우저</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="terminal"></span>에이전트 오케스트레이션</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI 게이트웨이</a>
+        <a class="relchip" href="workstation.html"><span class="ri" data-icon="terminal"></span>멀티에이전트 워크스테이션</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="terminal.html">다음 → 터미널</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>
