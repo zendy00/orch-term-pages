@@ -18,8 +18,7 @@ button, input, select, textarea { font-family: inherit; }
 .titlebar { display: flex; align-items: center; height: 32px; background: var(--bg-0); border-bottom: 1px solid var(--line-faint); flex: 0 0 auto; user-select: none; position: relative; }
 .tb-brand { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; padding: 0 10px; }
 .tb-brand-icon { width: 15px; height: 15px; border-radius: 4px; background: var(--accent); display: inline-grid; place-items: center; font-size: 10px; color: #fff; }
-.tb-wordmark { font-weight: 700; letter-spacing: .2px; color: var(--text-strong); font-size: var(--fs-md); }
-.tb-wordmark b { color: var(--accent); }
+.tb-wordmark { height: 13px; display: block; filter: invert(1); }
 .titlebar-spaces { display: flex; align-items: flex-start; padding: 0 8px; height: 100%; }
 .space-chip { display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 13px; background: var(--bg-hover); border: 1px solid var(--line); border-top: none; border-radius: 0 0 var(--r-md) var(--r-md); color: var(--text-dim); font-size: var(--fs-sm); cursor: default; white-space: nowrap; }
 .space-chip + .space-chip { margin-left: -1px; }

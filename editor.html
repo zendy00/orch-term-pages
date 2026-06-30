@@ -29,7 +29,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -55,48 +55,8 @@
     <p>좌측 <a href="explorer.html">탐색기</a>에서 파일을 <b>더블클릭</b>하면 활성 패널의 새 <b>에디터 탭</b>으로 열립니다. 텍스트가 아닌 바이너리(PNG·exe 등)는 에디터 대신 <b>“기본 앱으로 열기” 폴백 패널</b>이 뜹니다. 하단 상태바 우측엔 감지된 <b>인코딩 · EOL</b> 라벨이 에디터 탭일 때만 표시됩니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — editor-encoding.ts</span></div>
-        <div class="shot-stage" style="padding:18px">
-          <div class="pane active-pane" style="height:236px">
-            <div class="pane-tabbar">
-              <div class="pane-tabs">
-                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">editor-encoding.ts</span></div>
-                <div class="tab"><span class="tab-icon" data-icon="file"></span><span class="tab-label">README.md</span></div>
-              </div>
-              <div class="pane-actions">
-                <button class="pane-act" title="Git Blame 토글 (Ctrl+Shift+B)" data-icon="blame"></button>
-                <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
-                <span class="pane-act-sep"></span>
-                <button class="pane-act" title="닫기" data-icon="close"></button>
-              </div>
-            </div>
-            <div class="pane-content">
-              <div class="ed">
-                <div class="ed-gutter">1
-2
-3
-4
-5
-6
-7</div>
-                <div class="term ed-code"><span class="d">// 선두 BOM이면 UTF-8 BOM, 아니면 UTF-8</span>
-<span class="a">export function</span> <span class="c">detectEncoding</span>(text: <span class="a">string</span>) {
-  <span class="a">if</span> (text.<span class="c">charCodeAt</span>(<span class="am">0</span>) === <span class="am">0xfeff</span>)
-    <span class="a">return</span> <span class="g">"UTF-8 BOM"</span>;
-  <span class="a">return</span> <span class="g">"UTF-8"</span>;
-}<span class="ed-cur"></span>
-</div>
-              </div>
-            </div>
-          </div>
-          <div class="statusbar" style="border-radius:0 0 var(--r-lg) var(--r-lg);margin-top:7px;border:1px solid var(--line-faint)">
-            <button class="statusbar-reopen" title="디스크에서 다시 읽기" data-icon="refresh"></button>
-            <span class="statusbar-spacer"></span>
-            <span class="statusbar-encoding">UTF-8</span>
-            <span class="statusbar-encoding">LF</span>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 우상단 <span class="i dim" data-icon="blame"></span> 버튼으로 blame 토글 · <span class="n">②</span> 상태바 우측 <b>UTF-8 · LF</b> = 인코딩/EOL.</div>
+        <img class="shot-img" src="./assets/shots/editor.png" alt="코드 에디터 — about-dialog.ts(TypeScript 신택스 하이라이트), 상단 탭·상태바 인코딩/EOL" />
+        <div class="shot-cap"><span class="n">①</span> 우상단 아이콘으로 outline·미리보기·blame 토글. <span class="n">②</span> 상태바 우측 <b>UTF-8 · LF</b> = 인코딩/EOL.</div>
       </div>
     </figure>
 
@@ -164,42 +124,7 @@
     <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>(또는 에디터 우상단 <span class="i" data-icon="blame"></span> 버튼)로 blame을 켜면, 거터에 줄별 <b>작성자 · 상대시각</b>이 붙습니다. 같은 커밋이 이어지는 줄은 <b>그룹 첫 줄에만</b> 표시하고, 작업트리에서 바뀐 줄은 <b>미커밋</b>으로 뜹니다. 거터 줄을 클릭하면 <a href="source-control.html">소스 컨트롤</a> 패널의 커밋 세부로 연결되고, 호버하면 커밋 해시·작성자·시각·제목이 툴팁으로 보입니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">editor-blame.ts — blame 거터</span><span class="badge phase">Ctrl+Shift+B</span></div>
-        <div class="shot-stage" style="padding:18px">
-          <div class="pane active-pane" style="height:228px">
-            <div class="pane-tabbar">
-              <div class="pane-tabs">
-                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">editor-blame.ts</span></div>
-              </div>
-              <div class="pane-actions">
-                <button class="pane-act" title="Git Blame 토글 (Ctrl+Shift+B)" data-icon="blame"></button>
-                <button class="pane-act" title="닫기" data-icon="close"></button>
-              </div>
-            </div>
-            <div class="pane-content">
-              <div class="ed">
-                <div class="ed-gutter">1
-2
-3
-4
-5
-6</div>
-                <div class="ed-blame"><span title="a1b2c3d · Alice · 2026-06-28 14:02&#10;feat(editor): blame 그룹화"><b>Alice</b> · 2시간 전</span>
-
-<span title="9f8e7d6 · Bob · 2026-06-25 09:13&#10;refactor: 상대시각 헬퍼"><b>Bob</b> · 3일 전</span>
-
-<span class="un" title="미커밋 (작업트리 변경)">미커밋</span>
-<span class="un" title="미커밋 (작업트리 변경)">미커밋</span></div>
-                <div class="term ed-code"><span class="a">export function</span> <span class="c">blameGutterText</span>(b, prev, now) {
-  <span class="a">if</span> (prev?.hash === b.hash) <span class="a">return</span> <span class="g">""</span>;
-  <span class="a">if</span> (<span class="c">isUncommitted</span>(b.hash)) <span class="a">return</span> <span class="g">"미커밋"</span>;
-  <span class="a">return</span> <span class="g">`${b.author} · ${rel}`</span>;
-}
-<span class="d">// 거터 클릭 → 커밋 세부 연동</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/editor-blame.png" alt="GitLens식 blame 거터 — 에디터 좌측 거터에 줄별 작성자(Zendy Kim)·상대시각(22일 전·11일 전·16일 전), 같은 커밋이 이어지는 줄은 그룹 첫 줄에만 표시" />
         <div class="shot-cap"><span class="n">①</span> 그룹 첫 줄에만 <b>작성자 · 상대시각</b> 표시(이어지는 줄은 빈칸). <span class="n">②</span> <b style="color:var(--accent)">미커밋</b> = 아직 커밋 안 된 작업트리 변경.</div>
       </div>
     </figure>

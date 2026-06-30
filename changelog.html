@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/app-icon.png" />
+<title>변경 이력 (Changelog) — Orch term 가이드</title>
+<meta name="description" content="Orch term 릴리즈별 변경 이력 — 자동 업데이트(v0.1.23~)로 받는 버전별 새 기능·수정. SSH·Git 패널·전체 검색·AI 게이트웨이·macOS 포팅·CDP 미러." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 변경 이력 타임라인 (디자인 시스템 토큰만 사용) */
+  .cl-rel { margin: 0 0 24px; border-left: 2px solid var(--line-faint); padding: 0 0 4px 20px; position: relative; }
+  .cl-rel::before { content: ""; position: absolute; left: -6px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+  .cl-rel.is-latest::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .cl-ver { display: flex; align-items: baseline; gap: 10px; margin-bottom: 9px; flex-wrap: wrap; }
+  .cl-ver .v { font-size: 16.5px; font-weight: 700; color: var(--text-strong); letter-spacing: -.01em; }
+  .cl-ver .d { font-size: 12px; color: var(--text-faint); }
+  .cl-ver .latest { font-size: 10.5px; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+  .cl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  .cl-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+  .cl-tag { flex: none; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-top: 2px; text-transform: uppercase; letter-spacing: .02em; min-width: 30px; text-align: center; }
+  .cl-tag.feat { background: rgba(74, 222, 128, .14); color: #4ade80; }
+  .cl-tag.fix { background: rgba(251, 146, 60, .14); color: #fb923c; }
+  .cl-tag.perf { background: rgba(96, 165, 250, .14); color: #60a5fa; }
+  .cl-note { font-size: 12.5px; color: var(--text-faint); background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-md); padding: 11px 13px; margin: 2px 0 18px; }
+</style>
+</head>
+<body data-page="changelog">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>그 외 · 시스템</span><span class="sep">/</span><span>변경 이력</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 릴리즈 · 변경 이력</p>
+    <h1 class="page-title">변경 이력 (Changelog)</h1>
+    <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
+    <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
+
+    <h2 class="sec" id="v02x"><span class="hash"></span> 0.2.x — 안정화 · SSH · 미러</h2>
+
+    <div class="cl-rel is-latest">
+      <div class="cl-ver"><span class="v">v0.2.2</span><span class="d">2026-06-29</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>macOS 인앱 브라우저 미러 설정 토글 + 기본 ON</li>
+        <li><span class="cl-tag fix">fix</span>Alt+Tab 복귀 후 한글·스페이스 IME 중복 입력 수정</li>
+        <li><span class="cl-tag fix">fix</span>사이드바 브랜치명 실시간 갱신(.git/HEAD 감시)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.2.1</span><span class="d">2026-06-28</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>탐색기 푸터 개편 — 새로고침 버튼(열린 폴더 유지)·git 브랜치 표시 견고화</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.2.0</span><span class="d">2026-06-28</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Windows 멀티웹뷰 포커스 복귀 키보드 수정(wry 패치 번들)</li>
+        <li><span class="cl-tag fix">fix</span>SSH/SFTP 무제한 읽기(OOM)·SOCKS5 프레이밍·세션 누수·known_hosts 정리</li>
+        <li><span class="cl-tag fix">fix</span>자격증명 볼트 — 잠금/종료 시 평문 시크릿·DEK 미소거 + 비밀번호 변경 경합 수정</li>
+        <li><span class="cl-tag fix">fix</span>부팅 DB open/migrate 패닉 → busy_timeout + 클린 종료</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v013x"><span class="hash"></span> 0.1.30 ~ 0.1.37 — 검색 · Git 패널 · 게이트웨이</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.37</span><span class="d">2026-06-24</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>검색 세부 옵션 접기 토글 + classic 포커스 링</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.36</span><span class="d">2026-06-24</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>전체 검색 — .gitignore 적용 옵션·검색 버튼 + .git 제외·성능 개선</li>
+        <li><span class="cl-tag feat">feat</span>설정·정보 창 단축키 + 명령 팔레트 항목</li>
+        <li><span class="cl-tag fix">fix</span>창 최소화 복귀 시 입력 라인 사라짐(0높이 fit 차단)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.35</span><span class="d">2026-06-24</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>사이드바 검색·모드를 Space별로 격리 + Ctrl+Tab 순회</li>
+        <li><span class="cl-tag feat">feat</span>Git 패널 영역 분리 · diff 스크롤 보존 · 헤더/스크롤바 정리</li>
+        <li><span class="cl-tag fix">fix</span>창 포커스 복귀 시 클릭이 첫 터미널로 튕기던 버그</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.34</span><span class="d">2026-06-23</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Git sync 바 개편 — 카운트 클릭=push/pull · 실시간 자동갱신 · fetch 버튼</li>
+        <li><span class="cl-tag feat">feat</span>Ctrl+Tab / Ctrl+Shift+Tab 패널·사이드바 순회</li>
+        <li><span class="cl-tag fix">fix</span>사이드바 최대화 토글 시 프롬프트 중복(가려진 패널 SIGWINCH 억제)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.33</span><span class="d">2026-06-23</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Windows — git blame·기본 앱 열기 시 콘솔 창 깜빡임 제거</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.32</span><span class="d">2026-06-23</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>AI 게이트웨이 감사 로그 — 요청/응답 일자별 기록 + 뷰어 탭(달력·세로 분할) + retention</li>
+        <li><span class="cl-tag fix">fix</span>알림 벨 카운트 뱃지를 테마 무관 항상 동그라미로</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.31</span><span class="d">2026-06-21</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>세션 복원 — 사라진 경로 탭 가지치기·오류 격리·빈 패널 폴백(fallbackCwd)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.30</span><span class="d">2026-06-20</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>macOS Intel을 Apple Silicon 러너에서 크로스컴파일</li>
+        <li><span class="cl-tag fix">fix</span>Finder 실행 시 TERM 빈 값으로 색상·zsh 자동완성 깨짐</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v012x"><span class="hash"></span> 0.1.22 ~ 0.1.29 — 멀티에이전트 · macOS · 자동 업데이트</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.29</span><span class="d">2026-06-20</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>에디터 폰트 줌(Cmd+=/−/0) + 단축키 순수화·테스트</li>
+        <li><span class="cl-tag feat">feat</span>macOS curl 한 줄 설치 스크립트 + 릴리즈 자동 업로드</li>
+        <li><span class="cl-tag fix">fix</span>창 클램프를 NSScreen 작업영역 기준으로 · 경로 인자주입 방어</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.28</span><span class="d">2026-06-20</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>macOS 포팅 — codex 직접 실행 · 'Finder에서 보기' · 기본 창 1200×900 클램프</li>
+        <li><span class="cl-tag fix">fix</span>유실된 mouseup 자가복구 — '클릭 후 이동=드래그 stuck' 차단(크로스플랫폼)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.27</span><span class="d">2026-06-19</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>자동 업데이트 — 부팅 배너와 About이 하나의 Updater를 공유</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.26</span><span class="d">2026-06-19</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>오케스트레이션 감독 대시보드를 Space별로 스코프</li>
+        <li><span class="cl-tag feat">feat</span>다운로드 통계에서 latest.json(업데이터 매니페스트) 제외</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.25</span><span class="d">2026-06-19</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>오케스트레이션 — '진행 중 워커 + 중지' pill로 전환(send 기본 블로킹)</li>
+        <li><span class="cl-tag fix">fix</span>감독 대시보드 행 레이아웃·중지 정착·라벨 정리</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.24</span><span class="d">2026-06-18</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>스페이스 닫기 후 탐색기가 닫힌 Space 잔상을 유지하던 버그</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.23</span><span class="d">2026-06-17</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>자동 업데이트 — tauri-plugin-updater + 타이틀바 배너 + 부팅 자동 체크 + About 확인 버튼</li>
+        <li><span class="cl-tag feat">feat</span>릴리즈 changelog 자동 생성 스크립트(gen-changelog.mjs)</li>
+        <li><span class="cl-tag fix">fix</span>relaunch를 plugin-process로 + 다운로드 진행률 브로드캐스트</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.22</span><span class="d">2026-06-17</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>첫 공개 릴리즈 — 단일 창 데스크톱 터미널(탭·분할·Space), 인앱 브라우저·에디터, 멀티에이전트 오케스트레이션·미러</li>
+      </ul>
+    </div>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="auto-update.html"><span class="ri" data-icon="download"></span>자동 업데이트</a>
+        <a class="relchip" href="download.html"><span class="ri" data-icon="download"></span>다운로드 · 설치</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span><a href="auto-update.html">← 자동 업데이트</a></span>
+      <span><a href="index.html">홈 →</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

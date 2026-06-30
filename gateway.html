@@ -77,7 +77,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -122,24 +122,7 @@
         <p>토큰은 최초 1회 <b>랜덤</b>으로 발급됩니다. 설정 → AI 게이트웨이에서 확인·복사해 호출자에게 전달하세요. 모든 요청에 <code>Authorization: Bearer …</code>가 필요하고, 불일치하면 <code>401</code>입니다.</p>
         <figure class="fig">
           <div class="shot">
-            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 — AI 게이트웨이</span></div>
-            <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
-              <div class="modal-box" style="width:380px">
-                <div class="modal-head"><span class="i" data-icon="settings" style="color:var(--accent)"></span><h3 class="modal-title">AI 게이트웨이</h3><span class="badge ok" style="margin-left:auto">켜짐</span></div>
-                <div class="modal-body">
-                  <div class="field row-inline" style="justify-content:space-between"><label>포트</label><span class="mono dim" style="font-size:12px">127.0.0.1 : 9610 <span class="faint">(+base)</span></span></div>
-                  <div class="field">
-                    <label>Bearer 토큰 <span class="faint" style="font-size:11px">· 최초 1회 랜덤(192비트)</span></label>
-                    <div class="input-icon">
-                      <input class="input mono" value="b6f2c1a9…d04e7f" readonly />
-                      <span class="ic" data-icon="copy"></span>
-                    </div>
-                  </div>
-                  <div class="field row-inline" style="justify-content:space-between"><label>워커 폴더</label><span class="mono faint" style="font-size:11px">~/.orchterm/gateway</span></div>
-                </div>
-                <div class="modal-foot"><button class="btn sm">기본값</button><button class="btn primary sm"><span class="i" data-icon="copy" style="color:#fff"></span> 토큰 복사</button></div>
-              </div>
-            </div>
+            <img class="shot-img" src="./assets/shots/gateway-settings.png" alt="환경설정 모달 — AI 게이트웨이: 게이트웨이 사용(127.0.0.1)·포트 9610·Bearer 토큰·워커 폴더·감사 로그 보관 일수" />
             <div class="shot-cap"><span class="n">①</span> 127.0.0.1 전용이라 외부 네트워크 노출이 없습니다 · <span class="i dim" data-icon="copy"></span> 토큰을 복사해 호출자에 전달.</div>
           </div>
         </figure>

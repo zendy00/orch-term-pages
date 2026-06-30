@@ -61,7 +61,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -119,13 +119,8 @@
                   <div class="ssh-group-head" style="margin-top:4px"><span class="tw">▸</span><span>클라우드</span><span class="ssh-group-count">1</span></div>
                 </div>
               </div>
-              <div class="rrail" style="height:332px">
-                <div class="rrail-btn active" title="SSH 접속 관리자" data-icon="ssh"></div>
-                <div class="rrail-sp"></div>
-                <div class="rrail-btn" title="설정" data-icon="settings"></div>
-              </div>
             </div>
-            <div class="shot-cap"><span class="n">①</span> 초록 dot = 접속 중, <code>×N</code> = 세션 수(클릭하면 점프). <span class="n">②</span> 비밀은 저장하지 않고 호스트 정보만 보관합니다.</div>
+            <div class="shot-cap"><span class="n">①</span> 진입은 <b>타이틀바 우측 <span class="i dim" data-icon="ssh"></span> 아이콘</b> · 초록 dot = 접속 중, <code>×N</code> = 세션 수(클릭하면 점프). <span class="n">②</span> 비밀은 저장하지 않고 호스트 정보만 보관합니다.</div>
           </div>
         </figure>
       </li>
@@ -469,6 +464,59 @@
           </div>
         </div>
         <div class="shot-cap"><span class="n">①</span> 초록 dot = 수립됨, <span class="i dim" data-icon="stop"></span> 로 즉시 중지. <span class="n">②</span> 프로필에 저장되어 접속할 때 자동으로 다시 수립됩니다.</div>
+      </div>
+    </figure>
+
+    <!-- tmux 세션 유지 -->
+    <h2 class="sec" id="tmux"><span class="hash"></span> tmux 세션 유지 — 끊겨도 살아있는 원격 세션</h2>
+    <p>프로필에서 <b>"tmux 세션 유지"</b>를 켜면, 접속할 때 원격에 프로필 전용 tmux 세션을 만들고 거기에 붙습니다. <b>네트워크가 끊기거나 창·탭을 닫아도</b> 원격 세션은 계속 살아 있어 — 빌드·개발 서버·로그 tail·장시간 작업이 죽지 않습니다. 다시 접속하면 <b>같은 세션에 자동 재부착</b>되어 실행 중이던 화면 그대로 이어집니다.</p>
+    <ul>
+      <li><b>안정적인 세션명</b> — 세션명을 프로필 기준(<code>orchterm-&lt;프로필&gt;</code>)으로 고정해, 재접속해도 정확히 같은 세션을 찾아 붙습니다.</li>
+      <li><b>없으면 생성 · 있으면 부착</b> — 접속 시 <code>tmux new -A -s …</code> 한 줄로 첫 접속엔 세션을 만들고, 재접속엔 그 세션에 부착(<code>-A</code>)합니다.</li>
+      <li><b>graceful 강등</b> — 원격에 tmux가 없으면 자동으로 일반 로그인 셸로 떨어집니다(<code>|| exec "$SHELL" -l</code>). 즉 <b>tmux가 없어도 접속은 항상 됩니다</b>.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">새 호스트 — tmux 세션 유지 옵션</span></div>
+        <div class="shot-stage" style="padding:20px;display:grid;place-items:center">
+          <div style="width:330px;background:var(--bg-1);border:1px solid var(--line-faint);border-radius:var(--r-lg);padding:14px 15px;box-shadow:var(--shadow-pane)">
+            <div style="font-size:13px;color:var(--text-strong);font-weight:600;margin-bottom:11px">SSH 프로필</div>
+            <div style="display:grid;gap:8px;margin-bottom:11px">
+              <div style="display:flex;gap:8px"><span style="flex:1;background:var(--bg-0);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:12px;color:var(--text-dim)">web-prod-01</span><span style="width:62px;background:var(--bg-0);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:12px;color:var(--text-faint)">22</span></div>
+              <div style="background:var(--bg-0);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:12px;color:var(--text-dim)">deploy</div>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-dim);cursor:default">
+              <span style="width:15px;height:15px;border-radius:4px;background:var(--accent);display:grid;place-items:center"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span>
+              tmux 세션 유지 <span style="color:var(--text-faint)">(끊겨도 유지·재접속 시 복구)</span>
+            </label>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 프로필의 체크박스 하나로 켜집니다 — 켜면 접속이 <code>tmux new -A -s orchterm-&lt;프로필&gt;</code>로 감싸집니다.</div>
+      </div>
+    </figure>
+    <p class="note">⚠️ 원격 호스트에 <code>tmux</code>가 설치돼 있어야 세션이 유지됩니다(없으면 자동으로 일반 셸로 접속). 프로필 내보내기/가져오기에도 이 설정이 함께 보존됩니다.</p>
+
+    <!-- MultiExec 브로드캐스트 -->
+    <h2 class="sec" id="multiexec"><span class="hash"></span> 여러 서버에 한 번에 — MultiExec 브로드캐스트</h2>
+    <p>SSH 세션이 <b>2개 이상</b> 떠 있으면 접속 관리자에 <b>브로드캐스트</b> 섹션이 나타납니다. 멤버 체크박스로 그룹에 넣을 세션을 고르고 <b>켜기</b>를 누르면 — 그룹 중 한 터미널에 친 명령이 <b>그룹 전원에 동시 전송</b>됩니다. 여러 서버에 같은 명령(배포·패치·재시작·로그 확인)을 한 번에 칠 수 있습니다.</p>
+    <ul>
+      <li><b>입력만 팬아웃</b> — 명령(입력)만 모든 멤버에 보내고, 출력은 각 세션이 그대로 받습니다(서버별 결과를 따로 확인).</li>
+      <li><b>루프 차단</b> — 브로드캐스트로 받은 입력은 다시 전파하지 않아, 멤버끼리 무한 팬아웃이 생기지 않습니다.</li>
+      <li><b>멤버 표시</b> — 브로드캐스트 중인 멤버 터미널은 테두리(outline)로 강조됩니다(레이아웃은 그대로).</li>
+      <li><b>세션 1개면 숨김</b> — 혼자면 의미가 없어 2개 이상 라이브일 때만 섹션이 보입니다.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">접속 관리자 — 브로드캐스트 그룹</span><span class="badge ok">3 sessions</span></div>
+        <div class="shot-stage" style="padding:20px;display:grid;place-items:center">
+          <div style="width:300px;background:var(--bg-1);border:1px solid var(--line-faint);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-pane)">
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--accent-soft);border-bottom:1px solid var(--line-faint)"><span style="font-size:12.5px;color:var(--accent);font-weight:700">브로드캐스트</span><span style="flex:1"></span><span style="font-size:10.5px;color:var(--accent)">켜짐</span><span style="width:15px;height:15px;border-radius:4px;background:var(--accent);display:grid;place-items:center"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span></div>
+            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line-faint)"><span style="width:14px;height:14px;border-radius:4px;background:var(--accent);display:grid;place-items:center;flex:none"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span style="font-size:12.5px;color:var(--text-strong)">web-prod-01</span><span style="flex:1"></span><span style="font-size:11px;color:var(--text-faint)">배포</span></div>
+            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line-faint)"><span style="width:14px;height:14px;border-radius:4px;background:var(--accent);display:grid;place-items:center;flex:none"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span style="font-size:12.5px;color:var(--text-strong)">web-prod-02</span><span style="flex:1"></span><span style="font-size:11px;color:var(--text-faint)">배포</span></div>
+            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px"><span style="width:14px;height:14px;border-radius:4px;border:1.5px solid var(--line-strong);flex:none"></span><span style="font-size:12.5px;color:var(--text-dim)">db-02</span><span style="flex:1"></span><span style="font-size:11px;color:var(--text-faint)">DB</span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 멤버 체크 + 켜기 → 멤버 터미널에 친 입력이 그룹 전원에 동시 전송. <span class="n">②</span> 출력은 서버별로 따로 받습니다.</div>
       </div>
     </figure>
 

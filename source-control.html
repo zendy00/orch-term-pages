@@ -67,7 +67,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -93,23 +93,8 @@
     <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd> 또는 사이드바 모드바의 <span class="i" data-icon="git"></span> Git 아이콘으로 엽니다. 파일을 stage/unstage한 뒤 메시지를 적고 커밋합니다. 상태 글자 — <b style="color:var(--attention)">M</b> 수정 · <b style="color:var(--success)">A</b> 추가 · <b style="color:var(--term-green)">U</b> untracked · <b style="color:var(--danger)">D</b> 삭제.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git — Source Control</span></div>
-        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
-          <div class="gp">
-            <div class="gp-head"><span class="i" data-icon="git" style="color:var(--accent)"></span> 소스 컨트롤 <span class="sp"></span><button class="iconbtn" data-icon="refresh" title="새로고침"></button><button class="iconbtn" data-icon="sidebar-maximize" title="최대화"></button></div>
-            <div class="gp-sync"><span class="br"><span class="i" data-icon="git-branch"></span> main</span><span class="ahead">↑2 ↓1</span><span class="sp"></span><button class="syncbtn">Pull</button><button class="syncbtn">Push</button></div>
-            <div class="gp-sec-h">스테이지됨 <span class="cnt">1</span></div>
-            <div class="gp-file"><span class="st a">A</span><span class="nm"><span class="dir">docs/site/</span>ssh.html</span><span class="act">−</span></div>
-            <div class="gp-sec-h">변경 사항 <span class="cnt">2</span></div>
-            <div class="gp-file"><span class="st m">M</span><span class="nm"><span class="dir">src/workspace/</span>git-host.ts</span><span class="act">+</span></div>
-            <div class="gp-file"><span class="st u">U</span><span class="nm"><span class="dir">docs/site/</span>tasks.html</span><span class="act">+</span></div>
-            <div class="gp-commit">
-              <textarea rows="2" readonly>docs: Git 패널 가이드 페이지 추가</textarea>
-              <div class="row"><span class="sp"></span><button class="btn sm primary">커밋 (1)</button></div>
-            </div>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> sync 바 — 브랜치 + ahead/behind(↑2 ↓1) + Pull/Push. <span class="n">②</span> 각 행에서 stage(+)/unstage(−).</div>
+        <img class="shot-img" src="./assets/shots/source-control.png" alt="Git 패널 — 브랜치(main)·커밋 메시지 입력·변경 사항·커밋 그래프 History" />
+        <div class="shot-cap"><span class="n">①</span> sync 바 — 브랜치 + ahead/behind + Pull/Push. <span class="n">②</span> 각 행에서 stage(+)/unstage(−).</div>
       </div>
     </figure>
 
@@ -118,16 +103,7 @@
     <p>커밋을 최신→과거로 보여주고, 분기·병합을 레인 그래프로 시각화합니다. 행을 클릭하면 커밋 세부가 열립니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git — 로그 그래프</span></div>
-        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
-          <div class="gp" style="width:340px">
-            <div class="gp-sec-h">로그 이력</div>
-            <div class="gp-log-row sel"><div class="gp-lane"><span class="dot"></span></div><div class="gp-log-msg"><div class="gp-log-t">docs(site): 문서 사이트 리뉴얼</div><div class="gp-log-meta">d3ae1a8 · Zendy Kim · 방금 전</div></div></div>
-            <div class="gp-log-row"><div class="gp-lane branch"><span class="dot"></span></div><div class="gp-log-msg"><div class="gp-log-t">chore(release): v0.2.0</div><div class="gp-log-meta">895bd56 · 2시간 전</div></div></div>
-            <div class="gp-log-row"><div class="gp-lane branch"><span class="dot"></span><span class="dot b"></span></div><div class="gp-log-msg"><div class="gp-log-t">fix(windows): wry 멀티웹뷰 포커스 복귀</div><div class="gp-log-meta">70879a7 · 어제</div></div></div>
-            <div class="gp-log-row"><div class="gp-lane"><span class="dot"></span></div><div class="gp-log-msg"><div class="gp-log-t">fix(ui): SSH/SFTP 프론트 경합·누수 정리</div><div class="gp-log-meta">a825484 · 어제</div></div></div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/git-log.png" alt="Git 로그 그래프 — 브랜치 레인 + 21.zendy-terminal 실제 커밋(HEAD→main feat(sessions), fix(fonts), docs(changelog)…) + 단축 해시" style="max-width:312px;display:block;margin:0 auto;border-radius:var(--r-md)" />
         <div class="shot-cap"><span class="n">①</span> 선택된 커밋(액센트 배경). <span class="n">②</span> 초록 점은 병합된 다른 레인입니다.</div>
       </div>
     </figure>
@@ -137,28 +113,8 @@
     <p>커밋을 클릭하면 메시지·작성자·시각·변경 파일이 열리고, 파일을 클릭하면 패널 안에 읽기 전용 diff가 인라인으로 펼쳐집니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git — 커밋 세부 · 인라인 diff</span></div>
-        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
-          <div class="gp" style="width:380px">
-            <div class="gp-sec-h">커밋 세부 <span class="cnt">+12 −3</span></div>
-            <div style="padding:8px 12px;border-bottom:1px solid var(--line-faint)">
-              <div style="font-size:13px;color:var(--text-strong)">fix(db): 부팅 DB open/migrate 패닉 처리</div>
-              <div style="font-size:11px;color:var(--text-faint);font-family:var(--code-font);margin-top:3px">7f27569 · Zendy Kim &lt;zendy00@gmail.com&gt; · 2026-06-27</div>
-            </div>
-            <div class="gp-file"><span class="st m">M</span><span class="nm"><span class="dir">src-tauri/src/</span>db.rs</span><span class="ahead" style="margin-left:auto">+12 −3</span></div>
-            <div style="padding:8px 12px">
-              <div class="gp-diff">
-                <div class="hnk">@@ -41,7 +41,9 @@ fn open_db()</div>
-                <div class="ctx">  let conn = Connection::open(path)?;</div>
-                <div class="del">-  conn.execute_batch(MIGRATIONS)?;</div>
-                <div class="add">+  conn.busy_timeout(Duration::from_secs(5))?;</div>
-                <div class="add">+  migrate(&conn).map_err(fatal_dialog)?;</div>
-                <div class="ctx">  Ok(conn)</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 변경 파일 + <code>+n/−n</code>. <span class="n">②</span> 추가(초록)·삭제(빨강)·헌크(시안) diff가 패널 안에 인라인으로.</div>
+        <img class="shot-img" src="./assets/shots/git-diff.png" alt="커밋 세부 — 커밋 메시지·작성자·변경 파일 목록 (Changes 8개 + History + 커밋 세부 패널)" />
+        <div class="shot-cap"><span class="n">①</span> 커밋을 클릭하면 메시지·작성자·변경 파일이 패널 하단에 열립니다. <span class="n">②</span> 변경 파일을 클릭하면 추가(초록)·삭제(빨강) diff가 인라인으로 펼쳐집니다.</div>
       </div>
     </figure>
 
@@ -167,19 +123,7 @@
     <p>에디터에서 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>(또는 우상단 <span class="i" data-icon="blame"></span> 아이콘)로 토글합니다. 거터에 줄별 <b>작성자 · 상대 시각</b>이 붙고, 거터를 클릭하면 그 커밋 세부가 Git 패널에서 열립니다. 아직 커밋 안 된 줄은 "미커밋"으로 표시됩니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">에디터 — GitLens blame 거터</span></div>
-        <div class="shot-stage" style="padding:18px">
-          <div class="pane active-pane" style="height:188px">
-            <div class="pane-tabbar"><div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">git.rs</span></div></div><div class="pane-actions"><button class="pane-act" title="blame 토글" data-icon="blame" style="color:var(--accent)"></button></div></div>
-            <div class="pane-content"><div class="term-pane-terminal" style="inset:0;overflow:auto">
-              <div class="blame-line"><span class="blame-g">Zendy Kim · 3주 전</span><span class="blame-c"><span style="color:var(--term-cyan)">pub fn</span> run_git(args) {</span></div>
-              <div class="blame-line"><span class="blame-g">Zendy Kim · 3주 전</span><span class="blame-c">  cmd.env("GIT_TERMINAL_PROMPT", "0");</span></div>
-              <div class="blame-line"><span class="blame-g uncommitted">미커밋 · 나</span><span class="blame-c">  cmd.stdin(Stdio::null());</span></div>
-              <div class="blame-line"><span class="blame-g">Zendy Kim · 5일 전</span><span class="blame-c">  spawn_blocking(move || run()).await</span></div>
-              <div class="blame-line"><span class="blame-g">Zendy Kim · 5일 전</span><span class="blame-c">}</span></div>
-            </div></div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/editor-blame.png" alt="에디터 GitLens blame 거터 — 줄별 작성자·상대시각, 같은 커밋 그룹은 첫 줄에만 표시" />
         <div class="shot-cap"><span class="n">①</span> 거터의 "작성자 · 상대시각" — 클릭하면 그 커밋 세부로. <span class="n">②</span> <span style="color:var(--accent)">미커밋</span> 줄은 아직 커밋 안 된 변경입니다.</div>
       </div>
     </figure>

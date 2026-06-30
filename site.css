@@ -60,8 +60,7 @@ body::after {
 .topbar .brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; color: var(--text-strong); }
 .topbar .brand .glyph { width: 24px; height: 24px; display: grid; place-items: center; }
 .topbar .brand .glyph svg, .topbar .brand .glyph img { width: 24px; height: 24px; }
-.topbar .brand .wm { font-family: var(--display); font-weight: 700; font-size: 16px; letter-spacing: -.01em; }
-.topbar .brand .wm b { color: var(--accent); font-weight: 700; }
+.topbar .brand .wm { height: 16px; display: block; filter: invert(1); }
 .topbar .brand .tag { font-family: var(--code-font); font-size: 10.5px; color: var(--text-faint); padding: 2px 7px; border: 1px solid var(--line); border-radius: 999px; margin-left: 2px; }
 .topbar .spacer { flex: 1 1 auto; }
 .topbar .find { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; min-width: 200px;
@@ -195,6 +194,9 @@ kbd { font-family: var(--code-font); font-size: 11.5px; background: var(--bg-2);
 .shot-stage.pad { padding: 22px; display: grid; place-items: center; }
 /* 재현된 앱 셸을 프레임 안에서 고정 높이로 */
 .shot-stage > .app { height: var(--shot-h, 440px); }
+/* 실제 앱 스크린샷(전체 창) — 가짜 맥 크롬 없이 .shot 프레임에 직접 박는다.
+   앱이 자체 타이틀바를 가지므로 .shot-chrome은 생략한다(scripts/site/capture.mjs로 캡쳐). */
+.shot-img { display: block; width: 100%; height: auto; }
 .shot-cap { display: block; padding: 9px 14px; background: var(--bg-1);
   border-top: 1px solid var(--line-faint); font-size: 12.5px; line-height: 1.6; color: var(--text-dim); }
 .shot-cap .n { font-family: var(--code-font); color: var(--accent); font-weight: 600; margin-right: 3px; }
@@ -329,7 +331,9 @@ a.flag-card:hover::before { opacity: 1; }
 }
 @media (max-width: 880px) {
   :root { --gut: 22px; }
-  .doc { grid-template-columns: 1fr; }
+  /* .doc.no-toc(특이성 0,2,0)가 .doc(0,1,0)을 이겨 모바일에서 2열이 유지되던 버그 →
+     본문이 side-w 칼럼에 갇히고 우측 1fr이 빈공간으로 남았다. 둘 다 1열로 무너뜨린다. */
+  .doc, .doc.no-toc { grid-template-columns: 1fr; }
   .side { position: fixed; top: var(--top-h); left: 0; width: 86%; max-width: 320px; z-index: 45;
     background: var(--bg-0); border-right: 1px solid var(--line); transform: translateX(-102%); transition: transform var(--tap); }
   body.nav-open .side { transform: none; }

@@ -27,7 +27,9 @@
     appearance: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 12h9M5 18h14"/><circle cx="17" cy="12" r="2.3"/></svg>',
     persistence: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.8"/><path d="M5 5.5v13c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-13M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/></svg>',
     "auto-update": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v5h-5"/></svg>',
-    notifications: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg>'
+    notifications: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg>',
+    sessions: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.6a9 9 0 1 0 3-3.4M3 1.5v4.2h4.2"/><path d="M12 7.5V12l3 1.9"/></svg>',
+    changelog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3M16 3v3M4.5 7.5h15V19a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 19z"/><path d="M8 12h8M8 16h5"/></svg>'
   };
 
   var NAV = [
@@ -59,6 +61,7 @@
       { page: "appearance",   href: "appearance.html",   label: "외관 · 폰트 · 단축키" },
       { page: "persistence",  href: "persistence.html",  label: "저장 · 백업" },
       { page: "auto-update",  href: "auto-update.html",  label: "자동 업데이트" },
+      { page: "changelog",    href: "changelog.html",    label: "변경 이력" },
       { page: "notifications",href: "notifications.html",label: "완료 배지 · 알림" }
     ]}
   ];

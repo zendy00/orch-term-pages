@@ -17,7 +17,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -75,23 +75,7 @@
 
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 — 백업</span></div>
-        <div class="shot-stage" style="padding:22px;display:grid;place-items:center;min-height:248px">
-          <div class="modal-box" style="width:420px">
-            <div class="modal-head"><span class="i" data-icon="settings" style="color:var(--accent)"></span><h3 class="modal-title">환경설정 — 백업</h3></div>
-            <div class="modal-body">
-              <p class="caption">설정·워크스페이스·할 일 <b>전체</b>를 한 개의 <code>.db</code> 파일로 내보내거나, 백업 파일로 현재 데이터를 교체합니다.</p>
-              <div class="field">
-                <label>전체 백업 (데이터베이스)</label>
-                <div class="row-inline">
-                  <button class="btn"><span class="i dim" data-icon="download"></span> 내보내기…</button>
-                  <button class="btn"><span class="i dim" data-icon="refresh"></span> 가져오기…</button>
-                </div>
-              </div>
-              <div class="warn" style="margin:12px 0 0">현재 데이터를 교체하고 <b>앱을 재시작</b>합니다. 직전 상태는 <code>.pre-import</code>로 보존돼 되돌릴 수 있습니다.</div>
-            </div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/set-backup.png" alt="환경설정 — 백업: 전체 백업(데이터베이스) 가져오기·내보내기" />
         <div class="shot-cap"><span class="n">①</span> <span class="i dim" data-icon="download"></span> 내보내기 = 설정+워크스페이스+할 일 전체를 한 <code>.db</code> 파일로 저장 · <span class="n">②</span> <span class="i dim" data-icon="refresh"></span> 가져오기 = 검증 후 재시작 때만 교체.</div>
       </div>
     </figure>

@@ -55,7 +55,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -81,21 +81,8 @@
     <p>설정의 <b>코드 폰트</b>·<b>UI 폰트</b> 피커에서 번들 폰트와 <b>설치된 시스템 폰트</b>를 함께 고릅니다. 각 행은 <b>그 폰트로 그린 샘플</b>이라 한글 폭과 <code>il1Lo0</code> 구분을 눈으로 비교할 수 있습니다. 코드 폰트는 고정폭(monospace)만, UI 폰트는 전체를 보여줍니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 — 코드 폰트</span></div>
-        <div class="shot-stage" style="padding:24px;display:grid;place-items:center;min-height:300px">
-          <div class="shell-dropdown" style="position:relative;min-width:340px;box-shadow:var(--shadow-pop)">
-            <div class="shell-menu-title">코드 폰트 · 터미널 · 에디터</div>
-            <div style="padding:0 4px 7px">
-              <div class="input-icon"><input class="input mono" value="mono" readonly style="padding-right:26px" /><span class="ic" data-icon="search"></span></div>
-            </div>
-            <div class="fp-item active"><span class="nm">Zed Plex Mono <span class="badge phase" style="padding:1px 7px">기본</span></span><span class="sample" style="font-family:var(--code-font)">가나다 AaBb 0123 il1Lo0</span></div>
-            <div class="fp-item"><span class="nm">D2Coding</span><span class="sample" style="font-family:'D2Coding',var(--code-font)">가나다 AaBb 0123 il1Lo0</span></div>
-            <div class="fp-item"><span class="nm">Sarasa Mono K</span><span class="sample" style="font-family:'Sarasa Mono K',var(--code-font)">가나다 AaBb 0123 il1Lo0</span></div>
-            <div class="fp-item"><span class="nm">JetBrains Mono Hangul</span><span class="sample" style="font-family:'JetBrains Mono',var(--code-font)">가나다 AaBb 0123 il1Lo0</span></div>
-            <div class="fp-item"><span class="nm">Consolas <span class="sys">시스템</span></span><span class="sample" style="font-family:Consolas,monospace">가나다 AaBb 0123 il1Lo0</span></div>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 검색으로 좁히고, 각 행의 <b>샘플 글리프</b>로 미리보며 고릅니다.</div>
+        <img class="shot-img" src="./assets/shots/appearance.png" alt="설정 모달 모양 탭 — 테마·스킨·액센트·밀도·모서리·불투명도·코드 폰트·UI 폰트" />
+        <div class="shot-cap"><span class="n">①</span> 모양 탭 — 테마·액센트·밀도·불투명도와 코드/UI 폰트를 한 곳에서. 폰트는 검색·샘플 글리프로 고릅니다.</div>
       </div>
     </figure>
 
@@ -127,35 +114,7 @@
     <p><span class="i" data-icon="menu"></span> 햄버거 메뉴 → <b>설정</b>으로 엽니다. 왼쪽 네비로 외관·터미널·단축키·백업 그룹을 오가고, 오른쪽 패널에서 값을 바꿉니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 — 외관</span></div>
-        <div class="shot-stage" style="height:300px">
-          <div class="modal-overlay">
-            <div class="modal-box set-modal">
-              <div class="modal-head"><span class="i" data-icon="settings"></span><h3>설정</h3></div>
-              <div class="modal-body" style="padding:0">
-                <div class="set-grid">
-                  <div class="set-nav">
-                    <div class="set-navitem active"><span class="i" data-icon="contrast"></span> 외관</div>
-                    <div class="set-navitem"><span class="i dim" data-icon="terminal"></span> 터미널</div>
-                    <div class="set-navitem"><span class="i dim" data-icon="edit"></span> 단축키</div>
-                    <div class="set-navitem"><span class="i dim" data-icon="download"></span> 백업</div>
-                  </div>
-                  <div class="set-panel">
-                    <div class="set-sect">폰트</div>
-                    <div class="field"><label>코드 폰트 <span class="dim">— 터미널 · 에디터</span></label><button class="combo mono"><span>Zed Plex Mono</span><span class="car" data-icon="chevron-down"></span></button></div>
-                    <div class="field"><label>UI 폰트 <span class="dim">— 앱 인터페이스</span></label><button class="combo"><span>Zed Plex Sans</span><span class="car" data-icon="chevron-down"></span></button></div>
-                    <div class="set-sect" style="margin-top:13px">창</div>
-                    <div class="field" style="margin-bottom:2px"><label>창 투명도</label>
-                      <div class="slider"><div class="fill" style="width:82%"></div><div class="knob" style="left:82%"></div></div>
-                      <div class="slider-ends"><span>더 투명</span><span>불투명</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-foot"><span class="dim" style="margin-right:auto;font-size:11.5px">백업 탭 = 설정 내보내기 / 가져오기</span><button class="btn">완료</button></div>
-            </div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/appearance.png" alt="설정 모달 외관 탭 — 좌측 네비(고정) + 우측 패널(테마·스킨·액센트·밀도·불투명도·폰트)" />
         <div class="shot-cap"><span class="n">①</span> 왼쪽 네비는 고정 · 오른쪽 패널만 스크롤됩니다.</div>
       </div>
     </figure>
@@ -166,29 +125,7 @@
     <p>설정 <b>단축키</b> 섹션에서 행을 누르고 <b>원하는 키를 그대로 눌러</b> 재지정합니다. 키보드 레이아웃과 무관하게 동작하며, 다른 명령이나 고정 단축키와 겹치면 빨강으로 표시하고 저장을 막습니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 — 단축키</span></div>
-        <div class="shot-stage" style="padding:18px">
-          <div class="modal-box" style="margin:0 auto;width:100%;max-width:560px">
-            <div class="modal-head"><span class="i" data-icon="edit"></span><h3>단축키</h3></div>
-            <div class="modal-body">
-              <div class="sk-list">
-                <div class="sk-row">
-                  <div class="sk-cmd"><b>명령 팔레트 열기</b></div>
-                  <div class="sk-keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>P</kbd></div>
-                </div>
-                <div class="sk-row">
-                  <div class="sk-cmd"><b>아래로 분할</b></div>
-                  <div class="sk-keys"><span class="sk-rec">키를 누르세요…</span></div>
-                </div>
-                <div class="sk-row">
-                  <div class="sk-cmd"><b>줄바꿈 (제출 안 함)</b></div>
-                  <div class="sk-keys sk-conflict"><kbd>Ctrl</kbd><kbd>C</kbd><span class="sk-warn">충돌 · 복사</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-foot"><span class="dim" style="margin-right:auto;font-size:11.5px">충돌이 있으면 저장 비활성</span><button class="btn ghost">기본값</button><button class="btn primary" style="opacity:.5">저장</button></div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/set-shortcuts.png" alt="환경설정 — 단축키: 명령별 키 바인딩 목록·녹화·충돌 경고" />
         <div class="shot-cap"><span class="n">①</span> 녹화 중인 행에 키를 누르면 캡처됩니다. 고정 단축키(<kbd>Ctrl</kbd>+<kbd>C</kbd> 복사 등)와 겹치면 빨강 + 저장 비활성.</div>
       </div>
     </figure>
@@ -197,53 +134,15 @@
     <h2 class="sec" id="menu"><span class="hash"></span> 햄버거 메뉴 · 정보(About)</h2>
     <p>타이틀바 왼쪽 위 <span class="i" data-icon="menu"></span> 햄버거를 누르면 <b>설정</b>과 <b>정보</b>가 뜹니다. 오른쪽 <span class="i" data-icon="contrast"></span> 버튼은 테마를 dark → midnight → light로 순환합니다.</p>
     <figure class="fig">
-      <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">타이틀바 햄버거 메뉴</span></div>
-        <div class="shot-stage" style="padding:0;min-height:180px">
-          <div class="titlebar">
-            <button class="titlebar-btn" data-icon="menu" style="width:40px"></button>
-            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
-            <div class="titlebar-spaces">
-              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
-              <div class="space-chip"><span class="space-chip-num">2</span> docs</div>
-            </div>
-            <span class="titlebar-title"></span>
-            <div class="titlebar-actions">
-              <button class="titlebar-btn" title="테마 순환 (dark → midnight → light)" data-icon="contrast"></button>
-            </div>
-            <div class="titlebar-controls">
-              <button class="titlebar-btn" data-icon="window-minimize"></button>
-              <button class="titlebar-btn" data-icon="window-maximize"></button>
-              <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
-            </div>
-          </div>
-          <div class="ctx-menu" style="position:absolute;left:8px;top:36px;min-width:170px;box-shadow:var(--shadow-pop)">
-            <button class="ctx-item"><span class="i dim" data-icon="settings" style="vertical-align:-.2em"></span> 설정</button>
-            <button class="ctx-item"><span class="i dim" data-icon="info" style="vertical-align:-.2em"></span> 정보</button>
-          </div>
-        </div>
+      <div class="shot" style="max-width:420px">
+        <img class="shot-img" src="./assets/shots/menu-hamburger.png" alt="타이틀바 햄버거(☰) 메뉴 — 설정·정보" />
         <div class="shot-cap"><span class="n">①</span> ☰ → <b>설정</b> / <b>정보</b> · 오른쪽 <span class="i dim" data-icon="contrast"></span> 테마 순환.</div>
       </div>
     </figure>
     <p><b>정보(About)</b>는 브랜드·버전·제작자와 오픈소스 라이선스 목록을 보여줍니다. 라이선스는 빌드 때 자동으로 모이고, 기본은 접혀 있어 필요할 때 펼칩니다.</p>
     <figure class="fig">
-      <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">정보 — Orch term</span></div>
-        <div class="shot-stage" style="height:240px">
-          <div class="modal-overlay">
-            <div class="modal-box" style="width:400px">
-              <div class="modal-head"><span class="i" data-icon="info"></span><h3>정보</h3></div>
-              <div class="modal-body">
-                <div class="about-head">
-                  <span class="about-glyph">O</span>
-                  <span class="about-meta"><b>Orch term</b><span class="v">v0.2.0</span><span class="by">제작 · Zendy Kim</span></span>
-                  <button class="btn sm" style="margin-left:auto" title="버전 복사"><span class="i" data-icon="copy" style="vertical-align:-.2em"></span> 복사</button>
-                </div>
-                <div class="lic-toggle"><span class="tw">▸</span> 오픈소스 라이선스 <span class="cnt">npm + cargo · 펼치기</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="shot" style="max-width:560px">
+        <img class="shot-img" src="./assets/shots/menu-about.png" alt="정보(About) 모달 — Orch term v0.2.2·제작자·Check for Updates·오픈소스 라이선스" />
         <div class="shot-cap"><span class="n">①</span> 버전 <span class="i dim" data-icon="copy"></span> 복사 · 라이선스 목록은 토글로 펼침.</div>
       </div>
     </figure>

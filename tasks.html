@@ -62,7 +62,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -96,31 +96,8 @@
         <div class="step-h"><span class="ic" data-icon="plus-small"></span> + 토글로 입력 펼치기</div>
         <figure class="fig">
           <div class="shot">
-            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">할 일 — 새 항목 작성</span></div>
-            <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
-              <div class="tk-panel">
-                <div class="tk-head"><span class="i" data-icon="tasks" style="color:var(--accent)"></span> 할 일 <span class="sp"></span><button class="iconbtn" data-icon="refresh-alt" title="새로고침"></button></div>
-                <div class="tk-tabs">
-                  <span class="tk-tab active">할 일 <b>3</b></span>
-                  <span class="tk-tab">완료 5</span>
-                  <span class="tk-search"><span class="i" data-icon="search-alt"></span> 검색</span>
-                  <span class="tk-add open" data-icon="plus-small" title="입력 접기"></span>
-                </div>
-                <div class="tk-compose">
-                  <input class="ci" value="SSH 터널 e2e 스모크 돌리기" readonly />
-                  <input class="ci memo" value="메모 — WSL2에서 -L/-D 둘 다 (Shift+Enter 줄바꿈)" readonly />
-                  <div class="crow">
-                    <span class="due"><span class="i" data-icon="calendar"></span> 6/30 (월)</span>
-                    <span class="sp"></span>
-                    <button class="btn sm">취소</button><button class="btn sm primary">추가</button>
-                  </div>
-                </div>
-                <div class="tk-row"><span class="tk-check"></span><span class="tk-b"><span class="tk-t">볼트 실서버 e2e 스모크</span><span class="tk-m"><span class="due urgent"><span class="i" data-icon="calendar"></span> 어제 (지남)</span><span class="badge-memo"><span class="i" data-icon="note"></span> 메모</span></span></span></div>
-                <div class="tk-row"><span class="tk-check"></span><span class="tk-b"><span class="tk-t">포트 포워딩 터널 문서화</span><span class="tk-m"><span class="due"><span class="i" data-icon="calendar"></span> 7/2 (수)</span></span></span></div>
-                <div class="tk-foot"><span class="i" data-icon="calendar"></span> 6월 · 마감 2건</div>
-              </div>
-            </div>
-            <div class="shot-cap"><span class="n">①</span> + 토글로 펼친 입력 영역. <span class="n">②</span> 마감 지난 항목은 <b style="color:var(--danger)">빨강(긴급)</b>, 메모가 있으면 <span class="i dim" data-icon="note"></span> 표시.</div>
+            <img class="shot-img" src="./assets/shots/tasks.png" alt="할 일 보드 — 새 항목 작성(제목·메모·마감)·할 일 목록·하단 마감 달력" />
+            <div class="shot-cap"><span class="n">①</span> + 토글로 펼친 입력 영역(제목·메모·마감). <span class="n">②</span> 하단 달력으로 선택일·마감일을 한눈에 봅니다.</div>
           </div>
         </figure>
       </li>

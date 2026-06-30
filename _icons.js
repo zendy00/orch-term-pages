@@ -54,6 +54,12 @@ const ICONS = {
   // git-branch: from src/explorer.ts (ICON_BRANCH) — footer branch glyph (3 nodes)
   "git-branch": '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="8" r="2.4"/><path d="M6 7.4v9.2M18 10.4c0 3.2-4.6 4-8.4 4.4"/></svg>',
 
+  // ── docs 사이트 전용 글리프(앱 src에 1:1 대응 없음 — 실샷 교체로 검증) ──
+  // sessions: 사이드바 세션 모드(이어가기) 글리프 — 되감기 화살표 + 시계
+  "sessions": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.6a9 9 0 1 0 3-3.4M3 1.5v4.2h4.2"/><path d="M12 7.5V12l3 1.9"/></svg>',
+  // agents: 오케스트레이션 노드 그래프(_nav.js orchestration 글리프 재사용)
+  "agents": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2v4.3M12 11.5L6.4 17M12 11.5L17.6 17"/></svg>',
+
   // ── Editor (src/editor.ts) ──
   // blame: from src/editor.ts (ICON_BLAME) — lines + commit dot (git blame toggle)
   "blame": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="13" y2="12"/><line x1="4" y1="18" x2="11" y2="18"/><circle cx="18" cy="15" r="3"/></svg>',

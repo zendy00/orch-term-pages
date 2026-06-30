@@ -57,7 +57,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -84,55 +84,7 @@
 
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">사이드바 — Search 뷰</span></div>
-        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
-          <div class="explorer-col" style="width:312px;flex:none">
-            <div class="explorer" style="height:404px">
-              <div class="explorer-header"><span class="i dim" data-icon="search" style="width:14px"></span><span class="proj">검색</span><button class="iconbtn" title="전체 비우기" data-icon="trash-alt" style="margin-left:auto"></button></div>
-
-              <div class="sv-controls">
-                <div class="sv-input">
-                  <span class="si" data-icon="search"></span>
-                  <span class="val">channel_open</span><span class="caret"></span>
-                  <button class="sv-opt" title="대소문자 구분">Aa</button>
-                  <button class="sv-opt on" title="정규식">.*</button>
-                  <button class="sv-go" data-icon="search-alt" title="검색 (Enter)"></button>
-                </div>
-                <div class="sv-details">
-                  <div class="sv-field"><span class="k">include</span><span class="v">src/**/*.rs</span></div>
-                  <div class="sv-field"><span class="k">exclude</span><span class="v">**/target/**</span></div>
-                  <label class="sv-check"><span class="box">✓</span> .gitignore 무시 포함</label>
-                </div>
-                <div class="sv-toggle">세부 옵션 <span class="i dim" data-icon="chevron-down" style="width:12px"></span></div>
-              </div>
-
-              <div class="sv-tabs">
-                <span class="sv-tab active">channel_open <span class="ct">37</span> <span class="x">×</span></span>
-                <span class="sv-tab">TODO <span class="ct">12</span> <span class="x">×</span></span>
-                <span class="sv-spin">⟳</span>
-              </div>
-
-              <div class="explorer-body">
-                <div class="tree-row selected"><span class="tw" data-icon="chevron-down"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">src/ssh/tunnel.rs</span><span class="cnt">5</span></div>
-                <div class="sv-match"><span class="ln">142</span><span class="mx">    fn <span class="sv-hit">channel_open</span>_direct_tcpip(&self) {</span></div>
-                <div class="sv-match"><span class="ln">163</span><span class="mx">        let ch = self.<span class="sv-hit">channel_open</span>_session()?;</span></div>
-                <div class="sv-match"><span class="ln">209</span><span class="mx">        // <span class="sv-hit">channel_open</span> 은 &self 차용이라 동시성 안전</span></div>
-                <div class="tree-row"><span class="tw" data-icon="chevron-down"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">src/ssh/session.rs</span><span class="cnt">2</span></div>
-                <div class="sv-match"><span class="ln">88</span><span class="mx">    pub async fn <span class="sv-hit">channel_open</span>(&self) -&gt; Result&lt;Ch&gt; {</span></div>
-                <div class="sv-match"><span class="ln">91</span><span class="mx">        self.handle.<span class="sv-hit">channel_open</span>_direct_tcpip(&t)</span></div>
-                <div class="tree-row"><span class="tw" data-icon="chevron-down"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">tests/tunnel_test.rs</span><span class="cnt">1</span></div>
-                <div class="sv-match"><span class="ln">24</span><span class="mx">    let c = sess.<span class="sv-hit">channel_open</span>().await.unwrap();</span></div>
-              </div>
-              <div class="sv-trunc">⟳ 검색 진행 중… (스트리밍 누적)</div>
-            </div>
-            <div class="sidebar-modebar">
-              <button title="Files" data-icon="folder"></button>
-              <button class="active" title="Search" data-icon="search"></button>
-              <button title="Git" data-icon="git"></button>
-              <span class="sp"></span>
-            </div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/search.png" alt="전체 파일 검색 — 검색어·Aa·정규식 토글·검색 히스토리 칩·파일별 줄 매치(하이라이트)" />
         <div class="shot-cap"><span class="n">①</span> 검색어 + <code>Aa</code>·<code>.*</code> 토글, 세부 옵션의 include/exclude glob. <span class="n">②</span> 파일별 그룹 + 줄별 매치 — <b style="color:var(--accent)">하이라이트</b> 클릭 시 에디터로 점프.</div>
       </div>
     </figure>
@@ -152,28 +104,8 @@
     <p>결과의 줄을 클릭하면 해당 파일을 에디터 탭에서 열고, 그 줄/열로 스크롤해 매치를 선택합니다. 같은 파일이면 이미 열려 있는 탭을 재사용합니다.</p>
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">매치 클릭 → 에디터 reveal</span><span class="badge phase">tunnel.rs:142</span></div>
-        <div class="shot-stage" style="padding:18px">
-          <div class="pane active-pane" style="height:236px">
-            <div class="pane-tabbar">
-              <div class="pane-tabs">
-                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">tunnel.rs</span></div>
-              </div>
-              <div class="pane-actions"><button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button><button class="pane-act" title="닫기" data-icon="close"></button></div>
-            </div>
-            <div class="pane-content">
-              <div class="sv-code">
-                <div class="sv-cl"><span class="gut">140</span><span><span class="kw">impl</span> Tunnel {</span></div>
-                <div class="sv-cl"><span class="gut">141</span><span>    <span class="cmt">/// -L / -D direct-tcpip 리스너</span></span></div>
-                <div class="sv-cl rev"><span class="gut">142</span><span>    <span class="kw">fn</span> <span class="sv-sel">channel_open</span>_direct_tcpip(&<span class="kw">self</span>) {</span></div>
-                <div class="sv-cl"><span class="gut">143</span><span>        <span class="kw">let</span> addr = <span class="str">"127.0.0.1"</span>;</span></div>
-                <div class="sv-cl"><span class="gut">144</span><span>        bind(addr)?;</span></div>
-                <div class="sv-cl"><span class="gut">145</span><span>    }</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 클릭한 매치 줄(142)이 강조되고 검색어가 <b style="color:var(--text-strong)">선택</b>됩니다. <span class="n">②</span> 같은 파일이면 기존 탭 재사용, 없으면 새 탭.</div>
+        <img class="shot-img" src="./assets/shots/search-match.png" alt="매치 클릭 → 에디터 reveal — CLAUDE.md가 열리고 매치 줄(50)이 강조됨" />
+        <div class="shot-cap"><span class="n">①</span> 매치를 클릭하면 그 파일이 에디터로 열리고 해당 줄이 강조됩니다. <span class="n">②</span> 같은 파일이면 기존 탭 재사용, 없으면 새 탭.</div>
       </div>
     </figure>
 

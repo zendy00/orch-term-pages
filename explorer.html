@@ -36,7 +36,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -63,41 +63,8 @@
 
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">탐색기 — 프로젝트 전환</span></div>
-        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
-          <div class="explorer" style="width:236px;height:296px;position:relative">
-            <div class="explorer-header">
-              <span class="tree-icon" data-icon="folder" style="color:var(--accent)"></span>
-              <span class="proj">orch-term</span>
-              <span class="tw" style="margin-left:2px">▾</span>
-              <span style="flex:1"></span>
-              <button class="iconbtn" title="프로젝트 추가" data-icon="add" style="width:20px;height:18px"></button>
-            </div>
-            <div class="exp-search"><span class="i dim" data-icon="search" style="color:var(--text-faint)"></span><input placeholder="파일 검색…" /></div>
-            <div class="explorer-body">
-              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src</span></div>
-              <div class="tree-row" style="padding-left:24px"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">workspace</span></div>
-              <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">explorer.ts</span></div>
-              <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">terminal.ts</span></div>
-              <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src-tauri</span></div>
-              <div class="tree-row"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">package.json</span></div>
-            </div>
-            <div class="explorer-footer">
-              <span class="explorer-foot-git"><span data-icon="git-branch"></span> worktree-ssh-core</span>
-              <span class="explorer-foot-sp">128 항목</span>
-            </div>
-            <!-- 열린 프로젝트 드롭다운 -->
-            <div class="shell-dropdown" style="top:25px;left:8px;min-width:196px;z-index:8">
-              <div class="shell-menu-title">프로젝트</div>
-              <div class="shell-item"><button class="shell-open" style="background:var(--accent-soft);color:var(--text-strong)"><span class="shell-menu-ic" data-icon="folder"></span> orch-term</button><button class="shell-default" disabled>현재</button></div>
-              <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" data-icon="folder"></span> zendy-erp</button></div>
-              <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" data-icon="folder"></span> docs-site</button></div>
-              <div class="shell-sep"></div>
-              <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" data-icon="add"></span> 프로젝트 추가…</button></div>
-            </div>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 헤더 이름을 클릭하면 드롭다운이 열립니다 — 강조된 항목이 현재 활성 루트. <span class="n">②</span> <kbd>↑</kbd><kbd>↓</kbd> 이동 · <kbd>Enter</kbd> 선택 · <kbd>Esc</kbd> 닫기.</div>
+        <img class="shot-img" src="./assets/shots/explorer.png" alt="탐색기 패널 — 프로젝트 헤더·파일 검색바·파일 트리·하단 Git 브랜치" />
+        <div class="shot-cap"><span class="n">①</span> 헤더의 프로젝트 이름을 클릭하면 드롭다운으로 등록된 루트를 전환합니다(+ 로 새 루트). <span class="n">②</span> 검색바는 하위 폴더까지 파일명 부분일치로 찾습니다.</div>
       </div>
     </figure>
 
@@ -254,32 +221,7 @@
 
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">탐색기 — 컨텍스트 메뉴</span></div>
-        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
-          <div class="explorer" style="width:248px;height:296px;position:relative">
-            <div class="explorer-header"><span class="tree-icon" data-icon="folder" style="color:var(--accent)"></span><span class="proj">orch-term</span></div>
-            <div class="explorer-body">
-              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src-tauri</span></div>
-              <div class="tree-row selected" style="padding-left:24px"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src</span></div>
-              <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">docs</span></div>
-              <div class="tree-row" style="height:88px"></div>
-            </div>
-            <div class="explorer-footer"><span class="explorer-foot-git"><span data-icon="git-branch"></span> worktree-ssh-core</span></div>
-            <!-- 컨텍스트 메뉴 -->
-            <div class="ctx-menu" style="top:54px;left:74px;z-index:8">
-              <button class="ctx-item">잘라내기</button>
-              <button class="ctx-item">복사</button>
-              <button class="ctx-item">붙여넣기</button>
-              <button class="ctx-item">복제</button>
-              <div class="ctx-sep"></div>
-              <button class="ctx-item"><span class="i" data-icon="terminal" style="vertical-align:-.18em"></span> 터미널에서 열기</button>
-              <button class="ctx-item">탐색기에서 보기</button>
-              <button class="ctx-item">경로 복사</button>
-              <div class="ctx-sep"></div>
-              <button class="ctx-item">모두 접기</button>
-            </div>
-          </div>
-        </div>
+        <img class="shot-img" src="./assets/shots/explorer-ctx.png" alt="탐색기 빈 영역 우클릭 컨텍스트 메뉴 — 새 파일·새 폴더·터미널에서 열기·붙여넣기(비활성)·모두 접기" style="max-width:224px;display:block;margin:0 auto;border-radius:var(--r-md)" />
         <div class="shot-cap"><span class="n">①</span> <b>폴더</b> 우클릭 = 그 폴더에서 · <b>빈 영역</b> 우클릭 = 프로젝트 루트에서 새 터미널.</div>
       </div>
     </figure>

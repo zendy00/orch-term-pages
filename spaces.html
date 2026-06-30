@@ -22,7 +22,7 @@
   <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <a class="brand" href="index.html">
     <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
-    <span class="wm">Orch <b>term</b></span><span class="tag">docs</span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
   </a>
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
@@ -49,25 +49,8 @@
 
     <figure class="fig">
       <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — 타이틀바 · Space 칩</span></div>
-        <div class="shot-stage" style="padding:0">
-          <div class="titlebar">
-            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
-            <div class="titlebar-spaces">
-              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
-              <div class="space-chip"><span class="chip-hue" style="background:var(--accent)"></span><span class="space-chip-num">2</span> docs</div>
-              <div class="space-chip"><span class="chip-hue" style="background:var(--success)"></span><span class="space-chip-num">3</span> 릴리즈</div>
-              <button class="space-chip-add">＋</button>
-            </div>
-            <span class="titlebar-title"></span>
-            <div class="titlebar-controls">
-              <button class="titlebar-btn" data-icon="window-minimize"></button>
-              <button class="titlebar-btn" data-icon="window-maximize"></button>
-              <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
-            </div>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 활성 칩은 액센트 밑줄로 떠 보입니다. <span class="n">②</span> 칩 앞 색 사각형은 <b>9색 hue</b> 틴트, 끝의 <b>＋</b>는 새 Space.</div>
+        <img class="shot-img" src="./assets/shots/spaces.png" alt="타이틀바의 Space 칩(1·2·3)과 ＋ 버튼 — 각 Space는 독립 레이아웃" />
+        <div class="shot-cap"><span class="n">①</span> 활성 칩은 액센트로 떠 보입니다(상단 Space 1·2·3). <span class="n">②</span> 끝의 <b>＋</b>로 새 Space를 만들고, 각 Space는 독립 레이아웃을 가집니다.</div>
       </div>
     </figure>
 
@@ -99,26 +82,8 @@
     <p>칩을 <b>우클릭</b>하면 <b>이름 변경 / 색상 변경 / 복제 / 닫기</b> 메뉴가 열립니다. 이름·색은 더블클릭과 같은 인라인 편집기를 엽니다.</p>
 
     <figure class="fig">
-      <div class="shot">
-        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Space 칩 — 우클릭 메뉴</span></div>
-        <div class="shot-stage" style="padding:0;min-height:200px">
-          <div class="titlebar">
-            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
-            <div class="titlebar-spaces">
-              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
-              <div class="space-chip"><span class="chip-hue" style="background:var(--accent)"></span><span class="space-chip-num">2</span> docs</div>
-              <button class="space-chip-add">＋</button>
-            </div>
-            <span class="titlebar-title"></span>
-          </div>
-          <div class="ctx-menu" style="position:absolute;top:34px;left:96px">
-            <button class="ctx-item"><span class="i" data-icon="edit"></span> 이름 변경</button>
-            <button class="ctx-item"><span class="chip-hue" style="background:var(--accent);display:inline-block;vertical-align:middle;margin-right:7px"></span>색상 변경</button>
-            <button class="ctx-item"><span class="i" data-icon="copy-alt"></span> 복제</button>
-            <div class="ctx-sep"></div>
-            <button class="ctx-item danger"><span class="i" data-icon="close"></span> 닫기</button>
-          </div>
-        </div>
+      <div class="shot" style="max-width:420px">
+        <img class="shot-img" src="./assets/shots/menu-space-ctx.png" alt="Space 칩 우클릭 메뉴 — 이름변경·색상변경·복제·닫기" />
         <div class="shot-cap"><span class="n">①</span> 이름·색은 더블클릭과 같은 인라인 편집기. <span class="n">②</span> <b>닫기</b>는 위험 항목(<span style="color:var(--danger)">빨강</span>).</div>
       </div>
     </figure>
