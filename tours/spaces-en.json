@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-spaces-en",
+  "name": "Spaces tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/spaces.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Spaces",
+      "description": "A Space is an independent layout you switch to wholesale, like a tmux or i3 workspace. Each Space keeps its own split tree and file Explorer.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Spaces", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Spaces", "Switchable layouts", "Core features · Spaces"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Spaces",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "chips",
+      "name": "Space chips",
+      "description": "The Space list lines up as chips in the titlebar. The active chip is highlighted with an accent underline, and the ＋ at the end opens a new Space.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#chips" },
+        "layer2": { "kind": "text-parent", "text": "Space chips — switch from the titlebar", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Space chips — switch from the titlebar", "The Space list lines up as chips", "new Space"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-chips",
+          "text": "2. Space chips",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "switch",
+      "name": "Switching",
+      "description": "Switch by clicking a chip or pressing Ctrl+1‥9. The terminals and browsers in the Space you leave stay alive, so output and scrollback are preserved.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#switch" },
+        "layer2": { "kind": "text-parent", "text": "Switching (Ctrl+1‥9)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Switching (Ctrl+1‥9)", "swaps the whole layout", "Double-click a chip"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-switch",
+          "text": "3. Switching",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "layout",
+      "name": "Split tree · Explorer",
+      "description": "Each Space wholly owns its split tree, active pane, and Explorer. Even the collapse, width, and sidebar mode are remembered per Space.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#layout" },
+        "layer2": { "kind": "text-parent", "text": "Per-Space split tree · Explorer", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Per-Space split tree · Explorer", "Independent split tree", "Per-Space Explorer"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-layout",
+          "text": "4. Split tree · Explorer",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "menu",
+      "name": "Right-click menu",
+      "description": "Right-click a chip for Rename, Change color, Duplicate, and Close. Duplicate copies the whole Space into a new one and switches to it right away.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#menu" },
+        "layer2": { "kind": "text-parent", "text": "Right-click menu · full duplicate", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Right-click menu · full duplicate", "Rename / Change color / Duplicate / Close", "Running processes are not copied"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-menu",
+          "text": "5. Right-click menu",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "persist",
+      "name": "Persistence · restore",
+      "description": "Every time you touch a tab, split, or project, the state is saved, so the layout is restored on relaunch. Terminals remember only their directory.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#persist" },
+        "layer2": { "kind": "text-parent", "text": "Live persistence · restore", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Live persistence · restore", "Structure only is saved", "Custom tab names persist"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-persist",
+          "text": "6. Persistence · restore",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "done",
+      "name": "Completion notification",
+      "description": "When a task in a background Space finishes, a green dot blinks on its chip to let you know. This is still a coming-soon feature.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#done" },
+        "layer2": { "kind": "text-parent", "text": "Background completion notification", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Background completion notification", "green dot", "This notification is a coming-soon feature"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-done",
+          "text": "7. Completion notification",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

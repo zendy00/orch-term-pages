@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-tabs-panes-en",
+  "name": "Tabs · Panes tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/tabs-panes.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Tabs · Panes overview",
+      "description": "Introduces the core idea of splitting one screen horizontally and vertically to arrange multiple tabs. We then walk through splitting, maximizing, and naming or coloring tabs.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Tabs · Panes", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Core features · Tabs · Panes", "Tabs · Panes", "Split one screen horizontally and vertically"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Tabs · Panes overview",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "split",
+      "name": "Pane splitting",
+      "description": "Split the screen horizontally or vertically from the pane header buttons or a tab-bar drop, opening a new terminal. Move between panes with Ctrl+Alt+arrow keys.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#split" },
+        "layer2": { "kind": "text-parent", "text": "Pane splitting", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Pane splitting", "split down", "split right"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-split",
+          "text": "2. Pane splitting",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "grid",
+      "name": "Grid tiling · Merge all",
+      "description": "Covers grid tiling, which spreads a pane of 2+ tabs into a near-square grid, and merge all, which folds every pane into the top-left one.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#grid" },
+        "layer2": { "kind": "text-parent", "text": "Grid tiling · Merge all", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Grid tiling · Merge all", "Grid tiling", "Merge all"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-grid",
+          "text": "3. Grid tiling · Merge",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "maximize",
+      "name": "Pane maximize (Shift+Esc)",
+      "description": "Press Shift+Esc to enlarge the active pane like a glass panel. It rises with a frosted-blur effect while the workspace behind is dimmed.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#maximize" },
+        "layer2": { "kind": "text-parent", "text": "Pane maximize (Shift+Esc)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Pane maximize (Shift+Esc)", "glassmorphism", "Restore"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-maximize",
+          "text": "4. Pane maximize",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "rename",
+      "name": "Unified tab name + color editing",
+      "description": "Double-click a tab to open one pop-up with a name field and a 9-color picker. It edits the label of a terminal, editor, or browser by kind.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#rename" },
+        "layer2": { "kind": "text-parent", "text": "Unified tab name + color editing", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Unified tab name + color editing", "name field + a 9-color picker", "Double-click"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-rename",
+          "text": "5. Name + color",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "color",
+      "name": "Tab color (hue)",
+      "description": "Give a tab one of 9 colors and it appears as a bottom-border tint under the label, persisting across restarts. It shares the Spaces palette.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#color" },
+        "layer2": { "kind": "text-parent", "text": "Tab color (hue)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Tab color (hue)", "bottom-border tint", "Default"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-color",
+          "text": "6. Tab color",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "close",
+      "name": "Closing tabs · right-click menu",
+      "description": "Close the active tab with Ctrl+Shift+W, and right-click for Rename, Change color, Close, Close other tabs, and Close all.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#close" },
+        "layer2": { "kind": "text-parent", "text": "Closing tabs · right-click menu", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Closing tabs · right-click menu", "Close other tabs", "Close all"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-close",
+          "text": "7. Closing tabs",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "Keyboard shortcuts",
+      "description": "A single table collecting this page's key shortcuts: maximize a pane, close a tab, move between tabs and panes, and edit name + color.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Toggle maximize of the active pane", "Move to adjacent pane"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "8. Keyboard shortcuts",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-changelog-ko",
+  "name": "변경 이력 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/changelog.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "변경 이력 (Changelog)",
+      "description": "버전별 새 기능·수정 내역을 타임라인으로 정리한 페이지입니다. 자동 업데이트가 켜져 있으면 새 버전이 올라올 때 타이틀바 배너로 알려줍니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "변경 이력 (Changelog)", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["릴리즈 · 변경 이력", "변경 이력 (Changelog)", "버전별 새 기능·수정 내역입니다."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 변경 이력",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v03x",
+      "name": "0.3.0 릴리즈",
+      "description": "0.3.0 릴리즈 묶음입니다. 다국어(한/영), 사이드바 세션 목록으로 이어가기, 탭 바둑판 분할이 추가됐습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v03x" },
+        "layer2": { "kind": "text-parent", "text": "0.3.0 — 다국어 · 세션 목록 · 패널 타일링", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["0.3.0 — 다국어 · 세션 목록 · 패널 타일링", "v0.3.0", "다국어(한국어·영어)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v03x",
+          "text": "2. 0.3.0 릴리즈",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v02x",
+      "name": "0.2.x 안정화",
+      "description": "0.2.x 안정화 릴리즈입니다. SSH/SFTP·자격증명 볼트 수정과 인앱 브라우저 미러 토글이 담겼습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v02x" },
+        "layer2": { "kind": "text-parent", "text": "0.2.x — 안정화 · SSH · 미러", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["0.2.x — 안정화 · SSH · 미러", "v0.2.2", "macOS 인앱 브라우저 미러 설정 토글 + 기본 ON"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v02x",
+          "text": "3. 0.2.x 안정화",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v013x",
+      "name": "0.1.30~0.1.37",
+      "description": "0.1.30~0.1.37 릴리즈입니다. 전체 검색, Git 패널 개편, AI 게이트웨이 감사 로그가 들어왔습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v013x" },
+        "layer2": { "kind": "text-parent", "text": "0.1.30 ~ 0.1.37 — 검색 · Git 패널 · 게이트웨이", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["0.1.30 ~ 0.1.37 — 검색 · Git 패널 · 게이트웨이", "v0.1.37", "검색 세부 옵션 접기 토글 + classic 포커스 링"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v013x",
+          "text": "4. 0.1.30~0.1.37",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v012x",
+      "name": "0.1.22~0.1.29",
+      "description": "0.1.22~0.1.29 릴리즈입니다. 첫 공개 릴리즈부터 멀티에이전트, macOS 포팅, 자동 업데이트까지의 변화입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v012x" },
+        "layer2": { "kind": "text-parent", "text": "0.1.22 ~ 0.1.29 — 멀티에이전트 · macOS · 자동 업데이트", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["0.1.22 ~ 0.1.29 — 멀티에이전트 · macOS · 자동 업데이트", "v0.1.29", "에디터 폰트 줌(Cmd+=/−/0) + 단축키 순수화·테스트"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v012x",
+          "text": "5. 0.1.22~0.1.29",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

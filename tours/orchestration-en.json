@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-orchestration-en",
+  "name": "Agent orchestration tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/orchestration.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Agent orchestration",
+      "description": "The AI you're talking to spins up other AIs as workers and has them collaborate over multiple turns while keeping context. See the commander–worker model at a glance.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Agent orchestration", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Flagship features · control plane", "MCP A2A", "A commander–worker model lets you run a whole team from one place."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Agent orchestration",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "concept",
+      "name": "What it does",
+      "description": "The commander AI launches workers in interactive TUI tabs and exchanges messages over a bidirectional 1:1 channel. No one can touch a worker that isn't their own session.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#concept" },
+        "layer2": { "kind": "text-parent", "text": "What it does", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["What it does", "interactive TUI tabs", "bidirectional 1:1 channel"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-concept",
+          "text": "2. What it does",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "start",
+      "name": "Getting started",
+      "description": "Turn on orchestration in settings and restart, then delegate in plain language from the commander tab so a worker tab opens and replies.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#start" },
+        "layer2": { "kind": "text-parent", "text": "Getting started — put the commander to work", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Getting started — put the commander to work", "Turn on orchestration", "Delegate from the commander tab"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-start",
+          "text": "3. Getting started",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "dashboard",
+      "name": "Supervisor dashboard",
+      "description": "Open the supervisor dashboard from the command palette to gather the current Space's live sessions and jump, stop, or close them in one place.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dashboard" },
+        "layer2": { "kind": "text-parent", "text": "Supervisor dashboard (one per Space)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Supervisor dashboard (one per Space)", "Orchestration · Space 1", "● 2 sessions"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-dashboard",
+          "text": "4. Supervisor dashboard",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tools",
+      "name": "What gets exchanged",
+      "description": "These are the MCP tools the commander AI calls behind natural language — list_agents, open_session, send, and close_session.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#tools" },
+        "layer2": { "kind": "text-parent", "text": "What gets exchanged", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["What gets exchanged", "list_agents", "open_session"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tools",
+          "text": "5. What gets exchanged",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "security",
+      "name": "Safe defaults",
+      "description": "Local-only binding, one-time tokens, off by default, and worker safe mode explain orchestration's safe defaults.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#security" },
+        "layer2": { "kind": "text-parent", "text": "Safe defaults", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Safe defaults", "Local (127.0.0.1) only", "Worker safe mode on by default"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-security",
+          "text": "6. Safe defaults",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-workstation-en",
+  "name": "Multi-agent workstation tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/workstation.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Multi-agent workstation",
+      "description": "Spread terminal, editor, and browser across a binary split tree in one window, and run a different AI in each pane.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "멀티에이전트 워크스테이션", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["멀티에이전트 워크스테이션", "대형 기능 · 멀티에이전트 워크스테이션", "split tree"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Workstation",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "what",
+      "name": "One window's structure",
+      "description": "Each cell you carve out by splitting the screen is a pane, and any pane can be split in two again.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#what" },
+        "layer2": { "kind": "text-parent", "text": "한 창의 구조", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["한 창의 구조", "패널(pane)", "이진 분할 트리"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-what",
+          "text": "2. One window's structure",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "kinds",
+      "name": "Three tab kinds",
+      "description": "One pane's tab bar can mix all three tab kinds, and only the active tab shows in the body.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#kinds" },
+        "layer2": { "kind": "text-parent", "text": "탭 종류 3종 — 한 패널에 섞어서", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["탭 종류 3종 — 한 패널에 섞어서", "터미널", "브라우저"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-kinds",
+          "text": "3. Three tab kinds",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "split",
+      "name": "Split · maximize",
+      "description": "Use the split buttons to divide a pane, and Shift+Esc maximizes the active pane.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#split" },
+        "layer2": { "kind": "text-parent", "text": "분할 · 패널 최대화", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["분할 · 패널 최대화", "분할 버튼", "드롭 영역"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-split",
+          "text": "4. Split · maximize",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sidebar",
+      "name": "Left sidebar",
+      "description": "The mode bar switches Explorer, Search, Git, and To-dos, and clicking a file opens it as an editor tab.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "h2#sidebar" },
+        "layer2": { "kind": "text-parent", "text": "좌측 사이드바 ↔ 본문 패널", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["좌측 사이드바 ↔ 본문 패널", "사이드바 카드 + 모드바", "탐색기 · 검색 · Git · 할일"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sidebar",
+          "text": "5. Left sidebar",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "multiagent",
+      "name": "Why multi-agent",
+      "description": "Each pane is an independent shell, so you can run claude, codex, and agy at the same time on one screen.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#multiagent" },
+        "layer2": { "kind": "text-parent", "text": "왜 멀티에이전트 — 한눈에", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["왜 멀티에이전트 — 한눈에", "독립 셸", "claude"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-multiagent",
+          "text": "6. Why multi-agent",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "keys",
+      "name": "Shortcuts",
+      "description": "Shortcuts for panes and tabs — maximize with Shift+Esc and move pane focus with Ctrl+Alt+arrows.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#keys" },
+        "layer2": { "kind": "text-parent", "text": "단축키 (패널 · 탭)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["단축키 (패널 · 탭)", "활성 패널 최대화 / 복원(토글)", "Shift"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-keys",
+          "text": "7. Shortcuts",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    }
+  ]
+}

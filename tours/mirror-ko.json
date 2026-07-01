@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-mirror-ko",
+  "name": "CDP 브라우저 미러 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/mirror.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "CDP 브라우저 미러",
+      "description": "대화 중인 AI가 웹을 탐색하면 그 모든 동작이 터미널 옆 인앱 브라우저 패널에 실시간으로 비칩니다. 앱 화면은 에이전트에게 보이지 않아 실수로 조작되지 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "CDP 브라우저 미러", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["CDP 브라우저 미러", "대형 기능 · CDP 브라우저 미러", "터미널 옆 인앱 브라우저 패널"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 브라우저 미러",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "concept",
+      "name": "무엇을 하는가",
+      "description": "에이전트의 브라우저를 내 화면 안 진짜 패널로 만들어, 일하는 모습을 어깨너머로 보듯 실시간 관찰합니다. 앱 자신의 UI는 보이지도 잡히지도 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#concept" },
+        "layer2": { "kind": "text-parent", "text": "무엇을 하는가", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["무엇을 하는가", "내 화면 안의 진짜 패널", "앱 내장 미러"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-concept",
+          "text": "2. 무엇을 하는가",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "enable",
+      "name": "켜기",
+      "description": "dev는 npm run dev:app으로 미러가 항상 켜지고, 릴리즈는 설정에서 에이전트 브라우저 미러를 켠 뒤 앱을 재시작합니다. 상태바에 미러 :포트가 표시됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#enable" },
+        "layer2": { "kind": "text-parent", "text": "켜기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["켜기", "에이전트 브라우저 미러", "미러 :포트"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-enable",
+          "text": "3. 켜기",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "usage",
+      "name": "사용",
+      "description": "브라우저로 열어달라고 하면 에이전트가 연 페이지가 정식 인앱 탭으로 열리고, 이후 이동·클릭·입력이 패널에 실시간으로 보입니다. 끝나면 그 탭은 사용자가 이어서 씁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#usage" },
+        "layer2": { "kind": "text-parent", "text": "사용", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["사용", "정식 인앱 브라우저 탭", "Example Domain"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-usage",
+          "text": "4. 사용",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "limits",
+      "name": "한계 · 주의",
+      "description": "멀티 에이전트는 Space 단위로 분리되어 각자 자기 Space 패널만 봅니다. 미러를 켜면 인앱 브라우저가 별도 프로필을 써서, 일반 모드의 로그인·쿠키가 이어지지 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#limits" },
+        "layer2": { "kind": "text-parent", "text": "한계 · 주의", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["한계 · 주의", "멀티 에이전트는 Space 단위로 분리됩니다", "미러 모드는 브라우저 프로필이 분리됩니다"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-limits",
+          "text": "5. 한계 · 주의",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "reference",
+      "name": "참조",
+      "description": "프록시 포트, 켜기·끄기, 멀티 에이전트 등 핵심 값을 표로 정리했습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#reference" },
+        "layer2": { "kind": "text-parent", "text": "참조", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["참조", "프록시 포트", "미러 프로필"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-reference",
+          "text": "6. 참조",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

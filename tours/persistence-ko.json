@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-persistence-ko",
+  "name": "저장 · 백업 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/persistence.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "저장 · 백업",
+      "description": "설정과 스페이스, 할 일을 한 곳에 자동 저장하는 방식을 소개합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "저장 · 백업", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["그 외 · 시스템 · 저장 · 백업", "저장 · 백업", "설정·워크스페이스·할 일을 모두 한 곳에 자동 저장합니다."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 저장 · 백업",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sqlite",
+      "name": "한 파일에 전부 저장",
+      "description": "설정, 스페이스와 탭, 할 일까지 모든 상태가 단일 파일 하나에 담깁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#sqlite" },
+        "layer2": { "kind": "text-parent", "text": "한 파일에 전부 저장", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["한 파일에 전부 저장", "orchterm.db"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sqlite",
+          "text": "2. 한 파일에 전부",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "migrate",
+      "name": "이전 설정 자동 이관",
+      "description": "새 버전 첫 부팅 때 기존 설정이 새 저장소로 자동 이관됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#migrate" },
+        "layer2": { "kind": "text-parent", "text": "이전 설정 자동 이관", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["이전 설정 자동 이관", "settings.json.migrated"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-migrate",
+          "text": "3. 자동 이관",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "recovery",
+      "name": "자동 백업 · 복구",
+      "description": "부팅마다 백업을 남기고 검사해, 깨지면 정상 백업에서 자동 복구합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#recovery" },
+        "layer2": { "kind": "text-parent", "text": "자동 백업 · 복구", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["자동 백업 · 복구", "quick_check ✓"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-recovery",
+          "text": "4. 백업 · 복구",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "backup",
+      "name": "전체 백업 — 내보내기 · 가져오기",
+      "description": "설정 → 백업에서 전체를 한 파일로 내보내고, 가져오기는 재시작 때 적용됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#backup" },
+        "layer2": { "kind": "text-parent", "text": "전체 백업 — 내보내기 · 가져오기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["전체 백업 — 내보내기 · 가져오기", "설정 → 백업"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-backup",
+          "text": "5. 내보내기 · 가져오기",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "files",
+      "name": "데이터 폴더 파일",
+      "description": "데이터 폴더에 있는 저장 파일과 백업 파일의 역할을 한눈에 정리합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#files" },
+        "layer2": { "kind": "text-parent", "text": "데이터 폴더 파일", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["데이터 폴더 파일", "orchterm.db.bak.YYYY-MM-DD"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-files",
+          "text": "6. 데이터 폴더 파일",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

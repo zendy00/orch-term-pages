@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-tasks-ko",
+  "name": "할 일 보드 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/tasks.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "할 일 보드",
+      "description": "Space마다 독립된 to-do 보드입니다. 제목·메모·마감으로 할 일을 관리합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "할 일 보드", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["할 일 보드", "핵심 기능 · 할 일 보드", "Space마다 독립된 to-do 보드입니다."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 할 일 보드",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "할 일 패널 열기",
+      "description": "사이드바 할 일 아이콘이나 Ctrl+Shift+T로 엽니다. 보드는 현재 Space 전용입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "할 일 패널 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["할 일 패널 열기", "할 일", "현재 Space 전용이라"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. 패널 열기",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "compose",
+      "name": "새 할 일 — 제목 · 메모 · 마감",
+      "description": "탭 줄 우측 + 버튼으로 입력을 펼쳐 제목·메모·마감을 적습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#compose" },
+        "layer2": { "kind": "text-parent", "text": "새 할 일 — 제목 · 메모 · 마감", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["새 할 일 — 제목 · 메모 · 마감", "+ 토글로 입력 펼치기", "마감일 — 달력 팝업"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-compose",
+          "text": "3. 새 할 일",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "cards",
+      "name": "카드 — 완료 · 메모 · 액션",
+      "description": "각 카드에서 완료 토글과 마감·편집·복사·삭제 액션을 씁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#cards" },
+        "layer2": { "kind": "text-parent", "text": "카드 — 완료 · 메모 · 액션", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["카드 — 완료 · 메모 · 액션", "완료 토글", "포트 포워딩 터널 문서화"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-cards",
+          "text": "4. 카드",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tabs",
+      "name": "할일/완료 탭 · 검색 · 달력",
+      "description": "할일/완료 탭으로 나누고 단어로 검색하며 하단 달력으로 마감을 봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#tabs" },
+        "layer2": { "kind": "text-parent", "text": "할일/완료 탭 · 검색 · 달력", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["할일/완료 탭 · 검색 · 달력", "할일 / 완료 탭", "월 달력(하단)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tabs",
+          "text": "5. 탭 · 검색 · 달력",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키",
+      "description": "할 일 모드는 Ctrl+Shift+T, 메모 줄바꿈은 Shift+Enter입니다. 명령 팔레트로도 열 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["단축키", "할 일 모드 열기", "메모 줄바꿈 (작성 중)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "6. 단축키",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

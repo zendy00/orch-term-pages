@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-source-control-ko",
+  "name": "소스 컨트롤 (Git) 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/source-control.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "소스 컨트롤 개요",
+      "description": "사이드바 세 번째 모드인 Git 패널에서 스테이징·커밋·브랜치 그래프·blame을 한곳에서 다룬다는 걸 보여줍니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "소스 컨트롤 (Git)", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["핵심 기능 · 소스 컨트롤", "소스 컨트롤 (Git)", "사이드바 세 번째 모드"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 소스 컨트롤 개요",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "stage",
+      "name": "스테이징 · 커밋",
+      "description": "Ctrl+Shift+G로 열어 파일을 스테이징하고 메시지를 적어 커밋합니다. M·A·U·D 글자로 파일 상태를 구분합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#stage" },
+        "layer2": { "kind": "text-parent", "text": "Source Control — stage · commit", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Source Control — stage · commit", "파일을 stage/unstage한 뒤", "sync 바 — 브랜치"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-stage",
+          "text": "2. 스테이징 · 커밋",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "log",
+      "name": "로그 · 그래프",
+      "description": "커밋을 최신에서 과거 순으로 보여주고 분기와 병합을 레인 그래프로 그립니다. 행을 클릭하면 커밋 세부가 열립니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#log" },
+        "layer2": { "kind": "text-parent", "text": "로그 + 브랜치 그래프", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["로그 + 브랜치 그래프", "분기·병합을 레인 그래프로 시각화", "선택된 커밋"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-log",
+          "text": "3. 로그 · 그래프",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "detail",
+      "name": "커밋 세부 · diff",
+      "description": "커밋을 클릭하면 메시지·작성자·변경 파일이 열리고, 파일을 클릭하면 읽기 전용 diff가 인라인으로 펼쳐집니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#detail" },
+        "layer2": { "kind": "text-parent", "text": "커밋 세부 + 인라인 diff", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["커밋 세부 + 인라인 diff", "읽기 전용 diff가 인라인으로 펼쳐집니다", "변경 파일을 클릭하면"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-detail",
+          "text": "4. 커밋 세부 · diff",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "blame",
+      "name": "Blame",
+      "description": "에디터에서 Ctrl+Shift+B로 켜면 거터에 줄별 작성자와 상대 시각이 붙습니다. 미커밋 줄도 따로 표시됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#blame" },
+        "layer2": { "kind": "text-parent", "text": "GitLens식 blame", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["GitLens식 blame", "줄별 작성자 · 상대 시각", "미커밋"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-blame",
+          "text": "5. Blame",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sidebar-layout",
+      "name": "사이드바 · 최대화",
+      "description": "변경 사항·로그·커밋 세부 세 영역이 독립 스크롤되고, Shift+Esc로 사이드바를 최대화할 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#sidebar-layout" },
+        "layer2": { "kind": "text-parent", "text": "사이드바 레이아웃 · 최대화", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["사이드바 레이아웃 · 최대화", "변경 사항 · 로그 · 커밋 세부", "최대화"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sidebar-layout",
+          "text": "6. 사이드바 · 최대화",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키",
+      "description": "Git 패널 열기·blame 토글·사이드바 최대화 단축키를 한 표로 정리했습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["단축키", "Git 패널 열기", "blame 토글"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "7. 단축키",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-appearance-en",
+  "name": "Appearance · Fonts · Shortcuts tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/appearance.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Appearance · Fonts · Shortcuts",
+      "description": "Get a feel for the app's look. Change fonts, opacity, and shortcuts from Settings.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Appearance · Fonts · Shortcuts", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["More · System", "Appearance · Fonts · Shortcuts", "Tune the app's look and feel"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Overview",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "font",
+      "name": "Picking a font",
+      "description": "Choose bundled and system fonts together, and compare Korean glyph widths using each row's sample.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#font" },
+        "layer2": { "kind": "text-parent", "text": "Picking a font", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Picking a font", "Code font", "UI font"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-font",
+          "text": "2. Picking a font",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "opacity",
+      "name": "Window opacity",
+      "description": "One slider makes the whole window translucent, while menus and modals stay crisp.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#opacity" },
+        "layer2": { "kind": "text-parent", "text": "Window opacity", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Window opacity", "A single slider makes the whole window translucent", "menus, modals, and palettes stay crisp for readability"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-opacity",
+          "text": "3. Window opacity",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "statusbar",
+      "name": "Status bar",
+      "description": "The left button toggles the Explorer, and the right shows the file encoding.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#statusbar" },
+        "layer2": { "kind": "text-parent", "text": "Status bar", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Status bar", "Explorer", "UTF-8"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-statusbar",
+          "text": "4. Status bar",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "settings",
+      "name": "Settings dialog",
+      "description": "Open it from the hamburger menu. The left nav stays fixed while the right panel scrolls.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#settings" },
+        "layer2": { "kind": "text-parent", "text": "Settings dialog", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Settings dialog", "The left nav is fixed · only the right panel scrolls", "Backup"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-settings",
+          "text": "5. Settings dialog",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "Reassign keyboard shortcuts",
+      "description": "Click a row and press the keys to reassign it. Conflicts turn red and block saving.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Reassign keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Reassign keyboard shortcuts", "Press keys on a recording row to capture them", "fixed shortcut"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "6. Reassign shortcuts",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "menu",
+      "name": "Hamburger menu · About",
+      "description": "The hamburger opens Settings and About. About shows the version and licenses.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#menu" },
+        "layer2": { "kind": "text-parent", "text": "Hamburger menu · About", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Hamburger menu · About", "Settings", "About"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-menu",
+          "text": "7. Menu · About",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "keys",
+      "name": "Keyboard shortcuts",
+      "description": "A table lists frequently used shortcuts like the palettes, file search, and close.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#keys" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Command palette", "File search palette"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-keys",
+          "text": "8. Keyboard shortcuts",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    }
+  ]
+}

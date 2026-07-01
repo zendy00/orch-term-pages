@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-editor-ko",
+  "name": "코드 에디터 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/editor.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "코드 에디터",
+      "description": "탐색기에서 연 파일을 바로 편집하는 코드 에디터입니다. 자동 리로드, 모든 인코딩, EOL 보존, blame까지 한자리에서 다룹니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "코드 에디터", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["코드 에디터", "핵심 기능 · 코드 에디터", "탐색기에서 연 파일을 바로 편집합니다."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 코드 에디터",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "파일 열기",
+      "description": "탐색기에서 파일을 더블클릭하면 활성 패널의 새 에디터 탭으로 열립니다. 바이너리는 기본 앱 열기 폴백이 뜨고, 상태바엔 인코딩·EOL 라벨이 표시됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "파일 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["파일 열기", "탐색기", "에디터 탭"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. 파일 열기",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "reload",
+      "name": "외부 변경 자동 리로드",
+      "description": "열린 파일이 외부에서 바뀌면 디스크에서 다시 읽습니다. 미저장 편집이 없으면 조용히 교체하고, 있으면 덮어쓸지 먼저 확인합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#reload" },
+        "layer2": { "kind": "text-parent", "text": "외부 변경 자동 리로드", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["외부 변경 자동 리로드", "git pull", "미저장 편집"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-reload",
+          "text": "3. 자동 리로드",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "encoding",
+      "name": "인코딩 — 모든 파일 열기",
+      "description": "EUC-KR·UTF-16 등 모든 인코딩을 자동 감지해 엽니다. 라벨을 클릭하면 무손실 재해석과 변환 후 저장을 나눠 고르고, 저장 시 문자 손상은 미리 막습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#encoding" },
+        "layer2": { "kind": "text-parent", "text": "인코딩 — 모든 파일 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["인코딩 — 모든 파일 열기", "EUC-KR/CP949", "UTF-16(LE/BE)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-encoding",
+          "text": "4. 인코딩",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "eol",
+      "name": "EOL · 줄바꿈 보존",
+      "description": "열 때 CRLF·LF·CR을 감지하고 저장 시 원본 EOL을 그대로 보존합니다. 상태바 EOL 세그먼트에서 줄바꿈 방식을 바꿀 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#eol" },
+        "layer2": { "kind": "text-parent", "text": "EOL · 줄바꿈 보존", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["EOL · 줄바꿈 보존", "Windows (CRLF)", "Unix (LF)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-eol",
+          "text": "5. EOL 보존",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "blame",
+      "name": "GitLens식 blame",
+      "description": "Ctrl+Shift+B로 blame을 켜면 거터에 줄별 작성자와 상대시각이 붙습니다. 거터 줄을 클릭하면 소스 컨트롤 커밋 세부로 연결되고, 미커밋 줄도 표시됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#blame" },
+        "layer2": { "kind": "text-parent", "text": "GitLens식 blame", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["GitLens식 blame", "작성자 · 상대시각", "미커밋"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-blame",
+          "text": "6. blame",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키",
+      "description": "Blame 토글·단일 파일 찾기·저장, 그리고 팔레트의 인코딩 다시 열기·변환 후 저장 단축키를 한 표로 정리했습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["단축키", "Git Blame 토글", "저장 (원본 인코딩 유지)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "7. 단축키",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

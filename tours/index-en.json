@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-index-en",
+  "name": "Home tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/index.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Overview",
+      "description": "Introduces the core pitch — running and orchestrating many AIs as workers in one window.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".hero h1" },
+        "layer2": { "kind": "text-parent", "text": "Run many AIs in one window — orchestrate them from your terminal.", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["orchterm · multi-agent terminal workstation", "Run many AIs in one window —", "Download · Install"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Overview",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "flagship",
+      "name": "Flagship features",
+      "description": "The five flagship pillars — workstation, orchestration, gateway, SSH, and the CDP browser mirror.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#main > section:nth-of-type(2) h2" },
+        "layer2": { "kind": "text-parent", "text": "Five pillars that earn the name", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Flagship features", "Five pillars that earn the name", "Multi-agent workstation"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-flagship",
+          "text": "2. Flagship features",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "core",
+      "name": "Core features",
+      "description": "Everyday fundamentals — terminal, tabs, explorer, editor, search, and source-control cards.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#main > section:nth-of-type(3) h2" },
+        "layer2": { "kind": "text-parent", "text": "Workstation fundamentals", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Core features", "Workstation fundamentals", "Terminal"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-core",
+          "text": "3. Core features",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 4500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "system",
+      "name": "More · System",
+      "description": "More system-level features built to live with — appearance, storage, auto-update, and notifications.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#main > section:nth-of-type(4) h2" },
+        "layer2": { "kind": "text-parent", "text": "Built to live with", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["More · System", "Built to live with", "Appearance · Fonts · Shortcuts"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-system",
+          "text": "4. More · System",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "download",
+      "name": "Get started",
+      "description": "How to get started — install in two minutes and run your first orchestration in five.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#main > section:nth-of-type(5) h2" },
+        "layer2": { "kind": "text-parent", "text": "Install in 2 minutes, first orchestration in 5.", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Get started", "Install in 2 minutes, first orchestration in 5.", "Quick start guide"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-download",
+          "text": "5. Get started",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-search-ko",
+  "name": "전체 파일 검색 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/search.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "전체 파일 검색",
+      "description": "활성 프로젝트 루트 아래 모든 파일의 내용을 한 번에 검색합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "전체 파일 검색", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["핵심 기능 · 전체 파일 검색", "전체 파일 검색", "활성 프로젝트 루트 아래"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-hero",
+          "text": "1. 전체 파일 검색",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-open",
+      "name": "열기 — Ctrl+Shift+F",
+      "description": "Ctrl+Shift+F로 사이드바를 Search 뷰로 전환하고, 검색어를 입력한 뒤 Enter로 시작합니다. Aa는 대소문자, 점별표는 정규식 토글입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "열기 — Ctrl+Shift+F", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["열기 — Ctrl+Shift+F", "Search 뷰", "돋보기를 누르면 시작"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-open",
+          "text": "2. 열기",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-glob",
+      "name": "include / exclude glob · 무시 규칙",
+      "description": "세부 옵션에서 include·exclude glob과 gitignore 무시 포함을 조절합니다. include를 넣으면 그 glob에 맞는 파일만 검색하는 화이트리스트가 됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#glob" },
+        "layer2": { "kind": "text-parent", "text": "include / exclude glob · 무시 규칙", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["include / exclude glob · 무시 규칙", "화이트리스트", "node_modules"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-glob",
+          "text": "3. include/exclude glob",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-streaming",
+      "name": "스트리밍 누적 결과 탭",
+      "description": "검색을 시작하면 새 탭이 생기고 결과가 실시간으로 누적됩니다. 탭마다 검색 조건이 보존돼 여러 검색을 동시에 돌릴 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#streaming" },
+        "layer2": { "kind": "text-parent", "text": "스트리밍 누적 결과 탭", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["스트리밍 누적 결과 탭", "전체 비우기", "truncated"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-streaming",
+          "text": "4. 스트리밍 결과 탭",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-jump",
+      "name": "매치 클릭 → 에디터 점프",
+      "description": "결과의 줄을 클릭하면 그 파일을 에디터에서 열고 매치 줄로 스크롤해 선택합니다. 같은 파일이면 기존 탭을 재사용합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#jump" },
+        "layer2": { "kind": "text-parent", "text": "매치 클릭 → 에디터 점프", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["매치 클릭 → 에디터 점프", "에디터 탭에서 열고", "기존 탭 재사용"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-jump",
+          "text": "5. 매치 클릭 점프",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-search-only",
+      "name": "검색 전용 (바꾸기 없음)",
+      "description": "전체 파일 검색은 검색 전용이라 바꾸기는 지원하지 않습니다. 한 파일 안의 찾고 바꾸기는 에디터의 Ctrl+F로 씁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#search-only" },
+        "layer2": { "kind": "text-parent", "text": "검색 전용 (바꾸기 없음)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["검색 전용 (바꾸기 없음)", "바꾸기(replace)는 지원하지 않습니다", "에디터의"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-search-only",
+          "text": "6. 검색 전용",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-space",
+      "name": "Space별 격리",
+      "description": "검색 탭·결과·검색어·옵션은 Space마다 독립입니다. 진행 중 검색은 백그라운드로 이어지고 결과는 메모리 전용이라 재시작하면 비워집니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#space" },
+        "layer2": { "kind": "text-parent", "text": "Space별 격리", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Space별 격리", "다른 Space와 공유 안 함", "결과는 메모리 전용"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-space",
+          "text": "7. Space별 격리",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-shortcuts",
+      "name": "단축키",
+      "description": "자주 쓰는 키를 한눈에 정리했습니다. Ctrl+Shift+F로 열고 Enter로 실행하며 Aa·점별표로 옵션을 토글합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["단축키", "Search 뷰 열기", "단일 파일 찾기/바꾸기 (에디터)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-shortcuts",
+          "text": "8. 단축키",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

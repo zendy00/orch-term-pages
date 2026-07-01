@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-tabs-panes-ko",
+  "name": "탭 · 패널 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/tabs-panes.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "탭 · 패널 개요",
+      "description": "화면을 가로·세로로 쪼개 여러 탭을 배치하는 기본을 소개합니다. 패널 분할, 최대화, 탭 이름·색 지정을 차례로 살펴봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "탭 · 패널", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["핵심 기능 · 탭 · 패널", "탭 · 패널", "하나의 화면을 가로·세로로 쪼개"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 탭·패널 개요",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "split",
+      "name": "패널 분할",
+      "description": "패널 헤더의 분할 버튼이나 탭바 드롭으로 화면을 가로·세로로 나눠 새 터미널을 엽니다. Ctrl+Alt+방향키로 패널 사이를 이동합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#split" },
+        "layer2": { "kind": "text-parent", "text": "패널 분할", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["패널 분할", "아래로 분할", "오른쪽 분할"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-split",
+          "text": "2. 패널 분할",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "grid",
+      "name": "바둑판 배열 · 전체 병합",
+      "description": "탭 2개 이상인 패널을 근사 정사각형 격자로 펼치는 바둑판 배열과, 모든 패널을 좌상단 하나로 접는 전체 병합을 다룹니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#grid" },
+        "layer2": { "kind": "text-parent", "text": "바둑판 배열 · 전체 병합", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["바둑판 배열 · 전체 병합", "바둑판 배열", "전체 병합"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-grid",
+          "text": "3. 바둑판·병합",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "maximize",
+      "name": "패널 최대화 (Shift+Esc)",
+      "description": "Shift+Esc로 활성 패널을 유리창처럼 확대합니다. 최대화된 패널은 흐림 효과로 떠오르고 뒤 워크스페이스는 어둡게 가려집니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#maximize" },
+        "layer2": { "kind": "text-parent", "text": "패널 최대화 (Shift+Esc)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["패널 최대화 (Shift+Esc)", "glassmorphism", "복원"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-maximize",
+          "text": "4. 패널 최대화",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "rename",
+      "name": "탭 이름 + 색 통합 편집",
+      "description": "탭을 더블클릭하면 이름 입력란과 9색 색 피커가 한 팝업으로 열립니다. 종류에 따라 터미널·에디터·브라우저의 라벨을 편집합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#rename" },
+        "layer2": { "kind": "text-parent", "text": "탭 이름 + 색 통합 편집", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["탭 이름 + 색 통합 편집", "이름 입력란 + 9색 색 피커", "더블클릭"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-rename",
+          "text": "5. 이름+색 편집",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "color",
+      "name": "탭 색 (hue)",
+      "description": "탭마다 9색 중 하나를 지정하면 라벨 아래 하단 보더 틴트로 표시되고 재시작해도 유지됩니다. Space와 같은 팔레트를 씁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#color" },
+        "layer2": { "kind": "text-parent", "text": "탭 색 (hue)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["탭 색 (hue)", "하단 보더 틴트", "기본"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-color",
+          "text": "6. 탭 색",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "close",
+      "name": "탭 닫기 · 우클릭 메뉴",
+      "description": "Ctrl+Shift+W로 활성 탭을 닫고, 우클릭 메뉴에서 이름변경·색상변경·닫기·다른 탭 닫기·모두 닫기를 실행합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#close" },
+        "layer2": { "kind": "text-parent", "text": "탭 닫기 · 우클릭 메뉴", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["탭 닫기 · 우클릭 메뉴", "다른 탭 닫기", "모두 닫기"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-close",
+          "text": "7. 탭 닫기·메뉴",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키",
+      "description": "이 페이지의 주요 단축키를 표 하나로 정리합니다. 패널 최대화, 탭 닫기, 탭·패널 이동, 이름+색 편집을 확인합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["단축키", "활성 패널 최대화 토글", "인접 패널로 이동"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "8. 단축키",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    }
+  ]
+}

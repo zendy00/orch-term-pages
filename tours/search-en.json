@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-search-en",
+  "name": "Full-text search tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/search.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "Full-text search",
+      "description": "Search the contents of every file under the active project root at once, filling in results live as they arrive.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Full-text search", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Core features · Full-text search", "Full-text search", "Search the contents of every file"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-hero",
+          "text": "1. Full-text search",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-open",
+      "name": "Open — Ctrl+Shift+F",
+      "description": "Ctrl+Shift+F switches the sidebar to the Search view; type a query and press Enter to start. Use Aa for case sensitivity and .* for regex.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "Open — Ctrl+Shift+F", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Open — Ctrl+Shift+F", "Search view", "magnifier to start"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-open",
+          "text": "2. Open",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-glob",
+      "name": "include / exclude glob · ignore rules",
+      "description": "In the detailed options, set include/exclude globs and the ignore toggle. Adding an include makes it a whitelist that searches only matching files.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#glob" },
+        "layer2": { "kind": "text-parent", "text": "include / exclude glob · ignore rules", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["include / exclude glob · ignore rules", "whitelist", "node_modules"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-glob",
+          "text": "3. include/exclude glob",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-streaming",
+      "name": "Streaming, accumulating results tab",
+      "description": "Starting a search opens a new tab and results accumulate live. Each tab keeps its own conditions, so you can run several searches at once.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#streaming" },
+        "layer2": { "kind": "text-parent", "text": "Streaming, accumulating results tab", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Streaming, accumulating results tab", "Clear all", "truncated"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-streaming",
+          "text": "4. Streaming results tab",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-jump",
+      "name": "Click a match → jump to the editor",
+      "description": "Click a result line to open that file in the editor, scroll to the match line, and select it. The same file reuses an already-open tab.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#jump" },
+        "layer2": { "kind": "text-parent", "text": "Click a match → jump to the editor", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Click a match → jump to the editor", "open that file in an editor tab", "reuses the existing tab"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-jump",
+          "text": "5. Click to jump",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-search-only",
+      "name": "Search-only (no replace)",
+      "description": "Full-text search is search-only — no replace. Use Ctrl+Shift+F for where-is-it across the project, and the editor's Ctrl+F to find and replace in one file.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#search-only" },
+        "layer2": { "kind": "text-parent", "text": "Search-only (no replace)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Search-only (no replace)", "doesn't support replace", "find and replace"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-search-only",
+          "text": "6. Search-only",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-space",
+      "name": "Per-Space isolation",
+      "description": "Search tabs, results, queries, and options are independent per Space. In-progress searches keep running in the background, and results are memory-only.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#space" },
+        "layer2": { "kind": "text-parent", "text": "Per-Space isolation", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Per-Space isolation", "Not shared with other Spaces", "Results are memory-only"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-space",
+          "text": "7. Per-Space isolation",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-shortcuts",
+      "name": "Keyboard shortcuts",
+      "description": "A quick reference of the main keys: Ctrl+Shift+F to open, Enter to run, and Aa or .* to toggle options.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Open the Search view", "Single-file find/replace (editor)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-shortcuts",
+          "text": "8. Keyboard shortcuts",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

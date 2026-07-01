@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-source-control-en",
+  "name": "Source control (Git) tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/source-control.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Source control overview",
+      "description": "Introduces the Git panel — the sidebar's third mode — where staging, commits, the branch graph, and blame all live in one place.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Source control (Git)", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Core features · Source control", "Source control (Git)", "The sidebar's third mode"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Source control overview",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "stage",
+      "name": "Stage · commit",
+      "description": "Open it with Ctrl+Shift+G, stage files, write a message, and commit. The M, A, U, and D letters mark each file's status.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#stage" },
+        "layer2": { "kind": "text-parent", "text": "Source Control — stage · commit", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Source Control — stage · commit", "Stage/unstage files, then write a message", "Sync bar — branch"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-stage",
+          "text": "2. Stage · commit",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "log",
+      "name": "Log · graph",
+      "description": "Shows commits newest to oldest and draws branches and merges as a lane graph. Click a row to open the commit detail.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#log" },
+        "layer2": { "kind": "text-parent", "text": "Log + branch graph", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Log + branch graph", "visualizes branches and merges as a lane graph", "The selected commit"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-log",
+          "text": "3. Log · graph",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "detail",
+      "name": "Commit detail · diff",
+      "description": "Click a commit to see its message, author, and changed files; click a file and a read-only diff expands inline.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#detail" },
+        "layer2": { "kind": "text-parent", "text": "Commit detail + inline diff", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Commit detail + inline diff", "a read-only diff expands inline", "Click a changed file"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-detail",
+          "text": "4. Commit detail · diff",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "blame",
+      "name": "Blame",
+      "description": "Toggle blame in the editor with Ctrl+Shift+B to show per-line author and relative time in the gutter. Uncommitted lines are marked too.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#blame" },
+        "layer2": { "kind": "text-parent", "text": "GitLens-style blame", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["GitLens-style blame", "per-line author · relative time", "Uncommitted"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-blame",
+          "text": "5. Blame",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sidebar-layout",
+      "name": "Sidebar · maximize",
+      "description": "The Changes, Log, and Commit detail areas scroll independently, and Shift+Esc maximizes the sidebar.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#sidebar-layout" },
+        "layer2": { "kind": "text-parent", "text": "Sidebar layout · maximize", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Sidebar layout · maximize", "Changes · Log · Commit detail", "Maximize"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sidebar-layout",
+          "text": "6. Sidebar · maximize",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "Shortcuts",
+      "description": "A single table lists the shortcuts for opening the Git panel, toggling blame, and maximizing the sidebar.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Open the Git panel", "Toggle blame"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "7. Shortcuts",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    }
+  ]
+}

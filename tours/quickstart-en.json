@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-quickstart-en",
+  "name": "Quick start tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/quickstart.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Quick start",
+      "description": "A quick loop through the app's core screens in five minutes, right from the first launch.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Quick start", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Getting started · Quick start", "Quick start", "full loop in 5 minutes"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Quick start",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "walkthrough",
+      "name": "A full loop in 5 minutes",
+      "description": "Six steps in order, from auto-opening the terminal to adding a shell, splitting panes, editing files, the in-app browser, and orchestration.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#walkthrough" },
+        "layer2": { "kind": "text-parent", "text": "A full loop in 5 minutes", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["A full loop in 5 minutes", "Download · Install", "Launch the app — the first terminal opens automatically"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-walkthrough",
+          "text": "2. Full loop",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "next",
+      "name": "Where to next",
+      "description": "A set of cards that lead into the detailed docs for each feature.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#next" },
+        "layer2": { "kind": "text-parent", "text": "Where to next", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Where to next", "Terminal", "Orchestration"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-next",
+          "text": "3. Where to next",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "Handy keyboard shortcuts",
+      "description": "A quick reference of the shortcuts you'll use most, like copy/paste, newline, pane navigation, and toggling the Explorer.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Handy keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Handy keyboard shortcuts", "Copy when selected (interrupt if none) / paste", "Newline (does not submit)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "4. Shortcuts",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    }
+  ]
+}

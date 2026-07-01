@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-ssh-ko",
+  "name": "SSH · SFTP 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/ssh.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "SSH · SFTP",
+      "description": "SSH 연결 하나 위에 터미널·원격 탐색·터널을 함께 올리는 MobaXterm식 클라이언트입니다. 접속부터 원격 편집·전송까지 앱 안에서 끝냅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "SSH · SFTP", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["SSH · SFTP", "native russh", "MobaXterm식"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. SSH · SFTP",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "connect",
+      "name": "접속하기",
+      "description": "우측 레일의 SSH 아이콘으로 접속 관리자를 열고, 호스트를 클릭해 새 탭의 인-탭 폼에서 연결합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#connect" },
+        "layer2": { "kind": "text-parent", "text": "접속하기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["접속하기", "접속 관리자", "우측 레일의 SSH 아이콘"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-connect",
+          "text": "2. 접속하기",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "hostkey",
+      "name": "호스트키 신뢰 (TOFU)",
+      "description": "처음 보는 서버이거나 호스트키가 바뀌면 지문 확인창을 띄웁니다. 수락하면 known_hosts에 기억해 다음부터 자동 접속합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#hostkey" },
+        "layer2": { "kind": "text-parent", "text": "호스트키 신뢰 (TOFU)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["호스트키 신뢰 (TOFU)", "known_hosts", "최초 신뢰"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hostkey",
+          "text": "3. 호스트키 신뢰",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sftp",
+      "name": "SFTP 원격 탐색기",
+      "description": "SSH에 접속하면 좌측 탐색기가 그 서버의 원격 트리로 자동 전환됩니다. 더블클릭으로 원격 파일을 열어 편집·저장합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#sftp" },
+        "layer2": { "kind": "text-parent", "text": "SFTP 원격 탐색기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["SFTP 원격 탐색기", "원격 트리", "더블클릭 편집"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sftp",
+          "text": "4. SFTP 원격 탐색기",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "dualpane",
+      "name": "듀얼 페인 SFTP (드래그 전송)",
+      "description": "SSH 탭의 SFTP 열기로 원격 트리를 별도 탭으로 띄우고, 좌측 탐색기와 SFTP 탭 사이로 파일을 드래그해 전송합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dualpane" },
+        "layer2": { "kind": "text-parent", "text": "듀얼 페인 SFTP (드래그 전송)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["듀얼 페인 SFTP (드래그 전송)", "SFTP 열기", "MobaXterm 듀얼패널 방식"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-dualpane",
+          "text": "5. 듀얼 페인 SFTP",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "vault",
+      "name": "자격증명 볼트",
+      "description": "SSH 비밀을 마스터 비밀번호로 잠긴 볼트에 암호화해 저장하고, 저장한 프로필에 접속할 때 자동으로 씁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#vault" },
+        "layer2": { "kind": "text-parent", "text": "자격증명 볼트", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["자격증명 볼트", "마스터 비밀번호", "AES-256-GCM"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-vault",
+          "text": "6. 자격증명 볼트",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tunnel",
+      "name": "포트 포워딩 터널",
+      "description": "SSH 위에 로컬(-L)·다이내믹 SOCKS5(-D) 포트 포워딩 터널을 만듭니다. 설정은 프로필에 저장되어 접속 시 자동 수립됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#tunnel" },
+        "layer2": { "kind": "text-parent", "text": "포트 포워딩 터널", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["포트 포워딩 터널", "로컬(-L)", "SOCKS5"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tunnel",
+          "text": "7. 포트 포워딩 터널",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tmux",
+      "name": "tmux 세션 유지",
+      "description": "프로필에서 tmux 세션 유지를 켜면 끊기거나 창을 닫아도 원격 세션이 살아 있고, 재접속하면 같은 세션에 자동 재부착됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#tmux" },
+        "layer2": { "kind": "text-parent", "text": "tmux 세션 유지 — 끊겨도 살아있는 원격 세션", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["tmux 세션 유지", "같은 세션에 자동 재부착", "graceful 강등"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tmux",
+          "text": "8. tmux 세션 유지",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

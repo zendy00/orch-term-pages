@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-terminal-ko",
+  "name": "터미널 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/terminal.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic', 'Segoe UI', system-ui, sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "터미널",
+      "description": "터미널은 Orch term의 바탕입니다. 한국어·영어 입력과 이모지, 줄바꿈까지 매끄럽게 다룹니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "터미널", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 96, "nearbyText": ["터미널", "Orch term의 바탕"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 터미널",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -42 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-open",
+      "name": "새 터미널",
+      "description": "새 탭의 ＋ 버튼으로 터미널을 엽니다. 설치된 셸을 자동 감지해 고르고 기본으로 지정할 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "새 터미널 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["새 터미널 열기", "셸 선택"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. 새 터미널",
+          "position": { "x": 320, "y": 262 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-clipboard",
+      "name": "복사·붙여넣기",
+      "description": "Ctrl+C는 선택 영역이 있으면 복사, 없으면 인터럽트로 동작합니다. 이미지를 붙여넣으면 파일로 첨부됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#clipboard" },
+        "layer2": { "kind": "text-parent", "text": "복사 · 붙여넣기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 700, "width": 640, "height": 44, "nearbyText": ["복사", "붙여넣기", "Ctrl"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-clipboard",
+          "text": "3. 복사·붙여넣기",
+          "position": { "x": 320, "y": 662 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-newline",
+      "name": "줄바꿈",
+      "description": "Shift+Enter나 Ctrl+Enter로 제출 없이 줄바꿈합니다. 한글 조합 중에도 글자와 순서가 보존됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#newline" },
+        "layer2": { "kind": "text-parent", "text": "줄바꿈 (제출 없이)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 800, "width": 640, "height": 44, "nearbyText": ["줄바꿈", "Shift", "Enter"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-newline",
+          "text": "4. 줄바꿈",
+          "position": { "x": 320, "y": 762 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-scrollback",
+      "name": "스크롤백",
+      "description": "스크롤백은 기본 1000줄, 100에서 50,000줄까지 조정됩니다. 맨 아래로 버튼으로 최신 출력에 점프합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#scrollback" },
+        "layer2": { "kind": "text-parent", "text": "스크롤백 · 맨 아래로", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["스크롤백", "맨 아래로"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-scrollback",
+          "text": "5. 스크롤백",
+          "position": { "x": 320, "y": 862 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-exit",
+      "name": "자동 닫기",
+      "description": "exit로 셸이 끝나면 탭이 자동으로 닫히고, 그 아래 프로세스 트리 전체가 정리됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#exit" },
+        "layer2": { "kind": "text-parent", "text": "셸 종료 · 자동 닫기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1000, "width": 640, "height": 44, "nearbyText": ["셸 종료", "자동 닫기", "exit"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-exit",
+          "text": "6. 자동 닫기",
+          "position": { "x": 320, "y": 962 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-shortcuts",
+      "name": "단축키",
+      "description": "자주 쓰는 단축키를 한 표로 모았습니다. 복사·붙여넣기·줄바꿈을 빠르게 익혀 보세요.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1120, "width": 640, "height": 44, "nearbyText": ["단축키", "동작"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "7. 단축키",
+          "position": { "x": 320, "y": 1082 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Malgun Gothic', 'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    }
+  ]
+}

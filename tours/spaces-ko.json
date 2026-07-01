@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-spaces-ko",
+  "name": "스페이스 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/spaces.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "스페이스",
+      "description": "스페이스는 tmux·i3 워크스페이스처럼 통째로 갈아타는 독립 레이아웃입니다. 각 Space가 자기 분할 트리와 파일 탐색기를 따로 가집니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "스페이스", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["스페이스", "전환 가능한 레이아웃", "핵심 기능 · 스페이스"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 스페이스",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "chips",
+      "name": "Space 칩",
+      "description": "Space 목록이 타이틀바에 칩으로 늘어섭니다. 활성 칩은 액센트 밑줄로 강조되고, 끝의 ＋로 새 Space를 엽니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#chips" },
+        "layer2": { "kind": "text-parent", "text": "Space 칩 — 타이틀바에서 전환", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Space 칩 — 타이틀바에서 전환", "Space 목록은 타이틀바에 칩으로 늘어섭니다", "새 Space"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-chips",
+          "text": "2. Space 칩",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "switch",
+      "name": "전환",
+      "description": "칩 클릭이나 Ctrl+1‥9로 전환합니다. 나가는 Space의 터미널·브라우저는 그대로 살아 있어 출력과 스크롤백이 보존됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#switch" },
+        "layer2": { "kind": "text-parent", "text": "전환 (Ctrl+1‥9)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["전환 (Ctrl+1‥9)", "레이아웃을 통째로 교체", "칩 더블클릭"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-switch",
+          "text": "3. 전환",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "layout",
+      "name": "분할 트리 · 탐색기",
+      "description": "각 Space가 분할 트리·활성 패널·탐색기를 통째로 소유합니다. 접힘·폭·사이드바 모드까지 Space별로 기억합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#layout" },
+        "layer2": { "kind": "text-parent", "text": "Space별 분할 트리 · 탐색기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Space별 분할 트리 · 탐색기", "독립 분할 트리", "Space별 탐색기"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-layout",
+          "text": "4. 분할 트리 · 탐색기",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "menu",
+      "name": "우클릭 메뉴",
+      "description": "칩을 우클릭하면 이름 변경·색상 변경·복제·닫기 메뉴가 열립니다. 복제는 Space 전체를 새 Space로 복사해 곧바로 전환합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#menu" },
+        "layer2": { "kind": "text-parent", "text": "우클릭 메뉴 · 전체 복제", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["우클릭 메뉴 · 전체 복제", "이름 변경 / 색상 변경 / 복제 / 닫기", "실행 중 프로세스는 복사되지 않습니다"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-menu",
+          "text": "5. 우클릭 메뉴",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "persist",
+      "name": "영속화 · 복원",
+      "description": "탭·분할·프로젝트를 건드릴 때마다 상태가 자동 저장돼, 재시작 시 레이아웃이 복원됩니다. 터미널은 디렉터리만 기억합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#persist" },
+        "layer2": { "kind": "text-parent", "text": "실시간 영속화 · 복원", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["실시간 영속화 · 복원", "구조만 저장", "커스텀 탭 이름 유지"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-persist",
+          "text": "6. 영속화 · 복원",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "done",
+      "name": "완료 알림",
+      "description": "백그라운드 Space의 작업이 끝나면 그 칩에 초록 점이 깜빡여 알려 줍니다. 아직은 곧 제공될 예정 기능입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#done" },
+        "layer2": { "kind": "text-parent", "text": "백그라운드 완료 알림", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["백그라운드 완료 알림", "초록 점", "이 알림은 곧 제공될 기능입니다"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-done",
+          "text": "7. 완료 알림",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

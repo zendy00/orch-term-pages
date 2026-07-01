@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-sessions-en",
+  "name": "Session list tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/sessions.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Session list (resume)",
+      "description": "The 5th sidebar mode, Sessions, gathers the active project's claude, codex, and agy conversations in one place. orchterm reads the transcript sidecars the three CLIs leave on disk directly.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Session list (resume)", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Session list (resume)", "Core features · Session list", "The 5th sidebar mode"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Session list",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "Opening the session panel",
+      "description": "Open the panel with the Sessions icon in the sidebar mode bar or Ctrl+Shift+S. The list is specific to the active project, so switching projects shows that project's sessions.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "Opening the session panel", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Opening the session panel", "sidebar mode bar", "specific to the active project"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. Open the panel",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "list",
+      "name": "List — date groups · agent icons · meta",
+      "description": "Sessions are sorted newest first and bucketed into date groups. Each row shows a brand icon, the title, a relative time, and the git branch if any.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#list" },
+        "layer2": { "kind": "text-parent", "text": "List — date groups · agent icons · meta", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["List — date groups · agent icons · meta", "sorted newest first", "date groups"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-list",
+          "text": "3. List",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "resume",
+      "name": "Resume — pick up in the original folder",
+      "description": "Click a row to resume the conversation in a new terminal tab in that session's original folder. It runs the right command per CLI automatically.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#resume" },
+        "layer2": { "kind": "text-parent", "text": "Resume — pick up in the original folder", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Resume — pick up in the original folder", "original working folder (cwd)", "claude --resume"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-resume",
+          "text": "4. Resume",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "bypass",
+      "name": "Bypass permissions — resume without approvals",
+      "description": "Turn on the Bypass permissions checkbox to auto-add each CLI's bypass flag when resuming. It's off by default, so enable it only in projects you trust.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#bypass" },
+        "layer2": { "kind": "text-parent", "text": "Bypass permissions — resume without approvals", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Bypass permissions — resume without approvals", "Bypass permissions checkbox", "off by default (safe mode)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-bypass",
+          "text": "5. Bypass permissions",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "loading",
+      "name": "Incremental display · loading bar",
+      "description": "Draw 20 at a time, then More loads +20; the query runs once per project (up to 500), so it's instant. A loading bar shows while the query runs.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#loading" },
+        "layer2": { "kind": "text-parent", "text": "Incremental display · loading bar", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Incremental display · loading bar", "More (N left)", "Loading sessions…"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-loading",
+          "text": "6. Incremental display",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "cross",
+      "name": "Cross-platform · how it finds them",
+      "description": "The three CLIs' transcript paths are identical on Windows, macOS, and Linux. The backend is a pure filesystem scanner independent of any DB, and all three adapters parse JSONL.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#cross" },
+        "layer2": { "kind": "text-parent", "text": "Cross-platform · how it finds them", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Cross-platform · how it finds them", "~/.claude/projects", "pure filesystem scanner"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-cross",
+          "text": "7. Cross-platform",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "Keyboard shortcuts",
+      "description": "Open Sessions mode with Ctrl+Shift+S, or find it via the command palette.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Open sessions mode", "Command palette"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "8. Keyboard shortcuts",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    }
+  ]
+}

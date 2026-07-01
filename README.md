@@ -26,6 +26,20 @@
 - **`_nav.js`** — `<html lang="en">`이면 사이드바/TOC를 영어 라벨로 렌더(한국어가 기본).
 - ⚠️ **한국어판 페이지를 추가·수정하면 `en/` 대응본도 같이 갱신**한다(구조는 동일하게, 텍스트만 영어). `stats.html`은 i18n 제외.
 
+## 가이드 투어 (Manuscript standalone player)
+
+각 페이지 **화면 우하단에 플로팅 "투어/Tour" 버튼**이 떠 있고, 누르면 확장 없이 재생되는
+**Manuscript standalone player**가 그 페이지의 시나리오를 불러와 **스포트라이트 + 내레이션** 투어를
+재생한다(딤 + 대상 하이라이트 + 골드 어노테이션 라벨 + 하단 컨트롤바). 방문자는 아무 설치가 필요 없다.
+
+- **`player/`** — 자체 호스팅 번들(ESM 3종: `manuscript-player.0.1.0.esm.js` + `player-entry.js` + `spotlight-editor.js`). 한 폴더에 함께 둔다.
+- **`tours/<slug>-<lang>.json`** — 페이지·언어별 시나리오 1개(Manuscript schema `0.1.2`). `<slug>` = `<body data-page>` 값, `<lang>` = `ko`/`en`. 스텝마다 3-레이어 셀렉터(`stable-attr`/`text-parent`/`visual-heuristic`) + 골드 텍스트 라벨.
+- **`_tour.js`** (모든 페이지 `<head>`가 아닌 본문 끝에서 `_nav.js` 뒤로 로드) — 우하단 FAB 주입, 언어/경로 자동 감지(`en/` 깊이), `tours/<slug>-<lang>.json`을 `fetch` → player를 동적 `import` → `load()`/`play()`. 재생 중엔 FAB 숨김, 종료 시 복귀.
+- **색상**: 어노테이션은 사이트 **앰버 액센트(`#dcab59`, = `--accent`)** + 다크 칩(`#1c1e21`)으로 테마와 일치시킨다.
+- **TTS 보이스**: `window.__MANUSCRIPT_PLAYER__`에서 **Windows(및 기타 OS)는 Google 보이스**(ko `Google 한국의`, en `Google US English`), **macOS는 보이스 미지정**(시스템 기본 선택).
+- ⚠️ **페이지를 추가·수정하면**: ① `<body data-page="<slug>">`가 파일명 슬러그와 일치해야 하고(불일치 시 엉뚱한 투어 로드) ② 본문 끝에 `<script src="…/_tour.js"></script>`가 있어야 하며 ③ `tours/<slug>-ko.json`(+ i18n 대상이면 `-en.json`)을 같이 갱신한다. `stats.html`은 ko 전용.
+- **배포**: `player/`·`tours/`가 `docs/site/` 아래에 있으므로 아래 Pages 미러에 **자동 포함**된다(별도 단계 없음).
+
 ## 공개 배포 (GitHub Pages, 소스 repo는 private 유지)
 
 `.github/workflows/pages.yml`이 `docs/site/` 변경 push 시 **public repo `zendy00/orch-term-pages`**로

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-gateway-en",
+  "name": "AI gateway tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/gateway.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "AI gateway",
+      "description": "An external program posts a prompt to a local HTTP API; orchterm runs one worker turn and returns the response synchronously.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "AI gateway", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["AI gateway", "Flagship features · AI gateway", "HTTP API"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. AI gateway",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "what",
+      "name": "What it does",
+      "description": "An external program sends a one-line prompt, and the gateway spins up a worker in a tab to run one turn.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#what" },
+        "layer2": { "kind": "text-parent", "text": "What it does", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["What it does", "External program", "POST /run"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-what",
+          "text": "2. What it does",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "start",
+      "name": "Getting started",
+      "description": "Two steps: turn on the gateway and check · copy the Bearer token, issued randomly once and required on every request.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#start" },
+        "layer2": { "kind": "text-parent", "text": "Getting started", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Getting started", "Turn on the gateway (applied after restart)", "Check · copy the Bearer token"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-start",
+          "text": "3. Getting started",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "api",
+      "name": "API call — POST /run",
+      "description": "Put the AI and prompt in the POST /run body; it holds the connection and returns OpenAI chat.completion JSON synchronously.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#api" },
+        "layer2": { "kind": "text-parent", "text": "API call — POST /run", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["API call — POST /run", "curl — synchronous call", "200 · chat.completion"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-api",
+          "text": "4. API call",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "session",
+      "name": "Session keepalive",
+      "description": "Give a session value and the same session reuses the same worker, preserving context across a multi-turn conversation.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#session" },
+        "layer2": { "kind": "text-parent", "text": "Session keepalive (multi-turn)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Session keepalive (multi-turn)", "session \"s1\" — context preserved", "banana73"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-session",
+          "text": "5. Session keepalive",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "safe",
+      "name": "Worker safe mode",
+      "description": "Workers run in safe mode by default and don't use the dangerous permission-bypass flag unless you enable it.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#safe" },
+        "layer2": { "kind": "text-parent", "text": "Worker safe mode (ON by default)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Worker safe mode (ON by default)", "Bypass dangerous worker permissions", "control plane"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-safe",
+          "text": "6. Worker safe mode",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "audit",
+      "name": "Audit log",
+      "description": "Every authenticated request is logged by date; open the viewer tab from the palette to inspect the raw request and response.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#audit" },
+        "layer2": { "kind": "text-parent", "text": "Audit log (request/response records + viewer tab)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Audit log (request/response records + viewer tab)", "Gateway audit log", "Raw request"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-audit",
+          "text": "7. Audit log",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

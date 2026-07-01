@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-terminal-en",
+  "name": "Terminal tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/terminal.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI', system-ui, sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "Terminal",
+      "description": "The terminal is the foundation of Orch term — it handles Korean/English input, emoji, and newlines smoothly.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Terminal", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 96, "nearbyText": ["Terminal", "foundation of Orch term"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Terminal",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -42 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-open",
+      "name": "New terminal",
+      "description": "Open a terminal with the new-tab ＋ button. It auto-detects installed shells so you can pick one and set a default.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "Open a new terminal", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Open a new terminal", "pick a shell"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. New terminal",
+          "position": { "x": 320, "y": 262 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-clipboard",
+      "name": "Copy · paste",
+      "description": "Ctrl+C copies when there's a selection, otherwise it interrupts. Pasting an image attaches it as a file.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#clipboard" },
+        "layer2": { "kind": "text-parent", "text": "Copy · paste", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 700, "width": 640, "height": 44, "nearbyText": ["Copy", "paste", "Ctrl"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-clipboard",
+          "text": "3. Copy · paste",
+          "position": { "x": 320, "y": 662 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-newline",
+      "name": "Newlines",
+      "description": "Use Shift+Enter or Ctrl+Enter to add a newline without submitting — order is kept even mid-composition in Korean.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#newline" },
+        "layer2": { "kind": "text-parent", "text": "Newlines (without submitting)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 800, "width": 640, "height": 44, "nearbyText": ["Newlines", "Shift", "Enter"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-newline",
+          "text": "4. Newlines",
+          "position": { "x": 320, "y": 762 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-scrollback",
+      "name": "Scrollback",
+      "description": "Scrollback defaults to 1,000 lines and adjusts from 100 to 50,000. Jump to the latest output anytime.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#scrollback" },
+        "layer2": { "kind": "text-parent", "text": "Scrollback · jump to bottom", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Scrollback", "jump to bottom"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-scrollback",
+          "text": "5. Scrollback",
+          "position": { "x": 320, "y": 862 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-exit",
+      "name": "Auto-close",
+      "description": "When the shell exits, the tab closes automatically and the entire process tree beneath it is cleaned up.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#exit" },
+        "layer2": { "kind": "text-parent", "text": "Shell exit · auto-close", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1000, "width": 640, "height": 44, "nearbyText": ["Shell exit", "auto-close", "exit"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-exit",
+          "text": "6. Auto-close",
+          "position": { "x": 320, "y": 962 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-shortcuts",
+      "name": "Shortcuts",
+      "description": "Here are the key shortcuts in one table — copy, paste, and newline at a glance.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1120, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Action"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "7. Shortcuts",
+          "position": { "x": 320, "y": 1082 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": {
+            "fontFamily": "'Segoe UI', system-ui, sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    }
+  ]
+}

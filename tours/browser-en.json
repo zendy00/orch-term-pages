@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-browser-en",
+  "name": "In-app browser tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/browser.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "In-app browser",
+      "description": "An in-app browser tab is a native child webview, not an iframe, so links and back/forward feel as natural as a real browser.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "In-app browser", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["In-app browser", "Core features · In-app browser", "native child webview"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-hero",
+          "text": "1. In-app browser",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-urlbar",
+      "name": "Address bar · back · forward · reload",
+      "description": "It covers the back, forward, and reload buttons left of the address bar, plus the lock shown on the left when on https.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#urlbar" },
+        "layer2": { "kind": "text-parent", "text": "Address bar · back · forward · reload", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Address bar · back · forward · reload", "back (‹)", "reload (⟳)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-urlbar",
+          "text": "2. Address bar · nav",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-links",
+      "name": "New-window links open in place",
+      "description": "Links that would open a new window or tab open in place in the same tab, so they never break.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#links" },
+        "layer2": { "kind": "text-parent", "text": "New-window links open in place", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["New-window links open in place", "in place", "Flows that genuinely need a new window are the exception"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-links",
+          "text": "3. New-window links",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-localfile",
+      "name": "Open local files",
+      "description": "Local files such as HTML and images open directly in an in-app browser tab.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#localfile" },
+        "layer2": { "kind": "text-parent", "text": "Open local files", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Open local files", "Build report", "asset.localhost"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-localfile",
+          "text": "4. Open local files",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-external",
+      "name": "Open in the system browser",
+      "description": "The button at the right of the address bar opens the current page in your OS default browser.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#external" },
+        "layer2": { "kind": "text-parent", "text": "Open in the system browser", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Open in the system browser", "OS default browser", "Open in system browser"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-external",
+          "text": "5. System browser",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-occlusion",
+      "name": "Right-click · on-screen menu",
+      "description": "Right-clicking the page opens a menu, and while a menu or modal is open the webview hides briefly.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#occlusion" },
+        "layer2": { "kind": "text-parent", "text": "Right-click · on-screen menu", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Right-click · on-screen menu", "Webview temporarily hidden · DOM pop-up showing", "Copy address"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-occlusion",
+          "text": "6. Right-click menu",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-shortcuts",
+      "name": "Keyboard shortcuts",
+      "description": "Zoom the page in and out with Ctrl and +/−, or Ctrl+wheel.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard shortcuts", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Keyboard shortcuts", "Zoom in", "Zoom out"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-shortcuts",
+          "text": "7. Keyboard shortcuts",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    }
+  ]
+}

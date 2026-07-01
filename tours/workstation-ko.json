@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-workstation-ko",
+  "name": "멀티에이전트 워크스테이션 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/workstation.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "멀티에이전트 워크스테이션",
+      "description": "한 창에 터미널·에디터·브라우저를 이진 분할 트리로 펼치고, 각 패널에 서로 다른 AI를 띄우는 작업대입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "멀티에이전트 워크스테이션", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["멀티에이전트 워크스테이션", "대형 기능 · 멀티에이전트 워크스테이션", "split tree"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 워크스테이션",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "what",
+      "name": "한 창의 구조",
+      "description": "가로·세로로 나눈 각 칸이 패널이고, 각 패널은 터미널·에디터·브라우저 탭을 담습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#what" },
+        "layer2": { "kind": "text-parent", "text": "한 창의 구조", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["한 창의 구조", "패널(pane)", "이진 분할 트리"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-what",
+          "text": "2. 한 창의 구조",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "kinds",
+      "name": "탭 종류 3종",
+      "description": "한 패널의 탭바에 세 종류의 탭을 섞어 두고, 활성 탭만 본문에 보입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#kinds" },
+        "layer2": { "kind": "text-parent", "text": "탭 종류 3종 — 한 패널에 섞어서", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["탭 종류 3종 — 한 패널에 섞어서", "터미널", "브라우저"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-kinds",
+          "text": "3. 탭 종류 3종",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "split",
+      "name": "분할 · 최대화",
+      "description": "헤더의 분할 버튼으로 패널을 나누고, Shift+Esc로 활성 패널을 최대화합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#split" },
+        "layer2": { "kind": "text-parent", "text": "분할 · 패널 최대화", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["분할 · 패널 최대화", "분할 버튼", "드롭 영역"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-split",
+          "text": "4. 분할 · 최대화",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sidebar",
+      "name": "좌측 사이드바",
+      "description": "모드바로 탐색기·검색·Git·할일 4모드를 전환하고, 파일을 클릭하면 본문 패널에 에디터로 열립니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "h2#sidebar" },
+        "layer2": { "kind": "text-parent", "text": "좌측 사이드바 ↔ 본문 패널", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["좌측 사이드바 ↔ 본문 패널", "사이드바 카드 + 모드바", "탐색기 · 검색 · Git · 할일"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sidebar",
+          "text": "5. 좌측 사이드바",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "multiagent",
+      "name": "왜 멀티에이전트",
+      "description": "각 패널은 독립 셸이라, claude·codex·agy를 한 화면에서 동시에 굴릴 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#multiagent" },
+        "layer2": { "kind": "text-parent", "text": "왜 멀티에이전트 — 한눈에", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["왜 멀티에이전트 — 한눈에", "독립 셸", "claude"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-multiagent",
+          "text": "6. 왜 멀티에이전트",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "keys",
+      "name": "단축키",
+      "description": "패널과 탭을 다루는 단축키 모음입니다. 최대화·복원과 포커스 이동을 지원합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#keys" },
+        "layer2": { "kind": "text-parent", "text": "단축키 (패널 · 탭)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["단축키 (패널 · 탭)", "활성 패널 최대화 / 복원(토글)", "Shift"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-keys",
+          "text": "7. 단축키",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-sessions-ko",
+  "name": "세션 목록 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/sessions.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "세션 목록 (이어가기)",
+      "description": "사이드바 5번째 '세션' 모드가 활성 프로젝트의 claude·codex·agy 대화를 한곳에 모읍니다. orchterm이 따로 기록하지 않고 세 CLI의 transcript 사이드카를 직접 읽습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "세션 목록 (이어가기)", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["세션 목록 (이어가기)", "핵심 기능 · 세션 목록", "사이드바 5번째 모드"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 세션 목록",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "세션 패널 열기",
+      "description": "사이드바 모드바의 세션 아이콘이나 Ctrl+Shift+S로 엽니다. 목록은 활성 프로젝트(현재 폴더) 전용이라 프로젝트를 바꾸면 그 프로젝트의 세션이 나옵니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#open" },
+        "layer2": { "kind": "text-parent", "text": "세션 패널 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["세션 패널 열기", "사이드바 모드바의", "활성 프로젝트(현재 폴더) 전용"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. 세션 패널 열기",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "list",
+      "name": "목록 — 날짜 그룹 · 에이전트 아이콘 · 메타",
+      "description": "세션은 최신순으로 정렬되어 오늘·어제·날짜 그룹으로 묶입니다. 각 행은 브랜드 아이콘·제목·상대시각, 있으면 git 브랜치까지 보여줍니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#list" },
+        "layer2": { "kind": "text-parent", "text": "목록 — 날짜 그룹 · 에이전트 아이콘 · 메타", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["목록 — 날짜 그룹 · 에이전트 아이콘 · 메타", "최신순으로 정렬되어", "날짜 그룹"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-list",
+          "text": "3. 목록",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "resume",
+      "name": "이어가기 — 원래 폴더에서 재개",
+      "description": "행을 클릭하면 원래 작업 폴더(cwd)에서 새 터미널 탭으로 대화를 재개합니다. CLI별로 claude·codex·antigravity 명령을 자동 실행합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#resume" },
+        "layer2": { "kind": "text-parent", "text": "이어가기 — 원래 폴더에서 재개", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["이어가기 — 원래 폴더에서 재개", "원래 작업 폴더(cwd)", "claude --resume"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-resume",
+          "text": "4. 이어가기",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "bypass",
+      "name": "권한 우회 — 승인 없이 이어가기",
+      "description": "패널 헤더의 '권한 우회' 체크박스를 켜면 이어가기 시 위험 권한 우회 플래그를 자동으로 붙입니다. 기본값은 꺼짐이며 신뢰하는 프로젝트에서만 켜세요.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#bypass" },
+        "layer2": { "kind": "text-parent", "text": "권한 우회 — 승인 없이 이어가기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["권한 우회 — 승인 없이 이어가기", "권한 우회 체크박스", "기본값은 꺼짐(안전 모드)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-bypass",
+          "text": "5. 권한 우회",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "loading",
+      "name": "증분 표시 · 로딩바",
+      "description": "한 번에 20개만 그리고 '더 보기'로 +20씩, 조회는 프로젝트당 1회(최대 500)라 즉시 반응합니다. 조회 중에는 로딩바를 띄웠다가 결과가 오면 교체합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#loading" },
+        "layer2": { "kind": "text-parent", "text": "증분 표시 · 로딩바", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["증분 표시 · 로딩바", "더 보기 (남은 N)", "세션 불러오는 중…"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-loading",
+          "text": "6. 증분 표시 · 로딩바",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "cross",
+      "name": "크로스플랫폼 · 어떻게 찾나",
+      "description": "세 CLI의 transcript 경로는 Windows·macOS·Linux에서 동일합니다. 백엔드는 DB와 무관한 순수 파일시스템 스캐너로 세 어댑터가 JSONL을 파싱합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#cross" },
+        "layer2": { "kind": "text-parent", "text": "크로스플랫폼 · 어떻게 찾나", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["크로스플랫폼 · 어떻게 찾나", "~/.claude/projects", "순수 파일시스템 스캐너"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-cross",
+          "text": "7. 크로스플랫폼",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키",
+      "description": "Ctrl+Shift+S로 세션 모드를 열고, 명령 팔레트에서 '세션'으로도 찾을 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["단축키", "세션 모드 열기", "명령 팔레트"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "8. 단축키",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

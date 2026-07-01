@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-task-ai-sharing-en",
+  "name": "AI task sharing tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/task-ai-sharing.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "AI task sharing",
+      "description": "The AI in an app terminal (claude·codex·gemini) reads, adds, edits, moves, and deletes the to-dos of the Space it's attached to. The results appear live on the task board beside it.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "AI task sharing", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["AI task sharing", "Core features · AI task sharing", "task board"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. AI task sharing",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "what",
+      "name": "What it does",
+      "description": "The AI can do five things: list_tasks, create_task, update_task, set_task_status, and delete_task. It handles only to-dos, not the columns (lists) themselves.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#what" },
+        "layer2": { "kind": "text-parent", "text": "What it does", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["What it does", "list_tasks", "create_task"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-what",
+          "text": "2. What it does",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "use",
+      "name": "The agent adds them",
+      "description": "When the commander or a worker leaves to-dos while planning, they appear on the board right away without a refresh, only on that agent's own Space.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#use" },
+        "layer2": { "kind": "text-parent", "text": "Usage — the agent adds them directly", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Usage — the agent adds them directly", "claude · Space 1", "task added"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-use",
+          "text": "3. Agent adds them",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "scope",
+      "name": "Space scoping — isolation",
+      "description": "Each AI can touch only the to-dos of the Space it's attached to and cannot reach another Space's board. Concurrent human and AI edits never overwrite each other.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#scope" },
+        "layer2": { "kind": "text-parent", "text": "Space scoping — isolation", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Space scoping — isolation", "Space 1 — orch", "Allowed"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-scope",
+          "text": "4. Space scoping",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "settings",
+      "name": "Settings",
+      "description": "It's ON by default. Turn it off with the 'Share to-dos (Tasks) with AI' toggle in settings, applied on restart. The MCP port is 9612.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#settings" },
+        "layer2": { "kind": "text-parent", "text": "Settings", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Settings", "Share to-dos (Tasks) with AI", "9612"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-settings",
+          "text": "5. Settings",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

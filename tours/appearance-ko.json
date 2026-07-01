@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-appearance-ko",
+  "name": "외관 · 폰트 · 단축키 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/appearance.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "외관 · 폰트 · 단축키",
+      "description": "앱의 룩앤필을 손에 맞춥니다. 폰트와 투명도, 단축키를 설정에서 바꿉니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "외관 · 폰트 · 단축키", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["그 외 · 시스템", "외관 · 폰트 · 단축키", "앱의 룩앤필을 손에 맞춥니다"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 개요",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "font",
+      "name": "폰트 고르기",
+      "description": "번들과 시스템 폰트를 함께 고르고, 샘플 글리프로 한글 폭을 눈으로 비교합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#font" },
+        "layer2": { "kind": "text-parent", "text": "폰트 고르기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["폰트 고르기", "코드 폰트", "UI 폰트"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-font",
+          "text": "2. 폰트 고르기",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "opacity",
+      "name": "창 투명도",
+      "description": "슬라이더로 창 전체를 반투명하게. 메뉴·모달은 또렷하게 유지됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#opacity" },
+        "layer2": { "kind": "text-parent", "text": "창 투명도", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["창 투명도", "슬라이더 하나로 창 전체를 반투명하게 만듭니다", "메뉴·모달·팔레트는 가독성을 위해 또렷하게 유지됩니다"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-opacity",
+          "text": "3. 창 투명도",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "statusbar",
+      "name": "상태바",
+      "description": "상태바 왼쪽으로 탐색기를 여닫고, 오른쪽에 파일 인코딩이 표시됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#statusbar" },
+        "layer2": { "kind": "text-parent", "text": "상태바", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["상태바", "탐색기", "UTF-8"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-statusbar",
+          "text": "4. 상태바",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "settings",
+      "name": "설정 다이얼로그",
+      "description": "햄버거 메뉴의 설정에서 엽니다. 왼쪽 네비는 고정, 오른쪽 패널만 스크롤됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#settings" },
+        "layer2": { "kind": "text-parent", "text": "설정 다이얼로그", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["설정 다이얼로그", "왼쪽 네비는 고정 · 오른쪽 패널만 스크롤됩니다", "백업"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-settings",
+          "text": "5. 설정 다이얼로그",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키 다시 지정",
+      "description": "행을 누르고 키를 눌러 재지정합니다. 충돌하면 빨강으로 저장을 막습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키 다시 지정", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["단축키 다시 지정", "녹화 중인 행에 키를 누르면 캡처됩니다", "고정 단축키"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "6. 단축키 재지정",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "menu",
+      "name": "햄버거 메뉴 · 정보(About)",
+      "description": "햄버거로 설정·정보를 엽니다. 정보는 버전과 라이선스를 보여줍니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#menu" },
+        "layer2": { "kind": "text-parent", "text": "햄버거 메뉴 · 정보(About)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["햄버거 메뉴 · 정보(About)", "설정", "정보"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-menu",
+          "text": "7. 햄버거 · 정보",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "keys",
+      "name": "단축키",
+      "description": "명령 팔레트와 파일 검색, 닫기 같은 자주 쓰는 단축키를 표로 정리했습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#keys" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1200, "width": 640, "height": 44, "nearbyText": ["단축키", "명령 팔레트", "파일 검색 팔레트"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-keys",
+          "text": "8. 단축키 표",
+          "position": { "x": 320, "y": 1160 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

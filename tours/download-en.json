@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-download-en",
+  "name": "Download · Install tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/download.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Download · Install",
+      "description": "Introduces how to get the Windows and macOS builds from GitHub Release, and covers the first-launch warning for unsigned builds.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "다운로드 · 설치", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["시작하기 · 다운로드 · 설치", "다운로드 · 설치", "Windows·macOS용 빌드를"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Download · Install",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "windows",
+      "name": "Windows",
+      "description": "Install using the setup installer or MSI, then get past the SmartScreen warning.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#windows" },
+        "layer2": { "kind": "text-parent", "text": "Windows", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Windows", "orchterm-setup.exe", "SmartScreen 경고 넘기기"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-windows",
+          "text": "2. Windows",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "macos",
+      "name": "macOS",
+      "description": "Covers the one-line install.sh, installing directly from the .dmg, and clearing quarantine.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#macos" },
+        "layer2": { "kind": "text-parent", "text": "macOS", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["macOS", "install.sh", "직접 .dmg로 설치"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-macos",
+          "text": "3. macOS",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "unsigned",
+      "name": "Unsigned-build notes",
+      "description": "Explains the first-launch warning for builds that aren't signed or notarized, and why you only need to clear it once.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#unsigned" },
+        "layer2": { "kind": "text-parent", "text": "미서명 안내", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["미서명 안내", "알 수 없는 게시자", "격리(quarantine)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-unsigned",
+          "text": "4. Unsigned-build notes",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

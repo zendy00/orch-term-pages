@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-changelog-en",
+  "name": "Changelog tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/changelog.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Changelog",
+      "description": "A timeline of new features and fixes for each release. With auto-update on, a new version is announced by a titlebar banner as soon as it ships.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Changelog", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Release · Changelog", "Changelog", "New features and fixes per version."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Changelog",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v03x",
+      "name": "0.3.0 release",
+      "description": "The 0.3.0 bundle. Adds localization (KO/EN), a sidebar session list to resume conversations, and tab tiling.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v03x" },
+        "layer2": { "kind": "text-parent", "text": "0.3.0 — i18n · Session list · Panel tiling", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["0.3.0 — i18n · Session list · Panel tiling", "v0.3.0", "Localization (Korean · English)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v03x",
+          "text": "2. 0.3.0 release",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v02x",
+      "name": "0.2.x stabilization",
+      "description": "The 0.2.x stabilization releases. Bundles SSH/SFTP and credential-vault fixes plus an in-app browser mirror toggle.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v02x" },
+        "layer2": { "kind": "text-parent", "text": "0.2.x — Stabilization · SSH · Mirror", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["0.2.x — Stabilization · SSH · Mirror", "v0.2.2", "macOS in-app browser mirror settings toggle + on by default"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v02x",
+          "text": "3. 0.2.x stabilization",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v013x",
+      "name": "0.1.30–0.1.37",
+      "description": "Releases 0.1.30–0.1.37. Brought full-text search, a Git panel revamp, and the AI gateway audit log.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v013x" },
+        "layer2": { "kind": "text-parent", "text": "0.1.30 ~ 0.1.37 — Search · Git panel · Gateway", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["0.1.30 ~ 0.1.37 — Search · Git panel · Gateway", "v0.1.37", "Search advanced-options collapse toggle + classic focus ring"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v013x",
+          "text": "4. 0.1.30–0.1.37",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "v012x",
+      "name": "0.1.22–0.1.29",
+      "description": "Releases 0.1.22–0.1.29. Everything from the first public release through multi-agent orchestration, the macOS port, and auto-update.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#v012x" },
+        "layer2": { "kind": "text-parent", "text": "0.1.22 ~ 0.1.29 — Multi-agent · macOS · Auto-update", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["0.1.22 ~ 0.1.29 — Multi-agent · macOS · Auto-update", "v0.1.29", "Editor font zoom (Cmd+=/−/0) + shortcut purification & tests"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-v012x",
+          "text": "5. 0.1.22–0.1.29",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    }
+  ]
+}

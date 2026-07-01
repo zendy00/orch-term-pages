@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-notifications-en",
+  "name": "Done badge · Notifications tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/notifications.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Done badge · Notifications",
+      "description": "A look at the badges that flag agents finishing in other tabs, and the unified notification center.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Done badge · Notifications", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Done badge · Notifications", "More · System · Done badge · Notifications"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Done badge · Notifications",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "badge",
+      "name": "Done badge — inactive tabs",
+      "description": "When an inactive tab gets a done signal it blinks a dingbat next to the icon — green for done, orange for waiting on approval or input.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#badge" },
+        "layer2": { "kind": "text-parent", "text": "Done badge — inactive tabs", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Done badge — inactive tabs", "claude · build", "claude · refactor"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-badge",
+          "text": "2. Done badge",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "signals",
+      "name": "Per-agent support",
+      "description": "Two ways an agent signals completion — the simple terminal bell almost any shell can send, versus the precise color signal that only claude gives today.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#signals" },
+        "layer2": { "kind": "text-parent", "text": "Per-agent support", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Per-agent support", "Precise color badge", "Notes"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-signals",
+          "text": "3. Per-agent support",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "center",
+      "name": "Unified notification center — the top bell",
+      "description": "The top bell gathers done and attention from every Space and tab into one list with a red total count. Main window only.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#center" },
+        "layer2": { "kind": "text-parent", "text": "Unified notification center — the top bell", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Unified notification center — the top bell", "Notifications", "Clear all"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-center",
+          "text": "4. Notification center",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "cards",
+      "name": "Card contents",
+      "description": "The last prompt and response are filled in only for agents that send the content, like claude; a bell alone shows the Agent done placeholder.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#cards" },
+        "layer2": { "kind": "text-parent", "text": "Card contents", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Card contents", "12 tests passed · 0 lint", "Agent done"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-cards",
+          "text": "5. Card contents",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "activate",
+      "name": "Click a card → jump · delete",
+      "description": "Clicking the card body switches to that Space, activates the tab, then clears the card. The X deletes just that card; Clear all empties them.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#activate" },
+        "layer2": { "kind": "text-parent", "text": "Click a card → jump · delete", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Click a card → jump · delete", "Click the card body", "Switch to that Space + activate the tab → delete the card"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-activate",
+          "text": "6. Click → jump · delete",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-browser-ko",
+  "name": "인앱 브라우저 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/browser.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "인앱 브라우저",
+      "description": "인앱 브라우저 탭은 iframe이 아니라 네이티브 자식 웹뷰라, 링크와 뒤로·앞으로가 진짜 브라우저처럼 자연스럽습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "인앱 브라우저", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["인앱 브라우저", "핵심 기능 · 인앱 브라우저", "네이티브 자식 웹뷰"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-hero",
+          "text": "1. 인앱 브라우저",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-urlbar",
+      "name": "주소창 · 뒤로 · 앞으로 · 새로고침",
+      "description": "주소창 왼쪽의 뒤로·앞으로·새로고침 버튼과, https일 때 왼쪽에 뜨는 자물쇠를 설명합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#urlbar" },
+        "layer2": { "kind": "text-parent", "text": "주소창 · 뒤로 · 앞으로 · 새로고침", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["주소창 · 뒤로 · 앞으로 · 새로고침", "뒤로(‹)", "새로고침(⟳)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-urlbar",
+          "text": "2. 주소창 · 네비게이션",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-links",
+      "name": "새 창 링크는 그 자리에서",
+      "description": "새 창·새 탭으로 열릴 링크도 같은 탭 그 자리에서 열려 링크가 끊기지 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#links" },
+        "layer2": { "kind": "text-parent", "text": "새 창 링크는 그 자리에서", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["새 창 링크는 그 자리에서", "그 자리에서", "진짜 새 창이 필요한 흐름은 예외"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-links",
+          "text": "3. 새 창 링크",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-localfile",
+      "name": "로컬 파일 열기",
+      "description": "탐색기의 HTML·이미지 같은 로컬 파일을 인앱 탭에서 바로 엽니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#localfile" },
+        "layer2": { "kind": "text-parent", "text": "로컬 파일 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["로컬 파일 열기", "빌드 리포트", "asset.localhost"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-localfile",
+          "text": "4. 로컬 파일 열기",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-external",
+      "name": "시스템 브라우저로 열기",
+      "description": "주소창 오른쪽 버튼으로 현재 페이지를 OS 기본 브라우저에서 엽니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#external" },
+        "layer2": { "kind": "text-parent", "text": "시스템 브라우저로 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["시스템 브라우저로 열기", "OS 기본 브라우저", "시스템 브라우저로 열기 버튼"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-external",
+          "text": "5. 시스템 브라우저",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-occlusion",
+      "name": "오른쪽 클릭 · 화면 위 메뉴",
+      "description": "페이지를 오른쪽 클릭하면 메뉴가 뜨고, 메뉴나 모달이 열리는 동안 웹뷰는 잠깐 숨습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#occlusion" },
+        "layer2": { "kind": "text-parent", "text": "오른쪽 클릭 · 화면 위 메뉴", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["오른쪽 클릭 · 화면 위 메뉴", "웹뷰 일시 숨김 · DOM 팝업 표시 중", "주소 복사"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-occlusion",
+          "text": "6. 오른쪽 클릭 메뉴",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-shortcuts",
+      "name": "단축키",
+      "description": "Ctrl과 +·−, Ctrl+휠로 페이지를 확대·축소합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["단축키", "확대", "축소"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-shortcuts",
+          "text": "7. 단축키",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    }
+  ]
+}

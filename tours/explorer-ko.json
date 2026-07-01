@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-explorer-ko",
+  "name": "탐색기 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/explorer.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "탐색기",
+      "description": "좌측 파일 탐색기의 핵심 기능을 순서대로 살펴봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "탐색기", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["핵심 기능 · 탐색기", "탐색기", "좌측의 파일 탐색기."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-hero",
+          "text": "1. 탐색기",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-projects",
+      "name": "멀티 프로젝트 전환",
+      "description": "탐색기 헤더의 프로젝트 이름을 클릭해 등록된 여러 루트를 전환합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#projects" },
+        "layer2": { "kind": "text-parent", "text": "멀티 프로젝트 전환", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["멀티 프로젝트 전환", "프로젝트 이름", "재시작 시 복원됩니다"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-projects",
+          "text": "2. 멀티 프로젝트",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-keyboard",
+      "name": "키보드 네비게이션 · 멀티 셀렉트",
+      "description": "방향키와 타입어헤드로 트리를 누비고, 여러 항목을 한 번에 엽니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#keyboard" },
+        "layer2": { "kind": "text-parent", "text": "키보드 네비게이션 · 멀티 셀렉트", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["키보드 네비게이션 · 멀티 셀렉트", "타입어헤드", "3개 선택"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-keyboard",
+          "text": "3. 키보드 네비",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-create-rename",
+      "name": "인라인 생성 · 이름변경",
+      "description": "선택한 자리에서 파일과 폴더를 만들고 그 자리에서 이름을 바꿉니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#create-rename" },
+        "layer2": { "kind": "text-parent", "text": "인라인 생성 · 이름변경", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["인라인 생성 · 이름변경", "중첩 경로", "clampMenuPosition.ts"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-create-rename",
+          "text": "4. 생성 · 이름변경",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-dnd",
+      "name": "드래그 & 드롭 — 경로 삽입",
+      "description": "파일을 터미널 패널에 드롭하면 절대 경로가 커서 위치에 삽입됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dnd" },
+        "layer2": { "kind": "text-parent", "text": "드래그 & 드롭 — 경로 삽입", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["드래그 & 드롭 — 경로 삽입", "절대 경로", "schema.sql"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-dnd",
+          "text": "5. 드래그 & 드롭",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-side",
+      "name": "좌 · 우 배치 전환",
+      "description": "푸터의 버튼으로 탐색기를 좌우로 옮기고, 브랜치와 항목 수도 함께 봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#side" },
+        "layer2": { "kind": "text-parent", "text": "좌 · 우 배치 전환", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["좌 · 우 배치 전환", "왼쪽 배치 (기본)", "128 항목"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-side",
+          "text": "6. 좌 · 우 배치",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-context-menu",
+      "name": "빈 영역 우클릭 → 터미널 열기",
+      "description": "폴더나 빈 영역을 우클릭하면 그 위치에서 새 터미널을 여는 메뉴가 열립니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#context-menu" },
+        "layer2": { "kind": "text-parent", "text": "빈 영역 우클릭 → 터미널 열기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["빈 영역 우클릭 → 터미널 열기", "터미널에서 열기", "모두 접기"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-context-menu",
+          "text": "7. 우클릭 → 터미널",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

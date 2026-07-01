@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-mirror-en",
+  "name": "CDP browser mirror tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/mirror.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "CDP browser mirror",
+      "description": "When the AI you're chatting with browses the web, every action is reflected live in the in-app browser panel beside the terminal. The app's own screen is invisible to the agent, so it's never operated by mistake.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "CDP browser mirror", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["CDP browser mirror", "Flagship features · CDP browser mirror", "in-app browser panel beside the terminal"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Browser mirror",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "concept",
+      "name": "What it does",
+      "description": "The mirror turns the agent's browser into a real panel on your screen, letting you watch it work in real time. The app's own UI is neither visible nor reachable.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#concept" },
+        "layer2": { "kind": "text-parent", "text": "What it does", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["What it does", "a real panel on your screen", "Built-in app mirror"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-concept",
+          "text": "2. What it does",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "enable",
+      "name": "Enable",
+      "description": "In dev, npm run dev:app always turns the mirror on; in a release, enable Agent browser mirror in settings and restart the app. The status bar then shows Mirror :port.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#enable" },
+        "layer2": { "kind": "text-parent", "text": "Enable", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Enable", "Agent browser mirror", "Mirror :port"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-enable",
+          "text": "3. Enable",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "usage",
+      "name": "Usage",
+      "description": "Ask the agent to open something in the browser and the page opens as a proper in-app tab, with every navigation, click, and input shown live in the panel. When it's done, you take over that tab.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#usage" },
+        "layer2": { "kind": "text-parent", "text": "Usage", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Usage", "proper in-app browser tab", "Example Domain"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-usage",
+          "text": "4. Usage",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "limits",
+      "name": "Limits · caveats",
+      "description": "Multi-agent setups are separated per Space, so each agent sees only its own Space's panel. When the mirror is on the in-app browser uses a separate profile, so normal-mode logins and cookies don't carry over.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#limits" },
+        "layer2": { "kind": "text-parent", "text": "Limits · caveats", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Limits · caveats", "Multi-agent setups are separated per Space", "Mirror mode uses a separate browser profile"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-limits",
+          "text": "5. Limits · caveats",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "reference",
+      "name": "Reference",
+      "description": "A single table sums up the proxy port, enable/disable, multi-agent behavior, and the other key values.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#reference" },
+        "layer2": { "kind": "text-parent", "text": "Reference", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Reference", "Proxy port", "Mirror profile"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-reference",
+          "text": "6. Reference",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    }
+  ]
+}

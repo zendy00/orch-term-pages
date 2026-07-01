@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-stats-ko",
+  "name": "다운로드 통계 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/stats.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "릴리즈 다운로드 통계",
+      "description": "GitHub 릴리즈 에셋의 누적 다운로드를 공개 API로 실시간 집계합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".stats-head h1" },
+        "layer2": { "kind": "text-parent", "text": "릴리즈 다운로드 통계", "parentSelector": ".stats-head", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["릴리즈 다운로드 통계", "GitHub Release 에셋 누적 다운로드", "zendy00/orch-term-pages"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 다운로드 통계",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "summary",
+      "name": "요약 카드",
+      "description": "총 다운로드, 릴리즈 수, 최신 버전을 요약 카드로 한눈에 보여줍니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#summary" },
+        "layer2": { "kind": "text-parent", "text": "총 다운로드", "parentSelector": "#summary", "tagName": "DIV" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["총 다운로드", "릴리즈 수", "최신 버전"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-summary",
+          "text": "2. 요약 카드",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "refresh",
+      "name": "새로고침",
+      "description": "새로고침 버튼으로 최신 다운로드 수치를 다시 불러옵니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#refresh" },
+        "layer2": { "kind": "text-parent", "text": "↻ 새로고침", "parentSelector": ".toolbar", "tagName": "BUTTON" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["↻ 새로고침", "업데이트"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-refresh",
+          "text": "3. 새로고침",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "releases",
+      "name": "릴리즈 목록",
+      "description": "각 릴리즈 카드에서 에셋별 크기와 다운로드 수를 확인하고, 이전 버전은 토글로 펼쳐 볼 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#releases" },
+        "layer2": { "kind": "text-parent", "text": "에셋", "parentSelector": "#releases", "tagName": "TH" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["에셋", "크기", "다운로드"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-releases",
+          "text": "4. 릴리즈 목록",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

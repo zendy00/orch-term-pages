@@ -90,6 +90,19 @@
     </table>
     <p class="note">⚠️ Resume works only if that CLI (<code>claude</code> · <code>codex</code> · <code>antigravity</code>) is on the system <code>PATH</code>.</p>
 
+    <!-- Bypass permissions -->
+    <h2 class="sec" id="bypass"><span class="hash"></span> Bypass permissions — resume without approvals</h2>
+    <p>Turn on the <b>Bypass permissions</b> checkbox in the session panel header and resuming will automatically add each CLI's <b>bypass-permissions flag</b>, so the session picks up immediately without folder-trust or tool-approval prompts. The checkbox state is saved and <b>persists across app restarts</b> (off by default).</p>
+    <table class="kbds">
+      <thead><tr><th>Agent</th><th>Resume command (bypass on)</th></tr></thead>
+      <tbody>
+        <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --dangerously-skip-permissions --resume &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex --dangerously-bypass-approvals-and-sandbox resume &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>antigravity --dangerously-skip-permissions --conversation &lt;id&gt;</code></td></tr>
+      </tbody>
+    </table>
+    <p class="note">⚠️ Bypass permissions is a <b>risky, not-recommended</b> option for unattended runs — when on, the agent writes files and runs commands without asking. It is <b>off by default (safe mode)</b>, so enable it only in projects you trust. Unchecking it restores the usual one-time folder-trust approval.</p>
+
     <!-- Pagination · loading -->
     <h2 class="sec" id="loading"><span class="hash"></span> Incremental display · loading bar</h2>
     <ul>
@@ -147,5 +160,6 @@
 
 <script src="../_icons.js"></script>
 <script src="../_nav.js"></script>
+<script src="../_tour.js"></script>
 </body>
 </html>

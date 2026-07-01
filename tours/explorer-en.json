@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-explorer-en",
+  "name": "Explorer tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/explorer.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "step-hero",
+      "name": "Explorer",
+      "description": "A guided tour of the file explorer's core features, one by one.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Explorer", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Core features · Explorer", "Explorer", "The file explorer on the left."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-hero",
+          "text": "1. Explorer",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-projects",
+      "name": "Switch between multiple projects",
+      "description": "Click the project name in the Explorer header to switch between registered roots.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#projects" },
+        "layer2": { "kind": "text-parent", "text": "Switch between multiple projects", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Switch between multiple projects", "project name", "restored on restart"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-projects",
+          "text": "2. Multiple projects",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-keyboard",
+      "name": "Keyboard navigation · multi-select",
+      "description": "Navigate the tree with arrow keys and type-ahead, and open several items at once.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#keyboard" },
+        "layer2": { "kind": "text-parent", "text": "Keyboard navigation · multi-select", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Keyboard navigation · multi-select", "type-ahead", "3 selected"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-keyboard",
+          "text": "3. Keyboard nav",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-create-rename",
+      "name": "Inline create · rename",
+      "description": "Create files and folders at the selected spot, and rename them in place.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#create-rename" },
+        "layer2": { "kind": "text-parent", "text": "Inline create · rename", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Inline create · rename", "nested path", "clampMenuPosition.ts"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-create-rename",
+          "text": "4. Create · rename",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-dnd",
+      "name": "Drag & drop — insert path",
+      "description": "Drop a file onto a terminal pane and its absolute path is inserted at the cursor.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dnd" },
+        "layer2": { "kind": "text-parent", "text": "Drag & drop — insert path", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Drag & drop — insert path", "absolute path", "schema.sql"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-dnd",
+          "text": "5. Drag & drop",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-side",
+      "name": "Left · right placement toggle",
+      "description": "Move the Explorer left or right with the footer button, and see the branch and item count.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#side" },
+        "layer2": { "kind": "text-parent", "text": "Left · right placement toggle", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Left · right placement toggle", "Left placement (default)", "128 items"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-side",
+          "text": "6. Left · right",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-context-menu",
+      "name": "Right-click empty space → open a terminal",
+      "description": "Right-click a folder or empty space to open a new terminal from that location.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#context-menu" },
+        "layer2": { "kind": "text-parent", "text": "Right-click empty space → open a terminal", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 1050, "width": 640, "height": 44, "nearbyText": ["Right-click empty space → open a terminal", "Open in terminal", "collapse all"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-step-context-menu",
+          "text": "7. Right-click → terminal",
+          "position": { "x": 320, "y": 1010 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-quickstart-ko",
+  "name": "빠른 시작 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/quickstart.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "빠른 시작",
+      "description": "처음 켠 순간부터 5분 안에 앱의 핵심 화면을 순서대로 둘러봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "빠른 시작", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["시작하기 · 빠른 시작", "빠른 시작", "5분 안에 한 바퀴"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 빠른 시작",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "walkthrough",
+      "name": "5분 안에 한 바퀴",
+      "description": "터미널 자동 열기부터 셸 추가, 패널 분할, 파일 편집, 인앱 브라우저, 오케스트레이션까지 여섯 단계를 순서대로 따라갑니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#walkthrough" },
+        "layer2": { "kind": "text-parent", "text": "5분 안에 한 바퀴", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["5분 안에 한 바퀴", "다운로드 · 설치", "앱 실행 — 첫 터미널이 자동으로"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-walkthrough",
+          "text": "2. 5분에 한 바퀴",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "next",
+      "name": "다음엔 어디로",
+      "description": "각 기능의 자세한 설명으로 이어지는 카드 모음입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#next" },
+        "layer2": { "kind": "text-parent", "text": "다음엔 어디로", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["다음엔 어디로", "터미널", "오케스트레이션"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-next",
+          "text": "3. 다음엔 어디로",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "알아두면 좋은 단축키",
+      "description": "복사·붙여넣기, 줄바꿈, 패널 이동, 탐색기 토글 등 자주 쓰는 단축키를 한눈에 정리했습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#shortcuts" },
+        "layer2": { "kind": "text-parent", "text": "알아두면 좋은 단축키", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["알아두면 좋은 단축키", "선택 시 복사(없으면 인터럽트) / 붙여넣기", "줄바꿈 (제출 안 함)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "4. 단축키",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

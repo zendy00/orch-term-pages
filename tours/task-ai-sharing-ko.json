@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-task-ai-sharing-ko",
+  "name": "AI 할 일 공유 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/task-ai-sharing.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "AI 할 일 공유",
+      "description": "앱 안 터미널의 AI(claude·codex·gemini)가 자기가 붙어 있는 Space의 할 일을 직접 읽고 추가·수정·이동·삭제합니다. 결과는 옆 할 일 보드에 실시간으로 나타납니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "AI 할 일 공유", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["AI 할 일 공유", "핵심 기능 · AI 할 일 공유", "할 일 보드"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. AI 할 일 공유",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "what",
+      "name": "무엇을 하는가",
+      "description": "AI가 할 수 있는 동작은 다섯 가지입니다. list_tasks·create_task·update_task·set_task_status·delete_task로 할 일만 다루고 컬럼(목록) 자체는 건드리지 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#what" },
+        "layer2": { "kind": "text-parent", "text": "무엇을 하는가", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["무엇을 하는가", "list_tasks", "create_task"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-what",
+          "text": "2. 무엇을 하는가",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "use",
+      "name": "에이전트가 직접 추가",
+      "description": "지휘자나 워커가 작업 계획을 세우며 to-do를 남기면 새로고침 없이 보드에 바로 반영됩니다. 추가한 할 일은 자기 Space의 보드에만 나타납니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#use" },
+        "layer2": { "kind": "text-parent", "text": "사용 — 에이전트가 직접 추가", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["사용 — 에이전트가 직접 추가", "claude · Space 1", "task added"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-use",
+          "text": "3. 에이전트가 추가",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "scope",
+      "name": "Space 스코핑 — 격리",
+      "description": "각 AI는 자기가 붙어 있는 Space의 할 일만 건드릴 수 있고 다른 Space의 보드에는 접근할 수 없습니다. 사람과 동시에 바꿔도 서로 덮어쓰지 않고 안전하게 저장됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#scope" },
+        "layer2": { "kind": "text-parent", "text": "Space 스코핑 — 격리", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Space 스코핑 — 격리", "Space 1 — orch", "허용"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-scope",
+          "text": "4. Space 스코핑",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "settings",
+      "name": "설정",
+      "description": "기본값은 켜짐입니다. 설정의 'AI에 할 일(Task) 공유' 토글로 끌 수 있으며 재시작하면 적용됩니다. MCP 포트는 9612입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#settings" },
+        "layer2": { "kind": "text-parent", "text": "설정", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["설정", "AI에 할 일(Task) 공유", "9612"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-settings",
+          "text": "5. 설정",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

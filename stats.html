@@ -52,7 +52,7 @@
   .older.hidden { display: none; }
 </style>
 </head>
-<body>
+<body data-page="stats">
 <div class="wrap">
   <header class="site-head">
     <img class="glyph" src="./assets/app-icon.png" alt="" />
@@ -192,5 +192,6 @@ function render(releases) {
 document.getElementById('refresh').addEventListener('click', load);
 load();
 </script>
+<script src="./_tour.js"></script>
 </body>
 </html>

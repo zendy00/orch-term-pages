@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-auto-update-en",
+  "name": "Auto-update tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/auto-update.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Auto-update",
+      "description": "When a new version is out, a titlebar accent pill announces it; click to install via download then restart. It checks once automatically at launch, and you can also check manually from the About window.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Auto-update", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["Auto-update", "More · System · Auto-update", "When a new version is out"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Auto-update",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "notify",
+      "name": "New-version notification (titlebar pill)",
+      "description": "A titlebar accent pill on the right announces the new version. The label advances with progress: new version, downloading, restart, failed.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#notify" },
+        "layer2": { "kind": "text-parent", "text": "New-version notification (titlebar pill)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["New-version notification (titlebar pill)", "accent pill", "Update 0.2.1"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-notify",
+          "text": "2. New-version notification",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "install",
+      "name": "Download · restart install",
+      "description": "Clicking the pill opens a confirmation dialog. Agree and it downloads, installs the new version, and restarts; cancel touches no network.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#install" },
+        "layer2": { "kind": "text-parent", "text": "Download · restart install", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Download · restart install", "Install update", "Install and restart"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-install",
+          "text": "3. Download · restart install",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "check",
+      "name": "Boot check · manual About check",
+      "description": "Checks run once automatically at launch and directly via Check for Updates in the About window; both share one result.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#check" },
+        "layer2": { "kind": "text-parent", "text": "Boot check · manual About check", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Boot check · manual About check", "Check for Updates", "You're on the latest version (0.2.0)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-check",
+          "text": "4. Boot · About check",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "publish",
+      "name": "Signing · release notes",
+      "description": "Updates are verified by signature, and release notes are generated automatically from commits.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#publish" },
+        "layer2": { "kind": "text-parent", "text": "Signing · release notes", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Signing · release notes", "Updates are verified by signature"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-publish",
+          "text": "5. Signing · release notes",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "dev",
+      "name": "DEV unsupported · platform constraints",
+      "description": "Auto-update is for release builds only; dev builds only show an unsupported notice.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dev" },
+        "layer2": { "kind": "text-parent", "text": "DEV unsupported · platform constraints", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["DEV unsupported · platform constraints", "release builds only", "dev builds don't support updates"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-dev",
+          "text": "6. DEV unsupported",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    }
+  ]
+}

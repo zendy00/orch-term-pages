@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-orchestration-ko",
+  "name": "에이전트 오케스트레이션 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/orchestration.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "에이전트 오케스트레이션",
+      "description": "대화 중인 AI가 다른 AI를 워커로 띄워 여러 턴에 걸쳐 협업시키는 control plane을 소개합니다. 지휘자–워커 모델의 큰 그림을 먼저 봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "에이전트 오케스트레이션", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["대형 기능 · control plane", "MCP A2A", "지휘자(commander)–워커(worker) 모델로 한 자리에서 팀을 부립니다."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 에이전트 오케스트레이션",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "concept",
+      "name": "무엇을 하는가",
+      "description": "지휘자 AI가 워커를 인터랙티브 TUI 탭에 띄우고 메시지를 주고받는 양방향 1:1 채널을 설명합니다. 자기 세션이 아닌 워커는 건드릴 수 없습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#concept" },
+        "layer2": { "kind": "text-parent", "text": "무엇을 하는가", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["무엇을 하는가", "인터랙티브 TUI 탭", "양방향 1:1 채널"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-concept",
+          "text": "2. 무엇을 하는가",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "start",
+      "name": "시작하기",
+      "description": "설정에서 오케스트레이션을 켜고 앱을 재시작한 뒤, 지휘자 탭에 자연어로 위임하면 워커 탭이 뜨고 응답이 돌아옵니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#start" },
+        "layer2": { "kind": "text-parent", "text": "시작하기 — 지휘자에게 시키기", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["시작하기 — 지휘자에게 시키기", "오케스트레이션 켜기", "지휘자 탭에서 일 맡기기"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-start",
+          "text": "3. 시작하기",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "dashboard",
+      "name": "감독 대시보드",
+      "description": "명령 팔레트에서 감독 대시보드를 열면 현재 Space의 라이브 세션을 모아 보여주고, 워커 이동·턴 중지·세션 닫기를 한곳에서 합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dashboard" },
+        "layer2": { "kind": "text-parent", "text": "감독 대시보드 (Space당 1개)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["감독 대시보드 (Space당 1개)", "오케스트레이션 · Space 1", "● 2 세션"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-dashboard",
+          "text": "4. 감독 대시보드",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tools",
+      "name": "무엇을 주고받나",
+      "description": "지휘자 AI가 자연어 뒤에서 호출하는 MCP 도구입니다. list_agents·open_session·send·close_session의 역할을 정리합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#tools" },
+        "layer2": { "kind": "text-parent", "text": "무엇을 주고받나", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["무엇을 주고받나", "list_agents", "open_session"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tools",
+          "text": "5. 무엇을 주고받나",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "security",
+      "name": "안전 기본값",
+      "description": "로컬 전용·일회성 토큰·기본 off·워커 안전 모드 등 오케스트레이션의 안전 기본값을 설명합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#security" },
+        "layer2": { "kind": "text-parent", "text": "안전 기본값", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["안전 기본값", "로컬(127.0.0.1) 전용", "워커 안전 모드 기본 ON"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-security",
+          "text": "6. 안전 기본값",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

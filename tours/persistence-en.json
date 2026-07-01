@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-persistence-en",
+  "name": "Storage · Backup tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/persistence.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Storage · Backup",
+      "description": "See how settings, Spaces, and to-dos are all saved in one place automatically.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "Storage · Backup", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["More · System · Storage · Backup", "Storage · Backup", "Settings, workspace, and to-dos are all saved automatically in one place."] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Storage · Backup",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 5500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sqlite",
+      "name": "Everything saved in one file",
+      "description": "Settings, your open Spaces and tabs, and to-dos all live in a single file.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#sqlite" },
+        "layer2": { "kind": "text-parent", "text": "Everything saved in one file", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["Everything saved in one file", "orchterm.db"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sqlite",
+          "text": "2. Everything in one file",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "migrate",
+      "name": "Automatic migration of old settings",
+      "description": "On the first boot of a new version, your old settings move to the new store automatically.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#migrate" },
+        "layer2": { "kind": "text-parent", "text": "Automatic migration of old settings", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["Automatic migration of old settings", "settings.json.migrated"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-migrate",
+          "text": "3. Automatic migration",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "recovery",
+      "name": "Automatic backup · recovery",
+      "description": "Every boot leaves a backup and checks the file, recovering from the latest healthy backup if it's corrupt.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#recovery" },
+        "layer2": { "kind": "text-parent", "text": "Automatic backup · recovery", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Automatic backup · recovery", "quick_check ✓"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-recovery",
+          "text": "4. Backup · recovery",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "backup",
+      "name": "Full backup — export · import",
+      "description": "Export all settings to one file, or import a backup that swaps in on the next restart.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#backup" },
+        "layer2": { "kind": "text-parent", "text": "Full backup — export · import", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["Full backup — export · import", "Settings → Backup"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-backup",
+          "text": "5. Export · import",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "files",
+      "name": "Data folder files",
+      "description": "A quick rundown of the roles of the storage file and backup files in the data folder.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#files" },
+        "layer2": { "kind": "text-parent", "text": "Data folder files", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["Data folder files", "orchterm.db.bak.YYYY-MM-DD"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-files",
+          "text": "6. Data folder files",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    }
+  ]
+}

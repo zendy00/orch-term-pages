@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-notifications-ko",
+  "name": "완료 배지 · 알림 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/notifications.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "완료 배지 · 알림",
+      "description": "다른 탭에서 끝난 에이전트를 알리는 배지와 통합 알림센터를 살펴봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "완료 배지 · 알림", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["완료 배지 · 알림", "그 외 · 시스템 · 완료 배지 · 알림"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 완료 배지 · 알림",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "badge",
+      "name": "완료 배지 — 비활성 탭",
+      "description": "비활성 탭이 완료 신호를 받으면 아이콘 옆에 딩벳을 깜빡입니다. 초록은 완료, 주황은 승인·입력 대기입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#badge" },
+        "layer2": { "kind": "text-parent", "text": "완료 배지 — 비활성 탭", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["완료 배지 — 비활성 탭", "claude · build", "claude · refactor"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-badge",
+          "text": "2. 완료 배지",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "signals",
+      "name": "에이전트별 지원",
+      "description": "에이전트가 완료를 알리는 두 방법을 비교합니다 — 대부분 셸의 단순한 터미널 벨과, 색으로 완료·승인을 구분하는 정밀 신호.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#signals" },
+        "layer2": { "kind": "text-parent", "text": "에이전트별 지원", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["에이전트별 지원", "정밀 색 배지", "비고"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-signals",
+          "text": "3. 에이전트별 지원",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "center",
+      "name": "통합 알림센터 — 상단 종",
+      "description": "상단 종은 모든 Space·탭의 완료·주의를 한 목록에 모으고, 빨간 숫자로 총 개수를 보여줍니다. 메인 창 전용입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#center" },
+        "layer2": { "kind": "text-parent", "text": "통합 알림센터 — 상단 종", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["통합 알림센터 — 상단 종", "알림", "전체 삭제"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-center",
+          "text": "4. 통합 알림센터",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "cards",
+      "name": "카드 내용",
+      "description": "카드의 마지막 프롬프트·응답은 claude처럼 내용을 보내는 에이전트만 채워지고, 벨만 울리면 '에이전트 완료' 플레이스홀더가 뜹니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#cards" },
+        "layer2": { "kind": "text-parent", "text": "카드 내용", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["카드 내용", "테스트 12개 통과 · 린트 0", "에이전트 완료"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-cards",
+          "text": "5. 카드 내용",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "activate",
+      "name": "카드 클릭 → 이동 · 삭제",
+      "description": "카드 본문을 클릭하면 그 Space로 전환하고 탭을 활성화한 뒤 카드를 지웁니다. X는 카드만 삭제, 헤더는 전체 삭제.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#activate" },
+        "layer2": { "kind": "text-parent", "text": "카드 클릭 → 이동 · 삭제", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["카드 클릭 → 이동 · 삭제", "카드 본문 클릭", "그 Space로 전환 + 탭 활성화 → 카드 삭제"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-activate",
+          "text": "6. 클릭 → 이동·삭제",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

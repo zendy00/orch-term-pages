@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-auto-update-ko",
+  "name": "자동 업데이트 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/auto-update.html",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-07-01T00:00:00Z",
+  "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "자동 업데이트",
+      "description": "새 버전이 나오면 타이틀바 pill로 알리고, 클릭하면 다운로드와 재시작으로 설치합니다. 부팅 시 자동으로 한 번, 정보(About) 창에서 수동으로도 확인합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".page-title" },
+        "layer2": { "kind": "text-parent", "text": "자동 업데이트", "parentSelector": "#main", "tagName": "H1" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["자동 업데이트", "그 외 · 시스템 · 자동 업데이트", "새 버전이 나오면 타이틀바"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 자동 업데이트",
+          "position": { "x": 320, "y": 110 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "notify",
+      "name": "새 버전 알림 (타이틀바 pill)",
+      "description": "타이틀바 오른쪽 액센트 pill이 새 버전을 알립니다. 라벨은 새 버전·다운로드 중·재시작·실패 순으로 진행 상황에 따라 바뀝니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#notify" },
+        "layer2": { "kind": "text-parent", "text": "새 버전 알림 (타이틀바 pill)", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 300, "width": 640, "height": 44, "nearbyText": ["새 버전 알림 (타이틀바 pill)", "액센트 pill", "업데이트 0.2.1"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-notify",
+          "text": "2. 새 버전 알림",
+          "position": { "x": 320, "y": 260 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "install",
+      "name": "다운로드 · 재시작 설치",
+      "description": "pill을 클릭하면 설치 확인 창이 뜹니다. 동의하면 새 버전을 내려받아 설치하고 앱을 재시작하며, 취소하면 네트워크를 건드리지 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#install" },
+        "layer2": { "kind": "text-parent", "text": "다운로드 · 재시작 설치", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 450, "width": 640, "height": 44, "nearbyText": ["다운로드 · 재시작 설치", "업데이트 설치", "설치하고 재시작"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-install",
+          "text": "3. 다운로드·재시작 설치",
+          "position": { "x": 320, "y": 410 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "check",
+      "name": "부팅 체크 · About 수동 확인",
+      "description": "부팅 때 자동으로 한 번, 정보(About) 창의 Check for Updates 버튼으로 직접 확인합니다. 둘은 결과를 공유해 About에서 찾은 새 버전이 pill에도 나타납니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#check" },
+        "layer2": { "kind": "text-parent", "text": "부팅 체크 · About 수동 확인", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["부팅 체크 · About 수동 확인", "Check for Updates", "최신 버전입니다 (0.2.0)"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-check",
+          "text": "4. 부팅·About 확인",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "publish",
+      "name": "서명 · 릴리즈 노트",
+      "description": "업데이트는 서명으로 검증되고, 릴리즈 노트는 커밋에서 자동 생성됩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#publish" },
+        "layer2": { "kind": "text-parent", "text": "서명 · 릴리즈 노트", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 750, "width": 640, "height": 44, "nearbyText": ["서명 · 릴리즈 노트", "업데이트는 서명으로 검증되어"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-publish",
+          "text": "5. 서명·릴리즈 노트",
+          "position": { "x": 320, "y": 710 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "dev",
+      "name": "DEV 미지원 · 플랫폼 제약",
+      "description": "자동 업데이트는 릴리즈 빌드 전용입니다. dev 빌드는 미지원 안내만 띄웁니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#dev" },
+        "layer2": { "kind": "text-parent", "text": "DEV 미지원 · 플랫폼 제약", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 900, "width": 640, "height": 44, "nearbyText": ["DEV 미지원 · 플랫폼 제약", "릴리즈 빌드 전용", "dev 빌드는 업데이트 미지원"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-dev",
+          "text": "6. DEV 미지원",
+          "position": { "x": 320, "y": 860 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    }
+  ]
+}
