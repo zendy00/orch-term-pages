@@ -1,0 +1,32 @@
+# Orch term Documentation
+
+> Public documentation for Orch term, a multi-agent terminal workstation for running and orchestrating AI coding agents such as Codex, Claude, and Agy from one local workspace.
+
+Base URL: https://zendy00.github.io/orch-term-pages/
+
+## Start Here
+
+- [English overview](https://zendy00.github.io/orch-term-pages/en/)
+- [English quickstart](https://zendy00.github.io/orch-term-pages/en/quickstart.html)
+- [Korean overview](https://zendy00.github.io/orch-term-pages/)
+- [Korean quickstart](https://zendy00.github.io/orch-term-pages/quickstart.html)
+
+## Core Guides
+
+- [Workstation](https://zendy00.github.io/orch-term-pages/en/workstation.html): workspace model, panes, and operator workflow.
+- [Terminal](https://zendy00.github.io/orch-term-pages/en/terminal.html): terminal usage and local shells.
+- [Orchestration](https://zendy00.github.io/orch-term-pages/en/orchestration.html): multi-agent sessions and worker coordination.
+- [Tasks](https://zendy00.github.io/orch-term-pages/en/tasks.html): task board and work tracking.
+- [Task AI Sharing](https://zendy00.github.io/orch-term-pages/en/task-ai-sharing.html): sharing task context with AI agents.
+- [Source Control](https://zendy00.github.io/orch-term-pages/en/source-control.html): git and source-control workflows.
+- [SSH](https://zendy00.github.io/orch-term-pages/en/ssh.html): remote shell and SSH workflows.
+- [Browser Mirror](https://zendy00.github.io/orch-term-pages/en/mirror.html): visible browser mirroring for web tasks.
+
+## Discovery Files
+
+- [Sitemap](https://zendy00.github.io/orch-term-pages/sitemap.xml)
+- [Full LLM index](https://zendy00.github.io/orch-term-pages/llms-full.txt)
+
+## Crawler Access
+
+The site explicitly allows search and user-request crawlers for OpenAI, Google, and Anthropic in `robots.txt`, including OAI-SearchBot, ChatGPT-User, Googlebot, Google-Extended, Claude-SearchBot, and Claude-User. Training crawlers GPTBot and ClaudeBot are also allowed.

@@ -13,8 +13,12 @@
     return f && /\.html?$/i.test(f) ? f : "index.html";
   }
 
+  // ── 봇/크롤러는 자동 리다이렉트 제외(언어 타겟팅은 hreflang이 담당 → ko 페이지 색인 보존) ──
+  var ua = navigator.userAgent || "";
+  var isBot = /bot|crawler|crawl|spider|slurp|bingpreview|Google-Extended|GPTBot|ClaudeBot|OAI-SearchBot|facebookexternalhit|Twitterbot|Slackbot|Discordbot|WhatsApp|kakaotalk|redditbot|embedly|Applebot/i.test(ua);
+
   // ── 1) 자동 리다이렉트 (한국어 페이지에서만, 페인트 전) ──
-  if (!isEn) {
+  if (!isEn && !isBot) {
     try {
       var ov = localStorage.getItem(KEY);
       var goEn;

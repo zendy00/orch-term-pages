@@ -55,6 +55,17 @@
 
 배포 후: `https://zendy00.github.io/orch-term-pages/`.
 
+## 검색/AI 크롤러 노출
+
+`docs/site/` 루트에 검색·AI 발견용 파일을 둔다.
+
+- `robots.txt` — OpenAI(`OAI-SearchBot`, `ChatGPT-User`, `GPTBot`), Google(`Googlebot`, `Google-Extended`), Anthropic/Claude(`Claude-SearchBot`, `Claude-User`, `ClaudeBot`) 허용.
+- `sitemap.xml` — 한국어·영어 HTML 전체 URL.
+- `llms.txt` / `llms-full.txt` — Codex, Claude, Antigravity 같은 AI 코딩 도구가 문서 구조를 빠르게 읽도록 하는 진입 인덱스.
+- 각 HTML `<head>` — `meta robots`, `canonical`, `hreflang`을 포함한다.
+
+주의: 현재 배포 URL은 GitHub Project Pages 경로(`https://zendy00.github.io/orch-term-pages/`)다. 표준 `robots.txt`는 호스트 루트(`/robots.txt`) 기준이라, `https://zendy00.github.io/orch-term-pages/robots.txt`는 파일로 접근 가능해도 모든 크롤러의 정책 파일로 보장되지는 않는다. 크롤러 제어를 확실히 하려면 커스텀 도메인을 Pages에 연결하거나 `zendy00.github.io` 사용자 사이트 루트에도 동일한 `robots.txt`를 둔다. `sitemap.xml`, HTML 메타, `llms.txt`는 현재 Project Pages 경로에서도 그대로 유효하다.
+
 ## 앱 빌드 + 다운로드 릴리스 (`.github/workflows/release.yml`)
 
 버전 태그(`vX.Y.Z`) 푸시 시(또는 Actions에서 수동 실행) **Windows에서 앱을 빌드**해
