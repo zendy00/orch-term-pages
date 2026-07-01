@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Storage · Backup — Orch term guide</title>
+<meta name="description" content="Persist settings, workspace, and to-dos in a single SQLite file (orchterm.db). One-time settings.json→DB migration at boot, daily corruption backup/recovery, DB file export/import (import staging → restart swap)." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+</head>
+<body data-page="persistence">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>More · System</span><span class="sep">/</span><span>Storage · Backup</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> More · System · Storage · Backup</p>
+    <h1 class="page-title">Storage · Backup</h1>
+    <p class="lede">Settings, workspace, and to-dos are all saved automatically in one place. Nothing breaks if the app shuts down mid-use, it's backed up automatically every day, and you can export and import all your settings as a single file — there's nothing to manage by hand.</p>
+
+    <!-- Everything in one file -->
+    <h2 class="sec" id="sqlite"><span class="hash"></span> Everything saved in one file</h2>
+    <p>All state — settings, your open Spaces and tabs, and to-dos — is held in a single file, <code>orchterm.db</code>, inside the data folder. Development, release, and worktree builds each use their own separate folder so they never mix.</p>
+
+    <!-- Automatic migration of old settings -->
+    <h2 class="sec" id="migrate"><span class="hash"></span> Automatic migration of old settings</h2>
+    <p>If you were on an older version, the first boot of the new version moves your existing settings to the new store automatically in one go (settings, theme, Spaces, and to-dos all preserved). The original is left as <code>settings.json.migrated</code>, so there's nothing else to do.</p>
+
+    <!-- Corruption backup/recovery -->
+    <h2 class="sec" id="recovery"><span class="hash"></span> Automatic backup · recovery</h2>
+    <p>On every boot it leaves one backup for that day (keeping the 10 most recent) and checks that the storage file is intact. If corruption is found, it automatically recovers from the most recent healthy backup and lets you know.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Data folder — daily .bak rotation</span><span class="badge ok">quick_check ✓</span></div>
+        <div class="shot-stage" style="padding:16px">
+          <div class="term"><span class="d"># One .bak created per day at boot · rotated up to 10</span>
+<span class="g">$</span> ls -la ~/.orchterm
+<span class="c">orchterm.db</span>                  <span class="d">464K   ← live DB</span>
+<span class="c">orchterm.db-wal</span>              <span class="d">132K   ← WAL journal (writes)</span>
+<span class="c">orchterm.db-shm</span>              <span class="d"> 32K   ← shared-memory index</span>
+<span class="d">orchterm.db.bak.2026-06-28</span>   <span class="d">452K</span>
+<span class="d">orchterm.db.bak.2026-06-27</span>   <span class="d">448K</span>
+<span class="d">orchterm.db.bak.2026-06-26</span>   <span class="d">447K   … (beyond 10, the oldest are discarded first)</span>
+<span class="am">settings.json.migrated</span>       <span class="am">116K   ← original preserved after migration</span>
+<span class="g">[db] quick_check ok — backup orchterm.db.bak.2026-06-28 (rotated)</span></div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> A backup (<code>.bak</code>) is a clean single-file snapshot · <span class="n">②</span> if the check fails, it auto-recovers from the latest healthy backup.</div>
+      </div>
+    </figure>
+
+    <!-- Full settings backup -->
+    <h2 class="sec" id="backup"><span class="hash"></span> Full backup — export · import</h2>
+    <p>From <b>Settings → Backup</b> you can export all your settings as a single file, or replace your current data wholesale from a backup file. Import isn't applied immediately; it's safely swapped in on the next <b>restart</b>.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/set-backup.png" alt="Settings — Backup: full backup (database) import/export" />
+        <div class="shot-cap"><span class="n">①</span> <span class="i dim" data-icon="download"></span> Export = save settings + workspace + to-dos all to one <code>.db</code> file · <span class="n">②</span> <span class="i dim" data-icon="refresh"></span> Import = validated, then swapped only on restart.</div>
+      </div>
+    </figure>
+
+    <div class="warn"><b>Import replaces your current data wholesale</b> — after a confirmation, the app restarts. The previous state is automatically preserved as a <code>.pre-import</code> file so you can roll back.</div>
+
+    <!-- Data files -->
+    <h2 class="sec" id="files"><span class="hash"></span> Data folder files</h2>
+    <table class="kbds">
+      <thead><tr><th>File</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td><code>orchterm.db</code></td><td>The storage file holding all settings, Spaces, and to-dos</td></tr>
+        <tr><td><code>orchterm.db.bak.YYYY-MM-DD</code></td><td>A backup created daily — the 10 most recent are kept</td></tr>
+        <tr><td><code>settings.json.migrated</code></td><td>The old settings original, preserved after migration</td></tr>
+        <tr><td><code>orchterm.db.&lt;stamp&gt;.pre-import</code></td><td>The state just before import — for rollback</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="sidebar"></span>Spaces</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · Panes</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI gateway</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="ssh"></span>SSH · SFTP</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="spaces.html">Next → Spaces</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

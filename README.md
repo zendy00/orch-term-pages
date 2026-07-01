@@ -19,6 +19,13 @@
 `index.html` = 홈, 나머지는 기능별 가이드. `stats.html`은 별도 통계 페이지(독립).
 디자인 소스(목업)는 [`docs/mock/site/`](../mock/site/)에 보존.
 
+## 다국어 (i18n)
+
+- **`en/`** = 영어판 페이지(한국어판과 1:1). 공유 자산(`_tokens.css`·`_app.css`·`site.css`·`_icons.js`·`_nav.js`·`assets/`)은 복제하지 않고 `../`로 참조한다.
+- **`_lang.js`** (모든 페이지 `<head>`에 로드) — ① 한국어판에서 브라우저 언어가 비한국어면 `en/`으로 **페인트 전 리다이렉트**(localStorage `orchterm-lang`의 수동 선택은 존중, 영어판은 자동 리다이렉트 안 함) ② 상단바에 **반대 언어 글자 하나**(한국어→`EN`, 영어→`KO`)를 토글로 주입.
+- **`_nav.js`** — `<html lang="en">`이면 사이드바/TOC를 영어 라벨로 렌더(한국어가 기본).
+- ⚠️ **한국어판 페이지를 추가·수정하면 `en/` 대응본도 같이 갱신**한다(구조는 동일하게, 텍스트만 영어). `stats.html`은 i18n 제외.
+
 ## 공개 배포 (GitHub Pages, 소스 repo는 private 유지)
 
 `.github/workflows/pages.yml`이 `docs/site/` 변경 push 시 **public repo `zendy00/orch-term-pages`**로

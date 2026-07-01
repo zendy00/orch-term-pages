@@ -44,6 +44,12 @@
   .rlink { font-size: 13px; margin-top: 10px; display: inline-block; }
   .state { text-align: center; color: var(--dim); padding: 40px 0; }
   .state.err { color: #e06c75; }
+  .older-toggle { background: var(--bg-1); border: 1px solid var(--line); color: var(--dim);
+    border-radius: 8px; padding: 9px 16px; font-size: 13.5px; cursor: pointer; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 8px; margin: 4px 0 14px; }
+  .older-toggle:hover { border-color: var(--amber); color: var(--amber); }
+  .older-toggle .tri { font-size: 11px; line-height: 1; }
+  .older.hidden { display: none; }
 </style>
 </head>
 <body>
@@ -104,6 +110,39 @@ async function load() {
   }
 }
 
+function assetRows(r) {
+  const assets = sortedAssets(r);
+  if (!assets.length) return '<tr><td class="none" colspan="3">에셋 없음</td></tr>';
+  return assets.map((a) => {
+    const counted = isCounted(a);
+    const badge = counted ? '' : ' <span class="tag-uncounted" title="다운로드 통계 미집계">미집계</span>';
+    return `
+          <tr${counted ? '' : ' class="uncounted"'}>
+            <td><a href="${esc(a.browser_download_url)}" target="_blank" rel="noopener">${esc(a.name)}</a>${badge}</td>
+            <td class="r">${fmtBytes(a.size)}</td>
+            <td class="r dl">${fmtInt(a.download_count)}</td>
+          </tr>`;
+  }).join('');
+}
+
+function releaseCard(r, isLatest) {
+  return `
+      <div class="release${isLatest ? ' is-latest' : ''}">
+        <div class="rh">
+          <span class="tag">${esc(r.tag_name)}</span>
+          ${isLatest ? '<span class="badge latest">LATEST</span>' : ''}
+          ${r.prerelease ? '<span class="badge pre">pre-release</span>' : ''}
+          <span class="dl">↓ ${fmtInt(releaseDownloads(r))}</span>
+          <span class="date">${fmtDate(r.published_at)}</span>
+        </div>
+        <table class="asset-table">
+          <thead><tr><th>에셋</th><th class="r">크기</th><th class="r">다운로드</th></tr></thead>
+          <tbody>${assetRows(r)}</tbody>
+        </table>
+        <a class="rlink" href="${esc(r.html_url)}" target="_blank" rel="noopener">→ GitHub 릴리즈</a>
+      </div>`;
+}
+
 function render(releases) {
   if (!releases.length) {
     elSummary.innerHTML = '';
@@ -120,37 +159,34 @@ function render(releases) {
       <div class="box"><div class="num">${esc(latest ? latest.tag_name : '—')}</div><div class="lbl">최신 버전</div></div>
     </div>`;
 
-  elReleases.innerHTML = sortByPublished(releases).map((r) => {
-    const isLatest = latest && r.id === latest.id;
-    const assets = sortedAssets(r);
-    const rows = assets.length
-      ? assets.map((a) => {
-          const counted = isCounted(a);
-          const badge = counted ? '' : ' <span class="tag-uncounted" title="업데이터 매니페스트 — 집계 제외(폴링)">미집계</span>';
-          return `
-          <tr${counted ? '' : ' class="uncounted"'}>
-            <td><a href="${esc(a.browser_download_url)}" target="_blank" rel="noopener">${esc(a.name)}</a>${badge}</td>
-            <td class="r">${fmtBytes(a.size)}</td>
-            <td class="r dl">${fmtInt(a.download_count)}</td>
-          </tr>`;
-        }).join('')
-      : '<tr><td class="none" colspan="3">에셋 없음</td></tr>';
-    return `
-      <div class="release${isLatest ? ' is-latest' : ''}">
-        <div class="rh">
-          <span class="tag">${esc(r.tag_name)}</span>
-          ${isLatest ? '<span class="badge latest">LATEST</span>' : ''}
-          ${r.prerelease ? '<span class="badge pre">pre-release</span>' : ''}
-          <span class="dl">↓ ${fmtInt(releaseDownloads(r))}</span>
-          <span class="date">${fmtDate(r.published_at)}</span>
-        </div>
-        <table class="asset-table">
-          <thead><tr><th>에셋</th><th class="r">크기</th><th class="r">다운로드</th></tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-        <a class="rlink" href="${esc(r.html_url)}" target="_blank" rel="noopener">→ GitHub 릴리즈</a>
-      </div>`;
-  }).join('');
+  // 최신 버전만 즉시 렌더. 이전 버전들은 토글을 펼칠 때 lazy 렌더한다(초기 DOM 비용 절감).
+  const others = sortByPublished(releases).filter((r) => !(latest && r.id === latest.id));
+  elReleases.innerHTML =
+    (latest ? releaseCard(latest, true) : '') +
+    (others.length ? `
+      <button id="toggle-older" class="older-toggle" type="button" aria-expanded="false">
+        <span class="tri">▸</span><span class="older-label">이전 버전 ${others.length}개 보기</span>
+      </button>
+      <div id="older" class="older hidden"></div>` : '');
+
+  if (others.length) {
+    const btn = document.getElementById('toggle-older');
+    const box = document.getElementById('older');
+    const tri = btn.querySelector('.tri');
+    const lbl = btn.querySelector('.older-label');
+    let rendered = false;
+    btn.addEventListener('click', () => {
+      const expand = box.classList.contains('hidden');
+      if (expand && !rendered) { // 첫 펼침에만 렌더, 이후엔 표시만 토글
+        box.innerHTML = others.map((r) => releaseCard(r, false)).join('');
+        rendered = true;
+      }
+      box.classList.toggle('hidden', !expand);
+      btn.setAttribute('aria-expanded', String(expand));
+      tri.textContent = expand ? '▾' : '▸';
+      lbl.textContent = `이전 버전 ${others.length}개 ${expand ? '접기' : '보기'}`;
+    });
+  }
 }
 
 document.getElementById('refresh').addEventListener('click', load);

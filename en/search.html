@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Full-text search — Orch term guide</title>
+<meta name="description" content="Orch term full-text search: Ctrl+Shift+F sidebar Search view, ripgrep parallel walk + .gitignore, include/exclude glob, streaming accumulating results tab, click-to-jump matches, per-Space isolation." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — Search view / editor reveal reproduction (design tokens only) */
+  .sv-controls { display:flex; flex-direction:column; gap:6px; padding:7px 8px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); }
+  .sv-input { display:flex; align-items:center; gap:6px; height:27px; padding:0 5px 0 9px; background:var(--bg-0); border:1px solid var(--line); border-radius:var(--r-sm); }
+  .sv-input .si { color:var(--text-faint); display:inline-grid; place-items:center; width:14px; flex:none; }
+  .sv-input .val { flex:1; min-width:0; font-size:var(--fs-sm); color:var(--text-strong); font-family:var(--code-font); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .sv-input .caret { width:1px; height:13px; background:var(--accent); margin:0 2px; flex:none; }
+  .sv-opt { width:22px; height:19px; display:inline-grid; place-items:center; border-radius:var(--r-sm); font-family:var(--code-font); font-size:10px; color:var(--text-faint); border:1px solid transparent; flex:none; }
+  .sv-opt.on { color:var(--accent); background:var(--accent-soft); border-color:var(--accent-line); }
+  .sv-go { width:23px; height:21px; display:inline-grid; place-items:center; color:var(--text-faint); border-radius:var(--r-sm); flex:none; }
+  .sv-details { display:flex; flex-direction:column; gap:5px; }
+  .sv-field { display:flex; align-items:center; height:25px; padding:0 9px; gap:7px; background:var(--bg-0); border:1px solid var(--line-faint); border-radius:var(--r-sm); font-size:var(--fs-sm); }
+  .sv-field .k { color:var(--text-faint); font-family:var(--code-font); font-size:10.5px; flex:none; }
+  .sv-field .v { color:var(--text); font-family:var(--code-font); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .sv-check { display:flex; align-items:center; gap:7px; font-size:var(--fs-xs); color:var(--text-faint); }
+  .sv-check .box { width:13px; height:13px; border:1px solid var(--line-strong); border-radius:3px; display:inline-grid; place-items:center; flex:none; }
+  .sv-check.on .box { background:var(--accent); border-color:var(--accent); color:#fff; font-size:9px; }
+  .sv-toggle { display:flex; align-items:center; gap:6px; justify-content:flex-end; margin:1px -8px -3px; padding:4px 8px 0; border-top:1px solid var(--line-faint); color:var(--text-faint); font-size:var(--fs-xs); }
+  .sv-tabs { display:flex; align-items:center; gap:5px; padding:6px 8px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); flex-wrap:wrap; }
+  .sv-tab { display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:var(--r-sm); border:1px solid var(--line-faint); background:var(--bg-0); color:var(--text-dim); font-family:var(--code-font); font-size:10.5px; }
+  .sv-tab.active { color:var(--text-strong); border-color:var(--accent-line); background:var(--bg-1); }
+  .sv-tab .ct { color:var(--text-faint); }
+  .sv-tab .x { color:var(--text-faint); }
+  .sv-spin { color:var(--accent); font-size:12px; margin-left:auto; }
+  .sv-clear { margin-left:auto; color:var(--text-faint); font-size:var(--fs-xs); display:inline-flex; align-items:center; gap:4px; }
+  .tree-row .cnt { margin-left:auto; font-family:var(--code-font); font-size:10px; color:var(--text-faint); padding-left:8px; }
+  .sv-match { display:flex; gap:9px; padding:1px 8px 1px 28px; font-family:var(--code-font); font-size:11px; color:var(--text-dim); line-height:1.6; white-space:pre; overflow:hidden; }
+  .sv-match:hover { background:var(--accent-soft); }
+  .sv-match .ln { color:var(--text-faint); min-width:24px; text-align:right; flex:none; opacity:.8; }
+  .sv-match .mx { overflow:hidden; text-overflow:ellipsis; }
+  .sv-hit { background:var(--accent-soft); color:var(--accent); border-radius:2px; }
+  .sv-trunc { padding:5px 10px; font-size:var(--fs-xs); color:var(--attention); border-top:1px solid var(--line-faint); background:color-mix(in srgb, var(--attention) 9%, transparent); }
+  /* Editor reveal */
+  .sv-code { position:absolute; inset:0; padding:6px 0; overflow:hidden; font-family:var(--code-font); font-size:12px; line-height:1.7; background:var(--bg-1); }
+  .sv-cl { display:flex; gap:13px; padding:0 12px 0 0; color:var(--text-dim); white-space:pre; }
+  .sv-cl .gut { width:34px; text-align:right; color:var(--text-faint); flex:none; opacity:.65; }
+  .sv-cl.rev { background:var(--accent-soft); }
+  .sv-sel { background:var(--selection-bg); color:var(--text-strong); border-radius:2px; }
+  .sv-code .kw { color:var(--term-cyan); } .sv-code .str { color:var(--term-green); } .sv-code .cmt { color:var(--text-faint); }
+</style>
+</head>
+<body data-page="search">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Full-text search</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Full-text search</p>
+    <h1 class="page-title">Full-text search</h1>
+    <p class="lede">Search <b>the contents of every file</b> under the active project root at once. It supports plain text, regex, and case sensitivity plus include/exclude globs, automatically follows <code>.gitignore</code>, and fills in results <b>live</b> as they arrive.</p>
+
+    <!-- Open -->
+    <h2 class="sec" id="open"><span class="hash"></span> Open — Ctrl+Shift+F</h2>
+    <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> switches the sidebar to the <b>Search view</b> (you can also move directly between <span class="i dim" data-icon="folder"></span> Files · <span class="i" data-icon="search"></span> Search · <span class="i dim" data-icon="git"></span> Git in the mode bar below the sidebar). Type a query and press <kbd>Enter</kbd> or the <span class="i dim" data-icon="search-alt"></span> magnifier to start. Turn on case sensitivity with <code>Aa</code> and regex with <code>.*</code>; when regex is off, your input is matched literally.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/search.png" alt="Full-text search — query, Aa, regex toggle, search history chips, per-file line matches (highlighted)" />
+        <div class="shot-cap"><span class="n">①</span> Query + <code>Aa</code>·<code>.*</code> toggles, plus include/exclude glob in the detailed options. <span class="n">②</span> Per-file groups + per-line matches — click a <b style="color:var(--accent)">highlight</b> to jump to the editor.</div>
+      </div>
+    </figure>
+
+    <!-- glob -->
+    <h2 class="sec" id="glob"><span class="hash"></span> include / exclude glob · ignore rules</h2>
+    <p>Expand the detailed options (the <span class="i dim" data-icon="chevron-down"></span> toggle) to reveal <b>include</b> and <b>exclude</b> globs (comma-separated for multiple) and an <code>Include .gitignore-ignored</code> checkbox. If include is empty, only <code>.gitignore</code> applies; but once you add even one include, it becomes a whitelist that searches <b>only files matching those globs</b>, and exclude removes files from within that set. Even if you collapse the detailed options, the inputs and filters still apply.</p>
+    <div class="warn"><b>Adding an include changes the search scope</b> — e.g. <code>include=*.ts</code>, <code>exclude=*.test.ts</code> → all <code>.ts</code> files except <code>.test.ts</code>. The result scope differs from when include is empty, so take care.</div>
+    <p>By default, files listed in <code>.gitignore</code> and <code>.ignore</code>, files over 5MB, and binary files are skipped (ignored folders like <code>node_modules</code> don't leak into results). Check <code>Include .gitignore-ignored</code> to turn off all ignore rules and search <b>everything</b>.</p>
+
+    <!-- Streaming -->
+    <h2 class="sec" id="streaming"><span class="hash"></span> Streaming, accumulating results tab</h2>
+    <p>When you start a search, a new tab appears with a ⟳ and results accumulate per file and per line as they come in. The ⟳ disappears when it's done. Each tab preserves the search conditions from that moment, so you can run several searches at once and keep each in its own tab. Closing an in-progress tab with <b>×</b> stops it, and <b>Clear all</b> (<span class="i dim" data-icon="trash-alt"></span>) wipes every tab at once. If there are too many results and the cap is reached, the search stops and a <b>truncated</b> banner is attached.</p>
+
+    <!-- Jump -->
+    <h2 class="sec" id="jump"><span class="hash"></span> Click a match → jump to the editor</h2>
+    <p>Click a result line to open that file in an editor tab, scroll to the line/column, and select the match. For the same file, an already-open tab is reused.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/search-match.png" alt="Click a match → editor reveal — CLAUDE.md opens with the match line (50) highlighted" />
+        <div class="shot-cap"><span class="n">①</span> Click a match and that file opens in the editor with the line highlighted. <span class="n">②</span> The same file reuses the existing tab; otherwise a new tab opens.</div>
+      </div>
+    </figure>
+
+    <!-- Search-only -->
+    <h2 class="sec" id="search-only"><span class="hash"></span> Search-only (no replace)</h2>
+    <p>Full-text search is <b>search-only</b> — it doesn't support replace. Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> (this search) for "where is it" across the whole project, and the editor's <kbd>Ctrl</kbd>+<kbd>F</kbd> for "find and replace" within a single open file.</p>
+
+    <!-- Space isolation -->
+    <h2 class="sec" id="space"><span class="hash"></span> Per-Space isolation</h2>
+    <p>Search tabs, results, queries, and options (<code>Aa</code>/<code>.*</code>/include/exclude) are <b>independent per Space</b>.</p>
+    <ul>
+      <li><b>Not shared with other Spaces</b> — when you come back, the search state for that Space is restored.</li>
+      <li><b>In-progress searches keep running in the background</b> — they keep accumulating even after you leave the Space, and the view is only redrawn when it's active.</li>
+      <li><b>Results are memory-only</b> — there's no persistence, so a restart or a new Space starts empty.</li>
+    </ul>
+
+    <!-- Shortcuts -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd></td><td>Open the Search view</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td>Run the search</td></tr>
+        <tr><td><code>Aa</code></td><td>Toggle case sensitivity</td></tr>
+        <tr><td><code>.*</code></td><td>Toggle regex</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>Single-file find/replace (editor)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>Code editor</a>
+        <a class="relchip" href="source-control.html"><span class="ri" data-icon="git"></span>Source control (Git)</a>
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="sidebar"></span>Spaces</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="source-control.html">Next → Source control (Git)</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

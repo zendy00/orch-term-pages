@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Task board — Orch term guide</title>
+<meta name="description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* Page-specific — task panel reproduction (design-system tokens only) */
+  .tk-panel { width: 308px; background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-pane); }
+  .tk-head { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; background: var(--bg-2); border-bottom: 1px solid var(--line-faint); font-size: 13px; color: var(--text-strong); font-weight: 600; }
+  .tk-head .sp { flex: 1; }
+  .tk-head .iconbtn { color: var(--text-faint); }
+  .tk-tabs { display: flex; align-items: center; gap: 4px; padding: 7px 9px; border-bottom: 1px solid var(--line-faint); }
+  .tk-tab { padding: 3px 11px; border-radius: 999px; font-size: 12px; color: var(--text-dim); }
+  .tk-tab.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .tk-search { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--text-faint); font-size: 11.5px; }
+  .tk-add { width: 22px; height: 22px; display: grid; place-items: center; border-radius: var(--r-sm); color: var(--accent); background: var(--accent-soft); }
+  .tk-add.open { color: #fff; background: var(--accent); transform: rotate(45deg); }
+  .tk-compose { padding: 9px 10px; border-bottom: 1px solid var(--line-faint); display: grid; gap: 7px; background: var(--bg-2-tint); }
+  .tk-compose .ci { width: 100%; background: var(--bg-0); border: 1px solid var(--line); border-radius: var(--r-sm); color: var(--text-strong); font-size: 12.5px; padding: 6px 8px; }
+  .tk-compose .ci.memo { color: var(--text-faint); }
+  .tk-compose .crow { display: flex; align-items: center; gap: 7px; }
+  .tk-compose .crow .due { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--text-dim); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 4px 8px; }
+  .tk-compose .crow .due .i { color: var(--accent); }
+  .tk-compose .crow .sp { flex: 1; }
+  .tk-row { display: flex; align-items: flex-start; gap: 9px; padding: 9px 11px; border-bottom: 1px solid var(--line-faint); }
+  .tk-row:hover { background: var(--bg-hover); }
+  .tk-check { width: 15px; height: 15px; border: 1.5px solid var(--line-strong); border-radius: 4px; flex: none; margin-top: 1px; display: grid; place-items: center; color: transparent; }
+  .tk-check.done { background: var(--success); border-color: var(--success); color: #fff; }
+  .tk-check.done .i { color: #fff; }
+  .tk-b { min-width: 0; flex: 1; }
+  .tk-t { font-size: 13px; color: var(--text-strong); line-height: 1.4; }
+  .tk-t.done { color: var(--text-faint); text-decoration: line-through; }
+  .tk-m { display: flex; align-items: center; gap: 9px; margin-top: 5px; font-size: 11px; color: var(--text-faint); }
+  .tk-m .due { display: inline-flex; align-items: center; gap: 4px; }
+  .tk-m .due.urgent { color: var(--danger); }
+  .tk-m .badge-memo { display: inline-flex; align-items: center; gap: 3px; }
+  .tk-acts { display: flex; gap: 1px; margin-left: auto; }
+  .tk-acts .iconbtn { width: 22px; height: 20px; color: var(--text-faint); }
+  .tk-acts .iconbtn:hover { color: var(--text-strong); background: var(--bg-hover); }
+  .tk-foot { display: flex; align-items: center; gap: 8px; padding: 8px 11px; color: var(--text-faint); font-size: 11px; border-top: 1px solid var(--line-faint); }
+  /* Mini calendar popup */
+  .tk-cal { width: 232px; background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow-pop); padding: 10px; }
+  .tk-cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 12.5px; color: var(--text-strong); font-weight: 600; }
+  .tk-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .tk-cal-grid .dow { font-size: 9.5px; color: var(--text-faint); text-align: center; padding: 2px 0; }
+  .tk-cal-grid .d { aspect-ratio: 1; display: grid; place-items: center; font-size: 11px; color: var(--text-dim); border-radius: var(--r-sm); position: relative; }
+  .tk-cal-grid .d.dim { color: var(--text-faint); opacity: .45; }
+  .tk-cal-grid .d.sel { background: var(--accent); color: #fff; font-weight: 600; }
+  .tk-cal-grid .d.has::after { content: ""; position: absolute; bottom: 2px; width: 3px; height: 3px; border-radius: 50%; background: var(--accent); }
+</style>
+</head>
+<body data-page="tasks">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Task board</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Task board</p>
+    <h1 class="page-title">Task board</h1>
+    <p class="lede">An independent to-do board for each Space. Jot down a title, memo, and due date and manage them with To-do/Done tabs and a monthly calendar — and the in-app AI of the same Space shares the very same board.</p>
+
+    <!-- Open -->
+    <h2 class="sec" id="open"><span class="hash"></span> Opening the task panel</h2>
+    <p>Open it with the <span class="i" data-icon="tasks"></span> <b>To-dos</b> icon in the sidebar mode bar or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> (the command palette's "Tasks" also works). The board is <b>specific to the current Space</b>, so switching Spaces shows that Space's to-dos.</p>
+
+    <!-- New entry -->
+    <h2 class="sec" id="compose"><span class="hash"></span> New to-do — title · memo · due date</h2>
+    <p>Expand the input area with the <span class="i" data-icon="plus-small"></span> <b>+ button</b> on the right of the tab row. The title is a single line, the memo is multi-line (<kbd>Shift</kbd>+<kbd>Enter</kbd> for a newline), and you pick the due date from the <span class="i" data-icon="calendar"></span> calendar popup.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="plus-small"></span> Expand the input with the + toggle</div>
+        <figure class="fig">
+          <div class="shot">
+            <img class="shot-img" src="../assets/shots/en/tasks.png" alt="Task board — composing a new item (title·memo·due), the to-do list, and the due-date calendar at the bottom" />
+            <div class="shot-cap"><span class="n">①</span> The input area expanded by the + toggle (title·memo·due). <span class="n">②</span> The bottom calendar shows the selected day and due dates at a glance.</div>
+          </div>
+        </figure>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="calendar"></span> Due date — calendar popup</div>
+        <p>Press the due-date button and a monthly calendar appears. Pick a date and a due badge is attached.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Select due date</span></div>
+            <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+              <div class="tk-cal">
+                <div class="tk-cal-head"><span>June 2026</span><span style="color:var(--text-faint)">‹ ›</span></div>
+                <div class="tk-cal-grid">
+                  <span class="dow">Sun</span><span class="dow">Mon</span><span class="dow">Tue</span><span class="dow">Wed</span><span class="dow">Thu</span><span class="dow">Fri</span><span class="dow">Sat</span>
+                  <span class="d dim">25</span><span class="d dim">26</span><span class="d dim">27</span><span class="d dim">28</span><span class="d dim">29</span><span class="d dim">30</span><span class="d dim">31</span>
+                  <span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span><span class="d">6</span><span class="d">7</span>
+                  <span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span><span class="d">13</span><span class="d">14</span>
+                  <span class="d has">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d">19</span><span class="d">20</span><span class="d">21</span>
+                  <span class="d">22</span><span class="d">23</span><span class="d">24</span><span class="d">25</span><span class="d">26</span><span class="d">27</span><span class="d has">28</span>
+                  <span class="d">29</span><span class="d sel">30</span><span class="d dim">1</span><span class="d dim">2</span><span class="d dim">3</span><span class="d dim">4</span><span class="d dim">5</span>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> See the selected day (filled) and days with a due date (dot) at a glance.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+
+    <!-- Cards -->
+    <h2 class="sec" id="cards"><span class="hash"></span> Card — done · memo · actions</h2>
+    <p>Each card shows a <b>done toggle</b> (the check on the left), a due badge, and a memo indicator; expanded, it reveals the memo body and action icons (due · edit · copy · delete).</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">To-dos — expanded card + done</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="tk-panel">
+            <div class="tk-head"><span class="i" data-icon="tasks" style="color:var(--accent)"></span> To-dos <span class="sp"></span><button class="iconbtn" data-icon="refresh-alt" title="Refresh"></button></div>
+            <div class="tk-tabs"><span class="tk-tab active">To-do <b>2</b></span><span class="tk-tab">Done 5</span><span class="tk-search"><span class="i" data-icon="search-alt"></span> Search</span><span class="tk-add" data-icon="plus-small" title="New to-do"></span></div>
+            <div class="tk-row">
+              <span class="tk-check"></span>
+              <span class="tk-b">
+                <span class="tk-t">Document the port-forwarding tunnel</span>
+                <span class="tk-m"><span class="due"><span class="i" data-icon="calendar"></span> 7/2 (Wed)</span><span class="badge-memo"><span class="i" data-icon="note"></span> Memo</span></span>
+                <div style="margin-top:7px;font-size:12px;color:var(--text-dim);background:var(--bg-0);border:1px solid var(--line-faint);border-radius:var(--r-sm);padding:7px 9px">Two modes, -L local and -D SOCKS5; include the rail-overlay screenshot</div>
+                <span class="tk-acts" style="margin-top:7px">
+                  <button class="iconbtn" data-icon="calendar" title="Due date"></button>
+                  <button class="iconbtn" data-icon="edit" title="Edit"></button>
+                  <button class="iconbtn" data-icon="copy-alt" title="Copy"></button>
+                  <button class="iconbtn" data-icon="trash-alt" title="Delete"></button>
+                </span>
+              </span>
+            </div>
+            <div class="tk-row"><span class="tk-check done"><span class="i" data-icon="check"></span></span><span class="tk-b"><span class="tk-t done">SSH Phase 2 reference doc</span><span class="tk-m">Done</span></span></div>
+            <div class="tk-foot"><span class="i" data-icon="calendar"></span> June · 1 due</div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> The expanded card's memo body + actions (due · edit · copy · delete). <span class="n">②</span> Completing it adds a check + strikethrough.</div>
+      </div>
+    </figure>
+
+    <!-- Tabs / search / calendar -->
+    <h2 class="sec" id="tabs"><span class="hash"></span> To-do/Done tabs · search · calendar</h2>
+    <ul>
+      <li><b>To-do / Done tabs</b> — separate incomplete from done. A count is shown next to each tab.</li>
+      <li><b>Word search</b> — filter titles and memos by word.</li>
+      <li><b>Monthly calendar (bottom)</b> — a per-day due-count badge. Collapsible/expandable.</li>
+      <li><b>Refresh</b> (<span class="i" data-icon="refresh-alt"></span>) — reload to-dos changed externally or by AI.</li>
+    </ul>
+    <p>The in-app AI (claude·codex·agy) also operates <a href="task-ai-sharing.html">the same board over MCP</a>, so to-dos an agent adds show up right away on refresh.</p>
+
+    <!-- Shortcuts -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></td><td>Open to-dos mode (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>)</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Newline in memo (while composing)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Command palette → "Tasks"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="check"></span>AI task sharing</a>
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="split-horizontal"></span>Spaces</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="settings"></span>Storage & backup</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="task-ai-sharing.html">Next → AI task sharing</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

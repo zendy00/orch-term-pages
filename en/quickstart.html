@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Quick start — Orch term guide</title>
+<meta name="description" content="Orch term's first-five-minutes guide: the first terminal opens automatically, add a shell (＋), split panes, double-click a file for the editor, type an address for the in-app browser, and (optional) agent orchestration." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* Page-specific — reproduces the editor/browser screens (design-system tokens only) */
+  .qs-ed { position:absolute; inset:0; padding:9px 4px; overflow:hidden; font-family:var(--code-font); font-size:var(--code-fs); line-height:1.75; }
+  .qs-ed .row { display:grid; grid-template-columns:30px 1fr; }
+  .qs-ed .ln { color:var(--text-faint); text-align:right; padding-right:13px; user-select:none; }
+  .qs-ed .li { white-space:pre; color:var(--text); }
+  .qs-ed .k { color:var(--accent); } .qs-ed .s { color:var(--term-green); } .qs-ed .c2 { color:var(--text-dim); } .qs-ed .fn { color:var(--term-cyan); }
+  .qs-bbar { display:flex; align-items:center; gap:8px; height:34px; padding:0 8px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); flex:0 0 auto; }
+  .qs-bbar .navg { display:flex; gap:1px; }
+  .qs-bbar .navg .iconbtn { font-size:15px; }
+  .qs-url { flex:1; display:flex; align-items:center; gap:8px; height:24px; padding:0 11px; background:var(--bg-0); border:1px solid var(--line); border-radius:999px; color:var(--text-dim); font-family:var(--code-font); font-size:11px; }
+  .qs-url .lk { color:var(--success); display:inline-grid; place-items:center; width:13px; flex:none; }
+  .qs-url .lk svg { width:12px; height:12px; }
+  .qs-page { position:absolute; inset:0; display:grid; place-items:center; background:var(--bg-0); color:var(--text-faint); text-align:center; padding:20px; }
+  .qs-page .ttl { font-family:var(--ui); font-weight:700; font-size:19px; color:var(--text-strong); margin-bottom:6px; letter-spacing:-.01em; }
+  .qs-page .sub { font-size:12.5px; }
+</style>
+</head>
+<body data-page="quickstart">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Getting started</span><span class="sep">/</span><span>Quick start</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Getting started · Quick start</p>
+    <h1 class="page-title">Quick start</h1>
+    <p class="lede">A <b>full loop in 5 minutes</b>, from the very first launch — the first terminal, adding a shell, splitting panes, editing files, the in-app browser, and (optional) <b>orchestration</b> that puts other AIs to work as workers.</p>
+
+    <!-- 5-minute walkthrough -->
+    <h2 class="sec" id="walkthrough"><span class="hash"></span> A full loop in 5 minutes</h2>
+    <p>For installation, see <a href="download.html">Download · Install</a>. With the app running, follow the steps below in order and try out the core screens.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> Launch the app — the first terminal opens automatically</div>
+        <p>When you launch the app, <b>the first terminal tab opens automatically</b> with no extra action. A new terminal starts at the Explorer's <b>active project root</b>.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — first launch</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:248px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+                  </div>
+                  <div class="pane-actions">
+                    <button class="pane-act" title="Split down" data-icon="split-horizontal"></button>
+                    <button class="pane-act" title="Split right" data-icon="split-vertical"></button>
+                    <span class="pane-act-sep"></span>
+                    <button class="pane-act" title="Maximize" data-icon="maximize-pane"></button>
+                    <button class="pane-act" title="Close" data-icon="close"></button>
+                  </div>
+                </div>
+                <div class="pane-content">
+                  <div class="term-pane-terminal">
+                    <div class="term"><span class="d"># Launch the app and the first terminal opens automatically (starts at the active project root)</span>
+<span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> <span class="cursor"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> Even the <b>first key you press</b> during the cold start is buffered, so it's never lost. More → <a href="terminal.html">Terminal</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="add"></span> New terminal · pick a shell (＋)</div>
+        <p>Open a new terminal with the <b>＋</b> on the tab bar or the action at the pane's top-right. Installed shells are auto-detected and shown in a dropdown — PowerShell · cmd · Git Bash · WSL, and more.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">New terminal — pick a shell</span></div>
+            <div class="shot-stage" style="padding:26px;display:grid;place-items:center;min-height:230px">
+              <div class="shell-dropdown" style="position:relative;box-shadow:var(--shadow-pop)">
+                <div class="shell-menu-title">New terminal</div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#4d96ff">⌷</span> PowerShell</button><button class="shell-default" disabled>Default</button></div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#f1502f">⎇</span> Git Bash</button><button class="shell-default">Set default</button></div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">▮</span> cmd</button><button class="shell-default">Set default</button></div>
+                <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">🐧</span> Ubuntu (WSL)</button><button class="shell-default">Set default</button></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">②</span> Pick a shell from the list and it opens as a new tab in the active pane. More → <a href="terminal.html">Terminal</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="split-vertical"></span> Split panes — divide the screen</div>
+        <p>Divide the screen with the split actions at the pane's top-right — <span class="i dim" data-icon="split-horizontal"></span> <b>down</b>, <span class="i dim" data-icon="split-vertical"></span> <b>right</b>. Each pane is an independent shell, and <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>arrow keys</kbd> move between adjacent panes.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — two panes (split right)</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="panes" style="height:262px">
+                <div class="pane active-pane">
+                  <div class="pane-tabbar">
+                    <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div></div>
+                    <div class="pane-actions"><button class="pane-act" title="Split down" data-icon="split-horizontal"></button><button class="pane-act" title="Split right" data-icon="split-vertical"></button></div>
+                  </div>
+                  <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> npm run dev
+<span class="g">  ➜  Local:</span>   http://localhost:5181/
+<span class="a">PS</span> <span class="c">D:\orch-term</span><span class="d">&gt;</span> <span class="cursor"></span></div></div></div>
+                </div>
+                <div class="divider-v"></div>
+                <div class="pane">
+                  <div class="pane-tabbar">
+                    <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">Git Bash</span></div></div>
+                    <div class="pane-actions"><button class="pane-act" title="Close" data-icon="close"></button></div>
+                  </div>
+                  <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">user@pc</span><span class="d">:</span><span class="c">~/orch-term</span><span class="d">$</span> git status
+<span class="d">On branch main</span>
+<span class="d">nothing to commit, working tree clean</span></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">③</span> The active pane is highlighted with an accent border. More → <a href="tabs-panes.html">Tabs · panes</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="file"></span> Double-click a file → editor tab</div>
+        <p><b>Double-click</b> a file in the Explorer and it opens as an <b>editor tab</b> in the active pane (a single click previews). It supports auto-reload on external changes · encoding display · <kbd>Ctrl</kbd>+<kbd>F</kbd> find.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — editor</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:206px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div>
+                    <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">terminal.ts</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" title="Split right" data-icon="split-vertical"></button><button class="pane-act" title="Close" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content">
+                  <div class="qs-ed">
+                    <div class="row"><span class="ln">1</span><span class="li"><span class="k">import</span> { invoke } <span class="k">from</span> <span class="s">"@tauri-apps/api/core"</span>;</span></div>
+                    <div class="row"><span class="ln">2</span><span class="li"> </span></div>
+                    <div class="row"><span class="ln">3</span><span class="li"><span class="c2">// Open a new terminal at the active project root</span></span></div>
+                    <div class="row"><span class="ln">4</span><span class="li"><span class="k">export async function</span> <span class="fn">openTerminal</span>(cwd?: <span class="k">string</span>) {</span></div>
+                    <div class="row"><span class="ln">5</span><span class="li">  <span class="k">return</span> <span class="fn">invoke</span>(<span class="s">"pty_spawn"</span>, { cwd });</span></div>
+                    <div class="row"><span class="ln">6</span><span class="li">}<span class="cursor"></span></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="statusbar">
+                <span class="mono faint">terminal.ts</span>
+                <span class="statusbar-spacer"></span>
+                <span class="statusbar-encoding">UTF-8</span>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">④</span> The loaded encoding is shown at the <b>right of the status bar</b> at the bottom (only for editor tabs). More → <a href="editor.html">Code editor</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="external-link"></span> Type an address → in-app browser tab</div>
+        <p>Type a URL in the address bar and it opens as an <b>in-app browser tab</b>. For https a lock appears, and the <span class="i dim" data-icon="external-link"></span> button opens it in your system browser. Local files open right away too.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — in-app browser</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:236px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="external-link"></span><span class="tab-label">Orch term guide</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" title="Split right" data-icon="split-vertical"></button><button class="pane-act" title="Close" data-icon="close"></button></div>
+                </div>
+                <div class="qs-bbar">
+                  <div class="navg"><button class="iconbtn" title="Back">‹</button><button class="iconbtn" title="Forward">›</button><button class="iconbtn" title="Refresh" data-icon="refresh"></button></div>
+                  <div class="qs-url"><span class="lk" data-icon="lock"></span><span>github.com/zendy00/orch-term-pages</span></div>
+                  <button class="iconbtn" title="Open in system browser" data-icon="external-link"></button>
+                </div>
+                <div class="pane-content"><div class="qs-page"><div><div class="ttl">Orch term · Docs</div><div class="sub">The URL you typed in the address bar opened in this child webview tab.</div></div></div></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">⑤</span> For https a <span class="i" data-icon="lock"></span> lock · new-window links are intercepted to navigate in place. More → <a href="browser.html">In-app browser</a>.</div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> (optional) Orchestration — call in workers</div>
+        <p>Turn on <b>orchestration</b> in settings (off by default) and, from a commander (claude) tab, you can use natural language to spin up other AIs (<b>codex · agy · claude</b>) as <b>workers</b> and have them collaborate across multiple turns.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">commander · claude</span><span class="badge ok">orchestrating</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:248px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">commander · claude</span><span class="tab-dot on"></span></div>
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">backend · codex</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">have backend(codex) review the SSH tunnel module</span>
+<span class="a">▸ open_session</span> <span class="c">codex</span> <span class="d">from=ep_claude_8f3a… → { session_id: s_4c1e }</span>
+<span class="a">▸ send</span> <span class="d">"check whether channel_open_direct_tcpip is concurrency-safe"</span>
+<span class="am">  ⟳ codex working… (waiting for output idle)</span>
+<span class="g">◂ reply</span> <span class="d">codex: "&self borrow, so it's concurrency-safe. Confirmed the listener binds to 127.0.0.1."</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">⑥</span> One cycle: open a worker → instruct it → receive the reply. More → <a href="orchestration.html">Agent orchestration</a>.</div>
+          </div>
+        </figure>
+        <p class="dim">Enabling it requires a restart (127.0.0.1 only), and if you don't need in-app agent collaboration you can skip this step.</p>
+      </li>
+    </ol>
+
+    <!-- Next steps -->
+    <h2 class="sec" id="next"><span class="hash"></span> Where to next</h2>
+    <p>Once you've done the loop, the details of each feature continue below.</p>
+    <div class="feature-cards">
+      <a class="fcard" href="terminal.html"><span class="fc-ic" data-icon="terminal"></span><h4>Terminal</h4><p>Copy/paste, newline (Shift/Ctrl+Enter), scrollback, auto-close on shell exit.</p></a>
+      <a class="fcard" href="tabs-panes.html"><span class="fc-ic" data-icon="split-vertical"></span><h4>Tabs · panes</h4><p>Horizontal/vertical split, pane maximize (Shift+Esc), tab colors · drag, pane navigation.</p></a>
+      <a class="fcard" href="editor.html"><span class="fc-ic" data-icon="file"></span><h4>Code editor</h4><p>Auto-reload on external changes, encoding display, markdown styling, theme following.</p></a>
+      <a class="fcard" href="orchestration.html"><span class="fc-ic" data-icon="settings"></span><h4>Orchestration</h4><p>Spin up other AIs as workers and collaborate across multiple turns.</p></a>
+    </div>
+
+    <!-- Shortcuts -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Handy keyboard shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Copy when selected (interrupt if none) / paste</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd> · <kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>Newline (does not submit)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>arrow keys</kbd></td><td>Move to an adjacent pane</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd></td><td>Toggle the Explorer</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>Maximize the active pane</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>Editor find</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · panes</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>In-app browser</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="ssh"></span>SSH · SFTP</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="workstation.html">Next → Multi-agent workstation</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

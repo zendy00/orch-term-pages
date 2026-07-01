@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Spaces — Orch term Guide</title>
+<meta name="description" content="Orch term Spaces: independent layouts you switch via titlebar chips. Ctrl+1‥9 switching, per-Space split tree · Explorer, right-click menu · duplicate, live persistence · restore." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — done-badge dot (uses design-system tokens only) */
+  .space-chip-dot { width:7px; height:7px; border-radius:50%; background:var(--success); box-shadow:0 0 0 3px color-mix(in srgb,var(--success) 26%,transparent); flex:none; }
+  .chip-hue { width:7px; height:7px; border-radius:2px; flex:none; }
+</style>
+</head>
+<body data-page="spaces">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Spaces</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Spaces <span class="flag">Switchable layouts</span></p>
+    <h1 class="page-title">Spaces</h1>
+    <p class="lede">A <b>Space</b> is an <b>independent layout you switch to wholesale</b>, like a tmux or i3 workspace. Each Space keeps its own split tree (panes · tabs) and file Explorer, so you swap between them in one click via titlebar chips.</p>
+
+    <!-- Space chips -->
+    <h2 class="sec" id="chips"><span class="hash"></span> Space chips — switch from the titlebar</h2>
+    <p>The Space list lines up as chips in the <b>titlebar</b>. The active chip is highlighted with an accent underline, and the chip number points to its <kbd>Ctrl</kbd>+<kbd>number</kbd> switch position. The <span class="i" data-icon="add"></span> at the far end opens a <b>new Space</b> (empty Explorer + one terminal).</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/spaces.png" alt="Space chips (1·2·3) and the ＋ button in the titlebar — each Space is an independent layout" />
+        <div class="shot-cap"><span class="n">①</span> The active chip stands out in accent (Space 1·2·3 at the top). <span class="n">②</span> The <b>＋</b> at the end creates a new Space, and each Space has its own independent layout.</div>
+      </div>
+    </figure>
+
+    <p>Inline-edit a chip's name and color by <b>double-clicking</b>, and close it with the <b>×</b> that appears on hover (the last remaining Space can't be closed). Drag to reorder chips, or <b>drop a tab</b> onto a chip to move it to another Space.</p>
+
+    <!-- Switching -->
+    <h2 class="sec" id="switch"><span class="hash"></span> Switching (Ctrl+1‥9)</h2>
+    <p>Switch by clicking a chip or pressing <kbd>Ctrl</kbd>+<kbd>1</kbd>‥<kbd>9</kbd> (by <b>titlebar position</b>). Switching doesn't partially repaint the screen — it <b>swaps the whole layout</b>. The terminals and browsers in the Space you leave <b>stay alive</b>, so when you return the output and scrollback of an in-progress command are preserved.</p>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd> ‥ <kbd>9</kbd></td><td>Switch to the 1st‥9th Space by position</td></tr>
+        <tr><td>Click a chip</td><td>Switch to that Space</td></tr>
+        <tr><td>Double-click a chip</td><td>Inline-edit name + color</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Per-Space layout · Explorer -->
+    <h2 class="sec" id="layout"><span class="hash"></span> Per-Space split tree · Explorer</h2>
+    <p>Each Space wholly owns its own state. Switching is swapping that bundle.</p>
+    <div class="feature-cards">
+      <div class="fcard"><span class="fc-ic" data-icon="split-vertical"></span><h4>Independent split tree</h4><p>The split tree, active pane, and maximize state are kept per Space. One Space can be a 4-way split while another stays a single terminal.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="folder"></span><h4>Per-Space Explorer</h4><p>It has its own project list and active project. When you switch, the left Explorer changes to that Space's tree, and a new terminal starts at the active project root.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="sidebar"></span><h4>Collapse · width · mode</h4><p>The Explorer collapse/width and the sidebar mode (files · search · Git) are also remembered per Space and restored on switch and restart.</p></div>
+    </div>
+
+    <!-- Right-click menu + duplicate -->
+    <h2 class="sec" id="menu"><span class="hash"></span> Right-click menu · full duplicate</h2>
+    <p><b>Right-click</b> a chip to open the <b>Rename / Change color / Duplicate / Close</b> menu. Name and color open the same inline editor as double-clicking.</p>
+
+    <figure class="fig">
+      <div class="shot" style="max-width:420px">
+        <img class="shot-img" src="../assets/shots/en/menu-space-ctx.png" alt="Space chip right-click menu — rename · change color · duplicate · close" />
+        <div class="shot-cap"><span class="n">①</span> Name and color use the same inline editor as double-clicking. <span class="n">②</span> <b>Close</b> is a destructive item (<span style="color:var(--danger)">red</span>).</div>
+      </div>
+    </figure>
+
+    <p><b>Duplicate</b> copies the whole Space (tabs · projects · layout · color) into a new Space and switches to it right away. If there are already 9 Spaces, it's disabled in the menu.</p>
+    <div class="warn"><b>Running processes are not copied.</b> The duplicate's terminals start fresh in the same shell and directory — scrollback and any in-progress command don't come along.</div>
+
+    <!-- Persistence + restore -->
+    <h2 class="sec" id="persist"><span class="hash"></span> Live persistence · restore</h2>
+    <p>Every time you switch Spaces or touch a tab, split, or project, the state is saved automatically, so the layout is restored when you relaunch the app. If the saved state is corrupted, it safely falls back to a default single Space.</p>
+    <ul>
+      <li><b>Structure only is saved.</b> A terminal remembers only its directory (cwd) and starts fresh there on restart (scrollback is lost). Editor and browser tabs reopen.</li>
+      <li><b>Custom tab names persist.</b> Terminal tab names you changed inline are kept after restart (the icon follows the shell).</li>
+    </ul>
+
+    <!-- Done-notification seam -->
+    <h2 class="sec" id="done"><span class="hash"></span> Background completion notification</h2>
+    <p>When a task running in a background Space finishes, a green dot blinks on that Space's chip to let you know — so even while you're in another Space, you can tell it's done just by glancing at the chip.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Done badge — background Space chip</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="titlebar">
+            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
+            <div class="titlebar-spaces">
+              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
+              <div class="space-chip"><span class="space-chip-dot"></span><span class="space-chip-num">2</span> docs</div>
+              <button class="space-chip-add">＋</button>
+            </div>
+            <span class="titlebar-title"></span>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> The blinking <b style="color:var(--success)">green dot</b> in front of the background Space (<code>docs</code>) chip = a completion signal for that Space's task.</div>
+      </div>
+    </figure>
+
+    <div class="warn"><b>This notification is a coming-soon feature.</b> In the current build, the green dot on the chip doesn't light up yet.</div>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · panes</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="download"></span>Storage & backup</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>Done badge · notifications</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="explorer.html">Next → Explorer</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

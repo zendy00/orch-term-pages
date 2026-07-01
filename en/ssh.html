@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>SSH · SFTP — Orch term Guide</title>
+<meta name="description" content="A MobaXterm-style client that stacks a terminal, remote file browsing (SFTP), extra shells, and port forwarding on top of a single authenticated SSH connection. In-tab connect, host-key trust, remote editing, dual-pane transfer, credential vault, tunnels." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — SSH layout helpers (design-system tokens only) */
+
+  /* Dual pane side by side (left Explorer ↔ SFTP tab) */
+  .duo { display:flex; gap:var(--pane-gap); align-items:stretch; }
+  .duo > .pane { flex:1 1 0; min-width:0; }
+
+  /* Cross-pane drag ghost chip */
+  .dragghost { position:absolute; z-index:6; display:inline-flex; align-items:center; gap:7px;
+    padding:5px 11px; background:var(--bg-3); border:1px solid var(--accent-line); border-radius:var(--r-md);
+    box-shadow:var(--shadow-pop); font-size:12px; color:var(--text-strong); pointer-events:none; }
+  .dragghost .gx { color:var(--accent); font-family:var(--code-font); font-size:11px; }
+
+  /* Remote tree (free placement inside the screenshot) */
+  .rtree { position:absolute; inset:6px; overflow:auto; }
+
+  /* Transfer progress (inline in Explorer) */
+  .xfer { margin:9px; padding:10px 12px; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-md); font-size:12px; color:var(--text-dim); }
+  .xfer-top { display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+  .xfer-top .nm { color:var(--text); font-family:var(--code-font); font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .xfer-top .pct { margin-left:auto; color:var(--accent); font-family:var(--code-font); flex:none; }
+  .xfer-bar { height:5px; border-radius:3px; background:oklch(1 0 0 / 0.10); overflow:hidden; }
+  .xfer-fill { display:block; height:100%; border-radius:3px; background:var(--accent); }
+  .xfer-confirm { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:10px; padding-top:9px; border-top:1px solid var(--line-faint); }
+  .xfer-confirm .q { width:100%; color:var(--text); margin-bottom:3px; }
+
+  /* Key:value row (tunnel list · vault entries) */
+  .kv-row { display:flex; align-items:center; gap:10px; padding:9px 11px; border:1px solid var(--line-faint);
+    border-radius:var(--r-md); background:var(--bg-2); margin-bottom:7px; }
+  .kv-row .st { width:7px; height:7px; border-radius:50%; flex:none; background:var(--success);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--success) 24%, transparent); }
+  .kv-row .kind { font-family:var(--code-font); font-size:10.5px; padding:1px 8px; border-radius:999px;
+    background:var(--accent-soft); color:var(--accent); flex:none; }
+  .kv-row .map { font-family:var(--code-font); font-size:12px; color:var(--text); flex:1; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .kv-stop { width:24px; height:22px; display:grid; place-items:center; border-radius:var(--r-md);
+    color:var(--text-faint); border:none; background:none; cursor:default; flex:none; }
+  .kv-stop:hover { color:var(--danger); background:var(--bg-hover); }
+
+  /* Helper toolbar above the pane (follow toggle) */
+  .pane-tool { display:flex; align-items:center; gap:10px; padding:6px 9px; background:var(--bg-1);
+    border-bottom:1px solid var(--line-faint); font-size:12px; color:var(--text-dim); }
+  .pane-tool .lbl { color:var(--text); }
+</style>
+</head>
+<body data-page="ssh">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Flagship features</span><span class="sep">/</span><span>SSH · SFTP</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Flagship features · SSH · SFTP <span class="flag">native russh</span></p>
+    <h1 class="page-title">SSH · SFTP</h1>
+    <p class="lede">A <b>MobaXterm-style</b> client that stacks a terminal, remote file browsing (SFTP), extra shells, and port forwarding on top of a single authenticated SSH connection. Register a host → connect in-tab → edit and transfer remotely, all without leaving the app.</p>
+
+    <!-- ① Connect -->
+    <h2 class="sec" id="connect"><span class="hash"></span> Connecting</h2>
+    <p>The entry point for connecting is the <b>SSH icon on the right rail</b>. Click it and the <b>connection manager</b> opens as a right-hand panel, showing your saved hosts (groups · search) and current sessions in one place. Clicking outside or pressing Escape does not close it (always open).</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="ssh"></span> Open the connection manager from the rail</div>
+        <p>Click a host and a tab opens in the <b>current Space</b> and starts connecting (saved profiles come pre-filled; double-click to reconnect immediately). The header's <span class="i dim" data-icon="add"></span> New host, <span class="i dim" data-icon="vault"></span> Vault, and <span class="i dim" data-icon="tunnel"></span> Port forwarding open from here too.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">SSH connection manager — right-docked panel</span><span class="badge ok">2 connected</span></div>
+            <div class="shot-stage" style="padding:18px;display:flex;gap:7px;justify-content:center;align-items:stretch">
+              <div class="ssh-ov" style="width:300px;height:332px">
+                <div class="ov-head">
+                  <span class="ov-title">SSH hosts</span>
+                  <span style="flex:1"></span>
+                  <button class="iconbtn" title="New host" data-icon="add"></button>
+                  <button class="iconbtn" title="Refresh" data-icon="refresh"></button>
+                  <button class="iconbtn" title="Credential vault" data-icon="vault"></button>
+                  <button class="iconbtn" title="Port forwarding" data-icon="tunnel"></button>
+                  <button class="iconbtn" title="Close" data-icon="close"></button>
+                </div>
+                <div class="ov-search">
+                  <span class="mag" data-icon="search"></span>
+                  <input class="input" placeholder="Search hosts…" />
+                </div>
+                <div class="ov-body">
+                  <div class="ssh-group-head"><span class="tw">▾</span><span>Work</span><span class="ssh-group-count">3</span></div>
+                  <div class="ssh-host on active"><span class="dot"></span><span class="ic">🖥</span><span class="nm">web-prod-01</span><span class="cnt">×2</span><span class="meta">deploy · 22</span></div>
+                  <div class="ssh-host on"><span class="dot"></span><span class="ic">🖥</span><span class="nm">web-prod-02</span><span class="cnt">×1</span><span class="meta">deploy · 22</span></div>
+                  <div class="ssh-host"><span class="dot"></span><span class="ic">🗄</span><span class="nm">db-02</span><span class="meta">postgres · 22</span></div>
+                  <div class="ssh-group-head" style="margin-top:4px"><span class="tw">▾</span><span>Personal</span><span class="ssh-group-count">2</span></div>
+                  <div class="ssh-host"><span class="dot"></span><span class="ic">🖥</span><span class="nm">home-nas</span><span class="meta">zendy · 22</span></div>
+                  <div class="ssh-host"><span class="dot"></span><span class="ic">🍓</span><span class="nm">raspberrypi</span><span class="meta">pi · 2222</span></div>
+                  <div class="ssh-group-head" style="margin-top:4px"><span class="tw">▸</span><span>Cloud</span><span class="ssh-group-count">1</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> Entry is the <b><span class="i dim" data-icon="ssh"></span> icon at the right of the title bar</b> · green dot = connected, <code>×N</code> = session count (click to jump). <span class="n">②</span> Secrets are never stored — only host info is kept.</div>
+          </div>
+        </figure>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> In-tab connect form</div>
+        <p>A connect form appears inside a new tab. Fill in host, user, and port, then pick an auth method — <b>Password</b> / <b>Public key</b> (key path + optional passphrase) / <b>SSH Agent</b>. On success the tab becomes the SSH terminal itself.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">New SSH connection — auth: public key</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:360px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">bash</span></div>
+                    <div class="tab active"><span class="tab-icon" data-icon="ssh"></span><span class="tab-label">New SSH connection</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" data-icon="add"></button><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content">
+                  <div class="connect-wrap">
+                    <div class="connect-card">
+                      <div class="connect-head"><span class="i" data-icon="ssh" style="color:var(--accent)"></span><h3>SSH connection</h3></div>
+                      <div class="connect-body">
+                        <div class="field">
+                          <label>Host</label>
+                          <div class="row2">
+                            <input class="input mono" type="text" value="web-prod-01.example.com" />
+                            <input class="input mono" type="text" value="22" />
+                          </div>
+                          <span class="hint">e.g. deploy@web-prod-01.example.com</span>
+                        </div>
+                        <div class="field"><label>Username</label><input class="input" type="text" value="deploy" /></div>
+                        <div class="section-title">Authentication</div>
+                        <div class="field">
+                          <div class="segmented">
+                            <button>Password</button>
+                            <button class="active">Public key</button>
+                            <button>SSH Agent</button>
+                          </div>
+                        </div>
+                        <div class="field"><label>Private key path</label><input class="input mono" type="text" value="~/.ssh/id_ed25519" /></div>
+                        <div class="field"><label>passphrase <span class="faint" style="font-size:11px">· optional</span></label><input class="input" type="password" placeholder="Key passphrase (if any)" /></div>
+                      </div>
+                      <div class="connect-foot"><button class="btn ghost">Cancel</button><button class="btn primary">Connect</button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">①</span> Switch among the three auth methods (password · public key · SSH Agent) with the segmented control. <span class="n">②</span> Even on failure, the form reappears with host · user kept so you can retry right away.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+
+    <!-- ② Host key TOFU -->
+    <h2 class="sec" id="hostkey"><span class="hash"></span> Host-key trust (TOFU)</h2>
+    <p>For a server you've never seen, or when its host key changes, the connection pauses and a fingerprint confirmation dialog appears. Accept it and it's remembered in <code>known_hosts</code> so future connections are automatic (TOFU = trust on first use).</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Host-key confirmation</span><span class="badge warn">first connect</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="modal-box" style="width:400px">
+            <div class="modal-head"><span class="i" data-icon="lock" style="color:var(--attention)"></span><h3 class="modal-title">Trust this host key?</h3></div>
+            <div class="modal-body">
+              <p class="caption" style="margin-bottom:9px">Seeing <b style="color:var(--text)">web-prod-01.example.com:22</b> for the first time. Confirm with the server's admin that the fingerprint matches.</p>
+              <div class="field">
+                <label>SHA256 fingerprint</label>
+                <div class="fingerprint">SHA256:n7Hq2c8r0Vf9JpXk4Lw1bZ6sKd+Ie3M5oG8aQ2yU0c</div>
+              </div>
+              <div class="field row-inline" style="justify-content:space-between"><label>Key type</label><span class="mono faint" style="font-size:11px">ssh-ed25519 · 256-bit</span></div>
+            </div>
+            <div class="modal-foot"><button class="btn">Cancel</button><button class="btn primary">Trust and connect</button></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Accept and it's remembered in <code>known_hosts</code> and connects. <span class="n">②</span> If the key changes, a red warning appears in the same spot.</div>
+      </div>
+    </figure>
+    <div class="warn"><b>Don't blindly accept a changed key</b> — if a previously trusted host's key differs, the dialog turns red. Unless it's a legitimate server reinstall, it could be a man-in-the-middle (MITM) attack, so don't accept until an admin confirms.</div>
+
+    <!-- ③ Profiles -->
+    <h2 class="sec" id="profiles"><span class="hash"></span> Export · import profiles</h2>
+    <p>In the connection manager you add and edit hosts and use groups, search, and double-click reconnect. <b>Secrets are never stored</b> — only info like host, user, port, auth method, and key path is kept (a key path is just a location reference, not the key contents).</p>
+    <ul>
+      <li><b>Own JSON</b> — share a bundle of profiles as a file. With no secrets, there's no leak risk.</li>
+      <li><b>Import <code>~/.ssh/config</code></b> — read hosts straight from your existing OpenSSH config.</li>
+      <li>Imported profiles appear in the list by group, and you connect with a click or double-click.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Import ~/.ssh/config</span></div>
+        <div class="shot-stage" style="padding:16px">
+          <div class="term"><span class="d"># hosts from ~/.ssh/config become profiles as-is</span>
+<span class="c">Host</span> <span class="g">web-prod-01</span>
+    HostName 10.0.3.11
+    User deploy
+    Port 22
+    <span class="a">IdentityFile</span> ~/.ssh/id_ed25519   <span class="d">→ auth: public key</span>
+<span class="c">Host</span> <span class="g">db-02</span>
+    HostName 10.0.4.20
+    User postgres
+<span class="d">  ────────────────────────────────────────────</span>
+<span class="d">  imported:</span> <span class="g">2 hosts</span> <span class="d">·</span> <span class="a">0 secrets</span> <span class="d">(metadata only)</span> <span class="cursor"></span></div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> Passwords and passphrases aren't part of the import — enter them at connect time or have the vault supply them automatically.</div>
+      </div>
+    </figure>
+
+    <!-- ④ SFTP remote Explorer -->
+    <h2 class="sec" id="sftp"><span class="hash"></span> SFTP remote explorer</h2>
+    <p>When you connect over SSH, the <b>left file explorer switches automatically to that server's remote tree</b> (MobaXterm-style). It expands the remote home over the same connection, no extra login.</p>
+    <ul>
+      <li><b>Double-click to edit</b> — open a remote file, edit it, and saving writes straight to the server. If the file changes on the server, it's re-read automatically within about 3 seconds (a confirmation dialog if you're mid-edit).</li>
+      <li><b>Auto-refreshing tree</b> — creations and deletions in expanded folders are reflected every 3 seconds.</li>
+      <li><b>Open a terminal from a remote folder</b> — the context menu opens a new SSH shell on the same session, with no re-auth, and cd's into that folder.</li>
+      <li><b>Remotes in the project switcher</b> — the header dropdown shows local projects alongside connected SSH (<code>user@host</code>), and picking a remote keeps the remote tree even when you switch to a local terminal tab.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Explorer — remote tree (SFTP)</span><span class="badge ok">remote</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
+          <div class="explorer" style="width:300px;height:336px">
+            <div class="explorer-header"><span class="i" data-icon="ssh" style="color:var(--accent);width:13px;height:13px"></span><span class="proj">deploy@web-prod-01 ▾</span></div>
+            <div class="explorer-body">
+              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">/home/deploy</span></div>
+              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon" style="padding-left:14px">📁</span><span class="tree-name">app</span></div>
+              <div class="tree-row selected" style="padding-left:40px"><span class="tree-icon">📄</span><span class="tree-name">docker-compose.yml</span></div>
+              <div class="tree-row" style="padding-left:40px"><span class="tree-icon">📄</span><span class="tree-name">.env</span></div>
+              <div class="tree-row" style="padding-left:40px"><span class="tree-icon">📄</span><span class="tree-name">deploy.sh</span></div>
+              <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" style="padding-left:14px">📁</span><span class="tree-name">releases</span></div>
+              <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" style="padding-left:14px">📁</span><span class="tree-name">logs</span></div>
+              <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">.bashrc</span></div>
+            </div>
+            <div class="explorer-footer"><span class="explorer-foot-git" style="color:var(--accent)"><span data-icon="sftp" style="display:inline-grid;width:11px;height:11px"></span> SFTP</span><span class="explorer-foot-sp"></span><span>remote · 14 items</span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Header <code>user@host</code> = remote origin (switch local↔remote in the switcher). <span class="n">②</span> Double-click to edit remotely.</div>
+      </div>
+    </figure>
+    <p class="dim">Files over 5MB or binary won't open in the editor, just as locally. Remote paths are always <code>/</code>-style (POSIX).</p>
+
+    <!-- ⑤ Mutating CRUD -->
+    <h2 class="sec" id="crud"><span class="hash"></span> Create · rename · delete remote files</h2>
+    <p>Right-click or use <span class="i dim" data-icon="add"></span> to create, rename, and delete files and folders in the remote tree — the same flow as the local explorer.</p>
+    <ul>
+      <li><b>Auto-create parent folders</b> — name a new item like <code>a/b</code> and any missing parent folders are created too.</li>
+      <li><b>Delete a whole folder</b> — a folder is removed along with its contents in one go.</li>
+      <li><b>Permanent delete</b> — there's no recycle bin on the remote, so it can't be undone; a stronger confirmation than local is shown.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Remote tree — right-click context menu</span></div>
+        <div class="shot-stage" style="padding:18px;position:relative;min-height:236px">
+          <div class="explorer" style="width:300px;height:200px">
+            <div class="explorer-header"><span class="i" data-icon="ssh" style="color:var(--accent);width:13px;height:13px"></span><span class="proj">deploy@web-prod-01 ▾</span></div>
+            <div class="explorer-body">
+              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">/home/deploy</span></div>
+              <div class="tree-row selected" style="padding-left:26px"><span class="tree-icon">📁</span><span class="tree-name">releases</span></div>
+              <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">deploy.sh</span></div>
+            </div>
+          </div>
+          <div class="ctx-menu" style="position:absolute;left:150px;top:96px;min-width:188px">
+            <button class="ctx-item">New file…</button>
+            <button class="ctx-item">New folder…</button>
+            <button class="ctx-item">Rename…</button>
+            <div class="ctx-sep"></div>
+            <button class="ctx-item">Download…</button>
+            <button class="ctx-item">Open in terminal</button>
+            <div class="ctx-sep"></div>
+            <button class="ctx-item danger">Delete (permanent)</button>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> "Open in terminal" opens a new shell tab with no re-auth. <span class="n">②</span> <b style="color:var(--danger)">Delete (permanent)</b> can't be undone since there's no recycle bin.</div>
+      </div>
+    </figure>
+
+    <!-- ⑥ Transfer -->
+    <h2 class="sec" id="transfer"><span class="hash"></span> File transfer (upload · download)</h2>
+    <p>Transfer files and folders local↔remote. Download via right-click on the remote tree → "Download"; upload via dual-pane drag (below). Even large files transfer directly without passing through app memory.</p>
+    <ul>
+      <li><b>Transfer a whole folder</b> — move a folder and its descendant files transfer along with it.</li>
+      <li><b>Four-way conflict choice</b> — if a name already exists, you're asked: overwrite / skip / overwrite all / skip all.</li>
+      <li><b>Progress bar + cancel</b> — the current file, count, and % progress bar are shown inside the explorer, and you can cancel.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Download in progress — inline in Explorer</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
+          <div class="explorer" style="width:320px;height:300px">
+            <div class="explorer-header"><span class="i" data-icon="ssh" style="color:var(--accent);width:13px;height:13px"></span><span class="proj">deploy@web-prod-01 ▾</span></div>
+            <div class="explorer-body">
+              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">releases</span></div>
+              <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">v0.1.37.tar.gz</span></div>
+              <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">v0.1.36.tar.gz</span></div>
+            </div>
+            <div class="xfer">
+              <div class="xfer-top"><span data-icon="sftp" style="display:inline-grid;width:13px;height:13px;color:var(--accent)"></span><span class="nm">v0.1.37.tar.gz</span><span class="pct">62% · 3/5</span></div>
+              <div class="xfer-bar"><span class="xfer-fill" style="width:62%"></span></div>
+              <div class="xfer-confirm">
+                <span class="q"><b style="color:var(--text)">deploy.sh</b> already exists — what would you like to do?</span>
+                <button class="btn sm primary">Overwrite</button>
+                <button class="btn sm">Skip</button>
+                <button class="btn sm">Overwrite all</button>
+                <button class="btn sm">Skip all</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> The progress bar, conflicts, and cancel are all shown <b>inside the explorer</b> (no separate popup).</div>
+      </div>
+    </figure>
+
+    <!-- ⑦ Dual-pane SFTP -->
+    <h2 class="sec" id="dualpane"><span class="hash"></span> Dual-pane SFTP (drag to transfer)</h2>
+    <p>The "Open SFTP" button on an SSH terminal tab opens the same connection's remote tree as a <b>separate tab</b>, and you <b>drag</b> files between the left explorer ↔ the SFTP tab to transfer (MobaXterm dual-panel style). With multiple connections, a picker asks which one to attach to.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Dual pane — cross-pane drag upload</span></div>
+        <div class="shot-stage" style="padding:18px;position:relative">
+          <div class="duo">
+            <div class="explorer" style="flex:0 0 210px;height:300px">
+              <div class="explorer-header"><span class="folder" data-icon="folder" style="width:13px;height:13px;color:var(--text-faint);display:inline-grid"></span><span class="proj">local · orchterm ▾</span></div>
+              <div class="explorer-body">
+                <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">dist</span></div>
+                <div class="tree-row selected" style="padding-left:26px"><span class="tree-icon">📦</span><span class="tree-name">release.tar.gz</span></div>
+                <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">manifest.json</span></div>
+              </div>
+            </div>
+            <div class="pane active-pane" style="height:300px">
+              <div class="pane-tabbar">
+                <div class="pane-tabs">
+                  <div class="tab active"><span class="tab-icon" data-icon="sftp"></span><span class="tab-label">SFTP · web-prod-01</span></div>
+                </div>
+                <div class="pane-actions"><button class="pane-act" data-icon="refresh"></button><button class="pane-act" data-icon="close"></button></div>
+              </div>
+              <div class="pane-content">
+                <div class="rtree">
+                  <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">/home/deploy/app</span></div>
+                  <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">docker-compose.yml</span></div>
+                  <div class="tree-row" style="padding-left:26px;background:var(--accent-soft)"><span class="tree-icon">📁</span><span class="tree-name">incoming &nbsp;<span class="accent" style="font-size:11px">⇠ drop</span></span></div>
+                  <div class="tree-row" style="padding-left:26px"><span class="tree-icon">📄</span><span class="tree-name">deploy.sh</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dragghost" style="left:200px;top:150px">📦 release.tar.gz <span class="gx">→ upload</span></div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Drag from left (local) → right (remote) to <b>upload</b>, the reverse to <b>download</b> (direction is detected automatically).</div>
+      </div>
+    </figure>
+    <p class="dim">Dragging from the OS desktop or file manager isn't supported — transfers are done by dragging between the two panels inside the app.</p>
+
+    <!-- ⑧ follow-shell-path -->
+    <h2 class="sec" id="follow"><span class="hash"></span> Follow the shell (cd → tree sync)</h2>
+    <p>When you <code>cd</code> in the SSH shell, the remote pane and the left remote explorer follow to that path automatically (shell→tree, one-way). It's off by default and only works once you flip the toggle on.</p>
+    <ul>
+      <li>The moment you turn it on, one setup line is sent to the shell once (seeing one line in the scrollback is the expected result of turning it on).</li>
+      <li>It works in <b>bash · zsh</b> without touching your existing shell config (no-op in fish and the like).</li>
+      <li>The remote pane's "Follow CWD" toggle and the left explorer toggle share the same state.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Follow CWD — just after turning on</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:248px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="ssh"></span><span class="tab-label">deploy@web-prod-01</span><span class="tab-dot on"></span></div></div>
+              <div class="pane-actions"><button class="pane-act" data-icon="add"></button><button class="pane-act" data-icon="close"></button></div>
+            </div>
+            <div class="pane-tool">
+              <span class="lbl">Follow CWD</span>
+              <div class="segmented"><button>Off</button><button class="active">On</button></div>
+              <span class="faint" style="font-size:11px;margin-left:auto">shell cd → left tree + remote pane sync</span>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="d">deploy@web-prod-01:~$</span> <span class="am"># ↓ one setup line echoed when toggled on (intended behavior)</span>
+<span class="d">deploy@web-prod-01:~$</span> <span class="d">if [ -n "$ZSH_VERSION" ]; then …; else PROMPT_COMMAND='printf …'; fi</span>
+<span class="d">deploy@web-prod-01:~$</span> cd /home/deploy/app/releases/v0.1.37
+<span class="g">▸ left tree + remote pane moved to /home/deploy/app/releases/v0.1.37</span>
+<span class="d">deploy@web-prod-01:.../v0.1.37$</span> <span class="a">▍</span></div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Turn it on and one setup line appears in the scrollback (normal). <span class="n">②</span> After that, every <code>cd</code> makes the tree follow to the same path.</div>
+      </div>
+    </figure>
+
+    <!-- ⑨ Credential vault -->
+    <h2 class="sec" id="vault"><span class="hash"></span> Credential vault</h2>
+    <p>An optional vault that stores SSH secrets (passwords · key passphrases) encrypted and uses them automatically when you connect to a saved profile (no need to type them each time). Open it with the <span class="i dim" data-icon="vault"></span> vault icon in the connection manager header.</p>
+    <ul>
+      <li><b>Encryption</b> — all secrets are stored in a vault (AES-256-GCM) locked by a single master password. The vault file is kept separate from the settings DB.</li>
+      <li><b>Kept inside the app only</b> — a stored secret's plaintext is never surfaced back to the screen (app UI); it's used only inside the app at connect time.</li>
+      <li><b>Connect integration</b> — use the form's <b>USE toggle</b> to apply stored credentials (entering the master password if needed), and the <b>SAVE checkbox</b> to store them after a successful connect.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Credential vault — unlock</span><span class="badge warn">locked</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="modal-box" style="width:400px">
+            <div class="modal-head"><span class="i" data-icon="vault" style="color:var(--accent)"></span><h3 class="modal-title">Credential vault</h3><span class="badge warn" style="margin-left:auto">locked</span></div>
+            <div class="modal-body">
+              <p class="caption" style="margin-bottom:9px">To use stored secrets, unlock the vault with your <b style="color:var(--text)">master password</b>.</p>
+              <div class="field"><label>Master password</label><input class="input" type="password" value="••••••••••••" /></div>
+              <div class="section-title">Stored credentials</div>
+              <div class="kv-row"><span class="st"></span><span class="map">web-prod-01 · deploy</span><span class="kind">Password</span></div>
+              <div class="kv-row"><span class="st"></span><span class="map">db-02 · postgres</span><span class="kind">Key passphrase</span></div>
+            </div>
+            <div class="modal-foot"><button class="btn">Change master password</button><button class="btn primary"><span class="i" data-icon="lock" style="color:#fff"></span> Unlock</button></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Unlock the vault with the master password. <span class="n">②</span> Once unlocked, stored secrets are used automatically when connecting.</div>
+      </div>
+    </figure>
+
+    <!-- ⑩ Port-forwarding tunnel -->
+    <h2 class="sec" id="tunnel"><span class="hash"></span> Port-forwarding tunnel</h2>
+    <p>Create <b>local (-L)</b> and <b>dynamic SOCKS5 (-D)</b> port-forwarding tunnels on top of an SSH connection. The config is saved in the profile (<code>host:port</code> only, not a secret) and established automatically on a successful connect. It binds to <code>127.0.0.1</code> only, so it isn't exposed to the LAN.</p>
+    <ul>
+      <li><b>Local (-L)</b> — connects a port on your PC to a <code>host:port</code> beyond the remote (e.g. <code>127.0.0.1:5432 → db-02:5432</code>).</li>
+      <li><b>Dynamic (-D)</b> — acts as a SOCKS5 proxy, routing browser and tool traffic beyond the server.</li>
+      <li><b>Management</b> — from the connection manager's <span class="i dim" data-icon="tunnel"></span> "Port forwarding" button, view and stop active tunnels or add one on the fly.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Port forwarding — web-prod-01</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="modal-box" style="width:440px">
+            <div class="modal-head"><span class="i" data-icon="tunnel" style="color:var(--accent)"></span><h3 class="modal-title">Port forwarding — web-prod-01</h3></div>
+            <div class="modal-body">
+              <div class="kv-row"><span class="st"></span><span class="kind">-L</span><span class="map">127.0.0.1:5432 → db-02:5432</span><button class="kv-stop" title="Stop" data-icon="stop"></button></div>
+              <div class="kv-row"><span class="st"></span><span class="kind">-D</span><span class="map">SOCKS5 · 127.0.0.1:1080</span><button class="kv-stop" title="Stop" data-icon="stop"></button></div>
+              <div class="section-title">New tunnel</div>
+              <div class="field">
+                <div class="row-inline">
+                  <div class="segmented"><button class="active">-L local</button><button>-D SOCKS5</button></div>
+                  <input class="input mono" style="width:88px" value="5433" />
+                  <input class="input mono" value="db-03:5432" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-foot"><button class="btn">Close</button><button class="btn primary"><span class="i" data-icon="add" style="color:#fff"></span> Add tunnel</button></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> green dot = established, stop instantly with <span class="i dim" data-icon="stop"></span>. <span class="n">②</span> Saved in the profile and re-established automatically when you connect.</div>
+      </div>
+    </figure>
+
+    <!-- tmux session persistence -->
+    <h2 class="sec" id="tmux"><span class="hash"></span> tmux session persistence — remote sessions that survive disconnects</h2>
+    <p>Turn on <b>"tmux session persistence"</b> in a profile and, on connect, a profile-specific tmux session is created on the remote and attached to. <b>Even if the network drops or you close the window or tab</b>, the remote session keeps running — builds, dev servers, log tails, and long-running work don't die. Reconnect and you're <b>re-attached to the same session automatically</b>, picking up right where the screen was.</p>
+    <ul>
+      <li><b>Stable session name</b> — the session name is fixed per profile (<code>orchterm-&lt;profile&gt;</code>), so reconnecting finds and attaches to exactly the same session.</li>
+      <li><b>Create if missing · attach if present</b> — a single <code>tmux new -A -s …</code> on connect creates the session on first connect and attaches (<code>-A</code>) to it on reconnect.</li>
+      <li><b>Graceful fallback</b> — if the remote has no tmux, it falls back to a normal login shell automatically (<code>|| exec "$SHELL" -l</code>). In short, <b>connecting always works even without tmux</b>.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">New host — tmux session persistence option</span></div>
+        <div class="shot-stage" style="padding:20px;display:grid;place-items:center">
+          <div style="width:330px;background:var(--bg-1);border:1px solid var(--line-faint);border-radius:var(--r-lg);padding:14px 15px;box-shadow:var(--shadow-pane)">
+            <div style="font-size:13px;color:var(--text-strong);font-weight:600;margin-bottom:11px">SSH profile</div>
+            <div style="display:grid;gap:8px;margin-bottom:11px">
+              <div style="display:flex;gap:8px"><span style="flex:1;background:var(--bg-0);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:12px;color:var(--text-dim)">web-prod-01</span><span style="width:62px;background:var(--bg-0);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:12px;color:var(--text-faint)">22</span></div>
+              <div style="background:var(--bg-0);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 9px;font-size:12px;color:var(--text-dim)">deploy</div>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-dim);cursor:default">
+              <span style="width:15px;height:15px;border-radius:4px;background:var(--accent);display:grid;place-items:center"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span>
+              tmux session persistence <span style="color:var(--text-faint)">(survives disconnects · restored on reconnect)</span>
+            </label>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Turned on with a single profile checkbox — when on, the connection is wrapped in <code>tmux new -A -s orchterm-&lt;profile&gt;</code>.</div>
+      </div>
+    </figure>
+    <p class="note">⚠️ The remote host must have <code>tmux</code> installed for sessions to persist (otherwise it connects with a normal shell automatically). This setting is preserved across profile export/import too.</p>
+
+    <!-- MultiExec broadcast -->
+    <h2 class="sec" id="multiexec"><span class="hash"></span> To many servers at once — MultiExec broadcast</h2>
+    <p>When <b>two or more</b> SSH sessions are live, a <b>Broadcast</b> section appears in the connection manager. Pick the sessions to add to the group with the member checkboxes and press <b>On</b> — a command typed into one terminal in the group is <b>sent to every member at once</b>. You can run the same command (deploy · patch · restart · check logs) across many servers in one go.</p>
+    <ul>
+      <li><b>Input-only fan-out</b> — only the command (input) goes to every member; output is received by each session on its own (check per-server results separately).</li>
+      <li><b>Loop prevention</b> — input received via broadcast isn't re-propagated, so there's no infinite fan-out among members.</li>
+      <li><b>Member indication</b> — terminals that are broadcasting members are highlighted with an outline (layout unchanged).</li>
+      <li><b>Hidden with one session</b> — it's meaningless alone, so the section appears only when two or more are live.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Connection manager — broadcast group</span><span class="badge ok">3 sessions</span></div>
+        <div class="shot-stage" style="padding:20px;display:grid;place-items:center">
+          <div style="width:300px;background:var(--bg-1);border:1px solid var(--line-faint);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-pane)">
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--accent-soft);border-bottom:1px solid var(--line-faint)"><span style="font-size:12.5px;color:var(--accent);font-weight:700">Broadcast</span><span style="flex:1"></span><span style="font-size:10.5px;color:var(--accent)">On</span><span style="width:15px;height:15px;border-radius:4px;background:var(--accent);display:grid;place-items:center"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span></div>
+            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line-faint)"><span style="width:14px;height:14px;border-radius:4px;background:var(--accent);display:grid;place-items:center;flex:none"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span style="font-size:12.5px;color:var(--text-strong)">web-prod-01</span><span style="flex:1"></span><span style="font-size:11px;color:var(--text-faint)">Deploy</span></div>
+            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid var(--line-faint)"><span style="width:14px;height:14px;border-radius:4px;background:var(--accent);display:grid;place-items:center;flex:none"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></span><span style="font-size:12.5px;color:var(--text-strong)">web-prod-02</span><span style="flex:1"></span><span style="font-size:11px;color:var(--text-faint)">Deploy</span></div>
+            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px"><span style="width:14px;height:14px;border-radius:4px;border:1.5px solid var(--line-strong);flex:none"></span><span style="font-size:12.5px;color:var(--text-dim)">db-02</span><span style="flex:1"></span><span style="font-size:11px;color:var(--text-faint)">DB</span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Check members + On → input typed into a member terminal is sent to every member at once. <span class="n">②</span> Output is received per server.</div>
+      </div>
+    </figure>
+
+    <!-- Cross-platform -->
+    <h2 class="sec" id="platform"><span class="hash"></span> Cross-platform · security</h2>
+    <ul>
+      <li><b>No stored secrets</b> — SFTP, extra shells, and tunnels reuse the already-authenticated connection, so there's no new secret. On restart, remote connection state isn't restored and you return to local.</li>
+      <li><b>Cross-platform</b> — supports Windows · macOS · Linux (macOS is under additional verification in some environments).</li>
+    </ul>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>Code editor</a>
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="workstation.html"><span class="ri" data-icon="external-link"></span>Multi-agent workstation</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="mirror.html">Next → CDP browser mirror</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

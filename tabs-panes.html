@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>탭 · 패널 — Orch term 가이드</title>
-<meta name="description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 패널 최대화(Shift+Esc·glassmorphism), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
+<meta name="description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
 <link rel="stylesheet" href="./_tokens.css" />
 <link rel="stylesheet" href="./_app.css" />
 <link rel="stylesheet" href="./site.css" />
@@ -36,7 +37,7 @@
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
   <nav class="tlinks">
-    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
     <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
   </nav>
 </header>
@@ -115,6 +116,45 @@
 
     <p>키보드로는 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>방향키</kbd>로 인접 패널 사이를 이동하고, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>로 탐색기를 토글합니다.</p>
     <p>탭바의 빈 영역을 잡으면 패널 전체를 끌 수 있습니다. 다른 패널 <b>중앙</b>에 드롭하면 두 패널이 자리를 바꾸고, <b>가장자리</b>에 드롭하면 그쪽으로 재배치됩니다. <b>Space 칩</b>에 드롭하면 패널째 그 Space로 옮겨집니다(마지막 패널은 불가).</p>
+
+    <!-- 바둑판 배열 · 전체 병합 -->
+    <h2 class="sec" id="grid"><span class="hash"></span> 바둑판 배열 · 전체 병합</h2>
+    <p>쌓인 탭과 흩어진 패널을 <b>한 번에</b> 재배치하는 두 버튼입니다. 서로 반대 방향으로 동작합니다 — 하나는 한 패널을 격자로 <b>펼치고</b>, 다른 하나는 모든 패널을 하나로 <b>접습니다</b>.</p>
+
+    <p><b><span class="i" data-icon="tile"></span> 바둑판 배열</b> — 한 패널에 탭이 <b>2개 이상</b> 쌓이면 패널 헤더에 <span class="i" data-icon="tile"></span> 버튼이 나타납니다(탭이 하나면 숨겨짐). 누르면 그 패널의 탭들이 각각 패널로 펼쳐져 <b>근사 정사각형 격자</b>(2탭→1×2, 4탭→2×2, 5탭→2·3 …)로 배치됩니다. 격자는 <b>원래 그 패널이 차지하던 영역 안</b>에서만 만들어져 다른 패널과 Space는 그대로 유지됩니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">바둑판 배열 — ⊞</span></div>
+        <div class="shot-stage" style="padding:18px;display:grid;place-items:center;min-height:150px">
+          <div class="pane active-pane" style="width:440px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">codex</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">agy</span></div>
+                <div class="tab"><span class="tab-icon" data-icon="file"></span><span class="tab-label">pty.rs</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="새 터미널" data-icon="add"></button>
+                <span class="pane-act-sep"></span>
+                <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                <button class="pane-act" title="아래로 분할" data-icon="split-horizontal"></button>
+                <button class="pane-act" title="바둑판 배열" data-icon="tile" style="color:var(--accent)"></button>
+                <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+              </div>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">탭 4개 — 바둑판 배열 버튼으로 2×2 격자로 펼쳐집니다</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 탭이 2개 이상이면 헤더에 <span class="i dim" data-icon="tile"></span> <b>바둑판 배열</b> 버튼이 나타납니다. 누르면 네 탭이 각각 패널이 되어 2×2 격자로 배치됩니다.</div>
+      </div>
+    </figure>
+
+    <p><b><span class="i" data-icon="merge"></span> 전체 병합</b> — 하단바 맨 좌측, <span class="i" data-icon="sidebar"></span> 사이드바 토글 <b>바로 옆</b>의 <span class="i" data-icon="merge"></span> 버튼을 누르면 현재 Space의 <b>모든 패널이 좌상단 한 패널로 접히고</b>, 흩어져 있던 탭이 전부 그 패널의 탭으로 모입니다. 병합 전에 보고 있던 탭은 병합 후에도 활성으로 유지됩니다.</p>
+
+    <p class="dim">두 기능 모두 <b>명령 팔레트</b>(<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)에서 “바둑판 배열” · “전체 병합”으로도 실행할 수 있습니다. 기본 단축키는 없으며, 설정에서 원하는 키를 지정할 수 있습니다.</p>
 
     <!-- 최대화 -->
     <h2 class="sec" id="maximize"><span class="hash"></span> 패널 최대화 (Shift+Esc)</h2>

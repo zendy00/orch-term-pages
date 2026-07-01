@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>AI gateway — Orch term guide</title>
+<meta name="description" content="A machine-to-machine gateway where an external program synchronously calls AI (claude·codex·agy) over a local HTTP API (POST /run). OpenAI-compatible responses · session keepalive · worker safe mode · audit log." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* Page-specific — data-flow diagram · API code blocks · audit log viewer (design-system tokens only) */
+
+  /* Flow diagram (external → orchterm → worker) */
+  .gflow { display:flex; align-items:stretch; gap:0; margin:22px 0; max-width:var(--read); flex-wrap:wrap; }
+  .gnode { flex:1 1 200px; min-width:180px; background:var(--bg-1); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; }
+  .gnode.mid { border-color:var(--accent-line); }
+  .gnode .role { font-family:var(--code-font); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+  .gnode .who { font-size:15px; color:var(--text-strong); font-weight:600; }
+  .gnode .who b { color:var(--accent); }
+  .gnode .who small { display:block; color:var(--text-faint); font-weight:400; font-size:11px; margin-top:3px; font-family:var(--code-font); }
+  .garr { flex:0 0 100%; display:flex; align-items:center; gap:10px; padding:8px 2px; color:var(--text-dim); font-size:13px; }
+  .garr .line { flex:1; height:1px; background:linear-gradient(90deg,var(--accent-line),transparent); }
+  .garr code { white-space:nowrap; }
+  @media(min-width:640px){ .gflow{flex-wrap:nowrap;align-items:center} .garr{flex:0 0 142px;flex-direction:column;gap:4px} .garr .line{width:100%;flex:none} }
+
+  /* API code blocks (request curl / response JSON) — reuses .term's colored spans as-is */
+  .api-row { padding:12px 15px; }
+  .api-row + .api-row { border-top:1px solid var(--line-faint); background:var(--bg-0); }
+  .api-lbl { display:flex; align-items:center; gap:7px; margin:0 0 8px; font-family:var(--code-font); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); }
+  .api-lbl .verb { color:var(--success); font-weight:600; }
+  .api-lbl .verb.res { color:var(--accent); }
+  pre.term { margin:0; overflow-x:auto; }
+
+  /* Audit log viewer reproduction (orch dashboard tab pattern) */
+  .gl { position:relative; display:flex; flex-direction:column; height:100%; min-height:0; font-size:12px; }
+  .gl-bar { display:flex; align-items:center; gap:8px; padding:7px 10px; border-bottom:1px solid var(--line-faint); background:var(--bg-2); flex:0 0 auto; }
+  .gl-date { display:inline-flex; align-items:center; gap:8px; background:var(--bg-0); border:1px solid var(--line); border-radius:var(--r-sm); padding:4px 10px; font-family:var(--code-font); font-size:12px; color:var(--text-strong); }
+  .gl-date .ic { color:var(--accent); display:inline-grid; place-items:center; width:14px; height:14px; }
+  .gl-bar .sp { flex:1; }
+  .gl-del { width:24px; height:22px; display:grid; place-items:center; border-radius:var(--r-md); color:var(--text-faint); border:none; background:none; cursor:default; }
+  .gl-del:hover { color:var(--danger); background:var(--bg-hover); }
+  .gl-h { display:flex; align-items:center; gap:7px; padding:6px 11px; font-family:var(--code-font); font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text-faint); background:var(--bg-1); border-bottom:1px solid var(--line-faint); flex:0 0 auto; }
+  .gl-h .cap { margin-left:auto; color:var(--accent); text-transform:none; letter-spacing:0; }
+  .gl-rows { overflow:auto; flex:0 0 auto; max-height:116px; }
+  .gl-row { display:flex; align-items:center; gap:10px; padding:6px 11px; border-bottom:1px solid var(--line-faint); font-family:var(--code-font); font-size:11.5px; color:var(--text-dim); }
+  .gl-row:hover { background:var(--bg-hover); }
+  .gl-row.sel { background:var(--accent-soft); }
+  .gl-row .ts { color:var(--text-faint); flex:none; }
+  .gl-row .pr { color:var(--text); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .gl-row .ms { color:var(--text-faint); flex:none; }
+  .gl-st { font-size:10px; padding:1px 7px; border-radius:999px; flex:none; }
+  .gl-st.ok { background:color-mix(in srgb, var(--success) 16%, transparent); color:var(--success); }
+  .gl-st.to { background:color-mix(in srgb, var(--attention) 18%, transparent); color:var(--attention); }
+  .gl-drag { height:11px; display:grid; place-items:center; color:var(--text-faint); background:var(--bg-2); border-top:1px solid var(--line-faint); border-bottom:1px solid var(--line-faint); letter-spacing:3px; font-size:9px; flex:0 0 auto; cursor:row-resize; }
+  .gl-detail { flex:1 1 auto; overflow:auto; padding:10px 12px; display:grid; gap:9px; min-height:0; }
+  .gl-blk .lbl { font-family:var(--code-font); font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text-faint); margin-bottom:5px; }
+  .gl-blk pre { margin:0; font-family:var(--code-font); font-size:11.5px; line-height:1.55; color:var(--text); white-space:pre-wrap; word-break:break-word; background:var(--bg-0); border:1px solid var(--line-faint); border-radius:var(--r-sm); padding:8px 10px; }
+  .gl-blk pre .c { color:var(--term-cyan); } .gl-blk pre .g { color:var(--term-green); } .gl-blk pre .d { color:var(--text-dim); }
+  /* Calendar popup */
+  .gl-cal { position:absolute; top:41px; left:10px; z-index:6; width:188px; background:var(--bg-3); border:1px solid var(--line); border-radius:var(--r-md); box-shadow:var(--shadow-pop); padding:9px; }
+  .gl-cal-h { display:flex; align-items:center; justify-content:space-between; font-family:var(--code-font); font-size:11px; color:var(--text); margin-bottom:7px; }
+  .gl-cal-h span { color:var(--text-faint); }
+  .gl-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+  .gl-cal-grid .d { aspect-ratio:1; display:grid; place-items:center; font-size:10px; color:var(--text-faint); border-radius:50%; font-family:var(--code-font); }
+  .gl-cal-grid .dow { color:var(--text-faint); opacity:.6; font-size:9px; }
+  .gl-cal-grid .d.has { color:var(--text-strong); box-shadow:inset 0 0 0 1.5px var(--accent-line); }
+  .gl-cal-grid .d.sel { background:var(--accent); color:#fff; box-shadow:none; }
+  .gl-cal-grid .d.mute { opacity:.25; }
+</style>
+</head>
+<body data-page="gateway">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Flagship features</span><span class="sep">/</span><span>AI gateway</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Flagship features · AI gateway <span class="flag">HTTP API</span></p>
+    <h1 class="page-title">AI gateway</h1>
+    <p class="lede">An external program sends <code>{ai, prompt}</code> over a local HTTP API, and orchterm spins up that AI (<b>claude·codex·agy</b>) in a worker tab, runs one turn, and returns the response <b>synchronously</b> — an automated call with no human in the loop.</p>
+
+    <!-- What it does -->
+    <h2 class="sec" id="what"><span class="hash"></span> What it does</h2>
+    <p>When an external program (a script · CI · an in-app browser page) sends a one-line prompt, the gateway spins up a worker AI in a tab, runs one turn, and returns an OpenAI-compatible response <b>while holding the connection open</b>.</p>
+
+    <div class="gflow">
+      <div class="gnode"><div class="role">caller</div><div class="who">External <b>program</b><small>HTTP client</small></div></div>
+      <div class="garr"><code>POST /run</code><div class="line"></div><code>{ai, prompt}</code></div>
+      <div class="gnode mid"><div class="role">orchterm</div><div class="who">HTTP server<small>:9610 · Bearer</small></div></div>
+      <div class="garr"><code>worker tab</code><div class="line"></div><code>run 1 turn</code></div>
+      <div class="gnode"><div class="role">worker</div><div class="who"><b>claude</b> · codex · agy<small>worker tab (1 turn)</small></div></div>
+    </div>
+
+    <!-- Getting started -->
+    <h2 class="sec" id="start"><span class="hash"></span> Getting started</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> Turn on the gateway (applied after restart)</div>
+        <p>A fresh install starts with the gateway <b>on</b>. Turning it off or back on takes effect <b>after an app restart</b>.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="copy"></span> Check · copy the Bearer token</div>
+        <p>The token is issued <b>randomly</b> once, the first time. Check and copy it under Settings → AI gateway and hand it to the caller. Every request needs <code>Authorization: Bearer …</code>, and a mismatch returns <code>401</code>.</p>
+        <figure class="fig">
+          <div class="shot">
+            <img class="shot-img" src="../assets/shots/en/gateway-settings.png" alt="Settings modal — AI gateway: enable gateway (127.0.0.1) · port 9610 · Bearer token · worker folder · audit log retention days" />
+            <div class="shot-cap"><span class="n">①</span> It binds to 127.0.0.1 only, so there's no external network exposure · <span class="i dim" data-icon="copy"></span> copy the token and hand it to the caller.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+    <p class="dim">Workers run from a fixed folder (<code>~/.orchterm/gateway</code>), so agent trust approval is needed only <b>once, the first time</b>.</p>
+
+    <!-- API call -->
+    <h2 class="sec" id="api"><span class="hash"></span> API call — POST /run</h2>
+    <p>The request is <code>POST /run</code> (alias <code>POST /v1/chat/completions</code>). Put the AI to call and the prompt in the body, and it <b>holds the connection</b> until the response arrives, returning OpenAI <code>chat.completion</code> JSON synchronously.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">curl — synchronous call</span><span class="badge ok">200 · chat.completion</span></div>
+        <div class="shot-stage">
+          <div class="api-row">
+            <p class="api-lbl"><span class="verb">POST</span> /run · request</p>
+            <pre class="term"><span class="g">$</span> curl -s http://127.0.0.1:9610/run <span class="d">\</span>
+    -H <span class="c">"Authorization: Bearer $ORCHTERM_GATEWAY_TOKEN"</span> <span class="d">\</span>
+    -H <span class="c">"Content-Type: application/json"</span> <span class="d">\</span>
+    -d <span class="c">'{ "agent": "claude", "prompt": "PING", "session": "s1" }'</span></pre>
+          </div>
+          <div class="api-row">
+            <p class="api-lbl"><span class="verb res">200</span> OpenAI chat.completion · response</p>
+            <pre class="term">{
+  <span class="c">"id"</span>: <span class="g">"req_8f3a…"</span>, <span class="c">"object"</span>: <span class="g">"chat.completion"</span>,
+  <span class="c">"choices"</span>: [
+    { <span class="c">"index"</span>: 0,
+      <span class="c">"message"</span>: { <span class="c">"role"</span>: <span class="g">"assistant"</span>, <span class="c">"content"</span>: <span class="g">"PONG"</span> },
+      <span class="c">"finish_reason"</span>: <span class="g">"stop"</span> }
+  ],
+  <span class="c">"result"</span>: <span class="g">"PONG"</span>, <span class="c">"error"</span>: null <span class="d">// result·error = legacy compat</span>
+}</pre>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Synchronous model — the server waits up to <b>360s</b>, then returns <code>504</code> if it hasn't finished.</div>
+      </div>
+    </figure>
+
+    <table class="kbds">
+      <thead><tr><th>Body field</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>agent</code> / <code>ai</code></td><td>Worker type — claude · codex · agy (default <code>claude</code>)</td></tr>
+        <tr><td><code>prompt</code> / <code>messages</code></td><td>The prompt to send. If both are empty, <code>400</code></td></tr>
+        <tr><td><code>session</code></td><td>keepalive key (optional) — a value reuses the worker, empty makes it one-shot</td></tr>
+        <tr><td><code>model</code></td><td>Accepted but currently ignored (for later)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Session keepalive -->
+    <h2 class="sec" id="session"><span class="hash"></span> Session keepalive (multi-turn)</h2>
+    <p>Give a <code>session</code> value and <b>the same session reuses the same worker</b> — multi-turn with context preserved. Leave it empty and it's <b>one-shot</b>, closing the worker after the response (“the worker disappeared after the response” is not a bug but this very behavior).</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">session "s1" — context preserved</span></div>
+        <div class="shot-stage" style="padding:16px">
+          <div class="term"><span class="d"># turn 1 — first call with the same session</span>
+<span class="g">$</span> curl …/run -d <span class="c">'{ "agent":"claude", "session":"s1", "prompt":"remember: banana73" }'</span>
+<span class="d">  ◂</span> <span class="a">"Got it. I've remembered 'banana73'."</span>
+
+<span class="d"># turn 2 — same session, worker reused → recall</span>
+<span class="g">$</span> curl …/run -d <span class="c">'{ "agent":"claude", "session":"s1", "prompt":"what was that code earlier?" }'</span>
+<span class="d">  ◂</span> <span class="a">"It's banana73."</span> <span class="cursor"></span></div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> turn 2 recalls turn 1's “banana73” — reusing the same worker and the same session.</div>
+      </div>
+    </figure>
+
+    <!-- Safe mode -->
+    <h2 class="sec" id="safe"><span class="hash"></span> Worker safe mode (ON by default)</h2>
+    <p>Gateway workers run in <b>safe mode</b> by default — they don't use the dangerous permission-bypass flag. Bypass mode (unattended · faster but not recommended) is only enabled via the setting <b>“Bypass dangerous worker permissions”</b>.</p>
+    <div class="warn"><b>Caution</b> — the gateway is the control plane through which external programs put local AI to work. Don't carelessly disable the token, the local binding, or the safe-mode default.</div>
+
+    <!-- Audit log -->
+    <h2 class="sec" id="audit"><span class="hash"></span> Audit log (request/response records + viewer tab)</h2>
+    <p>While the gateway is on, it logs <b>every request</b> that passes authentication, by date — prompt · timestamp · total time · status (ok·error·timeout) · down to the raw response. Open the viewer tab with the palette command <b>“Gateway audit log”</b>.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Gateway audit log — viewer tab</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:368px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="audit-log"></span><span class="tab-label">Gateway audit log</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" data-icon="close"></button></div>
+            </div>
+            <div class="pane-content">
+              <div class="gl">
+                <div class="gl-bar">
+                  <span class="gl-date"><span class="ic" data-icon="calendar"></span> 2026-06-28</span>
+                  <span class="sp"></span>
+                  <button class="gl-del" title="Delete logs for this date" data-icon="trash"></button>
+                </div>
+                <div class="gl-h">Requests <span class="cap">(recent 24 / 24 total)</span></div>
+                <div class="gl-rows">
+                  <div class="gl-row sel"><span class="ts">14:02:51</span><span class="pr">remember: bana…na73</span><span class="ms">3.1s</span><span class="gl-st ok">ok</span></div>
+                  <div class="gl-row"><span class="ts">14:02:09</span><span class="pr">PING</span><span class="ms">2.4s</span><span class="gl-st ok">ok</span></div>
+                  <div class="gl-row"><span class="ts">13:58:44</span><span class="pr">SSH tunnel…ty review</span><span class="ms">41.8s</span><span class="gl-st ok">ok</span></div>
+                  <div class="gl-row"><span class="ts">13:55:02</span><span class="pr">large rep…rse summary</span><span class="ms">360s</span><span class="gl-st to">timeout</span></div>
+                </div>
+                <div class="gl-drag">═══ drag ═══</div>
+                <div class="gl-detail">
+                  <div class="gl-blk"><div class="lbl">Raw request</div><pre>{ <span class="c">"agent"</span>: <span class="g">"claude"</span>, <span class="c">"session"</span>: <span class="g">"s1"</span>,
+  <span class="c">"prompt"</span>: <span class="g">"remember: banana73"</span> }</pre></div>
+                  <div class="gl-blk"><div class="lbl">Raw response</div><pre>{ <span class="c">"result"</span>: <span class="g">"Got it. I've remembered 'banana73'."</span>,
+  <span class="c">"error"</span>: null } <span class="d">// totalMs 3142 · status ok</span></pre></div>
+                </div>
+                <div class="gl-cal">
+                  <div class="gl-cal-h"><span>‹</span> 2026 · June <span>›</span></div>
+                  <div class="gl-cal-grid">
+                    <span class="d dow">Sun</span><span class="d dow">Mon</span><span class="d dow">Tue</span><span class="d dow">Wed</span><span class="d dow">Thu</span><span class="d dow">Fri</span><span class="d dow">Sat</span>
+                    <span class="d mute">31</span><span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span><span class="d">6</span>
+                    <span class="d">7</span><span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span><span class="d">13</span>
+                    <span class="d">14</span><span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d has">19</span><span class="d">20</span>
+                    <span class="d">21</span><span class="d">22</span><span class="d has">23</span><span class="d">24</span><span class="d">25</span><span class="d has">26</span><span class="d">27</span>
+                    <span class="d sel">28</span><span class="d">29</span><span class="d">30</span><span class="d mute">1</span><span class="d mute">2</span><span class="d mute">3</span><span class="d mute">4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Date <span class="i dim" data-icon="calendar"></span> → calendar popup (only days with logs are selectable). <span class="n">②</span> <b>Request list</b> on top ↕ <b>details</b> below (raw request·response).</div>
+      </div>
+    </figure>
+    <p class="dim">Retention days are set in settings (default 10 days) — dates beyond that are deleted automatically. The full raw response is stored.</p>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>Agent orchestration</a>
+        <a class="relchip" href="mirror.html"><span class="ri" data-icon="external-link"></span>CDP browser mirror</a>
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="tasks"></span>AI task sharing</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>Done badge · notifications</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="mirror.html">Next → CDP browser mirror</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

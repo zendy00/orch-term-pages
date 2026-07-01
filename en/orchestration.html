@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Agent orchestration — Orch term guide</title>
+<meta name="description" content="A control plane where the AI you're talking to spins up other AIs as workers and has them collaborate over multiple turns. MCP open/send/close, commander dashboard." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — A2A flow diagram (design-system tokens only) */
+  .a2a { display:flex; align-items:stretch; gap:0; margin:22px 0; max-width:var(--read); flex-wrap:wrap; }
+  .a2a-node { flex:1 1 200px; min-width:180px; background:var(--bg-1); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; }
+  .a2a-node.cmd { border-color:var(--accent-line); }
+  .a2a-node .role { font-family:var(--code-font); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+  .a2a-node .who { font-size:15px; color:var(--text-strong); font-weight:600; }
+  .a2a-node .who b { color:var(--accent); }
+  .a2a-arrow { flex:0 0 100%; display:flex; align-items:center; gap:10px; padding:8px 2px; color:var(--text-dim); font-size:13px; }
+  .a2a-arrow .line { flex:1; height:1px; background:linear-gradient(90deg,var(--accent-line),transparent); }
+  .a2a-arrow code { white-space:nowrap; }
+  @media(min-width:640px){ .a2a{flex-wrap:nowrap;align-items:center} .a2a-arrow{flex:0 0 132px;flex-direction:column;gap:4px} .a2a-arrow .line{width:100%;flex:none} }
+  /* Commander dashboard session list */
+  .orch-dash { background:var(--bg-1); border:1px solid var(--line-faint); border-radius:var(--r-lg); overflow:hidden; }
+  .orch-dash-head { display:flex; align-items:center; gap:8px; padding:9px 13px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); }
+  .orch-dash-head .ttl { font-weight:600; color:var(--text-strong); font-size:13px; }
+  .orch-dash-head .pill { margin-left:auto; font-family:var(--code-font); font-size:11px; color:var(--success); background:color-mix(in srgb,var(--success) 16%,transparent); padding:2px 9px; border-radius:999px; }
+  .orch-row { display:flex; align-items:center; gap:11px; padding:11px 13px; border-bottom:1px solid var(--line-faint); }
+  .orch-row:last-child{border-bottom:none}
+  .orch-row .st { width:8px; height:8px; border-radius:50%; flex:none; }
+  .orch-row .st.run { background:var(--attention); box-shadow:0 0 0 3px color-mix(in srgb,var(--attention) 26%,transparent); }
+  .orch-row .st.idle { background:var(--success); }
+  .orch-row .nm { color:var(--text-strong); font-size:13.5px; }
+  .orch-row .nm small { color:var(--text-faint); font-family:var(--code-font); font-size:11px; margin-left:6px; }
+  .orch-row .turn { color:var(--text-dim); font-size:12px; margin-left:4px; }
+  .orch-row .acts { margin-left:auto; display:flex; gap:4px; }
+  .orch-row .acts .iconbtn { color:var(--text-faint); }
+  .orch-row .acts .iconbtn:hover { color:var(--text-strong); background:var(--bg-hover); }
+</style>
+</head>
+<body data-page="orchestration">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Flagship features</span><span class="sep">/</span><span>Agent orchestration</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Flagship features · control plane <span class="flag">MCP A2A</span></p>
+    <h1 class="page-title">Agent orchestration</h1>
+    <p class="lede">The AI you're talking to <b>spins up other AIs (claude·codex·agy) as workers</b> and has them <b>collaborate over multiple turns</b> while keeping context. A commander–worker model lets you run a whole team from one place.</p>
+
+    <!-- Concept -->
+    <h2 class="sec" id="concept"><span class="hash"></span> What it does</h2>
+    <p>The commander AI launches workers inside orchterm in <b>interactive TUI tabs</b> and exchanges messages with them. It's a <b>bidirectional 1:1 channel</b> where a worker can also speak to the commander first, and no one can touch a worker that isn't their own session — so you can't hijack someone else's work.</p>
+
+    <div class="a2a">
+      <div class="a2a-node cmd"><div class="role">commander</div><div class="who">External <b>Claude Code</b><br><small style="color:var(--text-faint)">commander</small></div></div>
+      <div class="a2a-arrow"><code>open session</code><div class="line"></div><code>instruct · respond</code></div>
+      <div class="a2a-node"><div class="role">orchterm</div><div class="who">MCP server<br><small style="color:var(--text-faint)">:9611</small></div></div>
+      <div class="a2a-arrow"><code>worker tab</code><div class="line"></div><code>return reply</code></div>
+      <div class="a2a-node"><div class="role">worker</div><div class="who"><b>codex</b> · agy · claude<br><small style="color:var(--text-faint)">interactive tab</small></div></div>
+    </div>
+
+    <!-- Getting started -->
+    <h2 class="sec" id="start"><span class="hash"></span> Getting started — put the commander to work</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> Turn on orchestration</div>
+        <p>Turn on orchestration in settings (off by default) and restart the app. After that, an external Claude Code can put workers to work right away with no extra setup.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> Delegate from the commander tab</div>
+        <p>Delegate in plain language from the commander (claude) tab — a worker tab opens and the reply comes back.</p>
+        <figure class="fig">
+          <div class="shot">
+            <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">commander · claude</span><span class="badge ok">orchestrating</span></div>
+            <div class="shot-stage" style="padding:18px">
+              <div class="pane active-pane" style="height:286px">
+                <div class="pane-tabbar">
+                  <div class="pane-tabs">
+                    <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">commander · claude</span><span class="tab-dot on"></span></div>
+                    <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">backend · codex</span></div>
+                  </div>
+                  <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                </div>
+                <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">ask backend(codex) to review the SSH tunnel module</span>
+<span class="a">▸ open_session</span> <span class="c">codex</span> <span class="d">from=ep_claude_8f3a… → { session_id: s_4c1e }</span>
+<span class="a">▸ send</span> <span class="d">"check whether channel_open_direct_tcpip is concurrency-safe"</span>
+<span class="am">  ⟳ codex working… (waiting for output to idle)</span>
+<span class="g">◂ reply</span> <span class="d">codex: "&self borrow ⇒ concurrency-safe. Verified -L/-D listeners bind to 127.0.0.1."</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+              </div>
+            </div>
+            <div class="shot-cap"><span class="n">▲</span> One cycle: the commander opens a worker, instructs it, and gets a reply.</div>
+          </div>
+        </figure>
+      </li>
+    </ol>
+
+    <!-- Supervisor dashboard -->
+    <h2 class="sec" id="dashboard"><span class="hash"></span> Supervisor dashboard (one per Space)</h2>
+    <p>Run <b>"Orchestration worker commander"</b> from the command palette to open the supervisor dashboard tab. It gathers the current Space's live sessions in one place, where you can <b>jump</b> to each worker, <b>stop</b> an in-progress turn, and <b>close</b> a session.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Orchestration — supervisor dashboard</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="orch-dash">
+            <div class="orch-dash-head"><span class="ic" data-icon="more" style="color:var(--accent);display:inline-grid;width:16px"></span><span class="ttl">Orchestration · Space 1</span><span class="pill">● 2 sessions</span></div>
+            <div class="orch-row"><span class="st run"></span><span class="nm">codex <small>s_4c1e · ssh-core</small></span><span class="turn">⟳ turn in progress</span><span class="acts"><button class="iconbtn" title="Jump">↗</button><button class="iconbtn" title="Stop" data-icon="stop"></button><button class="iconbtn" title="Close" data-icon="close"></button></span></div>
+            <div class="orch-row"><span class="st idle"></span><span class="nm">agy <small>s_91b7 · docs</small></span><span class="turn">idle</span><span class="acts"><button class="iconbtn" title="Jump">↗</button><button class="iconbtn" title="Stop" data-icon="stop"></button><button class="iconbtn" title="Close" data-icon="close"></button></span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Status dot — <b style="color:var(--attention)">amber</b> in progress · <b style="color:var(--success)">green</b> idle. <span class="n">②</span> Jump · stop · close from the row.</div>
+      </div>
+    </figure>
+
+    <!-- MCP tools -->
+    <h2 class="sec" id="tools"><span class="hash"></span> What gets exchanged</h2>
+    <p>These are the tools the commander AI calls behind the natural-language layer — you never type them yourself; they're here to help you understand the flow.</p>
+    <table class="kbds">
+      <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>list_agents</code></td><td>List of available workers (codex · agy · claude)</td></tr>
+        <tr><td><code>open_session</code></td><td>Opens a worker in an interactive tab</td></tr>
+        <tr><td><code>send</code></td><td>Instructs the other side and waits for a reply</td></tr>
+        <tr><td><code>close_session</code></td><td>Closes a worker tab</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Security -->
+    <h2 class="sec" id="security"><span class="hash"></span> Safe defaults</h2>
+    <ul>
+      <li><b>Local (127.0.0.1) only</b> + connections are made with one-time tokens.</li>
+      <li><b>Off by default</b> — you must turn it on in settings and restart for it to work.</li>
+      <li><b>Worker safe mode on by default</b> — workers don't use dangerous permission-bypass flags.</li>
+    </ul>
+    <div class="warn"><b>Caution</b> — orchestration is a channel through which external programs drive AI locally. Don't carelessly disable the token, local binding, or safe-mode defaults.</div>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI gateway</a>
+        <a class="relchip" href="mirror.html"><span class="ri" data-icon="external-link"></span>CDP browser mirror</a>
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="tasks"></span>AI task sharing</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>Done badges · notifications</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="gateway.html">Next → AI gateway</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

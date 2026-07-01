@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Orch term — Multi-agent terminal workstation · Guide</title>
+<meta name="description" content="A multi-agent terminal workstation that runs and orchestrates several AI coding agents (claude·codex·agy) in one place. The full feature guide." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+</head>
+<body data-page="index">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ── Topbar ── -->
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" />
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc no-toc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content home" id="main">
+
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <div class="hero-rail"></div>
+      <p class="hero-eyebrow reveal d1"><span class="hash"></span> orchterm · multi-agent terminal workstation</p>
+      <h1 class="reveal d2">Run many AIs in one window —<br><span class="grad">orchestrate</span> them from your terminal.</h1>
+      <p class="sub reveal d3">Terminal · editor · browser in one workstation. On top of it, spin up <b>claude·codex·agy</b> as workers and have them collaborate while keeping context — a <b>local multi-agent control plane</b>. Windows · macOS.</p>
+      <div class="hero-cta reveal d4">
+        <a class="bigbtn primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download · Install</a>
+        <a class="bigbtn ghost" href="quickstart.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>Quick start</a>
+      </div>
+    </section>
+
+    <!-- Hero screenshot -->
+    <div class="hero-shot reveal d5">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — backend (codex) · commander (claude)</span><span class="badge ok">orchestrating</span></div>
+        <div class="shot-stage">
+          <div class="app">
+            <!-- Titlebar + Space chips -->
+            <div class="titlebar">
+              <div class="tb-brand"><span class="tb-brand-icon"><img src="../assets/app-icon.png" alt="" style="width:100%;height:100%;border-radius:4px;display:block" /></span><img class="tb-wordmark" src="../assets/orch-term-wordmark.svg" alt="Orch term" /></div>
+              <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+              <div class="titlebar-spaces">
+                <div class="space-chip active"><span class="space-chip-num">1</span> orch</div>
+                <div class="space-chip"><span class="space-chip-num">2</span> api</div>
+                <button class="space-chip-add">＋</button>
+              </div>
+              <div class="titlebar-title"></div>
+              <div class="titlebar-actions">
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg></button>
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg></button>
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6"/><path d="M6.5 8h11v3.5a5.5 5.5 0 0 1-11 0z"/><path d="M12 17v5"/></svg></button>
+              </div>
+              <div class="titlebar-controls">
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+                <button class="titlebar-btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="1"/></svg></button>
+                <button class="titlebar-btn titlebar-close"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+              </div>
+            </div>
+            <!-- Body -->
+            <div class="body">
+              <div class="explorer-col">
+                <div class="explorer">
+                  <div class="explorer-header"><span class="proj">orch-term</span></div>
+                  <div class="explorer-body" style="font-size:12px">
+                    <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">src</span></div>
+                    <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">workspace</span></div>
+                    <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">orchestration.ts</span></div>
+                    <div class="tree-row"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">src-tauri</span></div>
+                    <div class="tree-row"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">README.md</span></div>
+                  </div>
+                  <div class="explorer-footer"><span class="explorer-foot-git">⎇ main</span><span class="explorer-foot-sp">Space 1</span></div>
+                </div>
+                <div class="sidebar-modebar">
+                  <button class="active" title="Files"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h3.4l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+                  <button title="Search"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+                  <button title="Git"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M6 8.2v7.6M17 10.2c0 3.8-5 2.4-5 6.4"/></svg></button>
+                  <button title="Tasks"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8.5 12l2.4 2.4L16 9.2"/></svg></button>
+                  <button title="Sessions"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.6a9 9 0 1 0 3-3.4M3 1.5v4.2h4.2"/><path d="M12 7.5V12l3 1.9"/></svg></button>
+                  <span class="sp"></span>
+                  <button title="Move explorer to the right"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h12M11 8l4 4-4 4M20 5v14"/></svg></button>
+                  <button title="Maximize sidebar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+                </div>
+              </div>
+              <div class="main-col">
+                <div class="panes">
+                  <div class="pane active-pane">
+                    <div class="pane-tabbar">
+                      <div class="pane-tabs">
+                        <div class="tab active"><span class="tab-icon">❯</span><span class="tab-label">commander · claude</span><span class="tab-dot on"></span></div>
+                        <div class="tab"><span class="tab-icon">❯</span><span class="tab-label">backend · codex</span></div>
+                      </div>
+                      <div class="pane-actions">
+                        <button class="pane-act"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></button>
+                        <button class="pane-act"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="pane-content">
+                      <div class="term-pane-terminal">
+                        <div class="term"><span class="g">❯</span> <span class="c">claude</span> <span class="d">orchestrate "ask backend to review the SSH tunnel module"</span>
+<span class="d">────────────────────────────────────────────</span>
+<span class="a">▸ open_session</span> backend(codex) ← worktree:ssh-core
+<span class="a">▸ send</span> "review channel_open_direct_tcpip for safety"
+<span class="am">  ⟳ backend working…</span>
+<span class="g">◂ report</span> codex: <span class="d">"&self borrow ⇒ concurrency-safe. Verified -L/-D listeners bind to 127.0.0.1."</span>
+<span class="g">❯</span> <span class="cursor"></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Main footer (status bar) — clears the sidebar area, sits at the bottom of the main column only -->
+                <div class="statusbar">
+                  <button class="statusbar-reopen" title="Toggle sidebar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M9 4.5v15"/></svg></button>
+                  <span class="statusbar-spacer"></span>
+                  <span class="statusbar-encoding">UTF-8</span>
+                  <span class="statusbar-encoding">Windows (CR LF)</span>
+                  <span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>orch :9611</span>
+                  <span class="statusbar-sys"><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">CPU</span><span class="statusbar-sys-v">23%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:23%"></span></span></span><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">MEM</span><span class="statusbar-sys-v">41%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:41%"></span></span></span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> Running and orchestrating several AIs as workers in one window — terminal, editor, and browser in a single workstation.</div>
+      </div>
+    </div>
+
+    <!-- ── Flagship features ── -->
+    <section class="home-section">
+      <div class="inner">
+        <p class="sec-eyebrow">Flagship features</p>
+        <h2>Five pillars that earn the name</h2>
+        <p class="sec-lede">The core features that make Orch term not just a terminal but a <b>multi-agent workstation</b>. Each card links to a detailed guide.</p>
+        <div class="flagship">
+          <a class="flag-card" href="workstation.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M13 9v11"/></svg></span>
+            <h3>Multi-agent workstation</h3>
+            <p>Terminal, editor, and browser in split panes of one window. Arrange three kinds of tabs freely.</p>
+            <span class="more">→ One-window anatomy</span>
+          </a>
+          <a class="flag-card" href="orchestration.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2v4.3M12 11.5L6.4 17M12 11.5L17.6 17"/></svg></span>
+            <h3>Agent orchestration</h3>
+            <p>The AI you're talking to spins up other AIs as workers and collaborates over multiple turns. A commander/worker model.</p>
+            <span class="more">→ Commander guide</span>
+            <span class="meta">MCP :9611 · open/send/close</span>
+          </a>
+          <a class="flag-card" href="gateway.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4 4-4 4M20 8l-4 4 4 4M14 4l-4 16"/></svg></span>
+            <h3>AI gateway</h3>
+            <p>External programs call AI through a local API (OpenAI-compatible). Machine-to-machine automation.</p>
+            <span class="more">→ Gateway</span>
+            <span class="meta">HTTP :9610 · /run · Bearer</span>
+          </a>
+          <a class="flag-card" href="ssh.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="11" rx="2"/><path d="M7 19h10M12 15v4M6.5 8l2.2 1.8L6.5 11.6M11 11.5h4"/></svg></span>
+            <h3>SSH · SFTP</h3>
+            <p>Native russh in-tab connections. Remote explorer, SFTP editing, vault, and port-forwarding tunnels.</p>
+            <span class="more">→ SSH guide</span>
+          </a>
+          <a class="flag-card" href="mirror.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9a5 5 0 0 1 5 5"/></svg></span>
+            <h3>CDP browser mirror</h3>
+            <p>Mirror an agent's browsing (chrome-devtools-mcp) into an in-app panel in real time.</p>
+            <span class="more">→ Mirror guide</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Core features ── -->
+    <section class="home-section">
+      <div class="inner">
+        <p class="sec-eyebrow">Core features</p>
+        <h2>Workstation fundamentals</h2>
+        <p class="sec-lede">Everyday editing, browsing, search, and version control. Each item has step-by-step usage with screenshots.</p>
+        <div class="feature-cards">
+          <a class="fcard" href="terminal.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span><h4>Terminal</h4><p>PTY sessions · copy/paste · WebGL · shell auto-close</p></a>
+          <a class="fcard" href="tabs-panes.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M11 4v16M11 12h10"/></svg></span><h4>Tabs · Panes</h4><p>Split tree · maximize · inline rename · tab colors</p></a>
+          <a class="fcard" href="spaces.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5-8 4.5-8-4.5z"/><path d="M4 12l8 4.5 8-4.5"/></svg></span><h4>Spaces</h4><p>Switchable independent layouts · persist + restore</p></a>
+          <a class="fcard" href="explorer.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><h4>Explorer</h4><p>Multi-project · keyboard nav · drag & drop</p></a>
+          <a class="fcard" href="editor.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></span><h4>Code editor</h4><p>Auto-reload on external change · encodings · CRLF</p></a>
+          <a class="fcard" href="browser.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18"/></svg></span><h4>In-app browser</h4><p>Native child webview · natural links/back</p></a>
+          <a class="fcard" href="search.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><h4>Full-text search</h4><p>Ctrl+Shift+F · parallel ripgrep · streaming</p></a>
+          <a class="fcard" href="source-control.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="17" cy="8" r="2.4"/><path d="M6 8.4v7.2M17 10.4c0 4-5 2.6-5 6.6"/></svg></span><h4>Source control</h4><p>Ctrl+Shift+G · log graph · diff · blame</p></a>
+          <a class="fcard" href="tasks.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 12l2.2 2.2L13 10"/></svg></span><h4>Task board</h4><p>Per-Space to-dos · due-date calendar · search</p></a>
+          <a class="fcard" href="task-ai-sharing.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l2 2 4-4"/><circle cx="18" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M16.3 7.2l-5 3M16.3 16.8l-5-3"/></svg></span><h4>AI task sharing</h4><p>In-app AIs CRUD their own Space's to-dos</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── More · System ── -->
+    <section class="home-section">
+      <div class="inner">
+        <p class="sec-eyebrow">More · System</p>
+        <h2>Built to live with</h2>
+        <div class="feature-cards">
+          <a class="fcard" href="appearance.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 12h9M5 18h14"/><circle cx="17" cy="12" r="2.3"/></svg></span><h4>Appearance · Fonts · Shortcuts</h4><p>Korean coding fonts · opacity · shortcut editing</p></a>
+          <a class="fcard" href="persistence.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.8"/><path d="M5 5.5v13c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-13"/></svg></span><h4>Storage · Backup</h4><p>SQLite persistence · auto corruption recovery · full backup</p></a>
+          <a class="fcard" href="auto-update.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v5h-5"/></svg></span><h4>Auto-update</h4><p>Detect new version → titlebar alert → restart to install</p></a>
+          <a class="fcard" href="notifications.html"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg></span><h4>Done badges · Notifications</h4><p>Agent done/attention badges · unified notification center</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Download CTA ── -->
+    <section class="home-section" style="text-align:center">
+      <div class="inner">
+        <p class="sec-eyebrow" style="justify-content:center">Get started</p>
+        <h2>Install in 2 minutes, first orchestration in 5.</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">A Windows installer or a one-line macOS install. See the download page for notes on unsigned builds.</p>
+        <div class="hero-cta" style="justify-content:center">
+          <a class="bigbtn primary" href="download.html">Download · Install</a>
+          <a class="bigbtn ghost" href="quickstart.html">Quick start guide</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="docfoot" style="max-width:none;padding:30px var(--gut)">
+      <span>Orch term · © 2026</span>
+      <span><a href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener">GitHub</a></span>
+    </footer>
+  </main>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

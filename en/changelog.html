@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Changelog — Orch term Guide</title>
+<meta name="description" content="Orch term changelog by release — new features and fixes per version, delivered via auto-update (v0.1.23+). SSH · Git panel · full-text search · AI gateway · session list · localization (KO/EN) · macOS port · CDP mirror." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — changelog timeline (uses design-system tokens only) */
+  .cl-rel { margin: 0 0 24px; border-left: 2px solid var(--line-faint); padding: 0 0 4px 20px; position: relative; }
+  .cl-rel::before { content: ""; position: absolute; left: -6px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+  .cl-rel.is-latest::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .cl-ver { display: flex; align-items: baseline; gap: 10px; margin-bottom: 9px; flex-wrap: wrap; }
+  .cl-ver .v { font-size: 16.5px; font-weight: 700; color: var(--text-strong); letter-spacing: -.01em; }
+  .cl-ver .d { font-size: 12px; color: var(--text-faint); }
+  .cl-ver .latest { font-size: 10.5px; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+  .cl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  .cl-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+  .cl-tag { flex: none; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-top: 2px; text-transform: uppercase; letter-spacing: .02em; min-width: 30px; text-align: center; }
+  .cl-tag.feat { background: rgba(74, 222, 128, .14); color: #4ade80; }
+  .cl-tag.fix { background: rgba(251, 146, 60, .14); color: #fb923c; }
+  .cl-tag.perf { background: rgba(96, 165, 250, .14); color: #60a5fa; }
+  .cl-note { font-size: 12.5px; color: var(--text-faint); background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-md); padding: 11px 13px; margin: 2px 0 18px; }
+</style>
+</head>
+<body data-page="changelog">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>More · System</span><span class="sep">/</span><span>Changelog</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Release · Changelog</p>
+    <h1 class="page-title">Changelog</h1>
+    <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
+    <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
+
+    <h2 class="sec" id="v03x"><span class="hash"></span> 0.3.0 — i18n · Session list · Panel tiling</h2>
+
+    <div class="cl-rel is-latest">
+      <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Localization (Korean · English) — auto-detects the OS language on first run · switch language in Settings (applied on restart) · English docs site</li>
+        <li><span class="cl-tag feat">feat</span>Session list (resume) — the sidebar Sessions mode (Ctrl+Shift+S) gathers claude·codex·agy conversations by date and resumes them in one click</li>
+        <li><span class="cl-tag feat">feat</span>Tab tiling (<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>) · Merge all panes (<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M5.2 8V5.2h6V8"/></svg>) — spread a pane's tabs into a grid, or merge every pane into a single one</li>
+        <li><span class="cl-tag feat">feat</span>Explorer — open images·SVG·PDF·media in the in-app browser · project icon · a single "Add project" entry point</li>
+        <li><span class="cl-tag feat">feat</span>"What's new" (changelog) popup on the first run of a new version</li>
+        <li><span class="cl-tag fix">fix</span>macOS — fix a hang caused by settings-dialog font enumeration (now async)</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v02x"><span class="hash"></span> 0.2.x — Stabilization · SSH · Mirror</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.2.2</span><span class="d">2026-06-29</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>macOS in-app browser mirror settings toggle + on by default</li>
+        <li><span class="cl-tag fix">fix</span>Fix duplicate Hangul/space IME input after Alt+Tab return</li>
+        <li><span class="cl-tag fix">fix</span>Live sidebar branch-name updates (.git/HEAD watch)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.2.1</span><span class="d">2026-06-28</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Explorer footer revamp — refresh button (keeps the open folder) · hardened git branch display</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.2.0</span><span class="d">2026-06-28</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Fix Windows multi-webview focus-return keyboard (bundled wry patch)</li>
+        <li><span class="cl-tag fix">fix</span>SSH/SFTP unbounded reads (OOM) · SOCKS5 framing · session leaks · known_hosts cleanup</li>
+        <li><span class="cl-tag fix">fix</span>Credential vault — fix plaintext secrets/DEK not wiped on lock/exit + password-change race</li>
+        <li><span class="cl-tag fix">fix</span>Boot DB open/migrate panic → busy_timeout + clean shutdown</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v013x"><span class="hash"></span> 0.1.30 ~ 0.1.37 — Search · Git panel · Gateway</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.37</span><span class="d">2026-06-24</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Search advanced-options collapse toggle + classic focus ring</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.36</span><span class="d">2026-06-24</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Full-text search — .gitignore-respect option · search button + .git exclusion · performance improvements</li>
+        <li><span class="cl-tag feat">feat</span>Settings/About window shortcuts + command palette entries</li>
+        <li><span class="cl-tag fix">fix</span>Fix the input line vanishing after window minimize/restore (block zero-height fit)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.35</span><span class="d">2026-06-24</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Isolate sidebar search/mode per Space + Ctrl+Tab cycling</li>
+        <li><span class="cl-tag feat">feat</span>Git panel section split · diff scroll preservation · header/scrollbar cleanup</li>
+        <li><span class="cl-tag fix">fix</span>Fix clicks bouncing to the first terminal on window focus return</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.34</span><span class="d">2026-06-23</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Git sync bar revamp — click the count = push/pull · live auto-refresh · fetch button</li>
+        <li><span class="cl-tag feat">feat</span>Ctrl+Tab / Ctrl+Shift+Tab pane/sidebar cycling</li>
+        <li><span class="cl-tag fix">fix</span>Fix prompt duplication when toggling sidebar maximize (suppress SIGWINCH on hidden panes)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.33</span><span class="d">2026-06-23</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Windows — remove console-window flicker on git blame / open in default app</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.32</span><span class="d">2026-06-23</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>AI gateway audit log — per-day request/response records + viewer tab (calendar · vertical split) + retention</li>
+        <li><span class="cl-tag fix">fix</span>Make the notification-bell count badge always a circle regardless of theme</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.31</span><span class="d">2026-06-21</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Session restore — prune tabs for missing paths · error isolation · empty-pane fallback (fallbackCwd)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.30</span><span class="d">2026-06-20</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Cross-compile macOS Intel on the Apple Silicon runner</li>
+        <li><span class="cl-tag fix">fix</span>Fix colors / zsh autocompletion breaking from an empty TERM when launched from Finder</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v012x"><span class="hash"></span> 0.1.22 ~ 0.1.29 — Multi-agent · macOS · Auto-update</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.29</span><span class="d">2026-06-20</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Editor font zoom (Cmd+=/−/0) + shortcut purification & tests</li>
+        <li><span class="cl-tag feat">feat</span>macOS one-line curl install script + automatic release upload</li>
+        <li><span class="cl-tag fix">fix</span>Clamp windows to the NSScreen work area · guard against path-argument injection</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.28</span><span class="d">2026-06-20</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>macOS port — run codex directly · 'Reveal in Finder' · default window 1200×900 clamp</li>
+        <li><span class="cl-tag fix">fix</span>Self-recover from a lost mouseup — block 'move after click = drag stuck' (cross-platform)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.27</span><span class="d">2026-06-19</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Auto-update — the boot banner and About share a single Updater</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.26</span><span class="d">2026-06-19</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Scope the orchestration supervisor dashboard per Space</li>
+        <li><span class="cl-tag feat">feat</span>Exclude latest.json (updater manifest) from download stats</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.25</span><span class="d">2026-06-19</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Orchestration — switch to a 'running worker + stop' pill (send blocks by default)</li>
+        <li><span class="cl-tag fix">fix</span>Supervisor dashboard row layout · stop settling · label cleanup</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.24</span><span class="d">2026-06-18</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Fix the Explorer keeping a ghost of a closed Space after closing it</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.23</span><span class="d">2026-06-17</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Auto-update — tauri-plugin-updater + titlebar banner + automatic boot check + About check button</li>
+        <li><span class="cl-tag feat">feat</span>Release changelog auto-generation script (gen-changelog.mjs)</li>
+        <li><span class="cl-tag fix">fix</span>Relaunch via plugin-process + broadcast download progress</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.1.22</span><span class="d">2026-06-17</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>First public release — single-window desktop terminal (tabs · splits · Space), in-app browser · editor, multi-agent orchestration · mirror</li>
+      </ul>
+    </div>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="auto-update.html"><span class="ri" data-icon="download"></span>Auto-update</a>
+        <a class="relchip" href="download.html"><span class="ri" data-icon="download"></span>Download · Install</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span><a href="auto-update.html">← Auto-update</a></span>
+      <span><a href="index.html">Home →</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

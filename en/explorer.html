@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Explorer — Orch term guide</title>
+<meta name="description" content="How to use the Orch term Explorer: switch between multiple projects, keyboard navigation · type-ahead · multi-select, inline create · rename, drag & drop, left/right placement toggle, right-click empty space to open a terminal." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — Explorer demo layout (design-system tokens only) */
+  /* Drop target (terminal pane) highlight + drag ghost */
+  .dropzone { outline: 2px dashed var(--accent-line); outline-offset: -4px;
+    box-shadow: var(--shadow-pane), 0 0 0 1px var(--accent-line), inset 0 0 46px -12px var(--accent); }
+  .dragchip { position: absolute; display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px;
+    background: var(--bg-3); border: 1px solid var(--accent-line); border-radius: var(--r-sm);
+    font-size: 11px; color: var(--text-strong); box-shadow: var(--shadow-pop); z-index: 6; }
+  /* Left/right placement mini diagram */
+  .lr { display: flex; gap: 14px; flex-wrap: wrap; margin: 18px 0; max-width: var(--read); }
+  .lr-fig { flex: 1 1 220px; min-width: 200px; border: 1px solid var(--line-faint); border-radius: var(--r-md); background: var(--bg-1); overflow: hidden; }
+  .lr-fig .cap { font-family: var(--code-font); font-size: 11px; color: var(--text-faint);
+    padding: 7px 11px; border-bottom: 1px solid var(--line-faint); display: flex; align-items: center; gap: 8px; }
+  .lr-fig .cap .i { color: var(--accent); }
+  .lr-mini { display: flex; gap: 6px; padding: 12px; height: 100px; }
+  .lr-mini .ex { flex: 0 0 46px; background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-sm); }
+  .lr-mini .pn { flex: 1; background: var(--bg-0); border: 1px solid var(--line-faint); border-radius: var(--r-sm); }
+  .lr-fig.right .lr-mini { flex-direction: row-reverse; }
+</style>
+</head>
+<body data-page="explorer">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Explorer</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Explorer</p>
+    <h1 class="page-title">Explorer</h1>
+    <p class="lede">The file explorer on the left. Switch between several <b>project roots</b> in one window, navigate the tree <b>with the keyboard alone</b>, and handle files with inline create, rename, and drag & drop.</p>
+
+    <!-- Multiple projects -->
+    <h2 class="sec" id="projects"><span class="hash"></span> Switch between multiple projects</h2>
+    <p>Clicking the <b>project name</b> in the Explorer header opens a dropdown to switch between the registered project roots. The <span class="i" data-icon="add"></span> <code>+</code> button adds a new root. The list and the active root are saved and restored on restart.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/explorer.png" alt="Explorer panel — project header · file search bar · file tree · Git branch at the bottom" />
+        <div class="shot-cap"><span class="n">①</span> Click the project name in the header to switch between registered roots via the dropdown (+ for a new root). <span class="n">②</span> The search bar finds files by partial filename match, down into subfolders.</div>
+      </div>
+    </figure>
+
+    <!-- Keyboard nav · multi-select -->
+    <h2 class="sec" id="keyboard"><span class="hash"></span> Keyboard navigation · multi-select</h2>
+    <p>Work the entire tree without a mouse. Move between items with the arrow keys, and just type letters to jump to an item whose name matches (type-ahead). You can <b>multi-select</b> several items and open them at once as <b>preview tabs</b>.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Explorer — multi-select</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
+          <div class="explorer" style="width:236px;height:262px">
+            <div class="explorer-header"><span class="tree-icon" data-icon="folder" style="color:var(--accent)"></span><span class="proj">orch-term</span></div>
+            <div class="explorer-body">
+              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src</span></div>
+              <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">explorer.ts</span></div>
+              <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">explorer-filter.ts</span></div>
+              <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">explorer-git.ts</span></div>
+              <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">terminal.ts</span></div>
+              <div class="tree-row"><span class="tw">▸</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">docs</span></div>
+            </div>
+            <div class="explorer-footer"><span class="explorer-foot-git"><span data-icon="git-branch"></span> worktree-ssh-core</span><span class="explorer-foot-sp">3 selected</span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Selected items are painted in the accent color. <span class="n">②</span> Type letters (<code>exp…</code>) to jump to a matching name.</div>
+      </div>
+    </figure>
+
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Move between tree items</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td>Select · open the item</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close dropdown / search</td></tr>
+        <tr><td>Type a letter</td><td>Type-ahead — jump to a matching name</td></tr>
+      </tbody>
+    </table>
+    <p class="dim"><b>File search</b> — type in the search bar and it finds files by partial filename match not just in the current folder but across <b>all subfolders</b>. Heavy folders like <code>node_modules</code>·<code>.git</code>·<code>target</code>·<code>dist</code> are excluded by default.</p>
+
+    <!-- Inline create / rename -->
+    <h2 class="sec" id="create-rename"><span class="hash"></span> Inline create · rename</h2>
+    <p>Create a file or folder right at the selected spot, and rename in place. When creating, if you enter a <b>nested path</b> all at once like <code>src/utils/new.ts</code>, the missing folders are created along with it.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">New file — inline input</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
+          <div class="explorer" style="width:236px;height:212px">
+            <div class="explorer-header"><span class="tree-icon" data-icon="folder" style="color:var(--accent)"></span><span class="proj">orch-term</span></div>
+            <div class="explorer-body">
+              <div class="tree-row"><span class="tw">▾</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">src</span></div>
+              <div class="tree-row" style="padding-left:24px"><span class="tw">▾</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">utils</span></div>
+              <div class="tree-row" style="padding-left:42px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><input class="input mono" value="clampMenuPosition.ts" style="height:18px;padding:0 5px;font-size:11px;width:128px" /></div>
+              <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">platform.ts</span></div>
+            </div>
+            <div class="explorer-footer"><span class="explorer-foot-git"><span data-icon="git-branch"></span> worktree-ssh-core</span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Enter a nested path like <code>utils/new.ts</code> in the input row and it creates the missing folders too.</div>
+      </div>
+    </figure>
+
+    <p>Start a rename on an item and you edit it in place. <b>Open tabs</b> stay in sync too, so renames and deletes are reflected directly.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Rename — tab sync</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
+          <div class="pane" style="width:300px;height:200px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">explorer.ts → exp-tree.ts</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" data-icon="close"></button></div>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="d">// when you rename in the Explorer</span>
+<span class="d">// the open editor tab title follows immediately too.</span>
+<span class="c">export function</span> <span class="a">buildTree</span>() { … }</div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Rename and the open tab title follows to the new name (if the file disappears, the tab is cleaned up too).</div>
+      </div>
+    </figure>
+
+    <!-- Drag & drop -->
+    <h2 class="sec" id="dnd"><span class="hash"></span> Drag &amp; drop — insert path</h2>
+    <p><b>Drop a file or folder onto a terminal pane</b> and that item's <b>absolute path</b> is inserted at the cursor, with the pane highlighted while you drop. Dragging with <b>"attach as context"</b> does the same thing but inserts the <b>project-relative path</b>.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Explorer → terminal drop</span></div>
+        <div class="shot-stage" style="padding:14px">
+          <div style="display:flex;gap:7px;height:282px;position:relative">
+            <div class="explorer" style="flex:0 0 178px">
+              <div class="explorer-header"><span class="tree-icon" data-icon="folder" style="color:var(--accent)"></span><span class="proj">orch-term</span></div>
+              <div class="explorer-body">
+                <div class="tree-row"><span class="tw">▾</span><span class="tree-icon" data-icon="folder"></span><span class="tree-name">db</span></div>
+                <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-faint)">schema.sql</span></div>
+                <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">seed.sql</span></div>
+                <div class="tree-row"><span class="tw"></span><span class="tree-icon" data-icon="file"></span><span class="tree-name">README.md</span></div>
+              </div>
+              <div class="explorer-footer"><span class="explorer-foot-git"><span data-icon="git-branch"></span> ssh-core</span></div>
+            </div>
+            <div class="pane active-pane dropzone" style="flex:1">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">Git Bash</span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">zendy@orch</span> <span class="c">~/orch-term</span> <span class="d">$</span> sqlite3 orchterm.db &lt; <span class="a">D:\orch-term\db\schema.sql</span><span class="cursor"></span></div></div></div>
+            </div>
+            <div class="dragchip" style="left:150px;top:104px"><span class="i" data-icon="file" style="width:1em;height:1em"></span> schema.sql</div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Drop and the pane is highlighted and the <b>absolute path</b> is inserted at the cursor.</div>
+      </div>
+    </figure>
+
+    <!-- Left/right placement -->
+    <h2 class="sec" id="side"><span class="hash"></span> Left · right placement toggle</h2>
+    <p>The <span class="i" data-icon="side-right"></span> / <span class="i" data-icon="side-left"></span> buttons in the Explorer footer move the Explorer <b>left ↔ right</b> across the screen. The position is saved and restored on restart.</p>
+
+    <div class="lr">
+      <div class="lr-fig left">
+        <div class="cap"><span class="i" data-icon="side-left"></span> Left placement (default)</div>
+        <div class="lr-mini"><div class="ex"></div><div class="pn"></div></div>
+      </div>
+      <div class="lr-fig right">
+        <div class="cap"><span class="i" data-icon="side-right"></span> Right placement</div>
+        <div class="lr-mini"><div class="ex"></div><div class="pn"></div></div>
+      </div>
+    </div>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Footer — placement toggle · branch · item count</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;justify-content:center">
+          <div class="explorer" style="width:248px;height:96px">
+            <div class="explorer-body" style="display:grid;place-items:center;color:var(--text-faint);font-size:12px">…tree…</div>
+            <div class="explorer-footer">
+              <span class="explorer-foot-git"><span data-icon="git-branch"></span> worktree-ssh-core</span>
+              <span class="explorer-foot-sp">128 items</span>
+              <button class="iconbtn" title="Move to right placement" data-icon="side-right" style="width:22px;height:18px"></button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> In the footer: <span class="i dim" data-icon="git-branch"></span> the active root's git branch + item count. <span class="n">②</span> The <span class="i dim" data-icon="side-right"></span> button toggles left/right placement.</div>
+      </div>
+    </figure>
+
+    <p class="dim"><b>Collapse/expand is on the status bar</b> — opening/closing the Explorer is done not from the header but from the always-visible <span class="i dim" data-icon="sidebar"></span> button on the left of the bottom status bar. Whether it's collapsed and its width are preserved <b>per Space</b> and restored across restarts.</p>
+
+    <!-- Right-click empty space -->
+    <h2 class="sec" id="context-menu"><span class="hash"></span> Right-click empty space → open a terminal</h2>
+    <p>Right-click a <b>folder or empty space</b> in the Explorer and <b>Open in terminal</b> appears. On a folder, a new terminal opens in <b>that folder</b>; on empty space, in the <b>project root</b>. The same menu also has cut · copy · paste · duplicate, reveal in Explorer, copy path, and collapse all.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/explorer-ctx.png" alt="Explorer empty-space right-click context menu — New file · New folder · Open in terminal · Paste (disabled) · Collapse all" style="max-width:224px;display:block;margin:0 auto;border-radius:var(--r-md)" />
+        <div class="shot-cap"><span class="n">①</span> Right-click a <b>folder</b> = new terminal in that folder · right-click <b>empty space</b> = new terminal in the project root.</div>
+      </div>
+    </figure>
+
+    <p class="dim"><b>Open with the system app</b> — binary/non-text files open in the OS default app, and you can also open the OS file explorer with that file selected.</p>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · Panes</a>
+        <a class="relchip" href="source-control.html"><span class="ri" data-icon="git"></span>Source control (Git)</a>
+        <a class="relchip" href="search.html"><span class="ri" data-icon="search-alt"></span>Full-text search</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="source-control.html">Next → Source control (Git)</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

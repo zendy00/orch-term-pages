@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Download · Install — Orch term guide</title>
+<meta name="description" content="Download and install Orch term: Windows installer (orchterm-setup.exe)/MSI, one-line macOS install.sh and .dmg, and getting past the first-run warning for unsigned builds." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — install-command code blocks + download button rows (design-system tokens only) */
+  pre.cmd { font-family: var(--code-font); font-size: 13px; line-height: 1.65; background: var(--bg-0);
+    border: 1px solid var(--line); border-left: 3px solid var(--accent-line); border-radius: var(--r-md);
+    padding: 13px 16px; margin: 14px 0; max-width: var(--read); color: var(--text);
+    overflow-x: auto; white-space: pre; }
+  pre.cmd .p { color: var(--text-faint); user-select: none; }
+  pre.cmd .c { color: var(--term-cyan); }
+  pre.cmd .d { color: var(--text-faint); }
+  .dlrow { display: flex; flex-wrap: wrap; gap: 11px; margin: 16px 0 8px; max-width: var(--read); }
+  .dlrow .bigbtn { font-size: 14px; padding: 11px 18px; }
+  /* Command + copy button on the outer right */
+  .cmdrow { display: flex; align-items: stretch; gap: 8px; margin: 14px 0; max-width: var(--read); }
+  .cmdrow pre.cmd { flex: 1 1 auto; min-width: 0; margin: 0; }
+  .copy-btn { flex: none; width: 42px; display: grid; place-items: center; background: var(--bg-1);
+    border: 1px solid var(--line); border-radius: var(--r-md); color: var(--text-dim); cursor: pointer;
+    transition: color .15s, border-color .15s, background .15s; }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent-line); background: var(--bg-2); }
+  .copy-btn .ci-ok { display: none; }
+  .copy-btn.copied { color: var(--success); border-color: var(--success); }
+  .copy-btn.copied .ci-copy { display: none; }
+  .copy-btn.copied .ci-ok { display: inline-grid; }
+  .copy-btn span[data-icon] { display: inline-grid; place-items: center; }
+  .copy-btn span[data-icon] svg { width: 16px; height: 16px; }
+</style>
+</head>
+<body data-page="download">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Getting started</span><span class="sep">/</span><span>Download · Install</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Getting started · Download · Install</p>
+    <h1 class="page-title">Download · Install</h1>
+    <p class="lede">Get Windows and macOS builds from <b>GitHub Release</b>. These are <b>unsigned</b> builds, so the OS shows a one-time warning on first launch, but you can get past it by following the steps below.</p>
+
+    <!-- Windows -->
+    <h2 class="sec" id="windows"><span class="hash"></span> Windows</h2>
+    <p>Download and run the installer (<code>orchterm-setup.exe</code>) or the MSI (<code>orchterm-x64.msi</code>). Both links always point to the latest build.</p>
+
+    <div class="dlrow">
+      <a class="bigbtn primary" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-setup.exe"><span data-icon="download"></span>orchterm-setup.exe</a>
+      <a class="bigbtn ghost" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-x64.msi"><span data-icon="download"></span>.msi (x64)</a>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="download"></span> Download and run</div>
+        <p>Download either one and double-click it.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="info"></span> Get past the SmartScreen warning</div>
+        <p>Because it's unsigned, Windows may show an <b>"Unknown publisher"</b> warning. Click <b>More info → Run anyway</b> to proceed with the installation.</p>
+      </li>
+    </ol>
+
+    <!-- macOS -->
+    <h2 class="sec" id="macos"><span class="hash"></span> macOS</h2>
+    <p><b>The easiest way</b> is a single line in the terminal. <code>install.sh</code> downloads and installs the <b>Apple Silicon build</b> and <b>even clears quarantine</b>. Files fetched with <code>curl</code> don't get the quarantine attribute, so they avoid the <b>"is damaged and can't be opened"</b> warning from the start.</p>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> curl -fsSL <span class="c">https://github.com/zendy00/orch-term-pages/releases/latest/download/install.sh</span> | sh</pre><button class="copy-btn" type="button" aria-label="Copy command" title="Copy"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+
+    <h3 class="sub">Install directly from the .dmg</h3>
+    <p>You can also download the <code>.dmg</code> and install it directly.</p>
+    <div class="dlrow">
+      <a class="bigbtn ghost" href="https://github.com/zendy00/orch-term-pages/releases/latest/download/orchterm-aarch64.dmg"><span data-icon="download"></span>Apple Silicon (.dmg)</a>
+    </div>
+    <p>Open the <code>.dmg</code>, move the app to <code>/Applications</code>, then strip the quarantine attribute once before the first launch.</p>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> xattr -dr com.apple.quarantine /Applications/orchterm.app</pre><button class="copy-btn" type="button" aria-label="Copy command" title="Copy"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+    <p class="dim"><code>install.sh</code> will be available starting with the next release.</p>
+
+    <!-- Unsigned-build notes -->
+    <h2 class="sec" id="unsigned"><span class="hash"></span> Unsigned-build notes</h2>
+    <p>The current builds are not code-signed or notarized. The OS shows a warning once on first launch, but they work normally once you get past it as described above.</p>
+    <div class="warn">On Windows it's a SmartScreen <b>"Unknown publisher"</b> warning, and on macOS it's a Gatekeeper <b>quarantine</b> warning — both just need to be cleared once with the steps above. Code signing/notarization is a future task.</div>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>Orchestration</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI gateway</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="terminal.html">Next → Terminal</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+<script>
+(function () {
+  function fb(t, d) { var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.focus(); a.select(); try { document.execCommand('copy'); d(); } catch (e) {} document.body.removeChild(a); }
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.closest('.cmdrow'); var pre = row && row.querySelector('.cmd'); if (!pre) return;
+      var text = pre.textContent.replace(/^\s*\$\s+/, '').trim();
+      var done = function () { btn.classList.add('copied'); setTimeout(function () { btn.classList.remove('copied'); }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fb(text, done); }); } else { fb(text, done); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

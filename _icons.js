@@ -19,6 +19,8 @@ const ICONS = {
   // ── Statusbar (src/statusbar.ts) ──
   // sidebar: from src/statusbar.ts (explorer open/close toggle) — VS Code style sidebar glyph
   "sidebar": '<svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 1L1 2v12l1 1h12l1-1V2l-1-1H2zm0 13V2h4v12H2zm5 0V2h7v12H7z"/></svg>',
+  // merge: from src/statusbar.ts (merge-all-panes button) — single panel with a tab (fold all panes into tabs)
+  "merge": '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><rect x="1.5" y="5" width="13" height="9.5" rx="1"/><path d="M3.5 5V2.5h4V5"/></svg>',
 
   // ── Pane / split actions (src/workspace/pane-manager.ts) ──
   // add: from src/workspace/pane-manager.ts (ICON_PLUS) — byte-identical to src/workspace/ssh-rail.ts (ICON_PLUS)
@@ -35,6 +37,8 @@ const ICONS = {
   "sidebar-maximize": '<svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M1 4V1h3M11 4V1H8M1 8v3h3M11 8v3H8"/></svg>',
   // sidebar-restore: from src/workspace/index.ts (ICON_SB_RESTORE) — same path as restore-pane at width 13
   "sidebar-restore": '<svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M4 1v3H1M8 1v3h3M4 11V8H1M8 11V8h3"/></svg>',
+  // tile: from src/workspace/pane-manager.ts (ICON_TILE) — 2×2 grid with the top-right tile tilted/popping out (tile a pane's tabs into a grid)
+  "tile": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>',
 
   // ── Tabs / notifications ──
   // attention: from src/workspace/tab-manager.ts (ICON_BELL) — filled agent/attention bell on a tab
@@ -168,11 +172,13 @@ if (typeof document !== 'undefined') {
  * search              src/titlebar.ts (ICON_COMMAND_SEARCH) == src/explorer.ts (ICON_SEARCH)
  *                     [variants: src/palette.ts ICON_PALETTE w16; src/workspace/ssh-rail.ts ICON_MAG w12]
  * sidebar             src/statusbar.ts (explorer toggle button)
+ * merge               src/statusbar.ts (merge-all-panes button)
  * add                 src/workspace/pane-manager.ts (ICON_PLUS) == src/workspace/ssh-rail.ts (ICON_PLUS)
  * split-vertical      src/workspace/pane-manager.ts (ICON_SPLIT_V) == src/workspace/index.ts (ICON_SPLIT_V)
  * split-horizontal    src/workspace/pane-manager.ts (ICON_SPLIT_H) == src/workspace/index.ts (ICON_SPLIT_H)
  * maximize-pane       src/workspace/pane-manager.ts (ICON_MAXIMIZE)
  * restore-pane        src/workspace/pane-manager.ts (ICON_RESTORE)
+ * tile                src/workspace/pane-manager.ts (ICON_TILE)
  * sidebar-maximize    src/workspace/index.ts (ICON_SB_MAXIMIZE)  [same path as maximize-pane @ 13px]
  * sidebar-restore     src/workspace/index.ts (ICON_SB_RESTORE)   [same path as restore-pane @ 13px]
  * attention           src/workspace/tab-manager.ts (ICON_BELL, filled)

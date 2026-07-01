@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Code editor — Orch term guide</title>
+<meta name="description" content="The Orch term code editor: open from the Explorer, auto-reload on external changes, open/save in every encoding including EUC-KR/CP949/UTF-16, EOL (CRLF) preservation, GitLens-style blame." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* Page-specific — editor code/gutter reproduction (design-system tokens only) */
+  .ed { display:flex; height:100%; background:var(--bg-1); overflow:hidden; }
+  .ed-gutter { flex:0 0 auto; padding:8px 10px 8px 14px; text-align:right; color:var(--text-faint);
+    font-family:var(--code-font); font-size:var(--code-fs); line-height:1.62; white-space:pre; user-select:none; }
+  .ed-blame { flex:0 0 auto; min-width:128px; padding:8px 12px; color:var(--text-faint);
+    font-family:var(--code-font); font-size:11px; line-height:1.62; white-space:pre; user-select:none; border-left:1px solid var(--line-faint); }
+  .ed-blame b { color:var(--text-dim); font-weight:500; }
+  .ed-blame .un { color:var(--accent); }
+  .ed-code.term { flex:1 1 auto; padding:8px 14px; line-height:1.62; white-space:pre; overflow:hidden; border-left:1px solid var(--line-faint); }
+  .ed-cur { display:inline-block; width:7px; height:1.05em; background:var(--accent); vertical-align:-2px; }
+</style>
+</head>
+<body data-page="editor">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Code editor</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Code editor</p>
+    <h1 class="page-title">Code editor</h1>
+    <p class="lede">Edit files opened from the Explorer right away. <b>Auto-reload</b> on external changes, open/save in <b>every encoding</b> down to EUC-KR and UTF-16, <b>EOL (CRLF) preservation</b>, and GitLens-style <b>blame</b>.</p>
+
+    <!-- Open -->
+    <h2 class="sec" id="open"><span class="hash"></span> Opening files</h2>
+    <p><b>Double-click</b> a file in the left <a href="explorer.html">Explorer</a> to open it as a new <b>editor tab</b> in the active pane. For non-text binaries (PNG, exe, etc.), instead of the editor an <b>"Open with the default app" fallback panel</b> appears. On the right of the bottom status bar, the detected <b>encoding · EOL</b> label is shown only for editor tabs.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/editor.png" alt="Code editor — about-dialog.ts (TypeScript syntax highlighting), the top tabs and the status-bar encoding/EOL" />
+        <div class="shot-cap"><span class="n">①</span> Top-right icons toggle outline·preview·blame. <span class="n">②</span> <b>UTF-8 · LF</b> on the right of the status bar = encoding/EOL.</div>
+      </div>
+    </figure>
+
+    <!-- Auto-reload -->
+    <h2 class="sec" id="reload"><span class="hash"></span> Auto-reload on external changes</h2>
+    <p>When an open file is <b>modified externally</b> (another tool, git pull, an AI CLI, etc.), the editor re-reads it from disk. With no unsaved edits it quietly swaps in the new content; with unsaved edits it first asks whether to overwrite. You can also re-read manually anytime with the <span class="i" data-icon="refresh"></span> button in the status bar.</p>
+
+    <!-- Encoding -->
+    <h2 class="sec" id="encoding"><span class="hash"></span> Encoding — open any file</h2>
+    <p>Open Korean legacy (<b>EUC-KR/CP949</b>), Japanese (Shift-JIS), Chinese (GBK·Big5), Western European (Windows-1252), and <b>UTF-16 (LE/BE)</b> files. The moment you open one, the encoding is auto-detected and shown as a label in the status bar.</p>
+    <p>If misdetection makes text look garbled, click the encoding label in the status bar. The top group, <b>"Reopen with encoding"</b>, re-decodes the disk bytes with a different encoding (it doesn't write the file — lossless) to fix the misdetection, while the bottom group, <b>"Convert encoding and save"</b>, changes the document to that encoding and saves.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Encoding menu — reinterpret vs convert</span><span class="badge warn">EUC-KR</span></div>
+        <div class="shot-stage" style="padding:26px;display:grid;place-items:center;min-height:280px">
+          <div class="ctx-menu" style="position:relative;min-width:220px;box-shadow:var(--shadow-pop)">
+            <div class="shell-menu-title">Reopen with encoding (reinterpret)</div>
+            <button class="ctx-item">UTF-8</button>
+            <button class="ctx-item">UTF-16 LE</button>
+            <button class="ctx-item">UTF-16 BE</button>
+            <button class="ctx-item" style="color:var(--accent)">EUC-KR / CP949 ✓</button>
+            <button class="ctx-item">Shift-JIS</button>
+            <button class="ctx-item">More ▸</button>
+            <div class="ctx-sep"></div>
+            <div class="shell-menu-title">Convert encoding and save</div>
+            <button class="ctx-item">UTF-8</button>
+            <button class="ctx-item">UTF-8 BOM</button>
+            <button class="ctx-item">EUC-KR / CP949</button>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Top group = <b>reinterpret</b> (doesn't touch the disk) · <span class="n">②</span> bottom group = <b>convert and save</b>. The divider separates the two.</div>
+      </div>
+    </figure>
+    <p>When saving to a legacy encoding, if there's a <b>character absent</b> from that encoding (e.g., an emoji), rather than quietly corrupting it the editor <b>blocks the save</b> and brings up a choice modal. If everything maps, it saves as-is without asking.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Save — data-loss guard</span></div>
+        <div class="shot-stage" style="height:240px">
+          <div class="modal-overlay">
+            <div class="modal-box" style="width:420px">
+              <div class="modal-head"><h3>Encoding save warning</h3></div>
+              <div class="modal-body">
+                <p style="margin:2px 0 0">1 character can't be saved as <b>EUC-KR</b> (e.g., <code>😀</code>).</p>
+                <p class="dim" style="margin:8px 0 0;font-size:13px">Saving as UTF-8 is lossless. If you save as EUC-KR anyway, that character is removed.</p>
+              </div>
+              <div class="modal-btns">
+                <button class="btn ghost">Cancel</button>
+                <button class="btn">Save as EUC-KR (remove characters)</button>
+                <button class="btn primary">Save as UTF-8</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> Blocked before any corruption. Choosing "Save as UTF-8" also switches the tab's save encoding to UTF-8, so later saves are lossless.</div>
+      </div>
+    </figure>
+    <div class="warn">Pressing <b>Reopen</b> when there are unsaved edits discards them, so it <b>asks first</b>.</div>
+
+    <!-- EOL -->
+    <h2 class="sec" id="eol"><span class="hash"></span> EOL · line-ending preservation</h2>
+    <p>It detects the line-ending style (<b>CRLF/LF/CR</b>) on open and <b>preserves the original EOL</b> on save. Clicking the EOL segment in the status bar brings up a conversion menu: <b>Windows (CRLF)</b>·<b>Unix (LF)</b>·<b>Macintosh (CR)</b>.</p>
+
+    <!-- blame -->
+    <h2 class="sec" id="blame"><span class="hash"></span> GitLens-style blame</h2>
+    <p>Turn on blame with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> (or the editor's top-right <span class="i" data-icon="blame"></span> button), and the gutter gains a per-line <b>author · relative time</b>. Lines that continue the same commit are shown <b>only on the group's first line</b>, and lines changed in the working tree appear as <b>Uncommitted</b>. Clicking a gutter line links to the commit details in the <a href="source-control.html">source control</a> panel, and hovering shows the commit hash, author, time, and subject as a tooltip.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/editor-blame.png" alt="GitLens-style blame gutter — per-line author (Zendy Kim) and relative time (22 days ago·11 days ago·16 days ago) in the editor's left gutter, with lines continuing the same commit shown only on the group's first line" />
+        <div class="shot-cap"><span class="n">①</span> <b>Author · relative time</b> shown only on the group's first line (continuing lines are blank). <span class="n">②</span> <b style="color:var(--accent)">Uncommitted</b> = working-tree changes not yet committed.</div>
+      </div>
+    </figure>
+
+    <!-- Shortcuts -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd></td><td>Toggle Git Blame</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>Find in a single file</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Save (keep original encoding)</td></tr>
+        <tr><td><span class="dim">Palette</span></td><td>Reopen with encoding / convert and save</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+        <a class="relchip" href="source-control.html"><span class="ri" data-icon="git"></span>Source control (Git)</a>
+        <a class="relchip" href="search.html"><span class="ri" data-icon="search-alt"></span>Full-text search</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>In-app browser</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="browser.html">Next → In-app browser</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

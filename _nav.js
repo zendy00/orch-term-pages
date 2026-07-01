@@ -33,36 +33,37 @@
   };
 
   var NAV = [
-    { title: "시작하기", count: "00", items: [
-      { page: "index",        href: "index.html",       label: "소개 · 한눈에" },
-      { page: "download",     href: "download.html",    label: "다운로드 · 설치" },
-      { page: "quickstart",   href: "quickstart.html",  label: "빠른 시작" }
+    { title: "시작하기", title_en: "Getting started", count: "00", items: [
+      { page: "index",        href: "index.html",       label: "소개 · 한눈에",   en: "Overview" },
+      { page: "download",     href: "download.html",    label: "다운로드 · 설치", en: "Download · Install" },
+      { page: "quickstart",   href: "quickstart.html",  label: "빠른 시작",       en: "Quick start" }
     ]},
-    { title: "대형 기능", count: "01", items: [
-      { page: "workstation",   href: "workstation.html",  label: "멀티에이전트 워크스테이션" },
-      { page: "orchestration", href: "orchestration.html", label: "에이전트 오케스트레이션" },
-      { page: "gateway",       href: "gateway.html",      label: "AI 게이트웨이" },
-      { page: "ssh",           href: "ssh.html",          label: "SSH · SFTP" },
-      { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러" }
+    { title: "대형 기능", title_en: "Flagship features", count: "01", items: [
+      { page: "workstation",   href: "workstation.html",  label: "멀티에이전트 워크스테이션", en: "Multi-agent workstation" },
+      { page: "orchestration", href: "orchestration.html", label: "에이전트 오케스트레이션",  en: "Agent orchestration" },
+      { page: "gateway",       href: "gateway.html",      label: "AI 게이트웨이",            en: "AI gateway" },
+      { page: "ssh",           href: "ssh.html",          label: "SSH · SFTP",              en: "SSH · SFTP" },
+      { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러",        en: "CDP browser mirror" }
     ]},
-    { title: "핵심 기능", count: "02", items: [
-      { page: "terminal",        href: "terminal.html",        label: "터미널" },
-      { page: "tabs-panes",      href: "tabs-panes.html",      label: "탭 · 패널" },
-      { page: "spaces",          href: "spaces.html",          label: "스페이스" },
-      { page: "explorer",        href: "explorer.html",        label: "탐색기" },
-      { page: "editor",          href: "editor.html",          label: "코드 에디터" },
-      { page: "browser",         href: "browser.html",         label: "인앱 브라우저" },
-      { page: "search",          href: "search.html",          label: "전체 파일 검색" },
-      { page: "source-control",  href: "source-control.html",  label: "소스 컨트롤 (Git)" },
-      { page: "tasks",           href: "tasks.html",           label: "할 일 보드" },
-      { page: "task-ai-sharing", href: "task-ai-sharing.html", label: "AI 할 일 공유" }
+    { title: "핵심 기능", title_en: "Core features", count: "02", items: [
+      { page: "terminal",        href: "terminal.html",        label: "터미널",          en: "Terminal" },
+      { page: "tabs-panes",      href: "tabs-panes.html",      label: "탭 · 패널",       en: "Tabs · Panes" },
+      { page: "spaces",          href: "spaces.html",          label: "스페이스",        en: "Spaces" },
+      { page: "explorer",        href: "explorer.html",        label: "탐색기",          en: "Explorer" },
+      { page: "editor",          href: "editor.html",          label: "코드 에디터",     en: "Code editor" },
+      { page: "browser",         href: "browser.html",         label: "인앱 브라우저",   en: "In-app browser" },
+      { page: "search",          href: "search.html",          label: "전체 파일 검색",  en: "Full-text search" },
+      { page: "source-control",  href: "source-control.html",  label: "소스 컨트롤 (Git)", en: "Source control (Git)" },
+      { page: "tasks",           href: "tasks.html",           label: "할 일 보드",      en: "Task board" },
+      { page: "task-ai-sharing", href: "task-ai-sharing.html", label: "AI 할 일 공유",   en: "AI task sharing" },
+      { page: "sessions",        href: "sessions.html",        label: "세션 목록 (이어가기)", en: "Session list (resume)" }
     ]},
-    { title: "그 외 · 시스템", count: "03", items: [
-      { page: "appearance",   href: "appearance.html",   label: "외관 · 폰트 · 단축키" },
-      { page: "persistence",  href: "persistence.html",  label: "저장 · 백업" },
-      { page: "auto-update",  href: "auto-update.html",  label: "자동 업데이트" },
-      { page: "changelog",    href: "changelog.html",    label: "변경 이력" },
-      { page: "notifications",href: "notifications.html",label: "완료 배지 · 알림" }
+    { title: "그 외 · 시스템", title_en: "More · System", count: "03", items: [
+      { page: "appearance",   href: "appearance.html",   label: "외관 · 폰트 · 단축키", en: "Appearance · Fonts · Shortcuts" },
+      { page: "persistence",  href: "persistence.html",  label: "저장 · 백업",          en: "Storage · Backup" },
+      { page: "auto-update",  href: "auto-update.html",  label: "자동 업데이트",        en: "Auto-update" },
+      { page: "notifications",href: "notifications.html",label: "완료 배지 · 알림",     en: "Done badges · Notifications" },
+      { page: "changelog",    href: "changelog.html",    label: "변경 이력",            en: "Changelog" }
     ]}
   ];
 
@@ -70,19 +71,24 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
 
+  function isEN() { return (document.documentElement.lang || "").toLowerCase().slice(0, 2) === "en"; }
+
   function renderSidebar(current) {
     var html = '';
+    var EN = isEN();
 
     NAV.forEach(function (group) {
       var open = group.items.some(function (it) { return it.page === current; }) || true;
+      var title = EN && group.title_en ? group.title_en : group.title;
       html += '<details class="side-group"' + (open ? " open" : "") + '>';
-      html += '<summary>' + chevron + '<span>' + esc(group.title) + '</span><span class="gx">' + group.count + '</span></summary>';
+      html += '<summary>' + chevron + '<span>' + esc(title) + '</span><span class="gx">' + group.count + '</span></summary>';
       html += '<div class="side-links">';
       group.items.forEach(function (it) {
         var active = it.page === current ? " active" : "";
         var flag = it.flag ? ' flag" data-flag="' + esc(it.flag) : "";
+        var label = EN && it.en ? it.en : it.label;
         html += '<a class="side-link' + active + (it.flag ? flag : "") + '" href="' + it.href + '">'
-          + '<span class="si">' + (G[it.page] || "") + '</span><span>' + esc(it.label) + '</span></a>';
+          + '<span class="si">' + (G[it.page] || "") + '</span><span>' + esc(label) + '</span></a>';
       });
       html += '</div></details>';
     });
@@ -94,7 +100,7 @@
   function buildTOC(content, tocEl) {
     var heads = content.querySelectorAll("h2.sec");
     if (!heads.length) { tocEl.style.display = "none"; return; }
-    var html = '<div class="toc-h">이 페이지</div><nav class="toc-list">';
+    var html = '<div class="toc-h">' + (isEN() ? "On this page" : "이 페이지") + '</div><nav class="toc-list">';
     heads.forEach(function (h) {
       if (!h.id) h.id = (h.textContent || "").trim().replace(/\s+/g, "-").toLowerCase();
       var label = h.getAttribute("data-toc") || h.textContent.replace(/^[#\s]+/, "").trim();

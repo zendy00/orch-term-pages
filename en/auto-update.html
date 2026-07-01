@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Auto-update — Orch term Guide</title>
+<meta name="description" content="Orch term auto-update: release builds detect a new version, announce it with a titlebar accent pill, and install it on click via download + restart. A single boot check + manual About check share one global Updater." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — titlebar update pill + state demo + About reproduction (uses design-system tokens only).
+     The pill styles are moved from src/styles.css (.update-pill*) (only the cursor is default). */
+  .titlebar-update-slot { display:inline-flex; align-items:center; height:100%; }
+  .update-pill { display:inline-flex; align-items:center; gap:1px; height:20px; margin:0 6px; padding:0 3px 0 7px;
+    border:1px solid var(--accent); border-radius:var(--r-sm); background:transparent; color:var(--accent);
+    font-size:var(--fs-sm); line-height:1; white-space:nowrap; }
+  .update-pill-action { display:inline-flex; align-items:center; gap:5px; background:none; border:none; color:inherit;
+    font:inherit; font-size:var(--fs-sm); cursor:default; padding:2px 1px; }
+  .update-pill-icon { display:inline-flex; }
+  .update-pill-icon svg { width:10px; height:10px; }
+  .update-pill-close { display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px;
+    background:none; border:none; color:inherit; opacity:.7; cursor:default; padding:0; border-radius:var(--r-sm); }
+  .update-pill-close svg { width:7px; height:7px; }
+  /* Pill list by state */
+  .statelist { list-style:none; padding:0; margin:16px 0; display:grid; gap:8px; max-width:var(--read); }
+  .statelist li { display:flex; align-items:center; gap:14px; padding:10px 13px; background:var(--bg-1);
+    border:1px solid var(--line-faint); border-radius:var(--r-md); }
+  .statelist .pillcell { flex:0 0 176px; display:flex; }
+  .statelist .txt { font-size:13px; color:var(--text-dim); min-width:0; }
+  .statelist .txt b { color:var(--text-strong); font-weight:600; }
+  /* About modal embellishments */
+  .about-brandrow { display:flex; align-items:center; gap:11px; margin-bottom:2px; }
+  .about-glyph { width:34px; height:34px; border-radius:9px; background:var(--accent-grad); display:grid; place-items:center;
+    color:#fff; font-family:var(--code-font); font-weight:700; font-size:16px; flex:none; }
+  .about-wm { font-family:var(--display); font-weight:700; font-size:19px; color:var(--text-strong); letter-spacing:-.01em; }
+  .about-wm b { color:var(--accent); }
+  .about-verrow { display:flex; align-items:center; gap:12px; font-size:12px; color:var(--text-dim); margin:8px 0 2px; }
+  .about-link { background:none; border:none; padding:0; font:inherit; color:var(--accent); cursor:default; }
+  .about-msg { font-size:12px; color:var(--text-dim); margin-top:4px; }
+  .about-meta { font-size:12px; color:var(--text-dim); margin-top:6px; }
+  .about-meta .desc { color:var(--text); }
+  .about-lictoggle { display:flex; align-items:center; gap:8px; margin-top:12px; padding-top:11px;
+    border-top:1px solid var(--line-faint); font-family:var(--code-font); font-size:11px; color:var(--text-faint); }
+</style>
+</head>
+<body data-page="auto-update">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>More · System</span><span class="sep">/</span><span>Auto-update</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> More · System · Auto-update</p>
+    <h1 class="page-title">Auto-update</h1>
+    <p class="lede">When a new version is out, a titlebar <b>accent pill</b> announces it. Click it to install via <b>download → restart</b>. It checks once automatically when you launch the app, and you can also check directly from the <b>About</b> window.</p>
+
+    <!-- ① New-version notification -->
+    <h2 class="sec" id="notify"><span class="hash"></span> New-version notification (titlebar pill)</h2>
+    <p>When a new version is detected, an <span class="i" data-icon="download"></span> <b>accent pill</b> appears on the right of the titlebar. Click it to proceed to install; press close to hide just that notification.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — titlebar · update pill</span><span class="badge phase">release</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="titlebar">
+            <span class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></span>
+            <div class="titlebar-spaces">
+              <div class="space-chip active"><span class="space-chip-num">1</span> ssh-core</div>
+              <div class="space-chip"><span class="space-chip-num">2</span> docs</div>
+              <button class="space-chip-add">＋</button>
+            </div>
+            <span class="titlebar-title"></span>
+            <div class="titlebar-update-slot">
+              <div class="update-pill">
+                <button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">Update 0.2.1</span></button>
+                <button class="update-pill-close" title="Close" data-icon="window-close"></button>
+              </div>
+            </div>
+            <div class="titlebar-controls">
+              <button class="titlebar-btn" data-icon="window-minimize"></button>
+              <button class="titlebar-btn" data-icon="window-maximize"></button>
+              <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Download icon + <b>update version</b> label + close — in the slot left of the window controls.</div>
+      </div>
+    </figure>
+
+    <p>The pill label changes with progress.</p>
+    <ul class="statelist">
+      <li>
+        <span class="pillcell"><span class="update-pill"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">Update 0.2.1</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>New version</b> — click to start installing.</span>
+      </li>
+      <li>
+        <span class="pillcell"><span class="update-pill update-pill-busy"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">Downloading 62%</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>Downloading</b> — shows progress.</span>
+      </li>
+      <li>
+        <span class="pillcell"><span class="update-pill"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">Restart to update</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>Ready to install</b> — restart to switch to the new version.</span>
+      </li>
+      <li>
+        <span class="pillcell"><span class="update-pill"><button class="update-pill-action"><span class="update-pill-icon" data-icon="download"></span><span class="update-pill-label">Update failed · retry</span></button><button class="update-pill-close" data-icon="window-close"></button></span></span>
+        <span class="txt"><b>Failed</b> — click to try again.</span>
+      </li>
+    </ul>
+
+    <!-- ② Download · restart install -->
+    <h2 class="sec" id="install"><span class="hash"></span> Download · restart install</h2>
+    <p>Clicking the pill opens a <b>confirmation dialog</b> before installing. If you agree, it downloads and installs the new version and restarts the app. Cancel and nothing is downloaded — you return to the notification state.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Install update — confirm</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="modal-overlay" style="min-height:230px">
+            <div class="modal-box" style="width:380px">
+              <div class="modal-head"><span class="i" data-icon="download"></span><h3>Install update</h3></div>
+              <div class="modal-body">
+                <p style="margin:2px 0 8px;color:var(--text)">Download and install the new version <b style="color:var(--text-strong)">0.2.1</b>. When the install finishes, the app <b>restarts</b>.</p>
+                <p style="margin:0;color:var(--text-faint);font-size:12px">If you have work in progress, save it first.</p>
+              </div>
+              <div class="modal-btns">
+                <button class="btn ghost">Cancel</button>
+                <button class="btn primary"><span class="i" data-icon="download" style="color:#fff"></span> Install and restart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Install confirmation dialog. <b>Cancel</b> touches no network.</div>
+      </div>
+    </figure>
+    <div class="warn"><b>Installing restarts the app.</b> Save any work in progress first.</div>
+
+    <!-- ③ Boot check · manual About check -->
+    <h2 class="sec" id="check"><span class="hash"></span> Boot check · manual About check</h2>
+    <p>Update checks come in two paths — <b>once automatically</b> when the app launches, and directly via the <b>Check for Updates</b> button in the <b>About</b> window. The two share their result, so a new version found in About also appears in the titlebar pill.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">About — manual update check</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="modal-overlay" style="min-height:300px">
+            <div class="modal-box" style="width:420px">
+              <div class="modal-head"><span class="i" data-icon="info"></span><h3>About</h3></div>
+              <div class="modal-body">
+                <div class="about-brandrow">
+                  <span class="about-glyph">O</span>
+                  <span class="about-wm">Orch <b>term</b></span>
+                </div>
+                <div class="about-verrow">
+                  <span>Version 0.2.0</span>
+                  <button class="about-link">Check for Updates</button>
+                </div>
+                <div class="about-msg">You're on the latest version (0.2.0)</div>
+                <div class="about-meta"><span class="desc">Multi-agent workstation</span></div>
+                <div class="about-meta">Made by · Zendy · zendy00@gmail.com</div>
+                <div class="about-lictoggle"><span style="font-size:10px">▸</span> Open-source licenses (412)</div>
+              </div>
+              <div class="modal-foot"><button class="btn primary">OK</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Pressing <b>Check for Updates</b> shows a result message — up to date / new version available / check failed.</div>
+      </div>
+    </figure>
+
+    <!-- ④ Signing · release notes -->
+    <h2 class="sec" id="publish"><span class="hash"></span> Signing · release notes</h2>
+    <p>Updates are verified by signature, so a tampered build won't install. Release notes (the changes) are generated automatically from commits and shown in both the GitHub release and the in-app notification — they're not written by hand.</p>
+
+    <!-- ⑤ DEV unsupported · platform constraints -->
+    <h2 class="sec" id="dev"><span class="hash"></span> DEV unsupported · platform constraints</h2>
+    <p>Auto-update is for <b>release builds only</b>. Development (dev) builds have no automatic boot check, and pressing <b>Check for Updates</b> only shows an unsupported notice.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">About — dev build</span></div>
+        <div class="shot-stage pad" style="min-height:150px">
+          <div class="modal-box" style="width:360px;box-shadow:var(--shadow-pop)">
+            <div class="modal-head"><span class="i" data-icon="info"></span><h3>About</h3></div>
+            <div class="modal-body">
+              <div class="about-verrow" style="margin-top:0"><span>Version 0.2.0-dev</span><button class="about-link">Check for Updates</button></div>
+              <div class="about-msg" style="color:var(--attention)">dev builds don't support updates</div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> In dev builds, even the manual button only shows an unsupported notice (no network calls).</div>
+      </div>
+    </figure>
+    <p class="dim">Installers ship as a Windows setup program (.exe · MSI) and a macOS <code>.dmg</code>.</p>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="download.html"><span class="ri" data-icon="download"></span>Download · Install</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="settings"></span>Storage & backup</a>
+        <a class="relchip" href="notifications.html"><span class="ri" data-icon="bell"></span>Done badge · notifications</a>
+        <a class="relchip" href="appearance.html"><span class="ri" data-icon="info"></span>Appearance · System</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="notifications.html">Next → Done badge · notifications</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

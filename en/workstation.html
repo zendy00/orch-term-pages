@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Multi-agent workstation — Orch term guide</title>
+<meta name="description" content="Spread terminal, editor, and browser across a binary split tree in one window, and run a different AI or shell in each pane to see it all at a glance. Split, pane maximize (Shift+Esc), and a 4-mode sidebar." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — split layout · editor/browser pane recreation (design-system tokens only) */
+  .wcol { display:flex; flex-direction:column; gap:var(--pane-gap); flex:1 1 auto; min-width:0; min-height:0; }
+  .wcol > .pane { flex:1 1 0; min-height:0; }
+
+  /* Editor (CodeMirror) pane recreation */
+  .ed { position:absolute; inset:0; display:flex; font-family:var(--code-font); font-size:var(--code-fs); line-height:1.6; overflow:hidden; }
+  .ed-gutter { flex:none; padding:6px 9px 0; text-align:right; color:var(--text-faint); background:var(--bg-1); border-right:1px solid var(--line-faint); white-space:pre; user-select:none; }
+  .ed-code { flex:1 1 auto; padding:6px 12px 0; color:var(--text); white-space:pre; overflow:hidden; }
+  .ed .k { color:var(--accent); } .ed .t { color:var(--term-cyan); } .ed .s { color:var(--term-green); } .ed .c { color:var(--text-faint); }
+
+  /* In-app browser (native child webview) pane recreation */
+  .bweb { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--bg-1); }
+  .bweb-url { display:flex; align-items:center; gap:7px; height:24px; margin:5px 5px 0; padding:0 11px; background:var(--bg-2); border:1px solid var(--line); border-radius:999px; font-family:var(--code-font); font-size:11px; color:var(--text-dim); }
+  .bweb-url .lk { color:var(--success); display:inline-grid; place-items:center; }
+  .bweb-page { flex:1 1 auto; margin:6px 5px 5px; padding:13px 15px; background:var(--bg-0); border:1px solid var(--line-faint); border-radius:var(--r-sm); overflow:hidden; }
+  .bweb-h { font-family:var(--ui); font-weight:700; font-size:16px; color:var(--text-strong); }
+  .bweb-sub { font-size:11.5px; color:var(--text-dim); margin-top:3px; }
+  .bweb-bar { height:2px; width:46px; border-radius:2px; background:var(--accent); margin:11px 0; }
+  .bweb-row { height:7px; border-radius:3px; background:var(--line-faint); margin:7px 0; }
+
+  /* Browser tab globe glyph (the app uses the Material globe — outside the harvested SVG set) */
+  .tab-glb { font-size:11px; line-height:1; }
+
+  /* Maximize-toggle highlight button (.active header) recreation */
+  .pane-act.on { color:var(--accent); background:var(--accent-soft); }
+</style>
+</head>
+<body data-page="workstation">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Flagship features</span><span class="sep">/</span><span>Multi-agent workstation</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Flagship features · Multi-agent workstation <span class="flag">split tree</span></p>
+    <h1 class="page-title">Multi-agent workstation</h1>
+    <p class="lede">Spread <b>terminal, editor, and browser</b> across a <b>binary split tree</b> in one window, and run <b>a different AI or shell</b> in each pane to see it all at a glance. It's not just a terminal — it's a workbench for driving several agents at once.</p>
+
+    <!-- One window's structure -->
+    <h2 class="sec" id="what"><span class="hash"></span> One window's structure</h2>
+    <p>Each cell you carve out by splitting the screen horizontally and vertically is a <b>pane</b>, and each pane holds <b>terminal, editor, and browser</b> tabs. Because it's a binary split tree, any pane can be split in two again, so all three kinds coexist freely in one window.</p>
+
+    <figure class="fig">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — terminal · editor · browser</span><span class="badge ok">3-way split</span></div>
+        <div class="shot-stage" style="--shot-h:472px">
+          <div class="app">
+            <!-- Title bar + Space chips -->
+            <div class="titlebar">
+              <div class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></div>
+              <div class="titlebar-spaces">
+                <div class="space-chip active"><span class="space-chip-num">1</span> dev</div>
+                <div class="space-chip"><span class="space-chip-num">2</span> agents</div>
+                <div class="space-chip-add">+</div>
+              </div>
+              <div class="titlebar-title"></div>
+              <div class="titlebar-actions">
+                <button class="titlebar-btn" data-icon="contrast"></button>
+                <button class="titlebar-btn" data-icon="bell"></button>
+              </div>
+              <div class="titlebar-controls">
+                <button class="titlebar-btn" data-icon="window-minimize"></button>
+                <button class="titlebar-btn" data-icon="window-maximize"></button>
+                <button class="titlebar-btn titlebar-close" data-icon="window-close"></button>
+              </div>
+            </div>
+            <!-- Body: left Explorer + 3-way split -->
+            <div class="body">
+              <div class="explorer-col">
+                <div class="explorer">
+                  <div class="explorer-header"><span class="proj">orch-term</span></div>
+                  <div class="explorer-body" style="font-size:12px">
+                    <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">src</span></div>
+                    <div class="tree-row" style="padding-left:24px"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">workspace</span></div>
+                    <div class="tree-row selected" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">types.ts</span></div>
+                    <div class="tree-row" style="padding-left:24px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">pane-manager.ts</span></div>
+                    <div class="tree-row"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">src-tauri</span></div>
+                    <div class="tree-row"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">README.md</span></div>
+                  </div>
+                  <div class="explorer-footer"><span class="explorer-foot-git"><span class="i dim" data-icon="git-branch" style="width:11px"></span> main</span><span class="explorer-foot-sp">Space 1</span></div>
+                </div>
+                <div class="sidebar-modebar"><button class="active" data-icon="folder"></button><button data-icon="search"></button><button data-icon="git"></button><button data-icon="tasks"></button><span class="sp"></span></div>
+              </div>
+              <div class="main-col">
+                <div class="panes">
+                  <!-- ② Terminal pane -->
+                  <div class="pane active-pane">
+                    <div class="pane-tabbar">
+                      <div class="pane-tabs">
+                        <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span><span class="tab-dot on"></span></div>
+                      </div>
+                      <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="maximize-pane"></button></div>
+                    </div>
+                    <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">claude</span>
+<span class="d">summarize the split-tree structure of workspace</span>
+<span class="a">●</span> <span class="d">leaf=pane, split=node. Each pane holds</span>
+<span class="d">  terminal·editor·browser tabs. The SSOT</span>
+<span class="d">  is held by the coordinator (index.ts)…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+                  </div>
+                  <div class="divider-v"></div>
+                  <!-- Right vertical stack: ③ editor / ④ browser -->
+                  <div class="wcol">
+                    <div class="pane">
+                      <div class="pane-tabbar">
+                        <div class="pane-tabs">
+                          <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">types.ts</span></div>
+                        </div>
+                        <div class="pane-actions"><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="close"></button></div>
+                      </div>
+                      <div class="pane-content"><div class="ed"><div class="ed-gutter">1
+2
+3
+4
+5
+6</div><div class="ed-code"><span class="c">// src/workspace/types.ts</span>
+<span class="k">export type</span> <span class="t">Tab</span> =
+  | <span class="s">{ kind: "terminal" }</span>
+  | <span class="s">{ kind: "editor" }</span>
+  | <span class="s">{ kind: "browser" }</span>;
+<span class="c">// leaf=pane, split=node</span></div></div></div>
+                    </div>
+                    <div class="pane">
+                      <div class="pane-tabbar">
+                        <div class="pane-tabs">
+                          <div class="tab active"><span class="tab-icon tab-glb">🌐</span><span class="tab-label">localhost:5173</span></div>
+                        </div>
+                        <div class="pane-actions"><button class="pane-act" data-icon="external-link"></button><button class="pane-act" data-icon="close"></button></div>
+                      </div>
+                      <div class="pane-content"><div class="bweb"><div class="bweb-url"><span class="lk" data-icon="lock"></span>localhost:5173</div><div class="bweb-page"><div class="bweb-h">Orch term</div><div class="bweb-sub">Multi-agent terminal workstation · dev preview</div><div class="bweb-bar"></div><div class="bweb-row"></div><div class="bweb-row" style="width:82%"></div><div class="bweb-row" style="width:64%"></div></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div class="statusbar">
+              <span class="statusbar-encoding">UTF-8</span>
+              <span class="statusbar-spacer"></span>
+              <span class="statusbar-sys"><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">CPU</span><span class="statusbar-sys-v">19%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:19%"></span></span></span><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">MEM</span><span class="statusbar-sys-v">44%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:44%"></span></span></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Left Explorer · <span class="n">②</span> terminal, editor, and browser panes coexist within one split tree.</div>
+      </div>
+    </figure>
+
+    <!-- Three tab kinds -->
+    <h2 class="sec" id="kinds"><span class="hash"></span> Three tab kinds — mixed in one pane</h2>
+    <p>A single pane's tab bar can <b>mix all three kinds of tabs</b>. Only the active tab shows in the body; the rest wait as tabs.</p>
+
+    <div class="feature-cards">
+      <div class="fcard"><span class="fc-ic" data-icon="terminal"></span><h4>Terminal</h4><p>A shell session. Auto-detects PowerShell, cmd, Git Bash, and WSL, and new terminals start at the project root.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="file"></span><h4>Editor</h4><p>A code editor. Auto-reload on external changes · encoding indicator (UTF-8) · Ctrl+F find · follows the app theme.</p></div>
+      <div class="fcard"><span class="fc-ic" data-icon="external-link"></span><h4>Browser</h4><p>A native window (not an iframe). Address-bar lock · open local files · native zoom.</p></div>
+    </div>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">One pane · mixed tabs</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:236px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span></div>
+                <div class="tab active"><span class="tab-icon" data-icon="file"></span><span class="tab-label">README.md</span></div>
+                <div class="tab"><span class="tab-icon tab-glb">🌐</span><span class="tab-label">localhost:5173</span></div>
+              </div>
+              <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="add"></button></div>
+            </div>
+            <div class="pane-content"><div class="ed"><div class="ed-gutter">1
+2
+3
+4
+5
+6</div><div class="ed-code"><span class="k"># Orch term</span>
+
+<span class="t">Multi-agent terminal workstation.</span>
+
+- Terminal · editor · browser in one window
+- Split tree · separate work bundles with Spaces</div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> One tab bar mixes terminal (pwsh), editor (README.md), and browser (localhost) tabs, and the active tab renders in the body.</div>
+      </div>
+    </figure>
+    <p class="dim">Double-click a tab to change its name and color (9-color picker) together, and drag it between panes to move it. The right-click menu has Rename · Change color · Close.</p>
+
+    <!-- Split · maximize -->
+    <h2 class="sec" id="split"><span class="hash"></span> Split · pane maximize</h2>
+    <p>Use the <b>split buttons</b> in the pane header to split the active pane and open a new terminal (or split via the <b>drop zones</b> at a pane's edge). Two buttons distinguish the split direction.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Vertical split — two panes</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="panes" style="height:228px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> npm run tauri dev
+<span class="d">  vite ready · app booting…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">git-bash</span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="split-horizontal"></button><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">git</span> status
+<span class="am">  On branch worktree-ssh-core</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="i dim" data-icon="split-vertical"></span> split right · <span class="i dim" data-icon="split-horizontal"></span> split down · <span class="i dim" data-icon="maximize-pane"></span> maximize pane. The active pane is marked with an accent border.</div>
+      </div>
+    </figure>
+
+    <div class="tip"><b>Pane maximize</b> — <kbd>Shift</kbd>+<kbd>Esc</kbd> or the <span class="i dim" data-icon="maximize-pane"></span> button in the header grows the active pane to fill the window. Press again to restore (toggle).</div>
+    <p class="dim">Drag a tab bar's empty area to move the whole pane — drop on another pane's <b>center</b> to swap positions, on an <b>edge</b> to rearrange toward that side, or on a <b>Space chip</b> to move it to that Space. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+arrow keys move focus to an adjacent pane.</p>
+
+    <!-- Sidebar ↔ pane -->
+    <h2 class="sec" id="sidebar"><span class="hash"></span> Left sidebar ↔ body panes</h2>
+    <p>The left of the body is a <b>sidebar card + mode bar</b>. The mode bar switches the four modes — <b>Explorer · Search · Git · To-dos</b> — and clicking a file in the Explorer opens it as an <b>editor (or browser) tab in a body pane</b>.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Left sidebar · 4 modes</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="explorer-col" style="height:262px;width:244px;flex:none">
+            <div class="explorer">
+              <div class="explorer-header"><span class="proj">orch-term</span></div>
+              <div class="explorer-body" style="font-size:12px">
+                <div class="tree-row"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">src</span></div>
+                <div class="tree-row" style="padding-left:24px"><span class="tw">▾</span><span class="tree-icon">📁</span><span class="tree-name">workspace</span></div>
+                <div class="tree-row selected" style="padding-left:40px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">index.ts</span></div>
+                <div class="tree-row" style="padding-left:40px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">pane-manager.ts</span></div>
+                <div class="tree-row" style="padding-left:40px"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">tab-manager.ts</span></div>
+                <div class="tree-row"><span class="tw">▸</span><span class="tree-icon">📁</span><span class="tree-name">src-tauri</span></div>
+                <div class="tree-row"><span class="tw"></span><span class="tree-icon">📄</span><span class="tree-name">README.md</span></div>
+              </div>
+              <div class="explorer-footer"><span class="explorer-foot-git"><span class="i dim" data-icon="git-branch" style="width:11px"></span> main</span><span class="explorer-foot-sp">Space 1</span></div>
+            </div>
+            <div class="sidebar-modebar"><button class="active" data-icon="folder"></button><button data-icon="search"></button><button data-icon="git"></button><button data-icon="tasks"></button><span class="sp"></span></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="i" data-icon="folder"></span> Explorer · <span class="i dim" data-icon="search"></span> Search · <span class="i dim" data-icon="git"></span> Git · <span class="i dim" data-icon="tasks"></span> To-dos — switch with the mode bar, toggle with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>.</div>
+      </div>
+    </figure>
+
+    <!-- Why multi-agent -->
+    <h2 class="sec" id="multiagent"><span class="hash"></span> Why multi-agent — at a glance</h2>
+    <p>Each pane is an <b>independent shell</b>. Run <code>claude</code> in one pane, <code>codex</code> next to it, and <code>agy</code> beside that to drive <b>different AIs at the same time</b>, and split the work into bundles with splits and Spaces to watch progress on one screen.</p>
+
+    <figure class="fig">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">At a glance — claude · codex · agy</span><span class="badge ok">3 agents</span></div>
+        <div class="shot-stage" style="padding:14px">
+          <div class="panes" style="height:236px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">claude</span>
+<span class="a">●</span> <span class="d">SFTP transfer module</span>
+<span class="d">  implementing…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">codex</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">codex</span>
+<span class="am">⟳</span> <span class="d">tunnel module</span>
+<span class="d">  reviewing…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">agy</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="maximize-pane"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="c">agy</span>
+<span class="a">●</span> <span class="d">doc draft</span>
+<span class="d">  writing…</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">▲</span> Three panes, each an independent shell — <code>claude</code>·<code>codex</code>·<code>agy</code> in parallel on one screen.</div>
+      </div>
+    </figure>
+
+    <p>The stage where <b>the AI you're chatting with directly drives</b> these workers on one screen is <a href="orchestration.html">agent orchestration</a>. The workstation is the foundation for it — a workbench where a person sees several agents at a glance and coordinates them by hand.</p>
+
+    <!-- Keyboard shortcuts -->
+    <h2 class="sec" id="keys"><span class="hash"></span> Keyboard shortcuts (panes · tabs)</h2>
+    <table class="kbds">
+      <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>Maximize / restore the active pane (toggle)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>←↑→↓</kbd></td><td>Move focus to an adjacent pane</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd></td><td>Toggle the left Explorer (sidebar)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd></td><td>Close the active tab</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>PageUp</kbd> / <kbd>PageDown</kbd></td><td>Cycle to the previous / next tab within a pane</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>Agent orchestration</a>
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · panes</a>
+        <a class="relchip" href="editor.html"><span class="ri" data-icon="file"></span>Code editor</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>In-app browser</a>
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="folder"></span>Spaces</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="orchestration.html">Next → Agent orchestration</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

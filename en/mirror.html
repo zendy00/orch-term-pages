@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>CDP browser mirror — Orch term guide</title>
+<meta name="description" content="Mirror an agent's (chrome-devtools-mcp) browsing live into the in-app browser panel beside the terminal. A built-in Rust filtering proxy hides the app's UI and maps new_page to an in-app tab." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* Page-specific — proxy-pipeline diagram + in-app browser panel reproduction (design tokens only) */
+  .mflow { margin:22px 0; max-width:var(--read); background:var(--bg-1); border:1px solid var(--line-faint); border-radius:var(--r-lg); padding:26px 18px 18px; }
+  .mflow-row { display:flex; align-items:stretch; gap:0; flex-wrap:wrap; }
+  .mnode { position:relative; flex:1 1 150px; min-width:140px; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-md); padding:13px 13px; text-align:center; }
+  .mnode .t { font-size:13.5px; font-weight:600; color:var(--text-strong); }
+  .mnode .s { font-family:var(--code-font); font-size:10.5px; color:var(--text-faint); margin-top:4px; line-height:1.5; }
+  .mnode.proxy { border-color:var(--accent-line); box-shadow:0 0 26px -8px var(--accent); }
+  .mnode.proxy .t { color:var(--accent); }
+  .mnode .ftag { position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-family:var(--code-font); font-size:9px; letter-spacing:.16em; color:var(--accent); background:var(--bg-1); border:1px solid var(--accent-line); border-radius:999px; padding:1px 8px; white-space:nowrap; }
+  .marrow { flex:0 0 100%; display:flex; align-items:center; gap:8px; padding:9px 2px; color:var(--text-faint); font-family:var(--code-font); font-size:10px; }
+  .marrow .line { flex:1; height:0; border-top:1.5px dashed var(--accent-line); }
+  @media(min-width:660px){ .mflow-row{flex-wrap:nowrap;align-items:center} .marrow{flex:0 0 90px;flex-direction:column;gap:3px} .marrow .line{width:100%;flex:none} }
+  .mbranch { display:grid; gap:8px; margin-top:18px; }
+  .mout { display:flex; align-items:center; gap:9px; padding:10px 13px; border-radius:var(--r-md); font-size:13px; border:1px solid var(--line-faint); }
+  .mout b { font-weight:600; }
+  .mout.ok { background:color-mix(in srgb,var(--success) 8%,transparent); border-color:color-mix(in srgb,var(--success) 34%,transparent); color:var(--text); }
+  .mout.ok .i { color:var(--success); }
+  .mout.no { background:color-mix(in srgb,var(--danger) 8%,transparent); border-color:color-mix(in srgb,var(--danger) 30%,transparent); color:var(--text-dim); }
+  .mout.no .x { color:var(--danger); font-weight:700; width:1.25em; text-align:center; flex:none; }
+  .mout .lbl { margin-left:auto; font-family:var(--code-font); font-size:10px; color:var(--text-faint); }
+
+  /* In-app browser panel reproduction — address bar (main webview render) + page (child webview) */
+  .mbnav { display:flex; align-items:center; gap:7px; height:27px; padding:0 9px; background:var(--bg-2); border-bottom:1px solid var(--line-faint); flex:0 0 auto; }
+  .mbnav .nb { width:14px; text-align:center; color:var(--text-faint); font-size:13px; }
+  .mbnav .rl { display:inline-grid; place-items:center; width:15px; height:15px; color:var(--text-faint); }
+  .mbnav .url { flex:1; display:flex; align-items:center; gap:7px; height:18px; padding:0 10px; background:var(--bg-0); border:1px solid var(--line); border-radius:999px; font-family:var(--code-font); font-size:10.5px; color:var(--text-dim); overflow:hidden; white-space:nowrap; }
+  .mbnav .url .lk { color:var(--success); display:inline-grid; place-items:center; width:11px; flex:none; }
+  .mbnav .url .lk svg { width:11px; height:11px; }
+  .mbpage { position:absolute; inset:0; background:var(--bg-0); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:13px; padding:26px; text-align:center; }
+  .mbpage h4 { margin:0; font-family:var(--ui); font-size:20px; font-weight:700; color:var(--text-strong); letter-spacing:-.01em; }
+  .mbpage p { margin:0; font-family:var(--ui); font-size:12px; line-height:1.65; color:var(--text-dim); max-width:280px; }
+  .mbpage .pbtn { font-family:var(--ui); font-size:12px; color:#fff; background:var(--accent); border-radius:var(--r-sm); padding:5px 14px; }
+</style>
+</head>
+<body data-page="mirror">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Flagship features</span><span class="sep">/</span><span>CDP browser mirror</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Flagship features · CDP browser mirror <span class="flag">WebView2 CDP</span></p>
+    <h1 class="page-title">CDP browser mirror</h1>
+    <p class="lede">When the AI you're chatting with browses the web, every action (navigation·clicks·input) is reflected live in the <b>in-app browser panel beside the terminal</b>. The app's own screen is <b>invisible</b> to the agent, so it's never operated by mistake.</p>
+
+    <!-- What -->
+    <h2 class="sec" id="concept"><span class="hash"></span> What it does</h2>
+    <p>When you hand an agent a web task, you usually can't see what it opened or where it got stuck. The mirror turns the agent's browser into a <b>real panel on your screen</b>, letting you watch it work in real time as if over its shoulder. The agent drives by looking only at that panel, while the app's own UI is neither visible nor reachable.</p>
+
+    <div class="mflow">
+      <div class="mflow-row">
+        <div class="mnode"><div class="t">AI agent</div><div class="s">Browses the web</div></div>
+        <div class="marrow"><div class="line"></div></div>
+        <div class="mnode proxy"><span class="ftag">Mirror</span><div class="t">Built-in app mirror</div><div class="s">Hides app UI<br>New page → in-app tab</div></div>
+        <div class="marrow"><div class="line"></div></div>
+        <div class="mnode"><div class="t">In-app browser panel</div><div class="s">Shown live on your screen</div></div>
+      </div>
+      <div class="mbranch">
+        <div class="mout ok"><span class="i" data-icon="external-link"></span><span>Agent browser — <b>mirrored to the panel · take over</b></span><span class="lbl">Visible</span></div>
+        <div class="mout no"><span class="x">✕</span><span>The app's own UI — <b>hidden from the agent</b></span><span class="lbl">Hidden</span></div>
+      </div>
+    </div>
+
+    <!-- Enable -->
+    <h2 class="sec" id="enable"><span class="hash"></span> Enable</h2>
+    <p>In <b>dev</b>, launching the app with <code>npm run dev:app</code> always turns the mirror on and connects agents automatically (proxy <code>9522+base</code>). In a <b>release</b>, turn on Settings → <b>Agent browser mirror</b> and <b>restart the app</b>, and agent sessions connect automatically (default port <code>9422</code>, changeable in settings). While it's on, the status bar shows <b>Mirror :port</b>.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — dev</span><span class="badge ok">mirror live</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane" style="height:172px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">PowerShell</span></div></div>
+              <div class="pane-actions"><button class="pane-act" data-icon="close"></button></div>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">$</span> npm run dev:app
+<span class="d">[dev] base=0 vite=1420 bridge=9323 cdp=9222</span> <span class="a">proxy=9522</span>
+<span class="d">[mirror] proxy 127.0.0.1:9522 → 127.0.0.1:9222</span>
+<span class="d">[mirror] .mcp.json patched → </span><span class="c">orchterm-mirror</span><span class="d"> @ :9522</span>
+<span class="g">$</span> <span class="cursor"></span></div></div></div>
+          </div>
+          <div class="statusbar" style="border:1px solid var(--line-faint);border-radius:var(--r-md);margin-top:12px;height:25px">
+            <span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>Mirror :9522</span>
+            <span class="statusbar-spacer"></span>
+            <span class="statusbar-encoding">UTF-8 · CRLF</span>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> The launcher brings up the mirror alongside and auto-configures the agent connection · the status bar shows <b>Mirror :port</b>.</div>
+      </div>
+    </figure>
+    <p class="dim">An agent session reads the mirror connection at startup. A session that's already running must be restarted once to attach to the mirror.</p>
+
+    <!-- Usage -->
+    <h2 class="sec" id="usage"><span class="hash"></span> Usage</h2>
+    <p>Just say "open ○○ in the browser and check it," and the page the agent opens isn't a floating temporary window but a <b>proper in-app browser tab</b>, with every subsequent navigation·click·input shown live in that panel. When the agent changes pages, your view follows along, and when the work is done <b>you take over</b> that tab as-is.</p>
+    <figure class="fig">
+      <div class="shot wide">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — agent ↔ mirror panel</span><span class="badge ok">Mirror :9422</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="panes" style="height:288px">
+            <div class="pane active-pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span><span class="tab-dot on"></span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+              </div>
+              <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="g">❯</span> <span class="d">open example.com and check the page title</span>
+<span class="a">▸ new_page</span> <span class="c">https://example.com</span>
+<span class="d">  → creates an in-app browser tab + auto-selects it</span>
+<span class="a">▸ take_snapshot</span> <span class="d">→ h1 "Example Domain"</span>
+<span class="g">◂</span> <span class="d">The title is "Example Domain".</span>
+<span class="d">  It's still open in the right panel.</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="pane">
+              <div class="pane-tabbar">
+                <div class="pane-tabs"><div class="tab active"><span class="tab-icon" data-icon="external-link"></span><span class="tab-label">Example Domain</span></div></div>
+                <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+              </div>
+              <div class="mbnav">
+                <span class="nb">‹</span><span class="nb">›</span>
+                <span class="rl" data-icon="refresh"></span>
+                <div class="url"><span class="lk" data-icon="lock"></span>https://example.com</div>
+                <span class="rl" data-icon="external-link"></span>
+              </div>
+              <div class="pane-content"><div class="mbpage">
+                <h4>Example Domain</h4>
+                <p>This domain is for use in illustrative examples in documents. The page the agent opened renders right here in this panel.</p>
+                <span class="pbtn">More information →</span>
+              </div></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> The page the agent opened = a proper browser tab. <span class="n">②</span> Subsequent actions are mirrored live into this panel — when it's done, the tab is yours.</div>
+      </div>
+    </figure>
+
+    <!-- Limits / caveats -->
+    <h2 class="sec" id="limits"><span class="hash"></span> Limits · caveats</h2>
+    <p><b>Multi-agent setups are separated per Space.</b> An agent launched from an app terminal drives by looking only at its own Space's panel, and new pages also open in its own Space. That said, agents within the same Space can see each other's panels, and even if you move a terminal tab to another Space it keeps pointing at the old Space until the shell is restarted. New pages open one at a time (opening two at once rejects the second, which can be retried).</p>
+    <div class="warn"><b>Mirror mode uses a separate browser profile</b> — when the mirror is on, the in-app browser uses a separate profile, so logins and cookies from normal mode don't carry over to mirror mode. You'll need to log in again to sites you need in mirror mode.</div>
+
+    <!-- Reference -->
+    <h2 class="sec" id="reference"><span class="hash"></span> Reference</h2>
+    <table class="kbds">
+      <thead><tr><th>Item</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Proxy port</td><td>dev <code>9522+base</code> · release default <code>9422</code> (changeable in settings)</td></tr>
+        <tr><td>Enable / disable</td><td>Settings → <b>Agent browser mirror</b> → restart the app</td></tr>
+        <tr><td>Multi-agent</td><td>Separated per Space</td></tr>
+        <tr><td>Mirror profile</td><td>When the mirror is ON, logins and cookies are kept separately</td></tr>
+        <tr><td>Status indicator</td><td>Status bar <b>Mirror :port</b></td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="external-link"></span>In-app browser</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="terminal"></span>Agent orchestration</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="external-link"></span>AI gateway</a>
+        <a class="relchip" href="workstation.html"><span class="ri" data-icon="terminal"></span>Multi-agent workstation</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="terminal.html">Next → Terminal</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

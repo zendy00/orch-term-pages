@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>변경 이력 (Changelog) — Orch term 가이드</title>
-<meta name="description" content="Orch term 릴리즈별 변경 이력 — 자동 업데이트(v0.1.23~)로 받는 버전별 새 기능·수정. SSH·Git 패널·전체 검색·AI 게이트웨이·macOS 포팅·CDP 미러." />
+<meta name="description" content="Orch term 릴리즈별 변경 이력 — 자동 업데이트(v0.1.23~)로 받는 버전별 새 기능·수정. SSH·Git 패널·전체 검색·AI 게이트웨이·세션 목록·다국어(한/영)·macOS 포팅·CDP 미러." />
 <link rel="stylesheet" href="./_tokens.css" />
 <link rel="stylesheet" href="./_app.css" />
 <link rel="stylesheet" href="./site.css" />
@@ -39,7 +40,7 @@
   <span class="spacer"></span>
   <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
   <nav class="tlinks">
-    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
     <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
   </nav>
 </header>
@@ -56,10 +57,24 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v02x"><span class="hash"></span> 0.2.x — 안정화 · SSH · 미러</h2>
+    <h2 class="sec" id="v03x"><span class="hash"></span> 0.3.0 — 다국어 · 세션 목록 · 패널 타일링</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.2.2</span><span class="d">2026-06-29</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>다국어(한국어·영어) — 첫 실행 시 OS 언어 자동 감지 · 설정에서 언어 전환(재시작 적용) · 문서 사이트 영어판</li>
+        <li><span class="cl-tag feat">feat</span>세션 목록 (이어가기) — 사이드바 세션 모드(Ctrl+Shift+S)로 claude·codex·agy 대화를 날짜별로 모아 보고 클릭 한 번으로 재개</li>
+        <li><span class="cl-tag feat">feat</span>탭 바둑판 분할(<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>) · 전체 패널 병합(<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M5.2 8V5.2h6V8"/></svg>) — 한 패널의 탭을 격자로 펼치거나 모든 패널을 하나로 합치기</li>
+        <li><span class="cl-tag feat">feat</span>탐색기 — 이미지·SVG·PDF·미디어를 인앱 브라우저로 열기 · 프로젝트 아이콘 · '프로젝트 추가' 단일 진입점</li>
+        <li><span class="cl-tag feat">feat</span>새 버전 첫 실행 시 "새로운 기능"(변경 이력) 팝업</li>
+        <li><span class="cl-tag fix">fix</span>macOS — 설정창 폰트 열거로 인한 hang 해결(비동기 처리)</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v02x"><span class="hash"></span> 0.2.x — 안정화 · SSH · 미러</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.2.2</span><span class="d">2026-06-29</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span>macOS 인앱 브라우저 미러 설정 토글 + 기본 ON</li>
         <li><span class="cl-tag fix">fix</span>Alt+Tab 복귀 후 한글·스페이스 IME 중복 입력 수정</li>

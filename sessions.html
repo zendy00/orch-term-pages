@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="./_lang.js"></script>
+<link rel="icon" href="./assets/app-icon.png" />
+<title>세션 목록 (이어가기) — Orch term 가이드</title>
+<meta name="description" content="Orch term 세션 목록: 사이드바 세션 모드(Ctrl+Shift+S)로 활성 프로젝트의 claude·codex·agy 대화를 날짜별로 모아 보고, 클릭 한 번으로 원래 폴더에서 이어갑니다." />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 세션 패널 재현 (디자인 시스템 토큰만 사용) */
+  .ss-panel { width: 318px; background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-pane); }
+  .ss-head { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; background: var(--bg-2); border-bottom: 1px solid var(--line-faint); font-size: 13px; color: var(--text-strong); font-weight: 600; }
+  .ss-head .sp { flex: 1; }
+  .ss-head .scope { font-size: 11px; color: var(--text-faint); font-weight: 500; }
+  .ss-group { padding: 8px 11px 4px; font-size: 10.5px; color: var(--text-faint); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .ss-row { display: flex; align-items: center; gap: 9px; padding: 8px 11px; border-bottom: 1px solid var(--line-faint); cursor: default; }
+  .ss-row:hover { background: var(--bg-hover); }
+  .ss-agent { width: 19px; height: 19px; flex: none; background-size: 18px; background-position: center; background-repeat: no-repeat; font-size: 0; }
+  .ss-agent.claude { background-image: url(./assets/agents/claude.svg); }
+  .ss-agent.codex { background-image: url(./assets/agents/codex.svg); }
+  .ss-agent.agy { background-image: url(./assets/agents/agy.svg); }
+  .agent-cell { display: inline-flex; align-items: center; gap: 7px; }
+  .ss-b { min-width: 0; flex: 1; }
+  .ss-t { font-size: 12.5px; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ss-m { display: flex; align-items: center; gap: 8px; margin-top: 3px; font-size: 11px; color: var(--text-faint); }
+  .ss-m .br { display: inline-flex; align-items: center; gap: 3px; }
+  .ss-more { padding: 9px; text-align: center; font-size: 12px; color: var(--accent); background: var(--bg-2-tint); cursor: default; }
+  .ss-loading { padding: 16px 13px; }
+  .ss-loading-t { font-size: 11.5px; color: var(--text-faint); margin-bottom: 9px; text-align: center; }
+  .ss-bar { height: 3px; background: var(--accent-soft); border-radius: 2px; overflow: hidden; position: relative; }
+  .ss-bar::after { content: ""; position: absolute; left: 8%; width: 38%; height: 100%; background: var(--accent); border-radius: 2px; }
+</style>
+</head>
+<body data-page="sessions">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>세션 목록</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 세션 목록</p>
+    <h1 class="page-title">세션 목록 (이어가기)</h1>
+    <p class="lede">사이드바 5번째 모드 "세션"으로, 활성 프로젝트에서 진행한 <b>AI CLI 에이전트(claude · codex · agy)</b> 대화를 한곳에 모아 보고 클릭 한 번으로 이어갑니다. orchterm이 따로 기록하지 않고, 세 CLI가 디스크에 남기는 <b>transcript 사이드카</b>를 직접 읽습니다(parse-don't-ask).</p>
+
+    <!-- 열기 -->
+    <h2 class="sec" id="open"><span class="hash"></span> 세션 패널 열기</h2>
+    <p>사이드바 모드바의 <span class="i" data-icon="sessions"></span> <b>세션</b> 아이콘이나 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>로 엽니다(명령 팔레트의 "세션"도 가능). 목록은 <b>활성 프로젝트(현재 폴더) 전용</b>이라 프로젝트를 바꾸면 그 프로젝트의 세션이 나옵니다.</p>
+
+    <!-- 목록 -->
+    <h2 class="sec" id="list"><span class="hash"></span> 목록 — 날짜 그룹 · 에이전트 아이콘 · 메타</h2>
+    <p>세션은 <b>최신순</b>으로 정렬되어 <b>날짜 그룹</b>(오늘 / 어제 / YYYY-MM-DD)으로 묶입니다. 각 행은 어떤 CLI인지 알려주는 <b>브랜드 아이콘</b> + 제목(첫 사용자 메시지) + 상대시각 + (있으면) git 브랜치를 보여줍니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/sessions-list.png" alt="세션 목록 — 21.zendy-terminal의 claude·codex·agy 세션이 오늘/어제/날짜로 그룹, 실제 브랜드 아이콘, claude만 git 브랜치(· main · worktree-ssh-core) 표시" style="max-width:312px;display:block;margin:0 auto;border-radius:var(--r-md)" />
+        <div class="shot-cap"><span class="n">①</span> 브랜드 아이콘으로 claude·codex·agy를 구분. <span class="n">②</span> 한 번에 20개씩 그리고 <b>더 보기</b>로 +20(재조회 없이 즉시).</div>
+      </div>
+    </figure>
+
+    <!-- 이어가기 -->
+    <h2 class="sec" id="resume"><span class="hash"></span> 이어가기 — 원래 폴더에서 재개</h2>
+    <p>행을 클릭하면 그 세션의 <b>원래 작업 폴더(cwd)</b>에서 <b>새 터미널 탭</b>으로 대화를 재개합니다. CLI별로 알맞은 명령을 자동으로 실행합니다.</p>
+    <table class="kbds">
+      <thead><tr><th>에이전트</th><th>이어가기 명령</th></tr></thead>
+      <tbody>
+        <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --resume &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex resume &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>antigravity --conversation &lt;id&gt;</code></td></tr>
+      </tbody>
+    </table>
+    <p class="note">⚠️ 이어가기는 해당 CLI(<code>claude</code> · <code>codex</code> · <code>antigravity</code>)가 시스템 <code>PATH</code>에 있어야 동작합니다.</p>
+
+    <!-- 페이지네이션 · 로딩 -->
+    <h2 class="sec" id="loading"><span class="hash"></span> 증분 표시 · 로딩바</h2>
+    <ul>
+      <li><b>증분 표시(페이지네이션)</b> — 한 번에 20개만 그리고 하단 <b>"더 보기 (남은 N)"</b>로 +20. 조회는 1회(프로젝트당 최대 500개)이고, 더 보기는 이미 받은 목록을 더 그릴 뿐이라 즉시 반응합니다(재조회 없음).</li>
+      <li><b>로딩바</b> — 조회를 시작하면 목록을 비우고 패널 안에 진행바("세션 불러오는 중…")를 띄웠다가 결과가 도착하면 교체합니다.</li>
+      <li><b>활성 프로젝트 스코프</b> — 목록은 활성 프로젝트 1개 기준입니다. 프로젝트를 추가·전환·제거하면 즉시 다시 불러옵니다.</li>
+    </ul>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">세션 — 불러오는 중</span></div>
+        <div class="shot-stage" style="padding:22px;display:grid;place-items:center">
+          <div class="ss-panel">
+            <div class="ss-head"><span class="i" data-icon="sessions" style="color:var(--accent)"></span> 세션 <span class="sp"></span><span class="scope">21.zendy-terminal</span></div>
+            <div class="ss-loading">
+              <div class="ss-loading-t">세션 불러오는 중…</div>
+              <div class="ss-bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 조회 시작 → 목록을 비우고 indeterminate 진행바 → 결과 도착 시 교체.</div>
+      </div>
+    </figure>
+
+    <!-- 크로스플랫폼 -->
+    <h2 class="sec" id="cross"><span class="hash"></span> 크로스플랫폼 · 어떻게 찾나</h2>
+    <p>세 CLI가 남기는 transcript 경로(<code>~/.claude/projects</code> · <code>~/.codex/sessions</code> · <code>~/.gemini/antigravity-cli/history.jsonl</code>)는 Windows·macOS·Linux에서 동일합니다. 활성 프로젝트와 같은 폴더에서 진행된 세션만 골라내며, 경로 비교는 OS 규약대로 정규화합니다(Windows만 소문자화). 백엔드는 DB와 무관한 <b>순수 파일시스템 스캐너</b>로, 세 어댑터 모두 JSONL을 파싱합니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>세션 모드 열기 (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>명령 팔레트 → "세션(Sessions)"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="spaces.html"><span class="ri" data-icon="split-horizontal"></span>스페이스</a>
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>터미널</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="agents"></span>에이전트 오케스트레이션</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span><a href="task-ai-sharing.html">← AI 할 일 공유</a></span>
+      <span><a href="appearance.html">다음 → 외관 · 폰트 · 단축키</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+</body>
+</html>

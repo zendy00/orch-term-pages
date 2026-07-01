@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Appearance · Fonts · Shortcuts — Orch term guide</title>
+<meta name="description" content="Orch term appearance settings: Korean and system coding-font picker, window opacity, settings dialog, inline shortcut reassignment, hamburger menu and About." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* This page only — settings dialog, font picker, shortcut editor, About reproduction (design-system tokens only) */
+  .set-modal { width: 660px; }
+  .set-grid { display: grid; grid-template-columns: 152px 1fr; min-height: 236px; }
+  .set-nav { display: flex; flex-direction: column; gap: 2px; padding: 8px 6px; background: var(--bg-2); border-right: 1px solid var(--line-faint); }
+  .set-navitem { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: var(--r-sm); color: var(--text-dim); font-size: var(--fs-ui); }
+  .set-navitem.active { background: var(--accent-soft); color: var(--text-strong); }
+  .set-panel { padding: 12px 14px; overflow-y: auto; }
+  .set-sect { font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: .4px; color: var(--text-faint); font-weight: 600; margin: 0 0 8px; }
+  .combo { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; background: var(--bg-2); border: 1px solid var(--line); color: var(--text-strong); padding: 6px 9px; border-radius: var(--r-sm); font-size: var(--fs-ui); cursor: default; }
+  .combo .car { color: var(--text-faint); display: inline-grid; place-items: center; }
+  .slider { position: relative; height: 6px; border-radius: 3px; background: var(--bg-0); border: 1px solid var(--line); margin: 8px 6px 4px; }
+  .slider .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--accent); }
+  .slider .knob { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); transform: translate(-50%, -50%); box-shadow: var(--shadow-pop); }
+  .slider-ends { display: flex; justify-content: space-between; font-family: var(--code-font); font-size: var(--fs-xs); color: var(--text-faint); margin: 2px 4px 0; }
+  .fp-item { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 9px; border-radius: var(--r-md); color: var(--text); font-size: var(--fs-sm); }
+  .fp-item:hover, .fp-item.active { background: var(--accent-soft); color: var(--text-strong); }
+  .fp-item .nm { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .fp-item .sys { font-size: var(--fs-xs); color: var(--text-faint); border: 1px solid var(--line); border-radius: 999px; padding: 0 6px; }
+  .fp-item .sample { color: var(--text-faint); font-size: 12px; }
+  .fp-item.active .sample { color: var(--text-dim); }
+  .sk-list { border: 1px solid var(--line-faint); border-radius: var(--r-md); overflow: hidden; }
+  .sk-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; border-bottom: 1px solid var(--line-faint); }
+  .sk-row:last-child { border-bottom: none; }
+  .sk-cmd b { color: var(--text-strong); font-weight: 600; font-size: 13px; }
+  .sk-keys { display: inline-flex; align-items: center; gap: 4px; flex: none; }
+  .sk-rec { color: var(--accent); font-size: 12px; font-family: var(--code-font); border: 1px dashed var(--accent-line); border-radius: var(--r-sm); padding: 3px 11px; background: var(--accent-soft); }
+  .sk-conflict kbd { border-color: var(--danger); color: var(--danger); }
+  .sk-warn { color: var(--danger); font-weight: 700; font-size: var(--fs-sm); }
+  .about-head { display: flex; align-items: center; gap: 13px; padding: 4px 2px 12px; }
+  .about-glyph { width: 42px; height: 42px; border-radius: var(--r-md); background: var(--accent); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 18px; flex: none; }
+  .about-meta b { color: var(--text-strong); font-size: 16px; }
+  .about-meta .v { display: block; color: var(--text-faint); font-size: 12px; font-family: var(--code-font); margin-top: 1px; }
+  .about-meta .by { display: block; color: var(--text-dim); font-size: 12px; margin-top: 2px; }
+  .lic-toggle { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border: 1px solid var(--line-faint); border-radius: var(--r-md); color: var(--text-dim); font-size: 13px; }
+  .lic-toggle .tw { color: var(--text-faint); }
+  .lic-toggle .cnt { margin-left: auto; font-family: var(--code-font); font-size: var(--fs-xs); color: var(--text-faint); }
+</style>
+</head>
+<body data-page="appearance">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>More · System</span><span class="sep">/</span><span>Appearance · Fonts · Shortcuts</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> More · System</p>
+    <h1 class="page-title">Appearance · Fonts · Shortcuts</h1>
+    <p class="lede">Tune the app's look and feel to your taste. Pick a coding font with a live preview, adjust window opacity, and reassign keyboard shortcuts — all from the <span class="i" data-icon="menu"></span> hamburger menu → <b>Settings</b>.</p>
+
+    <!-- Fonts -->
+    <h2 class="sec" id="font"><span class="hash"></span> Picking a font</h2>
+    <p>In the settings <b>Code font</b> and <b>UI font</b> pickers, choose from bundled fonts together with <b>installed system fonts</b>. Each row is <b>a sample drawn in that font</b>, so you can visually compare Korean glyph widths and how clearly <code>il1Lo0</code> are distinguished. The code font picker shows monospace only, while the UI font picker shows them all.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/appearance.png" alt="Settings modal Appearance tab — theme, skin, accent, density, corners, opacity, code font, UI font" />
+        <div class="shot-cap"><span class="n">①</span> Appearance tab — theme, accent, density, opacity, and code/UI fonts in one place. Pick fonts via search and sample glyphs.</div>
+      </div>
+    </figure>
+
+    <!-- Window opacity -->
+    <h2 class="sec" id="opacity"><span class="hash"></span> Window opacity</h2>
+    <p>A single slider makes the whole window translucent. Main surfaces like the Explorer, headers, and editor body fade together, while menus, modals, and palettes stay crisp for readability.</p>
+
+    <!-- Status bar -->
+    <h2 class="sec" id="statusbar"><span class="hash"></span> Status bar</h2>
+    <p>Use the <span class="i" data-icon="sidebar"></span> button on the <b>left</b> of the bottom status bar to toggle the Explorer; on the <b>right</b>, the file <b>encoding</b> (UTF-8, etc.) is shown when an editor tab is active.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Status bar</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="statusbar" style="border-radius:var(--r-lg);border:1px solid var(--line-faint)">
+            <button class="statusbar-reopen" title="Toggle Explorer" data-icon="sidebar"></button>
+            <span class="dim" style="font-size:11px">Explorer</span>
+            <span class="statusbar-spacer"></span>
+            <span class="statusbar-encoding">UTF-8</span>
+            <span class="statusbar-ports on" title="Mirror"><span class="statusbar-ports-dot"></span> mirror</span>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Left <span class="i dim" data-icon="sidebar"></span> toggles the Explorer · right <b>UTF-8</b> encoding (editor tabs only).</div>
+      </div>
+    </figure>
+
+    <!-- Settings dialog -->
+    <h2 class="sec" id="settings"><span class="hash"></span> Settings dialog</h2>
+    <p>Open it from the <span class="i" data-icon="menu"></span> hamburger menu → <b>Settings</b>. Move between the Appearance, Terminal, Shortcuts, and Backup groups via the left nav, and change values in the right panel.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/appearance.png" alt="Settings modal Appearance tab — left nav (fixed) + right panel (theme, skin, accent, density, opacity, fonts)" />
+        <div class="shot-cap"><span class="n">①</span> The left nav is fixed · only the right panel scrolls.</div>
+      </div>
+    </figure>
+    <p class="dim">From the <b>Backup</b> tab you can export settings to a file and import them. Import only applies settings the app recognizes, blocking dangerous values from external files.</p>
+
+    <!-- Shortcut editing -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Reassign keyboard shortcuts</h2>
+    <p>In the settings <b>Shortcuts</b> section, click a row and <b>press the keys you want</b> to reassign it. It works regardless of keyboard layout, and if it clashes with another command or a fixed shortcut it's shown in red and saving is blocked.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/set-shortcuts.png" alt="Settings — Shortcuts: per-command key binding list, recording, conflict warning" />
+        <div class="shot-cap"><span class="n">①</span> Press keys on a recording row to capture them. If it clashes with a fixed shortcut (e.g. <kbd>Ctrl</kbd>+<kbd>C</kbd> copy), it turns red and saving is disabled.</div>
+      </div>
+    </figure>
+
+    <!-- Hamburger menu + About -->
+    <h2 class="sec" id="menu"><span class="hash"></span> Hamburger menu · About</h2>
+    <p>Click the <span class="i" data-icon="menu"></span> hamburger at the top left of the titlebar to bring up <b>Settings</b> and <b>About</b>. The <span class="i" data-icon="contrast"></span> button on the right cycles the theme dark → midnight → light.</p>
+    <figure class="fig">
+      <div class="shot" style="max-width:420px">
+        <img class="shot-img" src="../assets/shots/en/menu-hamburger.png" alt="Titlebar hamburger (☰) menu — Settings, About" />
+        <div class="shot-cap"><span class="n">①</span> ☰ → <b>Settings</b> / <b>About</b> · the <span class="i dim" data-icon="contrast"></span> on the right cycles the theme.</div>
+      </div>
+    </figure>
+    <p><b>About</b> shows the brand, version, author, and the list of open-source licenses. Licenses are gathered automatically at build time and are collapsed by default — expand them when you need them.</p>
+    <figure class="fig">
+      <div class="shot" style="max-width:560px">
+        <img class="shot-img" src="../assets/shots/en/menu-about.png" alt="About modal — Orch term v0.2.2, author, Check for Updates, open-source licenses" />
+        <div class="shot-cap"><span class="n">①</span> Copy the version with <span class="i dim" data-icon="copy"></span> · expand the license list with the toggle.</div>
+      </div>
+    </figure>
+
+    <!-- Shortcuts table -->
+    <h2 class="sec" id="keys"><span class="hash"></span> Keyboard shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Command palette</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>File search palette</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close menu · dropdown</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="persistence.html"><span class="ri" data-icon="settings"></span>Storage · Backup</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="persistence.html">Next → Storage · Backup</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

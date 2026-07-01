@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Done badge · Notifications — Orch term guide</title>
+<meta name="description" content="Done (green) and approval/input-waiting (orange) badges on inactive tabs, plus the top bell (unified notification center). Click a card to jump or delete." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* notifications.html only — tab done badge · unified notification center dropdown reproduction (design-system tokens only) */
+
+  /* Tab done/attention badge — real app: tab-manager.ts blinks ICON_BELL (filled) as done=green / attention=orange */
+  .tab-badge { width: 14px; height: 14px; flex: none; display: inline-grid; place-items: center; }
+  .tab-badge svg { width: 13px; height: 13px; }
+  .tab-badge.done { color: var(--success); }
+  .tab-badge.att  { color: var(--attention); }
+  @keyframes nbBlink { 50% { opacity: .28; } }
+  .tab-badge.blink { animation: nbBlink 1.1s steps(1, end) infinite; }
+  @media (prefers-reduced-motion: reduce) { .tab-badge.blink { animation: none; } }
+
+  /* Unified notification center dropdown (src/notifications.ts · NotificationBell) */
+  .nc-bell { position: relative; }
+  .nc-count { position: absolute; top: 4px; right: 6px; min-width: 14px; height: 14px; padding: 0 3px;
+    border-radius: 999px; background: var(--danger); color: #fff; font-family: var(--code-font);
+    font-size: 9px; font-weight: 700; line-height: 14px; text-align: center; }
+  .nc { position: absolute; top: 33px; right: 6px; z-index: 9; width: 302px; background: var(--bg-3);
+    border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow-pop); overflow: hidden; }
+  .nc-head { display: flex; align-items: center; gap: 8px; padding: 8px 11px; border-bottom: 1px solid var(--line-faint); }
+  .nc-head .ttl { font-size: var(--fs-md); color: var(--text-strong); font-weight: 600; }
+  .nc-head .cnt { font-family: var(--code-font); font-size: 10.5px; color: var(--text-faint); }
+  .nc-head .clr { margin-left: auto; font-size: 11px; color: var(--text-faint); background: none; border: none;
+    cursor: default; padding: 2px 6px; border-radius: var(--r-sm); }
+  .nc-head .clr:hover { color: var(--text); background: var(--bg-hover); }
+  .nc-grp { padding: 7px 11px 3px; font-family: var(--code-font); font-size: 10px; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--text-faint); }
+  .nc-grp .num { color: var(--accent); }
+  .nc-card { position: relative; display: flex; gap: 9px; align-items: flex-start; padding: 8px 9px 9px 14px;
+    border-bottom: 1px solid var(--line-faint); cursor: default; }
+  .nc-card:last-child { border-bottom: none; }
+  .nc-card:hover { background: var(--bg-hover); }
+  .nc-card::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 0 2px 2px 0; }
+  .nc-card.done::before { background: var(--success); }
+  .nc-card.att::before  { background: var(--attention); }
+  .nc-card .body { min-width: 0; flex: 1; }
+  .nc-card .nm { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-strong); font-weight: 600; }
+  .nc-card .nm .bi { display: inline-grid; place-items: center; width: 12px; height: 12px; flex: none; }
+  .nc-card .nm .bi.done { color: var(--success); }
+  .nc-card .nm .bi.att  { color: var(--attention); }
+  .nc-card .msg { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; }
+  .nc-card .msg .q { color: var(--text-faint); }
+  .nc-card .msg.ph { color: var(--text-faint); font-style: italic; }
+  .nc-card .x { flex: none; width: 18px; height: 18px; display: grid; place-items: center; border: none;
+    background: none; color: var(--text-faint); border-radius: var(--r-sm); cursor: default; }
+  .nc-card .x:hover { color: var(--text); background: var(--bg-hover); }
+</style>
+</head>
+<body data-page="notifications">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>More · System</span><span class="sep">/</span><span>Done badge · Notifications</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> More · System · Done badge · Notifications</p>
+    <h1 class="page-title">Done badge · Notifications</h1>
+    <p class="lede">When an AI agent running in another tab finishes its work, <b>while that tab isn't visible</b> the tab blinks a colored dingbat to let you know, and the top <span class="i" data-icon="bell"></span> <b>bell</b> gathers the done and attention signals from every Space and tab in one place.</p>
+
+    <!-- Done badge -->
+    <h2 class="sec" id="badge"><span class="hash"></span> Done badge — inactive tabs</h2>
+    <p>When you work across many tabs, it's easy to miss when an agent running in another tab (<code>claude</code>·<code>codex</code>·<code>gemini</code>·<code>antigravity</code>) finished. When a <b>terminal tab you aren't looking at (inactive)</b> receives a done signal, it blinks a colored dingbat next to the tab icon — <span style="color:var(--success)">green</span> means the work is done, <span style="color:var(--attention)">orange</span> means it's waiting for approval or input. As soon as you look at that tab again, the badge disappears.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — tab badges</span></div>
+        <div class="shot-stage" style="padding:18px">
+          <div class="pane active-pane" style="height:264px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude · build</span><span class="tab-badge done blink" data-icon="attention" title="Work done"></span></div>
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude · refactor</span><span class="tab-badge att blink" data-icon="attention" title="Waiting for approval/input"></span></div>
+                <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="Split down" data-icon="split-horizontal"></button>
+                <button class="pane-act" title="Split right" data-icon="split-vertical"></button>
+                <span class="pane-act-sep"></span>
+                <button class="pane-act" title="Close" data-icon="close"></button>
+              </div>
+            </div>
+            <div class="pane-content">
+              <div class="term-pane-terminal">
+                <div class="term"><span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="d"># the claude in the next tab just finished — the badge shows only on inactive tabs</span>
+<span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="cursor"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Badge on <b>inactive tabs only</b>: <span class="i" data-icon="attention" style="color:var(--success)"></span> green=done · <span class="i" data-icon="attention" style="color:var(--attention)"></span> orange=waiting for approval/input. <span class="n">②</span> The active tab you're looking at (<code>pwsh</code>) has no badge.</div>
+      </div>
+    </figure>
+
+    <p>The same signal also blinks as a small bell next to the <b>Space chip</b> the tab belongs to, so even work that finished in another Space is shown together.</p>
+
+    <!-- Per-agent support -->
+    <h2 class="sec" id="signals"><span class="hash"></span> Per-agent support</h2>
+    <p>An agent has two ways to announce completion — a simple <b>terminal bell</b> that almost any shell can send (it also rings on autocomplete and errors, so it has false positives, and since it can't tell done from approval it's always treated as <span style="color:var(--success)">green</span>), and a <b>precise signal</b> that distinguishes done from approval by color and even carries the last prompt and response. The precise signal currently comes from running <code>claude</code> in its interactive screen.</p>
+    <p class="dim">Measured by running each CLI in a real dev-app terminal (2026-06, Windows).</p>
+    <table class="kbds">
+      <thead><tr><th>Agent</th><th>Precise color badge</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>claude</code></td><td><b style="color:var(--success)">✓ Works</b></td><td>When run in the interactive screen, it distinguishes done from approval by color and preserves the content. Requires the claude-code-warp plugin installed and enabled.</td></tr>
+        <tr><td><code>gemini</code></td><td><b style="color:var(--danger)">✗</b></td><td>Sends only a bell → just a done badge with no color distinction.</td></tr>
+        <tr><td><code>antigravity</code></td><td><b style="color:var(--danger)">✗</b></td><td>Currently sends no badge signal.</td></tr>
+        <tr><td><code>codex</code></td><td><b style="color:var(--attention)">Unverified</b></td><td>The bell works.</td></tr>
+      </tbody>
+    </table>
+    <p class="dim">Other agents, too, if you enable the <b>terminal bell on completion</b> option in each CLI, will get only a <span style="color:var(--success)">done badge</span> via the bell fallback (no approval distinction, false positives possible).</p>
+
+    <!-- Unified notification center -->
+    <h2 class="sec" id="center"><span class="hash"></span> Unified notification center — the top bell</h2>
+    <p>The <span class="i" data-icon="bell"></span> <b>bell</b> in the top titlebar gathers the done and attention signals from every Space and tab in one place (<b>main window only</b>). By the same rule as the tab badges, it collects only <b>done</b> and <b>waiting for approval/input</b>, and a red number badge shows the total count.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Top bell — notification dropdown</span><span class="badge danger">3</span></div>
+        <div class="shot-stage" style="padding:0">
+          <div class="app" style="height:340px">
+            <div class="titlebar">
+              <div class="tb-brand"><span class="tb-brand-icon">O</span><span class="tb-wordmark">Orch <b>term</b></span></div>
+              <div class="titlebar-spaces">
+                <div class="space-chip active"><span class="space-chip-num">1</span> Work</div>
+                <div class="space-chip"><span class="space-chip-num">2</span> Review</div>
+                <button class="space-chip-add">＋</button>
+              </div>
+              <div class="titlebar-title"></div>
+              <div class="titlebar-actions">
+                <button class="titlebar-btn nc-bell"><span data-icon="bell"></span><span class="nc-count">3</span></button>
+                <button class="titlebar-btn"><span data-icon="contrast"></span></button>
+              </div>
+              <div class="titlebar-controls">
+                <button class="titlebar-btn"><span data-icon="window-minimize"></span></button>
+                <button class="titlebar-btn"><span data-icon="window-maximize"></span></button>
+                <button class="titlebar-btn titlebar-close"><span data-icon="window-close"></span></button>
+              </div>
+
+              <div class="nc">
+                <div class="nc-head"><span class="ttl">Notifications</span><span class="cnt">3 items</span><button class="clr">Clear all</button></div>
+
+                <div class="nc-grp">Work <span class="num">· Space 1</span></div>
+                <div class="nc-card att">
+                  <div class="body">
+                    <div class="nm"><span class="bi att" data-icon="attention"></span> claude · refactor</div>
+                    <div class="msg"><span class="q">▸</span> Permission request — approve file write?</div>
+                  </div>
+                  <button class="x" data-icon="notification-close" title="Delete"></button>
+                </div>
+                <div class="nc-card done">
+                  <div class="body">
+                    <div class="nm"><span class="bi done" data-icon="attention"></span> claude · build</div>
+                    <div class="msg"><span class="q">◂</span> 12 tests passed · 0 lint</div>
+                  </div>
+                  <button class="x" data-icon="notification-close" title="Delete"></button>
+                </div>
+
+                <div class="nc-grp">Review <span class="num">· Space 2</span></div>
+                <div class="nc-card done">
+                  <div class="body">
+                    <div class="nm"><span class="bi done" data-icon="attention"></span> gemini · docs</div>
+                    <div class="msg ph">Agent done</div>
+                  </div>
+                  <button class="x" data-icon="notification-close" title="Delete"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="body">
+              <div class="main-col">
+                <div class="pane active-pane">
+                  <div class="pane-tabbar">
+                    <div class="pane-tabs">
+                      <div class="tab active"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">pwsh</span></div>
+                    </div>
+                    <div class="pane-actions"><button class="pane-act" data-icon="split-vertical"></button><button class="pane-act" data-icon="close"></button></div>
+                  </div>
+                  <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="d"># open the bell and the done/attention from every Space and tab is in one list</span>
+<span class="a">PS</span> <span class="c">~</span><span class="d">&gt;</span> <span class="cursor"></span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> <span class="i dim" data-icon="bell"></span> Bell + <b>red count</b> (total) → click for the dropdown. <span class="n">②</span> The card's <b>left color stripe</b> = <span style="color:var(--success)">done</span>/<span style="color:var(--attention)">attention</span>, grouped by Space. <span class="n">③</span> The <span class="i dim" data-icon="notification-close"></span> X deletes just that card · header <b>Clear all</b>.</div>
+      </div>
+    </figure>
+
+    <p class="dim">Notifications are kept in memory only, so they clear when the app restarts, and they stack up to 100. Embedded popup windows have no bell; the main window aggregates everything.</p>
+
+    <!-- Card contents -->
+    <h2 class="sec" id="cards"><span class="hash"></span> Card contents</h2>
+    <p>The card's last prompt and response (~20 chars each) are filled in only for agents that send the content along, like <code>claude</code>. When only a bell rang, there's no content, so it shows the <b>Agent done</b> placeholder.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Card contents — claude vs bell</span></div>
+        <div class="shot-stage" style="padding:20px;display:grid;place-items:center">
+          <div class="nc" style="position:static;width:302px;box-shadow:var(--shadow-pop)">
+            <div class="nc-card done">
+              <div class="body">
+                <div class="nm"><span class="bi done" data-icon="attention"></span> claude · build</div>
+                <div class="msg"><span class="q">◂</span> 12 tests passed · 0 lint</div>
+              </div>
+              <button class="x" data-icon="notification-close"></button>
+            </div>
+            <div class="nc-card done">
+              <div class="body">
+                <div class="nm"><span class="bi done" data-icon="attention"></span> gemini · docs</div>
+                <div class="msg ph">Agent done</div>
+              </div>
+              <button class="x" data-icon="notification-close"></button>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> claude: preserves the last prompt and response as-is. <span class="n">②</span> When only a bell rang: no content, so the <b>Agent done</b> placeholder (italic).</div>
+      </div>
+    </figure>
+
+    <!-- Click a card to jump -->
+    <h2 class="sec" id="activate"><span class="hash"></span> Click a card → jump · delete</h2>
+    <p>Clicking the card body <b>switches to that Space</b>, <b>activates that tab</b>, then clears the card. The <b>tab name</b> at the top of the card tells you which tab within the same Space.</p>
+    <table class="kbds">
+      <thead><tr><th>Action</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Click the card body</td><td>Switch to that Space + activate the tab → delete the card</td></tr>
+        <tr><td>Card <span class="i dim" data-icon="notification-close"></span> X</td><td>Delete just that card without jumping</td></tr>
+        <tr><td>Header <b>Clear all</b></td><td>Empty all cards at once</td></tr>
+        <tr><td>Red count badge</td><td>Current total card count</td></tr>
+      </tbody>
+    </table>
+    <p>Conversely, if you <b>look at the tab directly</b> without going through the card, that tab's badge and its bell card disappear together — you've already seen it, so there's no reason for the notification to linger. Flipping quickly through tabs doesn't close an open dropdown each time.</p>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="terminal.html"><span class="ri" data-icon="terminal"></span>Terminal</a>
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · Panes</a>
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="external-link"></span>Agent orchestration</a>
+        <a class="relchip" href="gateway.html"><span class="ri" data-icon="audit-log"></span>AI gateway</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="gateway.html">Next → AI gateway</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

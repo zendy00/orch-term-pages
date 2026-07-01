@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Terminal — Orch term Guide</title>
+<meta name="description" content="How to use the Orch term terminal: open a new terminal, copy/paste, newlines, scrollback, and shell auto-close." />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+</head>
+<body data-page="terminal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Terminal</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Terminal</p>
+    <h1 class="page-title">Terminal</h1>
+    <p class="lede">The foundation of Orch term. It renders real shell sessions fast and handles Korean/English input, emoji, and newlines smoothly.</p>
+
+    <!-- New terminal -->
+    <h2 class="sec" id="open"><span class="hash"></span> Open a new terminal</h2>
+    <p>Open one with the new-tab <span class="i" data-icon="add"></span> button or the actions in the top-right of a pane. A new terminal starts at the <b>active project root</b> (per the Explorer). Pressing ＋ opens a picker dropdown that auto-detects installed shells.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">New terminal — pick a shell</span></div>
+        <div class="shot-stage" style="padding:26px;display:grid;place-items:center;min-height:230px">
+          <div class="shell-dropdown" style="position:relative;box-shadow:var(--shadow-pop)">
+            <div class="shell-menu-title">New terminal</div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#4d96ff">⌷</span> PowerShell</button><button class="shell-default" disabled>Default</button></div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic" style="color:#f1502f">⎇</span> Git Bash</button><button class="shell-default">Set default</button></div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">▮</span> cmd</button><button class="shell-default">Set default</button></div>
+            <div class="shell-item"><button class="shell-open"><span class="shell-menu-ic">🐧</span> Ubuntu (WSL)</button><button class="shell-default">Set default</button></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> The list of installed shells — pick one to open, and you can set it as the <b>default</b>.</div>
+      </div>
+    </figure>
+    <p>The chosen shell opens as a new tab in the active pane. <b>Even the first key you press right after startup is never lost</b>.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/terminal.png" alt="Terminal pane — Git Bash session (MINGW64, active project root)" />
+        <div class="shot-cap"><span class="n">②</span> Top-right pane actions: <span class="i dim" data-icon="split-horizontal"></span> split down · <span class="i dim" data-icon="split-vertical"></span> split right · <span class="i dim" data-icon="maximize-pane"></span> maximize · <span class="i dim" data-icon="close"></span> close.</div>
+      </div>
+    </figure>
+
+    <!-- Copy/paste -->
+    <h2 class="sec" id="clipboard"><span class="hash"></span> Copy · paste</h2>
+    <p><kbd>Ctrl</kbd>+<kbd>C</kbd> <b>copies when there's a selection</b>, otherwise it acts as an interrupt, and <kbd>Ctrl</kbd>+<kbd>V</kbd> pastes — working regardless of the Korean/English input state. Windows clipboard history (<kbd>Win</kbd>+<kbd>V</kbd>) is supported too, and <b>pasting an image attaches it as a file</b> so claude and others read it directly.</p>
+
+    <!-- Newlines -->
+    <h2 class="sec" id="newline"><span class="hash"></span> Newlines (without submitting)</h2>
+    <p>When entering <b>multiple lines</b> into an AI CLI (Claude Code, etc.), use <kbd>Shift</kbd>+<kbd>Enter</kbd> or <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to send a newline instead of submitting. Characters and their order are preserved even mid-composition in Korean input.</p>
+
+    <!-- Scrollback -->
+    <h2 class="sec" id="scrollback"><span class="hash"></span> Scrollback · jump to bottom</h2>
+    <p>The number of history lines the terminal keeps (scrollback) defaults to <b>1,000 lines</b>; adjust it to <b>100–50,000 lines</b> under Settings → Terminal → Scrollback, applied instantly. When you scroll up, a <span class="i" data-icon="scroll-down"></span> <b>jump to bottom</b> button appears in the bottom-right to jump to the latest output.</p>
+
+    <!-- Auto-close -->
+    <h2 class="sec" id="exit"><span class="hash"></span> Shell exit · auto-close</h2>
+    <p>When the shell ends (<code>exit</code>), the tab closes automatically. If it's a <b>single pane with a single tab</b>, it's replaced with a new terminal instead of an empty screen. Closing a tab cleans up the entire process tree beneath it, leaving no zombie processes.</p>
+
+    <!-- Keyboard shortcuts -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>Copy if selected, otherwise interrupt</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Paste (including Win+V)</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Newline (no submit)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>Newline (no submit)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="tabs-panes.html"><span class="ri" data-icon="split-vertical"></span>Tabs · Panes</a>
+        <a class="relchip" href="explorer.html"><span class="ri" data-icon="folder"></span>Explorer</a>
+        <a class="relchip" href="appearance.html"><span class="ri" data-icon="settings"></span>Appearance · Fonts</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="ssh"></span>SSH · SFTP</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="tabs-panes.html">Next → Tabs · Panes</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+</body>
+</html>

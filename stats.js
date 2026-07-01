@@ -18,7 +18,9 @@ export function pickLatest(releases) {
 
 // 실제 사용자 다운로드 통계에서 제외할 에셋 이름. latest.json은 Tauri updater 매니페스트라
 // 앱이 업데이트를 확인할 때마다 받아가 카운트를 부풀린다 — 설치 다운로드가 아니라 폴링 노이즈다.
-const NON_DOWNLOAD_ASSETS = new Set(['latest.json']);
+// install.sh는 macOS 한 줄 설치(curl … | sh)의 부트스트랩 스크립트라, 받은 뒤 다시 실제
+// 바이너리(.dmg/.app)를 내려받는다 — 둘 다 세면 한 번 설치가 이중 집계된다.
+const NON_DOWNLOAD_ASSETS = new Set(['latest.json', 'install.sh']);
 
 /** 이 에셋을 다운로드 통계로 집계하는가(업데이터 매니페스트는 false). */
 export function isCounted(asset) {
