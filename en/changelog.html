@@ -74,10 +74,42 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v03x"><span class="hash"></span> 0.3.0 — i18n · Session list · Panel tiling</h2>
+    <h2 class="sec" id="v04x"><span class="hash"></span> 0.4.1 — Sidebar panel docking</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.4.1</span><span class="d">2026-07-05</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Sidebar panel docking — drag a sidebar icon (Explorer · Search · Git · To-dos · Sessions) out into a work pane as a tab; close the tab to send it back to the sidebar. Click a floated icon to jump to its tab · remembered per Space and restored on restart · each tab shows its mode icon</li>
+        <li><span class="cl-tag fix">fix</span>The split-drop preview overlay now matches the actual split area (half the pane) when dropping on an edge</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v03x"><span class="hash"></span> 0.3.x — i18n · Session list · Panel tiling</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.3.2</span><span class="d">2026-07-04</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Right-click empty explorer space to open the project folder in Finder/Explorer</li>
+        <li><span class="cl-tag feat">feat</span>File path tooltip on editor-tab hover + "Copy absolute path" in the context menu</li>
+        <li><span class="cl-tag feat">feat</span>Confirmation prompt before deleting a to-do (prevents accidental deletes)</li>
+        <li><span class="cl-tag feat">feat</span>"What's new" popup now shows in the app language (Korean/English)</li>
+        <li><span class="cl-tag fix">fix</span>Large backend hardening — fixed an unrecoverable whole-app freeze during input, a risk of losing global config files when enabling the mirror, and blocked several command-injection and crash paths</li>
+        <li><span class="cl-tag fix">fix</span>Fixed the Settings font dropdown opening off-screen in small windows</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.3.1</span><span class="d">2026-07-01</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Skip permission prompts on session resume — the header checkbox resumes conversations without per-agent permission checks (remembered)</li>
+        <li><span class="cl-tag feat">feat</span>Korean/English localization · open images·SVG·PDF in the in-app browser · session list git branch·icons·load more</li>
+        <li><span class="cl-tag fix">fix</span>Fixed the permission-skip flag being dropped when resuming an agy worker · macOS font-list hang · several session resume/refresh bugs</li>
+        <li><span class="cl-tag perf">perf</span>Faster session-list scanning (queries only the active project, in the background)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span>Localization (Korean · English) — auto-detects the OS language on first run · switch language in Settings (applied on restart) · English docs site</li>
         <li><span class="cl-tag feat">feat</span>Session list (resume) — the sidebar Sessions mode (Ctrl+Shift+S) gathers claude·codex·agy conversations by date and resumes them in one click</li>

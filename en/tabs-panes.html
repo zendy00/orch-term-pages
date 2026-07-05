@@ -173,6 +173,41 @@
 
     <p class="dim">Both actions are also available from the <b>command palette</b> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>) as “Tile tabs into grid” · “Merge all panes into tabs.” They have no default shortcut; you can bind your own in Settings.</p>
 
+    <!-- Panel docking -->
+    <h2 class="sec" id="dock"><span class="hash"></span> Panel docking — send sidebar panels to the work area</h2>
+    <p>The five icons at the bottom of the left sidebar (<span class="i" data-icon="file"></span> Explorer · <span class="i" data-icon="search"></span> Search · <span class="i" data-icon="git"></span> Git · <span class="i" data-icon="tasks"></span> To-dos · <span class="i" data-icon="sessions"></span> Sessions) aren't fixed to the sidebar. <b>Drag one out into the work area</b> and it opens as a <b>tab</b>, just like a terminal or editor. Drop it on a pane <b>edge</b> to <b>split</b> in that direction, or on the <b>tab bar</b> to <b>merge</b> it into that pane. Each tab carries its mode icon.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git panel as a tab in the work area</span></div>
+        <div class="shot-stage" style="padding:18px;display:grid;place-items:center;min-height:120px">
+          <div class="pane active-pane" style="width:440px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span></div>
+                <div class="tab active"><span class="tab-icon" data-icon="git"></span><span class="tab-label">Git</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="New terminal" data-icon="add"></button>
+                <span class="pane-act-sep"></span>
+                <button class="pane-act" title="Split right" data-icon="split-vertical"></button>
+                <button class="pane-act" title="Maximize" data-icon="maximize-pane"></button>
+              </div>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="d">Drag the sidebar Git icon into this pane → Git opens as a tab (with a <span class="i" data-icon="git" style="vertical-align:-2px"></span> icon in front).</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Drag a sidebar icon out into a pane and it opens as a tab — with its <b>mode icon in front of the label</b>.</div>
+      </div>
+    </figure>
+
+    <p><b>Close it to send it back.</b> Click <span class="i" data-icon="close"></span> on a floated panel tab and the panel <b>returns to the sidebar</b> — its content is kept. You can pull it back out any time by clicking its sidebar icon again.</p>
+
+    <p><b>Click the icon = jump to its tab.</b> If a panel is already floated, clicking its icon in the sidebar <b>focuses the floated tab</b> instead of re-opening it in the sidebar (floated icons get a small dot marker).</p>
+
+    <p class="dim"><b>Independent per Space · restored on restart.</b> Where each panel lives is remembered per <a href="spaces.html">Space</a> — you can float Git into a pane in one Space and keep it in the sidebar in another. It's all restored when you reopen the app.</p>
+
     <!-- Maximize -->
     <h2 class="sec" id="maximize"><span class="hash"></span> Pane maximize (Shift+Esc)</h2>
     <p>Enlarge the active pane like a glass pane floating above the workspace. Toggle it with <kbd>Shift</kbd>+<kbd>Esc</kbd> (press again on the same pane to restore) or with the toggle button in the pane header. While maximized, the button changes to the <span class="i" data-icon="restore-pane"></span> restore icon. The maximized pane rises with a frosted-glass (blur) effect, and the workspace behind it is dimmed.</p>

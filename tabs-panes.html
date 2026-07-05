@@ -173,6 +173,41 @@
 
     <p class="dim">두 기능 모두 <b>명령 팔레트</b>(<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)에서 “바둑판 배열” · “전체 병합”으로도 실행할 수 있습니다. 기본 단축키는 없으며, 설정에서 원하는 키를 지정할 수 있습니다.</p>
 
+    <!-- 패널 도킹 -->
+    <h2 class="sec" id="dock"><span class="hash"></span> 패널 도킹 — 사이드바 패널을 작업 영역으로</h2>
+    <p>왼쪽 사이드바 하단의 다섯 아이콘(<span class="i" data-icon="file"></span> 파일탐색기 · <span class="i" data-icon="search"></span> 검색 · <span class="i" data-icon="git"></span> Git · <span class="i" data-icon="tasks"></span> 할 일 · <span class="i" data-icon="sessions"></span> 세션)은 사이드바에 고정된 게 아닙니다. <b>드래그해서 작업 영역(패널)으로 떼어내</b> 터미널·에디터와 똑같은 <b>탭</b>으로 띄울 수 있습니다. 패널 <b>가장자리</b>에 놓으면 그 방향으로 <b>분할</b>되고, <b>탭바</b>에 놓으면 그 패널에 <b>합쳐집니다.</b> 탭 앞에는 해당 모드 아이콘이 함께 붙습니다.</p>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Git 패널이 작업 영역에 탭으로</span></div>
+        <div class="shot-stage" style="padding:18px;display:grid;place-items:center;min-height:120px">
+          <div class="pane active-pane" style="width:440px">
+            <div class="pane-tabbar">
+              <div class="pane-tabs">
+                <div class="tab"><span class="tab-icon" data-icon="terminal"></span><span class="tab-label">claude</span></div>
+                <div class="tab active"><span class="tab-icon" data-icon="git"></span><span class="tab-label">Git</span></div>
+              </div>
+              <div class="pane-actions">
+                <button class="pane-act" title="새 터미널" data-icon="add"></button>
+                <span class="pane-act-sep"></span>
+                <button class="pane-act" title="오른쪽 분할" data-icon="split-vertical"></button>
+                <button class="pane-act" title="최대화" data-icon="maximize-pane"></button>
+              </div>
+            </div>
+            <div class="pane-content"><div class="term-pane-terminal"><div class="term"><span class="d">사이드바 Git 아이콘을 이 패널로 드래그 → Git이 탭으로 뜹니다(탭 앞 <span class="i" data-icon="git" style="vertical-align:-2px"></span> 아이콘).</span>
+<span class="g">❯</span> <span class="cursor"></span></div></div></div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> 사이드바 아이콘을 드래그해 패널로 떼어내면, 그 패널이 탭으로 뜨고 <b>탭 앞에 모드 아이콘</b>이 붙습니다.</div>
+      </div>
+    </figure>
+
+    <p><b>닫으면 되돌아옵니다.</b> 떠 있는 패널 탭의 <span class="i" data-icon="close"></span>를 누르면 그 패널은 <b>다시 사이드바로 복귀</b>합니다 — 내용은 그대로 유지됩니다. 사이드바 아이콘을 다시 눌러 언제든 도로 꺼낼 수도 있습니다.</p>
+
+    <p><b>아이콘 클릭 = 그 탭으로 이동.</b> 어떤 패널이 이미 떠 있으면, 사이드바 아래 그 아이콘을 누를 때 사이드바에 다시 펼치는 대신 <b>떠 있는 탭으로 포커스가 이동</b>합니다(떠 있는 아이콘엔 작은 점 표식이 붙습니다).</p>
+
+    <p class="dim"><b>Space별로 독립 · 재시작에도 유지.</b> 어느 패널을 어디에 뒀는지는 <a href="spaces.html">Space</a>마다 따로 기억됩니다 — 한 Space에선 Git을 패널로 띄우고 다른 Space에선 사이드바에 두는 식으로요. 앱을 다시 켜도 그대로 복원됩니다.</p>
+
     <!-- 최대화 -->
     <h2 class="sec" id="maximize"><span class="hash"></span> 패널 최대화 (Shift+Esc)</h2>
     <p>활성 패널을 워크스페이스 위에 띄운 유리창처럼 확대합니다. <kbd>Shift</kbd>+<kbd>Esc</kbd>로 토글하거나(같은 패널에서 다시 누르면 복원) 패널 헤더의 토글 버튼으로도 됩니다. 최대화 중에는 버튼이 <span class="i" data-icon="restore-pane"></span> 복원 아이콘으로 바뀝니다. 최대화된 패널은 frosted glass(흐림) 효과로 떠오르고, 뒤 워크스페이스는 어둡게 가려집니다.</p>

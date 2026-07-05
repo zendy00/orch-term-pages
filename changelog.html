@@ -74,10 +74,42 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v03x"><span class="hash"></span> 0.3.0 — 다국어 · 세션 목록 · 패널 타일링</h2>
+    <h2 class="sec" id="v04x"><span class="hash"></span> 0.4.1 — 사이드바 패널 도킹</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.4.1</span><span class="d">2026-07-05</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>사이드바 패널 도킹 — 사이드바 하단 아이콘(파일탐색기·검색·Git·할 일·세션)을 드래그해 작업 패널로 떼어내 탭으로 띄우고, 탭을 닫으면 다시 사이드바로 복귀. 떠 있는 아이콘 클릭=그 탭으로 이동 · 배치는 Space별 기억·재시작 유지 · 각 탭에 모드 아이콘 표시</li>
+        <li><span class="cl-tag fix">fix</span>패널을 상·하·좌·우로 분할 드롭할 때 미리보기 오버레이가 실제 분할 영역(절반)과 맞도록 수정</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v03x"><span class="hash"></span> 0.3.x — 다국어 · 세션 목록 · 패널 타일링</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.3.2</span><span class="d">2026-07-04</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>탐색기 빈 공간 우클릭 → 프로젝트 폴더를 파인더/탐색기에서 바로 열기</li>
+        <li><span class="cl-tag feat">feat</span>편집기 탭에 파일 전체 경로 툴팁 + 우클릭 "절대 경로 복사"</li>
+        <li><span class="cl-tag feat">feat</span>할 일 삭제 시 확인창(실수 삭제 방지)</li>
+        <li><span class="cl-tag feat">feat</span>"새로운 기능" 팝업이 앱 언어(한/영)에 맞춰 표시</li>
+        <li><span class="cl-tag fix">fix</span>대규모 백엔드 안정화 — 입력 중 앱 전체가 얼던 문제, 미러 켤 때 전역 설정 파일 손실 위험, 커맨드 인젝션·크래시 다수 차단</li>
+        <li><span class="cl-tag fix">fix</span>설정의 폰트 드롭다운이 작은 창에서 화면 밖으로 열리던 문제</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.3.1</span><span class="d">2026-07-01</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>세션 재개 권한 건너뛰기 — 세션 목록 헤더 체크박스로 권한 확인 없이 대화 재개(선택 유지)</li>
+        <li><span class="cl-tag feat">feat</span>한국어/영어 다국어 · 이미지·SVG·PDF 인앱 열람 · 세션 목록 git 브랜치·아이콘·더 보기</li>
+        <li><span class="cl-tag fix">fix</span>agy 워커 재개 시 권한 건너뛰기 플래그 누락 · macOS 폰트 목록 hang · 세션 재개/갱신 버그 다수</li>
+        <li><span class="cl-tag perf">perf</span>세션 목록 스캔 속도 개선(활성 프로젝트만 조회·백그라운드)</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span>다국어(한국어·영어) — 첫 실행 시 OS 언어 자동 감지 · 설정에서 언어 전환(재시작 적용) · 문서 사이트 영어판</li>
         <li><span class="cl-tag feat">feat</span>세션 목록 (이어가기) — 사이드바 세션 모드(Ctrl+Shift+S)로 claude·codex·agy 대화를 날짜별로 모아 보고 클릭 한 번으로 재개</li>
