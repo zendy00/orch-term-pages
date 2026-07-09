@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>소스 컨트롤 (Git) — Orch term 가이드</title>
-<meta name="description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+인라인 diff, GitLens식 blame(Ctrl+Shift+B)." />
+<meta name="description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+좌우분할 diff, GitLens식 blame(Ctrl+Shift+B)." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/source-control.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/source-control.html" />
@@ -68,14 +68,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="소스 컨트롤 (Git) — Orch term 가이드" />
-<meta property="og:description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+인라인 diff, GitLens식 blame(Ctrl+Shift+B)." />
+<meta property="og:description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+좌우분할 diff, GitLens식 blame(Ctrl+Shift+B)." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/source-control.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="소스 컨트롤 (Git) — Orch term 가이드" />
-<meta name="twitter:description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+인라인 diff, GitLens식 blame(Ctrl+Shift+B)." />
+<meta name="twitter:description" content="Orch term Git 패널 사용법: Source Control(stage/commit), 로그+브랜치 그래프, push/pull, 커밋 세부+좌우분할 diff, GitLens식 blame(Ctrl+Shift+B)." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="source-control">
@@ -104,7 +104,7 @@
 
     <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 소스 컨트롤</p>
     <h1 class="page-title">소스 컨트롤 (Git)</h1>
-    <p class="lede">사이드바 세 번째 모드 <b>Git</b>. 변경 파일 스테이징·커밋·브랜치 그래프·커밋 세부 인라인 diff·<b>GitLens식 blame</b>까지 한 패널에서 다룹니다.</p>
+    <p class="lede">사이드바 세 번째 모드 <b>Git</b>. 변경 파일 스테이징·커밋·브랜치 그래프·커밋 세부·<b>좌우분할 diff</b>·<b>GitLens식 blame</b>·워크트리 정리까지 한 패널에서 다룹니다.</p>
 
     <!-- Source Control -->
     <h2 class="sec" id="stage"><span class="hash"></span> Source Control — stage · commit</h2>
@@ -127,12 +127,12 @@
     </figure>
 
     <!-- 커밋 세부 + diff -->
-    <h2 class="sec" id="detail"><span class="hash"></span> 커밋 세부 + 인라인 diff</h2>
-    <p>커밋을 클릭하면 메시지·작성자·시각·변경 파일이 열리고, 파일을 클릭하면 패널 안에 읽기 전용 diff가 인라인으로 펼쳐집니다.</p>
+    <h2 class="sec" id="detail"><span class="hash"></span> 커밋 세부 + 좌우분할 diff</h2>
+    <p>커밋을 클릭하면 메시지·작성자·시각·변경 파일이 열립니다. 변경 파일을 클릭하면 메인 패널에 <b>좌우분할(전·후) 읽기 전용 diff 탭</b>이 열립니다 — 신규(untracked) 파일도 포함하고, 같은 파일은 하나의 탭을 재사용합니다.</p>
     <figure class="fig">
       <div class="shot">
         <img class="shot-img" src="./assets/shots/git-diff.png" alt="커밋 세부 — 커밋 메시지·작성자·변경 파일 목록 (Changes 8개 + History + 커밋 세부 패널)" />
-        <div class="shot-cap"><span class="n">①</span> 커밋을 클릭하면 메시지·작성자·변경 파일이 패널 하단에 열립니다. <span class="n">②</span> 변경 파일을 클릭하면 추가(초록)·삭제(빨강) diff가 인라인으로 펼쳐집니다.</div>
+        <div class="shot-cap"><span class="n">①</span> 커밋을 클릭하면 메시지·작성자·변경 파일이 패널 하단에 열립니다. <span class="n">②</span> 변경 파일을 클릭하면 메인 패널에 좌우분할 diff 탭이 열립니다(추가=초록·삭제=빨강).</div>
       </div>
     </figure>
 
@@ -145,6 +145,10 @@
         <div class="shot-cap"><span class="n">①</span> 거터의 "작성자 · 상대시각" — 클릭하면 그 커밋 세부로. <span class="n">②</span> <span style="color:var(--accent)">미커밋</span> 줄은 아직 커밋 안 된 변경입니다.</div>
       </div>
     </figure>
+
+    <!-- 워크트리 -->
+    <h2 class="sec" id="worktree"><span class="hash"></span> 워크트리 목록 · 정리</h2>
+    <p>같은 저장소에 <b>git worktree</b>가 2개 이상이면 Git 패널에 워크트리 목록이 나타납니다. 각 워크트리의 이름·상대 경로·현재 브랜치를 보여주고, 다 쓴 워크트리는 여기서 바로 <b>정리(제거)</b>할 수 있습니다.</p>
 
     <!-- 사이드바 -->
     <h2 class="sec" id="sidebar-layout"><span class="hash"></span> 사이드바 레이아웃 · 최대화</h2>

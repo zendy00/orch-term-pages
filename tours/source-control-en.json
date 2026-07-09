@@ -79,12 +79,12 @@
     {
       "id": "detail",
       "name": "Commit detail · diff",
-      "description": "Click a commit to see its message, author, and changed files; click a file and a read-only diff expands inline.",
+      "description": "Click a commit to see its message, author, and changed files; click a changed file to open a side-by-side read-only diff tab in the main panel.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#detail" },
-        "layer2": { "kind": "text-parent", "text": "Commit detail + inline diff", "parentSelector": "#main", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Commit detail + inline diff", "a read-only diff expands inline", "Click a changed file"] }
+        "layer2": { "kind": "text-parent", "text": "Commit detail + side-by-side diff", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Commit detail + side-by-side diff", "side-by-side (before/after) read-only diff tab", "Click a changed file"] }
       },
       "annotations": [
         {

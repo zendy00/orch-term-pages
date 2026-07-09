@@ -144,7 +144,7 @@
       </li>
       <li class="step">
         <div class="step-h"><span class="ic" data-icon="terminal"></span> In-tab connect form</div>
-        <p>A connect form appears inside a new tab. Fill in host, user, and port, then pick an auth method — <b>Password</b> / <b>Public key</b> (key path + optional passphrase) / <b>SSH Agent</b>. On success the tab becomes the SSH terminal itself.</p>
+        <p>A connect form appears inside a new tab. Fill in host, user, and port, then pick an auth method — <b>Password</b> / <b>Public key</b> (key path + optional passphrase) / <b>SSH Agent</b>. On success the tab becomes the SSH terminal itself. If a connection fails, the app tells you the <b>specific reason</b> — key file not found / passphrase required / other authentication failure. Private-key paths may start with <code>~</code> (e.g. <code>~/.ssh/id_rsa</code>), which expands to your home directory.</p>
         <figure class="fig">
           <div class="shot">
             <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">New SSH connection — auth: public key</span></div>
@@ -188,7 +188,7 @@
                 </div>
               </div>
             </div>
-            <div class="shot-cap"><span class="n">①</span> Switch among the three auth methods (password · public key · SSH Agent) with the segmented control. <span class="n">②</span> Even on failure, the form reappears with host · user kept so you can retry right away.</div>
+            <div class="shot-cap"><span class="n">①</span> Switch among the three auth methods (password · public key · SSH Agent) with the segmented control. <span class="n">②</span> Even on failure, host and user are preserved and the form reappears — and it tells you why it failed (key missing, passphrase required, etc.) so you can retry right away.</div>
           </div>
         </figure>
       </li>

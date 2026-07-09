@@ -74,10 +74,33 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v04x"><span class="hash"></span> 0.4.1 — Sidebar panel docking</h2>
+    <h2 class="sec" id="v05x"><span class="hash"></span> 0.5.0 — Worktrees · Side-by-side diff · SSH error reasons</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.4.1</span><span class="d">2026-07-05</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span>Added a <b>worktree list</b> with cleanup (remove) UI to the sidebar Git panel — shown when you have 2+ worktrees</li>
+        <li><span class="cl-tag feat">feat</span>View code changes (diffs) in a <b>side-by-side tab viewer</b> in the main panel — including untracked (new) files, reusing one tab per file</li>
+        <li><span class="cl-tag feat">feat</span>SSH connection failures now show a <b>specific reason</b> (key file not found · passphrase required, etc.) instead of a generic "authentication failed"</li>
+        <li><span class="cl-tag fix">fix</span>Fixed duplicated characters while composing Korean with an IME (e.g. the Gureum input method) on macOS</li>
+        <li><span class="cl-tag fix">fix</span>Fixed Korean → Hanja conversion (⌥Enter) on macOS — now handles multi-syllable words like 한국→韓國</li>
+        <li><span class="cl-tag fix">fix</span>Fixed resuming a session from the session list on macOS where the tab opened but the AI agent (claude/codex/agy) never launched</li>
+        <li><span class="cl-tag fix">fix</span>SSH private-key paths starting with ~ (e.g. ~/.ssh/id_rsa) now expand to the home directory — previously only absolute paths worked</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v04x"><span class="hash"></span> 0.4.x — Sidebar panel docking</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.4.2</span><span class="d">2026-07-07</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span>Tabs resumed from the session list can now be renamed — double-click the tab, or right-click → Rename</li>
+        <li><span class="cl-tag fix">fix</span>Fixed an intermittent issue where launching an AI worker (e.g. agy) via orchestration left a session in the supervisor list without its tab ever appearing</li>
+      </ul>
+    </div>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.4.1</span><span class="d">2026-07-05</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span>Sidebar panel docking — drag a sidebar icon (Explorer · Search · Git · To-dos · Sessions) out into a work pane as a tab; close the tab to send it back to the sidebar. Click a floated icon to jump to its tab · remembered per Space and restored on restart · each tab shows its mode icon</li>
         <li><span class="cl-tag fix">fix</span>The split-drop preview overlay now matches the actual split area (half the pane) when dropping on an edge</li>

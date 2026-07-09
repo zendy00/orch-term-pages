@@ -79,12 +79,12 @@
     {
       "id": "detail",
       "name": "커밋 세부 · diff",
-      "description": "커밋을 클릭하면 메시지·작성자·변경 파일이 열리고, 파일을 클릭하면 읽기 전용 diff가 인라인으로 펼쳐집니다.",
+      "description": "커밋을 클릭하면 메시지·작성자·변경 파일이 열립니다. 변경 파일을 클릭하면 메인 패널에 좌우분할(전·후) 읽기 전용 diff 탭이 열립니다.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#detail" },
-        "layer2": { "kind": "text-parent", "text": "커밋 세부 + 인라인 diff", "parentSelector": "#main", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["커밋 세부 + 인라인 diff", "읽기 전용 diff가 인라인으로 펼쳐집니다", "변경 파일을 클릭하면"] }
+        "layer2": { "kind": "text-parent", "text": "커밋 세부 + 좌우분할 diff", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["커밋 세부 + 좌우분할 diff", "좌우분할(전·후) 읽기 전용 diff 탭", "변경 파일을 클릭하면"] }
       },
       "annotations": [
         {

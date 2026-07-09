@@ -6,7 +6,7 @@
 <script src="../_lang.js"></script>
 <link rel="icon" href="../assets/app-icon.png" />
 <title>Source control (Git) — Orch term guide</title>
-<meta name="description" content="How to use the Orch term Git panel: Source Control (stage/commit), log + branch graph, push/pull, commit detail + inline diff, GitLens-style blame (Ctrl+Shift+B)." />
+<meta name="description" content="How to use the Orch term Git panel: Source Control (stage/commit), log + branch graph, push/pull, commit detail + side-by-side diff, GitLens-style blame (Ctrl+Shift+B)." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/source-control.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/source-control.html" />
@@ -68,14 +68,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="Source control (Git) — Orch term guide" />
-<meta property="og:description" content="How to use the Orch term Git panel: Source Control (stage/commit), log + branch graph, push/pull, commit detail + inline diff, GitLens-style blame (Ctrl+Shift+B)." />
+<meta property="og:description" content="How to use the Orch term Git panel: Source Control (stage/commit), log + branch graph, push/pull, commit detail + side-by-side diff, GitLens-style blame (Ctrl+Shift+B)." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/en/source-control.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="ko_KR" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Source control (Git) — Orch term guide" />
-<meta name="twitter:description" content="How to use the Orch term Git panel: Source Control (stage/commit), log + branch graph, push/pull, commit detail + inline diff, GitLens-style blame (Ctrl+Shift+B)." />
+<meta name="twitter:description" content="How to use the Orch term Git panel: Source Control (stage/commit), log + branch graph, push/pull, commit detail + side-by-side diff, GitLens-style blame (Ctrl+Shift+B)." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="source-control">
@@ -104,7 +104,7 @@
 
     <p class="eyebrow"><span class="hash"></span> Core features · Source control</p>
     <h1 class="page-title">Source control (Git)</h1>
-    <p class="lede">The sidebar's third mode, <b>Git</b>. Stage and commit changed files, view the branch graph, see commit detail with inline diff, and even <b>GitLens-style blame</b> — all from one panel.</p>
+    <p class="lede">The sidebar's third mode, <b>Git</b>. Stage and commit changed files, view the branch graph, see commit detail with a <b>side-by-side diff</b>, use <b>GitLens-style blame</b>, and clean up worktrees — all from one panel.</p>
 
     <!-- Source Control -->
     <h2 class="sec" id="stage"><span class="hash"></span> Source Control — stage · commit</h2>
@@ -127,12 +127,12 @@
     </figure>
 
     <!-- Commit detail + diff -->
-    <h2 class="sec" id="detail"><span class="hash"></span> Commit detail + inline diff</h2>
-    <p>Click a commit to open its message, author, time, and changed files; click a file and a read-only diff expands inline within the panel.</p>
+    <h2 class="sec" id="detail"><span class="hash"></span> Commit detail + side-by-side diff</h2>
+    <p>Click a commit to open its message, author, time, and changed files. Click a changed file to open a <b>side-by-side (before/after) read-only diff tab</b> in the main panel — including untracked (new) files, reusing a single tab per file.</p>
     <figure class="fig">
       <div class="shot">
         <img class="shot-img" src="../assets/shots/en/git-diff.png" alt="Commit detail — commit message · author · changed-file list (Changes 8 + History + commit detail panel)" />
-        <div class="shot-cap"><span class="n">①</span> Click a commit and its message, author, and changed files open at the bottom of the panel. <span class="n">②</span> Click a changed file and the added (green) / deleted (red) diff expands inline.</div>
+        <div class="shot-cap"><span class="n">①</span> Click a commit and its message, author, and changed files open at the bottom of the panel. <span class="n">②</span> Click a changed file to open a side-by-side diff tab in the main panel (added = green, removed = red).</div>
       </div>
     </figure>
 
@@ -145,6 +145,10 @@
         <div class="shot-cap"><span class="n">①</span> The gutter's "author · relative time" — click it to go to that commit's detail. <span class="n">②</span> An <span style="color:var(--accent)">Uncommitted</span> line is a change not yet committed.</div>
       </div>
     </figure>
+
+    <!-- worktree -->
+    <h2 class="sec" id="worktree"><span class="hash"></span> Worktree list · cleanup</h2>
+    <p>When a repository has 2+ <b>git worktrees</b>, the Git panel shows a worktree list — each worktree's name, relative path, and current branch — and lets you <b>clean up (remove)</b> the ones you're done with, right there.</p>
 
     <!-- Sidebar -->
     <h2 class="sec" id="sidebar-layout"><span class="hash"></span> Sidebar layout · maximize</h2>
