@@ -340,6 +340,7 @@ a.flag-card:hover::before { opacity: 1; }
   .topbar .menu-toggle { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-md);
     background: none; border: 1px solid var(--line); color: var(--text); }
   .topbar .find { display: none; }
+  .topbar .tlink.cta { display: none; }
   .page-title { font-size: 32px; }
   .scrim { position: fixed; inset: var(--top-h) 0 0; background: rgba(0,0,0,.5); z-index: 44; opacity: 0; pointer-events: none; transition: opacity var(--tap); }
   body.nav-open .scrim { opacity: 1; pointer-events: auto; }
