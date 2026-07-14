@@ -74,10 +74,27 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v05x"><span class="hash"></span> 0.5.0 — Worktrees · Side-by-side diff · SSH error reasons</h2>
+    <h2 class="sec" id="v06x"><span class="hash"></span> 0.6.0 — Notes · Diagrams · AI note sharing</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.6.0</span><span class="d">2026-07-14</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b><a href="notes.html">Notes panel</a></b> — a floating Post-it opened from the titlebar (Ctrl+Shift+N). Tabs, colors, pinning and renaming, Markdown preview, save to file; text notes can expand into a main-panel tab</li>
+        <li><span class="cl-tag feat">feat</span><b>Drawing notes</b> — free-form Excalidraw canvas (works offline), grid toggle, PNG/SVG/PDF/clipboard export</li>
+        <li><span class="cl-tag feat">feat</span><b>Sequence diagram notes</b> — a drag-to-draw UML sequence editor (tool palette, activation bars, loop/alt/opt/par frames, free positioning, hand panning, tool shortcuts) with Mermaid (.mmd)/SVG/PNG/PDF export</li>
+        <li><span class="cl-tag feat">feat</span><b>Flowchart notes</b> — a <b>bidirectional editor</b>: draw on the canvas and it writes Mermaid code, or load Mermaid and get editable shapes (5 node shapes, 4 edge styles, flow direction, auto layout, light/dark background)</li>
+        <li><span class="cl-tag feat">feat</span><b>AI note sharing</b> — in-app AI agents can create, read and update notes directly (orchterm-notes MCP, on by default). Sequence and flowchart notes <b>round-trip as Mermaid</b>, so agents can re-read and edit them</li>
+        <li><span class="cl-tag feat">feat</span>Bundled <b>Jetendard</b> (JetBrains Mono + Pretendard) as the default code font — renders the same on machines without it installed</li>
+        <li><span class="cl-tag fix">fix</span>The code font chosen in Settings now applies to the <b>code editor and notes</b> — previously only the terminal followed it</li>
+        <li><span class="cl-tag fix">fix</span>AI edits to a drawing note now appear immediately while it is open — previously the open canvas could overwrite the AI's changes with the old scene</li>
+        <li><span class="cl-tag fix">fix</span>Drawing/sequence note backgrounds now follow the window opacity setting</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v05x"><span class="hash"></span> 0.5.0 — Worktrees · Side-by-side diff · SSH error reasons</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span>Added a <b>worktree list</b> with cleanup (remove) UI to the sidebar Git panel — shown when you have 2+ worktrees</li>
         <li><span class="cl-tag feat">feat</span>View code changes (diffs) in a <b>side-by-side tab viewer</b> in the main panel — including untracked (new) files, reusing one tab per file</li>

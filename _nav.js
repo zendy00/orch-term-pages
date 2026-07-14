@@ -22,6 +22,7 @@
     browser: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg>',
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
     "source-control": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="17" cy="8" r="2.4"/><path d="M6 8.4v7.2M17 10.4c0 4-5 2.6-5 6.6"/></svg>',
+    notes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14a1 1 0 0 1 1 1v9l-5 6H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M15 20v-5h5M8 9h8M8 13h5"/></svg>',
     tasks: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 12l2.2 2.2L13 10"/></svg>',
     "task-ai-sharing": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l2 2 4-4"/><circle cx="18" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M16.3 7.2l-5 3M16.3 16.8l-5-3"/></svg>',
     appearance: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 12h9M5 18h14"/><circle cx="17" cy="12" r="2.3"/></svg>',
@@ -54,6 +55,7 @@
       { page: "browser",         href: "browser.html",         label: "인앱 브라우저",   en: "In-app browser" },
       { page: "search",          href: "search.html",          label: "전체 파일 검색",  en: "Full-text search" },
       { page: "source-control",  href: "source-control.html",  label: "소스 컨트롤 (Git)", en: "Source control (Git)" },
+      { page: "notes",           href: "notes.html",           label: "메모 · 다이어그램", en: "Notes · Diagrams" },
       { page: "tasks",           href: "tasks.html",           label: "할 일 보드",      en: "Task board" },
       { page: "task-ai-sharing", href: "task-ai-sharing.html", label: "AI 할 일 공유",   en: "AI task sharing" },
       { page: "sessions",        href: "sessions.html",        label: "세션 목록 (이어가기)", en: "Session list (resume)" }

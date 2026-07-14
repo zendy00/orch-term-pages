@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Notes · Diagrams — Orch term guide</title>
+<meta name="description" content="How to use Orch term notes: a floating Post-it (Ctrl+Shift+N) with Markdown memos, Excalidraw drawings, sequence diagrams and flowcharts (bidirectional Mermaid), shared with in-app AI agents." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/notes.html" />
+<link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/notes.html" />
+<link rel="alternate" hreflang="en" href="https://zendy00.github.io/orch-term-pages/en/notes.html" />
+<link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/orch-term-pages/en/notes.html" />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<style>
+  /* Page-specific — note-kind comparison table emphasis (design-system tokens only) */
+  .nt-kinds td:first-child { white-space: nowrap; font-weight: 600; color: var(--text-strong); }
+</style>
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Orch term" />
+<meta property="og:title" content="Notes · Diagrams — Orch term guide" />
+<meta property="og:description" content="How to use Orch term notes: a floating Post-it (Ctrl+Shift+N) with Markdown memos, Excalidraw drawings, sequence diagrams and flowcharts (bidirectional Mermaid), shared with in-app AI agents." />
+<meta property="og:url" content="https://zendy00.github.io/orch-term-pages/en/notes.html" />
+<meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="ko_KR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Notes · Diagrams — Orch term guide" />
+<meta name="twitter:description" content="How to use Orch term notes: a floating Post-it (Ctrl+Shift+N) with Markdown memos, Excalidraw drawings, sequence diagrams and flowcharts (bidirectional Mermaid), shared with in-app AI agents." />
+<meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+</head>
+<body data-page="notes">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Core features</span><span class="sep">/</span><span>Notes · Diagrams</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Core features · Notes · Diagrams</p>
+    <h1 class="page-title">Notes · Diagrams</h1>
+    <p class="lede">A floating Post-it you keep next to the terminal. Manage Markdown <b>text notes</b>, free-form <b>drawings</b>, drag-to-draw <b>sequence diagrams</b> and <b>flowcharts</b> (bidirectional Mermaid) as tabs — and in-app AI agents read and write the same notes.</p>
+
+    <!-- Open -->
+    <h2 class="sec" id="open"><span class="hash"></span> Opening the notes panel</h2>
+    <p>Open it with the <span class="i" data-icon="note"></span> <b>Notes</b> icon in the titlebar or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>. The panel can be dragged, resized on all 8 edges, and maximized; right-click a tab for <b>rename · color · pin · delete</b>. Notes are <b>global to the app</b> — one shared set across all Spaces.</p>
+    <p>Create a new note with the <b>+ button</b> in the tab row — a menu asks which kind:</p>
+    <div class="tablewrap"><table class="kbds nt-kinds">
+      <thead><tr><th>Kind</th><th>Content</th><th>Export</th></tr></thead>
+      <tbody>
+        <tr><td>Text note</td><td>Markdown editing + rendered preview</td><td>Save as .md</td></tr>
+        <tr><td>Drawing</td><td>Free-form Excalidraw canvas (offline)</td><td>PNG · SVG · PDF · clipboard</td></tr>
+        <tr><td>Sequence diagram</td><td>Drag-to-draw UML sequence</td><td>Mermaid (.mmd) · SVG · PNG · PDF · clipboard</td></tr>
+        <tr><td>Flowchart</td><td>Canvas ↔ Mermaid flowchart, <b>bidirectional</b></td><td>Mermaid (.mmd) · SVG · PNG · PDF · clipboard</td></tr>
+      </tbody>
+    </table></div>
+
+    <!-- Text -->
+    <h2 class="sec" id="text"><span class="hash"></span> Text notes — Markdown</h2>
+    <p>Write the body in Markdown and toggle between editing and the rendered view with the <b>Preview</b> button. With the panel focused, <kbd>Ctrl</kbd>+<kbd>N</kbd> creates a new note. Text notes can also be expanded into a <a href="tabs-panes.html">main-panel tab</a> for more room.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/notes-text.png" alt="Text note — rendered Markdown preview" />
+        <div class="shot-cap"><span class="n">①</span> Markdown preview. The background follows the window opacity, so the terminal shows through softly.</div>
+      </div>
+    </figure>
+
+    <!-- Drawing -->
+    <h2 class="sec" id="drawing"><span class="hash"></span> Drawing notes — free-form</h2>
+    <p>An Excalidraw canvas (fully offline — fonts are bundled with the app). Draw shapes, arrows, freehand strokes and text, toggle the <b>grid</b>, and <b>export</b> to PNG/SVG/PDF or the clipboard.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/notes-drawing.png" alt="Drawing note — an architecture sketch on the Excalidraw canvas" />
+        <div class="shot-cap"><span class="n">①</span> A cache → DB sketch. Drawings created by AI are editable here as individual shapes.</div>
+      </div>
+    </figure>
+
+    <!-- Sequence -->
+    <h2 class="sec" id="sequence"><span class="hash"></span> Sequence diagrams — drag-to-draw UML</h2>
+    <p>Place objects and actors from the tool palette, then <b>drag between lifelines</b> to create messages. Synchronous calls auto-create <b>activation bars</b> and their replies; wrap ranges in loop/alt/opt/par <b>frames</b> by dragging a box. Participants and messages can be freely repositioned, and labels are edited by double-clicking. Tool shortcuts are shown as badges on each button (<kbd>H</kbd> hand, <kbd>V</kbd> select, …).</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/notes-sequence.png" alt="Sequence diagram note — order flow with activation bars, a note and an alt frame" />
+        <div class="shot-cap"><span class="n">①</span> Activation bars · auto-numbering · notes. <span class="n">②</span> An alt frame (in stock / out of stock).</div>
+      </div>
+    </figure>
+    <p>Export as <b>Mermaid (.mmd)</b> · SVG · PNG · PDF, or copy the Mermaid — the diagram you drew becomes <code>sequenceDiagram</code> text as-is.</p>
+
+    <!-- Flowchart -->
+    <h2 class="sec" id="flow"><span class="hash"></span> Flowcharts — bidirectional Mermaid</h2>
+    <p>Place nodes with the shape tools (<kbd>R</kbd> rectangle · <kbd>O</kbd> rounded · <kbd>S</kbd> stadium · <kbd>D</kbd> diamond · <kbd>C</kbd> circle) and drag between nodes with the <kbd>E</kbd> edge tool. Dragging a node stores its free position; right-click for shape changes, arrow styles (solid/open/dotted/thick) and delete. The toolbar's right side switches <b>direction</b> (TD/LR/BT/RL), runs <b>auto layout</b>, and toggles the light/dark background.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/notes-flow.png" alt="Flowchart note — a deploy pipeline with a diamond branch, labeled edges and a dotted edge" />
+        <div class="shot-cap"><span class="n">①</span> A diamond branch with yes/no edge labels. <span class="n">②</span> What you draw exports as Mermaid flowchart text.</div>
+      </div>
+    </figure>
+    <p>This note kind is <b>bidirectional</b> — drawing on the canvas writes Mermaid <code>flowchart</code> code, and loading Mermaid produced by an AI gives you editable shapes. Hand-placed positions and the background theme aren't part of Mermaid syntax, so they don't appear in the exported text.</p>
+
+    <!-- AI -->
+    <h2 class="sec" id="ai"><span class="hash"></span> AI note sharing</h2>
+    <p>In-app AI agents (claude · codex · gemini) can <b>create, read, update and delete</b> the same notes via the orchterm-notes MCP (on by default — can be disabled in Settings). Ask "summarize this meeting into a note" or "draw this logic as a flowchart" and it appears in the panel.</p>
+    <ul>
+      <li><b>Text</b> — read and written as plain Markdown.</li>
+      <li><b>Sequence · Flowchart</b> — written as Mermaid, and reads <b>return real Mermaid</b>, so agents can re-read and edit their own diagrams (full round-trip).</li>
+      <li><b>Drawing</b> — created from Mermaid flowcharts or Excalidraw skeletons (editable shapes); reads return a textual summary.</li>
+    </ul>
+    <p>Unlike <a href="task-ai-sharing.html">AI task sharing</a>, notes are not split per Space — there is one global set.</p>
+
+    <!-- Shortcuts -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> Shortcuts</h2>
+    <table class="kbds">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd></td><td>Open/close the notes panel (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>New text note (while the panel is focused)</td></tr>
+        <tr><td><kbd>V</kbd> / <kbd>H</kbd></td><td>Diagram canvas — select / hand (pan) tool</td></tr>
+        <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>C</kbd> · <kbd>E</kbd></td><td>Flowchart — 5 shape tools · edge tool</td></tr>
+        <tr><td><kbd>Delete</kbd></td><td>Diagram canvas — delete selection</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Line break while editing a label inline</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="check"></span>AI task sharing</a>
+        <a class="relchip" href="tasks.html"><span class="ri" data-icon="tasks"></span>Task board</a>
+        <a class="relchip" href="appearance.html"><span class="ri" data-icon="settings"></span>Appearance · Fonts</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="tasks.html">Next → Task board</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+<script src="../_tour.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="./_lang.js"></script>
+<link rel="icon" href="./assets/app-icon.png" />
+<title>메모 · 다이어그램 — Orch term 가이드</title>
+<meta name="description" content="Orch term 메모(노트) 사용법: 플로팅 Post-it(Ctrl+Shift+N)에서 마크다운 메모·그림(Excalidraw)·시퀀스 다이어그램·순서도(Mermaid 양방향)를 만들고, 앱 안 AI와 같은 노트를 공유합니다." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://zendy00.github.io/orch-term-pages/notes.html" />
+<link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/notes.html" />
+<link rel="alternate" hreflang="en" href="https://zendy00.github.io/orch-term-pages/en/notes.html" />
+<link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/orch-term-pages/en/notes.html" />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 노트 종류 비교 표 강조(디자인 시스템 토큰만 사용) */
+  .nt-kinds td:first-child { white-space: nowrap; font-weight: 600; color: var(--text-strong); }
+</style>
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Orch term" />
+<meta property="og:title" content="메모 · 다이어그램 — Orch term 가이드" />
+<meta property="og:description" content="Orch term 메모(노트) 사용법: 플로팅 Post-it(Ctrl+Shift+N)에서 마크다운 메모·그림(Excalidraw)·시퀀스 다이어그램·순서도(Mermaid 양방향)를 만들고, 앱 안 AI와 같은 노트를 공유합니다." />
+<meta property="og:url" content="https://zendy00.github.io/orch-term-pages/notes.html" />
+<meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="메모 · 다이어그램 — Orch term 가이드" />
+<meta name="twitter:description" content="Orch term 메모(노트) 사용법: 플로팅 Post-it(Ctrl+Shift+N)에서 마크다운 메모·그림(Excalidraw)·시퀀스 다이어그램·순서도(Mermaid 양방향)를 만들고, 앱 안 AI와 같은 노트를 공유합니다." />
+<meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+</head>
+<body data-page="notes">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" /><span class="tag">docs</span>
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>메모 · 다이어그램</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 메모 · 다이어그램</p>
+    <h1 class="page-title">메모 · 다이어그램</h1>
+    <p class="lede">터미널 옆에 항상 띄워 두는 플로팅 Post-it입니다. 마크다운 <b>텍스트 메모</b>, 자유 드로잉 <b>그림 메모</b>, 드래그로 그리는 <b>시퀀스 다이어그램</b>과 <b>순서도</b>(Mermaid 양방향)를 탭으로 관리하고, 앱 안 AI도 같은 노트를 읽고 씁니다.</p>
+
+    <!-- 열기 -->
+    <h2 class="sec" id="open"><span class="hash"></span> 노트 패널 열기</h2>
+    <p>타이틀바의 <span class="i" data-icon="note"></span> <b>메모</b> 아이콘이나 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>으로 엽니다. 패널은 드래그로 이동·8방향 리사이즈·최대화가 되고, 탭 우클릭으로 <b>이름 변경 · 색상 · 고정 · 삭제</b>를 할 수 있습니다. 노트는 Space와 무관하게 <b>앱 전역</b>에서 한 벌을 공유합니다.</p>
+    <p>새 노트는 탭 줄의 <b>+ 버튼</b>으로 만듭니다 — 종류를 고르는 메뉴가 뜹니다:</p>
+    <div class="tablewrap"><table class="kbds nt-kinds">
+      <thead><tr><th>종류</th><th>내용</th><th>내보내기</th></tr></thead>
+      <tbody>
+        <tr><td>텍스트 메모</td><td>마크다운 편집 + 렌더 미리보기</td><td>.md 파일 저장</td></tr>
+        <tr><td>그림 메모</td><td>Excalidraw 자유 드로잉(오프라인)</td><td>PNG · SVG · PDF · 클립보드</td></tr>
+        <tr><td>시퀀스 다이어그램</td><td>드래그로 그리는 UML 시퀀스</td><td>Mermaid(.mmd) · SVG · PNG · PDF · 클립보드</td></tr>
+        <tr><td>순서도</td><td>캔버스 ↔ Mermaid flowchart <b>양방향</b></td><td>Mermaid(.mmd) · SVG · PNG · PDF · 클립보드</td></tr>
+      </tbody>
+    </table></div>
+
+    <!-- 텍스트 -->
+    <h2 class="sec" id="text"><span class="hash"></span> 텍스트 메모 — 마크다운</h2>
+    <p>본문은 마크다운으로 쓰고, 툴바의 <b>미리보기</b> 버튼으로 렌더 화면과 편집 화면을 오갑니다. 패널에 포커스가 있을 때 <kbd>Ctrl</kbd>+<kbd>N</kbd>으로 바로 새 메모를 만듭니다. 텍스트 메모는 "탭으로 열기"로 <a href="tabs-panes.html">메인 패널 탭</a>으로 떼어내 넓게 편집할 수도 있습니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/notes-text.png" alt="텍스트 메모 — 마크다운 렌더 미리보기" />
+        <div class="shot-cap"><span class="n">①</span> 마크다운 미리보기. 배경이 창 투명도를 따라 뒤 터미널이 은은히 비칩니다.</div>
+      </div>
+    </figure>
+
+    <!-- 그림 -->
+    <h2 class="sec" id="drawing"><span class="hash"></span> 그림 메모 — 자유 드로잉</h2>
+    <p>Excalidraw 캔버스입니다(오프라인 동작 — 폰트까지 앱에 번들). 도형·화살표·손그림·텍스트를 자유롭게 그리고, 툴바의 <b>격자 토글</b>과 <b>내보내기</b>(PNG/SVG/PDF/클립보드)를 씁니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/notes-drawing.png" alt="그림 메모 — Excalidraw 캔버스에 그린 아키텍처 그림" />
+        <div class="shot-cap"><span class="n">①</span> 캐시 → DB 아키텍처 스케치. AI가 만들어 준 그림도 이 캔버스에서 개별 도형으로 편집합니다.</div>
+      </div>
+    </figure>
+
+    <!-- 시퀀스 -->
+    <h2 class="sec" id="sequence"><span class="hash"></span> 시퀀스 다이어그램 — 드래그로 그리는 UML</h2>
+    <p>왼쪽 도구 팔레트에서 객체·액터를 놓고, 라이프라인 사이를 <b>드래그해 메시지</b>를 만듭니다. 동기 호출은 <b>활성화 막대</b>와 응답을 자동 생성하고, loop/alt/opt/par <b>프레임</b>은 박스 드래그로 감쌉니다. 참가자·메시지는 자유 위치로 끌어 배치하고, 더블클릭으로 라벨을 고칩니다. 도구 단축키는 각 버튼 우하단 배지에 표시됩니다(<kbd>H</kbd> 손, <kbd>V</kbd> 선택 등).</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/notes-sequence.png" alt="시퀀스 다이어그램 노트 — 주문 흐름(활성화 막대·노트·alt 프레임)" />
+        <div class="shot-cap"><span class="n">①</span> 활성화 막대·자동 채번·노트. <span class="n">②</span> alt 프레임(재고 있음/없음 분기).</div>
+      </div>
+    </figure>
+    <p>내보내기는 <b>Mermaid(.mmd)</b> · SVG · PNG · PDF · Mermaid 클립보드 복사 — 그린 다이어그램이 그대로 <code>sequenceDiagram</code> 텍스트가 됩니다.</p>
+
+    <!-- 순서도 -->
+    <h2 class="sec" id="flow"><span class="hash"></span> 순서도 — Mermaid 양방향</h2>
+    <p>도형 도구(<kbd>R</kbd> 사각 · <kbd>O</kbd> 둥근 · <kbd>S</kbd> 스타디움 · <kbd>D</kbd> 마름모 · <kbd>C</kbd> 원)로 노드를 놓고 <kbd>E</kbd> 연결선 도구로 노드 사이를 드래그하면 순서도가 됩니다. 노드 드래그=자유 배치(저장됨), 우클릭=모양 변경·화살표 스타일(실선/선만/점선/굵게)·삭제. 툴바 우측에서 <b>방향</b>(TD/LR/BT/RL) 전환·<b>자동 정렬</b>·배경(밝게/어둡게)을 바꿉니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/notes-flow.png" alt="순서도 노트 — 배포 파이프라인(마름모 분기·라벨 엣지·점선)" />
+        <div class="shot-cap"><span class="n">①</span> 마름모 분기 + 예/아니오 라벨 엣지. <span class="n">②</span> 캔버스에서 그린 그대로 Mermaid flowchart로 내보냅니다.</div>
+      </div>
+    </figure>
+    <p>이 노트는 <b>양방향</b>입니다 — 캔버스에서 그리면 Mermaid <code>flowchart</code> 코드가 되고, AI가 Mermaid로 만들어 준 순서도를 불러오면 편집 가능한 도형이 됩니다. 손으로 옮긴 좌표·배경 테마는 Mermaid 문법에 없어 내보낸 텍스트에는 담기지 않습니다.</p>
+
+    <!-- AI -->
+    <h2 class="sec" id="ai"><span class="hash"></span> AI 노트 공유</h2>
+    <p>앱 안의 AI(claude·codex·gemini)는 orchterm-notes MCP로 같은 노트를 <b>직접 생성·조회·수정·삭제</b>합니다(기본 켜짐 — 설정에서 끌 수 있음). "회의 내용 노트로 정리해 줘", "이 로직 순서도로 그려 줘"라고 시키면 노트 패널에 바로 나타납니다.</p>
+    <ul>
+      <li><b>텍스트</b> — 마크다운 그대로 읽고 씁니다.</li>
+      <li><b>시퀀스 · 순서도</b> — Mermaid로 쓰고, 읽을 때도 <b>진짜 Mermaid가 반환</b>되어 AI가 자기가 그린 다이어그램을 다시 읽고 고치는 왕복 편집이 됩니다.</li>
+      <li><b>그림</b> — Mermaid flowchart 또는 Excalidraw skeleton으로 생성(편집 가능한 도형). 읽기는 구성 요약 텍스트입니다.</li>
+    </ul>
+    <p>같은 방식의 <a href="task-ai-sharing.html">AI 할 일 공유</a>와 달리 노트는 Space별로 나뉘지 않고 전역 한 벌입니다.</p>
+
+    <!-- 단축키 -->
+    <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
+    <table class="kbds">
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd></td><td>노트 패널 열기/닫기 (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>새 텍스트 메모 (패널 포커스 시)</td></tr>
+        <tr><td><kbd>V</kbd> / <kbd>H</kbd></td><td>다이어그램 캔버스 — 선택 / 손(패닝) 도구</td></tr>
+        <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>C</kbd> · <kbd>E</kbd></td><td>순서도 — 도형 5종 · 연결선 도구</td></tr>
+        <tr><td><kbd>Delete</kbd></td><td>다이어그램 캔버스 — 선택 요소 삭제</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>라벨 인라인 편집 중 줄바꿈</td></tr>
+      </tbody>
+    </table>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="check"></span>AI 할 일 공유</a>
+        <a class="relchip" href="tasks.html"><span class="ri" data-icon="tasks"></span>할 일 보드</a>
+        <a class="relchip" href="appearance.html"><span class="ri" data-icon="settings"></span>외관 · 폰트</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="tasks.html">다음 → 할 일 보드</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+<script src="./_tour.js"></script>
+</body>
+</html>

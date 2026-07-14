@@ -74,10 +74,27 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v05x"><span class="hash"></span> 0.5.0 — 워크트리 · 좌우분할 diff · SSH 에러 구분</h2>
+    <h2 class="sec" id="v06x"><span class="hash"></span> 0.6.0 — 노트 · 다이어그램 · AI 노트 공유</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.6.0</span><span class="d">2026-07-14</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b><a href="notes.html">메모(노트) 패널</a></b> — 타이틀바 메모 버튼(Ctrl+Shift+N)으로 여는 플로팅 Post-it. 탭·색상·고정·이름 변경, 마크다운 미리보기, 파일 저장, 텍스트 노트는 메인 패널 탭으로 확장</li>
+        <li><span class="cl-tag feat">feat</span><b>그림 노트</b> — Excalidraw 캔버스 자유 드로잉(오프라인 동작), 격자 토글, PNG/SVG/PDF/클립보드 내보내기</li>
+        <li><span class="cl-tag feat">feat</span><b>시퀀스 다이어그램 노트</b> — 드래그로 그리는 UML 시퀀스 편집기(도구 팔레트·활성화 막대·loop/alt/opt/par 프레임·자유 배치·손 패닝·도구 단축키), Mermaid(.mmd)/SVG/PNG/PDF 내보내기</li>
+        <li><span class="cl-tag feat">feat</span><b>순서도 노트</b> — 캔버스에서 드래그로 그리면 Mermaid 코드가 되고, Mermaid를 불러오면 편집 가능한 도형이 되는 <b>양방향 편집기</b>(도형 5종·연결선 4종·방향 전환·자동 정렬·밝은/어두운 배경)</li>
+        <li><span class="cl-tag feat">feat</span><b>AI 노트 공유</b> — 앱 안 AI 에이전트가 노트를 직접 생성·조회·수정(orchterm-notes MCP, 기본 켜짐). 시퀀스·순서도는 Mermaid로 읽고 써서 AI와 <b>왕복 편집</b> 가능</li>
+        <li><span class="cl-tag feat">feat</span>기본 코드 폰트로 <b>Jetendard</b>(JetBrains Mono + Pretendard) 내장 — 폰트가 설치되지 않은 PC에서도 동일하게 표시</li>
+        <li><span class="cl-tag fix">fix</span>설정에서 고른 코드 폰트가 <b>코드 편집기·메모장에 적용되지 않던</b> 문제 수정 — 터미널에만 적용되고 있었음</li>
+        <li><span class="cl-tag fix">fix</span>그림 노트를 열어둔 채 AI가 수정하면 캔버스에 즉시 반영 — 이전엔 열려 있던 옛 그림이 AI 수정을 되덮을 수 있었음</li>
+        <li><span class="cl-tag fix">fix</span>그림·시퀀스 노트 배경이 창 투명도 설정을 따라가도록 수정</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v05x"><span class="hash"></span> 0.5.0 — 워크트리 · 좌우분할 diff · SSH 에러 구분</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span>사이드바 Git 패널에 <b>워크트리 목록</b>과 정리(제거) UI — 워크트리가 2개 이상일 때 표시</li>
         <li><span class="cl-tag feat">feat</span>코드 변경(diff)을 메인 패널의 <b>좌우분할 탭 뷰어</b>로 — 신규(untracked) 파일 포함, 파일별로 탭 재사용</li>
