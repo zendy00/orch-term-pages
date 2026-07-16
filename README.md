@@ -1,5 +1,7 @@
 # Orch term 문서 사이트 (`docs/site/`)
 
+![Orch term — 탐색기 · 탭 패널 · 코드 에디터 · Git 상태바가 한 창에](assets/shots/editor.png)
+
 좌측 사이드바 + 기능별 가이드 페이지로 구성된 **정적 문서 사이트**. 빌드 단계 없음.
 로컬 미리보기: `npx serve docs/site` (또는 `docs/site/index.html`을 브라우저로 열기).
 
@@ -17,7 +19,7 @@
 - **페이지 그룹**: 시작하기(소개 · 다운로드 · 빠른 시작) / 대형 기능 / 핵심 기능 / 그 외 · 시스템
 
 `index.html` = 홈, 나머지는 기능별 가이드. `stats.html`은 별도 통계 페이지(독립).
-디자인 소스(목업)는 [`docs/mock/site/`](../mock/site/)에 보존.
+스크린샷 자산은 `assets/shots/`(한국어)·`assets/shots/en/`(영어)에 둔다.
 
 ## 다국어 (i18n)
 
@@ -68,16 +70,16 @@
 
 ## 앱 빌드 + 다운로드 릴리스 (`.github/workflows/release.yml`)
 
-버전 태그(`vX.Y.Z`) 푸시 시(또는 Actions에서 수동 실행) **Windows에서 앱을 빌드**해
-**`orch-term-pages`의 GitHub Release**에 설치파일을 업로드한다. 가이드의 "다운로드" 버튼은
-그 Release의 고정 링크 `releases/latest/download/orchterm-setup.exe`를 가리킨다.
+버전 태그(`vX.Y.Z`) 푸시 시(또는 Actions에서 수동 실행) **Windows·macOS 두 잡이 앱을 빌드**해
+**`orch-term-pages`의 GitHub Release**에 설치파일 + 인앱 자동 업데이트용 아티팩트를 올린다. 가이드의
+"다운로드" 페이지(`download.html`)는 그 Release의 OS별 고정 링크(Windows `orchterm-setup.exe`·`orchterm-x64.msi` / macOS `orchterm-aarch64.dmg`)를 나열한다.
 
 - **트리거**: `git tag vX.Y.Z && git push origin vX.Y.Z` (또는 Actions 탭 → `Release → orch-term-pages` → Run workflow).
-- **러너**: `windows-latest` (Tauri 데스크톱 앱은 크로스컴파일 불가). 빌드 ~5–15분.
+- **러너**: Windows = `windows-latest`, macOS = `macos-latest`(Apple Silicon/aarch64). Tauri 데스크톱 앱은 크로스컴파일 불가라 OS별 네이티브 러너가 필요하다. 빌드 ~5–15분.
 - **토큰**: 위 `PAGES_DEPLOY_TOKEN`을 그대로 사용(Release 생성/업로드는 Contents 범주).
-- **에셋**: NSIS `orchterm-setup.exe`(고정 이름) + MSI `orchterm-x64.msi` + macOS `.dmg`.
-- ⚠️ **미서명** — 설치파일은 코드서명되지 않아 Windows SmartScreen "알 수 없는 게시자" 경고가 뜬다.
-  공개 배포 시 코드서명 인증서 도입을 권장(후속 과제).
+- **에셋**: Windows = NSIS `orchterm-setup.exe`(고정 이름) + MSI `orchterm-x64.msi`; macOS = `orchterm-aarch64.dmg` + 업데이터용 `orchterm-aarch64.app.tar.gz`(+`.sig`). Intel(x86_64) macOS는 추후 `macos-13` 잡으로 추가 예정.
+- **자동 업데이트**: 각 잡이 업데이터 서명(`.sig`)과 `latest.json`을 만들어 Release에 올린다(macOS 잡이 Windows 항목을 보존한 채 `darwin-aarch64`를 병합). 앱은 이 `latest.json`으로 인앱 업데이트한다 → 사이트 [자동 업데이트](auto-update.html) 페이지 참조.
+- ⚠️ **미서명(두 OS 모두)** — Windows는 SmartScreen "알 수 없는 게시자" 경고, macOS는 Apple 공증이 없어 Gatekeeper가 다운로드를 격리한다(Release 본문에 `xattr` 우회 안내를 자동 prepend). 공개 배포 시 코드서명/공증 도입 권장(후속 과제).
 
 > 빌드 버전은 `src-tauri/tauri.conf.json`의 `version`을 따른다(태그는 정확히 `v<version>`,
 > CI가 불일치 시 빌드 실패 — [release-tagging](../rules/release-tagging.md)).
