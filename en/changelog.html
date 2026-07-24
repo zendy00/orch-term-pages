@@ -74,10 +74,22 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v075"><span class="hash"></span> 0.7.5 — Output backpressure (no more freezes on floods)</h2>
+    <h2 class="sec" id="v076"><span class="hash"></span> 0.7.6 — Session survival on reload · renderer self-recovery · agent output viewer</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.5</span><span class="d">2026-07-24</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.7.6</span><span class="d">2026-07-25</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>Session survival across reload</b> — when a reload happens (refresh or self-recovery), the local terminal <b>reconnects to its still-running session</b> — the running process is kept alive and previous output (scrollback) is restored, so your work isn't interrupted</li>
+        <li><span class="cl-tag feat">feat</span><b>Renderer self-recovery</b> — if the screen freezes or the renderer crashes, a <b>native dialog</b> offers to reload — recovering while keeping your local sessions alive</li>
+        <li><span class="cl-tag feat">feat</span><b>AI agent output viewer</b> — stream the live output of orchestration workers running headless (without a tab) via the <b>"Output"</b> button on the supervisor dashboard — closing the viewer tab doesn't stop the job</li>
+        <li><span class="cl-tag fix">fix</span>fixed <b>scrollback replay overwriting the clipboard</b> when a session reconnects (OSC 52 mute)</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v075"><span class="hash"></span> 0.7.5 — Output backpressure (no more freezes on floods)</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.5</span><span class="d">2026-07-24</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>Terminal output flow control (backpressure)</b> — prevents the screen from <b>freezing or the app becoming unresponsive</b> when a command floods the terminal faster than it can render — all three paths (local terminal, SSH, AI agent viewer) now pull output only as fast as the screen draws it</li>
         <li><span class="cl-tag feat">feat</span>keyboard input (e.g. Ctrl+C) <b>keeps flowing while output is paused</b>, so a runaway command can be stopped immediately</li>

@@ -74,10 +74,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v075"><span class="hash"></span> 0.7.5 — 대량 출력 멈춤 방지(백프레셔)</h2>
+    <h2 class="sec" id="v076"><span class="hash"></span> 0.7.6 — 세션 생존 리로드 · 렌더러 자가복구 · 에이전트 출력 뷰어</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.5</span><span class="d">2026-07-24</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.7.6</span><span class="d">2026-07-25</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>세션 생존 리로드</b> — 리로드(새로고침·자가복구)가 일어나도 로컬 터미널이 <b>살아있는 세션에 재접속</b> — 실행 중이던 프로세스 유지 + 이전 출력(스크롤백) 복원으로 작업이 끊기지 않음</li>
+        <li><span class="cl-tag feat">feat</span><b>렌더러 자가복구</b> — 화면이 멈추거나 렌더러가 비정상 종료되면 <b>네이티브 확인창</b>으로 다시 로드 제안 — 로컬 세션을 유지한 채 복구</li>
+        <li><span class="cl-tag feat">feat</span><b>AI 에이전트 출력 뷰어</b> — 탭 없이 백그라운드로 도는 오케스트레이션 워커 출력을 감독 대시보드 <b>'출력'</b> 버튼으로 실시간 스트리밍 — 뷰어 탭을 닫아도 작업 계속</li>
+        <li><span class="cl-tag fix">fix</span>세션 재접속 시 <b>스크롤백 재생이 클립보드를 덮어쓰던</b> 문제 수정(OSC 52 뮤트)</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v075"><span class="hash"></span> 0.7.5 — 대량 출력 멈춤 방지(백프레셔)</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.5</span><span class="d">2026-07-24</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>터미널 출력 흐름 제어(백프레셔)</b> — 명령이 화면 처리 속도보다 빠르게 대량 출력을 쏟아낼 때 <b>화면이 멈추거나 앱이 응답 없음</b>이 되던 문제 예방 — 로컬 터미널·SSH·AI 에이전트 뷰어 3경로 모두 화면이 그린 만큼만 출력 수신</li>
         <li><span class="cl-tag feat">feat</span>출력이 일시정지된 동안에도 <b>키 입력(Ctrl+C 등)은 계속 전달</b> — 폭주하는 명령을 즉시 중단 가능</li>
