@@ -74,10 +74,24 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v076"><span class="hash"></span> 0.7.6 — 세션 생존 리로드 · 렌더러 자가복구 · 에이전트 출력 뷰어</h2>
+    <h2 class="sec" id="v078"><span class="hash"></span> 0.7.8 — 한글 IME 기호 입력 · 브라우저 주소창 · 로컬 파일 열기</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.6</span><span class="d">2026-07-25</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>주소창에서 로컬 파일 열기</b> — <code>file:///…</code> 경로를 주소창에 넣으면 인앱 브라우저가 바로 엶(탐색기 "브라우저로 열기"와 같은 경로) — 예전엔 아무 안내 없이 빈 화면</li>
+        <li><span class="cl-tag feat">feat</span><b>브라우저를 잠시 숨길 때 안내</b> — 메모 패널처럼 위에 떠야 하는 창이 열리면 브라우저 화면이 잠깐 숨겨지는데, 그 자리에 <b>Hiding…</b> 표시로 "페이지가 안 뜬 것" 같은 오해 방지</li>
+        <li><span class="cl-tag fix">fix</span><b>macOS 한글 입력 중 <code>&gt;</code> <code>&lt;</code> <code>?</code> <code>~</code> <code>!</code> 기호가 입력되지 않던 문제</b> 수정 — 한글 상태에서 Shift와 함께 친 기호가 터미널에 아무것도 찍히지 않고 사라짐</li>
+        <li><span class="cl-tag fix">fix</span><b>macOS에서 사이트 접속 후 주소창이 <code>about:blank</code>로 바뀌던 문제</b> 수정(내부 프레임이 많은 사이트에서 발생)</li>
+        <li><span class="cl-tag fix">fix</span><b>SSH 패널을 열면 브라우저 탭이 사라지던 문제</b> 수정 — SSH 패널과 브라우저를 함께 사용 가능</li>
+        <li><span class="cl-tag fix">fix</span><b>Windows에서 앱 종료 시 이름이 같은 다른 프로그램(<code>app.exe</code>)까지 함께 종료되던 문제</b> 수정</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v076"><span class="hash"></span> 0.7.6 — 세션 생존 리로드 · 렌더러 자가복구 · 에이전트 출력 뷰어</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.6</span><span class="d">2026-07-25</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>세션 생존 리로드</b> — 리로드(새로고침·자가복구)가 일어나도 로컬 터미널이 <b>살아있는 세션에 재접속</b> — 실행 중이던 프로세스 유지 + 이전 출력(스크롤백) 복원으로 작업이 끊기지 않음</li>
         <li><span class="cl-tag feat">feat</span><b>렌더러 자가복구</b> — 화면이 멈추거나 렌더러가 비정상 종료되면 <b>네이티브 확인창</b>으로 다시 로드 제안 — 로컬 세션을 유지한 채 복구</li>
