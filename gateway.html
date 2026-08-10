@@ -186,7 +186,7 @@
         <tr><td><code>agent</code> / <code>ai</code></td><td>워커 종류 — claude · codex · agy (기본 <code>claude</code>)</td></tr>
         <tr><td><code>prompt</code> / <code>messages</code></td><td>보낼 프롬프트. 둘 다 비면 <code>400</code></td></tr>
         <tr><td><code>session</code></td><td>keepalive 키(옵션) — 값이면 워커 재사용, 비우면 1회성</td></tr>
-        <tr><td><code>model</code></td><td>받지만 현재는 무시됩니다(추후)</td></tr>
+        <tr><td><code>model</code></td><td>claude 워커에 <code>--model</code>로 전달됩니다(codex·agy는 무시). 워커를 띄울 때 1회 적용되므로, <code>session</code>으로 워커를 재사용하면 첫 호출의 모델이 계속 쓰입니다</td></tr>
       </tbody>
     </table>
 

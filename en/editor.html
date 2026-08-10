@@ -137,6 +137,20 @@
     <h2 class="sec" id="eol"><span class="hash"></span> EOL · line-ending preservation</h2>
     <p>It detects the line-ending style (<b>CRLF/LF/CR</b>) on open and <b>preserves the original EOL</b> on save. Clicking the EOL segment in the status bar brings up a conversion menu: <b>Windows (CRLF)</b>·<b>Unix (LF)</b>·<b>Macintosh (CR)</b>.</p>
 
+    <!-- Markdown preview -->
+    <h2 class="sec" id="markdown"><span class="hash"></span> Markdown preview</h2>
+    <p>Opening a <code>.md</code> file adds a <b>👁</b> toggle at the top right. The reading view does more than plain rendering:</p>
+    <ul>
+      <li><b>Mermaid diagrams</b> — <code>```mermaid</code> fences are drawn as SVG. On a syntax error it <b>keeps the original source</b> visible so you can fix it.</li>
+      <li><b>Math</b> — <code>$..$</code> (inline) and <code>$$..$$</code> (display) render with KaTeX. Currency like <code>$100</code> is not mistaken for math.</li>
+      <li><b>Code block highlighting</b> — name a language (<code>```ts</code>) and the block is highlighted in the <b>same colors as the editor</b>; hovering a block reveals a <b>copy button</b>.</li>
+      <li><b>GFM alerts</b> — <code>&gt; [!NOTE]</code>, <code>[!TIP]</code>, <code>[!IMPORTANT]</code>, <code>[!WARNING]</code>, and <code>[!CAUTION]</code> become colored callout boxes (a title can follow on the same line).</li>
+      <li><b>Relative images and links</b> — <code>![](./img/a.png)</code> resolves against the markdown file's own folder, <code>[x](./other.md)</code> opens <b>in an editor tab</b>, and external links open in the <a href="browser.html">in-app browser</a>.</li>
+      <li><b>Heading anchors</b> — in-document links like <code>[Contents](#section)</code> scroll to the heading inside the preview.</li>
+      <li>GFM basics such as tables and task lists (<code>- [x]</code>) are supported as well.</li>
+    </ul>
+    <p class="dim">Heavy features like Mermaid and math load only when the document actually uses that syntax, so opening an ordinary document is just as fast. The memo preview in <a href="notes.html">Notes</a> uses the same renderer.</p>
+
     <!-- blame -->
     <h2 class="sec" id="blame"><span class="hash"></span> GitLens-style blame</h2>
     <p>Turn on blame with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> (or the editor's top-right <span class="i" data-icon="blame"></span> button), and the gutter gains a per-line <b>author · relative time</b>. Lines that continue the same commit are shown <b>only on the group's first line</b>, and lines changed in the working tree appear as <b>Uncommitted</b>. Clicking a gutter line links to the commit details in the <a href="source-control.html">source control</a> panel, and hovering shows the commit hash, author, time, and subject as a tooltip.</p>

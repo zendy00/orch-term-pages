@@ -186,7 +186,7 @@
         <tr><td><code>agent</code> / <code>ai</code></td><td>Worker type — claude · codex · agy (default <code>claude</code>)</td></tr>
         <tr><td><code>prompt</code> / <code>messages</code></td><td>The prompt to send. If both are empty, <code>400</code></td></tr>
         <tr><td><code>session</code></td><td>keepalive key (optional) — a value reuses the worker, empty makes it one-shot</td></tr>
-        <tr><td><code>model</code></td><td>Accepted but currently ignored (for later)</td></tr>
+        <tr><td><code>model</code></td><td>Passed to the claude worker as <code>--model</code> (ignored for codex and agy). It applies when the worker starts, so reusing a worker via <code>session</code> keeps the model from the first call</td></tr>
       </tbody>
     </table>
 

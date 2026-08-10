@@ -137,6 +137,20 @@
     <h2 class="sec" id="eol"><span class="hash"></span> EOL · 줄바꿈 보존</h2>
     <p>열 때 줄바꿈 방식(<b>CRLF/LF/CR</b>)을 감지하고, 저장 시 <b>원본 EOL을 그대로 보존</b>합니다. 상태바 EOL 세그먼트를 클릭하면 <b>Windows (CRLF)</b>·<b>Unix (LF)</b>·<b>Macintosh (CR)</b> 변환 메뉴가 뜹니다.</p>
 
+    <!-- 마크다운 미리보기 -->
+    <h2 class="sec" id="markdown"><span class="hash"></span> 마크다운 미리보기</h2>
+    <p><code>.md</code> 파일을 열면 우상단에 <b>👁</b> 토글이 생깁니다. 읽기뷰는 단순 렌더가 아니라 다음을 함께 처리합니다.</p>
+    <ul>
+      <li><b>머메이드 다이어그램</b> — <code>```mermaid</code> 펜스를 SVG로 그립니다. 문법 오류여도 <b>원본 소스를 그대로 남겨</b> 고칠 수 있게 합니다.</li>
+      <li><b>수식</b> — <code>$..$</code>(인라인) · <code>$$..$$</code>(디스플레이)를 KaTeX로 렌더합니다. <code>$100</code> 같은 통화 표기는 수식으로 오인하지 않습니다.</li>
+      <li><b>코드블록 문법 강조</b> — <code>```ts</code> 처럼 언어를 적으면 <b>편집 화면과 같은 색</b>으로 강조하고, 블록에 호버하면 <b>복사 버튼</b>이 나타납니다.</li>
+      <li><b>GFM alert</b> — <code>&gt; [!NOTE]</code> · <code>[!TIP]</code> · <code>[!IMPORTANT]</code> · <code>[!WARNING]</code> · <code>[!CAUTION]</code> 를 색 박스로 표시합니다(첫 줄에 제목을 함께 쓸 수 있습니다).</li>
+      <li><b>상대경로 이미지 · 링크</b> — <code>![](./img/a.png)</code> 는 md 파일 위치를 기준으로 찾아 표시하고, <code>[x](./other.md)</code> 는 <b>에디터 탭으로</b>, 외부 링크는 <a href="browser.html">인앱 브라우저</a>로 엽니다.</li>
+      <li><b>헤딩 앵커</b> — <code>[목차](#섹션)</code> 같은 문서 내 링크가 미리보기 안에서 해당 위치로 이동합니다.</li>
+      <li>표 · 태스크 리스트(<code>- [x]</code>) 등 GFM 기본 문법도 그대로 지원합니다.</li>
+    </ul>
+    <p class="dim">머메이드·수식처럼 무거운 기능은 문서에 그 문법이 실제로 있을 때만 불러오므로, 평범한 문서를 여는 속도에는 영향이 없습니다. <a href="notes.html">노트</a>의 메모 미리보기도 같은 렌더를 씁니다.</p>
+
     <!-- blame -->
     <h2 class="sec" id="blame"><span class="hash"></span> GitLens식 blame</h2>
     <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>(또는 에디터 우상단 <span class="i" data-icon="blame"></span> 버튼)로 blame을 켜면, 거터에 줄별 <b>작성자 · 상대시각</b>이 붙습니다. 같은 커밋이 이어지는 줄은 <b>그룹 첫 줄에만</b> 표시하고, 작업트리에서 바뀐 줄은 <b>미커밋</b>으로 뜹니다. 거터 줄을 클릭하면 <a href="source-control.html">소스 컨트롤</a> 패널의 커밋 세부로 연결되고, 호버하면 커밋 해시·작성자·시각·제목이 툴팁으로 보입니다.</p>
