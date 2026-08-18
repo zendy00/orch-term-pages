@@ -94,6 +94,16 @@
       </div>
     </figure>
 
+    <!-- Rename -->
+    <h2 class="sec" id="rename"><span class="hash"></span> Rename — give a session your own title</h2>
+    <p>List titles come from the <b>first user message</b> in each CLI's transcript, so they are often long or look alike. <b>Right-click</b> a row and pick <b>Rename</b> to edit the title in place — <kbd>Enter</kbd> saves, <kbd>Esc</kbd> cancels.</p>
+    <ul>
+      <li><b>The original title stays</b> — a renamed row shows the original title in grey on a second line, so you never lose track of what the conversation was.</li>
+      <li><b>Undo</b> — pick <b>Reset to original title</b> from the same menu, or save an <b>empty name</b>, to go back.</li>
+      <li><b>Tabs follow</b> — resuming a renamed session labels the new terminal tab with that name too (unnamed sessions keep <code>claude</code>·<code>codex</code>·<code>agy</code> as before).</li>
+      <li><b>Stored locally</b> — names live in orchterm's own settings; the CLI transcript files are never modified.</li>
+    </ul>
+
     <!-- Resume -->
     <h2 class="sec" id="resume"><span class="hash"></span> Resume — pick up in the original folder</h2>
     <p>Click a row to resume the conversation in a <b>new terminal tab</b> in that session's <b>original working folder (cwd)</b>. It runs the right command per CLI automatically.</p>
@@ -109,7 +119,7 @@
 
     <!-- Bypass permissions -->
     <h2 class="sec" id="bypass"><span class="hash"></span> Bypass permissions — resume without approvals</h2>
-    <p>Turn on the <b>Bypass permissions</b> checkbox in the session panel header and resuming will automatically add each CLI's <b>bypass-permissions flag</b>, so the session picks up immediately without folder-trust or tool-approval prompts. The checkbox state is saved and <b>persists across app restarts</b> (off by default).</p>
+    <p>Turn on the <b>Bypass permissions</b> switch in the session panel header and resuming will automatically add each CLI's <b>bypass-permissions flag</b>, so the session picks up immediately without folder-trust or tool-approval prompts. The switch state is saved and <b>persists across app restarts</b> (off by default).</p>
     <table class="kbds">
       <thead><tr><th>Agent</th><th>Resume command (bypass on)</th></tr></thead>
       <tbody>

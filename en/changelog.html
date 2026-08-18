@@ -74,10 +74,27 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v078"><span class="hash"></span> 0.7.8 — Korean IME symbols · browser address bar · opening local files</h2>
+    <h2 class="sec" id="v079"><span class="hash"></span> 0.7.9 — Richer Markdown preview · agent-created local HTML · session names</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>Richer Markdown preview</b> — the reading view (👁) and note memos now render <b>Mermaid diagrams</b>, <b>math (KaTeX)</b>, <b>syntax-highlighted code</b>, GFM alerts (<code>&gt; [!NOTE]</code>) and a copy button on code blocks</li>
+        <li><span class="cl-tag feat">feat</span><b>Rename sessions</b> — right-click an entry in the resume list to name it; the original title stays below in grey and the name carries over to the tab when you resume</li>
+        <li><span class="cl-tag feat">feat</span><b>AI gateway</b> — audit logs sorted newest-request-first, and the model given in a request is passed through to the worker</li>
+        <li><span class="cl-tag fix">fix</span>fixed <b>HTML created by an agent opening as <code>about:blank</code> or a blank page</b> in the in-app browser — two-slash addresses (<code>file://D:/report.html</code>) and plain paths (<code>D:\work\report.html</code>, <code>/Users/me/report.html</code>) now open as-is</li>
+        <li><span class="cl-tag fix">fix</span>fixed <b>open failures being swallowed</b> — the reason is now shown in the tab, editing the address retries, and agents receive the failure instead of reporting a false success</li>
+        <li><span class="cl-tag fix">fix</span><b>local file tabs are titled with the file name</b> (and keep it after a restore)</li>
+        <li><span class="cl-tag fix">fix</span>fixed <b>the colour picker being orphaned when a tab closed itself</b>, which left the browser view hidden for good (when a shell exited and closed its terminal tab)</li>
+        <li><span class="cl-tag fix">fix</span>fixed <b>broken relative-path images/links and table-of-contents anchors (<code>[toc](#section)</code>)</b> in the Markdown preview</li>
+        <li><span class="cl-tag feat">feat</span><b>diagnostic log file</b> for problem reports (warnings and above, 1 MB rotating) + a notice that in-app browser agent tools need <b>Node 20.19+</b> (Settings → Agent mirror)</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v078"><span class="hash"></span> 0.7.8 — Korean IME symbols · browser address bar · opening local files</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>Open local files from the address bar</b> — type a <code>file:///…</code> path and the in-app browser opens it (the same path Explorer's "Open in browser" uses) — it previously went to a blank page with no explanation</li>
         <li><span class="cl-tag feat">feat</span><b>A notice while the browser is temporarily hidden</b> — panels that must float on top (such as Notes) briefly hide the browser view; the spot now reads <b>Hiding…</b> so it no longer looks like the page failed to load</li>

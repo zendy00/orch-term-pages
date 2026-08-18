@@ -74,10 +74,27 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v078"><span class="hash"></span> 0.7.8 — 한글 IME 기호 입력 · 브라우저 주소창 · 로컬 파일 열기</h2>
+    <h2 class="sec" id="v079"><span class="hash"></span> 0.7.9 — 마크다운 미리보기 강화 · 에이전트 로컬 HTML 열기 · 세션 이름</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>마크다운 미리보기 강화</b> — 읽기뷰(👁)·노트 메모에서 <b>머메이드 다이어그램</b>·<b>수식(KaTeX)</b>·<b>코드 문법 강조</b>·GFM 경고 블록(<code>&gt; [!NOTE]</code>)·코드 복사 버튼 동작</li>
+        <li><span class="cl-tag feat">feat</span><b>세션 목록 이름 바꾸기</b> — 이어가기 목록 항목을 우클릭해 이름 지정, 원래 제목은 아래 회색으로 병기, 이어간 탭 이름에도 반영</li>
+        <li><span class="cl-tag feat">feat</span><b>AI 게이트웨이</b> — 감사 로그 최신순 정렬 + 요청에 지정한 모델을 워커에 전달</li>
+        <li><span class="cl-tag fix">fix</span><b>에이전트가 만든 HTML을 인앱 브라우저로 열면 <code>about:blank</code>·빈 화면이 뜨던 문제</b> 수정 — 슬래시 2개 주소(<code>file://D:/보고서.html</code>)와 스킴 없는 경로(<code>D:\작업\보고서.html</code>·<code>/Users/me/report.html</code>)도 그대로 열림</li>
+        <li><span class="cl-tag fix">fix</span><b>열기 실패를 조용히 삼키던 문제</b> 수정 — 사유를 화면에 표시하고 주소창 재입력으로 재시도, 에이전트에도 실패가 전달돼 "열었습니다" 오보 방지</li>
+        <li><span class="cl-tag fix">fix</span><b>로컬 파일 탭 이름이 파일명으로</b> 표시(복원 후에도 유지)</li>
+        <li><span class="cl-tag fix">fix</span><b>탭이 스스로 닫히면 색 선택창이 남아 브라우저가 영영 숨겨지던 문제</b> 수정(셸 종료로 터미널 탭이 자동으로 닫힐 때 발생)</li>
+        <li><span class="cl-tag fix">fix</span><b>마크다운 미리보기의 상대경로 이미지·링크와 목차 앵커(<code>[목차](#섹션)</code>)가 깨지던 문제</b> 수정</li>
+        <li><span class="cl-tag feat">feat</span>문제 신고 진단용 <b>앱 로그 파일</b>(경고 이상·1MB 회전) + 인앱 브라우저 에이전트 도구의 <b>Node 20.19+ 요구 안내</b>(설정 → 에이전트 미러)</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v078"><span class="hash"></span> 0.7.8 — 한글 IME 기호 입력 · 브라우저 주소창 · 로컬 파일 열기</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>주소창에서 로컬 파일 열기</b> — <code>file:///…</code> 경로를 주소창에 넣으면 인앱 브라우저가 바로 엶(탐색기 "브라우저로 열기"와 같은 경로) — 예전엔 아무 안내 없이 빈 화면</li>
         <li><span class="cl-tag feat">feat</span><b>브라우저를 잠시 숨길 때 안내</b> — 메모 패널처럼 위에 떠야 하는 창이 열리면 브라우저 화면이 잠깐 숨겨지는데, 그 자리에 <b>Hiding…</b> 표시로 "페이지가 안 뜬 것" 같은 오해 방지</li>
