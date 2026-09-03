@@ -6,7 +6,7 @@
 <script src="../_lang.js"></script>
 <link rel="icon" href="../assets/app-icon.png" />
 <title>Session list (resume) — Orch term guide</title>
-<meta name="description" content="Orch term session list: the sidebar Sessions mode (Ctrl+Shift+S) gathers the active project's claude · codex · agy conversations by date, and resumes them in their original folder with one click." />
+<meta name="description" content="Orch term session list: the sidebar Sessions mode (Ctrl+Shift+S) gathers the active project's claude · codex · agy · grok · opencode · hermes conversations by date, and resumes them in their original folder with one click. Conversations come back after an app restart, and the name you give a tab becomes the conversation's name." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/sessions.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/sessions.html" />
@@ -78,7 +78,7 @@
 
     <p class="eyebrow"><span class="hash"></span> Core features · Session list</p>
     <h1 class="page-title">Session list (resume)</h1>
-    <p class="lede">The 5th sidebar mode, "Sessions", gathers the <b>AI CLI agent (claude · codex · agy)</b> conversations you ran in the active project in one place and resumes them with a single click. orchterm doesn't record them separately — it reads the <b>transcript sidecars</b> the three CLIs leave on disk directly (parse-don't-ask).</p>
+    <p class="lede">The 5th sidebar mode, "Sessions", gathers the <b>AI CLI agent (claude · codex · agy · grok · opencode · hermes)</b> conversations you ran in the active project in one place and resumes them with a single click. orchterm doesn't record them separately — it reads the <b>conversation records</b> each CLI leaves on disk directly (parse-don't-ask). Conversations <b>come back automatically after an app restart</b>, and <b>the name you give a tab becomes the conversation's name</b>.</p>
 
     <!-- Open -->
     <h2 class="sec" id="open"><span class="hash"></span> Opening the session panel</h2>
@@ -86,7 +86,7 @@
 
     <!-- List -->
     <h2 class="sec" id="list"><span class="hash"></span> List — date groups · agent icons · meta</h2>
-    <p>Sessions are sorted <b>newest first</b> and bucketed into <b>date groups</b> (Today / Yesterday / YYYY-MM-DD). Each row shows a <b>brand icon</b> that tells you which CLI it is, plus the title (first user message), a relative time, and (if any) the git branch.</p>
+    <p>Sessions are sorted <b>newest first</b> and bucketed into <b>date groups</b> (Today / Yesterday / YYYY-MM-DD). Each row shows a <b>brand icon</b> that tells you which CLI it is, plus the title (first user message), a relative time, and (if any) the git branch. CLIs without a brand icon yet (grok · opencode · hermes) show their name as text.</p>
     <figure class="fig">
       <div class="shot">
         <img class="shot-img" src="../assets/shots/en/sessions-list.png" alt="Session list — claude·codex·agy sessions of 21.zendy-terminal grouped by Today/Yesterday/date, real brand icons, git branch (· main · worktree-ssh-core) shown for claude only" style="max-width:312px;display:block;margin:0 auto;border-radius:var(--r-md)" />
@@ -100,8 +100,18 @@
     <ul>
       <li><b>The original title stays</b> — a renamed row shows the original title in grey on a second line, so you never lose track of what the conversation was.</li>
       <li><b>Undo</b> — pick <b>Reset to original title</b> from the same menu, or save an <b>empty name</b>, to go back.</li>
-      <li><b>Tabs follow</b> — resuming a renamed session labels the new terminal tab with that name too (unnamed sessions keep <code>claude</code>·<code>codex</code>·<code>agy</code> as before).</li>
+      <li><b>Tabs follow</b> — resuming a renamed session labels the new terminal tab with that name too (unnamed sessions keep the agent's name as before). If the conversation is already running in an open tab, <b>that tab's name changes right away</b>.</li>
       <li><b>Stored locally</b> — names live in orchterm's own settings; the CLI transcript files are never modified.</li>
+    </ul>
+
+    <!-- Tab name = conversation name -->
+    <h2 class="sec" id="tabname"><span class="hash"></span> Tab name = conversation name</h2>
+    <p>It works the other way too. <b>Rename a terminal tab</b> and the AI conversation running in it appears under <b>that same name</b> in the session list. Double-click the tab title, or right-click the tab and pick <b>Rename</b>.</p>
+    <ul>
+      <li><b>Order doesn't matter</b> — name the tab <b>first</b> and start <code>codex</code> later; the name attaches the moment the conversation appears.</li>
+      <li><b>It follows you across conversations</b> — switch to a different conversation inside one tab (claude's <code>/resume</code>, say) and the new one picks up the tab's name too. Think of the tab name as that tab's identity.</li>
+      <li><b>Default labels don't count</b> — automatic labels like <code>bash</code> or <code>Windows PowerShell</code> are never saved. Only a name you set yourself becomes a conversation name.</li>
+      <li><b>Undo</b> — picking <b>Reset to original title</b> in the session list also returns the tab running it to the original title.</li>
     </ul>
 
     <!-- Resume -->
@@ -112,10 +122,13 @@
       <tbody>
         <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --resume &lt;id&gt;</code></td></tr>
         <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex resume &lt;id&gt;</code></td></tr>
-        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>antigravity --conversation &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>agy --conversation &lt;id&gt;</code></td></tr>
+        <tr><td>grok</td><td><code>grok --resume &lt;id&gt;</code></td></tr>
+        <tr><td>opencode</td><td><code>opencode --session &lt;id&gt;</code></td></tr>
+        <tr><td>hermes</td><td><code>hermes --resume &lt;id&gt;</code></td></tr>
       </tbody>
     </table>
-    <p class="note">⚠️ Resume works only if that CLI (<code>claude</code> · <code>codex</code> · <code>antigravity</code>) is on the system <code>PATH</code>.</p>
+    <p class="note">⚠️ Resume works only if that CLI (<code>claude</code> · <code>codex</code> · <code>agy</code> · <code>grok</code> · <code>opencode</code> · <code>hermes</code>) is on the system <code>PATH</code>.</p>
 
     <!-- Bypass permissions -->
     <h2 class="sec" id="bypass"><span class="hash"></span> Bypass permissions — resume without approvals</h2>
@@ -125,10 +138,24 @@
       <tbody>
         <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --dangerously-skip-permissions --resume &lt;id&gt;</code></td></tr>
         <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex --dangerously-bypass-approvals-and-sandbox resume &lt;id&gt;</code></td></tr>
-        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>antigravity --dangerously-skip-permissions --conversation &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>agy --dangerously-skip-permissions --conversation &lt;id&gt;</code></td></tr>
+        <tr><td>grok · opencode · hermes</td><td>No flag is added — only CLIs with a verified bypass flag get one (guessing a flag would make the CLI fail to start)</td></tr>
       </tbody>
     </table>
     <p class="note">⚠️ Bypass permissions is a <b>risky, not-recommended</b> option for unattended runs — when on, the agent writes files and runs commands without asking. It is <b>off by default (safe mode)</b>, so enable it only in projects you trust. Unchecking it restores the usual one-time folder-trust approval.</p>
+
+    <!-- Restore on restart -->
+    <h2 class="sec" id="restore"><span class="hash"></span> Conversations survive a restart</h2>
+    <p>Quit and reopen the app and the <b>AI conversation that was running in each terminal tab comes back on its own</b>. orchterm remembers which conversation was running in which tab and brings the same one back to the same place — for all six CLIs.</p>
+    <ul>
+      <li><b>However you started it</b> — not just tabs resumed from the session list, but ones <b>you typed into a shell yourself</b>, ones behind an <b>alias</b> (say <code>cl</code> for <code>claude</code>), and ones launched through a wrapper script. It looks at the <b>process actually running</b> in that tab rather than at the text of the command you typed.</li>
+      <li><b>After a force-quit or a crash</b> — not only a clean exit; killing the app from Task Manager or a crash restores just the same.</li>
+      <li><b>The conversation you switched to</b> — if you moved to a different conversation inside the CLI (<code>/resume</code> and friends), you come back to the last one you were in.</li>
+      <li><b>Conversations you ended stay ended</b> — if you exited the agent in a tab, that tab opens as a plain shell. The same conversation is never opened in two tabs at once.</li>
+      <li><b>Without a conversation id it falls back to "continue the last one"</b> (<code>claude --continue</code> · <code>codex resume --last</code> · <code>hermes --continue</code>). agy has no such option, so it is restored only when the id is known.</li>
+      <li><b>Turning it off</b> — Settings → Terminal → <b>Agent session restore</b>. With it off the tabs still come back; only the conversations aren't resumed.</li>
+    </ul>
+    <p class="note">Duplicated tabs and tabs torn out into their own window do not resume the conversation — that would attach two processes to one conversation. SSH terminals are out of scope too (a remote conversation can't be picked up locally).</p>
 
     <!-- Pagination · loading -->
     <h2 class="sec" id="loading"><span class="hash"></span> Incremental display · loading bar</h2>
@@ -155,7 +182,18 @@
 
     <!-- Cross-platform -->
     <h2 class="sec" id="cross"><span class="hash"></span> Cross-platform · how it finds them</h2>
-    <p>The transcript paths the three CLIs leave (<code>~/.claude/projects</code> · <code>~/.codex/sessions</code> · <code>~/.gemini/antigravity-cli/history.jsonl</code>) are the same on Windows, macOS, and Linux. It picks only sessions run in the same folder as the active project, normalizing path comparison per OS convention (lowercasing on Windows only). The backend is a <b>pure filesystem scanner</b> independent of any DB, and all three adapters parse JSONL.</p>
+        <p>It reads each CLI's conversation store where it already lives. It picks only sessions run in the same folder as the active project, normalizing path comparison per OS convention (lowercasing on Windows only). The backend is a <b>read-only scanner</b>, independent of orchterm's own DB — it never writes to another tool's files.</p>
+    <table class="kbds">
+      <thead><tr><th>Agent</th><th>Conversation store</th></tr></thead>
+      <tbody>
+        <tr><td>claude</td><td><code>~/.claude/projects</code></td></tr>
+        <tr><td>codex</td><td><code>~/.codex/sessions</code></td></tr>
+        <tr><td>agy</td><td><code>~/.gemini/antigravity-cli/</code> (<code>history.jsonl</code> + <code>conversations/*.db</code>)</td></tr>
+        <tr><td>grok</td><td><code>~/.grok/sessions/…/summary.json</code> (<code>$GROK_HOME</code> wins)</td></tr>
+        <tr><td>opencode</td><td><code>~/.local/share/opencode/opencode.db</code> (<code>$XDG_DATA_HOME</code> wins)</td></tr>
+        <tr><td>hermes</td><td>Windows <code>%LOCALAPPDATA%\hermes\state.db</code> · elsewhere <code>~/.hermes/state.db</code> (<code>$HERMES_HOME</code> wins)</td></tr>
+      </tbody>
+    </table>
 
     <!-- Shortcuts -->
     <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>

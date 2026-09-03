@@ -74,10 +74,27 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v079"><span class="hash"></span> 0.7.9 — Richer Markdown preview · agent-created local HTML · session names</h2>
+    <h2 class="sec" id="v080"><span class="hash"></span> 0.8.0 — Agent session restore · tab name = conversation name · in-app browser freezes fixed</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>AI conversations survive a restart</b> — the Claude Code, Codex, Antigravity, Grok, opencode or Hermes conversation running in each terminal tab reopens on its own. It recognises agents you typed into a shell yourself and aliases (<code>cl</code>), survives force-quits and crashes, and returns to whichever conversation you switched to (turn it off under Settings → Terminal)</li>
+        <li><span class="cl-tag feat">feat</span><b>The name you give a tab becomes the conversation's name</b> — rename a terminal tab and its AI conversation shows up under that name in the session list. Order doesn't matter (name it first and start the agent later), and renaming in the list moves the tab name too</li>
+        <li><span class="cl-tag feat">feat</span><b>The session list covers all six CLIs</b> — Grok, opencode and Hermes join Claude, Codex and Antigravity (<code>Ctrl+Shift+S</code>)</li>
+        <li><span class="cl-tag feat">feat</span><b>Revive stalled browser tabs</b> added to the command palette — reopens the same address without closing the tab (<code>Ctrl+Shift+P</code>)</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed the app slowing down or freezing while using the in-app browser</b> — dozens to hundreds of pointless commands per second were fired at a dead browser view on every divider drag or window resize (1,412 in a day of real logs); it now sends one only when the state changes</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed browser tabs going blank with no explanation</b> — the reason now shows inside the tab, re-entering the address reopens it, and reopening the same address works</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed some terminal tabs coming back blank after a restart</b> — during restore a later tab could latch onto a previous tab's shell (11 tabs against 9 live shells)</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed resuming a Codex conversation failing</b> with <code>No saved session found with ID</code></li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed a new terminal inheriting the conversation when the app was launched from inside an AI session</b> — this had been dropping whole tabs from the restore</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v079"><span class="hash"></span> 0.7.9 — Richer Markdown preview · agent-created local HTML · session names</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>Richer Markdown preview</b> — the reading view (👁) and note memos now render <b>Mermaid diagrams</b>, <b>math (KaTeX)</b>, <b>syntax-highlighted code</b>, GFM alerts (<code>&gt; [!NOTE]</code>) and a copy button on code blocks</li>
         <li><span class="cl-tag feat">feat</span><b>Rename sessions</b> — right-click an entry in the resume list to name it; the original title stays below in grey and the name carries over to the tab when you resume</li>

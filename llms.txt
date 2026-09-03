@@ -16,6 +16,7 @@ Base URL: https://zendy00.github.io/orch-term-pages/
 - [Workstation](https://zendy00.github.io/orch-term-pages/en/workstation.html): workspace model, panes, and operator workflow.
 - [Terminal](https://zendy00.github.io/orch-term-pages/en/terminal.html): terminal usage and local shells.
 - [Orchestration](https://zendy00.github.io/orch-term-pages/en/orchestration.html): multi-agent sessions and worker coordination.
+- [Sessions](https://zendy00.github.io/orch-term-pages/en/sessions.html): resuming past agent conversations, naming sessions, and automatic restore after an app restart.
 - [Notes](https://zendy00.github.io/orch-term-pages/en/notes.html): floating notes with Markdown, drawings, sequence diagrams, and bidirectional Mermaid flowcharts.
 - [Tasks](https://zendy00.github.io/orch-term-pages/en/tasks.html): task board and work tracking.
 - [Task AI Sharing](https://zendy00.github.io/orch-term-pages/en/task-ai-sharing.html): sharing task context with AI agents.

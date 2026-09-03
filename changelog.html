@@ -74,10 +74,27 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v079"><span class="hash"></span> 0.7.9 — 마크다운 미리보기 강화 · 에이전트 로컬 HTML 열기 · 세션 이름</h2>
+    <h2 class="sec" id="v080"><span class="hash"></span> 0.8.0 — 에이전트 세션 복원 · 탭 이름=대화 이름 · 인앱 브라우저 멎음 수정</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>재시작해도 AI 대화가 그대로</b> — 각 터미널 탭에서 돌던 Claude Code·Codex·Antigravity·Grok·opencode·Hermes 대화가 자동으로 다시 열립니다. 셸에 직접 친 것과 별칭(<code>cl</code>)도 알아내고, 강제 종료·크래시 뒤에도 복원하며, 대화를 갈아탔으면 갈아탄 그 대화로 돌아옵니다(설정 → 터미널에서 끌 수 있음)</li>
+        <li><span class="cl-tag feat">feat</span><b>탭에 붙인 이름이 곧 대화 이름</b> — 터미널 탭 이름을 바꾸면 그 탭의 AI 대화가 세션 목록에서도 같은 이름으로 보입니다. 순서는 상관없고(이름을 먼저 붙이고 나중에 실행해도 붙습니다), 목록에서 이름을 바꾸면 탭 이름도 따라갑니다</li>
+        <li><span class="cl-tag feat">feat</span><b>세션 목록이 여섯 CLI를 모두 지원</b> — 기존 Claude·Codex·Antigravity에 Grok·opencode·Hermes 추가(<code>Ctrl+Shift+S</code>)</li>
+        <li><span class="cl-tag feat">feat</span><b>멈춘 브라우저 탭 되살리기</b>를 명령 팔레트에 추가 — 탭을 닫지 않고 보던 주소 그대로 다시 엽니다(<code>Ctrl+Shift+P</code>)</li>
+        <li><span class="cl-tag fix">fix</span><b>인앱 브라우저를 쓰다 앱이 느려지거나 멎던 문제</b> 수정 — 죽은 브라우저 화면에 구분선 드래그·창 크기 변경마다 초당 수십~수백 건씩 헛명령을 보내던 것을 상태가 바뀔 때만 보내도록(실측 하루 1412건)</li>
+        <li><span class="cl-tag fix">fix</span><b>브라우저 탭이 설명 없이 백지로 남던 문제</b> 수정 — 사유를 탭 안에 표시하고 주소창 재입력으로 다시 엽니다. 같은 주소 재열기도 동작</li>
+        <li><span class="cl-tag fix">fix</span><b>재시작 후 일부 터미널 탭이 빈 화면으로 남던 문제</b> 수정 — 복원 도중 뒤 탭이 앞 탭의 셸을 가로채던 것(탭 11개에 셸 9개)</li>
+        <li><span class="cl-tag fix">fix</span><b>Codex 대화 이어가기 실패</b> 수정 — <code>No saved session found with ID</code>로 재개가 안 되던 문제</li>
+        <li><span class="cl-tag fix">fix</span><b>AI 대화 안에서 앱을 실행하면 새 터미널이 그 대화를 물려받던 문제</b> 수정 — 복원해야 할 탭이 통째로 누락되곤 했습니다</li>
+      </ul>
+    </div>
+
+    <h2 class="sec" id="v079"><span class="hash"></span> 0.7.9 — 마크다운 미리보기 강화 · 에이전트 로컬 HTML 열기 · 세션 이름</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>마크다운 미리보기 강화</b> — 읽기뷰(👁)·노트 메모에서 <b>머메이드 다이어그램</b>·<b>수식(KaTeX)</b>·<b>코드 문법 강조</b>·GFM 경고 블록(<code>&gt; [!NOTE]</code>)·코드 복사 버튼 동작</li>
         <li><span class="cl-tag feat">feat</span><b>세션 목록 이름 바꾸기</b> — 이어가기 목록 항목을 우클릭해 이름 지정, 원래 제목은 아래 회색으로 병기, 이어간 탭 이름에도 반영</li>

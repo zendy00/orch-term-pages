@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>세션 목록 (이어가기) — Orch term 가이드</title>
-<meta name="description" content="Orch term 세션 목록: 사이드바 세션 모드(Ctrl+Shift+S)로 활성 프로젝트의 claude·codex·agy 대화를 날짜별로 모아 보고, 클릭 한 번으로 원래 폴더에서 이어갑니다." />
+<meta name="description" content="Orch term 세션 목록: 사이드바 세션 모드(Ctrl+Shift+S)로 활성 프로젝트의 claude·codex·agy·grok·opencode·hermes 대화를 날짜별로 모아 보고, 클릭 한 번으로 원래 폴더에서 이어갑니다. 앱을 재시작하면 돌던 대화가 자동으로 복원되고, 탭에 붙인 이름이 곧 대화 이름이 됩니다." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/sessions.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/sessions.html" />
@@ -78,7 +78,7 @@
 
     <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 세션 목록</p>
     <h1 class="page-title">세션 목록 (이어가기)</h1>
-    <p class="lede">사이드바 5번째 모드 "세션"으로, 활성 프로젝트에서 진행한 <b>AI CLI 에이전트(claude · codex · agy)</b> 대화를 한곳에 모아 보고 클릭 한 번으로 이어갑니다. orchterm이 따로 기록하지 않고, 세 CLI가 디스크에 남기는 <b>transcript 사이드카</b>를 직접 읽습니다(parse-don't-ask).</p>
+    <p class="lede">사이드바 5번째 모드 "세션"으로, 활성 프로젝트에서 진행한 <b>AI CLI 에이전트(claude · codex · agy · grok · opencode · hermes)</b> 대화를 한곳에 모아 보고 클릭 한 번으로 이어갑니다. orchterm이 따로 기록하지 않고, 각 CLI가 디스크에 남기는 <b>대화 기록</b>을 직접 읽습니다(parse-don't-ask). 앱을 <b>재시작하면 돌고 있던 대화가 자동으로 복원</b>되고, <b>탭에 붙인 이름이 곧 대화 이름</b>이 됩니다.</p>
 
     <!-- 열기 -->
     <h2 class="sec" id="open"><span class="hash"></span> 세션 패널 열기</h2>
@@ -86,7 +86,7 @@
 
     <!-- 목록 -->
     <h2 class="sec" id="list"><span class="hash"></span> 목록 — 날짜 그룹 · 에이전트 아이콘 · 메타</h2>
-    <p>세션은 <b>최신순</b>으로 정렬되어 <b>날짜 그룹</b>(오늘 / 어제 / YYYY-MM-DD)으로 묶입니다. 각 행은 어떤 CLI인지 알려주는 <b>브랜드 아이콘</b> + 제목(첫 사용자 메시지) + 상대시각 + (있으면) git 브랜치를 보여줍니다.</p>
+    <p>세션은 <b>최신순</b>으로 정렬되어 <b>날짜 그룹</b>(오늘 / 어제 / YYYY-MM-DD)으로 묶입니다. 각 행은 어떤 CLI인지 알려주는 <b>브랜드 아이콘</b> + 제목(첫 사용자 메시지) + 상대시각 + (있으면) git 브랜치를 보여줍니다. 브랜드 아이콘이 아직 없는 CLI(grok · opencode · hermes)는 이름을 글자로 표시합니다.</p>
     <figure class="fig">
       <div class="shot">
         <img class="shot-img" src="./assets/shots/sessions-list.png" alt="세션 목록 — 21.zendy-terminal의 claude·codex·agy 세션이 오늘/어제/날짜로 그룹, 실제 브랜드 아이콘, claude만 git 브랜치(· main · worktree-ssh-core) 표시" style="max-width:312px;display:block;margin:0 auto;border-radius:var(--r-md)" />
@@ -100,8 +100,18 @@
     <ul>
       <li><b>원래 제목은 남습니다</b> — 이름을 붙인 행은 내가 지은 제목 아래에 원래 제목이 회색으로 한 줄 더 표시되어, 어떤 대화였는지 단서를 잃지 않습니다.</li>
       <li><b>되돌리기</b> — 우클릭 메뉴의 <b>원래 제목으로</b>를 고르거나, 이름을 <b>비워서 저장</b>하면 원래 제목으로 돌아갑니다.</li>
-      <li><b>탭 이름까지</b> — 이름을 붙인 세션을 이어가면 새로 열리는 터미널 탭도 그 이름을 씁니다(이름이 없으면 기존처럼 <code>claude</code>·<code>codex</code>·<code>agy</code>).</li>
+      <li><b>탭 이름까지</b> — 이름을 붙인 세션을 이어가면 새로 열리는 터미널 탭도 그 이름을 씁니다(이름이 없으면 기존처럼 에이전트 이름). 이미 열려 있는 탭에서 그 대화가 돌고 있다면 <b>그 탭 이름도 즉시 따라 바뀝니다</b>.</li>
       <li><b>내 컴퓨터에만 저장</b> — 이름은 orchterm 설정에만 저장되고, CLI가 남긴 대화 기록 파일은 건드리지 않습니다.</li>
+    </ul>
+
+    <!-- 탭 이름 = 대화 이름 -->
+    <h2 class="sec" id="tabname"><span class="hash"></span> 탭 이름 = 대화 이름</h2>
+    <p>반대 방향도 됩니다. <b>터미널 탭 이름을 바꾸면</b>, 그 탭에서 돌고 있는 AI 대화가 세션 목록에서도 <b>같은 이름</b>으로 보입니다. 탭 제목을 더블클릭하거나 탭 우클릭 → <b>이름변경</b>으로 바꾸면 됩니다.</p>
+    <ul>
+      <li><b>순서는 상관없습니다</b> — 이름을 <b>먼저</b> 붙여 두고 나중에 <code>codex</code>를 실행해도, 그 대화가 뜨는 순간 이름이 붙습니다.</li>
+      <li><b>대화를 갈아타도 따라옵니다</b> — 한 탭 안에서 다른 대화로 전환하면(예: claude의 <code>/resume</code>) 새 대화에도 그 탭 이름이 붙습니다. 탭 이름은 그 탭의 정체성이라고 보면 됩니다.</li>
+      <li><b>기본 이름은 대상이 아닙니다</b> — <code>bash</code>·<code>Windows PowerShell</code> 같은 자동 라벨은 저장되지 않습니다. 직접 바꾼 이름만 대화 이름이 됩니다.</li>
+      <li><b>되돌리기</b> — 세션 목록에서 <b>원래 제목으로</b>를 고르면 그 대화가 돌고 있는 탭 이름도 원래 제목으로 돌아갑니다.</li>
     </ul>
 
     <!-- 이어가기 -->
@@ -112,10 +122,13 @@
       <tbody>
         <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --resume &lt;id&gt;</code></td></tr>
         <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex resume &lt;id&gt;</code></td></tr>
-        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>antigravity --conversation &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>agy --conversation &lt;id&gt;</code></td></tr>
+        <tr><td>grok</td><td><code>grok --resume &lt;id&gt;</code></td></tr>
+        <tr><td>opencode</td><td><code>opencode --session &lt;id&gt;</code></td></tr>
+        <tr><td>hermes</td><td><code>hermes --resume &lt;id&gt;</code></td></tr>
       </tbody>
     </table>
-    <p class="note">⚠️ 이어가기는 해당 CLI(<code>claude</code> · <code>codex</code> · <code>antigravity</code>)가 시스템 <code>PATH</code>에 있어야 동작합니다.</p>
+    <p class="note">⚠️ 이어가기는 해당 CLI(<code>claude</code> · <code>codex</code> · <code>agy</code> · <code>grok</code> · <code>opencode</code> · <code>hermes</code>)가 시스템 <code>PATH</code>에 있어야 동작합니다.</p>
 
     <!-- 권한 우회 -->
     <h2 class="sec" id="bypass"><span class="hash"></span> 권한 우회 — 승인 없이 이어가기</h2>
@@ -125,10 +138,24 @@
       <tbody>
         <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --dangerously-skip-permissions --resume &lt;id&gt;</code></td></tr>
         <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex --dangerously-bypass-approvals-and-sandbox resume &lt;id&gt;</code></td></tr>
-        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>antigravity --dangerously-skip-permissions --conversation &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>agy --dangerously-skip-permissions --conversation &lt;id&gt;</code></td></tr>
+        <tr><td>grok · opencode · hermes</td><td>플래그를 붙이지 않습니다 — 확인된 우회 플래그가 있는 CLI에만 적용합니다(모르는 플래그를 넣으면 실행 자체가 실패합니다)</td></tr>
       </tbody>
     </table>
     <p class="note">⚠️ 권한 우회는 무인 실행을 위한 <b>비권장·위험</b> 옵션입니다 — 켜면 에이전트가 승인 없이 파일 쓰기·명령 실행을 합니다. <b>기본값은 꺼짐(안전 모드)</b>이니 신뢰하는 프로젝트에서만 켜세요. 스위치를 끄면 기존처럼 최초 1회 폴더 트러스트 승인을 거칩니다.</p>
+
+    <!-- 재시작 복원 -->
+    <h2 class="sec" id="restore"><span class="hash"></span> 재시작해도 대화가 그대로</h2>
+    <p>앱을 껐다 켜면, 각 터미널 탭에서 <b>돌고 있던 AI 대화가 자동으로 다시 열립니다</b>. 어떤 탭에서 무슨 대화가 돌고 있었는지 orchterm이 기억해 두었다가 같은 자리에 같은 대화를 띄웁니다 — 여섯 CLI 모두 지원합니다.</p>
+    <ul>
+      <li><b>어떻게 띄웠든 알아냅니다</b> — 세션 목록에서 이어간 탭뿐 아니라, <b>셸에 직접 친 것</b>과 <b>별칭</b>(예: <code>cl</code>로 등록한 <code>claude</code>), 래퍼 스크립트로 띄운 것까지 잡습니다. 입력한 명령의 글자를 보는 게 아니라 그 탭에서 실제로 돌고 있는 <b>프로세스</b>를 보기 때문입니다.</li>
+      <li><b>강제 종료·크래시 뒤에도</b> — 정상 종료만이 아니라 작업 관리자로 죽이거나 앱이 튕겨도 복원됩니다.</li>
+      <li><b>대화를 갈아탔다면 갈아탄 그 대화로</b> — CLI 안에서 다른 대화로 전환했으면(<code>/resume</code> 등) 마지막에 보던 대화로 돌아옵니다.</li>
+      <li><b>끝낸 대화는 되살리지 않습니다</b> — 탭에서 에이전트를 종료했다면 그 탭은 평범한 셸로 열립니다. 같은 대화가 두 탭에서 동시에 열리는 일도 없습니다.</li>
+      <li><b>대화 id를 모르면 "마지막 대화 이어가기"</b>로 복원합니다(<code>claude --continue</code> · <code>codex resume --last</code> · <code>hermes --continue</code>). agy는 그런 옵션이 없어 id를 아는 경우에만 복원합니다.</li>
+      <li><b>끄기</b> — 설정 → 터미널 → <b>에이전트 세션 복원</b>. 끄면 탭은 그대로 복원되고 대화만 재개하지 않습니다.</li>
+    </ul>
+    <p class="note">복제한 탭이나 창 밖으로 떼어낸 탭은 대화를 재개하지 않습니다 — 같은 대화에 두 프로세스가 붙는 것을 막기 위해서입니다. SSH 터미널도 대상이 아닙니다(원격 대화는 로컬에서 이어갈 수 없습니다).</p>
 
     <!-- 페이지네이션 · 로딩 -->
     <h2 class="sec" id="loading"><span class="hash"></span> 증분 표시 · 로딩바</h2>
@@ -155,7 +182,18 @@
 
     <!-- 크로스플랫폼 -->
     <h2 class="sec" id="cross"><span class="hash"></span> 크로스플랫폼 · 어떻게 찾나</h2>
-    <p>세 CLI가 남기는 transcript 경로(<code>~/.claude/projects</code> · <code>~/.codex/sessions</code> · <code>~/.gemini/antigravity-cli/history.jsonl</code>)는 Windows·macOS·Linux에서 동일합니다. 활성 프로젝트와 같은 폴더에서 진행된 세션만 골라내며, 경로 비교는 OS 규약대로 정규화합니다(Windows만 소문자화). 백엔드는 DB와 무관한 <b>순수 파일시스템 스캐너</b>로, 세 어댑터 모두 JSONL을 파싱합니다.</p>
+    <p>각 CLI가 대화를 남기는 위치를 그대로 읽습니다. 활성 프로젝트와 같은 폴더에서 진행된 세션만 골라내며, 경로 비교는 OS 규약대로 정규화합니다(Windows만 소문자화). 백엔드는 orchterm의 DB와 무관한 <b>읽기 전용 스캐너</b>입니다 — 남의 파일에 쓰지 않습니다.</p>
+    <table class="kbds">
+      <thead><tr><th>에이전트</th><th>대화 기록 위치</th></tr></thead>
+      <tbody>
+        <tr><td>claude</td><td><code>~/.claude/projects</code></td></tr>
+        <tr><td>codex</td><td><code>~/.codex/sessions</code></td></tr>
+        <tr><td>agy</td><td><code>~/.gemini/antigravity-cli/</code>(<code>history.jsonl</code> + <code>conversations/*.db</code>)</td></tr>
+        <tr><td>grok</td><td><code>~/.grok/sessions/…/summary.json</code>(<code>$GROK_HOME</code> 우선)</td></tr>
+        <tr><td>opencode</td><td><code>~/.local/share/opencode/opencode.db</code>(<code>$XDG_DATA_HOME</code> 우선)</td></tr>
+        <tr><td>hermes</td><td>Windows <code>%LOCALAPPDATA%\hermes\state.db</code> · 그 외 <code>~/.hermes/state.db</code>(<code>$HERMES_HOME</code> 우선)</td></tr>
+      </tbody>
+    </table>
 
     <!-- 단축키 -->
     <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
