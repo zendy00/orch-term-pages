@@ -83,7 +83,7 @@
 
     <p class="eyebrow"><span class="hash"></span> 대형 기능 · control plane <span class="flag">MCP A2A</span></p>
     <h1 class="page-title">에이전트 오케스트레이션</h1>
-    <p class="lede">대화 중인 AI가 <b>다른 AI(claude·codex·agy)를 워커로 띄워</b>, 컨텍스트를 유지한 채 <b>여러 턴에 걸쳐 협업</b>시킵니다. 지휘자(commander)–워커(worker) 모델로 한 자리에서 팀을 부립니다.</p>
+    <p class="lede">대화 중인 AI가 <b>다른 AI(claude·codex·agy·grok·opencode·hermes)를 워커로 띄워</b>, 컨텍스트를 유지한 채 <b>여러 턴에 걸쳐 협업</b>시킵니다. 지휘자(commander)–워커(worker) 모델로 한 자리에서 팀을 부립니다.</p>
 
     <!-- 개념 -->
     <h2 class="sec" id="concept"><span class="hash"></span> 무엇을 하는가</h2>
@@ -94,7 +94,7 @@
       <div class="a2a-arrow"><code>세션 열기</code><div class="line"></div><code>지시 · 응답</code></div>
       <div class="a2a-node"><div class="role">orchterm</div><div class="who">MCP 서버<br><small style="color:var(--text-faint)">:9611</small></div></div>
       <div class="a2a-arrow"><code>워커 탭</code><div class="line"></div><code>응답 반환</code></div>
-      <div class="a2a-node"><div class="role">worker</div><div class="who"><b>codex</b> · agy · claude<br><small style="color:var(--text-faint)">인터랙티브 탭</small></div></div>
+      <div class="a2a-node"><div class="role">worker</div><div class="who"><b>codex</b> · agy · claude<br>grok · opencode · hermes<br><small style="color:var(--text-faint)">인터랙티브 탭</small></div></div>
     </div>
 
     <!-- 시작하기 -->
@@ -156,12 +156,28 @@
     <table class="kbds">
       <thead><tr><th>도구</th><th>하는 일</th></tr></thead>
       <tbody>
-        <tr><td><code>list_agents</code></td><td>쓸 수 있는 워커 목록 (codex · agy · claude)</td></tr>
+        <tr><td><code>list_agents</code></td><td><b>실제로 설치된</b> 워커만 (claude · codex · agy · grok · opencode · hermes 중)</td></tr>
         <tr><td><code>open_session</code></td><td>워커를 인터랙티브 탭으로 연다</td></tr>
-        <tr><td><code>send</code></td><td>상대에게 지시하고 응답을 기다린다</td></tr>
+        <tr><td><code>send</code></td><td>지시하고 <b>응답이 올 때까지 기다린다</b>(짧은 작업용)</td></tr>
+        <tr><td><code>send_async</code></td><td>지시하고 <b>기다리지 않고</b> 접수증(<code>turn_id</code>)만 받는다 — 긴 작업용</td></tr>
+        <tr><td><code>wait_turn</code></td><td><code>turn_id</code>의 진행 상황을 확인한다(끝났으면 답신, 아직이면 <code>running</code>)</td></tr>
+        <tr><td><code>list_sessions</code></td><td>내가 연 워커 목록 — 매번 새로 띄우지 않고 이어서 시킨다</td></tr>
+        <tr><td><code>orch_report</code></td><td>워커가 최종 답신을 지휘자에게 돌려주는 통로(워커 쪽에서 호출)</td></tr>
         <tr><td><code>close_session</code></td><td>워커 탭을 닫는다</td></tr>
       </tbody>
     </table>
+
+    <h3>긴 작업은 <code>send_async</code>로 — 끊기지 않게</h3>
+    <p><b>왜 있나</b> — 지휘자 AI의 CLI에는 도구 호출 제한 시간이 있습니다(실측: claude 60초 · opencode 62초 ·
+    agy 180초 · codex·hermes 300초). 워커에게 시킨 일이 그보다 오래 걸리면 <code>send</code>가 <b>기다리다
+    끊깁니다</b>. 더 나쁜 건, 끊겨도 워커는 계속 일하고 있어서 지휘자가 재시도하면 <b>같은 지시가 한 번 더
+    주입</b>된다는 점입니다.</p>
+    <p><code>send_async</code>는 지시만 넣고 접수증(<code>turn_id</code>)을 즉시 돌려줍니다. 지휘자는
+    <code>wait_turn</code>으로 짧게 끊어 확인하다가 끝났을 때 답신을 받습니다. 호출 하나하나가 짧으니
+    제한 시간에 걸리지 않고, 같은 <code>turn_id</code>를 다시 물어보는 건 안전합니다(중복 주입 없음).</p>
+    <p class="note">덕분에 <b>몇 분씩 걸리는 리팩터링·리뷰·빌드 같은 일도 워커에게 맡길 수 있습니다.</b>
+    지휘자 AI가 알아서 <code>send</code>와 <code>send_async</code>를 골라 쓰므로 사용자가 지정할 일은 없습니다.</p>
+    <div class="warn"><b>워커가 빈 답신을 준다면</b> — 그 CLI를 터미널에서 직접 한 번 실행해 보세요. 워커는 각자의 설정(모델·인증)을 그대로 쓰기 때문에, CLI 자체가 못 도는 상태면 오케스트레이션도 돌지 않습니다. 특히 <b>hermes</b>는 설정된 모델을 쓸 수 없게 되면(구독 변경·모델 은퇴 등) <code>HTTP 404: The model … does not exist</code>로 한 턴도 못 돕니다. <code>hermes model</code>로 쓸 수 있는 모델을 고르고, <code>hermes fallback add</code>로 대비 모델을 하나 등록해 두면 나중에 그 모델이 은퇴해도 자동으로 다음 모델로 넘어갑니다.</div>
 
     <!-- 보안 -->
     <h2 class="sec" id="security"><span class="hash"></span> 안전 기본값</h2>

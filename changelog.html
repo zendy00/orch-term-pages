@@ -74,10 +74,25 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v080"><span class="hash"></span> 0.8.0 — 에이전트 세션 복원 · 탭 이름=대화 이름 · 인앱 브라우저 멎음 수정</h2>
+    <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — 워커 6종 · 긴 작업 안 끊김 · 오케스트레이션 안정화</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>워커가 여섯으로</b> — 기존 Claude Code·Codex·Antigravity에 <b>Grok·opencode·Hermes</b> 추가. 목록에는 <b>이 컴퓨터에 실제로 설치된 것만</b> 보여, 없는 워커를 띄우려다 헛수고하지 않습니다</li>
+        <li><span class="cl-tag feat">feat</span><b>몇 분씩 걸리는 일도 워커에게</b> — 지금까지는 지휘하는 AI 쪽 제한 시간(Claude Code 60초) 때문에 오래 걸리는 작업이 기다리다 끊겼고, 재시도하면 <b>같은 지시가 한 번 더</b> 들어갔습니다. 이제 지시를 넣어두고 진행 상황을 나눠 확인해서 리팩터링·리뷰·빌드도 끝까지 갑니다</li>
+        <li><span class="cl-tag feat">feat</span><b>세션 목록에 Grok·opencode·Hermes 아이콘</b> — 여섯 CLI 모두 한눈에 구분됩니다</li>
+        <li><span class="cl-tag fix">fix</span><b>워커 답신이 엉뚱하게 오거나 비어 있던 문제</b> 수정 — 이름이 비슷한 orchterm이 둘 이상 떠 있으면 워커가 자기를 띄우지 않은 쪽에 결과를 보내, 정작 일을 시킨 쪽은 화면을 긁은 지저분한 텍스트를 받았습니다. 이제 어디로 보고할지 정확히 알려줍니다</li>
+        <li><span class="cl-tag fix">fix</span><b>Codex 워커가 뜨자마자 죽던 문제</b>(<code>no pty session</code>) 수정 — 업데이트 안내창을 입력창으로 착각해 Enter를 눌러 "지금 업데이트"가 선택되고 Codex가 종료됐습니다. 이제 시작 안내창을 알아보고 알려줍니다(탭을 닫거나 대신 선택하지 않습니다)</li>
+        <li><span class="cl-tag fix">fix</span><b>opencode 워커 시작이 30초씩 걸리던 문제</b> 수정 — 준비 완료 신호를 잘못 보고 있었습니다</li>
+        <li><span class="cl-tag fix">fix</span><b>개발용 등록이 남아 Codex·Claude 실행 때마다 연결 실패 경고가 뜨던 문제</b> 수정 — 부팅할 때 죽은 등록을 스스로 정리합니다</li>
+      </ul>
+      <p class="cl-note"><b>Hermes를 쓰신다면</b> — Hermes는 설정된 모델을 쓸 수 없게 되면(구독 변경·모델 은퇴) 한 번도 답하지 못합니다. <code>hermes model</code>로 쓸 수 있는 모델을 고르고 <code>hermes fallback add</code>로 대비 모델을 등록해 두면 나중에 자동으로 넘어갑니다.</p>
+    </div>
+    <h2 class="sec" id="v080"><span class="hash"></span> 0.8.0 — 에이전트 세션 복원 · 탭 이름=대화 이름 · 인앱 브라우저 멎음 수정</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>재시작해도 AI 대화가 그대로</b> — 각 터미널 탭에서 돌던 Claude Code·Codex·Antigravity·Grok·opencode·Hermes 대화가 자동으로 다시 열립니다. 셸에 직접 친 것과 별칭(<code>cl</code>)도 알아내고, 강제 종료·크래시 뒤에도 복원하며, 대화를 갈아탔으면 갈아탄 그 대화로 돌아옵니다(설정 → 터미널에서 끌 수 있음)</li>
         <li><span class="cl-tag feat">feat</span><b>탭에 붙인 이름이 곧 대화 이름</b> — 터미널 탭 이름을 바꾸면 그 탭의 AI 대화가 세션 목록에서도 같은 이름으로 보입니다. 순서는 상관없고(이름을 먼저 붙이고 나중에 실행해도 붙습니다), 목록에서 이름을 바꾸면 탭 이름도 따라갑니다</li>

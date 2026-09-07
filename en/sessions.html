@@ -28,6 +28,9 @@
   .ss-agent.claude { background-image: url(../assets/agents/claude.svg); }
   .ss-agent.codex { background-image: url(../assets/agents/codex.svg); }
   .ss-agent.agy { background-image: url(../assets/agents/agy.svg); }
+  .ss-agent.grok { background-image: url(../assets/agents/grok.svg); }
+  .ss-agent.opencode { background-image: url(../assets/agents/opencode.svg); }
+  .ss-agent.hermes { background-image: url(../assets/agents/hermes.svg); }
   .agent-cell { display: inline-flex; align-items: center; gap: 7px; }
   .ss-b { min-width: 0; flex: 1; }
   .ss-t { font-size: 12.5px; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -123,9 +126,9 @@
         <tr><td><span class="agent-cell"><span class="ss-agent claude"></span>claude</span></td><td><code>claude --resume &lt;id&gt;</code></td></tr>
         <tr><td><span class="agent-cell"><span class="ss-agent codex"></span>codex</span></td><td><code>codex resume &lt;id&gt;</code></td></tr>
         <tr><td><span class="agent-cell"><span class="ss-agent agy"></span>agy</span></td><td><code>agy --conversation &lt;id&gt;</code></td></tr>
-        <tr><td>grok</td><td><code>grok --resume &lt;id&gt;</code></td></tr>
-        <tr><td>opencode</td><td><code>opencode --session &lt;id&gt;</code></td></tr>
-        <tr><td>hermes</td><td><code>hermes --resume &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent grok"></span>grok</span></td><td><code>grok --resume &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent opencode"></span>opencode</span></td><td><code>opencode --session &lt;id&gt;</code></td></tr>
+        <tr><td><span class="agent-cell"><span class="ss-agent hermes"></span>hermes</span></td><td><code>hermes --resume &lt;id&gt;</code></td></tr>
       </tbody>
     </table>
     <p class="note">⚠️ Resume works only if that CLI (<code>claude</code> · <code>codex</code> · <code>agy</code> · <code>grok</code> · <code>opencode</code> · <code>hermes</code>) is on the system <code>PATH</code>.</p>

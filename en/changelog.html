@@ -74,10 +74,25 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v080"><span class="hash"></span> 0.8.0 — Agent session restore · tab name = conversation name · in-app browser freezes fixed</h2>
+    <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — Six workers · long jobs no longer cut off · orchestration hardening</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><b>Six agents can be put to work</b> — <b>Grok·opencode·Hermes</b> join Claude Code·Codex·Antigravity. The list shows <b>only what is actually installed</b>, so no turn is wasted spawning a worker you don't have</li>
+        <li><span class="cl-tag feat">feat</span><b>Hand a worker jobs that take minutes</b> — long work used to get cut off by the directing AI's time limit (60s with Claude Code), and retrying <b>delivered the same instruction twice</b>. Work is now handed over and checked on in short intervals, so refactors, reviews and builds run to completion</li>
+        <li><span class="cl-tag feat">feat</span><b>Grok·opencode·Hermes icons in the session list</b> — all six CLIs are distinguishable at a glance</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed worker replies arriving at the wrong place, or coming back empty</b> — with more than one similarly-named orchterm running, a worker could report to the instance that didn't spawn it, leaving the side that assigned the work with messy scraped text. Workers are now told exactly where to report</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed a Codex worker dying on startup</b> (<code>no pty session</code>) — its update prompt was mistaken for the input line, Enter selected "update now" and Codex quit. Startup prompts are now recognised and reported (without closing the tab or answering for you)</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed opencode workers taking 30 seconds to start</b> — the readiness signal was being read incorrectly</li>
+        <li><span class="cl-tag fix">fix</span><b>Fixed leftover development registrations causing connection-failure warnings</b> every time you ran Codex or Claude — dead registrations are cleaned up at startup</li>
+      </ul>
+      <p class="cl-note"><b>If you use Hermes</b> — Hermes cannot answer at all once its configured model becomes unavailable (subscription change, model retirement). Pick a working model with <code>hermes model</code> and register a spare with <code>hermes fallback add</code>, and it will switch over automatically later.</p>
+    </div>
+    <h2 class="sec" id="v080"><span class="hash"></span> 0.8.0 — Agent session restore · tab name = conversation name · in-app browser freezes fixed</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>AI conversations survive a restart</b> — the Claude Code, Codex, Antigravity, Grok, opencode or Hermes conversation running in each terminal tab reopens on its own. It recognises agents you typed into a shell yourself and aliases (<code>cl</code>), survives force-quits and crashes, and returns to whichever conversation you switched to (turn it off under Settings → Terminal)</li>
         <li><span class="cl-tag feat">feat</span><b>The name you give a tab becomes the conversation's name</b> — rename a terminal tab and its AI conversation shows up under that name in the session list. Order doesn't matter (name it first and start the agent later), and renaming in the list moves the tab name too</li>

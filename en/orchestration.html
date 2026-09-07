@@ -83,7 +83,7 @@
 
     <p class="eyebrow"><span class="hash"></span> Flagship features · control plane <span class="flag">MCP A2A</span></p>
     <h1 class="page-title">Agent orchestration</h1>
-    <p class="lede">The AI you're talking to <b>spins up other AIs (claude·codex·agy) as workers</b> and has them <b>collaborate over multiple turns</b> while keeping context. A commander–worker model lets you run a whole team from one place.</p>
+    <p class="lede">The AI you're talking to <b>spins up other AIs (claude·codex·agy·grok·opencode·hermes) as workers</b> and has them <b>collaborate over multiple turns</b> while keeping context. A commander–worker model lets you run a whole team from one place.</p>
 
     <!-- Concept -->
     <h2 class="sec" id="concept"><span class="hash"></span> What it does</h2>
@@ -94,7 +94,7 @@
       <div class="a2a-arrow"><code>open session</code><div class="line"></div><code>instruct · respond</code></div>
       <div class="a2a-node"><div class="role">orchterm</div><div class="who">MCP server<br><small style="color:var(--text-faint)">:9611</small></div></div>
       <div class="a2a-arrow"><code>worker tab</code><div class="line"></div><code>return reply</code></div>
-      <div class="a2a-node"><div class="role">worker</div><div class="who"><b>codex</b> · agy · claude<br><small style="color:var(--text-faint)">interactive tab</small></div></div>
+      <div class="a2a-node"><div class="role">worker</div><div class="who"><b>codex</b> · agy · claude<br>grok · opencode · hermes<br><small style="color:var(--text-faint)">interactive tab</small></div></div>
     </div>
 
     <!-- Getting started -->
@@ -156,12 +156,30 @@
     <table class="kbds">
       <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
       <tbody>
-        <tr><td><code>list_agents</code></td><td>List of available workers (codex · agy · claude)</td></tr>
+        <tr><td><code>list_agents</code></td><td>Only the workers <b>actually installed</b> (of claude · codex · agy · grok · opencode · hermes)</td></tr>
         <tr><td><code>open_session</code></td><td>Opens a worker in an interactive tab</td></tr>
-        <tr><td><code>send</code></td><td>Instructs the other side and waits for a reply</td></tr>
+        <tr><td><code>send</code></td><td>Instructs and <b>waits for the reply</b> (for short work)</td></tr>
+        <tr><td><code>send_async</code></td><td>Instructs and returns a receipt (<code>turn_id</code>) <b>without waiting</b> — for long work</td></tr>
+        <tr><td><code>wait_turn</code></td><td>Checks on a <code>turn_id</code> (the reply if it finished, <code>running</code> if not)</td></tr>
+        <tr><td><code>list_sessions</code></td><td>Workers you already opened — reuse them instead of spawning new ones</td></tr>
+        <tr><td><code>orch_report</code></td><td>How a worker hands its final reply back to the commander (called worker-side)</td></tr>
         <tr><td><code>close_session</code></td><td>Closes a worker tab</td></tr>
       </tbody>
     </table>
+
+    <h3>Use <code>send_async</code> for long work — so it doesn't get cut off</h3>
+    <p><b>Why it exists</b> — the commander AI's CLI has a tool-call time limit (measured: claude 60s ·
+    opencode 62s · agy 180s · codex and hermes 300s). If the work you hand a worker takes longer than that,
+    <code>send</code> <b>gets cut off while waiting</b>. Worse, the worker keeps going after the cut, so a retry
+    <b>injects the same instruction a second time</b>.</p>
+    <p><code>send_async</code> delivers the instruction and immediately returns a receipt (<code>turn_id</code>).
+    The commander then checks in with <code>wait_turn</code> in short polls and collects the reply when it lands.
+    Each individual call is short, so nothing hits the time limit, and asking about the same <code>turn_id</code>
+    again is safe (no duplicate injection).</p>
+    <p class="note">That means <b>you can hand a worker jobs that take minutes</b> — refactors, reviews, builds.
+    The commander AI picks between <code>send</code> and <code>send_async</code> on its own; there is nothing
+    for you to configure.</p>
+    <div class="warn"><b>If a worker returns an empty reply</b> — run that CLI once in a terminal by itself. Workers use each CLI's own settings (model, auth), so if the CLI can't run, orchestration can't either. In particular, <b>hermes</b> cannot complete a single turn once its configured model becomes unavailable (subscription change, model retirement): <code>HTTP 404: The model … does not exist</code>. Pick a working model with <code>hermes model</code>, and register a spare with <code>hermes fallback add</code> — it will switch over automatically when that model is retired later.</div>
 
     <!-- Security -->
     <h2 class="sec" id="security"><span class="hash"></span> Safe defaults</h2>
