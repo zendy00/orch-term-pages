@@ -74,10 +74,18 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — Six workers · long jobs no longer cut off · orchestration hardening</h2>
+    <h2 class="sec" id="v082"><span class="hash"></span> 0.8.2 — Fixed in-app browser tabs opening blank</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span><span class="latest">latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><b>Fixed in-app browser tabs opening to a blank screen</b> — the address stayed in the address bar but the page never appeared, and once it happened <b>every tab opened afterwards</b> behaved the same way (until a restart). Not site-specific; local development server addresses were affected too. The cause: with <a href="mirror.html">mirror</a> on and at least one AI session attached inside the app, every new tab was left <b>suspended before it could start drawing the page</b>. The app now releases that suspension itself — covering links clicked in the terminal, tabs opened by an AI, and setups with several <a href="spaces.html">Spaces</a></li>
+      </ul>
+    </div>
+    <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — Six workers · long jobs no longer cut off · orchestration hardening</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>Six agents can be put to work</b> — <b>Grok·opencode·Hermes</b> join Claude Code·Codex·Antigravity. The list shows <b>only what is actually installed</b>, so no turn is wasted spawning a worker you don't have</li>
         <li><span class="cl-tag feat">feat</span><b>Hand a worker jobs that take minutes</b> — long work used to get cut off by the directing AI's time limit (60s with Claude Code), and retrying <b>delivered the same instruction twice</b>. Work is now handed over and checked on in short intervals, so refactors, reviews and builds run to completion</li>

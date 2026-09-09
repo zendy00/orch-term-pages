@@ -74,10 +74,18 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — 워커 6종 · 긴 작업 안 끊김 · 오케스트레이션 안정화</h2>
+    <h2 class="sec" id="v082"><span class="hash"></span> 0.8.2 — 인앱 브라우저 탭이 백지로 남던 문제 수정</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><b>인앱 브라우저 탭이 열려도 화면이 백지로 남던 문제</b> 수정 — 주소창에는 주소가 보이는데 페이지가 끝까지 안 뜨고, 한 번 그렇게 되면 <b>그 뒤에 여는 탭도 전부</b> 같았습니다(앱 재시작까지). 특정 사이트가 아니라 로컬 개발 서버 주소도 마찬가지였습니다. <a href="mirror.html">미러</a>가 켜져 있고 앱 안에 AI 세션이 하나라도 붙어 있으면 새 탭이 <b>화면에 그릴 준비를 못 한 채 멈춰</b> 있었던 것이 원인입니다. 이제 앱이 그 멈춤을 스스로 풉니다 — 터미널 링크 클릭, AI가 여는 탭, <a href="spaces.html">Space</a>가 여러 개인 경우 모두 해당</li>
+      </ul>
+    </div>
+    <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — 워커 6종 · 긴 작업 안 끊김 · 오케스트레이션 안정화</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><b>워커가 여섯으로</b> — 기존 Claude Code·Codex·Antigravity에 <b>Grok·opencode·Hermes</b> 추가. 목록에는 <b>이 컴퓨터에 실제로 설치된 것만</b> 보여, 없는 워커를 띄우려다 헛수고하지 않습니다</li>
         <li><span class="cl-tag feat">feat</span><b>몇 분씩 걸리는 일도 워커에게</b> — 지금까지는 지휘하는 AI 쪽 제한 시간(Claude Code 60초) 때문에 오래 걸리는 작업이 기다리다 끊겼고, 재시도하면 <b>같은 지시가 한 번 더</b> 들어갔습니다. 이제 지시를 넣어두고 진행 상황을 나눠 확인해서 리팩터링·리뷰·빌드도 끝까지 갑니다</li>
