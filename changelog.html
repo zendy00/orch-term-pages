@@ -26,7 +26,9 @@
   .cl-ver .latest { font-size: 10.5px; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
   .cl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
   .cl-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--text-dim); line-height: 1.55; }
-  .cl-tag { flex: none; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-top: 2px; text-transform: uppercase; letter-spacing: .02em; min-width: 30px; text-align: center; }
+  .cl-list li > .cl-txt { flex: 1 1 auto; min-width: 0; }
+  .cl-list li > .cl-tag { width: 36px; }
+  .cl-tag { flex: none; box-sizing: border-box; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-top: 2px; text-transform: uppercase; letter-spacing: .02em; min-width: 30px; text-align: center; }
   .cl-tag.feat { background: rgba(74, 222, 128, .14); color: #4ade80; }
   .cl-tag.fix { background: rgba(251, 146, 60, .14); color: #fb923c; }
   .cl-tag.perf { background: rgba(96, 165, 250, .14); color: #60a5fa; }
@@ -79,7 +81,7 @@
     <div class="cl-rel is-latest">
       <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span><span class="latest">최신</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span><b>인앱 브라우저 탭이 열려도 화면이 백지로 남던 문제</b> 수정 — 주소창에는 주소가 보이는데 페이지가 끝까지 안 뜨고, 한 번 그렇게 되면 <b>그 뒤에 여는 탭도 전부</b> 같았습니다(앱 재시작까지). 특정 사이트가 아니라 로컬 개발 서버 주소도 마찬가지였습니다. <a href="mirror.html">미러</a>가 켜져 있고 앱 안에 AI 세션이 하나라도 붙어 있으면 새 탭이 <b>화면에 그릴 준비를 못 한 채 멈춰</b> 있었던 것이 원인입니다. 이제 앱이 그 멈춤을 스스로 풉니다 — 터미널 링크 클릭, AI가 여는 탭, <a href="spaces.html">Space</a>가 여러 개인 경우 모두 해당</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>인앱 브라우저 탭이 열려도 화면이 백지로 남던 문제</b> 수정 — 주소창에는 주소가 보이는데 페이지가 끝까지 안 뜨고, 한 번 그렇게 되면 <b>그 뒤에 여는 탭도 전부</b> 같았습니다(앱 재시작까지). 특정 사이트가 아니라 로컬 개발 서버 주소도 마찬가지였습니다. <a href="mirror.html">미러</a>가 켜져 있고 앱 안에 AI 세션이 하나라도 붙어 있으면 새 탭이 <b>화면에 그릴 준비를 못 한 채 멈춰</b> 있었던 것이 원인입니다. 이제 앱이 그 멈춤을 스스로 풉니다 — 터미널 링크 클릭, AI가 여는 탭, <a href="spaces.html">Space</a>가 여러 개인 경우 모두 해당</span></li>
       </ul>
     </div>
     <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — 워커 6종 · 긴 작업 안 끊김 · 오케스트레이션 안정화</h2>
@@ -87,13 +89,13 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>워커가 여섯으로</b> — 기존 Claude Code·Codex·Antigravity에 <b>Grok·opencode·Hermes</b> 추가. 목록에는 <b>이 컴퓨터에 실제로 설치된 것만</b> 보여, 없는 워커를 띄우려다 헛수고하지 않습니다</li>
-        <li><span class="cl-tag feat">feat</span><b>몇 분씩 걸리는 일도 워커에게</b> — 지금까지는 지휘하는 AI 쪽 제한 시간(Claude Code 60초) 때문에 오래 걸리는 작업이 기다리다 끊겼고, 재시도하면 <b>같은 지시가 한 번 더</b> 들어갔습니다. 이제 지시를 넣어두고 진행 상황을 나눠 확인해서 리팩터링·리뷰·빌드도 끝까지 갑니다</li>
-        <li><span class="cl-tag feat">feat</span><b>세션 목록에 Grok·opencode·Hermes 아이콘</b> — 여섯 CLI 모두 한눈에 구분됩니다</li>
-        <li><span class="cl-tag fix">fix</span><b>워커 답신이 엉뚱하게 오거나 비어 있던 문제</b> 수정 — 이름이 비슷한 orchterm이 둘 이상 떠 있으면 워커가 자기를 띄우지 않은 쪽에 결과를 보내, 정작 일을 시킨 쪽은 화면을 긁은 지저분한 텍스트를 받았습니다. 이제 어디로 보고할지 정확히 알려줍니다</li>
-        <li><span class="cl-tag fix">fix</span><b>Codex 워커가 뜨자마자 죽던 문제</b>(<code>no pty session</code>) 수정 — 업데이트 안내창을 입력창으로 착각해 Enter를 눌러 "지금 업데이트"가 선택되고 Codex가 종료됐습니다. 이제 시작 안내창을 알아보고 알려줍니다(탭을 닫거나 대신 선택하지 않습니다)</li>
-        <li><span class="cl-tag fix">fix</span><b>opencode 워커 시작이 30초씩 걸리던 문제</b> 수정 — 준비 완료 신호를 잘못 보고 있었습니다</li>
-        <li><span class="cl-tag fix">fix</span><b>개발용 등록이 남아 Codex·Claude 실행 때마다 연결 실패 경고가 뜨던 문제</b> 수정 — 부팅할 때 죽은 등록을 스스로 정리합니다</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>워커가 여섯으로</b> — 기존 Claude Code·Codex·Antigravity에 <b>Grok·opencode·Hermes</b> 추가. 목록에는 <b>이 컴퓨터에 실제로 설치된 것만</b> 보여, 없는 워커를 띄우려다 헛수고하지 않습니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>몇 분씩 걸리는 일도 워커에게</b> — 지금까지는 지휘하는 AI 쪽 제한 시간(Claude Code 60초) 때문에 오래 걸리는 작업이 기다리다 끊겼고, 재시도하면 <b>같은 지시가 한 번 더</b> 들어갔습니다. 이제 지시를 넣어두고 진행 상황을 나눠 확인해서 리팩터링·리뷰·빌드도 끝까지 갑니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>세션 목록에 Grok·opencode·Hermes 아이콘</b> — 여섯 CLI 모두 한눈에 구분됩니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>워커 답신이 엉뚱하게 오거나 비어 있던 문제</b> 수정 — 이름이 비슷한 orchterm이 둘 이상 떠 있으면 워커가 자기를 띄우지 않은 쪽에 결과를 보내, 정작 일을 시킨 쪽은 화면을 긁은 지저분한 텍스트를 받았습니다. 이제 어디로 보고할지 정확히 알려줍니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Codex 워커가 뜨자마자 죽던 문제</b>(<code>no pty session</code>) 수정 — 업데이트 안내창을 입력창으로 착각해 Enter를 눌러 "지금 업데이트"가 선택되고 Codex가 종료됐습니다. 이제 시작 안내창을 알아보고 알려줍니다(탭을 닫거나 대신 선택하지 않습니다)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>opencode 워커 시작이 30초씩 걸리던 문제</b> 수정 — 준비 완료 신호를 잘못 보고 있었습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>개발용 등록이 남아 Codex·Claude 실행 때마다 연결 실패 경고가 뜨던 문제</b> 수정 — 부팅할 때 죽은 등록을 스스로 정리합니다</span></li>
       </ul>
       <p class="cl-note"><b>Hermes를 쓰신다면</b> — Hermes는 설정된 모델을 쓸 수 없게 되면(구독 변경·모델 은퇴) 한 번도 답하지 못합니다. <code>hermes model</code>로 쓸 수 있는 모델을 고르고 <code>hermes fallback add</code>로 대비 모델을 등록해 두면 나중에 자동으로 넘어갑니다.</p>
     </div>
@@ -102,15 +104,15 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>재시작해도 AI 대화가 그대로</b> — 각 터미널 탭에서 돌던 Claude Code·Codex·Antigravity·Grok·opencode·Hermes 대화가 자동으로 다시 열립니다. 셸에 직접 친 것과 별칭(<code>cl</code>)도 알아내고, 강제 종료·크래시 뒤에도 복원하며, 대화를 갈아탔으면 갈아탄 그 대화로 돌아옵니다(설정 → 터미널에서 끌 수 있음)</li>
-        <li><span class="cl-tag feat">feat</span><b>탭에 붙인 이름이 곧 대화 이름</b> — 터미널 탭 이름을 바꾸면 그 탭의 AI 대화가 세션 목록에서도 같은 이름으로 보입니다. 순서는 상관없고(이름을 먼저 붙이고 나중에 실행해도 붙습니다), 목록에서 이름을 바꾸면 탭 이름도 따라갑니다</li>
-        <li><span class="cl-tag feat">feat</span><b>세션 목록이 여섯 CLI를 모두 지원</b> — 기존 Claude·Codex·Antigravity에 Grok·opencode·Hermes 추가(<code>Ctrl+Shift+S</code>)</li>
-        <li><span class="cl-tag feat">feat</span><b>멈춘 브라우저 탭 되살리기</b>를 명령 팔레트에 추가 — 탭을 닫지 않고 보던 주소 그대로 다시 엽니다(<code>Ctrl+Shift+P</code>)</li>
-        <li><span class="cl-tag fix">fix</span><b>인앱 브라우저를 쓰다 앱이 느려지거나 멎던 문제</b> 수정 — 죽은 브라우저 화면에 구분선 드래그·창 크기 변경마다 초당 수십~수백 건씩 헛명령을 보내던 것을 상태가 바뀔 때만 보내도록(실측 하루 1412건)</li>
-        <li><span class="cl-tag fix">fix</span><b>브라우저 탭이 설명 없이 백지로 남던 문제</b> 수정 — 사유를 탭 안에 표시하고 주소창 재입력으로 다시 엽니다. 같은 주소 재열기도 동작</li>
-        <li><span class="cl-tag fix">fix</span><b>재시작 후 일부 터미널 탭이 빈 화면으로 남던 문제</b> 수정 — 복원 도중 뒤 탭이 앞 탭의 셸을 가로채던 것(탭 11개에 셸 9개)</li>
-        <li><span class="cl-tag fix">fix</span><b>Codex 대화 이어가기 실패</b> 수정 — <code>No saved session found with ID</code>로 재개가 안 되던 문제</li>
-        <li><span class="cl-tag fix">fix</span><b>AI 대화 안에서 앱을 실행하면 새 터미널이 그 대화를 물려받던 문제</b> 수정 — 복원해야 할 탭이 통째로 누락되곤 했습니다</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>재시작해도 AI 대화가 그대로</b> — 각 터미널 탭에서 돌던 Claude Code·Codex·Antigravity·Grok·opencode·Hermes 대화가 자동으로 다시 열립니다. 셸에 직접 친 것과 별칭(<code>cl</code>)도 알아내고, 강제 종료·크래시 뒤에도 복원하며, 대화를 갈아탔으면 갈아탄 그 대화로 돌아옵니다(설정 → 터미널에서 끌 수 있음)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탭에 붙인 이름이 곧 대화 이름</b> — 터미널 탭 이름을 바꾸면 그 탭의 AI 대화가 세션 목록에서도 같은 이름으로 보입니다. 순서는 상관없고(이름을 먼저 붙이고 나중에 실행해도 붙습니다), 목록에서 이름을 바꾸면 탭 이름도 따라갑니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>세션 목록이 여섯 CLI를 모두 지원</b> — 기존 Claude·Codex·Antigravity에 Grok·opencode·Hermes 추가(<code>Ctrl+Shift+S</code>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>멈춘 브라우저 탭 되살리기</b>를 명령 팔레트에 추가 — 탭을 닫지 않고 보던 주소 그대로 다시 엽니다(<code>Ctrl+Shift+P</code>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>인앱 브라우저를 쓰다 앱이 느려지거나 멎던 문제</b> 수정 — 죽은 브라우저 화면에 구분선 드래그·창 크기 변경마다 초당 수십~수백 건씩 헛명령을 보내던 것을 상태가 바뀔 때만 보내도록(실측 하루 1412건)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>브라우저 탭이 설명 없이 백지로 남던 문제</b> 수정 — 사유를 탭 안에 표시하고 주소창 재입력으로 다시 엽니다. 같은 주소 재열기도 동작</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>재시작 후 일부 터미널 탭이 빈 화면으로 남던 문제</b> 수정 — 복원 도중 뒤 탭이 앞 탭의 셸을 가로채던 것(탭 11개에 셸 9개)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Codex 대화 이어가기 실패</b> 수정 — <code>No saved session found with ID</code>로 재개가 안 되던 문제</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>AI 대화 안에서 앱을 실행하면 새 터미널이 그 대화를 물려받던 문제</b> 수정 — 복원해야 할 탭이 통째로 누락되곤 했습니다</span></li>
       </ul>
     </div>
 
@@ -119,15 +121,15 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>마크다운 미리보기 강화</b> — 읽기뷰(👁)·노트 메모에서 <b>머메이드 다이어그램</b>·<b>수식(KaTeX)</b>·<b>코드 문법 강조</b>·GFM 경고 블록(<code>&gt; [!NOTE]</code>)·코드 복사 버튼 동작</li>
-        <li><span class="cl-tag feat">feat</span><b>세션 목록 이름 바꾸기</b> — 이어가기 목록 항목을 우클릭해 이름 지정, 원래 제목은 아래 회색으로 병기, 이어간 탭 이름에도 반영</li>
-        <li><span class="cl-tag feat">feat</span><b>AI 게이트웨이</b> — 감사 로그 최신순 정렬 + 요청에 지정한 모델을 워커에 전달</li>
-        <li><span class="cl-tag fix">fix</span><b>에이전트가 만든 HTML을 인앱 브라우저로 열면 <code>about:blank</code>·빈 화면이 뜨던 문제</b> 수정 — 슬래시 2개 주소(<code>file://D:/보고서.html</code>)와 스킴 없는 경로(<code>D:\작업\보고서.html</code>·<code>/Users/me/report.html</code>)도 그대로 열림</li>
-        <li><span class="cl-tag fix">fix</span><b>열기 실패를 조용히 삼키던 문제</b> 수정 — 사유를 화면에 표시하고 주소창 재입력으로 재시도, 에이전트에도 실패가 전달돼 "열었습니다" 오보 방지</li>
-        <li><span class="cl-tag fix">fix</span><b>로컬 파일 탭 이름이 파일명으로</b> 표시(복원 후에도 유지)</li>
-        <li><span class="cl-tag fix">fix</span><b>탭이 스스로 닫히면 색 선택창이 남아 브라우저가 영영 숨겨지던 문제</b> 수정(셸 종료로 터미널 탭이 자동으로 닫힐 때 발생)</li>
-        <li><span class="cl-tag fix">fix</span><b>마크다운 미리보기의 상대경로 이미지·링크와 목차 앵커(<code>[목차](#섹션)</code>)가 깨지던 문제</b> 수정</li>
-        <li><span class="cl-tag feat">feat</span>문제 신고 진단용 <b>앱 로그 파일</b>(경고 이상·1MB 회전) + 인앱 브라우저 에이전트 도구의 <b>Node 20.19+ 요구 안내</b>(설정 → 에이전트 미러)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>마크다운 미리보기 강화</b> — 읽기뷰(👁)·노트 메모에서 <b>머메이드 다이어그램</b>·<b>수식(KaTeX)</b>·<b>코드 문법 강조</b>·GFM 경고 블록(<code>&gt; [!NOTE]</code>)·코드 복사 버튼 동작</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>세션 목록 이름 바꾸기</b> — 이어가기 목록 항목을 우클릭해 이름 지정, 원래 제목은 아래 회색으로 병기, 이어간 탭 이름에도 반영</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI 게이트웨이</b> — 감사 로그 최신순 정렬 + 요청에 지정한 모델을 워커에 전달</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>에이전트가 만든 HTML을 인앱 브라우저로 열면 <code>about:blank</code>·빈 화면이 뜨던 문제</b> 수정 — 슬래시 2개 주소(<code>file://D:/보고서.html</code>)와 스킴 없는 경로(<code>D:\작업\보고서.html</code>·<code>/Users/me/report.html</code>)도 그대로 열림</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>열기 실패를 조용히 삼키던 문제</b> 수정 — 사유를 화면에 표시하고 주소창 재입력으로 재시도, 에이전트에도 실패가 전달돼 "열었습니다" 오보 방지</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>로컬 파일 탭 이름이 파일명으로</b> 표시(복원 후에도 유지)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>탭이 스스로 닫히면 색 선택창이 남아 브라우저가 영영 숨겨지던 문제</b> 수정(셸 종료로 터미널 탭이 자동으로 닫힐 때 발생)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>마크다운 미리보기의 상대경로 이미지·링크와 목차 앵커(<code>[목차](#섹션)</code>)가 깨지던 문제</b> 수정</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">문제 신고 진단용 <b>앱 로그 파일</b>(경고 이상·1MB 회전) + 인앱 브라우저 에이전트 도구의 <b>Node 20.19+ 요구 안내</b>(설정 → 에이전트 미러)</span></li>
       </ul>
     </div>
 
@@ -136,12 +138,12 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>주소창에서 로컬 파일 열기</b> — <code>file:///…</code> 경로를 주소창에 넣으면 인앱 브라우저가 바로 엶(탐색기 "브라우저로 열기"와 같은 경로) — 예전엔 아무 안내 없이 빈 화면</li>
-        <li><span class="cl-tag feat">feat</span><b>브라우저를 잠시 숨길 때 안내</b> — 메모 패널처럼 위에 떠야 하는 창이 열리면 브라우저 화면이 잠깐 숨겨지는데, 그 자리에 <b>Hiding…</b> 표시로 "페이지가 안 뜬 것" 같은 오해 방지</li>
-        <li><span class="cl-tag fix">fix</span><b>macOS 한글 입력 중 <code>&gt;</code> <code>&lt;</code> <code>?</code> <code>~</code> <code>!</code> 기호가 입력되지 않던 문제</b> 수정 — 한글 상태에서 Shift와 함께 친 기호가 터미널에 아무것도 찍히지 않고 사라짐</li>
-        <li><span class="cl-tag fix">fix</span><b>macOS에서 사이트 접속 후 주소창이 <code>about:blank</code>로 바뀌던 문제</b> 수정(내부 프레임이 많은 사이트에서 발생)</li>
-        <li><span class="cl-tag fix">fix</span><b>SSH 패널을 열면 브라우저 탭이 사라지던 문제</b> 수정 — SSH 패널과 브라우저를 함께 사용 가능</li>
-        <li><span class="cl-tag fix">fix</span><b>Windows에서 앱 종료 시 이름이 같은 다른 프로그램(<code>app.exe</code>)까지 함께 종료되던 문제</b> 수정</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>주소창에서 로컬 파일 열기</b> — <code>file:///…</code> 경로를 주소창에 넣으면 인앱 브라우저가 바로 엶(탐색기 "브라우저로 열기"와 같은 경로) — 예전엔 아무 안내 없이 빈 화면</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>브라우저를 잠시 숨길 때 안내</b> — 메모 패널처럼 위에 떠야 하는 창이 열리면 브라우저 화면이 잠깐 숨겨지는데, 그 자리에 <b>Hiding…</b> 표시로 "페이지가 안 뜬 것" 같은 오해 방지</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS 한글 입력 중 <code>&gt;</code> <code>&lt;</code> <code>?</code> <code>~</code> <code>!</code> 기호가 입력되지 않던 문제</b> 수정 — 한글 상태에서 Shift와 함께 친 기호가 터미널에 아무것도 찍히지 않고 사라짐</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS에서 사이트 접속 후 주소창이 <code>about:blank</code>로 바뀌던 문제</b> 수정(내부 프레임이 많은 사이트에서 발생)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>SSH 패널을 열면 브라우저 탭이 사라지던 문제</b> 수정 — SSH 패널과 브라우저를 함께 사용 가능</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Windows에서 앱 종료 시 이름이 같은 다른 프로그램(<code>app.exe</code>)까지 함께 종료되던 문제</b> 수정</span></li>
       </ul>
     </div>
 
@@ -150,10 +152,10 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.6</span><span class="d">2026-07-25</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>세션 생존 리로드</b> — 리로드(새로고침·자가복구)가 일어나도 로컬 터미널이 <b>살아있는 세션에 재접속</b> — 실행 중이던 프로세스 유지 + 이전 출력(스크롤백) 복원으로 작업이 끊기지 않음</li>
-        <li><span class="cl-tag feat">feat</span><b>렌더러 자가복구</b> — 화면이 멈추거나 렌더러가 비정상 종료되면 <b>네이티브 확인창</b>으로 다시 로드 제안 — 로컬 세션을 유지한 채 복구</li>
-        <li><span class="cl-tag feat">feat</span><b>AI 에이전트 출력 뷰어</b> — 탭 없이 백그라운드로 도는 오케스트레이션 워커 출력을 감독 대시보드 <b>'출력'</b> 버튼으로 실시간 스트리밍 — 뷰어 탭을 닫아도 작업 계속</li>
-        <li><span class="cl-tag fix">fix</span>세션 재접속 시 <b>스크롤백 재생이 클립보드를 덮어쓰던</b> 문제 수정(OSC 52 뮤트)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>세션 생존 리로드</b> — 리로드(새로고침·자가복구)가 일어나도 로컬 터미널이 <b>살아있는 세션에 재접속</b> — 실행 중이던 프로세스 유지 + 이전 출력(스크롤백) 복원으로 작업이 끊기지 않음</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>렌더러 자가복구</b> — 화면이 멈추거나 렌더러가 비정상 종료되면 <b>네이티브 확인창</b>으로 다시 로드 제안 — 로컬 세션을 유지한 채 복구</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI 에이전트 출력 뷰어</b> — 탭 없이 백그라운드로 도는 오케스트레이션 워커 출력을 감독 대시보드 <b>'출력'</b> 버튼으로 실시간 스트리밍 — 뷰어 탭을 닫아도 작업 계속</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">세션 재접속 시 <b>스크롤백 재생이 클립보드를 덮어쓰던</b> 문제 수정(OSC 52 뮤트)</span></li>
       </ul>
     </div>
 
@@ -162,8 +164,8 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.5</span><span class="d">2026-07-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>터미널 출력 흐름 제어(백프레셔)</b> — 명령이 화면 처리 속도보다 빠르게 대량 출력을 쏟아낼 때 <b>화면이 멈추거나 앱이 응답 없음</b>이 되던 문제 예방 — 로컬 터미널·SSH·AI 에이전트 뷰어 3경로 모두 화면이 그린 만큼만 출력 수신</li>
-        <li><span class="cl-tag feat">feat</span>출력이 일시정지된 동안에도 <b>키 입력(Ctrl+C 등)은 계속 전달</b> — 폭주하는 명령을 즉시 중단 가능</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널 출력 흐름 제어(백프레셔)</b> — 명령이 화면 처리 속도보다 빠르게 대량 출력을 쏟아낼 때 <b>화면이 멈추거나 앱이 응답 없음</b>이 되던 문제 예방 — 로컬 터미널·SSH·AI 에이전트 뷰어 3경로 모두 화면이 그린 만큼만 출력 수신</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">출력이 일시정지된 동안에도 <b>키 입력(Ctrl+C 등)은 계속 전달</b> — 폭주하는 명령을 즉시 중단 가능</span></li>
       </ul>
     </div>
 
@@ -172,8 +174,8 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.4</span><span class="d">2026-07-22</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>터미널 폰트 굵기</b> — 기본 코드 폰트(Jetendard)에 <b>Thin(100)·Light(300)</b> 굵기 번들 — 굵기 설정 100~300이 실제 얇게 표시</li>
-        <li><span class="cl-tag fix">fix</span>터미널의 굵은(bold) 글자가 <b>한 단어 안에서 글자마다 다른 모양·크기로 섞여</b> 보이던 문제 수정</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널 폰트 굵기</b> — 기본 코드 폰트(Jetendard)에 <b>Thin(100)·Light(300)</b> 굵기 번들 — 굵기 설정 100~300이 실제 얇게 표시</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">터미널의 굵은(bold) 글자가 <b>한 단어 안에서 글자마다 다른 모양·크기로 섞여</b> 보이던 문제 수정</span></li>
       </ul>
     </div>
 
@@ -182,7 +184,7 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.3</span><span class="d">2026-07-21</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span><b>부팅 입력 포커스</b> — 앱 실행 <b>직후 활성 터미널이 키보드 입력을 못 받아</b> 클릭·Alt+Tab을 해야 회복되던 문제 수정(브라우저·PDF 탭 복원 시 특히 발생)</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>부팅 입력 포커스</b> — 앱 실행 <b>직후 활성 터미널이 키보드 입력을 못 받아</b> 클릭·Alt+Tab을 해야 회복되던 문제 수정(브라우저·PDF 탭 복원 시 특히 발생)</span></li>
       </ul>
     </div>
 
@@ -191,7 +193,7 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.2</span><span class="d">2026-07-16</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span><b>AI 게이트웨이</b> — 게이트웨이를 켜두면 앱을 실행할 때마다 <b>게이트웨이 워커 탭이 뜨던</b> 문제 수정</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>AI 게이트웨이</b> — 게이트웨이를 켜두면 앱을 실행할 때마다 <b>게이트웨이 워커 탭이 뜨던</b> 문제 수정</span></li>
       </ul>
     </div>
 
@@ -200,8 +202,8 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.1</span><span class="d">2026-07-16</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>터미널 복사</b> — 선택한 터미널 텍스트를 Ctrl+Shift+C · 우클릭 · OSC 52로 클립보드에 복사</li>
-        <li><span class="cl-tag fix">fix</span>이모지(그림문자)가 포함된 텍스트를 붙여넣을 때 <b>중복 입력되던</b> 문제 수정</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널 복사</b> — 선택한 터미널 텍스트를 Ctrl+Shift+C · 우클릭 · OSC 52로 클립보드에 복사</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">이모지(그림문자)가 포함된 텍스트를 붙여넣을 때 <b>중복 입력되던</b> 문제 수정</span></li>
       </ul>
     </div>
 
@@ -210,10 +212,10 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.0</span><span class="d">2026-07-14</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b><a href="appearance.html">글꼴 크기 설정</a></b> — 터미널·코드 편집기·UI 글꼴 크기를 각각 조절</li>
-        <li><span class="cl-tag feat">feat</span><b>글꼴 굵기 설정</b> — 코드·UI 글꼴 굵기(100~900) 선택</li>
-        <li><span class="cl-tag feat">feat</span>설정의 <b>언어 선택</b>을 '모양'에서 '일반' 섹션으로 이동</li>
-        <li><span class="cl-tag fix">fix</span>창 전환(Alt+Tab) 후 키보드 입력이 안 되거나 <b>첫 글자가 씹히던</b> 문제 수정</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><a href="appearance.html">글꼴 크기 설정</a></b> — 터미널·코드 편집기·UI 글꼴 크기를 각각 조절</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>글꼴 굵기 설정</b> — 코드·UI 글꼴 굵기(100~900) 선택</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">설정의 <b>언어 선택</b>을 '모양'에서 '일반' 섹션으로 이동</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">창 전환(Alt+Tab) 후 키보드 입력이 안 되거나 <b>첫 글자가 씹히던</b> 문제 수정</span></li>
       </ul>
     </div>
 
@@ -222,15 +224,15 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.6.0</span><span class="d">2026-07-14</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b><a href="notes.html">메모(노트) 패널</a></b> — 타이틀바 메모 버튼(Ctrl+Shift+N)으로 여는 플로팅 Post-it. 탭·색상·고정·이름 변경, 마크다운 미리보기, 파일 저장, 텍스트 노트는 메인 패널 탭으로 확장</li>
-        <li><span class="cl-tag feat">feat</span><b>그림 노트</b> — Excalidraw 캔버스 자유 드로잉(오프라인 동작), 격자 토글, PNG/SVG/PDF/클립보드 내보내기</li>
-        <li><span class="cl-tag feat">feat</span><b>시퀀스 다이어그램 노트</b> — 드래그로 그리는 UML 시퀀스 편집기(도구 팔레트·활성화 막대·loop/alt/opt/par 프레임·자유 배치·손 패닝·도구 단축키), Mermaid(.mmd)/SVG/PNG/PDF 내보내기</li>
-        <li><span class="cl-tag feat">feat</span><b>순서도 노트</b> — 캔버스에서 드래그로 그리면 Mermaid 코드가 되고, Mermaid를 불러오면 편집 가능한 도형이 되는 <b>양방향 편집기</b>(도형 5종·연결선 4종·방향 전환·자동 정렬·밝은/어두운 배경)</li>
-        <li><span class="cl-tag feat">feat</span><b>AI 노트 공유</b> — 앱 안 AI 에이전트가 노트를 직접 생성·조회·수정(orchterm-notes MCP, 기본 켜짐). 시퀀스·순서도는 Mermaid로 읽고 써서 AI와 <b>왕복 편집</b> 가능</li>
-        <li><span class="cl-tag feat">feat</span>기본 코드 폰트로 <b>Jetendard</b>(JetBrains Mono + Pretendard) 내장 — 폰트가 설치되지 않은 PC에서도 동일하게 표시</li>
-        <li><span class="cl-tag fix">fix</span>설정에서 고른 코드 폰트가 <b>코드 편집기·메모장에 적용되지 않던</b> 문제 수정 — 터미널에만 적용되고 있었음</li>
-        <li><span class="cl-tag fix">fix</span>그림 노트를 열어둔 채 AI가 수정하면 캔버스에 즉시 반영 — 이전엔 열려 있던 옛 그림이 AI 수정을 되덮을 수 있었음</li>
-        <li><span class="cl-tag fix">fix</span>그림·시퀀스 노트 배경이 창 투명도 설정을 따라가도록 수정</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><a href="notes.html">메모(노트) 패널</a></b> — 타이틀바 메모 버튼(Ctrl+Shift+N)으로 여는 플로팅 Post-it. 탭·색상·고정·이름 변경, 마크다운 미리보기, 파일 저장, 텍스트 노트는 메인 패널 탭으로 확장</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>그림 노트</b> — Excalidraw 캔버스 자유 드로잉(오프라인 동작), 격자 토글, PNG/SVG/PDF/클립보드 내보내기</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>시퀀스 다이어그램 노트</b> — 드래그로 그리는 UML 시퀀스 편집기(도구 팔레트·활성화 막대·loop/alt/opt/par 프레임·자유 배치·손 패닝·도구 단축키), Mermaid(.mmd)/SVG/PNG/PDF 내보내기</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>순서도 노트</b> — 캔버스에서 드래그로 그리면 Mermaid 코드가 되고, Mermaid를 불러오면 편집 가능한 도형이 되는 <b>양방향 편집기</b>(도형 5종·연결선 4종·방향 전환·자동 정렬·밝은/어두운 배경)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI 노트 공유</b> — 앱 안 AI 에이전트가 노트를 직접 생성·조회·수정(orchterm-notes MCP, 기본 켜짐). 시퀀스·순서도는 Mermaid로 읽고 써서 AI와 <b>왕복 편집</b> 가능</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">기본 코드 폰트로 <b>Jetendard</b>(JetBrains Mono + Pretendard) 내장 — 폰트가 설치되지 않은 PC에서도 동일하게 표시</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">설정에서 고른 코드 폰트가 <b>코드 편집기·메모장에 적용되지 않던</b> 문제 수정 — 터미널에만 적용되고 있었음</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">그림 노트를 열어둔 채 AI가 수정하면 캔버스에 즉시 반영 — 이전엔 열려 있던 옛 그림이 AI 수정을 되덮을 수 있었음</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">그림·시퀀스 노트 배경이 창 투명도 설정을 따라가도록 수정</span></li>
       </ul>
     </div>
 
@@ -239,13 +241,13 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>사이드바 Git 패널에 <b>워크트리 목록</b>과 정리(제거) UI — 워크트리가 2개 이상일 때 표시</li>
-        <li><span class="cl-tag feat">feat</span>코드 변경(diff)을 메인 패널의 <b>좌우분할 탭 뷰어</b>로 — 신규(untracked) 파일 포함, 파일별로 탭 재사용</li>
-        <li><span class="cl-tag feat">feat</span>SSH 연결 실패 시 <b>원인을 구분해 안내</b>(키 파일 없음·패스프레이즈 필요 등) — 이전엔 모두 "인증 실패"로만 표시</li>
-        <li><span class="cl-tag fix">fix</span>macOS 한글 IME(구름 입력기 등) 조합 시 글자가 중복 입력되던 문제 수정</li>
-        <li><span class="cl-tag fix">fix</span>macOS 한글 → 한자 변환(⌥Enter) — 한국→韓國 같은 여러 음절 단어도 지원</li>
-        <li><span class="cl-tag fix">fix</span>macOS 세션 이어가기에서 탭만 생기고 AI 에이전트(claude/codex/agy)가 실행되지 않던 문제 수정</li>
-        <li><span class="cl-tag fix">fix</span>SSH 개인키 경로의 ~(틸드, 예: ~/.ssh/id_rsa)를 홈 경로로 확장 — 이전엔 절대경로만 동작</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">사이드바 Git 패널에 <b>워크트리 목록</b>과 정리(제거) UI — 워크트리가 2개 이상일 때 표시</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">코드 변경(diff)을 메인 패널의 <b>좌우분할 탭 뷰어</b>로 — 신규(untracked) 파일 포함, 파일별로 탭 재사용</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">SSH 연결 실패 시 <b>원인을 구분해 안내</b>(키 파일 없음·패스프레이즈 필요 등) — 이전엔 모두 "인증 실패"로만 표시</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">macOS 한글 IME(구름 입력기 등) 조합 시 글자가 중복 입력되던 문제 수정</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">macOS 한글 → 한자 변환(⌥Enter) — 한국→韓國 같은 여러 음절 단어도 지원</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">macOS 세션 이어가기에서 탭만 생기고 AI 에이전트(claude/codex/agy)가 실행되지 않던 문제 수정</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">SSH 개인키 경로의 ~(틸드, 예: ~/.ssh/id_rsa)를 홈 경로로 확장 — 이전엔 절대경로만 동작</span></li>
       </ul>
     </div>
 
@@ -254,16 +256,16 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.4.2</span><span class="d">2026-07-07</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>세션 목록에서 이어가기로 연 탭의 이름 변경 허용 — 탭 더블클릭 또는 우클릭 → 이름 변경</li>
-        <li><span class="cl-tag fix">fix</span>오케스트레이션으로 AI 워커(agy 등)를 띄울 때 워커 탭이 안 뜨고 감독 목록에만 세션이 남던 문제 수정</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">세션 목록에서 이어가기로 연 탭의 이름 변경 허용 — 탭 더블클릭 또는 우클릭 → 이름 변경</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">오케스트레이션으로 AI 워커(agy 등)를 띄울 때 워커 탭이 안 뜨고 감독 목록에만 세션이 남던 문제 수정</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.4.1</span><span class="d">2026-07-05</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>사이드바 패널 도킹 — 사이드바 하단 아이콘(파일탐색기·검색·Git·할 일·세션)을 드래그해 작업 패널로 떼어내 탭으로 띄우고, 탭을 닫으면 다시 사이드바로 복귀. 떠 있는 아이콘 클릭=그 탭으로 이동 · 배치는 Space별 기억·재시작 유지 · 각 탭에 모드 아이콘 표시</li>
-        <li><span class="cl-tag fix">fix</span>패널을 상·하·좌·우로 분할 드롭할 때 미리보기 오버레이가 실제 분할 영역(절반)과 맞도록 수정</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">사이드바 패널 도킹 — 사이드바 하단 아이콘(파일탐색기·검색·Git·할 일·세션)을 드래그해 작업 패널로 떼어내 탭으로 띄우고, 탭을 닫으면 다시 사이드바로 복귀. 떠 있는 아이콘 클릭=그 탭으로 이동 · 배치는 Space별 기억·재시작 유지 · 각 탭에 모드 아이콘 표시</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">패널을 상·하·좌·우로 분할 드롭할 때 미리보기 오버레이가 실제 분할 영역(절반)과 맞도록 수정</span></li>
       </ul>
     </div>
 
@@ -272,34 +274,34 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.3.2</span><span class="d">2026-07-04</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>탐색기 빈 공간 우클릭 → 프로젝트 폴더를 파인더/탐색기에서 바로 열기</li>
-        <li><span class="cl-tag feat">feat</span>편집기 탭에 파일 전체 경로 툴팁 + 우클릭 "절대 경로 복사"</li>
-        <li><span class="cl-tag feat">feat</span>할 일 삭제 시 확인창(실수 삭제 방지)</li>
-        <li><span class="cl-tag feat">feat</span>"새로운 기능" 팝업이 앱 언어(한/영)에 맞춰 표시</li>
-        <li><span class="cl-tag fix">fix</span>대규모 백엔드 안정화 — 입력 중 앱 전체가 얼던 문제, 미러 켤 때 전역 설정 파일 손실 위험, 커맨드 인젝션·크래시 다수 차단</li>
-        <li><span class="cl-tag fix">fix</span>설정의 폰트 드롭다운이 작은 창에서 화면 밖으로 열리던 문제</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">탐색기 빈 공간 우클릭 → 프로젝트 폴더를 파인더/탐색기에서 바로 열기</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">편집기 탭에 파일 전체 경로 툴팁 + 우클릭 "절대 경로 복사"</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">할 일 삭제 시 확인창(실수 삭제 방지)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">"새로운 기능" 팝업이 앱 언어(한/영)에 맞춰 표시</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">대규모 백엔드 안정화 — 입력 중 앱 전체가 얼던 문제, 미러 켤 때 전역 설정 파일 손실 위험, 커맨드 인젝션·크래시 다수 차단</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">설정의 폰트 드롭다운이 작은 창에서 화면 밖으로 열리던 문제</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.3.1</span><span class="d">2026-07-01</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>세션 재개 권한 건너뛰기 — 세션 목록 헤더 체크박스로 권한 확인 없이 대화 재개(선택 유지)</li>
-        <li><span class="cl-tag feat">feat</span>한국어/영어 다국어 · 이미지·SVG·PDF 인앱 열람 · 세션 목록 git 브랜치·아이콘·더 보기</li>
-        <li><span class="cl-tag fix">fix</span>agy 워커 재개 시 권한 건너뛰기 플래그 누락 · macOS 폰트 목록 hang · 세션 재개/갱신 버그 다수</li>
-        <li><span class="cl-tag perf">perf</span>세션 목록 스캔 속도 개선(활성 프로젝트만 조회·백그라운드)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">세션 재개 권한 건너뛰기 — 세션 목록 헤더 체크박스로 권한 확인 없이 대화 재개(선택 유지)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">한국어/영어 다국어 · 이미지·SVG·PDF 인앱 열람 · 세션 목록 git 브랜치·아이콘·더 보기</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">agy 워커 재개 시 권한 건너뛰기 플래그 누락 · macOS 폰트 목록 hang · 세션 재개/갱신 버그 다수</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt">세션 목록 스캔 속도 개선(활성 프로젝트만 조회·백그라운드)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>다국어(한국어·영어) — 첫 실행 시 OS 언어 자동 감지 · 설정에서 언어 전환(재시작 적용) · 문서 사이트 영어판</li>
-        <li><span class="cl-tag feat">feat</span>세션 목록 (이어가기) — 사이드바 세션 모드(Ctrl+Shift+S)로 claude·codex·agy 대화를 날짜별로 모아 보고 클릭 한 번으로 재개</li>
-        <li><span class="cl-tag feat">feat</span>탭 바둑판 분할(<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>) · 전체 패널 병합(<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M5.2 8V5.2h6V8"/></svg>) — 한 패널의 탭을 격자로 펼치거나 모든 패널을 하나로 합치기</li>
-        <li><span class="cl-tag feat">feat</span>탐색기 — 이미지·SVG·PDF·미디어를 인앱 브라우저로 열기 · 프로젝트 아이콘 · '프로젝트 추가' 단일 진입점</li>
-        <li><span class="cl-tag feat">feat</span>새 버전 첫 실행 시 "새로운 기능"(변경 이력) 팝업</li>
-        <li><span class="cl-tag fix">fix</span>macOS — 설정창 폰트 열거로 인한 hang 해결(비동기 처리)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">다국어(한국어·영어) — 첫 실행 시 OS 언어 자동 감지 · 설정에서 언어 전환(재시작 적용) · 문서 사이트 영어판</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">세션 목록 (이어가기) — 사이드바 세션 모드(Ctrl+Shift+S)로 claude·codex·agy 대화를 날짜별로 모아 보고 클릭 한 번으로 재개</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">탭 바둑판 분할(<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>) · 전체 패널 병합(<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M5.2 8V5.2h6V8"/></svg>) — 한 패널의 탭을 격자로 펼치거나 모든 패널을 하나로 합치기</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">탐색기 — 이미지·SVG·PDF·미디어를 인앱 브라우저로 열기 · 프로젝트 아이콘 · '프로젝트 추가' 단일 진입점</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">새 버전 첫 실행 시 "새로운 기능"(변경 이력) 팝업</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">macOS — 설정창 폰트 열거로 인한 hang 해결(비동기 처리)</span></li>
       </ul>
     </div>
 
@@ -308,26 +310,26 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.2.2</span><span class="d">2026-06-29</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>macOS 인앱 브라우저 미러 설정 토글 + 기본 ON</li>
-        <li><span class="cl-tag fix">fix</span>Alt+Tab 복귀 후 한글·스페이스 IME 중복 입력 수정</li>
-        <li><span class="cl-tag fix">fix</span>사이드바 브랜치명 실시간 갱신(.git/HEAD 감시)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">macOS 인앱 브라우저 미러 설정 토글 + 기본 ON</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Alt+Tab 복귀 후 한글·스페이스 IME 중복 입력 수정</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">사이드바 브랜치명 실시간 갱신(.git/HEAD 감시)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.2.1</span><span class="d">2026-06-28</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>탐색기 푸터 개편 — 새로고침 버튼(열린 폴더 유지)·git 브랜치 표시 견고화</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">탐색기 푸터 개편 — 새로고침 버튼(열린 폴더 유지)·git 브랜치 표시 견고화</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.2.0</span><span class="d">2026-06-28</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Windows 멀티웹뷰 포커스 복귀 키보드 수정(wry 패치 번들)</li>
-        <li><span class="cl-tag fix">fix</span>SSH/SFTP 무제한 읽기(OOM)·SOCKS5 프레이밍·세션 누수·known_hosts 정리</li>
-        <li><span class="cl-tag fix">fix</span>자격증명 볼트 — 잠금/종료 시 평문 시크릿·DEK 미소거 + 비밀번호 변경 경합 수정</li>
-        <li><span class="cl-tag fix">fix</span>부팅 DB open/migrate 패닉 → busy_timeout + 클린 종료</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Windows 멀티웹뷰 포커스 복귀 키보드 수정(wry 패치 번들)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">SSH/SFTP 무제한 읽기(OOM)·SOCKS5 프레이밍·세션 누수·known_hosts 정리</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">자격증명 볼트 — 잠금/종료 시 평문 시크릿·DEK 미소거 + 비밀번호 변경 경합 수정</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">부팅 DB open/migrate 패닉 → busy_timeout + 클린 종료</span></li>
       </ul>
     </div>
 
@@ -336,64 +338,64 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.37</span><span class="d">2026-06-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>검색 세부 옵션 접기 토글 + classic 포커스 링</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">검색 세부 옵션 접기 토글 + classic 포커스 링</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.36</span><span class="d">2026-06-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>전체 검색 — .gitignore 적용 옵션·검색 버튼 + .git 제외·성능 개선</li>
-        <li><span class="cl-tag feat">feat</span>설정·정보 창 단축키 + 명령 팔레트 항목</li>
-        <li><span class="cl-tag fix">fix</span>창 최소화 복귀 시 입력 라인 사라짐(0높이 fit 차단)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">전체 검색 — .gitignore 적용 옵션·검색 버튼 + .git 제외·성능 개선</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">설정·정보 창 단축키 + 명령 팔레트 항목</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">창 최소화 복귀 시 입력 라인 사라짐(0높이 fit 차단)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.35</span><span class="d">2026-06-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>사이드바 검색·모드를 Space별로 격리 + Ctrl+Tab 순회</li>
-        <li><span class="cl-tag feat">feat</span>Git 패널 영역 분리 · diff 스크롤 보존 · 헤더/스크롤바 정리</li>
-        <li><span class="cl-tag fix">fix</span>창 포커스 복귀 시 클릭이 첫 터미널로 튕기던 버그</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">사이드바 검색·모드를 Space별로 격리 + Ctrl+Tab 순회</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Git 패널 영역 분리 · diff 스크롤 보존 · 헤더/스크롤바 정리</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">창 포커스 복귀 시 클릭이 첫 터미널로 튕기던 버그</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.34</span><span class="d">2026-06-23</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Git sync 바 개편 — 카운트 클릭=push/pull · 실시간 자동갱신 · fetch 버튼</li>
-        <li><span class="cl-tag feat">feat</span>Ctrl+Tab / Ctrl+Shift+Tab 패널·사이드바 순회</li>
-        <li><span class="cl-tag fix">fix</span>사이드바 최대화 토글 시 프롬프트 중복(가려진 패널 SIGWINCH 억제)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Git sync 바 개편 — 카운트 클릭=push/pull · 실시간 자동갱신 · fetch 버튼</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Ctrl+Tab / Ctrl+Shift+Tab 패널·사이드바 순회</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">사이드바 최대화 토글 시 프롬프트 중복(가려진 패널 SIGWINCH 억제)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.33</span><span class="d">2026-06-23</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Windows — git blame·기본 앱 열기 시 콘솔 창 깜빡임 제거</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Windows — git blame·기본 앱 열기 시 콘솔 창 깜빡임 제거</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.32</span><span class="d">2026-06-23</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>AI 게이트웨이 감사 로그 — 요청/응답 일자별 기록 + 뷰어 탭(달력·세로 분할) + retention</li>
-        <li><span class="cl-tag fix">fix</span>알림 벨 카운트 뱃지를 테마 무관 항상 동그라미로</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">AI 게이트웨이 감사 로그 — 요청/응답 일자별 기록 + 뷰어 탭(달력·세로 분할) + retention</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">알림 벨 카운트 뱃지를 테마 무관 항상 동그라미로</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.31</span><span class="d">2026-06-21</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>세션 복원 — 사라진 경로 탭 가지치기·오류 격리·빈 패널 폴백(fallbackCwd)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">세션 복원 — 사라진 경로 탭 가지치기·오류 격리·빈 패널 폴백(fallbackCwd)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.30</span><span class="d">2026-06-20</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>macOS Intel을 Apple Silicon 러너에서 크로스컴파일</li>
-        <li><span class="cl-tag fix">fix</span>Finder 실행 시 TERM 빈 값으로 색상·zsh 자동완성 깨짐</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">macOS Intel을 Apple Silicon 러너에서 크로스컴파일</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Finder 실행 시 TERM 빈 값으로 색상·zsh 자동완성 깨짐</span></li>
       </ul>
     </div>
 
@@ -402,63 +404,63 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.29</span><span class="d">2026-06-20</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>에디터 폰트 줌(Cmd+=/−/0) + 단축키 순수화·테스트</li>
-        <li><span class="cl-tag feat">feat</span>macOS curl 한 줄 설치 스크립트 + 릴리즈 자동 업로드</li>
-        <li><span class="cl-tag fix">fix</span>창 클램프를 NSScreen 작업영역 기준으로 · 경로 인자주입 방어</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">에디터 폰트 줌(Cmd+=/−/0) + 단축키 순수화·테스트</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">macOS curl 한 줄 설치 스크립트 + 릴리즈 자동 업로드</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">창 클램프를 NSScreen 작업영역 기준으로 · 경로 인자주입 방어</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.28</span><span class="d">2026-06-20</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>macOS 포팅 — codex 직접 실행 · 'Finder에서 보기' · 기본 창 1200×900 클램프</li>
-        <li><span class="cl-tag fix">fix</span>유실된 mouseup 자가복구 — '클릭 후 이동=드래그 stuck' 차단(크로스플랫폼)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">macOS 포팅 — codex 직접 실행 · 'Finder에서 보기' · 기본 창 1200×900 클램프</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">유실된 mouseup 자가복구 — '클릭 후 이동=드래그 stuck' 차단(크로스플랫폼)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.27</span><span class="d">2026-06-19</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>자동 업데이트 — 부팅 배너와 About이 하나의 Updater를 공유</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">자동 업데이트 — 부팅 배너와 About이 하나의 Updater를 공유</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.26</span><span class="d">2026-06-19</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>오케스트레이션 감독 대시보드를 Space별로 스코프</li>
-        <li><span class="cl-tag feat">feat</span>다운로드 통계에서 latest.json(업데이터 매니페스트) 제외</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">오케스트레이션 감독 대시보드를 Space별로 스코프</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">다운로드 통계에서 latest.json(업데이터 매니페스트) 제외</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.25</span><span class="d">2026-06-19</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>오케스트레이션 — '진행 중 워커 + 중지' pill로 전환(send 기본 블로킹)</li>
-        <li><span class="cl-tag fix">fix</span>감독 대시보드 행 레이아웃·중지 정착·라벨 정리</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">오케스트레이션 — '진행 중 워커 + 중지' pill로 전환(send 기본 블로킹)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">감독 대시보드 행 레이아웃·중지 정착·라벨 정리</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.24</span><span class="d">2026-06-18</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>스페이스 닫기 후 탐색기가 닫힌 Space 잔상을 유지하던 버그</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">스페이스 닫기 후 탐색기가 닫힌 Space 잔상을 유지하던 버그</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.23</span><span class="d">2026-06-17</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>자동 업데이트 — tauri-plugin-updater + 타이틀바 배너 + 부팅 자동 체크 + About 확인 버튼</li>
-        <li><span class="cl-tag feat">feat</span>릴리즈 changelog 자동 생성 스크립트(gen-changelog.mjs)</li>
-        <li><span class="cl-tag fix">fix</span>relaunch를 plugin-process로 + 다운로드 진행률 브로드캐스트</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">자동 업데이트 — tauri-plugin-updater + 타이틀바 배너 + 부팅 자동 체크 + About 확인 버튼</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">릴리즈 changelog 자동 생성 스크립트(gen-changelog.mjs)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">relaunch를 plugin-process로 + 다운로드 진행률 브로드캐스트</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.22</span><span class="d">2026-06-17</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>첫 공개 릴리즈 — 단일 창 데스크톱 터미널(탭·분할·Space), 인앱 브라우저·에디터, 멀티에이전트 오케스트레이션·미러</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">첫 공개 릴리즈 — 단일 창 데스크톱 터미널(탭·분할·Space), 인앱 브라우저·에디터, 멀티에이전트 오케스트레이션·미러</span></li>
       </ul>
     </div>
 

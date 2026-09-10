@@ -26,7 +26,9 @@
   .cl-ver .latest { font-size: 10.5px; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
   .cl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
   .cl-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--text-dim); line-height: 1.55; }
-  .cl-tag { flex: none; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-top: 2px; text-transform: uppercase; letter-spacing: .02em; min-width: 30px; text-align: center; }
+  .cl-list li > .cl-txt { flex: 1 1 auto; min-width: 0; }
+  .cl-list li > .cl-tag { width: 36px; }
+  .cl-tag { flex: none; box-sizing: border-box; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-top: 2px; text-transform: uppercase; letter-spacing: .02em; min-width: 30px; text-align: center; }
   .cl-tag.feat { background: rgba(74, 222, 128, .14); color: #4ade80; }
   .cl-tag.fix { background: rgba(251, 146, 60, .14); color: #fb923c; }
   .cl-tag.perf { background: rgba(96, 165, 250, .14); color: #60a5fa; }
@@ -79,7 +81,7 @@
     <div class="cl-rel is-latest">
       <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span><span class="latest">latest</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span><b>Fixed in-app browser tabs opening to a blank screen</b> — the address stayed in the address bar but the page never appeared, and once it happened <b>every tab opened afterwards</b> behaved the same way (until a restart). Not site-specific; local development server addresses were affected too. The cause: with <a href="mirror.html">mirror</a> on and at least one AI session attached inside the app, every new tab was left <b>suspended before it could start drawing the page</b>. The app now releases that suspension itself — covering links clicked in the terminal, tabs opened by an AI, and setups with several <a href="spaces.html">Spaces</a></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed in-app browser tabs opening to a blank screen</b> — the address stayed in the address bar but the page never appeared, and once it happened <b>every tab opened afterwards</b> behaved the same way (until a restart). Not site-specific; local development server addresses were affected too. The cause: with <a href="mirror.html">mirror</a> on and at least one AI session attached inside the app, every new tab was left <b>suspended before it could start drawing the page</b>. The app now releases that suspension itself — covering links clicked in the terminal, tabs opened by an AI, and setups with several <a href="spaces.html">Spaces</a></span></li>
       </ul>
     </div>
     <h2 class="sec" id="v081"><span class="hash"></span> 0.8.1 — Six workers · long jobs no longer cut off · orchestration hardening</h2>
@@ -87,13 +89,13 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.8.1</span><span class="d">2026-09-07</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Six agents can be put to work</b> — <b>Grok·opencode·Hermes</b> join Claude Code·Codex·Antigravity. The list shows <b>only what is actually installed</b>, so no turn is wasted spawning a worker you don't have</li>
-        <li><span class="cl-tag feat">feat</span><b>Hand a worker jobs that take minutes</b> — long work used to get cut off by the directing AI's time limit (60s with Claude Code), and retrying <b>delivered the same instruction twice</b>. Work is now handed over and checked on in short intervals, so refactors, reviews and builds run to completion</li>
-        <li><span class="cl-tag feat">feat</span><b>Grok·opencode·Hermes icons in the session list</b> — all six CLIs are distinguishable at a glance</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed worker replies arriving at the wrong place, or coming back empty</b> — with more than one similarly-named orchterm running, a worker could report to the instance that didn't spawn it, leaving the side that assigned the work with messy scraped text. Workers are now told exactly where to report</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed a Codex worker dying on startup</b> (<code>no pty session</code>) — its update prompt was mistaken for the input line, Enter selected "update now" and Codex quit. Startup prompts are now recognised and reported (without closing the tab or answering for you)</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed opencode workers taking 30 seconds to start</b> — the readiness signal was being read incorrectly</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed leftover development registrations causing connection-failure warnings</b> every time you ran Codex or Claude — dead registrations are cleaned up at startup</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Six agents can be put to work</b> — <b>Grok·opencode·Hermes</b> join Claude Code·Codex·Antigravity. The list shows <b>only what is actually installed</b>, so no turn is wasted spawning a worker you don't have</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Hand a worker jobs that take minutes</b> — long work used to get cut off by the directing AI's time limit (60s with Claude Code), and retrying <b>delivered the same instruction twice</b>. Work is now handed over and checked on in short intervals, so refactors, reviews and builds run to completion</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Grok·opencode·Hermes icons in the session list</b> — all six CLIs are distinguishable at a glance</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed worker replies arriving at the wrong place, or coming back empty</b> — with more than one similarly-named orchterm running, a worker could report to the instance that didn't spawn it, leaving the side that assigned the work with messy scraped text. Workers are now told exactly where to report</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed a Codex worker dying on startup</b> (<code>no pty session</code>) — its update prompt was mistaken for the input line, Enter selected "update now" and Codex quit. Startup prompts are now recognised and reported (without closing the tab or answering for you)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed opencode workers taking 30 seconds to start</b> — the readiness signal was being read incorrectly</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed leftover development registrations causing connection-failure warnings</b> every time you ran Codex or Claude — dead registrations are cleaned up at startup</span></li>
       </ul>
       <p class="cl-note"><b>If you use Hermes</b> — Hermes cannot answer at all once its configured model becomes unavailable (subscription change, model retirement). Pick a working model with <code>hermes model</code> and register a spare with <code>hermes fallback add</code>, and it will switch over automatically later.</p>
     </div>
@@ -102,15 +104,15 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.8.0</span><span class="d">2026-09-03</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>AI conversations survive a restart</b> — the Claude Code, Codex, Antigravity, Grok, opencode or Hermes conversation running in each terminal tab reopens on its own. It recognises agents you typed into a shell yourself and aliases (<code>cl</code>), survives force-quits and crashes, and returns to whichever conversation you switched to (turn it off under Settings → Terminal)</li>
-        <li><span class="cl-tag feat">feat</span><b>The name you give a tab becomes the conversation's name</b> — rename a terminal tab and its AI conversation shows up under that name in the session list. Order doesn't matter (name it first and start the agent later), and renaming in the list moves the tab name too</li>
-        <li><span class="cl-tag feat">feat</span><b>The session list covers all six CLIs</b> — Grok, opencode and Hermes join Claude, Codex and Antigravity (<code>Ctrl+Shift+S</code>)</li>
-        <li><span class="cl-tag feat">feat</span><b>Revive stalled browser tabs</b> added to the command palette — reopens the same address without closing the tab (<code>Ctrl+Shift+P</code>)</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed the app slowing down or freezing while using the in-app browser</b> — dozens to hundreds of pointless commands per second were fired at a dead browser view on every divider drag or window resize (1,412 in a day of real logs); it now sends one only when the state changes</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed browser tabs going blank with no explanation</b> — the reason now shows inside the tab, re-entering the address reopens it, and reopening the same address works</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed some terminal tabs coming back blank after a restart</b> — during restore a later tab could latch onto a previous tab's shell (11 tabs against 9 live shells)</li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed resuming a Codex conversation failing</b> with <code>No saved session found with ID</code></li>
-        <li><span class="cl-tag fix">fix</span><b>Fixed a new terminal inheriting the conversation when the app was launched from inside an AI session</b> — this had been dropping whole tabs from the restore</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI conversations survive a restart</b> — the Claude Code, Codex, Antigravity, Grok, opencode or Hermes conversation running in each terminal tab reopens on its own. It recognises agents you typed into a shell yourself and aliases (<code>cl</code>), survives force-quits and crashes, and returns to whichever conversation you switched to (turn it off under Settings → Terminal)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>The name you give a tab becomes the conversation's name</b> — rename a terminal tab and its AI conversation shows up under that name in the session list. Order doesn't matter (name it first and start the agent later), and renaming in the list moves the tab name too</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>The session list covers all six CLIs</b> — Grok, opencode and Hermes join Claude, Codex and Antigravity (<code>Ctrl+Shift+S</code>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Revive stalled browser tabs</b> added to the command palette — reopens the same address without closing the tab (<code>Ctrl+Shift+P</code>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the app slowing down or freezing while using the in-app browser</b> — dozens to hundreds of pointless commands per second were fired at a dead browser view on every divider drag or window resize (1,412 in a day of real logs); it now sends one only when the state changes</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed browser tabs going blank with no explanation</b> — the reason now shows inside the tab, re-entering the address reopens it, and reopening the same address works</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed some terminal tabs coming back blank after a restart</b> — during restore a later tab could latch onto a previous tab's shell (11 tabs against 9 live shells)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed resuming a Codex conversation failing</b> with <code>No saved session found with ID</code></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed a new terminal inheriting the conversation when the app was launched from inside an AI session</b> — this had been dropping whole tabs from the restore</span></li>
       </ul>
     </div>
 
@@ -119,15 +121,15 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.9</span><span class="d">2026-08-18</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Richer Markdown preview</b> — the reading view (👁) and note memos now render <b>Mermaid diagrams</b>, <b>math (KaTeX)</b>, <b>syntax-highlighted code</b>, GFM alerts (<code>&gt; [!NOTE]</code>) and a copy button on code blocks</li>
-        <li><span class="cl-tag feat">feat</span><b>Rename sessions</b> — right-click an entry in the resume list to name it; the original title stays below in grey and the name carries over to the tab when you resume</li>
-        <li><span class="cl-tag feat">feat</span><b>AI gateway</b> — audit logs sorted newest-request-first, and the model given in a request is passed through to the worker</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>HTML created by an agent opening as <code>about:blank</code> or a blank page</b> in the in-app browser — two-slash addresses (<code>file://D:/report.html</code>) and plain paths (<code>D:\work\report.html</code>, <code>/Users/me/report.html</code>) now open as-is</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>open failures being swallowed</b> — the reason is now shown in the tab, editing the address retries, and agents receive the failure instead of reporting a false success</li>
-        <li><span class="cl-tag fix">fix</span><b>local file tabs are titled with the file name</b> (and keep it after a restore)</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>the colour picker being orphaned when a tab closed itself</b>, which left the browser view hidden for good (when a shell exited and closed its terminal tab)</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>broken relative-path images/links and table-of-contents anchors (<code>[toc](#section)</code>)</b> in the Markdown preview</li>
-        <li><span class="cl-tag feat">feat</span><b>diagnostic log file</b> for problem reports (warnings and above, 1 MB rotating) + a notice that in-app browser agent tools need <b>Node 20.19+</b> (Settings → Agent mirror)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Richer Markdown preview</b> — the reading view (👁) and note memos now render <b>Mermaid diagrams</b>, <b>math (KaTeX)</b>, <b>syntax-highlighted code</b>, GFM alerts (<code>&gt; [!NOTE]</code>) and a copy button on code blocks</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Rename sessions</b> — right-click an entry in the resume list to name it; the original title stays below in grey and the name carries over to the tab when you resume</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI gateway</b> — audit logs sorted newest-request-first, and the model given in a request is passed through to the worker</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>HTML created by an agent opening as <code>about:blank</code> or a blank page</b> in the in-app browser — two-slash addresses (<code>file://D:/report.html</code>) and plain paths (<code>D:\work\report.html</code>, <code>/Users/me/report.html</code>) now open as-is</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>open failures being swallowed</b> — the reason is now shown in the tab, editing the address retries, and agents receive the failure instead of reporting a false success</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>local file tabs are titled with the file name</b> (and keep it after a restore)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>the colour picker being orphaned when a tab closed itself</b>, which left the browser view hidden for good (when a shell exited and closed its terminal tab)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>broken relative-path images/links and table-of-contents anchors (<code>[toc](#section)</code>)</b> in the Markdown preview</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>diagnostic log file</b> for problem reports (warnings and above, 1 MB rotating) + a notice that in-app browser agent tools need <b>Node 20.19+</b> (Settings → Agent mirror)</span></li>
       </ul>
     </div>
 
@@ -136,12 +138,12 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.8</span><span class="d">2026-08-08</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Open local files from the address bar</b> — type a <code>file:///…</code> path and the in-app browser opens it (the same path Explorer's "Open in browser" uses) — it previously went to a blank page with no explanation</li>
-        <li><span class="cl-tag feat">feat</span><b>A notice while the browser is temporarily hidden</b> — panels that must float on top (such as Notes) briefly hide the browser view; the spot now reads <b>Hiding…</b> so it no longer looks like the page failed to load</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>symbols such as <code>&gt;</code>, <code>&lt;</code>, <code>?</code>, <code>~</code> and <code>!</code> not being typed while a Korean IME is active on macOS</b> — symbols typed with Shift in Korean input mode vanished without reaching the terminal</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>the address bar turning into <code>about:blank</code> after opening a site on macOS</b> (seen on sites with many embedded frames)</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>browser tabs disappearing when the SSH panel was opened</b> — the SSH panel and a browser tab can now be used side by side</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>quitting the app on Windows also terminating unrelated programs named <code>app.exe</code></b></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Open local files from the address bar</b> — type a <code>file:///…</code> path and the in-app browser opens it (the same path Explorer's "Open in browser" uses) — it previously went to a blank page with no explanation</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>A notice while the browser is temporarily hidden</b> — panels that must float on top (such as Notes) briefly hide the browser view; the spot now reads <b>Hiding…</b> so it no longer looks like the page failed to load</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>symbols such as <code>&gt;</code>, <code>&lt;</code>, <code>?</code>, <code>~</code> and <code>!</code> not being typed while a Korean IME is active on macOS</b> — symbols typed with Shift in Korean input mode vanished without reaching the terminal</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>the address bar turning into <code>about:blank</code> after opening a site on macOS</b> (seen on sites with many embedded frames)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>browser tabs disappearing when the SSH panel was opened</b> — the SSH panel and a browser tab can now be used side by side</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>quitting the app on Windows also terminating unrelated programs named <code>app.exe</code></b></span></li>
       </ul>
     </div>
 
@@ -150,10 +152,10 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.6</span><span class="d">2026-07-25</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Session survival across reload</b> — when a reload happens (refresh or self-recovery), the local terminal <b>reconnects to its still-running session</b> — the running process is kept alive and previous output (scrollback) is restored, so your work isn't interrupted</li>
-        <li><span class="cl-tag feat">feat</span><b>Renderer self-recovery</b> — if the screen freezes or the renderer crashes, a <b>native dialog</b> offers to reload — recovering while keeping your local sessions alive</li>
-        <li><span class="cl-tag feat">feat</span><b>AI agent output viewer</b> — stream the live output of orchestration workers running headless (without a tab) via the <b>"Output"</b> button on the supervisor dashboard — closing the viewer tab doesn't stop the job</li>
-        <li><span class="cl-tag fix">fix</span>fixed <b>scrollback replay overwriting the clipboard</b> when a session reconnects (OSC 52 mute)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Session survival across reload</b> — when a reload happens (refresh or self-recovery), the local terminal <b>reconnects to its still-running session</b> — the running process is kept alive and previous output (scrollback) is restored, so your work isn't interrupted</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Renderer self-recovery</b> — if the screen freezes or the renderer crashes, a <b>native dialog</b> offers to reload — recovering while keeping your local sessions alive</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI agent output viewer</b> — stream the live output of orchestration workers running headless (without a tab) via the <b>"Output"</b> button on the supervisor dashboard — closing the viewer tab doesn't stop the job</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed <b>scrollback replay overwriting the clipboard</b> when a session reconnects (OSC 52 mute)</span></li>
       </ul>
     </div>
 
@@ -162,8 +164,8 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.5</span><span class="d">2026-07-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Terminal output flow control (backpressure)</b> — prevents the screen from <b>freezing or the app becoming unresponsive</b> when a command floods the terminal faster than it can render — all three paths (local terminal, SSH, AI agent viewer) now pull output only as fast as the screen draws it</li>
-        <li><span class="cl-tag feat">feat</span>keyboard input (e.g. Ctrl+C) <b>keeps flowing while output is paused</b>, so a runaway command can be stopped immediately</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Terminal output flow control (backpressure)</b> — prevents the screen from <b>freezing or the app becoming unresponsive</b> when a command floods the terminal faster than it can render — all three paths (local terminal, SSH, AI agent viewer) now pull output only as fast as the screen draws it</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">keyboard input (e.g. Ctrl+C) <b>keeps flowing while output is paused</b>, so a runaway command can be stopped immediately</span></li>
       </ul>
     </div>
 
@@ -172,8 +174,8 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.4</span><span class="d">2026-07-22</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Terminal font weight</b> — bundled <b>Thin (100) and Light (300)</b> weights for the default code font (Jetendard) — weight settings 100–300 now render as actually thin</li>
-        <li><span class="cl-tag fix">fix</span>fixed bold characters in the terminal <b>mixing different shapes and sizes within a single word</b></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Terminal font weight</b> — bundled <b>Thin (100) and Light (300)</b> weights for the default code font (Jetendard) — weight settings 100–300 now render as actually thin</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">fixed bold characters in the terminal <b>mixing different shapes and sizes within a single word</b></span></li>
       </ul>
     </div>
 
@@ -182,7 +184,7 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.3</span><span class="d">2026-07-21</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span><b>Boot input focus</b> — fixed the <b>active terminal not receiving keyboard input right after launch</b> (needing a click or Alt+Tab to recover), most visible when a browser or PDF tab was restored</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Boot input focus</b> — fixed the <b>active terminal not receiving keyboard input right after launch</b> (needing a click or Alt+Tab to recover), most visible when a browser or PDF tab was restored</span></li>
       </ul>
     </div>
 
@@ -191,7 +193,7 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.2</span><span class="d">2026-07-16</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span><b>AI gateway</b> — fixed a <b>gateway worker tab reopening on every app launch</b> while the gateway was enabled</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>AI gateway</b> — fixed a <b>gateway worker tab reopening on every app launch</b> while the gateway was enabled</span></li>
       </ul>
     </div>
 
@@ -200,8 +202,8 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.1</span><span class="d">2026-07-16</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b>Terminal copy</b> — copy the selected terminal text to the clipboard with Ctrl+Shift+C, right-click, or OSC 52</li>
-        <li><span class="cl-tag fix">fix</span>Fixed pasted text containing emoji (pictographs) being <b>inserted twice</b></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Terminal copy</b> — copy the selected terminal text to the clipboard with Ctrl+Shift+C, right-click, or OSC 52</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed pasted text containing emoji (pictographs) being <b>inserted twice</b></span></li>
       </ul>
     </div>
 
@@ -210,10 +212,10 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.7.0</span><span class="d">2026-07-14</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b><a href="appearance.html">Font size settings</a></b> — set terminal, code editor and UI font sizes independently</li>
-        <li><span class="cl-tag feat">feat</span><b>Font weight settings</b> — pick the code and UI font weight (100–900)</li>
-        <li><span class="cl-tag feat">feat</span>Moved the <b>language selector</b> from Appearance to the General settings section</li>
-        <li><span class="cl-tag fix">fix</span>Fixed keyboard input being lost — or the <b>first keystroke swallowed</b> — after switching windows with Alt+Tab</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><a href="appearance.html">Font size settings</a></b> — set terminal, code editor and UI font sizes independently</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Font weight settings</b> — pick the code and UI font weight (100–900)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Moved the <b>language selector</b> from Appearance to the General settings section</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed keyboard input being lost — or the <b>first keystroke swallowed</b> — after switching windows with Alt+Tab</span></li>
       </ul>
     </div>
 
@@ -222,15 +224,15 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.6.0</span><span class="d">2026-07-14</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span><b><a href="notes.html">Notes panel</a></b> — a floating Post-it opened from the titlebar (Ctrl+Shift+N). Tabs, colors, pinning and renaming, Markdown preview, save to file; text notes can expand into a main-panel tab</li>
-        <li><span class="cl-tag feat">feat</span><b>Drawing notes</b> — free-form Excalidraw canvas (works offline), grid toggle, PNG/SVG/PDF/clipboard export</li>
-        <li><span class="cl-tag feat">feat</span><b>Sequence diagram notes</b> — a drag-to-draw UML sequence editor (tool palette, activation bars, loop/alt/opt/par frames, free positioning, hand panning, tool shortcuts) with Mermaid (.mmd)/SVG/PNG/PDF export</li>
-        <li><span class="cl-tag feat">feat</span><b>Flowchart notes</b> — a <b>bidirectional editor</b>: draw on the canvas and it writes Mermaid code, or load Mermaid and get editable shapes (5 node shapes, 4 edge styles, flow direction, auto layout, light/dark background)</li>
-        <li><span class="cl-tag feat">feat</span><b>AI note sharing</b> — in-app AI agents can create, read and update notes directly (orchterm-notes MCP, on by default). Sequence and flowchart notes <b>round-trip as Mermaid</b>, so agents can re-read and edit them</li>
-        <li><span class="cl-tag feat">feat</span>Bundled <b>Jetendard</b> (JetBrains Mono + Pretendard) as the default code font — renders the same on machines without it installed</li>
-        <li><span class="cl-tag fix">fix</span>The code font chosen in Settings now applies to the <b>code editor and notes</b> — previously only the terminal followed it</li>
-        <li><span class="cl-tag fix">fix</span>AI edits to a drawing note now appear immediately while it is open — previously the open canvas could overwrite the AI's changes with the old scene</li>
-        <li><span class="cl-tag fix">fix</span>Drawing/sequence note backgrounds now follow the window opacity setting</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><a href="notes.html">Notes panel</a></b> — a floating Post-it opened from the titlebar (Ctrl+Shift+N). Tabs, colors, pinning and renaming, Markdown preview, save to file; text notes can expand into a main-panel tab</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Drawing notes</b> — free-form Excalidraw canvas (works offline), grid toggle, PNG/SVG/PDF/clipboard export</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Sequence diagram notes</b> — a drag-to-draw UML sequence editor (tool palette, activation bars, loop/alt/opt/par frames, free positioning, hand panning, tool shortcuts) with Mermaid (.mmd)/SVG/PNG/PDF export</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Flowchart notes</b> — a <b>bidirectional editor</b>: draw on the canvas and it writes Mermaid code, or load Mermaid and get editable shapes (5 node shapes, 4 edge styles, flow direction, auto layout, light/dark background)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI note sharing</b> — in-app AI agents can create, read and update notes directly (orchterm-notes MCP, on by default). Sequence and flowchart notes <b>round-trip as Mermaid</b>, so agents can re-read and edit them</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Bundled <b>Jetendard</b> (JetBrains Mono + Pretendard) as the default code font — renders the same on machines without it installed</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">The code font chosen in Settings now applies to the <b>code editor and notes</b> — previously only the terminal followed it</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">AI edits to a drawing note now appear immediately while it is open — previously the open canvas could overwrite the AI's changes with the old scene</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Drawing/sequence note backgrounds now follow the window opacity setting</span></li>
       </ul>
     </div>
 
@@ -239,13 +241,13 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.5.0</span><span class="d">2026-07-09</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Added a <b>worktree list</b> with cleanup (remove) UI to the sidebar Git panel — shown when you have 2+ worktrees</li>
-        <li><span class="cl-tag feat">feat</span>View code changes (diffs) in a <b>side-by-side tab viewer</b> in the main panel — including untracked (new) files, reusing one tab per file</li>
-        <li><span class="cl-tag feat">feat</span>SSH connection failures now show a <b>specific reason</b> (key file not found · passphrase required, etc.) instead of a generic "authentication failed"</li>
-        <li><span class="cl-tag fix">fix</span>Fixed duplicated characters while composing Korean with an IME (e.g. the Gureum input method) on macOS</li>
-        <li><span class="cl-tag fix">fix</span>Fixed Korean → Hanja conversion (⌥Enter) on macOS — now handles multi-syllable words like 한국→韓國</li>
-        <li><span class="cl-tag fix">fix</span>Fixed resuming a session from the session list on macOS where the tab opened but the AI agent (claude/codex/agy) never launched</li>
-        <li><span class="cl-tag fix">fix</span>SSH private-key paths starting with ~ (e.g. ~/.ssh/id_rsa) now expand to the home directory — previously only absolute paths worked</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Added a <b>worktree list</b> with cleanup (remove) UI to the sidebar Git panel — shown when you have 2+ worktrees</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">View code changes (diffs) in a <b>side-by-side tab viewer</b> in the main panel — including untracked (new) files, reusing one tab per file</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">SSH connection failures now show a <b>specific reason</b> (key file not found · passphrase required, etc.) instead of a generic "authentication failed"</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed duplicated characters while composing Korean with an IME (e.g. the Gureum input method) on macOS</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed Korean → Hanja conversion (⌥Enter) on macOS — now handles multi-syllable words like 한국→韓國</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed resuming a session from the session list on macOS where the tab opened but the AI agent (claude/codex/agy) never launched</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">SSH private-key paths starting with ~ (e.g. ~/.ssh/id_rsa) now expand to the home directory — previously only absolute paths worked</span></li>
       </ul>
     </div>
 
@@ -254,16 +256,16 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.4.2</span><span class="d">2026-07-07</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Tabs resumed from the session list can now be renamed — double-click the tab, or right-click → Rename</li>
-        <li><span class="cl-tag fix">fix</span>Fixed an intermittent issue where launching an AI worker (e.g. agy) via orchestration left a session in the supervisor list without its tab ever appearing</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Tabs resumed from the session list can now be renamed — double-click the tab, or right-click → Rename</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed an intermittent issue where launching an AI worker (e.g. agy) via orchestration left a session in the supervisor list without its tab ever appearing</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.4.1</span><span class="d">2026-07-05</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Sidebar panel docking — drag a sidebar icon (Explorer · Search · Git · To-dos · Sessions) out into a work pane as a tab; close the tab to send it back to the sidebar. Click a floated icon to jump to its tab · remembered per Space and restored on restart · each tab shows its mode icon</li>
-        <li><span class="cl-tag fix">fix</span>The split-drop preview overlay now matches the actual split area (half the pane) when dropping on an edge</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Sidebar panel docking — drag a sidebar icon (Explorer · Search · Git · To-dos · Sessions) out into a work pane as a tab; close the tab to send it back to the sidebar. Click a floated icon to jump to its tab · remembered per Space and restored on restart · each tab shows its mode icon</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">The split-drop preview overlay now matches the actual split area (half the pane) when dropping on an edge</span></li>
       </ul>
     </div>
 
@@ -272,34 +274,34 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.3.2</span><span class="d">2026-07-04</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Right-click empty explorer space to open the project folder in Finder/Explorer</li>
-        <li><span class="cl-tag feat">feat</span>File path tooltip on editor-tab hover + "Copy absolute path" in the context menu</li>
-        <li><span class="cl-tag feat">feat</span>Confirmation prompt before deleting a to-do (prevents accidental deletes)</li>
-        <li><span class="cl-tag feat">feat</span>"What's new" popup now shows in the app language (Korean/English)</li>
-        <li><span class="cl-tag fix">fix</span>Large backend hardening — fixed an unrecoverable whole-app freeze during input, a risk of losing global config files when enabling the mirror, and blocked several command-injection and crash paths</li>
-        <li><span class="cl-tag fix">fix</span>Fixed the Settings font dropdown opening off-screen in small windows</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Right-click empty explorer space to open the project folder in Finder/Explorer</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">File path tooltip on editor-tab hover + "Copy absolute path" in the context menu</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Confirmation prompt before deleting a to-do (prevents accidental deletes)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">"What's new" popup now shows in the app language (Korean/English)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Large backend hardening — fixed an unrecoverable whole-app freeze during input, a risk of losing global config files when enabling the mirror, and blocked several command-injection and crash paths</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed the Settings font dropdown opening off-screen in small windows</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.3.1</span><span class="d">2026-07-01</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Skip permission prompts on session resume — the header checkbox resumes conversations without per-agent permission checks (remembered)</li>
-        <li><span class="cl-tag feat">feat</span>Korean/English localization · open images·SVG·PDF in the in-app browser · session list git branch·icons·load more</li>
-        <li><span class="cl-tag fix">fix</span>Fixed the permission-skip flag being dropped when resuming an agy worker · macOS font-list hang · several session resume/refresh bugs</li>
-        <li><span class="cl-tag perf">perf</span>Faster session-list scanning (queries only the active project, in the background)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Skip permission prompts on session resume — the header checkbox resumes conversations without per-agent permission checks (remembered)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Korean/English localization · open images·SVG·PDF in the in-app browser · session list git branch·icons·load more</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fixed the permission-skip flag being dropped when resuming an agy worker · macOS font-list hang · several session resume/refresh bugs</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt">Faster session-list scanning (queries only the active project, in the background)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.3.0</span><span class="d">2026-07-01</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Localization (Korean · English) — auto-detects the OS language on first run · switch language in Settings (applied on restart) · English docs site</li>
-        <li><span class="cl-tag feat">feat</span>Session list (resume) — the sidebar Sessions mode (Ctrl+Shift+S) gathers claude·codex·agy conversations by date and resumes them in one click</li>
-        <li><span class="cl-tag feat">feat</span>Tab tiling (<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>) · Merge all panes (<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M5.2 8V5.2h6V8"/></svg>) — spread a pane's tabs into a grid, or merge every pane into a single one</li>
-        <li><span class="cl-tag feat">feat</span>Explorer — open images·SVG·PDF·media in the in-app browser · project icon · a single "Add project" entry point</li>
-        <li><span class="cl-tag feat">feat</span>"What's new" (changelog) popup on the first run of a new version</li>
-        <li><span class="cl-tag fix">fix</span>macOS — fix a hang caused by settings-dialog font enumeration (now async)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Localization (Korean · English) — auto-detects the OS language on first run · switch language in Settings (applied on restart) · English docs site</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Session list (resume) — the sidebar Sessions mode (Ctrl+Shift+S) gathers claude·codex·agy conversations by date and resumes them in one click</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Tab tiling (<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="4" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1" transform="rotate(18 17 7)"/></svg>) · Merge all panes (<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" style="vertical-align:-3px"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M5.2 8V5.2h6V8"/></svg>) — spread a pane's tabs into a grid, or merge every pane into a single one</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Explorer — open images·SVG·PDF·media in the in-app browser · project icon · a single "Add project" entry point</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">"What's new" (changelog) popup on the first run of a new version</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">macOS — fix a hang caused by settings-dialog font enumeration (now async)</span></li>
       </ul>
     </div>
 
@@ -308,26 +310,26 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.2.2</span><span class="d">2026-06-29</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>macOS in-app browser mirror settings toggle + on by default</li>
-        <li><span class="cl-tag fix">fix</span>Fix duplicate Hangul/space IME input after Alt+Tab return</li>
-        <li><span class="cl-tag fix">fix</span>Live sidebar branch-name updates (.git/HEAD watch)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">macOS in-app browser mirror settings toggle + on by default</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix duplicate Hangul/space IME input after Alt+Tab return</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Live sidebar branch-name updates (.git/HEAD watch)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.2.1</span><span class="d">2026-06-28</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Explorer footer revamp — refresh button (keeps the open folder) · hardened git branch display</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Explorer footer revamp — refresh button (keeps the open folder) · hardened git branch display</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.2.0</span><span class="d">2026-06-28</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Fix Windows multi-webview focus-return keyboard (bundled wry patch)</li>
-        <li><span class="cl-tag fix">fix</span>SSH/SFTP unbounded reads (OOM) · SOCKS5 framing · session leaks · known_hosts cleanup</li>
-        <li><span class="cl-tag fix">fix</span>Credential vault — fix plaintext secrets/DEK not wiped on lock/exit + password-change race</li>
-        <li><span class="cl-tag fix">fix</span>Boot DB open/migrate panic → busy_timeout + clean shutdown</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix Windows multi-webview focus-return keyboard (bundled wry patch)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">SSH/SFTP unbounded reads (OOM) · SOCKS5 framing · session leaks · known_hosts cleanup</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Credential vault — fix plaintext secrets/DEK not wiped on lock/exit + password-change race</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Boot DB open/migrate panic → busy_timeout + clean shutdown</span></li>
       </ul>
     </div>
 
@@ -336,64 +338,64 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.37</span><span class="d">2026-06-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Search advanced-options collapse toggle + classic focus ring</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Search advanced-options collapse toggle + classic focus ring</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.36</span><span class="d">2026-06-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Full-text search — .gitignore-respect option · search button + .git exclusion · performance improvements</li>
-        <li><span class="cl-tag feat">feat</span>Settings/About window shortcuts + command palette entries</li>
-        <li><span class="cl-tag fix">fix</span>Fix the input line vanishing after window minimize/restore (block zero-height fit)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Full-text search — .gitignore-respect option · search button + .git exclusion · performance improvements</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Settings/About window shortcuts + command palette entries</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix the input line vanishing after window minimize/restore (block zero-height fit)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.35</span><span class="d">2026-06-24</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Isolate sidebar search/mode per Space + Ctrl+Tab cycling</li>
-        <li><span class="cl-tag feat">feat</span>Git panel section split · diff scroll preservation · header/scrollbar cleanup</li>
-        <li><span class="cl-tag fix">fix</span>Fix clicks bouncing to the first terminal on window focus return</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Isolate sidebar search/mode per Space + Ctrl+Tab cycling</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Git panel section split · diff scroll preservation · header/scrollbar cleanup</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix clicks bouncing to the first terminal on window focus return</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.34</span><span class="d">2026-06-23</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Git sync bar revamp — click the count = push/pull · live auto-refresh · fetch button</li>
-        <li><span class="cl-tag feat">feat</span>Ctrl+Tab / Ctrl+Shift+Tab pane/sidebar cycling</li>
-        <li><span class="cl-tag fix">fix</span>Fix prompt duplication when toggling sidebar maximize (suppress SIGWINCH on hidden panes)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Git sync bar revamp — click the count = push/pull · live auto-refresh · fetch button</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Ctrl+Tab / Ctrl+Shift+Tab pane/sidebar cycling</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix prompt duplication when toggling sidebar maximize (suppress SIGWINCH on hidden panes)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.33</span><span class="d">2026-06-23</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Windows — remove console-window flicker on git blame / open in default app</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Windows — remove console-window flicker on git blame / open in default app</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.32</span><span class="d">2026-06-23</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>AI gateway audit log — per-day request/response records + viewer tab (calendar · vertical split) + retention</li>
-        <li><span class="cl-tag fix">fix</span>Make the notification-bell count badge always a circle regardless of theme</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">AI gateway audit log — per-day request/response records + viewer tab (calendar · vertical split) + retention</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Make the notification-bell count badge always a circle regardless of theme</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.31</span><span class="d">2026-06-21</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Session restore — prune tabs for missing paths · error isolation · empty-pane fallback (fallbackCwd)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Session restore — prune tabs for missing paths · error isolation · empty-pane fallback (fallbackCwd)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.30</span><span class="d">2026-06-20</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Cross-compile macOS Intel on the Apple Silicon runner</li>
-        <li><span class="cl-tag fix">fix</span>Fix colors / zsh autocompletion breaking from an empty TERM when launched from Finder</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Cross-compile macOS Intel on the Apple Silicon runner</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix colors / zsh autocompletion breaking from an empty TERM when launched from Finder</span></li>
       </ul>
     </div>
 
@@ -402,63 +404,63 @@
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.29</span><span class="d">2026-06-20</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Editor font zoom (Cmd+=/−/0) + shortcut purification & tests</li>
-        <li><span class="cl-tag feat">feat</span>macOS one-line curl install script + automatic release upload</li>
-        <li><span class="cl-tag fix">fix</span>Clamp windows to the NSScreen work area · guard against path-argument injection</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Editor font zoom (Cmd+=/−/0) + shortcut purification & tests</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">macOS one-line curl install script + automatic release upload</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Clamp windows to the NSScreen work area · guard against path-argument injection</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.28</span><span class="d">2026-06-20</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>macOS port — run codex directly · 'Reveal in Finder' · default window 1200×900 clamp</li>
-        <li><span class="cl-tag fix">fix</span>Self-recover from a lost mouseup — block 'move after click = drag stuck' (cross-platform)</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">macOS port — run codex directly · 'Reveal in Finder' · default window 1200×900 clamp</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Self-recover from a lost mouseup — block 'move after click = drag stuck' (cross-platform)</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.27</span><span class="d">2026-06-19</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Auto-update — the boot banner and About share a single Updater</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Auto-update — the boot banner and About share a single Updater</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.26</span><span class="d">2026-06-19</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Scope the orchestration supervisor dashboard per Space</li>
-        <li><span class="cl-tag feat">feat</span>Exclude latest.json (updater manifest) from download stats</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Scope the orchestration supervisor dashboard per Space</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Exclude latest.json (updater manifest) from download stats</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.25</span><span class="d">2026-06-19</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Orchestration — switch to a 'running worker + stop' pill (send blocks by default)</li>
-        <li><span class="cl-tag fix">fix</span>Supervisor dashboard row layout · stop settling · label cleanup</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Orchestration — switch to a 'running worker + stop' pill (send blocks by default)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Supervisor dashboard row layout · stop settling · label cleanup</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.24</span><span class="d">2026-06-18</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag fix">fix</span>Fix the Explorer keeping a ghost of a closed Space after closing it</li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Fix the Explorer keeping a ghost of a closed Space after closing it</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.23</span><span class="d">2026-06-17</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>Auto-update — tauri-plugin-updater + titlebar banner + automatic boot check + About check button</li>
-        <li><span class="cl-tag feat">feat</span>Release changelog auto-generation script (gen-changelog.mjs)</li>
-        <li><span class="cl-tag fix">fix</span>Relaunch via plugin-process + broadcast download progress</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Auto-update — tauri-plugin-updater + titlebar banner + automatic boot check + About check button</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">Release changelog auto-generation script (gen-changelog.mjs)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt">Relaunch via plugin-process + broadcast download progress</span></li>
       </ul>
     </div>
 
     <div class="cl-rel">
       <div class="cl-ver"><span class="v">v0.1.22</span><span class="d">2026-06-17</span></div>
       <ul class="cl-list">
-        <li><span class="cl-tag feat">feat</span>First public release — single-window desktop terminal (tabs · splits · Space), in-app browser · editor, multi-agent orchestration · mirror</li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt">First public release — single-window desktop terminal (tabs · splits · Space), in-app browser · editor, multi-agent orchestration · mirror</span></li>
       </ul>
     </div>
 
