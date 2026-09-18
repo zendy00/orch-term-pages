@@ -76,10 +76,34 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v082"><span class="hash"></span> 0.8.2 — 인앱 브라우저 탭이 백지로 남던 문제 수정</h2>
+    <h2 class="sec" id="v090"><span class="hash"></span> 0.9.0 — 앱을 업데이트·재시작해도 터미널이 이어짐 · 종료 시 유지/모두 종료 선택</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.9.0</span><span class="d">2026-09-18</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>앱을 업데이트하거나 다시 켜도 터미널이 그대로 이어집니다</b> — 셸·돌고 있던 빌드와 서버·AI 에이전트·스크롤백이 끊기지 않고, 앱을 다시 열면 각 탭이 원래 셸에 다시 붙습니다. 앱이 비정상 종료돼도 마찬가지입니다. 터미널을 앱 대신 백그라운드 프로세스(<code>orchterm-ptyd</code>)가 들고 있기 때문이라, 활성 상태 보기·작업 관리자에 이 이름이 보여도 정상입니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>앱을 끌 때 실행 중인 터미널을 어떻게 할지 선택</b> — 창을 닫거나 macOS에서 ⌘Q를 누르면 <b>백그라운드에서 유지 / 모두 종료 / 취소</b> 중에서 고릅니다. "다시 묻지 않기"로 기억시킬 수 있고 설정 → 터미널에서 되돌립니다. 앱을 24시간 열지 않으면 백그라운드 터미널은 정리됩니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널 서비스가 바뀌는 업데이트는 설치 전에 경고</b> — 드물게 터미널을 유지할 수 없는 업데이트는 "실행 중인 터미널 N개가 종료됩니다"라고 먼저 알립니다(<a href="auto-update.html#install">자동 업데이트</a>). 평소 업데이트는 터미널을 건드리지 않습니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널을 시작하지 못하면 원인과 로그 위치 표시</b> — 빈 탭으로 남지 않습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS에서 한글 뒤 스페이스를 치면 글자가 두 번 입력되던 문제</b> 수정 — <code>개 발</code>이 <code>개 개 발 발</code>이 되고 맥을 재부팅해야 사라지던 증상입니다. macOS 한글 입력기가 공백을 글자와 함께 확정하는 방식으로 바뀌면 공백이 다른 종류의 공백 문자로 들어와 두 번 보냈습니다. 이제 입력기가 어느 방식이어도 한 번만 입력됩니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>창을 새로고침한 뒤 <code>^[[I^[[?1;2c</code> 같은 이상한 문자가 찍히던 문제</b> 수정 — 이전 화면을 다시 그리며 터미널이 자동으로 보내는 응답이 셸로 흘러가던 것이 원인이었습니다</span></li>
+      </ul>
+      <p class="cl-note"><b>⚠️ 0.9.0으로 업데이트하는 순간에는 지금 열려 있는 터미널이 이어지지 않습니다</b> — 이전 버전은 터미널을 앱이 직접 들고 있어 넘겨줄 수 없기 때문입니다. AI 에이전트 대화는 재시작 후 이어서 열립니다. 터미널이 살아남는 건 <b>다음 업데이트부터</b>입니다.</p>
+    </div>
+    <h2 class="sec" id="v083"><span class="hash"></span> 0.8.3 — macOS 로컬 네트워크 접속 · 메모리 수치 정확도</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.3</span><span class="d">2026-09-16</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS에서 터미널이 같은 네트워크의 서버에 접속하지 못하던 문제</b> 수정 — <code>curl http://사내호스트:3000</code> 같은 명령이 곧바로 실패했습니다. macOS는 로컬 네트워크 접근을 앱 단위로 허용하는데 orchterm이 그 권한을 요청하지 않아 조용히 차단당했습니다. 이제 권한을 정식으로 요청하고, 한 번 허용하면 업데이트 후에도 유지됩니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS 하단바 메모리 수치가 활성 상태 보기와 1GB 넘게 어긋나던 문제</b> 수정 — 이제 "사용된 메모리"와 같은 기준으로 셉니다</span></li>
+      </ul>
+      <p class="cl-note">macOS 배포본에 <b>코드 서명</b>이 붙었습니다(로컬 네트워크 권한이 업데이트 후에도 유지되려면 필요). Apple 공증은 아직이라 처음 실행 때 안내는 그대로입니다.</p>
+    </div>
+    <h2 class="sec" id="v082"><span class="hash"></span> 0.8.2 — 인앱 브라우저 탭이 백지로 남던 문제 수정</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>인앱 브라우저 탭이 열려도 화면이 백지로 남던 문제</b> 수정 — 주소창에는 주소가 보이는데 페이지가 끝까지 안 뜨고, 한 번 그렇게 되면 <b>그 뒤에 여는 탭도 전부</b> 같았습니다(앱 재시작까지). 특정 사이트가 아니라 로컬 개발 서버 주소도 마찬가지였습니다. <a href="mirror.html">미러</a>가 켜져 있고 앱 안에 AI 세션이 하나라도 붙어 있으면 새 탭이 <b>화면에 그릴 준비를 못 한 채 멈춰</b> 있었던 것이 원인입니다. 이제 앱이 그 멈춤을 스스로 풉니다 — 터미널 링크 클릭, AI가 여는 탭, <a href="spaces.html">Space</a>가 여러 개인 경우 모두 해당</span></li>
       </ul>

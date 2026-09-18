@@ -76,10 +76,34 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v082"><span class="hash"></span> 0.8.2 — Fixed in-app browser tabs opening blank</h2>
+    <h2 class="sec" id="v090"><span class="hash"></span> 0.9.0 — Terminals survive app updates and restarts · keep or close them when you quit</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span><span class="latest">latest</span></div>
+      <div class="cl-ver"><span class="v">v0.9.0</span><span class="d">2026-09-18</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Your terminals keep running when you update or restart the app</b> — shells, running builds and servers, AI agents, and scrollback all carry on, and each tab reattaches to its original shell when you reopen the app. The same holds if the app crashes. A background process (<code>orchterm-ptyd</code>) now holds your terminals, so seeing that name in Activity Monitor or Task Manager is normal</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Choose what happens to running terminals when you quit</b> — closing the window, or pressing ⌘Q on macOS, asks you to <b>Keep running in background / Close all / Cancel</b>. "Don't ask again" remembers your choice; change it back in Settings → Terminal. If the app stays closed for 24 hours, background terminals are cleaned up</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Updates that change the terminal service warn you before installing</b> — in the rare case an update can't keep your terminals running, you're told "the N running terminals will close" first (<a href="auto-update.html#install">Auto-update</a>). Regular updates leave your terminals alone</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>If a terminal can't start, the tab shows why and where the log is</b> — instead of staying blank</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed Korean characters being typed twice after a space on macOS</b> — <code>개 발</code> became <code>개 개 발 발</code> until the Mac was rebooted. When the macOS Korean input method switched to committing the space together with the syllable, the space arrived as a different kind of space character and was sent twice. Input now arrives once in either mode</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed stray characters such as <code>^[[I^[[?1;2c</code> after reloading the window</b> — automatic replies the terminal sends while redrawing the previous screen were leaking into the shell</span></li>
+      </ul>
+      <p class="cl-note"><b>⚠️ Terminals that are open when you update to 0.9.0 will not carry over</b> — the previous version held terminals inside the app itself, so it can't hand them off. AI agent conversations reopen after the restart. Terminals survive <b>starting with the next update</b>.</p>
+    </div>
+    <h2 class="sec" id="v083"><span class="hash"></span> 0.8.3 — macOS local network access · accurate memory figure</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.3</span><span class="d">2026-09-16</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the terminal being unable to reach servers on your local network on macOS</b> — commands like <code>curl http://internal-host:3000</code> failed immediately. macOS grants local network access per app, and orchterm never requested it, so it was denied silently. It now requests the permission properly, and once allowed the grant survives updates</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the macOS status bar memory figure disagreeing with Activity Monitor by more than 1GB</b> — it now counts the same way as "Memory Used"</span></li>
+      </ul>
+      <p class="cl-note">macOS builds are now <b>code signed</b> (needed for the local network permission to survive updates). Apple notarization is still pending, so the first-launch prompt is unchanged.</p>
+    </div>
+    <h2 class="sec" id="v082"><span class="hash"></span> 0.8.2 — Fixed in-app browser tabs opening blank</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.8.2</span><span class="d">2026-09-09</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed in-app browser tabs opening to a blank screen</b> — the address stayed in the address bar but the page never appeared, and once it happened <b>every tab opened afterwards</b> behaved the same way (until a restart). Not site-specific; local development server addresses were affected too. The cause: with <a href="mirror.html">mirror</a> on and at least one AI session attached inside the app, every new tab was left <b>suspended before it could start drawing the page</b>. The app now releases that suspension itself — covering links clicked in the terminal, tabs opened by an AI, and setups with several <a href="spaces.html">Spaces</a></span></li>
       </ul>
