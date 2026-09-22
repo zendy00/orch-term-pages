@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>터미널 — Orch term 가이드</title>
-<meta name="description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기." />
+<meta name="description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기. 앱을 닫거나 업데이트해도 상주 데몬이 세션을 살려둬 다시 열면 스크롤백까지 그대로 이어집니다." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/terminal.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/terminal.html" />
@@ -18,14 +18,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="터미널 — Orch term 가이드" />
-<meta property="og:description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기." />
+<meta property="og:description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기. 앱을 닫거나 업데이트해도 상주 데몬이 세션을 살려둬 다시 열면 스크롤백까지 그대로 이어집니다." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/terminal.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="터미널 — Orch term 가이드" />
-<meta name="twitter:description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기." />
+<meta name="twitter:description" content="Orch term 터미널 사용법: 새 터미널 열기, 복사/붙여넣기, 줄바꿈, 스크롤백, 셸 자동닫기. 앱을 닫거나 업데이트해도 상주 데몬이 세션을 살려둬 다시 열면 스크롤백까지 그대로 이어집니다." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="terminal">
@@ -97,6 +97,24 @@
     <!-- 자동닫기 -->
     <h2 class="sec" id="exit"><span class="hash"></span> 셸 종료 · 자동 닫기</h2>
     <p>셸이 끝나면(<code>exit</code>) 탭이 자동으로 닫힙니다. <b>단일 패널·단일 탭</b>이면 빈 화면 대신 새 터미널로 대체합니다. 탭을 닫으면 그 아래 프로세스 트리 전체가 정리되어 좀비 프로세스를 남기지 않습니다.</p>
+
+<!-- 세션 생존 -->
+    <h2 class="sec" id="survive"><span class="hash"></span> 꺼도 살아있는 터미널</h2>
+    <p><b>앱을 닫아도 터미널 안의 프로세스는 계속 돕니다.</b> 셸·빌드·테스트·AI 대화가 멈추지 않고, 앱을 다시 열면 그 세션에 그대로 다시 붙습니다 — 스크롤백까지 이어집니다.</p>
+    <p>터미널을 소유하는 것은 앱이 아니라 <b>상주 데몬</b>입니다. 그래서 앱이 닫히거나 업데이트로 재시작해도, 심지어 앱이 크래시해도 세션은 살아남습니다.</p>
+    <h3>앱을 닫을 때</h3>
+    <p>실행 중인 터미널이 있으면 <b>백그라운드에서 유지 / 모두 종료 / 취소</b>를 묻습니다. "다시 묻지 않기"를 고르면 설정(터미널 → 종료 시 동작)에 기억되고, 거기서 언제든 "매번 묻기"로 되돌릴 수 있습니다.</p>
+    <ul class="bul">
+      <li><b>백그라운드에서 유지</b> — 세션이 살아 있습니다. 다음에 앱을 열면 그대로 이어집니다.</li>
+      <li><b>모두 종료</b> — 터미널을 정리하고 끝냅니다. 잠시 뒤 데몬도 스스로 물러납니다.</li>
+    </ul>
+    <h3>알아두면 좋은 것</h3>
+    <ul class="bul">
+      <li>유지 중에도 출력이 계속 쌓입니다. 스크롤백은 세션당 최근 4MiB까지 보관하고, 그보다 오래된 출력은 밀려납니다.</li>
+      <li>아무 앱도 붙지 않은 채 오래 두면 데몬이 스스로 종료합니다(기본 24시간). 그때 남은 세션도 함께 정리됩니다.</li>
+      <li>업데이트가 <b>터미널을 종료해야 하는</b> 드문 경우에는, 설치 전에 "실행 중인 터미널 N개를 종료합니다"라고 먼저 확인합니다. AI 대화는 재시작 후 <a href="sessions.html">이어가기</a>로 복구됩니다.</li>
+      <li>원격(SSH) 탭은 이 대상이 아닙니다 — 로컬 터미널에만 해당합니다.</li>
+    </ul>
 
     <!-- 단축키 -->
     <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>

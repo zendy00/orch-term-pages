@@ -6,7 +6,7 @@
 <script src="../_lang.js"></script>
 <link rel="icon" href="../assets/app-icon.png" />
 <title>Terminal — Orch term Guide</title>
-<meta name="description" content="How to use the Orch term terminal: open a new terminal, copy/paste, newlines, scrollback, and shell auto-close." />
+<meta name="description" content="How to use the Orch term terminal: open a new terminal, copy/paste, newlines, scrollback, and shell auto-close. A resident daemon keeps sessions alive across app close and updates, so reopening reattaches with scrollback intact." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/terminal.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/terminal.html" />
@@ -97,6 +97,24 @@
     <!-- Auto-close -->
     <h2 class="sec" id="exit"><span class="hash"></span> Shell exit · auto-close</h2>
     <p>When the shell ends (<code>exit</code>), the tab closes automatically. If it's a <b>single pane with a single tab</b>, it's replaced with a new terminal instead of an empty screen. Closing a tab cleans up the entire process tree beneath it, leaving no zombie processes.</p>
+
+    <!-- Session survival -->
+    <h2 class="sec" id="survive"><span class="hash"></span> Terminals that outlive the app</h2>
+    <p><b>Closing the app does not stop what is running inside your terminals.</b> Shells, builds, tests, and AI conversations keep going, and reopening the app reattaches to those same sessions — scrollback included.</p>
+    <p>Terminals are owned by a <b>resident daemon</b>, not by the app window. That is why sessions survive a close, an update restart, and even an app crash.</p>
+    <h3>When you close the app</h3>
+    <p>If terminals are running you are asked: <b>Keep in background / Close all / Cancel</b>. Choosing "Don't ask again" stores your answer in Settings (Terminal → on quit), where you can switch back to "Ask every time".</p>
+    <ul class="bul">
+      <li><b>Keep in background</b> — sessions stay alive and resume the next time you open the app.</li>
+      <li><b>Close all</b> — terminals are cleaned up; the daemon steps down shortly after.</li>
+    </ul>
+    <h3>Good to know</h3>
+    <ul class="bul">
+      <li>Output keeps accumulating while the app is closed. Scrollback keeps the most recent 4&nbsp;MiB per session; older output is dropped.</li>
+      <li>If no app attaches for a long time the daemon exits on its own (24 hours by default), cleaning up any remaining sessions.</li>
+      <li>On the rare update that <b>must</b> close terminals, you are asked first — "this update will close N running terminals". AI conversations come back through <a href="sessions.html">session resume</a> after the restart.</li>
+      <li>Remote (SSH) tabs are out of scope — this applies to local terminals.</li>
+    </ul>
 
     <!-- Keyboard shortcuts -->
     <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>
