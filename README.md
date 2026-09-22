@@ -72,12 +72,12 @@
 
 버전 태그(`vX.Y.Z`) 푸시 시(또는 Actions에서 수동 실행) **Windows·macOS 두 잡이 앱을 빌드**해
 **`orch-term-pages`의 GitHub Release**에 설치파일 + 인앱 자동 업데이트용 아티팩트를 올린다. 가이드의
-"다운로드" 페이지(`download.html`)는 그 Release의 OS별 고정 링크(Windows `orchterm-setup.exe`·`orchterm-x64.msi` / macOS `orchterm-aarch64.dmg`)를 나열한다.
+"다운로드" 페이지(`download.html`)는 그 Release의 OS별 고정 링크(Windows `orchterm-setup.exe` / macOS `orchterm-aarch64.dmg`)를 나열한다.
 
 - **트리거**: `git tag vX.Y.Z && git push origin vX.Y.Z` (또는 Actions 탭 → `Release → orch-term-pages` → Run workflow).
 - **러너**: Windows = `windows-latest`, macOS = `macos-latest`(Apple Silicon/aarch64). Tauri 데스크톱 앱은 크로스컴파일 불가라 OS별 네이티브 러너가 필요하다. 빌드 ~5–15분.
 - **토큰**: 위 `PAGES_DEPLOY_TOKEN`을 그대로 사용(Release 생성/업로드는 Contents 범주).
-- **에셋**: Windows = NSIS `orchterm-setup.exe`(고정 이름) + MSI `orchterm-x64.msi`; macOS = `orchterm-aarch64.dmg` + 업데이터용 `orchterm-aarch64.app.tar.gz`(+`.sig`). Intel(x86_64) macOS는 추후 `macos-13` 잡으로 추가 예정.
+- **에셋**: Windows = NSIS `orchterm-setup.exe`(고정 이름) — MSI는 배포하지 않는다(NSIS와 공존 불가 + 업데이터가 설치 출처를 구분하지 않아 MSI 사용자가 자동으로 이중 설치된다; `release.yml`의 `--bundles nsis` 주석 참고); macOS = `orchterm-aarch64.dmg` + 업데이터용 `orchterm-aarch64.app.tar.gz`(+`.sig`). Intel(x86_64) macOS는 추후 `macos-13` 잡으로 추가 예정.
 - **자동 업데이트**: 각 잡이 업데이터 서명(`.sig`)과 `latest.json`을 만들어 Release에 올린다(macOS 잡이 Windows 항목을 보존한 채 `darwin-aarch64`를 병합). 앱은 이 `latest.json`으로 인앱 업데이트한다 → 사이트 [자동 업데이트](auto-update.html) 페이지 참조.
 - ⚠️ **미서명(두 OS 모두)** — Windows는 SmartScreen "알 수 없는 게시자" 경고, macOS는 Apple 공증이 없어 Gatekeeper가 다운로드를 격리한다(Release 본문에 `xattr` 우회 안내를 자동 prepend). 공개 배포 시 코드서명/공증 도입 권장(후속 과제).
 

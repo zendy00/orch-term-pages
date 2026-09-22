@@ -246,6 +246,40 @@
 
     <p class="dim"><b>시스템 앱으로 열기</b> — 바이너리/비텍스트 파일은 OS 기본 앱으로 열리고, OS 탐색기에서 해당 파일이 선택된 채 열 수도 있습니다.</p>
 
+    <!-- OS 셸 통합 -->
+    <h2 class="sec" id="open-with"><span class="hash"></span> 탐색기 · 파인더에서 orchterm으로 바로 열기</h2>
+    <p><b>설치 후</b>, Windows 탐색기와 macOS 파인더에서 파일·폴더를 우클릭하면 바로 orchterm으로 열 수 있습니다. <b>폴더</b>를 열면 그 폴더를 이미 아는 Space가 있을 때는 그 Space로 전환하고, 없으면 폴더 이름으로 새 Space와 터미널을 만듭니다. <b>파일</b>을 열면 그 파일을 담고 있는 프로젝트의 Space에서(없으면 지금 보던 Space에서) 에디터 탭으로 엽니다. 앱이 꺼져 있으면 실행하면서 열고, 이미 떠 있으면 새 창 없이 그 인스턴스에서 엽니다.</p>
+
+    <div class="warn"><b>Windows와 macOS는 메뉴가 나오는 자리가 다릅니다.</b> Windows 탐색기는 우클릭 메뉴에 <code>orchterm으로 열기</code>가 보입니다(파일·폴더·폴더 안 빈 공간 모두). <b>Windows 11에서는 새 우클릭 메뉴 최상위가 아니라 <code>추가 옵션 표시</code>(또는 Shift+F10) 아래의 클래식 메뉴에 나옵니다</b> — Windows 10에서는 바로 최상위에 보입니다. macOS 파인더는 최상위 항목을 서드파티 앱이 만들 수 없어서(VS Code도 마찬가지입니다) <b>서브메뉴 두 곳</b>을 씁니다 — 우클릭 <code>다음으로 열기 ▸ orchterm</code>, 그리고 <code>서비스 ▸ orchterm에서 열기</code>. 독 아이콘에 폴더를 끌어다 놓는 것도 됩니다.<br><br><b>macOS의 <code>다음으로 열기 ▸</code>에는 텍스트 계열 파일과 폴더만 orchterm이 나옵니다.</b> macOS가 확장자를 텍스트로 분류하지 않는 파일 — 대표적으로 <code>.ts</code>(macOS는 영상 파일로 분류합니다), 확장자가 없는 파일(<code>LICENSE</code>·<code>Dockerfile</code>·<code>.gitignore</code> 등) — 은 목록에 나타나지 않습니다. macOS 쪽 제약이라 모든 에디터가 같습니다. 그런 파일은 <code>서비스 ▸ orchterm에서 열기</code>(모든 파일·폴더를 받습니다), <code>다음으로 열기 ▸ 기타…</code>, 또는 독 아이콘 드롭으로 열면 됩니다.</div>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">우클릭 메뉴 — Windows / macOS</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+          <div class="lr-fig" style="flex:1 1 200px;min-width:180px">
+            <div class="cap"><span class="i" data-icon="terminal"></span> Windows — 우클릭 메뉴 (Win11은 추가 옵션 표시 아래)</div>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:2px;font-size:12px">
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">연결 프로그램</span></div>
+              <div class="tree-row" style="background:var(--accent-line);border-radius:var(--r-sm)"><span class="tree-icon" data-icon="terminal" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-strong)">orchterm으로 열기</span></div>
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">속성</span></div>
+            </div>
+          </div>
+          <div class="lr-fig" style="flex:1 1 200px;min-width:180px">
+            <div class="cap"><span class="i" data-icon="terminal"></span> macOS — 서브메뉴</div>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:2px;font-size:12px">
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">다음으로 열기 ▸</span></div>
+              <div class="tree-row" style="padding-left:16px;background:var(--accent-line);border-radius:var(--r-sm)"><span class="tree-icon" data-icon="terminal" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-strong)">orchterm</span></div>
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">서비스 ▸</span></div>
+              <div class="tree-row" style="padding-left:16px;background:var(--accent-line);border-radius:var(--r-sm)"><span class="tree-icon" data-icon="terminal" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-strong)">orchterm에서 열기</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> Windows 10은 우클릭하자마자 바로 보이고, Windows 11은 <b>추가 옵션 표시</b>를 먼저 펴야 합니다. <span class="n">②</span> macOS는 서브메뉴를 펴야 보입니다.</div>
+      </div>
+    </figure>
+
+    <p class="dim">이 메뉴는 <b>설치 프로그램이 등록</b>합니다 — 설치 없이 실행한 빌드(포터블 실행 등)에는 나타나지 않습니다.</p>
+
     <div class="related">
       <h4>관련 기능</h4>
       <div class="relchips">

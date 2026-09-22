@@ -246,6 +246,40 @@
 
     <p class="dim"><b>Open with the system app</b> — binary/non-text files open in the OS default app, and you can also open the OS file explorer with that file selected.</p>
 
+    <!-- OS shell integration -->
+    <h2 class="sec" id="open-with"><span class="hash"></span> Open with orchterm from Explorer · Finder</h2>
+    <p><b>After installing</b>, right-click a file or folder in Windows Explorer or macOS Finder to open it straight in orchterm. Opening a <b>folder</b> switches to the Space that already knows it as a project, or — if none does — creates a new Space and terminal named after the folder. Opening a <b>file</b> opens an editor tab in the Space whose project contains it (or the Space you were looking at, if none does). If orchterm is closed it launches and opens; if it's already running, it opens in that same instance — no second window.</p>
+
+    <div class="warn"><b>Windows and macOS put the menu in different places.</b> Windows Explorer shows <code>Open with orchterm</code> in the right-click menu (for files, folders, and empty folder space alike). <b>On Windows 11 it sits under <code>Show more options</code> (or Shift+F10), not at the top level of the new menu</b> — on Windows 10 it is right at the top level. macOS Finder can't have a top-level entry from a third-party app (neither can VS Code) — instead it uses <b>two submenus</b>: right-click <code>Open With ▸ orchterm</code>, and <code>Services ▸ orchterm에서 열기</code>. The Services entry's title is Korean for now — macOS needs a localized bundle for per-service titles. Dropping a folder onto the Dock icon also works.<br><br><b>On macOS, <code>Open With ▸</code> lists orchterm for text-like files and folders only.</b> Files whose extension macOS does not classify as text — most notably <code>.ts</code> (macOS types it as a video file), and files with no extension at all (<code>LICENSE</code>, <code>Dockerfile</code>, <code>.gitignore</code>, …) — will not show orchterm in that list. This is a macOS restriction that affects every editor. For those files use <code>Services ▸ orchterm에서 열기</code> (it accepts any file or folder), <code>Open With ▸ Other…</code>, or drop them onto the Dock icon.</div>
+
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Right-click menu — Windows / macOS</span></div>
+        <div class="shot-stage" style="padding:18px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+          <div class="lr-fig" style="flex:1 1 200px;min-width:180px">
+            <div class="cap"><span class="i" data-icon="terminal"></span> Windows — right-click menu (Win11: under Show more options)</div>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:2px;font-size:12px">
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">Open with</span></div>
+              <div class="tree-row" style="background:var(--accent-line);border-radius:var(--r-sm)"><span class="tree-icon" data-icon="terminal" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-strong)">Open with orchterm</span></div>
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">Properties</span></div>
+            </div>
+          </div>
+          <div class="lr-fig" style="flex:1 1 200px;min-width:180px">
+            <div class="cap"><span class="i" data-icon="terminal"></span> macOS — submenus</div>
+            <div style="padding:10px;display:flex;flex-direction:column;gap:2px;font-size:12px">
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">Open With ▸</span></div>
+              <div class="tree-row" style="padding-left:16px;background:var(--accent-line);border-radius:var(--r-sm)"><span class="tree-icon" data-icon="terminal" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-strong)">orchterm</span></div>
+              <div class="tree-row"><span class="tree-icon" data-icon="file"></span><span class="tree-name">Services ▸</span></div>
+              <div class="tree-row" style="padding-left:16px;background:var(--accent-line);border-radius:var(--r-sm)"><span class="tree-icon" data-icon="terminal" style="color:var(--accent)"></span><span class="tree-name" style="color:var(--text-strong)">orchterm에서 열기</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-cap"><span class="n">①</span> On Windows 10 it's visible the moment you right-click; on Windows 11 open <b>Show more options</b> first. <span class="n">②</span> On macOS you need to open a submenu.</div>
+      </div>
+    </figure>
+
+    <p class="dim">This menu is <b>registered by the installer</b> — it won't appear on a build run without installing (e.g. a portable run).</p>
+
     <div class="related">
       <h4>Related features</h4>
       <div class="relchips">
