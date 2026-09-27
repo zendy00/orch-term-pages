@@ -76,10 +76,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0100"><span class="hash"></span> 0.10.0 — 탐색기에서 orchterm으로 열기 · 새 파일 탭 · 백그라운드 유지 중 멈추던 문제 수정</h2>
+    <h2 class="sec" id="v0101"><span class="hash"></span> 0.10.1 — Ctrl+C로 실행 중인 명령 중단 · PowerShell conda 프롬프트</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.0</span><span class="d">2026-09-22</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.10.1</span><span class="d">2026-09-27</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>터미널에서 <code>Ctrl+C</code>를 눌러도 실행 중인 명령이 멈추지 않던 문제</b> 수정 (Windows) — <code>ping -t</code>든 빌드든 AI 에이전트든 한 번 시작하면 중단되지 않았습니다. 프롬프트에서는 <code>^C</code>가 찍혀 "입력은 가는데 중단만 안 되는" 모습이었습니다. 터미널을 들고 있는 백그라운드 프로세스가 "Ctrl+C 무시" 상태로 실행되고 그 속성이 그 아래 셸과 명령에 상속된 것이 원인이었습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>선택한 글자가 있으면 <code>Ctrl+C</code>가 복사만 반복되던 문제</b> 수정 — 출력을 드래그해 둔 상태에서는 몇 번을 눌러도 중단되지 않았습니다. 이제 Windows Terminal처럼 복사 후 선택을 해제해, 한 번 더 누르면 중단으로 갑니다. <code>Ctrl+Shift+C</code>와 macOS <code>⌘C</code>는 중단 키와 겹치지 않으므로 선택이 그대로 유지됩니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>PowerShell에서 활성화된 conda 가상환경 이름이 안 보이던 문제</b> 수정 (Windows) — 환경은 켜져 있는데 프롬프트에 <code>(env-name)</code>만 없었습니다. 현재 폴더를 알아내려고 프롬프트를 통째로 바꿔 끼우면서 프로필에 설치된 프롬프트를 지운 것이 원인이었고, <b>oh-my-posh · starship · 직접 쓴 프롬프트</b>도 같은 이유로 사라졌었습니다. 이제 모두 유지됩니다</span></li>
+      </ul>
+      <p class="cl-note"><b>Ctrl+C 수정은 백그라운드 프로세스가 새로 뜬 뒤부터 적용됩니다</b> — 그 프로세스(<code>orchterm-ptyd</code>)는 앱을 업데이트해도 살아 있습니다. 바로 적용하려면 앱을 닫을 때 <b>"모두 종료"</b>를 고르고 30초쯤 뒤에 다시 실행하세요. 그냥 두셔도 다음에 앱을 완전히 종료했다 켤 때 적용됩니다. 이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0100"><span class="hash"></span> 0.10.0 — 탐색기에서 orchterm으로 열기 · 새 파일 탭 · 백그라운드 유지 중 멈추던 문제 수정</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.0</span><span class="d">2026-09-22</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탐색기(파인더)에서 파일·폴더를 orchterm으로 바로 열기</b> — 우클릭 <b>다음으로 열기 → orchterm</b>. 파일은 에디터 탭으로, 폴더는 프로젝트로 열립니다. 여러 개를 한 번에 골라도 같은 프로젝트의 파일은 한 자리에 모이고 서로 다른 폴더는 각각의 Space로 갑니다. 폴더를 독 아이콘에 떨어뜨려도 됩니다. Windows 11은 <b>추가 옵션 표시</b> 아래, macOS는 <b>서비스 ▸ orchterm에서 열기</b>로도 됩니다(<a href="explorer.html">탐색기</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Ctrl+N(맥 ⌘N)으로 빈 파일 탭</b> — 저장 전까지 이름이 없고, 처음 저장할 때 위치와 이름을 정합니다. <b>저장하지 않은 내용도 앱을 껐다 켜면 그대로</b> 돌아옵니다(<a href="editor.html#untitled">새 파일 탭</a>)</span></li>

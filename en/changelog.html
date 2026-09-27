@@ -76,10 +76,22 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0100"><span class="hash"></span> 0.10.0 — Open in orchterm from Explorer · new file tab · fixed work stalling while the app was closed</h2>
+    <h2 class="sec" id="v0101"><span class="hash"></span> 0.10.1 — Ctrl+C interrupts a running command · conda prompt in PowerShell</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.0</span><span class="d">2026-09-22</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.10.1</span><span class="d">2026-09-27</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed <code>Ctrl+C</code> not stopping a running command</b> (Windows) — whether it was <code>ping -t</code>, a build or an AI agent, once started it could not be interrupted. At the prompt <code>^C</code> still appeared, so input was clearly arriving and only the interrupt was missing. The background process that holds your terminals was started with Ctrl+C disabled, and that attribute was inherited by every shell and command underneath it</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed <code>Ctrl+C</code> only copying while text was selected</b> — with output dragged over, pressing it again just copied again and never interrupted. It now clears the selection after copying, like Windows Terminal, so a second press interrupts. <code>Ctrl+Shift+C</code> and <code>⌘C</code> on macOS don't collide with the interrupt key, so they keep the selection</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the active conda environment name missing from the PowerShell prompt</b> (Windows) — the environment was active but <code>(env-name)</code> was gone. orchterm replaced the whole prompt to track the current folder, wiping out the prompt installed by your profile; <b>oh-my-posh, starship and hand-written prompts</b> disappeared for the same reason. All of them are preserved now</span></li>
+      </ul>
+      <p class="cl-note"><b>The Ctrl+C fix applies once the background process is replaced</b> — that process (<code>orchterm-ptyd</code>) survives app updates. To get it right away, choose <b>"Close all"</b> when you quit the app and start it again about 30 seconds later. Otherwise it applies the next time you fully quit and reopen the app. This update does <b>not</b> close your running terminals.</p>
+    </div>
+
+    <h2 class="sec" id="v0100"><span class="hash"></span> 0.10.0 — Open in orchterm from Explorer · new file tab · fixed work stalling while the app was closed</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.0</span><span class="d">2026-09-22</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Open files and folders in orchterm from Explorer or Finder</b> — right-click, <b>Open with → orchterm</b>. Files open as editor tabs, folders open as projects. Select several at once and files from the same project land together while different folders each get their own Space. You can also drop a folder on the Dock icon. On Windows 11 it's under <b>Show more options</b>; on macOS <b>Services ▸ Open in orchterm</b> works too (<a href="explorer.html">Explorer</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Ctrl+N (⌘N on Mac) opens a blank file tab</b> — no name until you save, and the first save is where you choose location and name. <b>Unsaved content survives closing and reopening the app</b> (<a href="editor.html#untitled">New file tab</a>)</span></li>
