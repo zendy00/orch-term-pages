@@ -16,6 +16,24 @@
 <link rel="stylesheet" href="./_app.css" />
 <link rel="stylesheet" href="./site.css" />
 <style>
+  /* 설치 명령 + 바깥 우측 복사 버튼(download.html과 동일) */
+  pre.cmd { font-family: var(--code-font); font-size: 13px; line-height: 1.65; background: var(--bg-0);
+    border: 1px solid var(--line); border-left: 3px solid var(--accent-line); border-radius: var(--r-md);
+    padding: 13px 16px; margin: 14px 0; max-width: var(--read); color: var(--text);
+    overflow-x: auto; white-space: pre; }
+  pre.cmd .p { color: var(--text-faint); user-select: none; }
+  .cmdrow { display: flex; align-items: stretch; gap: 8px; margin: 14px 0; max-width: var(--read); }
+  .cmdrow pre.cmd { flex: 1 1 auto; min-width: 0; margin: 0; }
+  .copy-btn { flex: none; width: 42px; display: grid; place-items: center; background: var(--bg-1);
+    border: 1px solid var(--line); border-radius: var(--r-md); color: var(--text-dim); cursor: pointer;
+    transition: color .15s, border-color .15s, background .15s; }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent-line); background: var(--bg-2); }
+  .copy-btn .ci-ok { display: none; }
+  .copy-btn.copied { color: var(--success); border-color: var(--success); }
+  .copy-btn.copied .ci-copy { display: none; }
+  .copy-btn.copied .ci-ok { display: inline-grid; }
+  .copy-btn span[data-icon] { display: inline-grid; place-items: center; }
+  .copy-btn span[data-icon] svg { width: 16px; height: 16px; }
   /* notifications.html 전용 — 탭 완료 배지 · 통합 알림센터 드롭다운 재현 (디자인 시스템 토큰만 사용) */
 
   /* 탭의 완료/주의 배지 — 실제 앱: tab-manager.ts ICON_BELL(filled)을 done=초록 / attention=주황으로 깜빡임 */
@@ -147,13 +165,21 @@
     <table class="kbds">
       <thead><tr><th>에이전트</th><th>정밀 색 배지</th><th>비고</th></tr></thead>
       <tbody>
-        <tr><td><code>claude</code></td><td><b style="color:var(--success)">✓ 작동</b></td><td>인터랙티브 화면으로 실행 시 완료·승인 색 구분 + 내용 보존. claude-code-warp 플러그인 설치·활성 전제.</td></tr>
+        <tr><td><code>claude</code></td><td><b style="color:var(--success)">✓ 작동</b></td><td>인터랙티브 화면으로 실행 시 완료·승인 색 구분 + 내용 보존. <b>claude-code-warp 플러그인 설치·활성 전제</b> — <a href="#claude-plugin">설치 방법</a>.</td></tr>
         <tr><td><code>gemini</code></td><td><b style="color:var(--danger)">✗</b></td><td>벨만 보냄 → 색 구분 없는 완료 배지만.</td></tr>
         <tr><td><code>antigravity</code></td><td><b style="color:var(--danger)">✗</b></td><td>현재 배지 신호를 보내지 않음.</td></tr>
         <tr><td><code>codex</code></td><td><b style="color:var(--attention)">미확인</b></td><td>벨은 가능.</td></tr>
       </tbody>
     </table>
     <p class="dim">다른 에이전트도 각 CLI에서 <b>완료 시 터미널 벨</b> 옵션을 켜면 벨 fallback으로 <span style="color:var(--success)">완료 배지</span>만 받습니다(승인 구분 없음·오탐 가능).</p>
+
+    <!-- claude 알림 플러그인 -->
+    <h2 class="sec" id="claude-plugin"><span class="hash"></span> claude 알림 플러그인 설치</h2>
+    <p><code>claude</code>의 완료·승인 신호는 claude 본체가 아니라 <b>claude-code-warp 플러그인</b>이 보냅니다. 이 플러그인이 없으면 claude 탭은 <b>탭 배지·Space 칩·상단 종 알림을 전혀 보내지 않습니다</b> — 다른 패널이나 다른 Space에서 작업이 끝나도 아무 표시가 없어 알림 기능이 고장 난 것처럼 보입니다. 터미널에서 아래 두 줄을 한 번만 실행하세요.</p>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> claude plugin marketplace add warpdotdev/claude-code-warp</pre><button class="copy-btn" type="button" aria-label="명령어 복사" title="복사"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> claude plugin install warp@claude-code-warp</pre><button class="copy-btn" type="button" aria-label="명령어 복사" title="복사"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+    <p>설치 전에 이미 열려 있던 claude 탭은 <b>claude를 다시 시작해야</b> 적용됩니다. 플러그인이 받는 데 필요한 환경변수(<code>WARP_*</code>)는 앱이 모든 터미널에 자동으로 넣어 주므로 추가 설정은 없습니다.</p>
+    <div class="warn"><b>설치돼 있지 않으면 상단 종에 주황 <code>!</code>가 붙습니다.</b> 종을 열면 맨 위 안내 카드에서 <b>터미널에서 실행</b>(새 터미널 탭에 명령을 입력해 둡니다 — Enter만 누르면 됩니다) · <b>복사</b> · <b>다시 확인</b> · <b>다시 보지 않기</b>를 고를 수 있습니다. 설치하면 종을 다시 열 때 <code>!</code>가 사라집니다. 플러그인을 꺼 둔 경우에는 켜기 명령(<code>claude plugin enable --scope user warp@claude-code-warp</code>)을 안내합니다. claude를 쓰지 않는 컴퓨터(<code>~/.claude</code> 폴더가 없음)에는 표시하지 않습니다.</div>
 
     <!-- 통합 알림센터 -->
     <h2 class="sec" id="center"><span class="hash"></span> 통합 알림센터 — 상단 종</h2>
@@ -299,5 +325,18 @@
 <script src="./_icons.js"></script>
 <script src="./_nav.js"></script>
 <script src="./_tour.js"></script>
+<script>
+(function () {
+  function fb(t, d) { var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.focus(); a.select(); try { document.execCommand('copy'); d(); } catch (e) {} document.body.removeChild(a); }
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.closest('.cmdrow'); var pre = row && row.querySelector('.cmd'); if (!pre) return;
+      var text = pre.textContent.replace(/^\s*\$\s+/, '').trim();
+      var done = function () { btn.classList.add('copied'); setTimeout(function () { btn.classList.remove('copied'); }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fb(text, done); }); } else { fb(text, done); }
+    });
+  });
+})();
+</script>
 </body>
 </html>

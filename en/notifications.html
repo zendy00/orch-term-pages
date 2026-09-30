@@ -16,6 +16,24 @@
 <link rel="stylesheet" href="../_app.css" />
 <link rel="stylesheet" href="../site.css" />
 <style>
+  /* 설치 명령 + 바깥 우측 복사 버튼(download.html과 동일) */
+  pre.cmd { font-family: var(--code-font); font-size: 13px; line-height: 1.65; background: var(--bg-0);
+    border: 1px solid var(--line); border-left: 3px solid var(--accent-line); border-radius: var(--r-md);
+    padding: 13px 16px; margin: 14px 0; max-width: var(--read); color: var(--text);
+    overflow-x: auto; white-space: pre; }
+  pre.cmd .p { color: var(--text-faint); user-select: none; }
+  .cmdrow { display: flex; align-items: stretch; gap: 8px; margin: 14px 0; max-width: var(--read); }
+  .cmdrow pre.cmd { flex: 1 1 auto; min-width: 0; margin: 0; }
+  .copy-btn { flex: none; width: 42px; display: grid; place-items: center; background: var(--bg-1);
+    border: 1px solid var(--line); border-radius: var(--r-md); color: var(--text-dim); cursor: pointer;
+    transition: color .15s, border-color .15s, background .15s; }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent-line); background: var(--bg-2); }
+  .copy-btn .ci-ok { display: none; }
+  .copy-btn.copied { color: var(--success); border-color: var(--success); }
+  .copy-btn.copied .ci-copy { display: none; }
+  .copy-btn.copied .ci-ok { display: inline-grid; }
+  .copy-btn span[data-icon] { display: inline-grid; place-items: center; }
+  .copy-btn span[data-icon] svg { width: 16px; height: 16px; }
   /* notifications.html only — tab done badge · unified notification center dropdown reproduction (design-system tokens only) */
 
   /* Tab done/attention badge — real app: tab-manager.ts blinks ICON_BELL (filled) as done=green / attention=orange */
@@ -147,13 +165,21 @@
     <table class="kbds">
       <thead><tr><th>Agent</th><th>Precise color badge</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><code>claude</code></td><td><b style="color:var(--success)">✓ Works</b></td><td>When run in the interactive screen, it distinguishes done from approval by color and preserves the content. Requires the claude-code-warp plugin installed and enabled.</td></tr>
+        <tr><td><code>claude</code></td><td><b style="color:var(--success)">✓ Works</b></td><td>When run in the interactive screen, it distinguishes done from approval by color and preserves the content. <b>Requires the claude-code-warp plugin installed and enabled</b> — <a href="#claude-plugin">how to install</a>.</td></tr>
         <tr><td><code>gemini</code></td><td><b style="color:var(--danger)">✗</b></td><td>Sends only a bell → just a done badge with no color distinction.</td></tr>
         <tr><td><code>antigravity</code></td><td><b style="color:var(--danger)">✗</b></td><td>Currently sends no badge signal.</td></tr>
         <tr><td><code>codex</code></td><td><b style="color:var(--attention)">Unverified</b></td><td>The bell works.</td></tr>
       </tbody>
     </table>
     <p class="dim">Other agents, too, if you enable the <b>terminal bell on completion</b> option in each CLI, will get only a <span style="color:var(--success)">done badge</span> via the bell fallback (no approval distinction, false positives possible).</p>
+
+    <!-- claude notification plugin -->
+    <h2 class="sec" id="claude-plugin"><span class="hash"></span> Installing the claude notification plugin</h2>
+    <p><code>claude</code>'s done and approval signals are sent not by claude itself but by the <b>claude-code-warp plugin</b>. Without it, claude tabs send <b>no tab badges, Space-chip bells, or top-bell notifications at all</b> — work finishing in another pane or Space shows nothing, so notifications look broken. Run these two lines once in a terminal.</p>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> claude plugin marketplace add warpdotdev/claude-code-warp</pre><button class="copy-btn" type="button" aria-label="Copy command" title="Copy"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+    <div class="cmdrow"><pre class="cmd"><span class="p">$</span> claude plugin install warp@claude-code-warp</pre><button class="copy-btn" type="button" aria-label="Copy command" title="Copy"><span class="ci-copy" data-icon="copy"></span><span class="ci-ok" data-icon="check"></span></button></div>
+    <p>claude tabs that were already open before installing pick it up only after <b>restarting claude</b>. The environment variables the plugin needs (<code>WARP_*</code>) are added to every terminal automatically, so there's nothing else to set up.</p>
+    <div class="warn"><b>When it isn't installed, the top bell shows an orange <code>!</code>.</b> Open the bell and the notice card at the top offers <b>Run in terminal</b> (types the command into a new terminal tab — just press Enter), <b>Copy</b>, <b>Check again</b>, and <b>Don't show again</b>. Once installed, the <code>!</code> disappears the next time you open the bell. If the plugin is turned off, it suggests the enable command (<code>claude plugin enable --scope user warp@claude-code-warp</code>) instead. Computers that don't use claude (no <code>~/.claude</code> folder) never show it.</div>
 
     <!-- Unified notification center -->
     <h2 class="sec" id="center"><span class="hash"></span> Unified notification center — the top bell</h2>
@@ -299,5 +325,18 @@
 <script src="../_icons.js"></script>
 <script src="../_nav.js"></script>
 <script src="../_tour.js"></script>
+<script>
+(function () {
+  function fb(t, d) { var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.focus(); a.select(); try { document.execCommand('copy'); d(); } catch (e) {} document.body.removeChild(a); }
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.closest('.cmdrow'); var pre = row && row.querySelector('.cmd'); if (!pre) return;
+      var text = pre.textContent.replace(/^\s*\$\s+/, '').trim();
+      var done = function () { btn.classList.add('copied'); setTimeout(function () { btn.classList.remove('copied'); }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fb(text, done); }); } else { fb(text, done); }
+    });
+  });
+})();
+</script>
 </body>
 </html>
