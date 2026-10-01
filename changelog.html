@@ -76,10 +76,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0101"><span class="hash"></span> 0.10.1 — Ctrl+C로 실행 중인 명령 중단 · PowerShell conda 프롬프트</h2>
+    <h2 class="sec" id="v0102"><span class="hash"></span> 0.10.2 — 인앱 브라우저 로그인 · Claude 알림 플러그인 안내 · 게이트웨이 신뢰성</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.1</span><span class="d">2026-09-27</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.10.2</span><span class="d">2026-10-01</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>인앱 브라우저에서 로그인할 때 "허용"을 누르면 빈 화면만 남던 문제</b> 수정 — Claude 등의 로그인 팝업을 같은 탭 안에서 열다 보니 결과를 원래 페이지로 돌려줄 수 없었습니다. 이제 로그인 팝업은 진짜 새 창으로 열리고, 끝나면 저절로 닫히며 원래 페이지에 로그인이 반영됩니다(<a href="browser.html">인앱 브라우저</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Claude 완료·승인 알림이 아예 오지 않을 때 원인 안내</b> — Claude의 알림(탭 배지·Space 표시·벨)은 알림 플러그인(<code>claude-code-warp</code>)이 보냅니다. 플러그인이 없거나 꺼져 있으면 알림이 하나도 오지 않아 고장처럼 보였습니다. 이제 벨에 <b><code>!</code></b>가 표시되고, 벨을 열면 설치 명령과 <b>"터미널에서 실행"</b> 버튼이 나옵니다(<a href="notifications.html#claude-plugin">알림</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>AI 에이전트 게이트웨이의 무인 호출 신뢰성 개선</b> — 수만 자짜리 긴 입력이 잘려 빈 응답이 나던 문제, 같은 입력이 두세 번 들어가던 문제, Enter가 먹히지 않아 멈춰 있던 문제를 고쳤습니다. 실패하면 사유를 OpenAI 형식(<code>{"error":{"message":…}}</code>)으로 함께 돌려줍니다(<a href="gateway.html">게이트웨이</a>)</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0101"><span class="hash"></span> 0.10.1 — Ctrl+C로 실행 중인 명령 중단 · PowerShell conda 프롬프트</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.1</span><span class="d">2026-09-27</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>터미널에서 <code>Ctrl+C</code>를 눌러도 실행 중인 명령이 멈추지 않던 문제</b> 수정 (Windows) — <code>ping -t</code>든 빌드든 AI 에이전트든 한 번 시작하면 중단되지 않았습니다. 프롬프트에서는 <code>^C</code>가 찍혀 "입력은 가는데 중단만 안 되는" 모습이었습니다. 터미널을 들고 있는 백그라운드 프로세스가 "Ctrl+C 무시" 상태로 실행되고 그 속성이 그 아래 셸과 명령에 상속된 것이 원인이었습니다</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>선택한 글자가 있으면 <code>Ctrl+C</code>가 복사만 반복되던 문제</b> 수정 — 출력을 드래그해 둔 상태에서는 몇 번을 눌러도 중단되지 않았습니다. 이제 Windows Terminal처럼 복사 후 선택을 해제해, 한 번 더 누르면 중단으로 갑니다. <code>Ctrl+Shift+C</code>와 macOS <code>⌘C</code>는 중단 키와 겹치지 않으므로 선택이 그대로 유지됩니다</span></li>

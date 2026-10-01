@@ -76,10 +76,22 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0101"><span class="hash"></span> 0.10.1 — Ctrl+C interrupts a running command · conda prompt in PowerShell</h2>
+    <h2 class="sec" id="v0102"><span class="hash"></span> 0.10.2 — In-app browser sign-in · Claude notification plugin notice · gateway reliability</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.1</span><span class="d">2026-09-27</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.10.2</span><span class="d">2026-10-01</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed in-app browser sign-in ending on a blank page after clicking "Allow"</b> — sign-in popups (Claude and others) opened inside the same tab, so the result could never reach the original page. They now open as real windows, close themselves when you're done, and the original page is signed in (<a href="browser.html">In-app browser</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Explains why Claude's completion and approval notifications never arrive</b> — they are sent by Claude's notification plugin (<code>claude-code-warp</code>). Without it, or with it disabled, nothing arrived and notifications looked broken. The bell now shows a <b><code>!</code></b>; open it for the install commands and a <b>"Run in terminal"</b> button (<a href="notifications.html#claude-plugin">Notifications</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>More reliable unattended calls through the AI agent gateway</b> — fixed very long inputs (tens of thousands of characters) getting cut off into an empty reply, the same input being typed two or three times, and requests stalling when Enter was swallowed. Failures now return the reason in OpenAI format (<code>{"error":{"message":…}}</code>) (<a href="gateway.html">Gateway</a>)</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0101"><span class="hash"></span> 0.10.1 — Ctrl+C interrupts a running command · conda prompt in PowerShell</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.1</span><span class="d">2026-09-27</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed <code>Ctrl+C</code> not stopping a running command</b> (Windows) — whether it was <code>ping -t</code>, a build or an AI agent, once started it could not be interrupted. At the prompt <code>^C</code> still appeared, so input was clearly arriving and only the interrupt was missing. The background process that holds your terminals was started with Ctrl+C disabled, and that attribute was inherited by every shell and command underneath it</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed <code>Ctrl+C</code> only copying while text was selected</b> — with output dragged over, pressing it again just copied again and never interrupted. It now clears the selection after copying, like Windows Terminal, so a second press interrupts. <code>Ctrl+Shift+C</code> and <code>⌘C</code> on macOS don't collide with the interrupt key, so they keep the selection</span></li>
