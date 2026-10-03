@@ -76,10 +76,22 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0103"><span class="hash"></span> 0.10.3 — Gateway worker tabs no longer pile up</h2>
+    <h2 class="sec" id="v0104"><span class="hash"></span> 0.10.4 — TUI screens restored after restart · orchestration worker display fixes</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.3</span><span class="d">2026-10-01</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.10.4</span><span class="d">2026-10-03</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed long-running claude tabs showing a broken screen after the app restarts</b> — after relaunching (for example, after an update), the status line was left as fragments like "ens" or "28m 11" until you resized the window. Reattaching now restores the full-screen mode and redraws the screen, and tab state is saved in full right before an update restart (<a href="persistence.html">Persistence</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the bottom two lines of the terminal being hidden while orchestration workers are running</b> — when the "Running" bar appeared above the tab, the terminal was cut off by its height, hiding the status line below claude's input line (<a href="orchestration.html">Orchestration</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed workers opening in the wrong Space</b> — if workers were already running in one Space, a worker launched by the commanding agent in another Space also opened there. Workers now open in the Space of the agent that launched them (<a href="orchestration.html">Orchestration</a>)</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0103"><span class="hash"></span> 0.10.3 — Gateway worker tabs no longer pile up</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.3</span><span class="d">2026-10-01</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed worker tabs piling up when using the AI agent gateway</b> — a one-off request (no <code>session</code>) should close its worker after replying, but only the agent exited and the <code>gateway · claude</code> tab stayed. The tab now closes once the reply arrives, and failed requests (timeouts, worker errors) close their worker too, so no agent process is left behind. Tabs left open after closing a worker in orchestration or a session from the supervision dashboard are fixed as well (<a href="gateway.html">Gateway</a>)</span></li>
       </ul>
