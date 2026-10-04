@@ -76,10 +76,26 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0104"><span class="hash"></span> 0.10.4 — TUI screens restored after restart · orchestration worker display fixes</h2>
+    <h2 class="sec" id="v0110"><span class="hash"></span> 0.11.0 — Workers survive restarts · late reports recovered · auto-continue to a goal · finish notices · GPU gauge</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.4</span><span class="d">2026-10-03</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.11.0</span><span class="d">2026-10-04</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Orchestration workers now survive an app restart</b> — when orchterm relaunches (for example, after an update), worker tabs and sessions are restored so you can keep sending work to the same session (<a href="orchestration.html">Orchestration</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Late worker reports are no longer lost</b> — if a worker answers after the 5-minute window or the app restarts in between, the result is saved and can be fetched with the same turn ID. A session still waiting for a result no longer accepts new work on top of it (<a href="orchestration.html">Orchestration</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Workers keep going until a goal file exists</b> — hand off a long task with a goal file (<code>until_file</code>) and orchterm sends "continue" each time the worker finishes a step, stopping once the file appears (<a href="orchestration.html">Orchestration</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>The commanding claude is notified when a worker turn finishes</b> — with <code>notify</code> on, orchterm types a one-line notice into the commander's claude tab as soon as it is idle, so it can fetch the result right away. It never types over text you are entering (<a href="orchestration.html">Orchestration</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>GPU usage in the status bar</b> — a GPU cell appears next to CPU and memory (macOS and Windows). It stays hidden where GPU usage can't be measured</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed codex workers in safe mode being unable to report results</b> — the orchterm report tool can now be used without an approval prompt</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed codex worker reports being rejected when only the AI gateway is enabled</b></span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0104"><span class="hash"></span> 0.10.4 — TUI screens restored after restart · orchestration worker display fixes</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.4</span><span class="d">2026-10-03</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed long-running claude tabs showing a broken screen after the app restarts</b> — after relaunching (for example, after an update), the status line was left as fragments like "ens" or "28m 11" until you resized the window. Reattaching now restores the full-screen mode and redraws the screen, and tab state is saved in full right before an update restart (<a href="persistence.html">Persistence</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the bottom two lines of the terminal being hidden while orchestration workers are running</b> — when the "Running" bar appeared above the tab, the terminal was cut off by its height, hiding the status line below claude's input line (<a href="orchestration.html">Orchestration</a>)</span></li>

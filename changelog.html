@@ -76,10 +76,26 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0104"><span class="hash"></span> 0.10.4 — 재시작 후 TUI 화면 복원 · 오케스트레이션 워커 표시 수정</h2>
+    <h2 class="sec" id="v0110"><span class="hash"></span> 0.11.0 — 워커 재시작 생존 · 늦은 보고 회수 · 목표까지 자동 계속 · 종료 알림 · GPU 게이지</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.10.4</span><span class="d">2026-10-03</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.11.0</span><span class="d">2026-10-04</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>오케스트레이션 워커가 앱 재시작 후에도 살아남습니다</b> — 업데이트 등으로 다시 켜도 워커 탭과 세션이 복원되어 같은 세션에 계속 일을 시킬 수 있습니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>워커의 늦은 보고를 잃지 않습니다</b> — 워커가 5분을 넘겨 답하거나 그사이 앱을 재시작해도 결과가 저장되어 같은 턴 ID로 받을 수 있습니다. 결과를 기다리는 세션에는 새 작업이 끼어들지 않습니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>목표 파일이 생길 때까지 워커가 알아서 계속</b> — 긴 작업에 목표 파일(<code>until_file</code>)을 지정하면 워커가 한 단계씩 끝낼 때마다 자동으로 계속시키고, 파일이 생기면 끝냅니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>워커 턴이 끝나면 지휘하는 claude에게 알림</b> — 알림(<code>notify</code>)을 켜면 턴이 끝났을 때 지휘관 claude 탭이 쉬는 순간 한 줄 알림을 넣어 결과를 바로 가져가게 합니다. 입력 중인 글자가 있으면 넣지 않습니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>하단바에 GPU 사용률 표시</b> — CPU·메모리 옆에 GPU 칸이 생깁니다(macOS·Windows). 측정할 수 없는 환경에서는 보이지 않습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>안전 모드의 codex 워커가 결과를 보고하지 못하던 문제</b> 수정 — orchterm 보고 도구는 승인 없이 쓸 수 있습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>AI 게이트웨이만 켠 경우 codex 워커의 보고가 거부되던 문제</b> 수정</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0104"><span class="hash"></span> 0.10.4 — 재시작 후 TUI 화면 복원 · 오케스트레이션 워커 표시 수정</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.10.4</span><span class="d">2026-10-03</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>앱을 재시작한 뒤 오래 돌던 claude 탭의 화면이 조각나던 문제</b> 수정 — 업데이트 등으로 다시 켜면 상태줄이 "ens", "28m 11" 같은 조각만 남고 창 크기를 바꿔야 돌아왔습니다. 이제 재접속할 때 전체 화면 모드를 복원하고 화면을 다시 그리며, 업데이트 재시작 직전의 탭 상태도 빠짐없이 저장합니다(<a href="persistence.html">세션 유지</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>오케스트레이션 워커가 작업 중일 때 터미널 하단 두 줄이 가려지던 문제</b> 수정 — 탭 위에 "작업중" 표시줄이 뜨면 그 높이만큼 아래가 잘려 claude 입력줄 아래 상태줄이 보이지 않았습니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
