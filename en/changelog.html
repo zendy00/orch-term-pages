@@ -76,10 +76,23 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0110"><span class="hash"></span> 0.11.0 — Workers survive restarts · late reports recovered · auto-continue to a goal · finish notices · GPU gauge</h2>
+    <h2 class="sec" id="v0111"><span class="hash"></span> 0.11.1 — Terminal renderer choice · opaque window by default · lower GPU usage</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.11.0</span><span class="d">2026-10-04</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.11.1</span><span class="d">2026-10-05</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Choose the terminal renderer</b> — in Settings › Appearance › Terminal renderer, pick DOM (default, less GPU) or WebGL (faster drawing, more GPU). Choosing WebGL first asks you to confirm that GPU usage may go up (<a href="appearance.html">Appearance</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Much lower GPU usage by default</b> — the renderer now defaults to DOM and the window is opaque by default, cutting the compositing load while the app sits idle</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Changing opacity offers a restart</b> — transparency is decided at launch, so lowering opacity below 100% or raising it back to 100% asks whether to restart. Tabs and the layout are saved first (<a href="appearance.html">Appearance</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Status bar gauges no longer animate</b> — value changes use less GPU</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0110"><span class="hash"></span> 0.11.0 — Workers survive restarts · late reports recovered · auto-continue to a goal · finish notices · GPU gauge</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.11.0</span><span class="d">2026-10-04</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Orchestration workers now survive an app restart</b> — when orchterm relaunches (for example, after an update), worker tabs and sessions are restored so you can keep sending work to the same session (<a href="orchestration.html">Orchestration</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Late worker reports are no longer lost</b> — if a worker answers after the 5-minute window or the app restarts in between, the result is saved and can be fetched with the same turn ID. A session still waiting for a result no longer accepts new work on top of it (<a href="orchestration.html">Orchestration</a>)</span></li>

@@ -76,10 +76,23 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0110"><span class="hash"></span> 0.11.0 — 워커 재시작 생존 · 늦은 보고 회수 · 목표까지 자동 계속 · 종료 알림 · GPU 게이지</h2>
+    <h2 class="sec" id="v0111"><span class="hash"></span> 0.11.1 — 터미널 렌더러 선택 · 기본 불투명 창 · GPU 사용량 감소</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.11.0</span><span class="d">2026-10-04</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.11.1</span><span class="d">2026-10-05</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널 렌더러 선택</b> — 설정 › 모양 › 터미널 렌더러에서 DOM(기본 · GPU 적게)과 WebGL(빠른 그리기 · GPU 더 씀) 중 고릅니다. WebGL을 고르면 GPU 사용량이 올라갈 수 있다는 확인창이 먼저 뜹니다(<a href="appearance.html">외관</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>기본 상태의 GPU 사용량을 크게 줄였습니다</b> — 렌더러 기본값이 DOM이 되고 창도 기본 불투명이 되어, 가만히 둘 때의 화면 합성 부하가 줄었습니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>투명도를 바꿀 때 재시작 안내</b> — 창의 투명·불투명은 시작할 때 정해지므로 100% 아래로 내리거나 다시 100%로 올리면 재시작할지 묻습니다. 재시작 전에 탭과 레이아웃을 먼저 저장합니다(<a href="appearance.html">외관</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>하단바 사용률 게이지 애니메이션 제거</b> — 값이 바뀔 때 GPU를 덜 씁니다</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0110"><span class="hash"></span> 0.11.0 — 워커 재시작 생존 · 늦은 보고 회수 · 목표까지 자동 계속 · 종료 알림 · GPU 게이지</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.11.0</span><span class="d">2026-10-04</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>오케스트레이션 워커가 앱 재시작 후에도 살아남습니다</b> — 업데이트 등으로 다시 켜도 워커 탭과 세션이 복원되어 같은 세션에 계속 일을 시킬 수 있습니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>워커의 늦은 보고를 잃지 않습니다</b> — 워커가 5분을 넘겨 답하거나 그사이 앱을 재시작해도 결과가 저장되어 같은 턴 ID로 받을 수 있습니다. 결과를 기다리는 세션에는 새 작업이 끼어들지 않습니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
