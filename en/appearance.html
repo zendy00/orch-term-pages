@@ -107,6 +107,11 @@
     <!-- Window opacity -->
     <h2 class="sec" id="opacity"><span class="hash"></span> Window opacity</h2>
     <p>A single slider makes the whole window translucent. Main surfaces like the Explorer, headers, and editor body fade together, while menus, modals, and palettes stay crisp for readability.</p>
+    <p>The default is <b>100% (opaque window)</b>. A transparent window greatly increases GPU compositing load, so lowering the slider from an opaque window asks for confirmation and the transparent window takes effect only after <b>restarting the app</b>. Raising it back to 100% offers to restart now; after a restart (or from the next launch) the window is opaque again (less GPU).</p>
+
+    <!-- Terminal renderer -->
+    <h2 class="sec" id="renderer"><span class="hash"></span> Terminal renderer</h2>
+    <p>Choose it under Settings → Appearance → <b>Terminal renderer</b>. <b>DOM</b> (default) uses less GPU; <b>WebGL</b> draws heavy output faster and joins box/block characters (<code>─ │ █</code>, agent TUI borders, etc.) seamlessly between rows, but uses more GPU (you'll be asked to confirm). With DOM, thin gaps may appear between box lines depending on display scaling. The change applies to open terminals immediately.</p>
 
     <!-- Status bar -->
     <h2 class="sec" id="statusbar"><span class="hash"></span> Status bar</h2>
