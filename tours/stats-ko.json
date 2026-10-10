@@ -10,12 +10,12 @@
     {
       "id": "hero",
       "name": "릴리즈 다운로드 통계",
-      "description": "GitHub 릴리즈 에셋의 누적 다운로드를 공개 API로 실시간 집계합니다.",
+      "description": "앱 릴리즈 에셋의 누적 다운로드를 공개 API로 실시간 집계합니다(회의 모델 배포 릴리즈는 제외).",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": ".stats-head h1" },
         "layer2": { "kind": "text-parent", "text": "릴리즈 다운로드 통계", "parentSelector": ".stats-head", "tagName": "H1" },
-        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["릴리즈 다운로드 통계", "GitHub Release 에셋 누적 다운로드", "zendy00/orch-term-pages"] }
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 150, "width": 640, "height": 44, "nearbyText": ["릴리즈 다운로드 통계", "앱 릴리즈 에셋 누적 다운로드", "zendy00/orch-term-pages"] }
       },
       "annotations": [
         {
