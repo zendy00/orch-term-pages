@@ -62,7 +62,7 @@
 
   <div class="stats-head">
     <h1>릴리즈 다운로드 통계</h1>
-    <p class="sub">zendy00/orch-term-pages · GitHub Release 에셋 누적 다운로드 (공개 API, 실시간)</p>
+    <p class="sub">zendy00/orch-term-pages · 앱 릴리즈 에셋 누적 다운로드 — 회의 모델 배포 제외 (공개 API, 실시간)</p>
   </div>
 
   <div id="summary"></div>
@@ -82,7 +82,7 @@
 <script type="module">
 import {
   sortByPublished, pickLatest, releaseDownloads, totalDownloads,
-  sortedAssets, isCounted, fmtInt, fmtBytes, fmtDate,
+  sortedAssets, isCounted, appReleases, fmtInt, fmtBytes, fmtDate,
 } from './stats.js';
 
 const REPO = 'zendy00/orch-term-pages';
@@ -102,7 +102,7 @@ async function load() {
       throw new Error(`GitHub API 오류: ${res.status}`);
     }
     const all = await res.json();
-    render(all.filter((r) => !r.draft));
+    render(appReleases(all));
     elUpdated.textContent = `업데이트 ${new Date().toLocaleTimeString('ko-KR')}`;
   } catch (e) {
     elSummary.innerHTML = '';

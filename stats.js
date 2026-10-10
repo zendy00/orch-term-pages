@@ -16,6 +16,21 @@ export function pickLatest(releases) {
   return sorted.find((r) => !r.prerelease) || sorted[0];
 }
 
+// 앱 릴리즈 태그(vX.Y.Z, rc 등 접미사 허용). 같은 저장소에 회의 전사 모델·DLL 릴리즈
+// (asr-models-ko-N, prerelease)도 있는데, 앱이 회의 첫 사용 때 받아 가는 것이라 설치
+// 다운로드가 아니다 — 합계·릴리즈 수·목록에서 모두 뺀다.
+const APP_TAG = /^v\d+\.\d+\.\d+/;
+
+/** 앱 릴리즈인가(태그가 vX.Y.Z로 시작). 모델 배포 릴리즈는 false. */
+export function isAppRelease(release) {
+  return APP_TAG.test(release.tag_name || '');
+}
+
+/** 통계 대상 릴리즈: draft·모델 배포 릴리즈 제외. */
+export function appReleases(releases) {
+  return releases.filter((r) => !r.draft && isAppRelease(r));
+}
+
 // 실제 사용자 다운로드 통계에서 제외할 에셋 이름. latest.json은 Tauri updater 매니페스트라
 // 앱이 업데이트를 확인할 때마다 받아가 카운트를 부풀린다 — 설치 다운로드가 아니라 폴링 노이즈다.
 // install.sh는 macOS 한 줄 설치(curl … | sh)의 부트스트랩 스크립트라, 받은 뒤 다시 실제
