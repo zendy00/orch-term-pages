@@ -76,10 +76,30 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0111"><span class="hash"></span> 0.11.1 — 터미널 렌더러 선택 · 기본 불투명 창 · GPU 사용량 감소</h2>
+    <h2 class="sec" id="v0120"><span class="hash"></span> 0.12.0 — 회의 전사 · 에이전트끼리 대화 · 메모 왼쪽 목록</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.11.1</span><span class="d">2026-10-05</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.12.0</span><span class="d">2026-10-10</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>회의 전사</b> — 타이틀바 마이크 아이콘으로 회의 전사 창을 엽니다. 녹음 파일(wav·mp3·m4a·caf·flac, 음성 메모 포함)이나 마이크를 받아 적고, 창을 닫아도 전사는 계속됩니다. 마이크는 녹음·일시정지/재개·정지로 조작하고, 정지하면 녹음 전체를 다시 받아 적어 더 정확한 회의록으로 바꿉니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>화자 구분과 이름 바꾸기</b> — 끝나면 화자를 자동으로 나누고(최대 8명), 화자 칩을 눌러 이름을 바꾸면 회의록 전체에 반영됩니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>회의록을 노트로 저장</b> — 날짜·시작~종료 시각과 함께 화자별로 문장마다 한 줄씩 정리해 노트 패널에 저장합니다. 앱 안 에이전트에게 요약·할 일 만들기를 바로 맡길 수 있습니다(<a href="notes.html">노트</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>모든 음성 처리는 기기 안에서</b> — 음성이 외부로 나가지 않습니다. 처음 쓸 때 음성 모델을 한 번 내려받습니다(macOS Apple Silicon 약 880MB, Windows 약 1.75GB). Apple Silicon Mac은 GPU(Metal)로 더 큰 모델을 씁니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Windows 회의 전사 정확도 향상</b> — 실시간 자막은 Nemotron 3.5, 정지 후 교정은 더 큰 whisper 모델을 씁니다. 이전에 모델을 받아 둔 경우 회의 창의 "정확도 향상 모델 받기"(약 1.26GB)로 추가로 받을 수 있습니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>따로 띄운 AI 에이전트끼리 대화</b> — 앱 안의 claude·codex가 <code>chat_who</code>로 상대를 찾고 <code>chat_send</code>로 메시지를 보내면 받는 탭에 한 줄로 전달되고 답장도 같은 길로 돌아옵니다. 처음 연결될 때 확인창이 뜨고, 입력 중인 글이 있으면 끝날 때까지 기다립니다(<a href="orchestration.html">오케스트레이션</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>메모 목록이 왼쪽 접이식 목록으로</b> — 목록만 따로 스크롤되고, 창이 좁으면 접혔다가 펼칠 때 본문 위에 겹쳐 뜹니다(<a href="notes.html">노트</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>메모·회의 창을 고르면 앞으로 나옵니다</b> — 뒤에 가려진 메모가 단축키를 가로채지 않습니다</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Windows 실시간 자막의 대기 중 CPU 사용을 크게 줄였습니다</b></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS 한글 입력에서 백스페이스 뒤 스페이스가 두 칸 들어가던 문제</b> 수정</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>다시 부른 codex 워커가 보고(<code>orch_report</code>)를 못 하던 문제</b> 수정 — codex 공용 데몬을 거칠 때 인증 토큰이 전달되지 않았습니다</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.<br>알려진 한계 — codex를 공용 데몬 모드로 쓰면 에이전트 채팅·오케스트레이션에서 codex가 다른 탭으로 인식될 수 있습니다(Windows에서 앱이 직접 띄운 codex는 보정됨). 정확히 쓰려면 codex를 데몬 없이 실행하세요.</p>
+    </div>
+
+    <h2 class="sec" id="v0111"><span class="hash"></span> 0.11.1 — 터미널 렌더러 선택 · 기본 불투명 창 · GPU 사용량 감소</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.11.1</span><span class="d">2026-10-05</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>터미널 렌더러 선택</b> — 설정 › 모양 › 터미널 렌더러에서 DOM(기본 · GPU 적게)과 WebGL(빠른 그리기 · GPU 더 씀) 중 고릅니다. WebGL을 고르면 GPU 사용량이 올라갈 수 있다는 확인창이 먼저 뜹니다(<a href="appearance.html">외관</a>)</span></li>
         <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>기본 상태의 GPU 사용량을 크게 줄였습니다</b> — 렌더러 기본값이 DOM이 되고 창도 기본 불투명이 되어, 가만히 둘 때의 화면 합성 부하가 줄었습니다</span></li>

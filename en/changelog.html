@@ -76,10 +76,30 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0111"><span class="hash"></span> 0.11.1 — Terminal renderer choice · opaque window by default · lower GPU usage</h2>
+    <h2 class="sec" id="v0120"><span class="hash"></span> 0.12.0 — Meeting transcription · agents talk to each other · notes list on the left</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.11.1</span><span class="d">2026-10-05</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.12.0</span><span class="d">2026-10-10</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Meeting transcription</b> — the microphone icon in the title bar opens the meeting transcription window. Transcribe a recording (wav, mp3, m4a, caf, flac — including voice memos) or a live microphone; transcription keeps running when you close the window. The microphone works like a recorder (record, pause/resume, stop), and stopping re-transcribes the whole recording into a more accurate transcript</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Speaker separation and renaming</b> — speakers are separated automatically when transcription finishes (up to 8); click a speaker chip to rename that person across the whole transcript</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Save transcripts as notes</b> — saved to the Notes panel grouped by speaker, one line per sentence, with the date and start–end time, ready to hand to an in-app agent for a summary or to-dos (<a href="notes.html">Notes</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>All speech processing stays on your device</b> — audio never leaves the machine. Speech models are downloaded once on first use (about 880MB on Apple Silicon macOS, about 1.75GB on Windows). Apple Silicon Macs use the GPU (Metal) to run a larger model</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>More accurate meeting transcription on Windows</b> — live captions use Nemotron 3.5 and the post-stop correction uses a larger whisper model. If you downloaded models in an earlier version, get the extra models with "Get accuracy models" (about 1.26GB) in the meeting window</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Separately launched AI agents can talk to each other</b> — in-app claude and codex find each other with <code>chat_who</code> and send messages with <code>chat_send</code>; each message arrives as one line in the receiving tab and replies come back the same way. The first connection asks for confirmation, and delivery waits while you are typing (<a href="orchestration.html">Orchestration</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Notes list moved to a collapsible list on the left</b> — the list scrolls on its own, and in a narrow window it collapses and opens over the note when expanded (<a href="notes.html">Notes</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Clicking or selecting a notes or meeting window brings it to the front</b> — a note hidden behind no longer steals shortcuts</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Much lower idle CPU for live captions on Windows</b></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed a double space after Backspace in Korean input on macOS</b></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed a re-summoned codex worker failing to report (<code>orch_report</code>)</b> — the auth token was not passed through the shared codex daemon</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.<br>Known limitation — when codex runs in shared daemon mode, agent chat and orchestration may identify codex as a different tab (corrected on Windows for codex launched by the app). For exact behavior, run codex without the daemon.</p>
+    </div>
+
+    <h2 class="sec" id="v0111"><span class="hash"></span> 0.11.1 — Terminal renderer choice · opaque window by default · lower GPU usage</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.11.1</span><span class="d">2026-10-05</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Choose the terminal renderer</b> — in Settings › Appearance › Terminal renderer, pick DOM (default, less GPU) or WebGL (faster drawing, more GPU). Choosing WebGL first asks you to confirm that GPU usage may go up (<a href="appearance.html">Appearance</a>)</span></li>
         <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Much lower GPU usage by default</b> — the renderer now defaults to DOM and the window is opaque by default, cutting the compositing load while the app sits idle</span></li>
