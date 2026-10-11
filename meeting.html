@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="./_lang.js"></script>
+<link rel="icon" href="./assets/app-icon.png" />
+<title>회의 전사 — Orch term 가이드</title>
+<meta name="description" content="Orch term 회의 전사 사용법: 타이틀바 마이크 아이콘으로 녹음 파일이나 마이크를 이 기기 안에서 받아 적고, 화자를 나누고, 회의록을 노트로 저장합니다(macOS Apple Silicon · Windows)." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://zendy00.github.io/orch-term-pages/meeting.html" />
+<link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/meeting.html" />
+<link rel="alternate" hreflang="en" href="https://zendy00.github.io/orch-term-pages/en/meeting.html" />
+<link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/orch-term-pages/en/meeting.html" />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<style>
+  /* 이 페이지 전용 — 회의록 예시 블록(디자인 시스템 토큰만 사용) */
+  .mt-sample { font-family: var(--code-font); font-size: 12.5px; line-height: 1.7; color: var(--text); background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-md); padding: 12px 14px; margin: 4px 0 16px; white-space: pre-wrap; overflow-x: auto; }
+</style>
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Orch term" />
+<meta property="og:title" content="회의 전사 — Orch term 가이드" />
+<meta property="og:description" content="Orch term 회의 전사 사용법: 타이틀바 마이크 아이콘으로 녹음 파일이나 마이크를 이 기기 안에서 받아 적고, 화자를 나누고, 회의록을 노트로 저장합니다(macOS Apple Silicon · Windows)." />
+<meta property="og:url" content="https://zendy00.github.io/orch-term-pages/meeting.html" />
+<meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="회의 전사 — Orch term 가이드" />
+<meta name="twitter:description" content="Orch term 회의 전사 사용법: 타이틀바 마이크 아이콘으로 녹음 파일이나 마이크를 이 기기 안에서 받아 적고, 화자를 나누고, 회의록을 노트로 저장합니다(macOS Apple Silicon · Windows)." />
+<meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+</head>
+<body data-page="meeting">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" />
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>핵심 기능</span><span class="sep">/</span><span>회의 전사</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 회의 전사</p>
+    <h1 class="page-title">회의 전사</h1>
+    <p class="lede">녹음 파일이나 마이크로 들어오는 말을 <b>이 기기 안에서</b> 받아 적습니다. 녹음 중에는 실시간 자막을 보여 주고, 끝나면 전체를 다시 받아 적어 정확도를 높인 뒤 <b>누가 말했는지</b> 나눠 줍니다. 결과는 <a href="notes.html">노트</a>로 저장해 앱 안 AI에게 요약·할 일 정리를 바로 맡길 수 있습니다.</p>
+
+    <!-- 열기 -->
+    <h2 class="sec" id="open"><span class="hash"></span> 회의 창 열기</h2>
+    <p>타이틀바의 <span class="i" data-icon="mic"></span> <b>회의 전사</b>(마이크) 아이콘이나 명령 팔레트의 <b>"회의 전사"</b>로 엽니다. 메모 창처럼 떠 있는 창이라 드래그로 옮기고 가장자리로 크기를 바꾸며 최대화할 수 있습니다.</p>
+    <ul>
+      <li><b>창을 닫아도 전사는 계속됩니다.</b> 진행 중이면 마이크 아이콘에 <b style="color:var(--danger, #e5534b)">빨간 점</b>이 붙고, 다시 열면 그대로 이어서 보입니다.</li>
+      <li>메모 창과 함께 띄워 두면 클릭하거나 키보드로 고른 창이 앞으로 나옵니다.</li>
+    </ul>
+
+    <!-- 모델 -->
+    <h2 class="sec" id="models"><span class="hash"></span> 처음 쓸 때 — 음성 모델 받기</h2>
+    <p>음성 인식은 모두 이 기기 안에서 하며 <b>소리가 외부로 나가지 않습니다</b>. 그래서 처음 한 번 음성 모델을 내려받아야 합니다 — 창에 뜨는 <b>모델 다운로드</b> 버튼을 누르면 됩니다(받는 동안 진행률 표시, 받은 파일은 크기·체크섬으로 검사).</p>
+    <div class="tablewrap"><table class="kbds">
+      <thead><tr><th>플랫폼</th><th>처음 받는 크기</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td>macOS (Apple Silicon)</td><td>약 880MB</td><td>GPU(Metal)로 큰 모델(whisper large-v3-turbo)을 써서 받아쓰기 품질이 가장 높습니다. macOS 13.3 이상</td></tr>
+        <tr><td>Windows (x64)</td><td>약 1.75GB</td><td>CPU로 동작합니다. 실시간 자막은 Nemotron 3.5, 정지 후 교정은 whisper 모델(정확도 향상 모델 포함)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note"><b>Windows에서 이전 버전 때 모델을 받아 두었다면</b> 회의는 그대로 시작됩니다. 창 상태줄에 <b>"정확도 향상 모델 받기(약 1.26GB)"</b> 링크가 보이면 눌러 추가 모델을 받으세요 — 실시간 자막과 정지 후 교정 정확도가 좋아집니다.</p>
+
+    <!-- 파일 -->
+    <h2 class="sec" id="file"><span class="hash"></span> 녹음 파일 받아 적기</h2>
+    <p><b>오디오 파일 열기…</b>로 녹음 파일을 고릅니다. wav · mp3 · m4a · caf · flac 등을 읽고, iPhone 음성 메모(m4a)도 그대로 열립니다. 처음부터 정확도가 높은 모델로 받아 적고, 끝나면 화자를 나눕니다.</p>
+
+    <!-- 마이크 -->
+    <h2 class="sec" id="mic"><span class="hash"></span> 마이크로 받아 적기</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="mic"></span> 마이크 고르고 녹음 시작</div>
+        <p>마이크 목록에서 입력 장치를 고르고(기본 마이크 · 새로 꽂은 장치는 새로고침) <b>마이크 녹음 시작</b>을 누릅니다. 녹음은 바로 시작되고, 자막 엔진이 준비되는 몇 초 동안은 "● 녹음 중 — 자막 준비 중…"으로 표시됩니다(그사이 소리도 빠짐없이 처리됩니다).</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="stop"></span> 녹음기처럼 조작</div>
+        <p><b>녹음 · 일시정지/재개 · 정지</b> 버튼과 경과 시간으로 조작합니다. <b>일시정지한 동안의 소리는 자막에도 녹음 파일에도 들어가지 않습니다.</b></p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="refresh"></span> 정지하면 전체를 다시 받아 적기</div>
+        <p>정지하면 "확정 처리 중…"이 뜨고 <b>녹음 전체를 더 정확한 모델로 다시 받아 적어</b> 녹음 중 자막을 바꿉니다. 그다음 화자를 확정합니다. 녹음 중 자막이 듬성듬성했어도 이 단계가 회의록을 채웁니다.</p>
+      </li>
+    </ol>
+    <p>마이크 녹음 원본은 wav 파일로 저장되고, 창의 <b>원본</b> 줄에서 Finder/탐색기로 바로 열 수 있습니다.</p>
+
+    <!-- 화자 -->
+    <h2 class="sec" id="speakers"><span class="hash"></span> 화자 구분 · 이름 바꾸기</h2>
+    <p>전사가 끝나면 화자를 자동으로 나눕니다(최대 8명, 녹음 중에는 추정값). 줄 앞의 <b>화자 칩</b>(화자1, 화자2…)을 누르면 "이 화자는 누구인가요?"가 뜨고, 이름을 넣고 <b>적용</b>하면 그 사람의 모든 줄이 한 번에 바뀝니다. 녹음 중에 붙인 이름은 끝난 뒤 화자를 확정할 때도 이어집니다.</p>
+
+    <!-- 노트 -->
+    <h2 class="sec" id="note"><span class="hash"></span> 회의록을 노트로 저장</h2>
+    <p><b>노트로 저장</b>을 누르면 회의록이 <a href="notes.html">노트 패널</a>에 텍스트 메모로 저장되고 패널이 열립니다(자동 저장은 하지 않습니다). 저장한 뒤 화자 이름을 바꾸면 그 노트도 함께 고쳐집니다.</p>
+    <pre class="mt-sample">일시: 2026-10-10 14:00:05 ~ 14:42:31 (42:26)
+원본: meeting-1791612005.wav
+
+**김팀장**
+- 이번 주 배포 일정부터 볼게요.
+- 목요일 오후로 잡으면 될까요?
+
+**박개발**
+- 네, 목요일 괜찮습니다.</pre>
+    <p>화자가 바뀔 때 이름 한 줄, 문장마다 한 줄씩 정리됩니다. 마이크 녹음은 일시정지를 뺀 녹음 시간이 괄호에 들어갑니다. 저장한 뒤 앱 안 AI에게 "이 회의 요약해서 할 일 만들어 줘"처럼 맡기면 <a href="task-ai-sharing.html">할 일 보드</a>까지 이어집니다.</p>
+
+    <!-- 문제 해결 -->
+    <h2 class="sec" id="tips"><span class="hash"></span> 잘 안 될 때</h2>
+    <ul>
+      <li><b>"마이크에서 소리가 들어오지 않습니다"</b> — 운영체제 개인정보 설정에서 Orch term의 마이크 권한과 입력 장치를 확인하세요(macOS: 시스템 설정 › 개인정보 보호 및 보안 › 마이크).</li>
+      <li><b>녹음 중 자막이 거의 안 나오고 정지 후에 한꺼번에 나온다</b> — 입력 소리가 너무 작거나(마이크와 멀거나 입력 음량이 낮음) 스피커폰처럼 잡음 제거가 강한 장치일 때 생깁니다. 정지 후 전체 재전사가 회의록을 채우지만, 마이크를 가까이 두거나 입력 음량을 올리면 녹음 중 자막도 좋아집니다.</li>
+      <li><b>회의 중 앱을 끄면</b> 마이크 녹음 wav까지만 저장되고 화자 확정 등 후처리는 건너뜁니다. 회의록은 노트로 저장한 뒤 끄세요.</li>
+    </ul>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="notes.html"><span class="ri" data-icon="note"></span>메모 · 다이어그램</a>
+        <a class="relchip" href="task-ai-sharing.html"><span class="ri" data-icon="check"></span>AI 할 일 공유</a>
+        <a class="relchip" href="tasks.html"><span class="ri" data-icon="tasks"></span>할 일 보드</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span><a href="notes.html">← 이전 메모 · 다이어그램</a></span>
+      <span><a href="tasks.html">다음 → 할 일 보드</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+<script src="./_tour.js"></script>
+</body>
+</html>

@@ -15,9 +15,10 @@ Base URL: https://zendy00.github.io/orch-term-pages/
 
 - [Workstation](https://zendy00.github.io/orch-term-pages/en/workstation.html): workspace model, panes, and operator workflow.
 - [Terminal](https://zendy00.github.io/orch-term-pages/en/terminal.html): terminal usage and local shells, including session survival — a resident daemon owns the PTYs so shells, builds, and AI conversations keep running when the app is closed or updated, and reattach with scrollback on reopen.
-- [Orchestration](https://zendy00.github.io/orch-term-pages/en/orchestration.html): multi-agent sessions and worker coordination.
+- [Orchestration](https://zendy00.github.io/orch-term-pages/en/orchestration.html): multi-agent sessions, worker coordination, and chat between separately launched agents.
 - [Sessions](https://zendy00.github.io/orch-term-pages/en/sessions.html): resuming past agent conversations, naming sessions, and automatic restore after an app restart.
 - [Notes](https://zendy00.github.io/orch-term-pages/en/notes.html): floating notes with Markdown, drawings, sequence diagrams, and bidirectional Mermaid flowcharts.
+- [Meeting transcription](https://zendy00.github.io/orch-term-pages/en/meeting.html): on-device transcription of recordings or a live microphone, speaker separation, and saving transcripts as notes.
 - [Tasks](https://zendy00.github.io/orch-term-pages/en/tasks.html): task board and work tracking.
 - [Task AI Sharing](https://zendy00.github.io/orch-term-pages/en/task-ai-sharing.html): sharing task context with AI agents.
 - [Source Control](https://zendy00.github.io/orch-term-pages/en/source-control.html): git and source-control workflows.

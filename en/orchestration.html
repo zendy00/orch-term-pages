@@ -181,6 +181,30 @@
     for you to configure.</p>
     <div class="warn"><b>If a worker returns an empty reply</b> — run that CLI once in a terminal by itself. Workers use each CLI's own settings (model, auth), so if the CLI can't run, orchestration can't either. In particular, <b>hermes</b> cannot complete a single turn once its configured model becomes unavailable (subscription change, model retirement): <code>HTTP 404: The model … does not exist</code>. Pick a working model with <code>hermes model</code>, and register a spare with <code>hermes fallback add</code> — it will switch over automatically when that model is retired later.</div>
 
+    <!-- Agent chat -->
+    <h2 class="sec" id="chat"><span class="hash"></span> Agents talking to each other (chat)</h2>
+    <p>Even without a commander–worker setup, <b>claude and codex tabs you launched separately</b> can message each other. For example, tell the claude in one tab "ask the codex in the next tab to review this diff" — claude finds it, sends the message, and codex's reply comes back to the claude tab.</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="search"></span> Find who to talk to — <code>chat_who</code></div>
+        <p>Lists the agents available to chat, told apart by <b>Space · tab name · session name</b>. Agents refer to each other by a public chat address (<code>c_…</code>).</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="check"></span> Confirm once</div>
+        <p>The first time two tabs connect, an <b>"Agent chat request"</b> dialog shows the sender, the recipient and the first message (default [Allow]). Once allowed, the two tabs can message freely while both stay open.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> Delivered as one line — <code>chat_send</code></div>
+        <p>Each message is <b>typed into the receiving tab as one line</b> that also says how to reply, so the answer comes back the same way. <b>If you are typing in that tab, delivery waits until you finish</b>, and it waits while the agent is busy. Past messages are available with <code>chat_inbox</code>.</p>
+      </li>
+    </ol>
+    <ul>
+      <li><b>Stop from the supervisor dashboard</b> — the dashboard lists chatting pairs and message counts, and [Stop] · [Allow again] cut or restore a pair at any time.</li>
+      <li><b>Available only when orchestration is on</b> (with only the AI gateway on, the chat tools are hidden).</li>
+      <li>Messages are up to <b>500 characters</b>; control characters are removed. History is kept for 24 hours.</li>
+    </ul>
+    <div class="warn"><b>Known limitation</b> — when codex runs in shared daemon mode, it may be identified as a different tab (corrected on Windows for codex launched by the app). For exact behavior, run codex without the daemon.</div>
+
     <!-- Security -->
     <h2 class="sec" id="security"><span class="hash"></span> Safe defaults</h2>
     <ul>
