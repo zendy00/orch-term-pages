@@ -1,0 +1,445 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-meeting-en",
+  "name": "Meeting transcription tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/meeting.html",
+  "createdAt": "2026-10-12T00:00:00Z",
+  "updatedAt": "2026-10-12T00:00:00Z",
+  "siteFonts": [
+    "'Segoe UI',system-ui,sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Meeting transcription",
+      "description": "Transcribe a recording or a live microphone entirely on your device, with speakers separated.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".page-title"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Meeting transcription",
+          "parentSelector": "#main",
+          "tagName": "H1"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 150,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Meeting transcription"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Meeting transcription",
+          "position": {
+            "x": 320,
+            "y": 110
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "Open the meeting window",
+      "description": "Open it from the microphone icon in the titlebar. Transcription keeps running when you close the window, and the icon shows a red dot.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#open"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Open the meeting window",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 300,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Open the meeting window"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. Open",
+          "position": {
+            "x": 320,
+            "y": 260
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "models",
+      "name": "First use — download the speech models",
+      "description": "Speech models are downloaded once on first use. Audio never leaves your device.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#models"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "First use — download the speech models",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 450,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "First use — download the speech models"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-models",
+          "text": "3. Models",
+          "position": {
+            "x": 320,
+            "y": 410
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "file",
+      "name": "Transcribe a recording",
+      "description": "Use Open audio file to transcribe wav, mp3, m4a and other recordings.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#file"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Transcribe a recording",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 600,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Transcribe a recording"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-file",
+          "text": "4. Recordings",
+          "position": {
+            "x": 320,
+            "y": 560
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "mic",
+      "name": "Transcribe from a microphone",
+      "description": "Record, pause and stop like a recorder. Stopping re-transcribes the whole recording for accuracy.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#mic"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Transcribe from a microphone",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 750,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Transcribe from a microphone"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-mic",
+          "text": "5. Microphone",
+          "position": {
+            "x": 320,
+            "y": 710
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "speakers",
+      "name": "Speakers and renaming",
+      "description": "Click a speaker chip to rename that person across the whole transcript.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#speakers"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Speakers and renaming",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 900,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Speakers and renaming"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-speakers",
+          "text": "6. Speakers",
+          "position": {
+            "x": 320,
+            "y": 860
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "note",
+      "name": "Save the transcript as a note",
+      "description": "Save to notes puts the transcript in the Notes panel, ready for an AI summary.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#note"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Save the transcript as a note",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1050,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Save the transcript as a note"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-note",
+          "text": "7. Save to notes",
+          "position": {
+            "x": 320,
+            "y": 1010
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tips",
+      "name": "Troubleshooting",
+      "description": "Check the microphone permission and the input volume.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#tips"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Troubleshooting",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1200,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Troubleshooting"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tips",
+          "text": "8. Troubleshooting",
+          "position": {
+            "x": 320,
+            "y": 1160
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-meeting-ko",
+  "name": "회의 전사 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/meeting.html",
+  "createdAt": "2026-10-12T00:00:00Z",
+  "updatedAt": "2026-10-12T00:00:00Z",
+  "siteFonts": [
+    "'Malgun Gothic','Segoe UI',system-ui,sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "회의 전사",
+      "description": "녹음 파일이나 마이크로 들어오는 말을 이 기기 안에서 받아 적고, 누가 말했는지 나눠 줍니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".page-title"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "회의 전사",
+          "parentSelector": "#main",
+          "tagName": "H1"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 150,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "회의 전사"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 회의 전사",
+          "position": {
+            "x": 320,
+            "y": 110
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "회의 창 열기",
+      "description": "타이틀바 마이크 아이콘으로 엽니다. 창을 닫아도 전사는 계속되고, 진행 중이면 아이콘에 빨간 점이 붙습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#open"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "회의 창 열기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 300,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "회의 창 열기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. 창 열기",
+          "position": {
+            "x": 320,
+            "y": 260
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "models",
+      "name": "처음 쓸 때 — 음성 모델 받기",
+      "description": "처음 한 번 음성 모델을 내려받습니다. 소리는 기기 밖으로 나가지 않습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#models"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "처음 쓸 때 — 음성 모델 받기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 450,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "처음 쓸 때 — 음성 모델 받기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-models",
+          "text": "3. 모델 받기",
+          "position": {
+            "x": 320,
+            "y": 410
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "file",
+      "name": "녹음 파일 받아 적기",
+      "description": "오디오 파일 열기로 wav, mp3, m4a 같은 녹음 파일을 받아 적습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#file"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "녹음 파일 받아 적기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 600,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "녹음 파일 받아 적기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-file",
+          "text": "4. 녹음 파일",
+          "position": {
+            "x": 320,
+            "y": 560
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "mic",
+      "name": "마이크로 받아 적기",
+      "description": "녹음, 일시정지, 정지로 조작하고, 정지하면 녹음 전체를 다시 받아 적어 정확도를 높입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#mic"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "마이크로 받아 적기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 750,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "마이크로 받아 적기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-mic",
+          "text": "5. 마이크",
+          "position": {
+            "x": 320,
+            "y": 710
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "speakers",
+      "name": "화자 구분 · 이름 바꾸기",
+      "description": "화자 칩을 눌러 이름을 바꾸면 그 사람의 모든 줄이 한 번에 바뀝니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#speakers"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "화자 구분 · 이름 바꾸기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 900,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "화자 구분 · 이름 바꾸기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-speakers",
+          "text": "6. 화자",
+          "position": {
+            "x": 320,
+            "y": 860
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "note",
+      "name": "회의록을 노트로 저장",
+      "description": "노트로 저장을 누르면 회의록이 노트 패널에 저장되어 AI에게 요약을 맡길 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#note"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "회의록을 노트로 저장",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1050,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "회의록을 노트로 저장"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-note",
+          "text": "7. 노트로 저장",
+          "position": {
+            "x": 320,
+            "y": 1010
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "tips",
+      "name": "잘 안 될 때",
+      "description": "마이크 권한과 입력 음량을 확인하세요.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#tips"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "잘 안 될 때",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1200,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "잘 안 될 때"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-tips",
+          "text": "8. 문제 해결",
+          "position": {
+            "x": 320,
+            "y": 1160
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    }
+  ]
+}

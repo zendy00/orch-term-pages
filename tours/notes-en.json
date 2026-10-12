@@ -1,0 +1,445 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-notes-en",
+  "name": "Notes · Diagrams tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/notes.html",
+  "createdAt": "2026-10-12T00:00:00Z",
+  "updatedAt": "2026-10-12T00:00:00Z",
+  "siteFonts": [
+    "'Segoe UI',system-ui,sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Notes · Diagrams",
+      "description": "A floating note pad next to your terminal: text, drawings, sequence diagrams and flowcharts.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".page-title"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Notes · Diagrams",
+          "parentSelector": "#main",
+          "tagName": "H1"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 150,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Notes · Diagrams"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Notes · Diagrams",
+          "position": {
+            "x": 320,
+            "y": 110
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "Opening the notes panel",
+      "description": "Open it with the Notes icon in the titlebar or Ctrl Shift N. Pick notes from the left list and create one with the New note button.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#open"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Opening the notes panel",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 300,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Opening the notes panel"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. Open the panel",
+          "position": {
+            "x": 320,
+            "y": 260
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "text",
+      "name": "Text notes — Markdown",
+      "description": "Write in Markdown and switch to the rendered preview.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#text"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Text notes — Markdown",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 450,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Text notes — Markdown"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-text",
+          "text": "3. Text notes",
+          "position": {
+            "x": 320,
+            "y": 410
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "drawing",
+      "name": "Drawing notes — free-form",
+      "description": "Draw freely on an Excalidraw canvas.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#drawing"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Drawing notes — free-form",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 600,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Drawing notes — free-form"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-drawing",
+          "text": "4. Drawing notes",
+          "position": {
+            "x": 320,
+            "y": 560
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sequence",
+      "name": "Sequence diagrams — drag-to-draw UML",
+      "description": "Drag between lifelines to create messages, then export as Mermaid.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#sequence"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Sequence diagrams — drag-to-draw UML",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 750,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Sequence diagrams — drag-to-draw UML"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sequence",
+          "text": "5. Sequence diagrams",
+          "position": {
+            "x": 320,
+            "y": 710
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "flow",
+      "name": "Flowcharts — bidirectional Mermaid",
+      "description": "The canvas and Mermaid flowchart code convert both ways.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#flow"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Flowcharts — bidirectional Mermaid",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 900,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Flowcharts — bidirectional Mermaid"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-flow",
+          "text": "6. Flowcharts",
+          "position": {
+            "x": 320,
+            "y": 860
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "ai",
+      "name": "AI note sharing",
+      "description": "In-app AI agents create, read and edit the same notes.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#ai"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "AI note sharing",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1050,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "AI note sharing"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-ai",
+          "text": "7. AI note sharing",
+          "position": {
+            "x": 320,
+            "y": 1010
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "Shortcuts",
+      "description": "The shortcuts you will use most.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#shortcuts"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Shortcuts",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1200,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Shortcuts"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "8. Shortcuts",
+          "position": {
+            "x": 320,
+            "y": 1160
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    }
+  ]
+}

@@ -15,10 +15,6 @@
 <link rel="stylesheet" href="../_tokens.css" />
 <link rel="stylesheet" href="../_app.css" />
 <link rel="stylesheet" href="../site.css" />
-<style>
-  /* 이 페이지 전용 — 회의록 예시 블록(디자인 시스템 토큰만 사용) */
-  .mt-sample { font-family: var(--code-font); font-size: 12.5px; line-height: 1.7; color: var(--text); background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-md); padding: 12px 14px; margin: 4px 0 16px; white-space: pre-wrap; overflow-x: auto; }
-</style>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="Meeting transcription — Orch term guide" />
@@ -71,6 +67,7 @@
     <!-- Models -->
     <h2 class="sec" id="models"><span class="hash"></span> First use — download the speech models</h2>
     <p>All speech recognition happens on your device and <b>audio never leaves the machine</b>, so the speech models are downloaded once on first use — click <b>Download models</b> in the window (progress is shown; files are checked by size and checksum).</p>
+    <p>Speech recognition currently supports <b>Korean only</b>.</p>
     <div class="tablewrap"><table class="kbds">
       <thead><tr><th>Platform</th><th>First download</th><th>Notes</th></tr></thead>
       <tbody>
@@ -83,6 +80,12 @@
     <!-- File -->
     <h2 class="sec" id="file"><span class="hash"></span> Transcribe a recording</h2>
     <p>Choose a file with <b>Open audio file…</b>. It reads wav, mp3, m4a, caf, flac and more, including iPhone voice memos (m4a). Files are transcribed with the high-accuracy model from the start, and speakers are separated when it finishes.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/meeting-transcript.png" alt="Meeting transcription window — a finished file transcription with named speakers" />
+        <div class="shot-cap"><span class="n">①</span> Open the file in Finder/Explorer from the Source row. <span class="n">②</span> Each line has a speaker chip; renaming updates every line.</div>
+      </div>
+    </figure>
 
     <!-- Mic -->
     <h2 class="sec" id="mic"><span class="hash"></span> Transcribe from a microphone</h2>
@@ -105,19 +108,22 @@
     <!-- Speakers -->
     <h2 class="sec" id="speakers"><span class="hash"></span> Speakers and renaming</h2>
     <p>When transcription finishes, speakers are separated automatically (up to 8; during recording they are estimates). Click a <b>speaker chip</b> (Speaker 1, Speaker 2…) to get "Who is this speaker?", type a name and click <b>Apply</b> — every line from that person changes at once. Names given during recording carry over when speakers are confirmed at the end.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/meeting-rename.png" alt="Renaming a speaker — previews of what they said and a name field" />
+        <div class="shot-cap"><span class="n">①</span> A few of the speaker's lines are shown so you can tell who it is.</div>
+      </div>
+    </figure>
 
     <!-- Note -->
     <h2 class="sec" id="note"><span class="hash"></span> Save the transcript as a note</h2>
     <p>Click <b>Save to notes</b> to save the transcript as a text memo in the <a href="notes.html">Notes panel</a> and open the panel (nothing is saved automatically). If you rename a speaker after saving, the note is updated too.</p>
-    <pre class="mt-sample">When: 2026-10-10 14:00:05 ~ 14:42:31 (42:26)
-Source: meeting-1791612005.wav
-
-**Alex**
-- Let's start with this week's release schedule.
-- Does Thursday afternoon work?
-
-**Sam**
-- Yes, Thursday works.</pre>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="../assets/shots/en/meeting-note.png" alt="A transcript saved in the Notes panel — time and source header, sentences listed by speaker" />
+        <div class="shot-cap"><span class="n">①</span> The header holds the time and source, followed by speaker names and their sentences. File transcriptions say "Transcribed", microphone recordings say "When".</div>
+      </div>
+    </figure>
     <p>A name line appears whenever the speaker changes, and each sentence gets its own line. For microphone recordings, the length in parentheses excludes paused time. After saving, ask an in-app AI "summarize this meeting and create to-dos" to carry it through to the <a href="task-ai-sharing.html">task board</a>.</p>
 
     <!-- Troubleshooting -->

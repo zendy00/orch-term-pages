@@ -1,0 +1,445 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-notes-ko",
+  "name": "메모 · 다이어그램 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/notes.html",
+  "createdAt": "2026-10-12T00:00:00Z",
+  "updatedAt": "2026-10-12T00:00:00Z",
+  "siteFonts": [
+    "'Malgun Gothic','Segoe UI',system-ui,sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "메모 · 다이어그램",
+      "description": "터미널 옆에 띄워 두는 플로팅 메모입니다. 텍스트, 그림, 시퀀스 다이어그램, 순서도를 만듭니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".page-title"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "메모 · 다이어그램",
+          "parentSelector": "#main",
+          "tagName": "H1"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 150,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "메모 · 다이어그램"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 메모 · 다이어그램",
+          "position": {
+            "x": 320,
+            "y": 110
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "open",
+      "name": "노트 패널 열기",
+      "description": "타이틀바 메모 아이콘이나 Ctrl Shift N으로 엽니다. 왼쪽 목록에서 메모를 고르고, 새 메모 버튼으로 만듭니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#open"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "노트 패널 열기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 300,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "노트 패널 열기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-open",
+          "text": "2. 패널 열기",
+          "position": {
+            "x": 320,
+            "y": 260
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "text",
+      "name": "텍스트 메모 — 마크다운",
+      "description": "마크다운으로 쓰고 미리보기로 렌더 화면을 봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#text"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "텍스트 메모 — 마크다운",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 450,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "텍스트 메모 — 마크다운"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-text",
+          "text": "3. 텍스트 메모",
+          "position": {
+            "x": 320,
+            "y": 410
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "drawing",
+      "name": "그림 메모 — 자유 드로잉",
+      "description": "Excalidraw 캔버스에 자유롭게 그립니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#drawing"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "그림 메모 — 자유 드로잉",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 600,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "그림 메모 — 자유 드로잉"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-drawing",
+          "text": "4. 그림 메모",
+          "position": {
+            "x": 320,
+            "y": 560
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "sequence",
+      "name": "시퀀스 다이어그램 — 드래그로 그리는 UML",
+      "description": "라이프라인 사이를 드래그해 메시지를 만들고, Mermaid로 내보냅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#sequence"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "시퀀스 다이어그램 — 드래그로 그리는 UML",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 750,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "시퀀스 다이어그램 — 드래그로 그리는 UML"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-sequence",
+          "text": "5. 시퀀스 다이어그램",
+          "position": {
+            "x": 320,
+            "y": 710
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "flow",
+      "name": "순서도 — Mermaid 양방향",
+      "description": "캔버스와 Mermaid flowchart가 양방향으로 오갑니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#flow"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "순서도 — Mermaid 양방향",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 900,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "순서도 — Mermaid 양방향"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-flow",
+          "text": "6. 순서도",
+          "position": {
+            "x": 320,
+            "y": 860
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "ai",
+      "name": "AI 노트 공유",
+      "description": "앱 안 AI가 같은 노트를 직접 만들고 읽고 고칩니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#ai"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "AI 노트 공유",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1050,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "AI 노트 공유"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-ai",
+          "text": "7. AI 노트 공유",
+          "position": {
+            "x": 320,
+            "y": 1010
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "shortcuts",
+      "name": "단축키",
+      "description": "자주 쓰는 단축키입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#shortcuts"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "단축키",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 1200,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "단축키"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-shortcuts",
+          "text": "8. 단축키",
+          "position": {
+            "x": 320,
+            "y": 1160
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7500,
+      "waitForNavigation": false
+    }
+  ]
+}

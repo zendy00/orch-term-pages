@@ -15,10 +15,6 @@
 <link rel="stylesheet" href="./_tokens.css" />
 <link rel="stylesheet" href="./_app.css" />
 <link rel="stylesheet" href="./site.css" />
-<style>
-  /* 이 페이지 전용 — 회의록 예시 블록(디자인 시스템 토큰만 사용) */
-  .mt-sample { font-family: var(--code-font); font-size: 12.5px; line-height: 1.7; color: var(--text); background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-md); padding: 12px 14px; margin: 4px 0 16px; white-space: pre-wrap; overflow-x: auto; }
-</style>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="회의 전사 — Orch term 가이드" />
@@ -71,6 +67,7 @@
     <!-- 모델 -->
     <h2 class="sec" id="models"><span class="hash"></span> 처음 쓸 때 — 음성 모델 받기</h2>
     <p>음성 인식은 모두 이 기기 안에서 하며 <b>소리가 외부로 나가지 않습니다</b>. 그래서 처음 한 번 음성 모델을 내려받아야 합니다 — 창에 뜨는 <b>모델 다운로드</b> 버튼을 누르면 됩니다(받는 동안 진행률 표시, 받은 파일은 크기·체크섬으로 검사).</p>
+    <p>음성 인식은 현재 <b>한국어 전용</b>입니다.</p>
     <div class="tablewrap"><table class="kbds">
       <thead><tr><th>플랫폼</th><th>처음 받는 크기</th><th>특징</th></tr></thead>
       <tbody>
@@ -83,6 +80,12 @@
     <!-- 파일 -->
     <h2 class="sec" id="file"><span class="hash"></span> 녹음 파일 받아 적기</h2>
     <p><b>오디오 파일 열기…</b>로 녹음 파일을 고릅니다. wav · mp3 · m4a · caf · flac 등을 읽고, iPhone 음성 메모(m4a)도 그대로 열립니다. 처음부터 정확도가 높은 모델로 받아 적고, 끝나면 화자를 나눕니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/meeting-transcript.png" alt="회의 전사 창 — 녹음 파일 전사가 끝나고 화자 이름이 붙은 회의록" />
+        <div class="shot-cap"><span class="n">①</span> 원본 줄에서 Finder/탐색기로 파일을 엽니다. <span class="n">②</span> 줄마다 화자 칩이 붙고, 이름을 바꾸면 모든 줄에 반영됩니다.</div>
+      </div>
+    </figure>
 
     <!-- 마이크 -->
     <h2 class="sec" id="mic"><span class="hash"></span> 마이크로 받아 적기</h2>
@@ -105,19 +108,22 @@
     <!-- 화자 -->
     <h2 class="sec" id="speakers"><span class="hash"></span> 화자 구분 · 이름 바꾸기</h2>
     <p>전사가 끝나면 화자를 자동으로 나눕니다(최대 8명, 녹음 중에는 추정값). 줄 앞의 <b>화자 칩</b>(화자1, 화자2…)을 누르면 "이 화자는 누구인가요?"가 뜨고, 이름을 넣고 <b>적용</b>하면 그 사람의 모든 줄이 한 번에 바뀝니다. 녹음 중에 붙인 이름은 끝난 뒤 화자를 확정할 때도 이어집니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/meeting-rename.png" alt="화자 이름 바꾸기 — 그 화자의 발언 미리보기와 이름 입력칸" />
+        <div class="shot-cap"><span class="n">①</span> 그 화자가 한 말을 몇 줄 보여 줘서 누구인지 알아보기 쉽습니다.</div>
+      </div>
+    </figure>
 
     <!-- 노트 -->
     <h2 class="sec" id="note"><span class="hash"></span> 회의록을 노트로 저장</h2>
     <p><b>노트로 저장</b>을 누르면 회의록이 <a href="notes.html">노트 패널</a>에 텍스트 메모로 저장되고 패널이 열립니다(자동 저장은 하지 않습니다). 저장한 뒤 화자 이름을 바꾸면 그 노트도 함께 고쳐집니다.</p>
-    <pre class="mt-sample">일시: 2026-10-10 14:00:05 ~ 14:42:31 (42:26)
-원본: meeting-1791612005.wav
-
-**김팀장**
-- 이번 주 배포 일정부터 볼게요.
-- 목요일 오후로 잡으면 될까요?
-
-**박개발**
-- 네, 목요일 괜찮습니다.</pre>
+    <figure class="fig">
+      <div class="shot">
+        <img class="shot-img" src="./assets/shots/meeting-note.png" alt="노트 패널에 저장된 회의록 — 일시·원본 머리줄, 화자별 문장 목록" />
+        <div class="shot-cap"><span class="n">①</span> 머리줄에 일시와 원본, 그 아래 화자 이름과 문장 목록. 파일 전사는 "전사 일시", 마이크 녹음은 "일시"로 적힙니다.</div>
+      </div>
+    </figure>
     <p>화자가 바뀔 때 이름 한 줄, 문장마다 한 줄씩 정리됩니다. 마이크 녹음은 일시정지를 뺀 녹음 시간이 괄호에 들어갑니다. 저장한 뒤 앱 안 AI에게 "이 회의 요약해서 할 일 만들어 줘"처럼 맡기면 <a href="task-ai-sharing.html">할 일 보드</a>까지 이어집니다.</p>
 
     <!-- 문제 해결 -->
