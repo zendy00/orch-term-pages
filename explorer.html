@@ -114,12 +114,22 @@
     <table class="kbds">
       <thead><tr><th>키</th><th>동작</th></tr></thead>
       <tbody>
-        <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>트리 항목 이동</td></tr>
+        <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>트리 항목 이동 · 선택</td></tr>
+        <tr><td><kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td><td>선택 유지한 채 커서만 이동 (<kbd>Space</kbd>로 선택 추가)</td></tr>
         <tr><td><kbd>Enter</kbd></td><td>항목 선택 · 열기</td></tr>
-        <tr><td><kbd>Esc</kbd></td><td>드롭다운 / 검색 닫기</td></tr>
+        <tr><td><kbd>Shift</kbd>+클릭 · <kbd>Shift</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td><td>범위 선택 (<kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>Shift</kbd>+클릭은 범위 추가)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd> (macOS <kbd>⌘</kbd>+<kbd>A</kbd>)</td><td>보이는 항목 모두 선택</td></tr>
+        <tr><td><kbd>Delete</kbd> (macOS <kbd>⌘</kbd>+<kbd>⌫</kbd>)</td><td>선택 항목 삭제 (확인 후)</td></tr>
+        <tr><td><kbd>F2</kbd></td><td>이름 바꾸기</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>X</kbd> / <kbd>C</kbd> / <kbd>V</kbd> (macOS <kbd>⌘</kbd>)</td><td>잘라내기 / 복사 / 붙여넣기 (로컬 폴더) — Windows는 잘라낸 항목이 붙여넣기 전까지 흐리게 표시됩니다</td></tr>
+        <tr><td>macOS <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>V</kbd></td><td>복사해 둔 항목을 여기로 이동 (Finder 방식 — <kbd>⌘</kbd>+<kbd>C</kbd> 후)</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (macOS <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>C</kbd>)</td><td>경로 복사</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (macOS <kbd>⌥</kbd>+<kbd>⇧</kbd>+<kbd>⌘</kbd>+<kbd>C</kbd>)</td><td>상대 경로 복사</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>선택 해제 · 드롭다운 / 검색 닫기 (Windows는 대기 중인 잘라내기도 취소)</td></tr>
         <tr><td>글자 입력</td><td>타입어헤드 — 일치하는 이름으로 점프</td></tr>
       </tbody>
     </table>
+    <p class="dim">우클릭 메뉴 항목 오른쪽에도 같은 단축키가 표시됩니다.</p>
     <p class="dim"><b>파일 검색</b> — 검색바에 입력하면 현재 폴더만이 아니라 <b>하위 폴더 전체</b>에서 파일명 부분일치로 찾습니다. <code>node_modules</code>·<code>.git</code>·<code>target</code>·<code>dist</code> 같은 무거운 폴더는 기본 제외됩니다.</p>
 
     <!-- 인라인 생성 / rename -->

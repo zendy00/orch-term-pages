@@ -114,12 +114,22 @@
     <table class="kbds">
       <thead><tr><th>Key</th><th>Action</th></tr></thead>
       <tbody>
-        <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Move between tree items</td></tr>
+        <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Move between tree items and select</td></tr>
+        <tr><td><kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td><td>Move the cursor without changing the selection (<kbd>Space</kbd> toggles)</td></tr>
         <tr><td><kbd>Enter</kbd></td><td>Select · open the item</td></tr>
-        <tr><td><kbd>Esc</kbd></td><td>Close dropdown / search</td></tr>
+        <tr><td><kbd>Shift</kbd>+click · <kbd>Shift</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td><td>Range select (<kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>Shift</kbd>+click adds a range)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd> (macOS <kbd>⌘</kbd>+<kbd>A</kbd>)</td><td>Select all visible items</td></tr>
+        <tr><td><kbd>Delete</kbd> (macOS <kbd>⌘</kbd>+<kbd>⌫</kbd>)</td><td>Delete selected items (after confirmation)</td></tr>
+        <tr><td><kbd>F2</kbd></td><td>Rename</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>X</kbd> / <kbd>C</kbd> / <kbd>V</kbd> (macOS <kbd>⌘</kbd>)</td><td>Cut / Copy / Paste (local folders) — on Windows, cut items are dimmed until pasted</td></tr>
+        <tr><td>macOS <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>V</kbd></td><td>Move the copied items here (Finder style — after <kbd>⌘</kbd>+<kbd>C</kbd>)</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (macOS <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>C</kbd>)</td><td>Copy path</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (macOS <kbd>⌥</kbd>+<kbd>⇧</kbd>+<kbd>⌘</kbd>+<kbd>C</kbd>)</td><td>Copy relative path</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Clear selection · close dropdown / search (on Windows, also cancels a pending cut)</td></tr>
         <tr><td>Type a letter</td><td>Type-ahead — jump to a matching name</td></tr>
       </tbody>
     </table>
+    <p class="dim">The right-click menu shows the same shortcuts next to each item.</p>
     <p class="dim"><b>File search</b> — type in the search bar and it finds files by partial filename match not just in the current folder but across <b>all subfolders</b>. Heavy folders like <code>node_modules</code>·<code>.git</code>·<code>target</code>·<code>dist</code> are excluded by default.</p>
 
     <!-- Inline create / rename -->
