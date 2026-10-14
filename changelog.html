@@ -76,10 +76,25 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0120"><span class="hash"></span> 0.12.0 — 회의 전사 · 에이전트끼리 대화 · 메모 왼쪽 목록</h2>
+    <h2 class="sec" id="v0121"><span class="hash"></span> 0.12.1 — 탐색기 단축키 · Shift 범위 선택 · 탭 휠 클릭 닫기</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.12.0</span><span class="d">2026-10-10</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.12.1</span><span class="d">2026-10-14</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탐색기 단축키</b> — 트리에 포커스가 있을 때 Delete(macOS ⌘⌫)로 삭제(확인 후), F2로 이름 바꾸기, Ctrl+X/C/V(⌘)로 잘라내기·복사·붙여넣기, Ctrl+A(⌘A)로 모두 선택, Alt+Shift+C(⌥⌘C)로 경로 복사, Ctrl+Alt+Shift+C(⌥⇧⌘C)로 상대 경로 복사. 우클릭 메뉴에도 같은 단축키가 표시됩니다(<a href="explorer.html#keyboard">탐색기</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Shift 범위 선택</b> — Shift+클릭·Shift+↑/↓로 범위를 고르고 Ctrl(⌘)+Shift+클릭으로 범위를 더합니다. 화살표로 움직이면 선택도 따라가고, Ctrl(⌘)+↑/↓는 선택을 둔 채 커서만 옮깁니다(Space로 선택 추가)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>macOS Finder식 이동</b> — ⌘C로 복사한 뒤 옮길 폴더에서 ⌥⌘V를 누르면 그 자리로 이동합니다(우클릭 "여기로 이동"). ⌘X → ⌘V도 그대로 됩니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Windows 잘라낸 항목 흐림 표시</b> — 붙여넣기 전까지 흐리게 보이고, 트리에서 Esc를 누르면 잘라내기가 취소됩니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탭 휠 클릭으로 닫기</b> — 탭을 마우스 휠(가운데 버튼)로 클릭하면 X 버튼과 같은 확인창으로 닫힙니다(<a href="tabs-panes.html">탭·패널</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>닫은 Space의 알림을 누르면 Space 바가 멈추던 문제</b> 수정 — Space를 닫으면 그 알림도 정리되고, 남은 알림을 눌러도 Space 전환·추가가 멈추지 않습니다</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0120"><span class="hash"></span> 0.12.0 — 회의 전사 · 에이전트끼리 대화 · 메모 왼쪽 목록</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.12.0</span><span class="d">2026-10-10</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>회의 전사</b> — 타이틀바 마이크 아이콘으로 회의 전사 창을 엽니다. 녹음 파일(wav·mp3·m4a·caf·flac, 음성 메모 포함)이나 마이크를 받아 적고, 창을 닫아도 전사는 계속됩니다. 마이크는 녹음·일시정지/재개·정지로 조작하고, 정지하면 녹음 전체를 다시 받아 적어 더 정확한 회의록으로 바꿉니다</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>화자 구분과 이름 바꾸기</b> — 끝나면 화자를 자동으로 나누고(최대 8명), 화자 칩을 눌러 이름을 바꾸면 회의록 전체에 반영됩니다</span></li>

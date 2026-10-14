@@ -76,10 +76,25 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0120"><span class="hash"></span> 0.12.0 — Meeting transcription · agents talk to each other · notes list on the left</h2>
+    <h2 class="sec" id="v0121"><span class="hash"></span> 0.12.1 — Explorer shortcuts · Shift range selection · middle-click to close tabs</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.12.0</span><span class="d">2026-10-10</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.12.1</span><span class="d">2026-10-14</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Explorer keyboard shortcuts</b> — with the tree focused: Delete (macOS ⌘⌫) deletes after confirmation, F2 renames, Ctrl+X/C/V (⌘) cuts, copies and pastes, Ctrl+A (⌘A) selects all, Alt+Shift+C (⌥⌘C) copies the path and Ctrl+Alt+Shift+C (⌥⇧⌘C) copies the relative path. The right-click menu shows the same shortcuts (<a href="explorer.html#keyboard">Explorer</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Shift range selection</b> — Shift+click or Shift+↑/↓ selects a range, Ctrl(⌘)+Shift+click adds a range. The arrow keys now move the selection too; Ctrl(⌘)+↑/↓ moves only the cursor (Space adds to the selection)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Finder-style move on macOS</b> — copy with ⌘C, then press ⌥⌘V in the target folder to move the items there (right-click "Move Here"). ⌘X → ⌘V still works</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Windows dims cut items</b> — cut items stay dimmed until pasted, and Esc in the tree cancels the cut</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Middle-click to close a tab</b> — middle-clicking a tab closes it with the same confirmation as the X button (<a href="tabs-panes.html">Tabs &amp; panes</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed the Space bar freezing after clicking a notification from a closed Space</b> — closing a Space now clears its notifications, and a leftover notification no longer stops you from switching or adding Spaces</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0120"><span class="hash"></span> 0.12.0 — Meeting transcription · agents talk to each other · notes list on the left</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.12.0</span><span class="d">2026-10-10</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Meeting transcription</b> — the microphone icon in the title bar opens the meeting transcription window. Transcribe a recording (wav, mp3, m4a, caf, flac — including voice memos) or a live microphone; transcription keeps running when you close the window. The microphone works like a recorder (record, pause/resume, stop), and stopping re-transcribes the whole recording into a more accurate transcript</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Speaker separation and renaming</b> — speakers are separated automatically when transcription finishes (up to 8); click a speaker chip to rename that person across the whole transcript</span></li>
