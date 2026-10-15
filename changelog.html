@@ -76,10 +76,26 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0121"><span class="hash"></span> 0.12.1 — 탐색기 단축키 · Shift 범위 선택 · 탭 휠 클릭 닫기</h2>
+    <h2 class="sec" id="v0122"><span class="hash"></span> 0.12.2 — macOS ⌘W 탭 닫기 · Tauri 2.12 · 포커스 수정</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.12.1</span><span class="d">2026-10-14</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.12.2</span><span class="d">2026-10-15</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>macOS ⌘W로 지금 탭 닫기</b> — 터미널·에디터·브라우저 어디에 포커스가 있어도 됩니다(메모 패널이면 메모를 닫음). 브라우저 로그인 팝업 같은 다른 창이 앞에 있으면 그 창을 닫습니다. ⌘⇧W도 그대로 됩니다(<a href="tabs-panes.html">탭·패널</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>앱 기반(Tauri) 2.12로 업그레이드</b> — Windows에서 Alt+Tab 복귀 후 키보드가 안 먹던 문제를 막던 임시 패치를 공식 수정으로 바꿨습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>macOS에서 브라우저 탭이 열려 있으면 ⌘Q가 종료 확인 없이 꺼지던 문제</b> 수정</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>포커스가 있던 브라우저 탭을 닫으면 키보드 입력이 먹지 않던 문제(Windows)</b> 수정 — 브라우저 페이지에서 Ctrl+T로 새 터미널을 열거나 명령 팔레트를 띄웠을 때 입력이 안 되던 문제도 함께 고쳤습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>패널의 마지막 탭을 닫아 패널이 사라진 뒤 클릭해야 입력되던 문제</b> 수정 — 남은 패널의 탭으로 바로 입력됩니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>명령 팔레트·파일 찾기를 Esc로 닫으면 원래 있던 곳으로 포커스가 돌아옵니다</b></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>브라우저 탭을 빠르게 열고 닫을 때 생길 수 있던 macOS 충돌 가능성</b>을 막았습니다</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0121"><span class="hash"></span> 0.12.1 — 탐색기 단축키 · Shift 범위 선택 · 탭 휠 클릭 닫기</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.12.1</span><span class="d">2026-10-14</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탐색기 단축키</b> — 트리에 포커스가 있을 때 Delete(macOS ⌘⌫)로 삭제(확인 후), F2로 이름 바꾸기, Ctrl+X/C/V(⌘)로 잘라내기·복사·붙여넣기, Ctrl+A(⌘A)로 모두 선택, Alt+Shift+C(⌥⌘C)로 경로 복사, Ctrl+Alt+Shift+C(⌥⇧⌘C)로 상대 경로 복사. 우클릭 메뉴에도 같은 단축키가 표시됩니다(<a href="explorer.html#keyboard">탐색기</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Shift 범위 선택</b> — Shift+클릭·Shift+↑/↓로 범위를 고르고 Ctrl(⌘)+Shift+클릭으로 범위를 더합니다. 화살표로 움직이면 선택도 따라가고, Ctrl(⌘)+↑/↓는 선택을 둔 채 커서만 옮깁니다(Space로 선택 추가)</span></li>

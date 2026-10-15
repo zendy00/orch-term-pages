@@ -76,10 +76,26 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0121"><span class="hash"></span> 0.12.1 — Explorer shortcuts · Shift range selection · middle-click to close tabs</h2>
+    <h2 class="sec" id="v0122"><span class="hash"></span> 0.12.2 — ⌘W closes tabs on macOS · Tauri 2.12 · focus fixes</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.12.1</span><span class="d">2026-10-14</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.12.2</span><span class="d">2026-10-15</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>⌘W closes the current tab on macOS</b> — wherever focus is: terminal, editor or browser (in the notes panel it closes the note). If another window such as a browser sign-in popup is in front, ⌘W closes that window. ⌘⇧W still works (<a href="tabs-panes.html">Tabs &amp; panes</a>)</span></li>
+        <li><span class="cl-tag perf">perf</span><span class="cl-txt"><b>Upgraded the app framework (Tauri) to 2.12</b> — the temporary patch for the Windows issue where the keyboard stopped working after Alt+Tab is replaced by the official fix</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed ⌘Q quitting without the confirmation on macOS when a browser tab was open</b></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed keyboard input not working after closing a focused browser tab (Windows)</b> — also fixed input not working after opening a new terminal with Ctrl+T or the command palette from a browser page</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Fixed having to click before typing after closing the last tab of a pane</b> — input now goes straight to the remaining pane's tab</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Closing the command palette or file finder with Esc returns focus to where it was</b></span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Prevented a possible macOS crash</b> when quickly opening and closing browser tabs</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not close your running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0121"><span class="hash"></span> 0.12.1 — Explorer shortcuts · Shift range selection · middle-click to close tabs</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.12.1</span><span class="d">2026-10-14</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Explorer keyboard shortcuts</b> — with the tree focused: Delete (macOS ⌘⌫) deletes after confirmation, F2 renames, Ctrl+X/C/V (⌘) cuts, copies and pastes, Ctrl+A (⌘A) selects all, Alt+Shift+C (⌥⌘C) copies the path and Ctrl+Alt+Shift+C (⌥⇧⌘C) copies the relative path. The right-click menu shows the same shortcuts (<a href="explorer.html#keyboard">Explorer</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Shift range selection</b> — Shift+click or Shift+↑/↓ selects a range, Ctrl(⌘)+Shift+click adds a range. The arrow keys now move the selection too; Ctrl(⌘)+↑/↓ moves only the cursor (Space adds to the selection)</span></li>
