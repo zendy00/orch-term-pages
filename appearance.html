@@ -116,6 +116,13 @@
     <!-- 상태바 -->
     <h2 class="sec" id="statusbar"><span class="hash"></span> 상태바</h2>
     <p>하단 상태바 <b>왼쪽</b>의 <span class="i" data-icon="sidebar"></span> 버튼으로 탐색기를 여닫고, <b>오른쪽</b>에는 에디터 탭일 때 파일 <b>인코딩</b>(UTF-8 등)이 표시됩니다.</p>
+    <p><b>AI 사용량</b> — 오른쪽 포트 표시와 CPU·MEM·GPU 게이지 사이에 Codex · Claude · Antigravity · xAI(Grok)의 남은 사용 한도가 서비스별 아이콘·사용률(%)·작은 막대로 나타납니다. 클릭하면 한도별 사용률·초기화 시각을 보여 주는 상세 팝오버가 열립니다.</p>
+    <ul>
+      <li>막대 색은 사용률이 아니라 <b>사용 속도</b>입니다. 시간이 지난 만큼보다 얼마나 빨리 쓰고 있는지에 따라 기본 → 노랑 → 주황 → 빨강으로 바뀝니다.</li>
+      <li>로그인 기록이 없는 서비스는 나타나지 않고, 하나도 없으면 이 영역 전체가 숨겨집니다. 값을 알 수 없으면 0%로 꾸미지 않고 <b>—</b>로 표시합니다.</li>
+      <li><b>기본으로 켜져 있습니다.</b> 설치된 CLI의 로그인 토큰으로 사용량을 조회하고(Claude·xAI는 해당 서비스 서버에 요청) Codex·Antigravity는 CLI를 주기적으로 실행해 값을 읽습니다(기본 2분 간격). 토큰은 해당 서비스 서버 외에는 보내지 않고, 저장하지도 않습니다.</li>
+      <li>끄려면 <b>설정 → 상태바</b>에서 <b>상태바에 표시</b>를 해제하세요. 서비스별 표시와 조회 간격도 같은 곳에서 고르며, 끄면 조회·실행이 전혀 일어나지 않습니다. Linux에서는 아직 지원하지 않습니다.</li>
+    </ul>
     <figure class="fig">
       <div class="shot">
         <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">상태바</span></div>

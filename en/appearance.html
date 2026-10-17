@@ -116,6 +116,13 @@
     <!-- Status bar -->
     <h2 class="sec" id="statusbar"><span class="hash"></span> Status bar</h2>
     <p>Use the <span class="i" data-icon="sidebar"></span> button on the <b>left</b> of the bottom status bar to toggle the Explorer; on the <b>right</b>, the file <b>encoding</b> (UTF-8, etc.) is shown when an editor tab is active.</p>
+    <p><b>AI usage</b> — between the port indicator and the CPU · MEM · GPU gauges on the right, the remaining usage limit of Codex, Claude, Antigravity and xAI (Grok) appears per service as an icon, a percentage and a small bar. Click it to open a detail popover with each limit's usage and reset time.</p>
+    <ul>
+      <li>Bar color shows <b>pace</b>, not usage: it moves from default to yellow, orange and red the further your usage runs ahead of the time elapsed.</li>
+      <li>Services you are not signed in to do not appear, and the whole area is hidden if there are none. When a value is unknown it shows <b>—</b> instead of a made-up 0%.</li>
+      <li><b>On by default.</b> It reads the sign-in tokens of the CLIs you have installed to query usage (Claude and xAI contact that service's servers) and runs the Codex and Antigravity CLIs periodically to read their values (every 2 minutes by default). Tokens are sent only to that service's own servers and are never stored.</li>
+      <li>To turn it off, clear <b>Show in status bar</b> under <b>Settings → Status bar</b>. Per-service visibility and the refresh interval are chosen there too, and nothing is queried or run once it is off. Not supported on Linux yet.</li>
+    </ul>
     <figure class="fig">
       <div class="shot">
         <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">Status bar</span></div>
