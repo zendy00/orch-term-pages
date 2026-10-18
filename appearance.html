@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>외관 · 폰트 · 단축키 — Orch term 가이드</title>
-<meta name="description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
+<meta name="description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/appearance.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/appearance.html" />
@@ -52,18 +52,82 @@
   .lic-toggle { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border: 1px solid var(--line-faint); border-radius: var(--r-md); color: var(--text-dim); font-size: 13px; }
   .lic-toggle .tw { color: var(--text-faint); }
   .lic-toggle .cnt { margin-left: auto; font-family: var(--code-font); font-size: var(--fs-xs); color: var(--text-faint); }
+  /* 상태바 · AI 사용량 재현 — 값은 앱 src/styles.css 그대로(트랜지션 없음) */
+  :root { --usage-normal: #a2becb; --usage-yellow: #c6ad69; --usage-orange: #d69a65; --usage-red: #db7b7d; }
+  .sb-stage { padding: 30px 0 0; }
+  .shot-stage.pad.fit { grid-template-columns: minmax(0, 1fr); }
+  .sb-stage .sb-demo { border: 0; border-top: 1px solid var(--line-faint); border-radius: 0; }
+  .sb-scroll { overflow-x: auto; }
+  .sb-demo { border-radius: var(--r-lg); border: 1px solid var(--line-faint); width: max-content; min-width: 100%; box-sizing: border-box; }
+  .sb-demo .statusbar-ports, .sb-demo .statusbar-sys { white-space: nowrap; flex-shrink: 0; }
+  .statusbar-ai-wrap { display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; flex-shrink: 0; }
+  .statusbar-ai-sep { width: 1px; height: 14px; background: var(--line); }
+  .statusbar-ai { display: inline-flex; align-items: center; gap: 14px; font-family: var(--code-font); color: var(--text); padding: 0 2px; }
+  .ai-prov { display: inline-flex; align-items: center; gap: 5px; }
+  .ai-ico { position: relative; display: inline-flex; }
+  .ai-ico svg { flex: none; color: var(--text-strong); }
+  .ai-prov.dim .ai-ico svg, .ai-prov.dim .ai-one, .ai-prov.dim .ai-two, .ai-prov.dim .ai-nums { opacity: 0.45; }
+  .ai-warn { position: absolute; right: -2px; top: -2px; width: 5px; height: 5px; border-radius: 50%; background: oklch(0.80 0.13 78); box-shadow: 0 0 0 1.5px var(--bg-0); }
+  .ai-one { display: inline-flex; flex-direction: column; gap: 2px; width: 26px; font-size: 10.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ai-two { display: grid; grid-template-columns: 22px auto; column-gap: 4px; row-gap: 3px; align-items: center; font-size: 9px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ai-bar { display: block; position: relative; height: 3px; border-radius: 2px; background: oklch(1 0 0 / 0.14); overflow: hidden; }
+  .ai-fill { display: block; height: 100%; border-radius: 2px; }
+  .statusbar-ai.compact { gap: 4px; }
+  .ai-chip { height: 18px; padding: 0 6px; border-radius: 5px; gap: 5px; font-size: 11px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ai-chip .ai-ico svg { width: 12px; height: 12px; }
+  .ai-nums { display: inline-flex; align-items: center; }
+  .ai-slash { color: var(--text-faint); }
+  .statusbar-ai.minimal { gap: 5px; font-family: inherit; font-size: 11px; color: var(--text-faint); }
+  .ai-min-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .ai-min-warn { width: 5px; height: 5px; border-radius: 50%; background: oklch(0.80 0.13 78); flex: none; }
+  .sb-stack { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+  .sb-lay { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .sb-lay .sb-scroll { flex: 1 1 auto; min-width: 0; }
+  .sb-tag { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-family: var(--code-font); font-size: 11px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent-line); }
+  .ai-pop { width: 360px; max-width: 100%; box-sizing: border-box; background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow-pop); padding: 4px; display: flex; flex-direction: column; }
+  .ai-pop-head { display: flex; align-items: center; gap: 8px; padding: 8px 10px 6px; }
+  .ai-pop-title { font-size: 12px; font-weight: 600; color: var(--text-strong); }
+  .ai-pop-updated { margin-left: auto; font-size: 10.5px; color: var(--text-faint); }
+  .ai-pop-refresh { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 5px; color: var(--text-dim); }
+  .ai-pop-blk { display: flex; flex-direction: column; gap: 5px; padding: 8px 10px 9px; border-top: 1px solid var(--line); }
+  .ai-pop-bh { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-strong); font-weight: 500; }
+  .ai-pop-ico { display: inline-flex; color: var(--text-strong); flex: none; }
+  .ai-pop-meta { margin-left: auto; font-size: 10.5px; color: var(--text-faint); font-weight: 400; }
+  .ai-pop-row { display: grid; grid-template-columns: 96px minmax(0, 1fr) 36px 62px; column-gap: 10px; align-items: center; font-size: 11px; color: var(--text-dim); }
+  .ai-pop-bar { position: relative; height: 5px; border-radius: 3px; background: oklch(1 0 0 / 0.12); }
+  .ai-pop-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; }
+  .ai-pop-tick { position: absolute; top: -3px; width: 2px; height: 11px; margin-left: -1px; border-radius: 1px; background: var(--text-strong); }
+  .ai-pop-num { font-family: var(--code-font); font-variant-numeric: tabular-nums; text-align: right; color: var(--text); }
+  .ai-pop-reset { font-family: var(--code-font); font-variant-numeric: tabular-nums; text-align: right; color: var(--text-faint); font-size: 10.5px; }
+  .ai-pop-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 8px 10px 6px; border-top: 1px solid var(--line); font-size: 10.5px; line-height: 1.45; color: var(--text-faint); }
+  .ai-pop-lg { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .ai-pop-sw { width: 9px; height: 5px; border-radius: 2px; }
+  .ai-pop-elapsed { width: 2px; height: 10px; border-radius: 1px; background: var(--text-strong); }
+  .sb-set { width: 400px; max-width: 100%; box-sizing: border-box; background: var(--bg-1); border: 1px solid var(--line-faint); border-radius: var(--r-lg); padding: 14px 16px; font-size: var(--fs-ui); color: var(--text); }
+  .sb-row { display: flex; align-items: center; gap: 12px; margin-bottom: 5px; }
+  .sb-lbl { flex: 0 0 150px; }
+  .sb-chk { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; pointer-events: none; flex: none; }
+  .sb-ai-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+  .sb-ai-icon { display: inline-flex; width: 16px; height: 16px; color: var(--text-dim); }
+  .sb-ai-icon svg { width: 100%; height: 100%; }
+  .sb-ai-chip { margin-left: auto; font-size: 11px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-dim); white-space: nowrap; }
+  .sb-ai-chip.ok { color: var(--accent); border-color: var(--accent); }
+  .sb-note { font-size: 12px; color: var(--text-dim); margin: 2px 0 8px; }
+  .sb-combo { width: auto; min-width: 90px; }
+  .lv-sw { display: inline-block; width: 10px; height: 6px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+  @media (max-width: 520px) { .sb-lbl { flex-basis: auto; flex-grow: 1; } }
 </style>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="외관 · 폰트 · 단축키 — Orch term 가이드" />
-<meta property="og:description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
+<meta property="og:description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/appearance.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="외관 · 폰트 · 단축키 — Orch term 가이드" />
-<meta name="twitter:description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
+<meta name="twitter:description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="appearance">
@@ -115,33 +179,138 @@
 
     <!-- 상태바 -->
     <h2 class="sec" id="statusbar"><span class="hash"></span> 상태바</h2>
-    <p>하단 상태바 <b>왼쪽</b>의 <span class="i" data-icon="sidebar"></span> 버튼으로 탐색기를 여닫고, <b>오른쪽</b>에는 에디터 탭일 때 파일 <b>인코딩</b>(UTF-8 등)이 표시됩니다.</p>
-    <p><b>AI 사용량</b> — 오른쪽 포트 표시와 CPU·MEM·GPU 게이지 사이에 Codex · Claude · Antigravity · xAI(Grok)의 남은 사용 한도가 서비스별 아이콘·사용률(%)·작은 막대로 나타납니다. 클릭하면 한도별 사용률·초기화 시각을 보여 주는 상세 팝오버가 열립니다.</p>
-    <ul>
-      <li>막대 색은 사용률이 아니라 <b>사용 속도</b>입니다. 시간이 지난 만큼보다 얼마나 빨리 쓰고 있는지에 따라 기본 → 노랑 → 주황 → 빨강으로 바뀝니다.</li>
-      <li>로그인 기록이 없는 서비스는 나타나지 않고, 하나도 없으면 이 영역 전체가 숨겨집니다. 값을 알 수 없으면 0%로 꾸미지 않고 <b>—</b>로 표시합니다.</li>
-      <li><b>기본으로 켜져 있습니다.</b> 설치된 CLI의 로그인 토큰으로 사용량을 조회하고(Claude·xAI는 해당 서비스 서버에 요청) Codex·Antigravity는 CLI를 주기적으로 실행해 값을 읽습니다(기본 2분 간격). 토큰은 해당 서비스 서버 외에는 보내지 않고, 저장하지도 않습니다.</li>
-      <li>끄려면 <b>설정 → 상태바</b>에서 <b>상태바에 표시</b>를 해제하세요. 서비스별 표시와 조회 간격도 같은 곳에서 고르며, 끄면 조회·실행이 전혀 일어나지 않습니다. Linux에서는 아직 지원하지 않습니다.</li>
-    </ul>
+    <p>창 맨 아래 한 줄입니다. <b>왼쪽</b>에는 <span class="i" data-icon="sidebar"></span> 탐색기 열기/닫기와 <span class="i" data-icon="merge"></span> 모든 패널을 탭으로 병합 버튼이 있고, <b>오른쪽</b>에는 아래 순서로 정보가 놓입니다.</p>
     <figure class="fig">
       <div class="shot">
         <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">상태바</span></div>
-        <div class="shot-stage" style="padding:18px">
-          <div class="statusbar" style="border-radius:var(--r-lg);border:1px solid var(--line-faint)">
-            <button class="statusbar-reopen" title="탐색기 토글" data-icon="sidebar"></button>
-            <span class="dim" style="font-size:11px">탐색기</span>
-            <span class="statusbar-spacer"></span>
-            <span class="statusbar-encoding">UTF-8</span>
-            <span class="statusbar-ports on" title="미러"><span class="statusbar-ports-dot"></span> mirror</span>
-          </div>
-        </div>
-        <div class="shot-cap"><span class="n">①</span> 왼쪽 <span class="i dim" data-icon="sidebar"></span> 탐색기 토글 · 오른쪽 <b>UTF-8</b> 인코딩(에디터 탭 전용).</div>
+        <div class="shot-stage sb-stage"><div class="sb-scroll"><div class="statusbar sb-demo"><button class="statusbar-reopen" title="탐색기 열기/닫기" data-icon="sidebar"></button><span class="statusbar-spacer"></span><span class="statusbar-encoding">UTF-8</span><span class="statusbar-encoding">LF</span><span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>포트</span><span class="statusbar-ai-wrap"><span class="statusbar-ai-sep"></span><span class="statusbar-ai"><span class="ai-prov" title="Codex · 주간 0%"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l4 4-4 4"></path><path d="M8.5 12.5h5"></path></svg></span><span class="ai-one"><span>0%</span><span class="ai-bar"><span class="ai-fill" style="width:0%;background:var(--usage-normal)"></span></span></span></span><span class="ai-prov" title="Claude · 5시간 18% · 주간 59%"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"></path></svg></span><span class="ai-two"><span class="ai-bar"><span class="ai-fill" style="width:18%;background:var(--usage-normal)"></span></span><span>18%</span><span class="ai-bar"><span class="ai-fill" style="width:59%;background:var(--usage-yellow)"></span></span><span>59%</span></span></span><span class="ai-prov" title="Antigravity · Gemini 20% (주간) · Claude·GPT 64% (주간)"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.751 22.607c1.34 1.005 3.35.335 1.508-1.508C17.73 15.74 18.904 1 12.037 1 5.17 1 6.342 15.74.815 21.1c-2.01 2.009.167 2.511 1.507 1.506 5.192-3.517 4.857-9.714 9.715-9.714 4.857 0 4.522 6.197 9.714 9.715z"></path></svg></span><span class="ai-two"><span class="ai-bar"><span class="ai-fill" style="width:20%;background:var(--usage-normal)"></span></span><span>20%</span><span class="ai-bar"><span class="ai-fill" style="width:64%;background:var(--usage-orange)"></span></span><span>64%</span></span></span><span class="ai-prov dim" title="xAI · 주간 12% · 연결 실패 · 다음 조회에서 재시도"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg><span class="ai-warn"></span></span><span class="ai-one"><span>12%</span><span class="ai-bar"><span class="ai-fill" style="width:12%;background:var(--usage-normal)"></span></span></span></span></span></span><span class="statusbar-sys"><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">CPU</span><span class="statusbar-sys-v">12%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:12%"></span></span></span><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">MEM</span><span class="statusbar-sys-v">61%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:61%"></span></span></span><span class="statusbar-sys-cell"><span class="statusbar-sys-row"><span class="statusbar-sys-k">GPU</span><span class="statusbar-sys-v">3%</span></span><span class="statusbar-sys-bar"><span class="statusbar-sys-fill" style="width:3%"></span></span></span></span></div></div></div>
+        <div class="shot-cap"><span class="n">①</span> 인코딩 · 줄바꿈 <span class="n">②</span> 포트 <span class="n">③</span> AI 사용량 <span class="n">④</span> CPU · MEM · GPU — 항목에 마우스를 올리면 설명이 뜹니다.</div>
       </div>
     </figure>
+    <table class="kbds">
+      <thead><tr><th>항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td>① 인코딩 · 줄바꿈</td><td><b>에디터 탭일 때만</b> 보입니다. 인코딩을 누르면 다른 인코딩으로 다시 열거나 변환해 저장하고, 줄바꿈(LF·CRLF)을 누르면 바꿉니다(<a href="editor.html">코드 에디터</a>).</td></tr>
+        <tr><td>② 포트</td><td>앱이 연 포트 목록을 엽니다. 인앱 브라우저 미러가 켜져 있으면 점이 초록색으로 켜집니다(<a href="mirror.html">에이전트 미러</a>).</td></tr>
+        <tr><td>③ AI 사용량</td><td>Codex · Claude · Antigravity · xAI의 남은 사용 한도. 누르면 상세 창이 열립니다(<a href="#ai-usage">아래</a>).</td></tr>
+        <tr><td>④ CPU · MEM · GPU</td><td>컴퓨터 전체의 CPU·메모리·GPU 사용률(0.5초마다 갱신). GPU는 측정할 수 있는 OS(macOS·Windows)에서만 보입니다. 설정 → 상태바에서 끌 수 있습니다.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- AI 사용량 -->
+    <h2 class="sec" id="ai-usage"><span class="hash"></span> AI 사용량</h2>
+    <p>Codex · Claude · Antigravity · xAI(Grok)를 쓰고 있다면, 각 서비스의 <b>사용 한도를 얼마나 썼는지</b>를 상태바에서 바로 봅니다. 이미 설치해 둔 각 CLI의 로그인 정보로 조회하므로 따로 로그인할 필요가 없고, <b>로그인 기록이 없는 서비스는 나타나지 않습니다</b>(하나도 없으면 이 영역 전체가 숨겨집니다).</p>
+    <h3 class="sub">상태바에서 읽기</h3>
+    <p>서비스마다 <b>단색 아이콘 + 사용률(%) + 작은 막대</b>로 표시됩니다. 한도가 둘인 서비스는 두 줄로 나뉩니다. 마우스를 올리면 서비스 이름과 각 줄이 무엇인지 툴팁으로 보여 줍니다.</p>
+    <table class="kbds">
+      <thead><tr><th>서비스</th><th>윗줄</th><th>아랫줄</th></tr></thead>
+      <tbody>
+        <tr><td>Codex</td><td>주간 한도</td><td>— (Codex는 지금 주간 한도만 알려 줍니다)</td></tr>
+        <tr><td>Claude</td><td>5시간 한도</td><td>주간 한도</td></tr>
+        <tr><td>Antigravity</td><td>Gemini 모델 그룹</td><td>Claude·GPT 모델 그룹 (두 그룹 모두 주간 한도)</td></tr>
+        <tr><td>xAI (Grok)</td><td>이번 결제 기간의 크레딧 사용률 (Grok 채팅과 Build가 함께 씀)</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><b>숫자는 쓴 비율</b>입니다. 59%면 그 한도의 59%를 썼고 41%가 남았다는 뜻입니다.</li>
+      <li><b>막대 색은 사용률이 아니라 사용 속도</b>입니다. 한도 기간이 지난 만큼보다 빨리 쓰고 있으면 노랑 → 주황 → 빨강으로 바뀝니다(기준은 <a href="#ai-popover">상세 창</a>).</li>
+      <li><b>아이콘이 흐리면</b> 지금 값이 아니라 이전에 받아 둔 값입니다. 앱을 다시 켠 직후이거나 마지막 조회가 실패한 경우입니다.</li>
+      <li><b>아이콘 오른쪽 위의 노란 점</b>은 마지막 조회가 실패했다는 표시입니다. 이유는 상세 창에 나옵니다.</li>
+      <li><b>—</b>는 값을 모른다는 뜻입니다(처음 불러오는 중, 연결 실패, 초기화 시각이 지난 값). 모르는 값을 0%로 꾸며 보여 주지 않습니다.</li>
+    </ul>
+
+    <h3 class="sub" id="ai-popover">상세 창 (클릭)</h3>
+    <p>AI 사용량을 누르면 위로 상세 창이 열립니다. 한도마다 <b>얼마나 썼는지, 시간이 얼마나 지났는지, 언제 초기화되는지</b>를 한 줄로 보여 줍니다. 바깥을 누르거나 <kbd>Esc</kbd>로 닫습니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">AI 사용량</span></div>
+        <div class="shot-stage pad fit"><div class="ai-pop"><div class="ai-pop-head"><span class="ai-pop-title">AI 사용량</span><span class="ai-pop-updated">1분 전 갱신</span><span class="ai-pop-refresh" title="지금 새로고침"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"></path><path d="M13.5 2.5v3h-3"></path></svg></span></div><div class="ai-pop-blk"><div class="ai-pop-bh"><span class="ai-pop-ico"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l4 4-4 4"></path><path d="M8.5 12.5h5"></path></svg></span><span>Codex</span><span class="ai-pop-meta">5시간 한도 정보 없음</span></div><div class="ai-pop-row"><span>주간</span><span class="ai-pop-bar"><span class="ai-pop-fill" style="width:0%;background:var(--usage-normal)"></span><span class="ai-pop-tick" style="left:1%"></span></span><span class="ai-pop-num">0%</span><span class="ai-pop-reset">일 09:34</span></div></div><div class="ai-pop-blk"><div class="ai-pop-bh"><span class="ai-pop-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"></path></svg></span><span>Claude</span></div><div class="ai-pop-row"><span>5시간</span><span class="ai-pop-bar"><span class="ai-pop-fill" style="width:18%;background:var(--usage-normal)"></span><span class="ai-pop-tick" style="left:32%"></span></span><span class="ai-pop-num">18%</span><span class="ai-pop-reset">13:00</span></div><div class="ai-pop-row"><span>주간</span><span class="ai-pop-bar"><span class="ai-pop-fill" style="width:59%;background:var(--usage-yellow)"></span><span class="ai-pop-tick" style="left:53%"></span></span><span class="ai-pop-num" style="color:var(--usage-yellow)">59%</span><span class="ai-pop-reset">수 17:00</span></div></div><div class="ai-pop-foot"><span class="ai-pop-lg"><span class="ai-pop-elapsed"></span>지난 시간</span><span class="ai-pop-lg"><span class="ai-pop-sw" style="background:var(--usage-normal)"></span>여유</span><span class="ai-pop-lg"><span class="ai-pop-sw" style="background:var(--usage-yellow)"></span>조금 빠름</span><span class="ai-pop-lg"><span class="ai-pop-sw" style="background:var(--usage-orange)"></span>빠름</span><span class="ai-pop-lg"><span class="ai-pop-sw" style="background:var(--usage-red)"></span>매우 빠름</span></div></div></div>
+        <div class="shot-cap"><span class="n">①</span> 막대 채움 = 쓴 비율 · 흰 눈금 = 지난 시간. Claude 주간은 기간이 53% 지났는데 59%를 써서 <b>조금 빠름</b>(노랑)입니다.</div>
+      </div>
+    </figure>
+    <table class="kbds">
+      <thead><tr><th>부분</th><th>뜻</th></tr></thead>
+      <tbody>
+        <tr><td>머리줄</td><td>가장 최근에 값을 받아 온 때(예: <b>1분 전 갱신</b>)와 <span class="i" data-icon="refresh-alt"></span> <b>지금 새로고침</b> 버튼.</td></tr>
+        <tr><td>서비스 이름 옆 회색 글씨</td><td>서비스별 안내. Codex <b>5시간 한도 정보 없음</b>(Codex가 주간 한도만 알려 줌), Antigravity는 그룹마다 들어 있는 모델 이름, xAI <b>Grok 채팅·Build 공유 한도</b>.</td></tr>
+        <tr><td>한도 이름</td><td><b>5시간</b> · <b>주간</b> · <b>월간</b>. Antigravity는 <b>Gemini · 주간</b>처럼 그룹 이름이 앞에 붙습니다.</td></tr>
+        <tr><td>막대 채움</td><td>이번 한도 기간에 <b>쓴 비율</b>. 오른쪽 숫자와 같은 값입니다.</td></tr>
+        <tr><td>흰 세로 눈금</td><td>이번 한도 기간 중 <b>지난 시간</b>. 주간 한도가 시작된 지 3일 반이 지났다면 막대 가운데에 있습니다.</td></tr>
+        <tr><td>사용률 숫자</td><td>쓴 비율. 속도가 빠르면 막대와 같은 색으로 바뀝니다.</td></tr>
+        <tr><td>오른쪽 시각</td><td>한도가 <b>초기화되는 시각</b>. 오늘이면 시각만(<code>13:00</code>), 다른 날이면 요일과 시각(<code>수 17:00</code>).</td></tr>
+        <tr><td>맨 아래 줄</td><td>눈금과 색의 범례.</td></tr>
+      </tbody>
+    </table>
+    <p><b>속도 색 읽는 법</b> — 채움이 흰 눈금보다 왼쪽에 있으면 남은 시간에 비해 여유 있게 쓰고 있는 것입니다. 채움이 눈금을 넘어선 만큼에 따라 색이 바뀝니다.</p>
+    <table class="kbds">
+      <thead><tr><th>색</th><th>쓴 비율 − 지난 시간</th><th>뜻</th></tr></thead>
+      <tbody>
+        <tr><td><span class="lv-sw" style="background:var(--usage-normal)"></span> 여유</td><td>0 이하</td><td>이 속도면 초기화 전에 한도가 남습니다.</td></tr>
+        <tr><td><span class="lv-sw" style="background:var(--usage-yellow)"></span> 조금 빠름</td><td>10%p 이하</td><td>조금 빠릅니다. 대개 그대로 써도 됩니다.</td></tr>
+        <tr><td><span class="lv-sw" style="background:var(--usage-orange)"></span> 빠름</td><td>25%p 이하</td><td>이 속도면 초기화 전에 한도가 바닥날 수 있습니다.</td></tr>
+        <tr><td><span class="lv-sw" style="background:var(--usage-red)"></span> 매우 빠름</td><td>25%p 초과</td><td>곧 한도에 닿을 가능성이 큽니다.</td></tr>
+      </tbody>
+    </table>
+    <p class="dim">예: 같은 59%라도 주간 기간이 80% 지났다면 <b>여유</b>, 30%밖에 안 지났다면 <b>매우 빠름</b>입니다. 한도 길이나 초기화 시각을 모르면 눈금 없이 기본색으로 둡니다.</p>
+
+    <h3 class="sub" id="ai-narrow">좁은 창에서</h3>
+    <p>창이 좁아 상태바에 다 들어가지 않으면 AI 사용량이 <b>한 단계씩 접힙니다</b>. 창을 다시 넓히면 펼쳐지고, 어느 모양에서든 누르면 같은 상세 창이 열립니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">좁은 창에서</span></div>
+        <div class="shot-stage pad fit"><div class="sb-stack"><div class="sb-lay"><span class="sb-tag">A</span><div class="sb-scroll"><div class="statusbar sb-demo"><span class="statusbar-spacer"></span><span class="statusbar-encoding">UTF-8</span><span class="statusbar-encoding">LF</span><span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>포트</span><span class="statusbar-ai-wrap"><span class="statusbar-ai-sep"></span><span class="statusbar-ai"><span class="ai-prov" title="Codex · 주간 0%"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l4 4-4 4"></path><path d="M8.5 12.5h5"></path></svg></span><span class="ai-one"><span>0%</span><span class="ai-bar"><span class="ai-fill" style="width:0%;background:var(--usage-normal)"></span></span></span></span><span class="ai-prov" title="Claude · 5시간 18% · 주간 59%"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"></path></svg></span><span class="ai-two"><span class="ai-bar"><span class="ai-fill" style="width:18%;background:var(--usage-normal)"></span></span><span>18%</span><span class="ai-bar"><span class="ai-fill" style="width:59%;background:var(--usage-yellow)"></span></span><span>59%</span></span></span><span class="ai-prov" title="Antigravity · Gemini 20% (주간) · Claude·GPT 64% (주간)"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.751 22.607c1.34 1.005 3.35.335 1.508-1.508C17.73 15.74 18.904 1 12.037 1 5.17 1 6.342 15.74.815 21.1c-2.01 2.009.167 2.511 1.507 1.506 5.192-3.517 4.857-9.714 9.715-9.714 4.857 0 4.522 6.197 9.714 9.715z"></path></svg></span><span class="ai-two"><span class="ai-bar"><span class="ai-fill" style="width:20%;background:var(--usage-normal)"></span></span><span>20%</span><span class="ai-bar"><span class="ai-fill" style="width:64%;background:var(--usage-orange)"></span></span><span>64%</span></span></span><span class="ai-prov dim" title="xAI · 주간 12% · 연결 실패 · 다음 조회에서 재시도"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg><span class="ai-warn"></span></span><span class="ai-one"><span>12%</span><span class="ai-bar"><span class="ai-fill" style="width:12%;background:var(--usage-normal)"></span></span></span></span></span></span></div></div></div><div class="sb-lay"><span class="sb-tag">B</span><div class="sb-scroll"><div class="statusbar sb-demo"><span class="statusbar-spacer"></span><span class="statusbar-encoding">UTF-8</span><span class="statusbar-encoding">LF</span><span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>포트</span><span class="statusbar-ai-wrap"><span class="statusbar-ai-sep"></span><span class="statusbar-ai compact"><span class="ai-prov ai-chip" title="Codex · 주간 0%"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l4 4-4 4"></path><path d="M8.5 12.5h5"></path></svg></span><span class="ai-nums"><span style="color:var(--text)">0</span></span></span><span class="ai-prov ai-chip" title="Claude · 5시간 18% · 주간 59%"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"></path></svg></span><span class="ai-nums"><span style="color:var(--text)">18</span><span class="ai-slash">/</span><span style="color:var(--usage-yellow)">59</span></span></span><span class="ai-prov ai-chip" title="Antigravity · Gemini 20% (주간) · Claude·GPT 64% (주간)"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.751 22.607c1.34 1.005 3.35.335 1.508-1.508C17.73 15.74 18.904 1 12.037 1 5.17 1 6.342 15.74.815 21.1c-2.01 2.009.167 2.511 1.507 1.506 5.192-3.517 4.857-9.714 9.715-9.714 4.857 0 4.522 6.197 9.714 9.715z"></path></svg></span><span class="ai-nums"><span style="color:var(--text)">20</span><span class="ai-slash">/</span><span style="color:var(--usage-orange)">64</span></span></span><span class="ai-prov ai-chip dim" title="xAI · 주간 12% · 연결 실패 · 다음 조회에서 재시도"><span class="ai-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg><span class="ai-warn"></span></span><span class="ai-nums"><span style="color:var(--text)">12</span></span></span></span></span></div></div></div><div class="sb-lay"><span class="sb-tag">C</span><div class="sb-scroll"><div class="statusbar sb-demo"><span class="statusbar-spacer"></span><span class="statusbar-encoding">UTF-8</span><span class="statusbar-encoding">LF</span><span class="statusbar-ports on"><span class="statusbar-ports-dot"></span>포트</span><span class="statusbar-ai-wrap"><span class="statusbar-ai-sep"></span><span class="statusbar-ai minimal"><span class="ai-min-dot" style="background:var(--usage-orange)"></span><span>AI</span><span class="ai-min-warn"></span></span></span></div></div></div></div></div>
+        <div class="shot-cap"><b>A</b> 막대 · <b>B</b> 숫자만 · <b>C</b> <code>● AI</code> 한 칸. 그림의 xAI는 이전 값(흐림)이고 마지막 조회가 실패(노란 점)한 상태입니다.</div>
+      </div>
+    </figure>
+    <ul>
+      <li><b>A — 기본</b>: 아이콘 + 사용률 + 막대.</li>
+      <li><b>B — 숫자 칩</b>: 막대를 빼고 숫자만 보여 줍니다. 한도가 둘이면 <code>18/59</code>처럼 빗금으로 나누고, 숫자 색이 속도 색을 따릅니다.</li>
+      <li><b>C — 한 칸</b>: <code>● AI</code>만 남습니다. 점 색은 <b>가장 빠르게 쓰고 있는 한도</b>의 속도 색이고, 조회 실패가 있으면 옆에 노란 점이 붙습니다.</li>
+    </ul>
+
+    <h3 class="sub" id="ai-settings">켜고 끄기 — 설정 → 상태바</h3>
+    <p><span class="i" data-icon="menu"></span> 햄버거 메뉴 → <b>설정</b> → <b>상태바</b>에서 바꿉니다. 바로 적용되고 재시작은 필요 없습니다.</p>
+    <figure class="fig">
+      <div class="shot">
+        <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">설정 → 상태바</span></div>
+        <div class="shot-stage pad fit"><div class="sb-set"><div class="set-sect">AI 사용량</div><div class="sb-row"><span class="sb-lbl">상태바에 표시</span><input type="checkbox" class="sb-chk" tabindex="-1" checked aria-hidden="true" /></div><div class="sb-ai-row"><input type="checkbox" class="sb-chk" tabindex="-1" checked aria-hidden="true" /><span class="sb-ai-icon"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l4 4-4 4"></path><path d="M8.5 12.5h5"></path></svg></span><span>Codex</span><span class="sb-ai-chip ok">로그인됨</span></div><div class="sb-ai-row"><input type="checkbox" class="sb-chk" tabindex="-1" checked aria-hidden="true" /><span class="sb-ai-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"></path></svg></span><span>Claude</span><span class="sb-ai-chip ok">로그인됨</span></div><div class="sb-ai-row"><input type="checkbox" class="sb-chk" tabindex="-1" aria-hidden="true" /><span class="sb-ai-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.751 22.607c1.34 1.005 3.35.335 1.508-1.508C17.73 15.74 18.904 1 12.037 1 5.17 1 6.342 15.74.815 21.1c-2.01 2.009.167 2.511 1.507 1.506 5.192-3.517 4.857-9.714 9.715-9.714 4.857 0 4.522 6.197 9.714 9.715z"></path></svg></span><span>Antigravity</span><span class="sb-ai-chip ok">로그인됨</span></div><div class="sb-ai-row"><input type="checkbox" class="sb-chk" tabindex="-1" checked disabled aria-hidden="true" /><span class="sb-ai-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg></span><span>xAI</span><span class="sb-ai-chip">로그인 기록 없음</span></div><div class="sb-note">로그인 기록이 없는 서비스는 체크해 두어도 상태바에 나타나지 않습니다.</div><div class="sb-row"><span class="sb-lbl">조회 간격</span><span class="combo sb-combo">2분<span class="car">▾</span></span></div><div class="set-sect" style="margin-top:12px">시스템</div><div class="sb-row"><span class="sb-lbl">CPU · MEM · GPU</span><input type="checkbox" class="sb-chk" tabindex="-1" checked aria-hidden="true" /></div></div></div>
+        <div class="shot-cap"><span class="n">①</span> 오른쪽 칩이 서비스별 로그인 상태입니다. 로그인 기록이 있어야 체크를 켜고 끌 수 있습니다.</div>
+      </div>
+    </figure>
+    <table class="kbds">
+      <thead><tr><th>설정</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td>상태바에 표시</td><td>AI 사용량 전체를 켜고 끕니다. <b>기본으로 켜져 있습니다.</b> 끄면 조회와 CLI 실행이 전혀 일어나지 않습니다.</td></tr>
+        <tr><td>서비스별 체크</td><td>보여 줄 서비스를 고릅니다. 끈 서비스는 조회하지 않습니다. 칩 표시: <b>로그인됨</b> · <b>로그인 기록 없음</b> · <b>구독 한도 없음</b>(API 키로만 쓰는 경우 등 보여 줄 한도가 없음) · <b>이 OS에서 미지원</b>.</td></tr>
+        <tr><td>조회 간격</td><td>1 · 2 · 5 · 10분 중에서 고릅니다(기본 <b>2분</b>). 창이 숨겨져 있거나 최소화돼 있으면 건너뛰고, 다시 보일 때 오래된 값이면 바로 조회합니다.</td></tr>
+        <tr><td>시스템 — CPU · MEM · GPU</td><td>오른쪽 끝 게이지를 켜고 끕니다.</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><b>조회 방식</b> — Claude·xAI는 각 CLI의 로그인 토큰으로 <b>그 서비스 서버에만</b> 요청합니다. Codex·Antigravity는 설치된 CLI(<code>codex</code>·<code>agy</code>)를 잠깐 실행해 값을 읽습니다.</li>
+      <li><b>토큰을 쓰지 않습니다</b> — 사용량 조회는 대화가 아니라서 한도를 깎지 않습니다. 로그인 토큰은 저장하지 않고 다른 곳으로 보내지 않으며, 오크텀이 토큰을 직접 갱신하지도 않습니다.</li>
+      <li><b>macOS 키체인</b> — Claude 로그인 정보는 시스템 <code>security</code> 도구로 읽으므로 보통 키체인 승인 창이 뜨지 않습니다.</li>
+      <li><b>Linux</b>는 아직 지원하지 않습니다(설정 칩에 <b>이 OS에서 미지원</b>).</li>
+    </ul>
+
+    <h3 class="sub" id="ai-errors">상세 창의 안내 문구</h3>
+    <p>조회에 실패하면 상세 창의 서비스 이름 아래에 주황색으로 이유가 나옵니다. 이전 값이 있으면 흐리게 계속 보여 주고, 다른 서비스 표시에는 영향을 주지 않습니다.</p>
+    <table class="kbds">
+      <thead><tr><th>문구</th><th>뜻 · 할 일</th></tr></thead>
+      <tbody>
+        <tr><td>인증 만료 · Claude Code를 한 번 실행하면 갱신됩니다</td><td>CLI 로그인이 만료됐습니다. 그 CLI를 한 번 쓰면 로그인이 갱신되고, 다음 조회부터 다시 보입니다.</td></tr>
+        <tr><td>Grok을 실행하면 갱신됩니다</td><td>xAI 로그인은 몇 시간 뒤 만료됩니다. Grok을 한 번 실행하면 갱신됩니다.</td></tr>
+        <tr><td>요청 제한 · 14:32에 다시 조회</td><td>서비스 서버가 조회를 잠시 막았습니다. 적힌 시각에 자동으로 다시 조회하고, 계속 막히면 대기를 최대 30분까지 늘립니다. 새로고침 버튼도 이 대기를 지킵니다.</td></tr>
+        <tr><td>연결 실패 · 다음 조회에서 재시도</td><td>네트워크 오류나 시간 초과. 다음 조회 때 자동으로 다시 시도합니다.</td></tr>
+        <tr><td>접근 거부 · 계정 권한 확인</td><td>서버가 이 계정의 사용량 조회를 거부했습니다.</td></tr>
+        <tr><td>응답 형식이 바뀌었습니다 · 오크텀 업데이트 필요</td><td>서비스가 응답 구조를 바꿨습니다. 오크텀 업데이트로 해결됩니다.</td></tr>
+        <tr><td>codex(또는 agy) 실행 파일을 찾지 못했습니다</td><td>로그인 기록은 있지만 CLI를 찾지 못했습니다. CLI가 설치돼 있는지 확인하세요.</td></tr>
+      </tbody>
+    </table>
 
     <!-- 설정 다이얼로그 -->
     <h2 class="sec" id="settings"><span class="hash"></span> 설정 다이얼로그</h2>
-    <p><span class="i" data-icon="menu"></span> 햄버거 메뉴 → <b>설정</b>으로 엽니다. 왼쪽 네비로 외관·터미널·단축키·백업 그룹을 오가고, 오른쪽 패널에서 값을 바꿉니다.</p>
+    <p><span class="i" data-icon="menu"></span> 햄버거 메뉴 → <b>설정</b>으로 엽니다. 왼쪽 네비로 일반·모양·터미널·<a href="#ai-settings">상태바</a>·에이전트 미러·AI 게이트웨이·에이전트 오케스트레이션·백업·단축키 그룹을 오가고, 오른쪽 패널에서 값을 바꿉니다.</p>
     <figure class="fig">
       <div class="shot">
         <img class="shot-img" src="./assets/shots/appearance.png" alt="설정 모달 외관 탭 — 좌측 네비(고정) + 우측 패널(테마·스킨·액센트·밀도·불투명도·폰트)" />

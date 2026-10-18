@@ -4,7 +4,7 @@
   "name": "Appearance · Fonts · Shortcuts tour",
   "url": "https://zendy00.github.io/orch-term-pages/en/appearance.html",
   "createdAt": "2026-07-01T00:00:00Z",
-  "updatedAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-10-18T00:00:00Z",
   "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
   "steps": [
     {
@@ -79,7 +79,7 @@
     {
       "id": "statusbar",
       "name": "Status bar",
-      "description": "The left button toggles the Explorer, and the right shows the file encoding.",
+      "description": "The left button toggles the Explorer; the right shows the encoding, ports, AI usage, and CPU gauges.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#statusbar" },
@@ -100,6 +100,29 @@
       "waitForNavigation": false
     },
     {
+      "id": "ai-usage",
+      "name": "AI usage",
+      "description": "See the usage limits of Codex, Claude, Antigravity, and xAI in the status bar. Click for per-limit usage and reset times; bar colors show your pace.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#ai-usage" },
+        "layer2": { "kind": "text-parent", "text": "AI usage", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["AI usage", "Detail popover", "Time elapsed"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-ai-usage",
+          "text": "5. AI usage",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
       "id": "settings",
       "name": "Settings dialog",
       "description": "Open it from the hamburger menu. The left nav stays fixed while the right panel scrolls.",
@@ -113,7 +136,7 @@
         {
           "kind": "text",
           "id": "ann-settings",
-          "text": "5. Settings dialog",
+          "text": "6. Settings dialog",
           "position": { "x": 320, "y": 710 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -136,7 +159,7 @@
         {
           "kind": "text",
           "id": "ann-shortcuts",
-          "text": "6. Reassign shortcuts",
+          "text": "7. Reassign shortcuts",
           "position": { "x": 320, "y": 860 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -159,7 +182,7 @@
         {
           "kind": "text",
           "id": "ann-menu",
-          "text": "7. Menu · About",
+          "text": "8. Menu · About",
           "position": { "x": 320, "y": 1010 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -182,7 +205,7 @@
         {
           "kind": "text",
           "id": "ann-keys",
-          "text": "8. Keyboard shortcuts",
+          "text": "9. Keyboard shortcuts",
           "position": { "x": 320, "y": 1160 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }

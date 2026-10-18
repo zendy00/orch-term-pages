@@ -4,7 +4,7 @@
   "name": "외관 · 폰트 · 단축키 둘러보기",
   "url": "https://zendy00.github.io/orch-term-pages/appearance.html",
   "createdAt": "2026-07-01T00:00:00Z",
-  "updatedAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-10-18T00:00:00Z",
   "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
   "steps": [
     {
@@ -79,7 +79,7 @@
     {
       "id": "statusbar",
       "name": "상태바",
-      "description": "상태바 왼쪽으로 탐색기를 여닫고, 오른쪽에 파일 인코딩이 표시됩니다.",
+      "description": "상태바 왼쪽으로 탐색기를 여닫고, 오른쪽에 인코딩·포트·AI 사용량·CPU 게이지가 표시됩니다.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#statusbar" },
@@ -100,6 +100,29 @@
       "waitForNavigation": false
     },
     {
+      "id": "ai-usage",
+      "name": "AI 사용량",
+      "description": "Codex·Claude·Antigravity·xAI의 사용 한도를 상태바에서 봅니다. 누르면 한도별 사용률과 초기화 시각이 열리고, 막대 색은 사용 속도를 뜻합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#ai-usage" },
+        "layer2": { "kind": "text-parent", "text": "AI 사용량", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["AI 사용량", "상세 창", "지난 시간"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-ai-usage",
+          "text": "5. AI 사용량",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9500,
+      "waitForNavigation": false
+    },
+    {
       "id": "settings",
       "name": "설정 다이얼로그",
       "description": "햄버거 메뉴의 설정에서 엽니다. 왼쪽 네비는 고정, 오른쪽 패널만 스크롤됩니다.",
@@ -113,7 +136,7 @@
         {
           "kind": "text",
           "id": "ann-settings",
-          "text": "5. 설정 다이얼로그",
+          "text": "6. 설정 다이얼로그",
           "position": { "x": 320, "y": 710 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -136,7 +159,7 @@
         {
           "kind": "text",
           "id": "ann-shortcuts",
-          "text": "6. 단축키 재지정",
+          "text": "7. 단축키 재지정",
           "position": { "x": 320, "y": 860 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -159,7 +182,7 @@
         {
           "kind": "text",
           "id": "ann-menu",
-          "text": "7. 햄버거 · 정보",
+          "text": "8. 햄버거 · 정보",
           "position": { "x": 320, "y": 1010 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -182,7 +205,7 @@
         {
           "kind": "text",
           "id": "ann-keys",
-          "text": "8. 단축키 표",
+          "text": "9. 단축키 표",
           "position": { "x": 320, "y": 1160 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
