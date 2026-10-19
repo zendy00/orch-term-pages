@@ -76,10 +76,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0140"><span class="hash"></span> 0.14.0 — 공간 모드</h2>
+    <h2 class="sec" id="v0141"><span class="hash"></span> 0.14.1 — 공간 모드 Shift+Esc 최대화 · 최대화 기억 · 사이드바 제자리 선택</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.14.0</span><span class="d">2026-10-19</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.14.1</span><span class="d">2026-10-19</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드에서 <code>Shift+Esc</code>로 창 최대화</b> — 집중한 창(없으면 활성 패널, 탐색기에 포커스가 있으면 사이드바)을 최대화하고 다시 누르면 복원합니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>최대화 상태 기억</b> — 공간 모드를 껐다 켜거나 앱을 다시 켜도 최대화된 창과 최대화한 채 옮긴 위치가 그대로 남습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>사이드바·SSH 창은 제자리에서 선택</b> — 눌러도 화면이 가운데로 끌려가지 않고 선택만 바뀌어, 파일을 누르면 바로 열립니다</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0140"><span class="hash"></span> 0.14.0 — 공간 모드</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.14.0</span><span class="d">2026-10-19</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드 추가</b> — 타이틀바 버튼으로 사이드바와 패널을 넓은 작업 공간 위의 독립 창으로 펼칩니다. 빈 공간을 드래그해 둘러보고 휠로 확대·축소하며, 창을 클릭하면 가운데로 크게 와서 바로 입력할 수 있습니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>창 이동·크기 조절·최대화</b> — 탭바 빈 부분을 드래그해 옮기고 가장자리·모서리로 크기를 바꿉니다. 최대화하면 주변 창이 겹치지 않게 비켜났다가, 복원하면 제자리로 돌아옵니다</span></li>

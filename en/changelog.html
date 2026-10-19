@@ -76,10 +76,22 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0140"><span class="hash"></span> 0.14.0 — Spatial mode</h2>
+    <h2 class="sec" id="v0141"><span class="hash"></span> 0.14.1 — Shift+Esc maximize · remembered maximize · sidebar selects in place (spatial mode)</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.14.0</span><span class="d">2026-10-19</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.14.1</span><span class="d">2026-10-19</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><code>Shift+Esc</code> maximizes windows in spatial mode</b> — the focused window (or the active pane, or the sidebar when the Explorer has focus); press it again to restore (<a href="tabs-panes.html#spatial">Spatial mode</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Maximize is remembered</b> — maximized windows, and where you moved them while maximized, stay that way when you turn spatial mode off and on or restart the app</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Sidebar and SSH windows select in place</b> — clicking them no longer pulls the view to the center; only the selection changes, so a file opens right away</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not end running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0140"><span class="hash"></span> 0.14.0 — Spatial mode</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.14.0</span><span class="d">2026-10-19</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>New spatial mode</b> — a titlebar button spreads the sidebar and panes out as separate windows on a large workspace. Drag empty space to look around, zoom with the mouse wheel, and click a window to bring it to the center, ready for input (<a href="tabs-panes.html#spatial">Spatial mode</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Move, resize and maximize windows</b> — drag an empty part of the tab bar to move a window and its edges or corners to resize it. Maximizing moves neighboring windows aside so nothing overlaps, and they return when you restore it</span></li>
