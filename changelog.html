@@ -76,10 +76,23 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0130"><span class="hash"></span> 0.13.0 — 상태바 AI 사용량 (Codex · Claude · Antigravity · xAI)</h2>
+    <h2 class="sec" id="v0140"><span class="hash"></span> 0.14.0 — 공간 모드</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.13.0</span><span class="d">2026-10-17</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.14.0</span><span class="d">2026-10-19</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드 추가</b> — 타이틀바 버튼으로 사이드바와 패널을 넓은 작업 공간 위의 독립 창으로 펼칩니다. 빈 공간을 드래그해 둘러보고 휠로 확대·축소하며, 창을 클릭하면 가운데로 크게 와서 바로 입력할 수 있습니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>창 이동·크기 조절·최대화</b> — 탭바 빈 부분을 드래그해 옮기고 가장자리·모서리로 크기를 바꿉니다. 최대화하면 주변 창이 겹치지 않게 비켜났다가, 복원하면 제자리로 돌아옵니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탭을 빈 공간에 놓으면 새 창으로 분리</b> — 창 배치는 Space별로 저장되고, 공간 모드를 다시 켜면 그대로 돌아옵니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>전체 보기 단축키</b> — macOS <code>⌘⌥0</code>, Windows·Linux <code>Ctrl+Alt+0</code>(단축키 설정에서 변경 가능)</span></li>
+      </ul>
+      <p class="cl-note"><b>공간 모드를 끄면 그 Space의 창들이 한 패널의 탭으로 모입니다.</b> 켜기 전의 분할 배치는 남지 않으니, 필요하면 일반 화면에서 다시 나누세요. 앱은 평소처럼 일반 화면으로 시작하고 공간 모드는 버튼을 눌렀을 때만 켜지며, 세션을 새로 만들지 않고 기존 화면을 옮기므로 실행 중인 작업은 그대로입니다. 이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0130"><span class="hash"></span> 0.13.0 — 상태바 AI 사용량 (Codex · Claude · Antigravity · xAI)</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.13.0</span><span class="d">2026-10-17</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>상태바에 AI 사용량 표시 (Codex · Claude · Antigravity · xAI)</b> — 로그인해 둔 서비스의 남은 한도를 한눈에 보고, 클릭하면 한도별 사용률·초기화 시각을 봅니다. 막대 색은 사용 속도가 시간 경과보다 빠른지를 나타냅니다(노랑 → 주황 → 빨강)(<a href="appearance.html#statusbar">상태바</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>설정에 "상태바" 섹션 추가</b> — 표시할 서비스, 조회 간격(기본 2분), CPU·MEM·GPU 게이지를 켜고 끌 수 있습니다</span></li>

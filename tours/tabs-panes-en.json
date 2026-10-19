@@ -4,7 +4,7 @@
   "name": "Tabs · Panes tour",
   "url": "https://zendy00.github.io/orch-term-pages/en/tabs-panes.html",
   "createdAt": "2026-07-01T00:00:00Z",
-  "updatedAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-10-19T00:00:00Z",
   "siteFonts": ["'Segoe UI',system-ui,sans-serif"],
   "steps": [
     {
@@ -100,6 +100,29 @@
       "waitForNavigation": false
     },
     {
+      "id": "spatial",
+      "name": "Spatial mode",
+      "description": "The titlebar button spreads panes out as separate windows on a large workspace. Click a window to bring it to the center, and use Overview to see them all.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#spatial" },
+        "layer2": { "kind": "text-parent", "text": "Spatial mode", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["Spatial mode", "Overview", "Exit spatial mode"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-spatial",
+          "text": "5. Spatial mode",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 8500,
+      "waitForNavigation": false
+    },
+    {
       "id": "rename",
       "name": "Unified tab name + color editing",
       "description": "Double-click a tab to open one pop-up with a name field and a 9-color picker. It edits the label of a terminal, editor, or browser by kind.",
@@ -113,7 +136,7 @@
         {
           "kind": "text",
           "id": "ann-rename",
-          "text": "5. Name + color",
+          "text": "6. Name + color",
           "position": { "x": 320, "y": 710 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -136,7 +159,7 @@
         {
           "kind": "text",
           "id": "ann-color",
-          "text": "6. Tab color",
+          "text": "7. Tab color",
           "position": { "x": 320, "y": 860 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -159,7 +182,7 @@
         {
           "kind": "text",
           "id": "ann-close",
-          "text": "7. Closing tabs",
+          "text": "8. Closing tabs",
           "position": { "x": 320, "y": 1010 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -182,7 +205,7 @@
         {
           "kind": "text",
           "id": "ann-shortcuts",
-          "text": "8. Keyboard shortcuts",
+          "text": "9. Keyboard shortcuts",
           "position": { "x": 320, "y": 1160 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }

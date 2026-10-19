@@ -76,10 +76,23 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0130"><span class="hash"></span> 0.13.0 — AI usage in the status bar (Codex · Claude · Antigravity · xAI)</h2>
+    <h2 class="sec" id="v0140"><span class="hash"></span> 0.14.0 — Spatial mode</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.13.0</span><span class="d">2026-10-17</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.14.0</span><span class="d">2026-10-19</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>New spatial mode</b> — a titlebar button spreads the sidebar and panes out as separate windows on a large workspace. Drag empty space to look around, zoom with the mouse wheel, and click a window to bring it to the center, ready for input (<a href="tabs-panes.html#spatial">Spatial mode</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Move, resize and maximize windows</b> — drag an empty part of the tab bar to move a window and its edges or corners to resize it. Maximizing moves neighboring windows aside so nothing overlaps, and they return when you restore it</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Drop a tab on empty space to split it into a new window</b> — window layouts are saved per Space and come back when you turn spatial mode on again</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Overview shortcut</b> — <code>⌘⌥0</code> on macOS, <code>Ctrl+Alt+0</code> on Windows and Linux (changeable in the shortcut settings)</span></li>
+      </ul>
+      <p class="cl-note"><b>Turning spatial mode off gathers the Space's windows into tabs of one pane.</b> The split layout you had before is not kept, so split the pane again in the normal view if you need it. The app still starts in the normal view, spatial mode turns on only when you click the button, and it moves the existing views instead of creating new sessions, so running work is left as it is. This update <b>does not end running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0130"><span class="hash"></span> 0.13.0 — AI usage in the status bar (Codex · Claude · Antigravity · xAI)</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.13.0</span><span class="d">2026-10-17</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>AI usage in the status bar (Codex, Claude, Antigravity, xAI)</b> — see the remaining limit of each service you are signed in to at a glance, and click for per-limit usage and reset times. Bar colors show whether you are using a limit faster than time is passing (yellow → orange → red) (<a href="appearance.html#statusbar">Status bar</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>New "Status bar" section in Settings</b> — choose which services to show, the refresh interval (2 minutes by default), and turn the CPU · MEM · GPU gauges on or off</span></li>

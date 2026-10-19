@@ -14,6 +14,12 @@ const ICONS = {
   "mic": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/></svg>',
   // contrast: from src/titlebar.ts (ICON_CONTRAST) — half-moon theme cycle (dark→midnight→light)
   "contrast": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/></svg>',
+  // spatial: from src/spatial/workspace.ts (toggleBtn) — spatial mode toggle in the titlebar actions
+  "spatial": '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="5" height="14" rx="2"/><rect x="10" y="3" width="12" height="10" rx="2"/><rect x="12" y="16" width="8" height="5" rx="1"/></svg>',
+  // spatial-maximize: from src/spatial/maximize-button.ts (updateMaximizeButton, maximized=false)
+  "spatial-maximize": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>',
+  // spatial-restore: from src/spatial/maximize-button.ts (updateMaximizeButton, maximized=true)
+  "spatial-restore": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 8V4h12v12h-4"/><rect x="4" y="8" width="12" height="12" rx="1"/></svg>',
   // search: from src/titlebar.ts (ICON_COMMAND_SEARCH) — magnifier; byte-identical to src/explorer.ts (ICON_SEARCH).
   //         Size/stroke variants of this same glyph: src/palette.ts (ICON_PALETTE, width 16) and src/workspace/ssh-rail.ts (ICON_MAG, width 12 stroke 1.8).
   "search": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>',

@@ -4,7 +4,7 @@
   "name": "탭 · 패널 둘러보기",
   "url": "https://zendy00.github.io/orch-term-pages/tabs-panes.html",
   "createdAt": "2026-07-01T00:00:00Z",
-  "updatedAt": "2026-07-01T00:00:00Z",
+  "updatedAt": "2026-10-19T00:00:00Z",
   "siteFonts": ["'Malgun Gothic','Segoe UI',system-ui,sans-serif"],
   "steps": [
     {
@@ -100,6 +100,29 @@
       "waitForNavigation": false
     },
     {
+      "id": "spatial",
+      "name": "공간 모드",
+      "description": "타이틀바 버튼으로 패널을 넓은 공간 위의 독립 창으로 펼칩니다. 창을 클릭하면 가운데로 크게 오고, 전체 보기로 모든 창을 한눈에 봅니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#spatial" },
+        "layer2": { "kind": "text-parent", "text": "공간 모드", "parentSelector": "#main", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 320, "y": 600, "width": 640, "height": 44, "nearbyText": ["공간 모드", "전체 보기", "공간 모드 종료"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-spatial",
+          "text": "5. 공간 모드",
+          "position": { "x": 320, "y": 560 },
+          "anchorOffset": { "x": 0, "y": -40 },
+          "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
+        }
+      ],
+      "autoAdvanceMs": 9500,
+      "waitForNavigation": false
+    },
+    {
       "id": "rename",
       "name": "탭 이름 + 색 통합 편집",
       "description": "탭을 더블클릭하면 이름 입력란과 9색 색 피커가 한 팝업으로 열립니다. 종류에 따라 터미널·에디터·브라우저의 라벨을 편집합니다.",
@@ -113,7 +136,7 @@
         {
           "kind": "text",
           "id": "ann-rename",
-          "text": "5. 이름+색 편집",
+          "text": "6. 이름+색 편집",
           "position": { "x": 320, "y": 710 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -136,7 +159,7 @@
         {
           "kind": "text",
           "id": "ann-color",
-          "text": "6. 탭 색",
+          "text": "7. 탭 색",
           "position": { "x": 320, "y": 860 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -159,7 +182,7 @@
         {
           "kind": "text",
           "id": "ann-close",
-          "text": "7. 탭 닫기·메뉴",
+          "text": "8. 탭 닫기·메뉴",
           "position": { "x": 320, "y": 1010 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
@@ -182,7 +205,7 @@
         {
           "kind": "text",
           "id": "ann-shortcuts",
-          "text": "8. 단축키",
+          "text": "9. 단축키",
           "position": { "x": 320, "y": 1160 },
           "anchorOffset": { "x": 0, "y": -40 },
           "style": { "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif", "fontSize": 15, "color": "#f4f5f8", "bold": true, "backgroundColor": "#1c1e21", "backgroundOpacity": 0.96, "borderColor": "#dcab59" }
