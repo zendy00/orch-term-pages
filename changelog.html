@@ -76,10 +76,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0141"><span class="hash"></span> 0.14.1 — 공간 모드 Shift+Esc 최대화 · 최대화 기억 · 사이드바 제자리 선택</h2>
+    <h2 class="sec" id="v0142"><span class="hash"></span> 0.14.2 — 공간 모드 "클릭하면 가운데로" · Ctrl 드래그 창 이동 · Alt 드래그 화면 이동</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.14.1</span><span class="d">2026-10-19</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.14.2</span><span class="d">2026-10-19</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>"클릭하면 가운데로" 체크박스</b> — 공간 모드 하단 조작부에서 끄면 창을 클릭해도 화면은 그대로 두고 선택만 바뀝니다. 두 창을 나란히 두고 번갈아 보며 작업할 때 편합니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><code>Ctrl</code>+드래그로 창 이동</b> — 터미널 내용 위를 포함해 창 안 어디서든 창을 옮깁니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><code>Alt</code>(macOS <code>Option</code>)+드래그로 화면 이동</b> — 창 위에서도 화면 전체가 움직이고, 선택한 창은 그대로 유지됩니다</span></li>
+      </ul>
+      <p class="cl-note">공간 모드 안에서는 터미널의 Alt+클릭 커서 이동·에디터의 Alt+드래그 사각형 선택·Ctrl+클릭 동작이 이 기능에 양보합니다(일반 화면은 그대로). 이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0141"><span class="hash"></span> 0.14.1 — 공간 모드 Shift+Esc 최대화 · 최대화 기억 · 사이드바 제자리 선택</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.14.1</span><span class="d">2026-10-19</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드에서 <code>Shift+Esc</code>로 창 최대화</b> — 집중한 창(없으면 활성 패널, 탐색기에 포커스가 있으면 사이드바)을 최대화하고 다시 누르면 복원합니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>최대화 상태 기억</b> — 공간 모드를 껐다 켜거나 앱을 다시 켜도 최대화된 창과 최대화한 채 옮긴 위치가 그대로 남습니다</span></li>
