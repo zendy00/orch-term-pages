@@ -318,7 +318,7 @@
     <h3 class="sub">Looking around and focusing</h3>
     <ul>
       <li><b>Pan</b> — drag empty space to move the view; turn the mouse wheel over empty space to zoom in and out. Hold <kbd>Alt</kbd> (<kbd>Option</kbd> on macOS) and drag to move the whole view even over a window; the selected window stays selected.</li>
-      <li><b>Focus</b> — click a window to bring it to the center at full size (up to 100%), ready for input. Windows larger than the screen are scaled to fit. Moving keyboard focus to another window follows it too. The <b>sidebar (Explorer) and SSH windows</b> are the exception: clicking them changes only the selection and leaves the view where it is, so a file opens right away (choose them on the map to move the view to them). Turn off <b>Center on click</b> in the bottom controls and every window behaves this way, so you can work with two windows side by side (the setting is kept).</li>
+      <li><b>Focus</b> — click a window to bring it to the center at full size (up to 100%), ready for input. Windows larger than the screen are scaled to fit. Moving keyboard focus to another window follows it too. The <b>sidebar (Explorer) and SSH windows</b> are the exception: clicking them changes only the selection and leaves the view where it is, so a file opens right away (choose them on the map to move the view to them). Turn off <b>Center on click</b> in the bottom controls and every window behaves this way, so you can work with two windows side by side (the setting is kept). Even with it off, <kbd>Ctrl</kbd>+<kbd>Alt</kbd> (<kbd>Ctrl</kbd>+<kbd>Option</kbd> on macOS)+click jumps to that window at 100%.</li>
       <li><b>Release</b> — click empty space, or click an empty part of the selected window's tab bar again, to release the selection while keeping the current position and zoom.</li>
       <li><b>Overview</b> — fits every window in view. Use <b>Overview</b> in the bottom controls, the shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> (<kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd> on macOS, changeable in the shortcut settings), or <kbd>Esc</kbd> outside a terminal or text field while a window is focused.</li>
       <li><b>Controls · map</b> — they stay hidden so they don't cover the view. Move the pointer toward the bottom of the screen and the controls (− zoom + · Overview · Center on click · Exit spatial mode) appear in the middle and the workspace map at the bottom right. Click a window on the map to go to it. They are reachable with <kbd>Tab</kbd> as well.</li>
@@ -415,6 +415,7 @@
         <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd></td><td>Spatial mode overview</td></tr>
         <tr><td><kbd>Ctrl</kbd>+drag (spatial mode)</td><td>Move a window from anywhere inside it</td></tr>
         <tr><td><kbd>Alt</kbd>/<kbd>Option</kbd>+drag (spatial mode)</td><td>Move the whole view</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>/<kbd>Option</kbd>+click (spatial mode)</td><td>Center on that window (regardless of "Center on click")</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd></td><td>Close the active tab</td></tr>
         <tr><td><kbd>⌘</kbd>+<kbd>W</kbd> (macOS)</td><td>Close the active tab</td></tr>
         <tr><td>Middle-click a tab</td><td>Close that tab</td></tr>
