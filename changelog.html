@@ -76,10 +76,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0150"><span class="hash"></span> 0.15.0 — 공간 모드 배경 · 패널 반투명(재시작 없음) · 배치도 화면 박스</h2>
+    <h2 class="sec" id="v0151"><span class="hash"></span> 0.15.1 — 마지막 모드로 시작 · 공간 모드 상태바 겹침 수정</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.15.0</span><span class="d">2026-10-20</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.15.1</span><span class="d">2026-10-20</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>마지막에 쓰던 모드로 시작</b> — 공간 모드에서 끝냈으면 공간 모드로, 일반 화면에서 끝냈으면 일반 화면으로 열리고 창 배치도 그대로 돌아옵니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드 상태바 겹침</b> — 창이 상태바 밑으로 지나가며 글자가 겹쳐 보이던 문제. 이제 위쪽 탭 막대처럼 상태바 경계에서 잘립니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>리사이즈 점선 테두리</b> — 공간 모드에서 다른 창을 리사이즈할 때 점선이 직전 창 자리에 잠깐 남던 문제</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0150"><span class="hash"></span> 0.15.0 — 공간 모드 배경 · 패널 반투명(재시작 없음) · 배치도 화면 박스</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.15.0</span><span class="d">2026-10-20</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드 배경 이미지</b> — 떠 있는 바위섬이 있는 어두운 하늘 그림이 기본으로 깔리고, 하단 조작부 <b>배경</b>에서 내 이미지(PNG·JPG·WebP, 20MB 이하)로 바꾸거나 끌 수 있습니다(<a href="tabs-panes.html#spatial-background">공간 모드</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>패널 반투명 — 재시작 없음</b> — 패널 배경만 반투명해져 그림이 비치고 글자는 선명합니다. 설정 → 모양에서 <b>일반 화면에도 적용</b>을 켜면 평소 화면에서도 씁니다. 앱 창은 불투명 그대로라 GPU 부담이 거의 없습니다(<a href="appearance.html#app-background">앱 배경</a>)</span></li>
