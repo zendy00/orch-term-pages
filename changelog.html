@@ -76,10 +76,24 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0143"><span class="hash"></span> 0.14.3 — 공간 모드 Ctrl+Alt+클릭으로 가운데 이동</h2>
+    <h2 class="sec" id="v0150"><span class="hash"></span> 0.15.0 — 공간 모드 배경 · 패널 반투명(재시작 없음) · 배치도 화면 박스</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.14.3</span><span class="d">2026-10-19</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.15.0</span><span class="d">2026-10-20</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드 배경 이미지</b> — 떠 있는 바위섬이 있는 어두운 하늘 그림이 기본으로 깔리고, 하단 조작부 <b>배경</b>에서 내 이미지(PNG·JPG·WebP, 20MB 이하)로 바꾸거나 끌 수 있습니다(<a href="tabs-panes.html#spatial-background">공간 모드</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>패널 반투명 — 재시작 없음</b> — 패널 배경만 반투명해져 그림이 비치고 글자는 선명합니다. 설정 → 모양에서 <b>일반 화면에도 적용</b>을 켜면 평소 화면에서도 씁니다. 앱 창은 불투명 그대로라 GPU 부담이 거의 없습니다(<a href="appearance.html#app-background">앱 배경</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>배치도에 지금 화면 박스</b> — 박스를 끌어 화면을 옮기고, 그냥 누르면 그 아래 창으로, 빈 곳을 누르면 그 지점이 가운데로 옵니다. 배치도 위 휠로 확대·축소(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>설정 → 모양 정리</b> — 테마 · 글꼴 · 앱 배경 · 창 투명도 네 묶음으로 나누고, 바탕화면이 비치는 <b>창 불투명도</b>(재시작 필요)와 새 <b>패널 불투명도</b>(재시작 없음)를 구분했습니다(<a href="appearance.html#opacity">창 투명도</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드에서 확대·축소한 터미널의 마우스 위치</b> — 50%·150% 등에서도 드래그 선택·링크 클릭·vim 같은 프로그램의 마우스 클릭이 누른 칸 그대로 들어갑니다</span></li>
+      </ul>
+      <p class="cl-note">이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0143"><span class="hash"></span> 0.14.3 — 공간 모드 Ctrl+Alt+클릭으로 가운데 이동</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.14.3</span><span class="d">2026-10-19</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><code>Ctrl</code>+<code>Alt</code>(macOS <code>Ctrl</code>+<code>Option</code>)+클릭으로 그 창을 가운데로</b> — "클릭하면 가운데로"를 꺼 둔 상태에서도 원하는 창으로 바로 이동해 100%로 맞춥니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
       </ul>

@@ -321,7 +321,8 @@
       <li><b>Focus</b> — click a window to bring it to the center at full size (up to 100%), ready for input. Windows larger than the screen are scaled to fit. Moving keyboard focus to another window follows it too. The <b>sidebar (Explorer) and SSH windows</b> are the exception: clicking them changes only the selection and leaves the view where it is, so a file opens right away (choose them on the map to move the view to them). Turn off <b>Center on click</b> in the bottom controls and every window behaves this way, so you can work with two windows side by side (the setting is kept). Even with it off, <kbd>Ctrl</kbd>+<kbd>Alt</kbd> (<kbd>Ctrl</kbd>+<kbd>Option</kbd> on macOS)+click jumps to that window at 100%.</li>
       <li><b>Release</b> — click empty space, or click an empty part of the selected window's tab bar again, to release the selection while keeping the current position and zoom.</li>
       <li><b>Overview</b> — fits every window in view. Use <b>Overview</b> in the bottom controls, the shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> (<kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd> on macOS, changeable in the shortcut settings), or <kbd>Esc</kbd> outside a terminal or text field while a window is focused.</li>
-      <li><b>Controls · map</b> — they stay hidden so they don't cover the view. Move the pointer toward the bottom of the screen and the controls (− zoom + · Overview · Center on click · Exit spatial mode) appear in the middle and the workspace map at the bottom right. Click a window on the map to go to it. They are reachable with <kbd>Tab</kbd> as well.</li>
+      <li><b>Controls · map</b> — they stay hidden so they don't cover the view. Move the pointer toward the bottom of the screen and the controls (− zoom + · Overview · Center on click · Background · Exit spatial mode) appear in the middle and the workspace map at the bottom right. Click a window on the map to go to it. They are reachable with <kbd>Tab</kbd> as well.</li>
+      <li><b>View box on the map</b> — the map shows the area you are looking at as a box with a camera icon, and it follows the view as you move. Drag the box to move the view; the selected window stays selected. Click the box without dragging to go to the window under it, or click empty space on the map to center that spot. Turn the wheel over the map to zoom.</li>
     </ul>
 
     <h3 class="sub">Moving, resizing and maximizing windows</h3>
@@ -331,13 +332,21 @@
       <li><b>Maximize</b> — <span class="i" data-icon="spatial-maximize"></span> at the right end of the tab bar fills the screen with the window (press it again, <span class="i" data-icon="spatial-restore"></span>, to restore). The <kbd>Shift</kbd>+<kbd>Esc</kbd> shortcut does the same (the focused window, otherwise the active pane, or the sidebar when the Explorer has focus). Overlapping neighbors step aside without changing size, and return to their places when you restore it. A maximized window — and where you moved it while maximized — is kept when you turn spatial mode off and on or restart the app.</li>
     </ul>
 
+    <h3 class="sub" id="spatial-background">Background and panel translucency</h3>
+    <ul>
+      <li><b>Background</b> — spatial mode shows a dark sky with floating rock islands by default. Under <b>Background</b> in the bottom controls, choose <b>Choose image…</b> (PNG, JPG or WebP, up to 20 MB), <b>Default</b> or <b>No image</b>. A chosen image is scaled to screen size and stored in the app's data folder, so it stays even if you delete the original.</li>
+      <li><b>Panel opacity</b> — lower it to make only window backgrounds translucent so the picture shows through; text stays sharp (0–100%). <b>Dim background</b> darkens the picture to keep text easy to read. Changes apply instantly, without a restart.</li>
+      <li>The same settings are in <a href="appearance.html#app-background">Settings → Appearance → App background · panel translucency</a>; turn on <b>Also outside spatial mode</b> there to use them on the regular screen too.</li>
+      <li><a href="browser.html">In-app browser</a> pages stay opaque.</li>
+    </ul>
+
     <h3 class="sub" id="spatial-tabs">Splitting tabs off and bringing them back</h3>
     <ul>
       <li>Drag a tab onto <b>empty space</b> to split it off into a new window. Dropping it on another window adds it to that window's tabs, as before.</li>
       <li>Turning spatial mode off gathers the Space's windows into <b>tabs of one pane</b>. The split layout you had before turning it on is not kept, so split the pane again in the normal view if you need it. Turning spatial mode on again brings back the split-off windows and their active tabs. Tabs closed in between are dropped, and newly opened tabs come along.</li>
       <li>Window positions, sizes and the view position are saved per <a href="spaces.html">Space</a> and kept across restarts.</li>
     </ul>
-    <p class="note"><b>Built to stay light.</b> While the view moves, only window positions and zoom change (at most 30 times a second) and terminals are not re-measured; once it stops, drawing stops. Off-screen windows are not drawn, and terminals in windows that are not focused turn their WebGL renderer off. An <a href="browser.html">in-app browser</a> page shows a "Click this panel to view the page" placeholder during the overview or while moving, and the real page appears once you click its window to focus it.</p>
+    <p class="note"><b>Built to stay light.</b> While the view moves, only window positions and zoom change (at most 30 times a second) and terminals are not re-measured; once it stops, drawing stops. Off-screen windows are not drawn, and terminals in windows that are not focused turn their WebGL renderer off. The background picture is a single layer fixed to the screen, so it is not redrawn while the view moves, and translucency only changes window background colors, with no blur. An <a href="browser.html">in-app browser</a> page shows a "Click this panel to view the page" placeholder during the overview or while moving, and the real page appears once you click its window to focus it.</p>
 
 <!-- Unified name + color editing -->
     <h2 class="sec" id="rename"><span class="hash"></span> Unified tab name + color editing</h2>

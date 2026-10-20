@@ -76,10 +76,24 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0143"><span class="hash"></span> 0.14.3 — Ctrl+Alt+click to center (spatial mode)</h2>
+    <h2 class="sec" id="v0150"><span class="hash"></span> 0.15.0 — Spatial backgrounds · panel translucency (no restart) · map view box</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.14.3</span><span class="d">2026-10-19</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.15.0</span><span class="d">2026-10-20</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Spatial mode background images</b> — a dark sky with floating rock islands is shown by default; switch to your own image (PNG, JPG or WebP, up to 20 MB) or turn it off under <b>Background</b> in the bottom controls (<a href="tabs-panes.html#spatial-background">Spatial mode</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Panel translucency, no restart</b> — only panel backgrounds become translucent so the picture shows through while text stays sharp. Turn on <b>Also outside spatial mode</b> in Settings → Appearance to use it on the regular screen. The app window stays opaque, so it adds almost no GPU load (<a href="appearance.html#app-background">App background</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>View box on the map</b> — drag it to move the view, click it to go to the window under it, click empty map space to center that spot, and scroll over the map to zoom (<a href="tabs-panes.html#spatial">Spatial mode</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Settings → Appearance reorganized</b> — four groups (Theme, Fonts, App background, Window transparency), with see-through-to-desktop <b>Window opacity</b> (restart required) kept apart from the new <b>Panel opacity</b> (no restart) (<a href="appearance.html#opacity">Window opacity</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Mouse position in zoomed terminals in spatial mode</b> — at 50%, 150% and other zoom levels, drag selection, link clicks and mouse clicks in programs like vim land on the cell you pressed</span></li>
+      </ul>
+      <p class="cl-note">This update <b>does not end running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0143"><span class="hash"></span> 0.14.3 — Ctrl+Alt+click to center (spatial mode)</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.14.3</span><span class="d">2026-10-19</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b><code>Ctrl</code>+<code>Alt</code> (<code>Ctrl</code>+<code>Option</code> on macOS)+click centers on a window</b> — jumps to it at 100% even while "Center on click" is off (<a href="tabs-panes.html#spatial">Spatial mode</a>)</span></li>
       </ul>

@@ -168,9 +168,19 @@
       </div>
     </figure>
 
+    <!-- App background -->
+    <h2 class="sec" id="app-background"><span class="hash"></span> App background · panel translucency</h2>
+    <p>The <b>App background · panel translucency</b> group in Settings → Appearance places a background picture inside the app and makes only panel backgrounds translucent, so the picture shows through while text stays sharp. It <b>applies instantly without a restart</b>, and since the app window itself stays opaque it adds almost no GPU load.</p>
+    <ul>
+      <li><b>Background image</b> — <b>Choose image…</b> (PNG, JPG or WebP, up to 20 MB), <b>Default</b> (a dark sky with floating rock islands) or <b>No image</b>.</li>
+      <li><b>Panel opacity</b> (0–100%) · <b>Dim background</b> (0–70%).</li>
+      <li><b>Applies to</b> — always used in <a href="tabs-panes.html#spatial-background">spatial mode</a>; turn on <b>Also outside spatial mode</b> to use it on the regular split screen too. While you use a see-through window with <b>Window opacity</b> below, it is not applied outside spatial mode.</li>
+      <li>These are the same settings as <b>Background</b> in the spatial mode controls, so changing either updates both. <a href="browser.html">In-app browser</a> pages stay opaque.</li>
+    </ul>
+
     <!-- Window opacity -->
     <h2 class="sec" id="opacity"><span class="hash"></span> Window opacity</h2>
-    <p>A single slider makes the whole window translucent. Main surfaces like the Explorer, headers, and editor body fade together, while menus, modals, and palettes stay crisp for readability.</p>
+    <p>The <b>Window opacity</b> slider under Settings → Appearance → <b>Window transparency · rendering</b> makes the whole app window translucent so <b>your desktop shows through</b>. Main surfaces like the Explorer, headers, and editor body fade together, while menus, modals, and palettes stay crisp for readability.</p>
     <p>The default is <b>100% (opaque window)</b>. A transparent window greatly increases GPU compositing load, so lowering the slider from an opaque window asks for confirmation and the transparent window takes effect only after <b>restarting the app</b>. Raising it back to 100% offers to restart now; after a restart (or from the next launch) the window is opaque again (less GPU).</p>
 
     <!-- Terminal renderer -->
