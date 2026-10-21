@@ -26,9 +26,10 @@ export function isAppRelease(release) {
   return APP_TAG.test(release.tag_name || '');
 }
 
-/** 통계 대상 릴리즈: draft·모델 배포 릴리즈 제외. */
+/** 통계 대상 릴리즈: draft·모델 배포 릴리즈·베타(prerelease) 제외. 베타(v<x.y.z>-beta.<n>)는
+ *  「베타 업데이트 확인」을 켠 사람만 받는 것이라 정식 설치 통계에 섞지 않는다. */
 export function appReleases(releases) {
-  return releases.filter((r) => !r.draft && isAppRelease(r));
+  return releases.filter((r) => !r.draft && !r.prerelease && isAppRelease(r));
 }
 
 // 실제 사용자 다운로드 통계에서 제외할 에셋 이름. latest.json은 Tauri updater 매니페스트라
