@@ -6,7 +6,7 @@
 <script src="../_lang.js"></script>
 <link rel="icon" href="../assets/app-icon.png" />
 <title>Task board — Orch term guide</title>
-<meta name="description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons." />
+<meta name="description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons, kanban board and agent assignment." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/tasks.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/tasks.html" />
@@ -63,14 +63,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="Task board — Orch term guide" />
-<meta property="og:description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons." />
+<meta property="og:description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons, kanban board and agent assignment." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/en/tasks.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="ko_KR" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Task board — Orch term guide" />
-<meta name="twitter:description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons." />
+<meta name="twitter:description" content="How to use the Orch term task board: sidebar to-dos mode (Ctrl+Shift+T), title + memo entry, due-date calendar, To-do/Done tabs, per-row action icons, kanban board and agent assignment." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="tasks">
@@ -99,7 +99,7 @@
 
     <p class="eyebrow"><span class="hash"></span> Core features · Task board</p>
     <h1 class="page-title">Task board</h1>
-    <p class="lede">An independent to-do board for each Space. Jot down a title, memo, and due date and manage them with To-do/Done tabs and a monthly calendar — and the in-app AI of the same Space shares the very same board.</p>
+    <p class="lede">An independent to-do board for each Space. Jot down a title, memo, and due date, manage them with To-do/Done tabs and a monthly calendar, and see progress at a glance on the kanban board — and the in-app AI of the same Space shares the very same board.</p>
 
     <!-- Open -->
     <h2 class="sec" id="open"><span class="hash"></span> Opening the task panel</h2>
@@ -184,8 +184,27 @@
       <li><b>Word search</b> — filter titles and memos by word.</li>
       <li><b>Monthly calendar (bottom)</b> — a per-day due-count badge. Collapsible/expandable.</li>
       <li><b>Refresh</b> (<span class="i" data-icon="refresh-alt"></span>) — reload to-dos changed externally or by AI.</li>
+      <li><b>Status badges</b> — to-dos that are in progress, ready to release, or on hold get an "In progress", "Ready to release", or "On hold" badge before the title.</li>
+      <li><b>Open as board</b> — the "Open as board" button in the tab row opens the <a href="#board">kanban board</a>.</li>
     </ul>
     <p>The in-app AI (claude·codex·agy) also operates <a href="task-ai-sharing.html">the same board over MCP</a>, so to-dos an agent adds show up right away on refresh.</p>
+
+    <!-- Kanban board -->
+    <h2 class="sec" id="board"><span class="hash"></span> Kanban board</h2>
+    <p>Use <b>"Open as board"</b> in the sidebar To-dos list (or "Open task board" in the command palette) to see to-dos side by side in columns. It opens as a new tab in the normal view and as a new window in <a href="tabs-panes.html#spatial">spatial mode</a>, and reopens where you left it after updates and restarts.</p>
+    <ul>
+      <li><b>Columns</b> — To do → In progress → Ready to release → Done → On hold. The board starts with To do, In progress and Done; buttons under the search box show or hide the other columns.</li>
+      <li><b>Drag to move</b> — drag a card to another column, or reorder it within a column.</li>
+      <li><b>Expand</b> — click a card to expand its full note.</li>
+      <li><b>Done column</b> — shows only what you finished today; older ones are under "Show more".</li>
+      <li><b>Owner tab</b> — when an agent moves a card to In progress, that tab's name appears on the card as a chip; click it to jump to that tab.</li>
+      <li><b>Narrow board</b> — when the board is narrow, the columns turn into tabs.</li>
+    </ul>
+
+    <!-- Assign -->
+    <h2 class="sec" id="assign"><span class="hash"></span> Assign — instruct or ask an agent</h2>
+    <p>Expand a card on the board and press <b>"Assign"</b> to pick a claude or codex terminal in the same Space and send it an <b>"Instruction"</b> (work on this to-do) or a <b>"Question"</b> (opinions or questions only, no work) as one line. The line is typed only while the agent is idle, and the agent reads the note itself through the <a href="task-ai-sharing.html">to-do tools</a>. An agent given an instruction moves the card to In progress.</p>
+    <p class="dim">Requires both <a href="orchestration.html">Agent orchestration</a> and <b>AI task sharing</b> to be on in Settings.</p>
 
     <!-- Shortcuts -->
     <h2 class="sec" id="shortcuts"><span class="hash"></span> Keyboard shortcuts</h2>
@@ -194,7 +213,7 @@
       <tbody>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></td><td>Open to-dos mode (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>)</td></tr>
         <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Newline in memo (while composing)</td></tr>
-        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Command palette → "Tasks"</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Command palette → "Tasks" · "Open task board"</td></tr>
       </tbody>
     </table>
 

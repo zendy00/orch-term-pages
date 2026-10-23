@@ -76,10 +76,28 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0151"><span class="hash"></span> 0.15.1 — 마지막 모드로 시작 · 공간 모드 상태바 겹침 수정</h2>
+    <h2 class="sec" id="v0160"><span class="hash"></span> 0.16.0 — 할 일 보드(칸반) · 라이트 테마 · 공간 모드 창 안 분할 · 창 자석</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.15.1</span><span class="d">2026-10-20</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.16.0</span><span class="d">2026-10-23</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>할 일 보드(칸반)</b> — 할 일 → 진행 중 → 배포 대기 → 완료 → 보류 열로 보고 카드를 끌어 옮깁니다. 카드를 누르면 메모 전체가 펼쳐지고, 완료 열은 오늘 끝낸 일만 보입니다. 업데이트·재시작 뒤에도 열어 둔 자리에 다시 열립니다(<a href="tasks.html#board">할 일 보드</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>맡은 탭 표시 · 「배정」</b> — 에이전트가 진행 중으로 옮긴 카드에 그 탭 이름이 붙고 누르면 이동합니다. 카드의 「배정」으로 같은 Space의 claude·codex 터미널에 지시·문의를 한 줄로 보냅니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>라이트 테마</b> — 터미널·에디터·마크다운 미리보기까지 밝은 색으로, 공간 모드 기본 배경은 같은 풍경의 낮 그림으로 바뀝니다(<a href="appearance.html#theme">외관</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드 창 안 분할 · 탭 꺼내기·합치기</b> — 분할 버튼이 같은 창 안을 나누고, 탭을 빈 곳으로 끌면 점선으로 미리 보인 자리에 새 창으로, 다른 창 가장자리에 놓으면 그 창 안으로 합쳐집니다(<a href="tabs-panes.html#spatial-split">공간 모드</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>창 자석</b> — 창을 가까이 끌면 딱 붙고, 붙은 창은 함께 움직입니다(<code>Shift</code>+끌기 = 그 창만). 맞닿은 경계를 끌면 두 창이 크기를 나눠 갖습니다(<a href="tabs-panes.html#spatial-magnet">창 자석</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>공간 모드 확대·축소</b> — <code>Ctrl</code>+휠로 어디서든, 단축키 <code>⌘⌥=</code> 확대 · <code>⌘⌥-</code> 축소 · <code>⌘⌥0</code> 100%(Windows는 <code>Ctrl+Alt</code>). 전체 보기는 <code>⌘⌥9</code>로 옮겼습니다(<a href="tabs-panes.html#spatial-zoom">확대·축소</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>베타 업데이트 확인</b> — 정보 창에서 베타 판을 직접 확인해 설치할 수 있습니다(<a href="auto-update.html#beta">자동 업데이트</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드 배율</b> — 다른 Space에 다녀오면 줄여 둔 배율이 100%로 돌아가던 문제, 인앱 브라우저에 포커스가 있을 때 전체 보기 단축키가 듣지 않던 문제</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>반투명 창</b> — 검색칸·달력·SSH 버튼·할 일 보드가 불투명하게 떠 보이던 것을 창 투명도에 맞춤</span></li>
+      </ul>
+      <p class="cl-note"><b>ORCH(녹색) 테마를 없앴습니다</b> — 쓰던 분은 다크 테마로 바뀝니다. 공간 모드의 창 안 분할은 이 버전 이전의 앱으로 열면 풀립니다. 이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0151"><span class="hash"></span> 0.15.1 — 마지막 모드로 시작 · 공간 모드 상태바 겹침 수정</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.15.1</span><span class="d">2026-10-20</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>마지막에 쓰던 모드로 시작</b> — 공간 모드에서 끝냈으면 공간 모드로, 일반 화면에서 끝냈으면 일반 화면으로 열리고 창 배치도 그대로 돌아옵니다(<a href="tabs-panes.html#spatial">공간 모드</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드 상태바 겹침</b> — 창이 상태바 밑으로 지나가며 글자가 겹쳐 보이던 문제. 이제 위쪽 탭 막대처럼 상태바 경계에서 잘립니다</span></li>

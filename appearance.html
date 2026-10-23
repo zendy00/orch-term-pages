@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>외관 · 폰트 · 단축키 — Orch term 가이드</title>
-<meta name="description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
+<meta name="description" content="Orch term 외관 설정: 테마(다크·미드나잇·라이트), 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/appearance.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/appearance.html" />
@@ -120,14 +120,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="외관 · 폰트 · 단축키 — Orch term 가이드" />
-<meta property="og:description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
+<meta property="og:description" content="Orch term 외관 설정: 테마(다크·미드나잇·라이트), 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/appearance.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="외관 · 폰트 · 단축키 — Orch term 가이드" />
-<meta name="twitter:description" content="Orch term 외관 설정: 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
+<meta name="twitter:description" content="Orch term 외관 설정: 테마(다크·미드나잇·라이트), 한글·시스템 코딩폰트 피커, 창 투명도, 상태바와 AI 사용량(Codex·Claude·Antigravity·xAI), 설정 다이얼로그, 단축키 인라인 재지정, 햄버거 메뉴와 정보(About)." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="appearance">
@@ -168,11 +168,15 @@
       </div>
     </figure>
 
+    <!-- 테마 -->
+    <h2 class="sec" id="theme"><span class="hash"></span> 테마 — 다크 · 미드나잇 · 라이트</h2>
+    <p>설정 → 모양 → <b>테마</b>에서 <b>다크</b>·<b>미드나잇</b>·<b>라이트</b> 중 고르거나, 타이틀바의 <span class="i" data-icon="contrast"></span> 테마 버튼으로 차례로 바꿉니다. <b>라이트</b>로 바꾸면 터미널·에디터·마크다운 미리보기도 밝은 색이 되고, 공간 모드 기본 배경은 같은 풍경의 낮 그림이 됩니다.</p>
+
     <!-- 앱 배경 · 패널 반투명 -->
     <h2 class="sec" id="app-background"><span class="hash"></span> 앱 배경 · 패널 반투명</h2>
     <p>설정 → 모양의 <b>앱 배경 · 패널 반투명</b> 묶음입니다. 앱 안에 배경 그림을 깔고 패널 배경만 반투명하게 해서, 그림이 비쳐 보이면서도 글자는 선명합니다. <b>재시작 없이 바로 적용</b>되고, 앱 창 자체를 투명하게 하지 않아 GPU 부담이 거의 없습니다.</p>
     <ul>
-      <li><b>배경 이미지</b> — <b>이미지 선택…</b>(PNG·JPG·WebP, 20MB 이하), <b>기본 이미지</b>(떠 있는 바위섬이 있는 어두운 하늘), <b>이미지 없음</b>.</li>
+      <li><b>배경 이미지</b> — <b>이미지 선택…</b>(PNG·JPG·WebP, 20MB 이하), <b>기본 이미지</b>(떠 있는 바위섬이 있는 어두운 하늘 — 라이트 테마에선 같은 풍경의 낮 그림), <b>이미지 없음</b>.</li>
       <li><b>패널 불투명도</b>(0~100%) · <b>배경 어둡게</b>(0~70%).</li>
       <li><b>적용 범위</b> — <a href="tabs-panes.html#spatial-background">공간 모드</a>에는 항상 적용되고, <b>일반 화면에도 적용</b>을 켜면 평소 분할 화면에서도 씁니다. 아래 <b>창 불투명도</b>로 바탕화면이 비치는 투명 창을 쓰는 동안에는 일반 화면에는 적용되지 않습니다.</li>
       <li>공간 모드 하단 조작부의 <b>배경</b>과 같은 설정이라 어느 쪽에서 바꿔도 함께 바뀝니다. <a href="browser.html">인앱 브라우저</a> 페이지는 투명해지지 않습니다.</li>
@@ -341,7 +345,7 @@
 
     <!-- 햄버거 메뉴 + About -->
     <h2 class="sec" id="menu"><span class="hash"></span> 햄버거 메뉴 · 정보(About)</h2>
-    <p>타이틀바 왼쪽 위 <span class="i" data-icon="menu"></span> 햄버거를 누르면 <b>설정</b>과 <b>정보</b>가 뜹니다. 오른쪽 <span class="i" data-icon="contrast"></span> 버튼은 테마를 dark → midnight → light로 순환합니다.</p>
+    <p>타이틀바 왼쪽 위 <span class="i" data-icon="menu"></span> 햄버거를 누르면 <b>설정</b>과 <b>정보</b>가 뜹니다. 오른쪽 <span class="i" data-icon="contrast"></span> 버튼은 테마를 다크 → 미드나잇 → 라이트로 순환합니다(<a href="#theme">테마</a>).</p>
     <figure class="fig">
       <div class="shot" style="max-width:420px">
         <img class="shot-img" src="./assets/shots/menu-hamburger.png" alt="타이틀바 햄버거(☰) 메뉴 — 설정·정보" />

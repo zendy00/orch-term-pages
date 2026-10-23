@@ -104,6 +104,8 @@ body::after {
 .side-link .si svg { width: 15px; height: 15px; }
 .side-link.flag::after { content: attr(data-flag); margin-left: auto; font-family: var(--code-font); font-size: 9px; font-weight: 600;
   letter-spacing: .04em; color: var(--accent); background: var(--accent-soft); padding: 1px 5px; border-radius: 999px; }
+/* 최신 릴리즈로 바뀐 페이지(_nav.js LATEST) — 다른 표식보다 눈에 띄게 채운 알약. */
+.side-link.flag.is-new::after { color: #fff; background: var(--accent); }
 .side-link.active { color: var(--text-strong); background: var(--accent-soft); font-weight: 500; }
 .side-link.active .si { color: var(--accent); }
 .side-link.active::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2.5px; border-radius: 2px; background: var(--accent-grad); }

@@ -34,6 +34,10 @@
     changelog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3M16 3v3M4.5 7.5h15V19a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 19z"/><path d="M8 12h8M8 16h5"/></svg>'
   };
 
+  /* 최신 릴리즈 버전 — 항목의 updated가 이 값과 같으면 좌측 목록에 NEW 뱃지를 단다.
+     릴리즈 때 이 값을 올리고, 그 릴리즈로 내용이 바뀐 페이지에 updated를 적는다(이전 NEW는 저절로 사라진다). */
+  var LATEST = "0.16.0";
+
   var NAV = [
     { title: "시작하기", title_en: "Getting started", count: "00", items: [
       { page: "index",        href: "index.html",       label: "소개 · 한눈에",   en: "Overview" },
@@ -49,7 +53,7 @@
     ]},
     { title: "핵심 기능", title_en: "Core features", count: "02", items: [
       { page: "terminal",        href: "terminal.html",        label: "터미널",          en: "Terminal" },
-      { page: "tabs-panes",      href: "tabs-panes.html",      label: "탭 · 패널",       en: "Tabs · Panes" },
+      { page: "tabs-panes",      href: "tabs-panes.html",      label: "탭 · 패널",       en: "Tabs · Panes", updated: "0.16.0" },
       { page: "spaces",          href: "spaces.html",          label: "스페이스",        en: "Spaces" },
       { page: "explorer",        href: "explorer.html",        label: "탐색기",          en: "Explorer" },
       { page: "editor",          href: "editor.html",          label: "코드 에디터",     en: "Code editor" },
@@ -58,14 +62,14 @@
       { page: "source-control",  href: "source-control.html",  label: "소스 컨트롤 (Git)", en: "Source control (Git)" },
       { page: "notes",           href: "notes.html",           label: "메모 · 다이어그램", en: "Notes · Diagrams" },
       { page: "meeting",         href: "meeting.html",         label: "회의 전사",       en: "Meeting transcription" },
-      { page: "tasks",           href: "tasks.html",           label: "할 일 보드",      en: "Task board" },
-      { page: "task-ai-sharing", href: "task-ai-sharing.html", label: "AI 할 일 공유",   en: "AI task sharing" },
+      { page: "tasks",           href: "tasks.html",           label: "할 일 보드",      en: "Task board", updated: "0.16.0" },
+      { page: "task-ai-sharing", href: "task-ai-sharing.html", label: "AI 할 일 공유",   en: "AI task sharing", updated: "0.16.0" },
       { page: "sessions",        href: "sessions.html",        label: "세션 목록 (이어가기)", en: "Session list (resume)" }
     ]},
     { title: "그 외 · 시스템", title_en: "More · System", count: "03", items: [
-      { page: "appearance",   href: "appearance.html",   label: "외관 · 폰트 · 단축키", en: "Appearance · Fonts · Shortcuts" },
+      { page: "appearance",   href: "appearance.html",   label: "외관 · 폰트 · 단축키", en: "Appearance · Fonts · Shortcuts", updated: "0.16.0" },
       { page: "persistence",  href: "persistence.html",  label: "저장 · 백업",          en: "Storage · Backup" },
-      { page: "auto-update",  href: "auto-update.html",  label: "자동 업데이트",        en: "Auto-update" },
+      { page: "auto-update",  href: "auto-update.html",  label: "자동 업데이트",        en: "Auto-update", updated: "0.16.0" },
       { page: "notifications",href: "notifications.html",label: "완료 배지 · 알림",     en: "Done badges · Notifications" },
       { page: "changelog",    href: "changelog.html",    label: "변경 이력",            en: "Changelog" }
     ]}
@@ -89,9 +93,10 @@
       html += '<div class="side-links">';
       group.items.forEach(function (it) {
         var active = it.page === current ? " active" : "";
-        var flag = it.flag ? ' flag" data-flag="' + esc(it.flag) : "";
+        var mark = it.flag || (it.updated === LATEST ? "NEW" : "");
+        var flag = mark ? ' flag' + (mark === "NEW" ? " is-new" : "") + '" data-flag="' + esc(mark) : "";
         var label = EN && it.en ? it.en : it.label;
-        html += '<a class="side-link' + active + (it.flag ? flag : "") + '" href="' + it.href + '">'
+        html += '<a class="side-link' + active + flag + '" href="' + it.href + '">'
           + '<span class="si">' + (G[it.page] || "") + '</span><span>' + esc(label) + '</span></a>';
       });
       html += '</div></details>';

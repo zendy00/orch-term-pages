@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>할 일 보드 — Orch term 가이드</title>
-<meta name="description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘." />
+<meta name="description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘, 칸반 보드와 에이전트 배정." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/tasks.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/tasks.html" />
@@ -63,14 +63,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="할 일 보드 — Orch term 가이드" />
-<meta property="og:description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘." />
+<meta property="og:description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘, 칸반 보드와 에이전트 배정." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/tasks.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="할 일 보드 — Orch term 가이드" />
-<meta name="twitter:description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘." />
+<meta name="twitter:description" content="Orch term 할 일 보드 사용법: 사이드바 할 일 모드(Ctrl+Shift+T), 제목+메모 입력, 마감 달력, 할일/완료 탭, 라인 액션 아이콘, 칸반 보드와 에이전트 배정." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="tasks">
@@ -99,7 +99,7 @@
 
     <p class="eyebrow"><span class="hash"></span> 핵심 기능 · 할 일 보드</p>
     <h1 class="page-title">할 일 보드</h1>
-    <p class="lede">Space마다 독립된 to-do 보드입니다. 제목·메모·마감일을 적고 할일/완료 탭과 월 달력으로 관리하며, 같은 Space의 앱 안 AI도 같은 보드를 함께 씁니다.</p>
+    <p class="lede">Space마다 독립된 to-do 보드입니다. 제목·메모·마감일을 적고 할일/완료 탭과 월 달력으로 관리하고, 칸반 보드로 진행 상황을 한눈에 봅니다. 같은 Space의 앱 안 AI도 같은 보드를 함께 씁니다.</p>
 
     <!-- 열기 -->
     <h2 class="sec" id="open"><span class="hash"></span> 할 일 패널 열기</h2>
@@ -184,8 +184,27 @@
       <li><b>단어 검색</b> — 제목·메모를 단어로 필터링.</li>
       <li><b>월 달력(하단)</b> — 날짜별 마감 개수 배지. 접기/펼치기 가능.</li>
       <li><b>새로고침</b>(<span class="i" data-icon="refresh-alt"></span>) — 외부나 AI가 바꾼 할 일을 다시 불러옵니다.</li>
+      <li><b>상태 배지</b> — 진행 중·배포 대기·보류인 할 일은 제목 앞에 「진행 중」「배포 대기」「보류」 배지가 붙습니다.</li>
+      <li><b>보드로 열기</b> — 탭 줄의 「보드로 열기」 버튼으로 <a href="#board">칸반 보드</a>를 엽니다.</li>
     </ul>
     <p>앱 안의 AI(claude·codex·gemini)도 <a href="task-ai-sharing.html">MCP로 같은 보드</a>를 조작하니, 에이전트가 추가한 할 일이 새로고침으로 바로 보입니다.</p>
+
+    <!-- 칸반 보드 -->
+    <h2 class="sec" id="board"><span class="hash"></span> 칸반 보드</h2>
+    <p>사이드바 할 일 목록의 <b>「보드로 열기」</b>(또는 명령 팔레트의 "할 일 보드 열기")로 할 일을 열별로 나란히 봅니다. 일반 화면에선 새 탭으로, <a href="tabs-panes.html#spatial">공간 모드</a>에선 새 창으로 열리고, 업데이트·재시작 뒤에도 열어 둔 자리에 다시 열립니다.</p>
+    <ul>
+      <li><b>열</b> — 할 일 → 진행 중 → 배포 대기 → 완료 → 보류. 처음엔 할 일·진행 중·완료만 보이고, 검색칸 아래 버튼으로 다른 열을 켜고 끕니다.</li>
+      <li><b>끌어서 옮기기</b> — 카드를 끌어 다른 열로 옮기거나 열 안에서 순서를 바꿉니다.</li>
+      <li><b>펼치기</b> — 카드를 누르면 메모 전체가 펼쳐집니다.</li>
+      <li><b>완료 열</b> — 오늘 끝낸 일만 보이고, 이전 완료는 「더 보기」로 엽니다.</li>
+      <li><b>맡은 탭</b> — 에이전트가 진행 중으로 옮긴 카드에는 그 탭 이름이 칩으로 붙고, 누르면 그 탭으로 이동합니다.</li>
+      <li><b>좁은 보드</b> — 보드 폭이 좁으면 열이 탭으로 바뀝니다.</li>
+    </ul>
+
+    <!-- 배정 -->
+    <h2 class="sec" id="assign"><span class="hash"></span> 배정 — 에이전트에 지시 · 문의</h2>
+    <p>보드에서 카드를 펼쳐 <b>「배정」</b>을 누르면 같은 Space의 claude·codex 터미널을 골라 <b>「지시」</b>(이 할 일을 진행) 또는 <b>「문의」</b>(작업 없이 의견·질문만)를 한 줄로 보냅니다. 그 줄은 에이전트가 쉬는 중일 때만 입력되고, 메모 내용은 에이전트가 <a href="task-ai-sharing.html">할 일 도구</a>로 직접 읽습니다. 지시를 받은 에이전트가 카드를 진행 중으로 옮깁니다.</p>
+    <p class="dim">설정에서 <a href="orchestration.html">에이전트 오케스트레이션</a>과 <b>AI 할 일 공유</b>를 둘 다 켜야 쓸 수 있습니다.</p>
 
     <!-- 단축키 -->
     <h2 class="sec" id="shortcuts"><span class="hash"></span> 단축키</h2>
@@ -194,7 +213,7 @@
       <tbody>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></td><td>할 일 모드 열기 (mac <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>)</td></tr>
         <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>메모 줄바꿈 (작성 중)</td></tr>
-        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>명령 팔레트 → "할 일(Tasks)"</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>명령 팔레트 → "할 일(Tasks)" · "할 일 보드 열기"</td></tr>
       </tbody>
     </table>
 

@@ -76,10 +76,28 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0151"><span class="hash"></span> 0.15.1 — Start in your last mode · spatial status bar overlap fix</h2>
+    <h2 class="sec" id="v0160"><span class="hash"></span> 0.16.0 — To-do board (kanban) · light theme · splits inside spatial windows · magnetic windows</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.15.1</span><span class="d">2026-10-20</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.16.0</span><span class="d">2026-10-23</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>To-do board (kanban)</b> — see to-dos in To do → In progress → Ready to release → Done → On hold columns and drag cards between them. Click a card to expand its note; Done shows only today's work. The board reopens where you left it after updates and restarts (<a href="tasks.html#board">Task board</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Owner tab · Assign</b> — when an agent moves a card to In progress, the tab's name appears on it; click to jump there. "Assign" sends an instruction or a question as one line to a claude or codex terminal in the same Space</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Light theme</b> — the terminal, editor and Markdown preview turn light too, and the spatial mode default background becomes a daytime version of the same landscape (<a href="appearance.html#theme">Appearance</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Splits inside spatial windows · tear-out and merge</b> — the split buttons split the same window; drag a tab onto empty space to get a new window exactly where the dashed outline showed, or onto another window's edge to merge it in (<a href="tabs-panes.html#spatial-split">Spatial mode</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Magnetic windows</b> — drag a window near another and it snaps flush; snapped windows move together (<code>Shift</code>+drag moves just one). Drag a shared border to split the size between them (<a href="tabs-panes.html#spatial-magnet">Magnetic windows</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Spatial zoom</b> — <code>Ctrl</code>+wheel from anywhere, plus <code>⌘⌥=</code> zoom in · <code>⌘⌥-</code> zoom out · <code>⌘⌥0</code> 100% (<code>Ctrl+Alt</code> on Windows). Overview moved to <code>⌘⌥9</code> (<a href="tabs-panes.html#spatial-zoom">Zoom</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Check for beta</b> — check for and install beta builds from the About window (<a href="auto-update.html#beta">Auto-update</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Spatial zoom level</b> — zoom snapped back to 100% after visiting another Space, and the overview shortcut did nothing while the in-app browser had focus</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Translucent windows</b> — search boxes, calendar, SSH buttons and the to-do board now follow the window opacity instead of staying opaque</span></li>
+      </ul>
+      <p class="cl-note"><b>The ORCH (green) theme was removed</b> — if you used it, you are switched to the dark theme. Splits inside spatial windows are flattened if the layout is opened with an older version. This update <b>does not end running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0151"><span class="hash"></span> 0.15.1 — Start in your last mode · spatial status bar overlap fix</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.15.1</span><span class="d">2026-10-20</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Start in the mode you last used</b> — if you quit in spatial mode the app reopens in spatial mode, otherwise in the normal view, with your window layout restored (<a href="tabs-panes.html#spatial">Spatial mode</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Spatial mode status bar overlap</b> — windows slid under the status bar and their text overlapped it; they are now clipped at the status bar edge, just like at the top tab bar</span></li>

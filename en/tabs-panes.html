@@ -6,7 +6,7 @@
 <script src="../_lang.js"></script>
 <link rel="icon" href="../assets/app-icon.png" />
 <title>Tabs · Panes — Orch term Guide</title>
-<meta name="description" content="How to use Orch term tabs & panes: pane splitting (binary tree), grid tiling · merge all, pane maximize (Shift+Esc · glassmorphism), spatial mode (floating windows · overview), unified tab name + color editing, closing tabs (Ctrl+Shift+W) · right-click menu, and custom browser labels." />
+<meta name="description" content="How to use Orch term tabs & panes: pane splitting (binary tree), grid tiling · merge all, pane maximize (Shift+Esc · glassmorphism), spatial mode (floating windows · overview · in-window splits · magnetic windows), unified tab name + color editing, closing tabs (Ctrl+Shift+W) · right-click menu, and custom browser labels." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/tabs-panes.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/tabs-panes.html" />
@@ -59,14 +59,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="Tabs · Panes — Orch term Guide" />
-<meta property="og:description" content="How to use Orch term tabs & panes: pane splitting (binary tree), grid tiling · merge all, pane maximize (Shift+Esc · glassmorphism), spatial mode (floating windows · overview), unified tab name + color editing, closing tabs (Ctrl+Shift+W) · right-click menu, and custom browser labels." />
+<meta property="og:description" content="How to use Orch term tabs & panes: pane splitting (binary tree), grid tiling · merge all, pane maximize (Shift+Esc · glassmorphism), spatial mode (floating windows · overview · in-window splits · magnetic windows), unified tab name + color editing, closing tabs (Ctrl+Shift+W) · right-click menu, and custom browser labels." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/en/tabs-panes.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="ko_KR" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Tabs · Panes — Orch term Guide" />
-<meta name="twitter:description" content="How to use Orch term tabs & panes: pane splitting (binary tree), grid tiling · merge all, pane maximize (Shift+Esc · glassmorphism), spatial mode (floating windows · overview), unified tab name + color editing, closing tabs (Ctrl+Shift+W) · right-click menu, and custom browser labels." />
+<meta name="twitter:description" content="How to use Orch term tabs & panes: pane splitting (binary tree), grid tiling · merge all, pane maximize (Shift+Esc · glassmorphism), spatial mode (floating windows · overview · in-window splits · magnetic windows), unified tab name + color editing, closing tabs (Ctrl+Shift+W) · right-click menu, and custom browser labels." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="tabs-panes">
@@ -317,19 +317,42 @@
     </figure>
     <h3 class="sub">Looking around and focusing</h3>
     <ul>
-      <li><b>Pan</b> — drag empty space to move the view; turn the mouse wheel over empty space to zoom in and out. Hold <kbd>Alt</kbd> (<kbd>Option</kbd> on macOS) and drag to move the whole view even over a window; the selected window stays selected.</li>
+      <li><b>Pan</b> — drag empty space to move the view; turn the mouse wheel over empty space to zoom in and out (see <a href="#spatial-zoom">Zooming</a> below). Hold <kbd>Alt</kbd> (<kbd>Option</kbd> on macOS) and drag to move the whole view even over a window; the selected window stays selected.</li>
       <li><b>Focus</b> — click a window to bring it to the center at full size (up to 100%), ready for input. Windows larger than the screen are scaled to fit. Moving keyboard focus to another window follows it too. The <b>sidebar (Explorer) and SSH windows</b> are the exception: clicking them changes only the selection and leaves the view where it is, so a file opens right away (choose them on the map to move the view to them). Turn off <b>Center on click</b> in the bottom controls and every window behaves this way, so you can work with two windows side by side (the setting is kept). Even with it off, <kbd>Ctrl</kbd>+<kbd>Alt</kbd> (<kbd>Ctrl</kbd>+<kbd>Option</kbd> on macOS)+click jumps to that window at 100%.</li>
       <li><b>Release</b> — click empty space, or click an empty part of the selected window's tab bar again, to release the selection while keeping the current position and zoom.</li>
-      <li><b>Overview</b> — fits every window in view. Use <b>Overview</b> in the bottom controls, the shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> (<kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd> on macOS, changeable in the shortcut settings), or <kbd>Esc</kbd> outside a terminal or text field while a window is focused.</li>
+      <li><b>Overview</b> — fits every window in view. Use <b>Overview</b> in the bottom controls, the shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>9</kbd> (<kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>9</kbd> on macOS, changeable in the shortcut settings), or <kbd>Esc</kbd> outside a terminal or text field while a window is focused.</li>
       <li><b>Controls · map</b> — they stay hidden so they don't cover the view. Move the pointer toward the bottom of the screen and the controls (− zoom + · Overview · Center on click · Background · Exit spatial mode) appear in the middle and the workspace map at the bottom right. Click a window on the map to go to it. They are reachable with <kbd>Tab</kbd> as well.</li>
       <li><b>View box on the map</b> — the map shows the area you are looking at as a box with a camera icon, and it follows the view as you move. Drag the box to move the view; the selected window stays selected. Click the box without dragging to go to the window under it, or click empty space on the map to center that spot. Turn the wheel over the map to zoom.</li>
     </ul>
 
+    <h3 class="sub" id="spatial-zoom">Zooming</h3>
+    <ul>
+      <li><b>Wheel</b> — turn the wheel over empty space to zoom; inside a window it scrolls the content.</li>
+      <li><b><kbd>Ctrl</kbd>+wheel</b> — zooms the view from anywhere, even over window content. The exceptions: over a drawing note it zooms the drawing, and over an <a href="browser.html">in-app browser</a> tab it zooms that page.</li>
+      <li><b>Shortcuts</b> — <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>=</kbd> zoom in · <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>-</kbd> zoom out · <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> 100% (<kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>=</kbd> · <kbd>-</kbd> · <kbd>0</kbd> on macOS, changeable in the shortcut settings). They step by the same amount as − / + in the bottom controls.</li>
+    </ul>
+
     <h3 class="sub">Moving, resizing and maximizing windows</h3>
     <ul>
-      <li><b>Move</b> — drag an empty part of the tab bar (the header for the sidebar and SSH) or the handle at the bottom of the window. Hold <kbd>Ctrl</kbd> and drag to move it from anywhere inside, including over terminal content. With the handle focused, the arrow keys move it too.</li>
+      <li><b>Move</b> — drag an empty part of the tab bar (the header for the sidebar and SSH) or the handle at the bottom of the window. Hold <kbd>Ctrl</kbd> and drag to move it from anywhere inside, including over terminal content. With the handle focused, the arrow keys move it too. The sidebar can also be dragged by the project name at its top (a plain click still opens the project menu).</li>
       <li><b>Resize</b> — drag a window's edge or corner. Only a dashed outline moves while you drag; the contents fit the new size when you let go.</li>
       <li><b>Maximize</b> — <span class="i" data-icon="spatial-maximize"></span> at the right end of the tab bar fills the screen with the window (press it again, <span class="i" data-icon="spatial-restore"></span>, to restore). The <kbd>Shift</kbd>+<kbd>Esc</kbd> shortcut does the same (the focused window, otherwise the active pane, or the sidebar when the Explorer has focus). Overlapping neighbors step aside without changing size, and return to their places when you restore it. A maximized window — and where you moved it while maximized — is kept when you turn spatial mode off and on or restart the app.</li>
+    </ul>
+
+    <h3 class="sub" id="spatial-magnet">Magnetic windows — snapping and moving together</h3>
+    <ul>
+      <li><b>Snap</b> — drag a window to within about 16px of another window's edge and it snaps flush, with no gap. It also lines up the top and bottom edges of side-by-side windows, and the edge being joined is highlighted while you drag. Edges you drag while resizing snap the same way.</li>
+      <li><b>Move together</b> — snapped windows move together when you drag one of them. Hold <kbd>Shift</kbd> while dragging to detach and move just that window.</li>
+      <li><b>Share a border</b> — drag a shared border and one window grows as the other shrinks, so the two split the size between them (it stops when either reaches its minimum size). Hold <kbd>Shift</kbd> to resize only that window.</li>
+      <li>Maximized windows don't snap and don't move with others.</li>
+    </ul>
+
+    <h3 class="sub" id="spatial-split">Splits inside a window · pulling out · merging</h3>
+    <ul>
+      <li><b>Split inside a window</b> — the split buttons in the tab bar (<span class="i" data-icon="split-horizontal"></span> <span class="i" data-icon="split-vertical"></span>) split <b>the same window</b> instead of making a new one. Drag the divider between panes to resize them; moving, resizing or maximizing the window takes the splits along.</li>
+      <li><b>Pull out</b> — drag a tab onto <b>empty space</b> to pull it out into a new window. A dashed outline previews where it will land, and the window appears exactly there.</li>
+      <li><b>Merge</b> — drop it on another window's <b>edge</b> to split that window on that side, or in the <b>middle</b> to add it to that window's tabs.</li>
+      <li><b>Kept</b> — splits inside a window survive turning spatial mode off and on and restarting the app. Opening the layout with an app older than 0.16.0 flattens them.</li>
     </ul>
 
     <h3 class="sub" id="spatial-background">Background and panel translucency</h3>
@@ -342,8 +365,8 @@
 
     <h3 class="sub" id="spatial-tabs">Splitting tabs off and bringing them back</h3>
     <ul>
-      <li>Drag a tab onto <b>empty space</b> to split it off into a new window. Dropping it on another window adds it to that window's tabs, as before.</li>
-      <li>Turning spatial mode off gathers the Space's windows into <b>tabs of one pane</b>. The split layout you had before turning it on is not kept, so split the pane again in the normal view if you need it. Turning spatial mode on again brings back the split-off windows and their active tabs. Tabs closed in between are dropped, and newly opened tabs come along.</li>
+      <li>Drag a tab onto <b>empty space</b> to split it off into a new window, or onto another window to merge it in (see <a href="#spatial-split">Splits inside a window · pulling out · merging</a> above).</li>
+      <li>Turning spatial mode off gathers the Space's windows into <b>tabs of one pane</b>. The split layout you had before turning it on is not kept, so split the pane again in the normal view if you need it. Turning spatial mode on again brings back the split-off windows (including splits inside them) and their active tabs. Tabs closed in between are dropped, and newly opened tabs come along.</li>
       <li>Window positions, sizes and the view position are saved per <a href="spaces.html">Space</a> and kept across restarts.</li>
     </ul>
     <p class="note"><b>Built to stay light.</b> While the view moves, only window positions and zoom change (at most 30 times a second) and terminals are not re-measured; once it stops, drawing stops. Off-screen windows are not drawn, and terminals in windows that are not focused turn their WebGL renderer off. The background picture is a single layer fixed to the screen, so it is not redrawn while the view moves, and translucency only changes window background colors, with no blur. An <a href="browser.html">in-app browser</a> page shows a "Click this panel to view the page" placeholder during the overview or while moving, and the real page appears once you click its window to focus it.</p>
@@ -421,7 +444,10 @@
       <thead><tr><th>Key</th><th>Action</th></tr></thead>
       <tbody>
         <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>Toggle maximize of the active pane (in spatial mode, maximize/restore the window)</td></tr>
-        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd></td><td>Spatial mode overview</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>9</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>9</kbd></td><td>Spatial mode overview</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>=</kbd> / <kbd>-</kbd> / <kbd>0</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>=</kbd> / <kbd>-</kbd> / <kbd>0</kbd></td><td>Spatial mode zoom in / zoom out / 100%</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+wheel (spatial mode)</td><td>Zoom from anywhere (except over a drawing note or the in-app browser)</td></tr>
+        <tr><td><kbd>Shift</kbd>+drag (spatial mode)</td><td>Move only that window out of a snapped group · resize only that window at a shared border</td></tr>
         <tr><td><kbd>Ctrl</kbd>+drag (spatial mode)</td><td>Move a window from anywhere inside it</td></tr>
         <tr><td><kbd>Alt</kbd>/<kbd>Option</kbd>+drag (spatial mode)</td><td>Move the whole view</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>/<kbd>Option</kbd>+click (spatial mode)</td><td>Center on that window (regardless of "Center on click")</td></tr>

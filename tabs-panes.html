@@ -6,7 +6,7 @@
 <script src="./_lang.js"></script>
 <link rel="icon" href="./assets/app-icon.png" />
 <title>탭 · 패널 — Orch term 가이드</title>
-<meta name="description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 공간 모드(독립 창·전체 보기), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
+<meta name="description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 공간 모드(독립 창·전체 보기·창 안 분할·창 자석), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://zendy00.github.io/orch-term-pages/tabs-panes.html" />
 <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/tabs-panes.html" />
@@ -59,14 +59,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Orch term" />
 <meta property="og:title" content="탭 · 패널 — Orch term 가이드" />
-<meta property="og:description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 공간 모드(독립 창·전체 보기), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
+<meta property="og:description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 공간 모드(독립 창·전체 보기·창 안 분할·창 자석), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
 <meta property="og:url" content="https://zendy00.github.io/orch-term-pages/tabs-panes.html" />
 <meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="탭 · 패널 — Orch term 가이드" />
-<meta name="twitter:description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 공간 모드(독립 창·전체 보기), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
+<meta name="twitter:description" content="Orch term 탭·패널 사용법: 패널 분할(이진 트리), 바둑판 배열·전체 병합, 패널 최대화(Shift+Esc·glassmorphism), 공간 모드(독립 창·전체 보기·창 안 분할·창 자석), 탭 이름+색 통합 편집, 탭 닫기(Ctrl+Shift+W)·우클릭 메뉴, 브라우저 커스텀 라벨." />
 <meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
 </head>
 <body data-page="tabs-panes">
@@ -317,19 +317,42 @@
     </figure>
     <h3 class="sub">둘러보기와 집중</h3>
     <ul>
-      <li><b>둘러보기</b> — 빈 공간을 드래그하면 화면이 움직이고, 빈 공간에서 휠을 돌리면 확대·축소됩니다. <kbd>Alt</kbd>(macOS <kbd>Option</kbd>)를 누른 채 드래그하면 창 위에서도 화면 전체가 움직이고, 선택한 창은 그대로 유지됩니다.</li>
+      <li><b>둘러보기</b> — 빈 공간을 드래그하면 화면이 움직이고, 빈 공간에서 휠을 돌리면 확대·축소됩니다(아래 <a href="#spatial-zoom">확대 · 축소</a>). <kbd>Alt</kbd>(macOS <kbd>Option</kbd>)를 누른 채 드래그하면 창 위에서도 화면 전체가 움직이고, 선택한 창은 그대로 유지됩니다.</li>
       <li><b>집중</b> — 창을 클릭하면 그 창이 가운데로 크게(최대 100%) 와서 바로 입력할 수 있습니다. 화면보다 큰 창은 맞게 줄어듭니다. 키보드로 다른 창에 포커스를 옮겨도 따라갑니다. 단 <b>사이드바(탐색기)와 SSH 창</b>은 눌러도 화면이 움직이지 않고 선택만 바뀝니다 — 파일을 누르면 바로 열립니다(배치도에서 고르면 그 창으로 이동). 하단 조작부의 <b>클릭하면 가운데로</b>를 끄면 모든 창이 이렇게 제자리에서 선택만 되어, 두 창을 나란히 두고 번갈아 보며 작업할 수 있습니다(설정은 유지). 꺼 둔 상태에서도 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>(macOS <kbd>Ctrl</kbd>+<kbd>Option</kbd>)+클릭하면 그 창으로 가운데 100% 이동합니다.</li>
       <li><b>선택 해제</b> — 빈 공간이나, 선택한 창의 탭바 빈 부분을 다시 클릭하면 지금 화면 위치·배율 그대로 선택만 풀립니다.</li>
-      <li><b>전체 보기</b> — 모든 창이 한눈에 들어오게 맞춥니다. 하단 조작부의 <b>전체 보기</b>, 단축키 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd>(macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd>, 단축키 설정에서 변경 가능), 또는 창에 집중한 상태에서 터미널·입력창 밖에서 <kbd>Esc</kbd>.</li>
+      <li><b>전체 보기</b> — 모든 창이 한눈에 들어오게 맞춥니다. 하단 조작부의 <b>전체 보기</b>, 단축키 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>9</kbd>(macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>9</kbd>, 단축키 설정에서 변경 가능), 또는 창에 집중한 상태에서 터미널·입력창 밖에서 <kbd>Esc</kbd>.</li>
       <li><b>하단 조작부 · 배치도</b> — 평소엔 화면을 가리지 않게 숨어 있다가, 포인터를 화면 아래쪽으로 가져가면 가운데에 조작부(− 배율 + · 전체 보기 · 클릭하면 가운데로 · 배경 · 공간 모드 종료)가, 오른쪽 아래에 배치도가 나타납니다. 배치도의 창을 누르면 그 창으로 이동합니다. 키보드 <kbd>Tab</kbd>으로도 닿습니다.</li>
       <li><b>배치도의 화면 박스</b> — 배치도에는 지금 보고 있는 영역이 카메라 아이콘이 든 박스로 표시되고, 화면을 움직이면 따라갑니다. 박스를 끌면 화면이 그만큼 이동하고 선택한 창은 그대로입니다. 박스를 끌지 않고 누르면 그 아래 창으로, 배치도의 빈 곳을 누르면 그 지점이 가운데로 옵니다. 배치도 위에서 휠을 돌리면 확대·축소됩니다.</li>
     </ul>
 
+    <h3 class="sub" id="spatial-zoom">확대 · 축소</h3>
+    <ul>
+      <li><b>휠</b> — 빈 공간에서 휠을 돌리면 확대·축소되고, 창 안에서는 내용이 스크롤됩니다.</li>
+      <li><b><kbd>Ctrl</kbd>+휠</b> — 창 내용 위를 포함해 어디서든 화면을 확대·축소합니다. 단 메모 그림판 위에서는 그 그림이, <a href="browser.html">인앱 브라우저</a> 탭 위에서는 그 페이지가 확대·축소됩니다.</li>
+      <li><b>단축키</b> — <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>=</kbd> 확대 · <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>-</kbd> 축소 · <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> 100%(macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>=</kbd> · <kbd>-</kbd> · <kbd>0</kbd>, 단축키 설정에서 변경 가능). 하단 조작부의 − / + 와 같은 간격으로 움직입니다.</li>
+    </ul>
+
     <h3 class="sub">창 옮기기 · 크기 조절 · 최대화</h3>
     <ul>
-      <li><b>옮기기</b> — 탭바(사이드바·SSH는 머리줄)의 빈 부분이나 창 아래 손잡이를 드래그합니다. <kbd>Ctrl</kbd>을 누른 채 드래그하면 터미널 내용 위를 포함해 창 안 어디서든 옮길 수 있습니다. 손잡이에 포커스를 두고 방향키로도 옮길 수 있습니다.</li>
+      <li><b>옮기기</b> — 탭바(사이드바·SSH는 머리줄)의 빈 부분이나 창 아래 손잡이를 드래그합니다. <kbd>Ctrl</kbd>을 누른 채 드래그하면 터미널 내용 위를 포함해 창 안 어디서든 옮길 수 있습니다. 손잡이에 포커스를 두고 방향키로도 옮길 수 있습니다. 사이드바는 맨 위 프로젝트 이름을 잡고 끌어도 옮겨집니다(그냥 누르면 프로젝트 메뉴가 열립니다).</li>
       <li><b>크기 조절</b> — 창의 가장자리나 모서리를 드래그합니다. 드래그하는 동안은 점선 테두리만 움직이고, 놓으면 내용이 새 크기에 맞춰집니다.</li>
       <li><b>최대화</b> — 탭바 오른쪽 끝 <span class="i" data-icon="spatial-maximize"></span>로 창을 화면 가득 키웁니다(다시 누르면 <span class="i" data-icon="spatial-restore"></span> 복원). 단축키 <kbd>Shift</kbd>+<kbd>Esc</kbd>도 같습니다(집중한 창, 없으면 활성 패널, 탐색기에 포커스가 있으면 사이드바). 겹치는 주변 창은 크기 그대로 옆으로 비켜났다가, 복원하면 제자리로 돌아옵니다. 최대화 상태와 최대화한 채 옮긴 위치는 공간 모드를 껐다 켜거나 앱을 다시 켜도 유지됩니다.</li>
+    </ul>
+
+    <h3 class="sub" id="spatial-magnet">창 자석 — 붙이기 · 같이 옮기기</h3>
+    <ul>
+      <li><b>붙이기</b> — 창을 끌다가 다른 창 가장자리에 약 16px 안으로 가져가면 틈 없이 딱 붙습니다. 나란한 창의 윗변·아랫변도 맞춰 주고, 끄는 동안 맞닿을 변을 강조선으로 보여 줍니다. 크기 조절로 끄는 변도 같은 거리에서 붙습니다.</li>
+      <li><b>같이 옮기기</b> — 붙어 있는 창은 하나를 끌면 함께 움직입니다. <kbd>Shift</kbd>를 누른 채 끌면 그 창만 떼어 옮깁니다.</li>
+      <li><b>경계 나누기</b> — 맞닿은 경계를 끌면 한쪽이 커지는 만큼 다른 쪽이 줄어 두 창이 크기를 나눠 갖습니다(어느 쪽이든 최소 크기에 닿으면 멈춤). <kbd>Shift</kbd>를 누른 채 끌면 그 창만 크기가 바뀝니다.</li>
+      <li>최대화한 창은 붙지 않고 함께 움직이지도 않습니다.</li>
+    </ul>
+
+    <h3 class="sub" id="spatial-split">창 안 분할 · 꺼내기 · 합치기</h3>
+    <ul>
+      <li><b>창 안 분할</b> — 탭바의 분할 버튼(<span class="i" data-icon="split-horizontal"></span> <span class="i" data-icon="split-vertical"></span>)은 새 창을 만들지 않고 <b>같은 창 안</b>을 나눕니다. 칸 사이 경계선을 끌어 크기를 바꾸고, 창을 옮기거나 크기를 조절하거나 최대화하면 안의 분할도 함께 따라갑니다.</li>
+      <li><b>꺼내기</b> — 탭을 끌어 <b>빈 공간</b>에 놓으면 새 창으로 나옵니다. 끄는 동안 놓일 자리를 점선 상자로 보여 주고, 놓으면 정확히 그 자리에 생깁니다.</li>
+      <li><b>합치기</b> — 다른 창의 <b>가장자리</b>에 놓으면 그 창 안에서 그쪽으로 나뉘고, <b>가운데</b>에 놓으면 그 창의 탭으로 들어갑니다.</li>
+      <li><b>유지</b> — 창 안 분할은 공간 모드를 껐다 켜거나 앱을 다시 켜도 남습니다. 0.16.0 이전 버전의 앱으로 열면 분할이 풀립니다.</li>
     </ul>
 
     <h3 class="sub" id="spatial-background">배경과 패널 반투명</h3>
@@ -342,8 +365,8 @@
 
     <h3 class="sub" id="spatial-tabs">탭 나누기와 되돌리기</h3>
     <ul>
-      <li>탭을 끌어 <b>빈 공간</b>에 놓으면 그 탭이 새 창으로 분리됩니다. 다른 창 위에 놓으면 지금처럼 그 창의 탭으로 들어갑니다.</li>
-      <li>공간 모드를 끄면 그 Space의 창들이 <b>한 패널의 탭</b>으로 모입니다. 켜기 전에 나눠 두었던 분할 배치는 남지 않으니, 일반 화면에서 다시 나누면 됩니다. 공간 모드를 다시 켜면 나눠 둔 창과 활성 탭이 돌아옵니다. 그 사이에 닫은 탭은 빠지고, 새로 연 탭은 함께 들어갑니다.</li>
+      <li>탭을 끌어 <b>빈 공간</b>에 놓으면 새 창으로 분리되고, 다른 창에 놓으면 그 창으로 합쳐집니다(위 <a href="#spatial-split">창 안 분할 · 꺼내기 · 합치기</a>).</li>
+      <li>공간 모드를 끄면 그 Space의 창들이 <b>한 패널의 탭</b>으로 모입니다. 켜기 전에 나눠 두었던 분할 배치는 남지 않으니, 일반 화면에서 다시 나누면 됩니다. 공간 모드를 다시 켜면 나눠 둔 창(창 안 분할 포함)과 활성 탭이 돌아옵니다. 그 사이에 닫은 탭은 빠지고, 새로 연 탭은 함께 들어갑니다.</li>
       <li>창 위치·크기와 화면 위치는 <a href="spaces.html">Space</a>별로 저장돼 앱을 다시 켜도 유지됩니다.</li>
     </ul>
     <p class="note"><b>가볍게 동작하도록 만들었습니다.</b> 화면을 움직이는 동안에는 창의 위치·배율만 바꾸고(초당 최대 30번) 터미널 크기는 다시 계산하지 않으며, 멈추면 그리기를 멈춥니다. 화면 밖 창은 그리지 않고, 집중하지 않은 창의 터미널은 WebGL 렌더러를 끕니다. 배경 그림은 화면에 고정된 한 장이라 화면을 움직여도 다시 그리지 않고, 반투명은 흐림 효과 없이 창 배경색만 바꿉니다. <a href="browser.html">인앱 브라우저</a> 페이지는 전체 보기·이동 중에는 "창을 클릭하면 페이지를 표시합니다" 안내로 바뀌고, 그 창을 클릭해 집중하면 실제 페이지가 나타납니다.</p>
@@ -421,7 +444,10 @@
       <thead><tr><th>키</th><th>동작</th></tr></thead>
       <tbody>
         <tr><td><kbd>Shift</kbd>+<kbd>Esc</kbd></td><td>활성 패널 최대화 토글 (공간 모드에서는 창 최대화/복원)</td></tr>
-        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>0</kbd></td><td>공간 모드 전체 보기</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>9</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>9</kbd></td><td>공간 모드 전체 보기</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>=</kbd> / <kbd>-</kbd> / <kbd>0</kbd> · macOS <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>=</kbd> / <kbd>-</kbd> / <kbd>0</kbd></td><td>공간 모드 확대 / 축소 / 100%</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+휠 (공간 모드)</td><td>어디서든 확대·축소 (메모 그림판·인앱 브라우저 위는 제외)</td></tr>
+        <tr><td><kbd>Shift</kbd>+드래그 (공간 모드)</td><td>붙은 창 중 그 창만 이동 · 경계에서 그 창만 크기 조절</td></tr>
         <tr><td><kbd>Ctrl</kbd>+드래그 (공간 모드)</td><td>창 안 어디서든 창 이동</td></tr>
         <tr><td><kbd>Alt</kbd>/<kbd>Option</kbd>+드래그 (공간 모드)</td><td>화면 전체 이동</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>/<kbd>Option</kbd>+클릭 (공간 모드)</td><td>그 창으로 가운데 이동 ("클릭하면 가운데로"와 무관)</td></tr>
