@@ -86,6 +86,11 @@
     <h2 class="sec" id="clipboard"><span class="hash"></span> 복사 · 붙여넣기</h2>
     <p><kbd>Ctrl</kbd>+<kbd>C</kbd>는 <b>선택 영역이 있으면 복사</b>, 없으면 인터럽트로 동작하고, <kbd>Ctrl</kbd>+<kbd>V</kbd>는 붙여넣기입니다 — 한/영 입력 상태와 무관하게 작동합니다. Windows 클립보드 기록(<kbd>Win</kbd>+<kbd>V</kbd>)도 지원하며, <b>이미지를 붙여넣으면 파일로 첨부</b>되어 claude 등이 그대로 읽습니다.</p>
 
+    <!-- 선택 영역 번역 -->
+    <h2 class="sec" id="translate"><span class="hash"></span> 선택 영역 번역 (영→한)</h2>
+    <p>영어를 드래그하면 「번역」 버튼이 뜨고, 누르면 그 위에 창과 같은 투명도의 박스로 한국어를 보여 줍니다. <b>한 단어</b>를 고르면 품사와 뜻(개발 용어 뜻 포함)을 보여 줍니다. 터미널뿐 아니라 코드 에디터·마크다운 미리보기·메모에서도 쓸 수 있습니다. 박스는 바깥을 누르거나 <kbd>Esc</kbd>로 닫히고, 4,000자가 넘는 선택은 「너무 깁니다」로 표시됩니다.</p>
+    <p><b>설정 → 일반 → 「선택 영역 번역(영→한)」</b>을 켜면 번역 모델과 사전(약 210~250MB)을 내려받습니다. 처음엔 꺼져 있고, 번역은 이 컴퓨터의 CPU로 해서 밖으로 보내지 않습니다. Claude Code 전체 화면 모드처럼 마우스를 직접 받는 앱에서는 드래그하고 놓을 때(앱이 클립보드에 복사할 때) 버튼이 뜹니다. macOS에서는 <kbd>Option</kbd>을 누른 채 끌어 터미널 자체로 고를 수도 있습니다.</p>
+
     <!-- 줄바꿈 -->
     <h2 class="sec" id="newline"><span class="hash"></span> 줄바꿈 (제출 없이)</h2>
     <p>AI CLI(Claude Code 등)에 <b>여러 줄</b>을 입력할 때 <kbd>Shift</kbd>+<kbd>Enter</kbd> 또는 <kbd>Ctrl</kbd>+<kbd>Enter</kbd>로 제출 대신 줄바꿈을 보냅니다. 한글 입력 조합 중에도 글자와 순서가 보존됩니다.</p>

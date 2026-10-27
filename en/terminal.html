@@ -86,6 +86,11 @@
     <h2 class="sec" id="clipboard"><span class="hash"></span> Copy · paste</h2>
     <p><kbd>Ctrl</kbd>+<kbd>C</kbd> <b>copies when there's a selection</b>, otherwise it acts as an interrupt, and <kbd>Ctrl</kbd>+<kbd>V</kbd> pastes — working regardless of the Korean/English input state. Windows clipboard history (<kbd>Win</kbd>+<kbd>V</kbd>) is supported too, and <b>pasting an image attaches it as a file</b> so claude and others read it directly.</p>
 
+    <!-- Selection translation -->
+    <h2 class="sec" id="translate"><span class="hash"></span> Selection translation (EN→KO)</h2>
+    <p>Select English text and a Translate button appears; press it to see the Korean translation in a box right above, with the same translucency as the window. Select a <b>single word</b> to see its parts of speech and meanings (including developer senses). Besides the terminal it works in the code editor, Markdown preview and notes. Close the box by clicking outside it or pressing <kbd>Esc</kbd>; selections over 4,000 characters show "Too long".</p>
+    <p>Turning on <b>Settings → General → "Selection translation (EN→KO)"</b> downloads the model and dictionary (about 210–250 MB). It is off by default, and translation runs on this computer's CPU — nothing is sent out. In apps that take over the mouse, such as Claude Code's fullscreen mode, the button appears when you drag and release (when the app copies the selection to the clipboard). On macOS you can also hold <kbd>Option</kbd> while dragging to select with the terminal itself.</p>
+
     <!-- Newlines -->
     <h2 class="sec" id="newline"><span class="hash"></span> Newlines (without submitting)</h2>
     <p>When entering <b>multiple lines</b> into an AI CLI (Claude Code, etc.), use <kbd>Shift</kbd>+<kbd>Enter</kbd> or <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to send a newline instead of submitting. Characters and their order are preserved even mid-composition in Korean input.</p>

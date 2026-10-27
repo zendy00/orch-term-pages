@@ -76,10 +76,22 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0160"><span class="hash"></span> 0.16.0 — 할 일 보드(칸반) · 라이트 테마 · 공간 모드 창 안 분할 · 창 자석</h2>
+    <h2 class="sec" id="v0161"><span class="hash"></span> 0.16.1 — 선택 영역 번역(영→한) · 공간 모드 방향키 창 이동 수정</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.16.0</span><span class="d">2026-10-23</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.16.1</span><span class="d">2026-10-27</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>선택 영역 번역(영→한)</b> — AI가 영어로 답한 부분을 드래그하면 「번역」 버튼이 뜨고, 누르면 그 위에 한국어 박스를 띄웁니다. 한 단어는 품사와 뜻(개발 용어 뜻 포함)을 보여 줍니다. 터미널·코드 에디터·마크다운 미리보기·메모에서 쓸 수 있고, 이 컴퓨터의 CPU로 번역해 밖으로 보내지 않습니다(<a href="terminal.html#translate">선택 영역 번역</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드 방향키 창 이동</b> — <code>Ctrl</code>(macOS <code>⌘</code>)+<code>Alt</code>+방향키가 조금 어긋난 창도 찾아가고, 탭 창 사이에 놓인 사이드바를 건너뛰지 않습니다. 고른 창이 화면에 다 보이지 않으면 그 창으로 화면이 옮겨집니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>할 일 사이드바 포커스</b> — 사이드바가 「할 일」 모드일 때 단축키로 가면 할 일 검색칸에 커서가 들어갑니다</span></li>
+      </ul>
+      <p class="cl-note">선택 영역 번역은 처음엔 꺼져 있고, 설정 → 일반에서 켤 때 번역 모델과 사전(약 210~250MB)을 내려받습니다. 이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0160"><span class="hash"></span> 0.16.0 — 할 일 보드(칸반) · 라이트 테마 · 공간 모드 창 안 분할 · 창 자석</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.16.0</span><span class="d">2026-10-23</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>할 일 보드(칸반)</b> — 할 일 → 진행 중 → 배포 대기 → 완료 → 보류 열로 보고 카드를 끌어 옮깁니다. 카드를 누르면 메모 전체가 펼쳐지고, 완료 열은 오늘 끝낸 일만 보입니다. 업데이트·재시작 뒤에도 열어 둔 자리에 다시 열립니다(<a href="tasks.html#board">할 일 보드</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>맡은 탭 표시 · 「배정」</b> — 에이전트가 진행 중으로 옮긴 카드에 그 탭 이름이 붙고 누르면 이동합니다. 카드의 「배정」으로 같은 Space의 claude·codex 터미널에 지시·문의를 한 줄로 보냅니다</span></li>

@@ -36,7 +36,7 @@
 
   /* 최신 릴리즈 버전 — 항목의 updated가 이 값과 같으면 좌측 목록에 NEW 뱃지를 단다.
      릴리즈 때 이 값을 올리고, 그 릴리즈로 내용이 바뀐 페이지에 updated를 적는다(이전 NEW는 저절로 사라진다). */
-  var LATEST = "0.16.0";
+  var LATEST = "0.16.1";
 
   var NAV = [
     { title: "시작하기", title_en: "Getting started", count: "00", items: [
@@ -52,7 +52,7 @@
       { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러",        en: "CDP browser mirror" }
     ]},
     { title: "핵심 기능", title_en: "Core features", count: "02", items: [
-      { page: "terminal",        href: "terminal.html",        label: "터미널",          en: "Terminal" },
+      { page: "terminal",        href: "terminal.html",        label: "터미널",          en: "Terminal", updated: "0.16.1" },
       { page: "tabs-panes",      href: "tabs-panes.html",      label: "탭 · 패널",       en: "Tabs · Panes", updated: "0.16.0" },
       { page: "spaces",          href: "spaces.html",          label: "스페이스",        en: "Spaces" },
       { page: "explorer",        href: "explorer.html",        label: "탐색기",          en: "Explorer" },

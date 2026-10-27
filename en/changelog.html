@@ -76,10 +76,22 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0160"><span class="hash"></span> 0.16.0 — To-do board (kanban) · light theme · splits inside spatial windows · magnetic windows</h2>
+    <h2 class="sec" id="v0161"><span class="hash"></span> 0.16.1 — Selection translation (EN→KO) · spatial arrow-key navigation fixes</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.16.0</span><span class="d">2026-10-23</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.16.1</span><span class="d">2026-10-27</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Selection translation (English → Korean)</b> — Select English text, such as an AI agent's answer, and a Translate button appears; press it to see the Korean translation in a box right above. A single word shows its parts of speech and meanings (including developer senses). Works in the terminal, code editor, Markdown preview and notes, and runs on this computer's CPU — nothing is sent out (<a href="terminal.html#translate">Selection translation</a>)</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Spatial arrow-key navigation</b> — <code>Ctrl</code> (<code>⌘</code> on macOS)+<code>Alt</code>+arrow keys now reach windows that are slightly out of line and no longer skip a sidebar sitting between tab windows. The view moves to the chosen window if it isn't fully on screen</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>To-dos sidebar focus</b> — moving to the sidebar in To-dos mode with the shortcut now puts the cursor in the to-do search box</span></li>
+      </ul>
+      <p class="cl-note">Selection translation is off by default; turning it on under Settings → General downloads the model and dictionary (about 210–250 MB). This update <b>does not interrupt running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0160"><span class="hash"></span> 0.16.0 — To-do board (kanban) · light theme · splits inside spatial windows · magnetic windows</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.16.0</span><span class="d">2026-10-23</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>To-do board (kanban)</b> — see to-dos in To do → In progress → Ready to release → Done → On hold columns and drag cards between them. Click a card to expand its note; Done shows only today's work. The board reopens where you left it after updates and restarts (<a href="tasks.html#board">Task board</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Owner tab · Assign</b> — when an agent moves a card to In progress, the tab's name appears on it; click to jump there. "Assign" sends an instruction or a question as one line to a claude or codex terminal in the same Space</span></li>
