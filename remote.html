@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="./_lang.js"></script>
+<link rel="icon" href="./assets/app-icon.png" />
+<title>원격 오크텀 — Orch term 가이드</title>
+<meta name="description" content="집 PC와 회사 PC의 오크텀을 Tailscale 위에서 짝지어 에이전트 메시지와 파일을 주고받습니다. Tailnet Lock·ACL 설정, 짝짓기 절차, 본인 확인, 호스트 잠금 화면, 위험 안내." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://zendy00.github.io/orch-term-pages/remote.html" />
+<link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/remote.html" />
+<link rel="alternate" hreflang="en" href="https://zendy00.github.io/orch-term-pages/en/remote.html" />
+<link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/orch-term-pages/en/remote.html" />
+<link rel="stylesheet" href="./_tokens.css" />
+<link rel="stylesheet" href="./_app.css" />
+<link rel="stylesheet" href="./site.css" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Orch term" />
+<meta property="og:title" content="원격 오크텀 — Orch term 가이드" />
+<meta property="og:description" content="집 PC와 회사 PC의 오크텀을 Tailscale 위에서 짝지어 에이전트 메시지와 파일을 주고받습니다. Tailnet Lock·ACL 설정, 짝짓기 절차, 본인 확인, 호스트 잠금 화면, 위험 안내." />
+<meta property="og:url" content="https://zendy00.github.io/orch-term-pages/remote.html" />
+<meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="원격 오크텀 — Orch term 가이드" />
+<meta name="twitter:description" content="집 PC와 회사 PC의 오크텀을 Tailscale 위에서 짝지어 에이전트 메시지와 파일을 주고받습니다. Tailnet Lock·ACL 설정, 짝짓기 절차, 본인 확인, 호스트 잠금 화면, 위험 안내." />
+<meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+</head>
+<body data-page="remote">
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="메뉴"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="./assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="./assets/orch-term-wordmark.svg" alt="Orch term" />
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>기능 검색…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">홈</a><span class="sep">/</span><span>대형 기능</span><span class="sep">/</span><span>원격 오크텀</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> 대형 기능 · 원격 오크텀 <span class="flag">Tailscale</span></p>
+    <h1 class="page-title">원격 오크텀</h1>
+    <p class="lede">집 PC와 회사 PC의 오크텀을 <b>Tailscale 위에서 짝지어</b>, 한쪽 PC의 claude·codex가 다른 쪽 PC의 에이전트와 <b>메시지와 파일(스크린샷·로그·큰 파일)</b>을 주고받게 합니다. Windows와 macOS를 서로 섞어 쓸 수 있습니다.</p>
+
+    <div class="warn"><b>이 기능은 1단계입니다.</b> 원격 터미널·원격 탐색기 같은 화면 원격 제어는 아직 없습니다. 지금은 <b>에이전트 메시지와 파일</b>만 오갑니다. Linux에서는 이 기능이 꺼져 있습니다(설정에 항목이 보이지 않습니다).</div>
+
+    <h2 class="sec" id="what"><span class="hash"></span> 무엇을 하는가</h2>
+    <ul>
+      <li><b>받는 PC(호스트)</b>와 <b>하는 PC(클라이언트)</b>가 있습니다. 모든 오크텀이 둘 다 될 수 있고, 방향마다 따로 짝짓습니다.</li>
+      <li>「이 PC로 원격 접속 받기」는 <b>기본 꺼짐</b>입니다. PC마다 직접 켜야 문이 열립니다.</li>
+      <li>켜면 <b>Tailscale 주소에만</b> 연결을 받습니다(포트 <code>9620</code>). 사내망·LAN·인터넷에는 열리지 않고, Tailscale을 못 찾으면 켜지지 않습니다.</li>
+      <li>짝지은 PC의 에이전트끼리는 <code>chat_who</code>·<code>chat_send</code>·<code>chat_inbox</code>(메시지), <code>chat_send_file</code>(파일)을 씁니다. <a href="orchestration.html#chat">에이전트 채팅</a>과 같은 도구입니다.</li>
+    </ul>
+
+    <h2 class="sec" id="tailscale"><span class="hash"></span> 준비 1 — Tailscale 설치</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="download"></span> 두 PC에 Tailscale 설치·로그인</div>
+        <p>두 PC 모두 <a href="https://tailscale.com/download" target="_blank" rel="noopener">tailscale.com/download</a>에서 설치하고 <b>같은 tailnet</b>에 로그인합니다. 각 PC에 <code>회사-win</code>, <code>home-mac</code> 같은 Tailscale 이름이 붙습니다. 짝지을 때 이 이름(또는 <code>100.x.y.z</code> 주소)을 씁니다.</p>
+      </li>
+    </ol>
+
+    <h2 class="sec" id="lock"><span class="hash"></span> 준비 2 — Tailnet Lock 켜기 (권장)</h2>
+    <p>Tailscale은 PC를 tailnet에 들이는 일을 <b>Tailscale 서버가 도와줍니다</b>. 그 서버나 내 Tailscale 계정이 뚫리면 공격자가 <b>내 tailnet에 가짜 PC를 끼워 넣을 수 있습니다.</b> <b>Tailnet Lock</b>을 켜면 새 PC는 <b>이미 믿는 내 PC가 서명해 줘야만</b> tailnet에 들어올 수 있어서, Tailscale 서버나 계정이 뚫려도 가짜 PC가 들어오지 못합니다.</p>
+    <p>오크텀은 Tailscale 위에 <b>자체 인증을 한 번 더</b> 두므로(짝지은 기기 키만 통과) Tailnet Lock이 없다고 바로 뚫리는 것은 아닙니다. 그래도 <b>겹겹이 막는 것이 목적</b>이라, 회사 PC를 받는 쪽으로 켜는 분은 Tailnet Lock을 켜 두기를 권합니다. 켜는 방법은 Tailscale 문서의 <a href="https://tailscale.com/kb/1226/tailnet-lock" target="_blank" rel="noopener">Tailnet Lock</a>을 따르세요.</p>
+
+    <h2 class="sec" id="acl"><span class="hash"></span> 준비 3 — ACL로 범위 좁히기</h2>
+    <p>Tailscale의 접근 규칙(ACL)으로 <b>집 PC가 회사 PC의 오크텀 포트 하나에만</b> 닿게 좁힐 수 있습니다. PC에 <b>태그</b>(<code>tag:home</code>, <code>tag:work</code>)를 붙이고 태그끼리의 규칙을 씁니다. 태그는 관리 콘솔에서 PC에 붙이는 이름표입니다. 이름은 마음대로 정해도 됩니다.</p>
+    <div class="cmdrow"><pre class="cmd">{
+  "tagOwners": { "tag:home": ["autogroup:admin"], "tag:work": ["autogroup:admin"] },
+  "acls": [
+    { "action": "accept", "src": ["tag:home"], "dst": ["tag:work:9620"] }
+  ]
+}</pre></div>
+    <p>위 예시는 <code>tag:home</code> PC가 <code>tag:work</code> PC의 <code>9620</code> 포트로만 갈 수 있게 합니다. 핵심 한 줄은 <code>{"src":["tag:home"],"dst":["tag:work:9620"]}</code>입니다. 포트는 <b>정식 빌드에서 9620</b>입니다(개발 빌드는 9620에 인스턴스 번호가 더해집니다). 양방향으로 쓰려면 반대 방향 규칙을 한 줄 더 둡니다. 위 규칙은 <b>기존 <code>acls</code> 배열에 한 줄을 더하는 것</b>입니다. 기본 허용 규칙을 통째로 바꾸면 tailnet의 다른 통신이 끊깁니다. 또 PC에 태그를 붙이면 그 PC는 사용자가 아니라 <b>태그가 소유</b>하게 되어 다시 인증해야 할 수 있습니다.</p>
+
+    <h2 class="sec" id="pair"><span class="hash"></span> 짝짓기</h2>
+    <p>짝짓기는 <b>받는 PC 앞에 있는 사람이 직접 승인할 때만</b> 됩니다. 원격에서 새 기기를 짝짓는 길은 없습니다.</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> 받는 PC: 받기 켜고 짝짓기 창 열기</div>
+        <p>설정 → 원격 접속 → 「이 PC로 원격 접속 받기」를 켭니다(Tailscale 주소가 표시됩니다). 「새 기기 짝짓기」를 누르고 <b>Touch ID / Windows Hello</b>로 본인 확인을 하면 <b>2분 동안, 요청 1번만</b> 받는 창이 열립니다.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> 하는 PC: 원격 PC 추가</div>
+        <p>설정 → 원격 접속 → 「원격 PC 추가」에 받는 PC의 <b>Tailscale 이름</b>(또는 주소)과 알아보기 쉬운 표시 이름(예: <code>회사-Win</code>)을 적고 요청합니다.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="check"></span> 6자리 숫자를 비교하고 승인</div>
+        <p>두 PC 화면에 <b>같은 6자리 숫자</b>가 뜹니다. <b>받는 PC에서 두 숫자가 같을 때만</b> 「승인」을 누릅니다. 다르면 누르지 마세요 — 중간에 누가 끼어들었다는 뜻일 수 있습니다. 승인하면 양쪽 「등록 기기」 목록에 서로가 생깁니다.</p>
+      </li>
+    </ol>
+    <p class="dim">등록 기기는 받는 PC의 설정에서 언제든 삭제할 수 있고, 삭제하면 그 기기의 현재 연결도 바로 끊깁니다.</p>
+
+    <h2 class="sec" id="chat"><span class="hash"></span> 메시지 — 허락은 보내는 쪽에서</h2>
+    <ul>
+      <li>하는 PC의 에이전트가 <code>chat_who</code>를 부르면 짝지은 PC의 탭이 <code>회사-Win / claude — 탭 이름</code>처럼 나옵니다.</li>
+      <li>처음 메시지를 보낼 때 <b>보내는 PC(사람이 있는 PC)에서 허용 여부를 묻습니다.</b> 받는 PC에는 허용창이 뜨지 않고 기록과 알림만 남습니다. 허용은 (내 탭, 상대 탭) 쌍마다 따로이고 앱을 다시 켜도 유지되며, 어느 쪽 탭이 닫히거나 기기가 삭제되면 사라집니다.</li>
+      <li><b>대화는 하는 PC 쪽에서만 시작합니다.</b> 받는 PC의 에이전트는 허용된 대화에만 <b>답장</b>할 수 있고, 먼저 말을 걸 수 없습니다. 받는 PC의 에이전트가 속아 넘어가도 하는 PC의 에이전트를 부릴 수 없게 하려는 장치입니다. 허용을 묻는 것은 보내는 쪽(하는 PC)의 사람이고, 거기서 거절하면 그 탭을 닫았다 열 때까지 최종입니다.</li>
+      <li>받는 탭에는 <code>from: 회사-Win / claude</code>처럼 <b>출처 PC 이름</b>이 붙어 한 줄로 입력됩니다. 500자·제어문자 제거 같은 규칙은 로컬 채팅과 같습니다.</li>
+      <li>상대가 오프라인이면 하는 PC → 받는 PC 메시지는 쌓지 않고 바로 오류(<code>peer_offline</code>)를 돌려줍니다. 반대로 받는 PC의 <b>답장은 보관</b>했다가(기기당 최대 500건·7일) 하는 PC가 다시 연결되면 한 번씩 전달합니다.</li>
+      <li>메시지는 기기 쌍마다 <b>분당 20건</b>으로 제한됩니다(설정에서 바꿈).</li>
+    </ul>
+
+    <h2 class="sec" id="files"><span class="hash"></span> 파일</h2>
+    <ul>
+      <li>에이전트가 <code>chat_send_file</code>로 <b>파일 하나</b>를 짝지은 PC로만 보냅니다(폴더 통째 전송·외부 주소 없음). 이름·크기·sha256이 받는 에이전트에게 한 줄로 전달됩니다.</li>
+      <li>받은 파일은 <b>받은편지함 폴더에만</b> 저장됩니다: 데이터 폴더의 <code>remote-inbox/&lt;기기 이름&gt;/&lt;날짜&gt;/</code>. 자동으로 열리거나 실행되지 않고, 에이전트에게는 <b>경로만</b> 알려 줍니다. macOS는 「인터넷에서 다운로드한 파일」 경고, Windows는 「이 파일은 다른 컴퓨터에서 왔으므로…」 표시가 붙습니다.</li>
+      <li>조각으로 보내고 끊기면 이어 받으며, 끝나면 sha256으로 확인합니다. 받는 PC의 <b>디스크 여유가 부족하면 시작 전에 거절</b>합니다.</li>
+      <li><b>100 MiB를 넘는 파일</b>은 사람이 있는 PC에서 한 번 확인합니다. 파일 하나의 <b>한도는 기본 2 GiB</b>(설정에서 낮출 수 있음)입니다.</li>
+      <li><b>민감한 파일은 기본으로 막습니다.</b> <code>~/.ssh</code>, 클라우드·도구 자격 증명(<code>~/.aws</code>·<code>~/.kube</code> 등), 에이전트 설정과 토큰(<code>~/.claude</code>·<code>~/.codex</code> 등), 브라우저 프로필, 오크텀 데이터 폴더, <code>.env</code>·<code>*.pem</code>·<code>id_*</code> 같은 비밀값 파일이 해당합니다. 심볼릭 링크는 <b>실제 경로를 따라가서</b> 검사하므로 링크로 돌려서 보낼 수 없습니다.</li>
+    </ul>
+
+    <h2 class="sec" id="verify"><span class="hash"></span> 본인 확인 — 12시간과 잠자기</h2>
+    <ul>
+      <li>하는 PC에서 <b>연결을 시작할 때마다</b> Touch ID / Windows Hello로 본인 확인을 합니다. 에이전트가 이 창을 대신 띄우는 일은 없습니다.</li>
+      <li>확인은 <b>12시간</b> 유효합니다. <b>PC가 잠자기에 들어가도</b> 만료됩니다(깨어난 뒤 다시 확인). <b>화면 잠금은 만료 사유가 아닙니다</b> — 자리를 비워도 에이전트 일은 계속됩니다.</li>
+      <li>만료되면 연결이 끊기고 상태바에 「본인 확인 필요」가 뜹니다. 그때 에이전트가 <code>chat_send</code>를 하면 <code>auth_required</code> 오류만 돌아옵니다. 상태바를 눌러 확인하면 다시 연결됩니다.</li>
+      <li>확인이 유효한 동안 네트워크가 잠깐 끊겼다 돌아오면 확인 없이 자동으로 다시 붙습니다.</li>
+    </ul>
+
+    <h2 class="sec" id="lockscreen"><span class="hash"></span> 받는 PC의 잠금 화면</h2>
+    <p>하는 PC가 연결되어 있는 동안 받는 PC의 오크텀 화면 전체가 <b>「원격 사용 중」 잠금 화면</b>으로 가려집니다(메시지가 터미널에 타이핑되는 모습이 사무실 사람에게 보이지 않게 합니다). 인앱 브라우저 화면도 함께 가려집니다.</p>
+    <ul>
+      <li>잠금 화면 아래에 「집-Mac 연결됨」처럼 연결된 기기 이름과 <b>[모두 끊기]</b> 버튼이 있습니다. 끊기는 본인 확인 없이 바로 됩니다. 끊으면 하는 PC는 <b>스스로 다시 붙지 않고</b>, 받는 PC는 <b>60초 동안</b> 그 기기를 받지 않습니다.</li>
+      <li>받는 PC 앞에서 계속 쓰려면 <b>[이 PC에서 계속 쓰기]</b> → 이 PC에서 본인 확인. 풀어도 원격 연결은 유지됩니다.</li>
+      <li>잠금 중에는 <b>앱을 끌 수 없습니다</b>(⌘Q·창 닫기 무동작). 풀거나 「모두 끊기」를 먼저 하세요.</li>
+      <li>두 PC 앞에 다 사람이 있는 옆자리 테스트 같은 때를 위해, 기기별 「연결 중 화면 잠금」을 끌 수 있습니다. 끄는 일은 <b>받는 PC에서만, 본인 확인 후에만</b> 됩니다.</li>
+    </ul>
+
+    <h2 class="sec" id="settings"><span class="hash"></span> 설정에서 볼 수 있는 것</h2>
+    <p>설정 → 원격 접속에서 받기 켜기, 새 기기 짝짓기, 등록 기기 목록(마지막 연결·삭제), 원격 PC 추가, 메시지 속도·파일 크기 한도, 모든 연결 끊기, <b>감사 기록 보기</b>를 합니다. 감사 기록에는 짝짓기·연결·끊김·본인 확인·메시지(<b>본문은 저장하지 않음</b>, 길이만)·파일(이름·크기·해시)·거절된 연결 시도가 <b>30일</b> 남습니다. 연결이 생기면 상태바에도 표시됩니다.</p>
+
+    <h2 class="sec" id="risk"><span class="hash"></span> 위험과 한계</h2>
+    <div class="warn"><b>집 PC가 장악되면, 그 PC의 에이전트가 할 수 있던 일을 공격자도 할 수 있습니다.</b> 악성코드가 사용자 몰래 본인 확인을 통과할 수는 없지만, 사용자가 확인을 해 준 상태에서 장악된 PC는 정상 연결과 구분되지 않습니다. 그 PC의 에이전트가 허용된 대화로 회사 에이전트에게 일을 시킬 수 있고, 회사 에이전트가 읽을 수 있는 파일(차단 목록 밖)을 가져올 수 있습니다. 그래서 권한은 <code>chat</code>(메시지·파일)으로 좁게 두고, 위의 허용·속도 제한·잠금 화면·감사 기록으로 피해를 줄입니다.</div>
+    <ul>
+      <li>Tailscale 계정에 <b>2단계 인증</b>을 켜고, Tailnet Lock·ACL로 범위를 좁히세요. 등록 기기를 잃어버렸다면 받는 PC에서 바로 삭제하세요.</li>
+      <li>민감한 자료가 있는 PC는 이 기능을 켜지 않는 쪽이 가장 안전합니다. 받기는 기본 꺼짐입니다.</li>
+      <li><b>회사 PC에 켜기 전에 회사 정책을 확인하세요.</b> 사내 PC에 외부 PC의 접속을 받는 것을 보안 정책이 금지하거나 사전 승인을 요구할 수 있습니다. 허락 없이 쓰다 문제가 되는 책임은 사용자에게 있습니다.</li>
+      <li>상대 PC와 오크텀 버전(원격 프로토콜)이 다르면 연결이 거절되고 「상대 PC 업데이트 필요」가 나옵니다.</li>
+    </ul>
+
+    <div class="related">
+      <h4>관련 기능</h4>
+      <div class="relchips">
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="terminal"></span>에이전트 오케스트레이션</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="terminal"></span>SSH · SFTP</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="settings"></span>인앱 브라우저</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="mirror.html">다음 → CDP 브라우저 미러</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="./_icons.js"></script>
+<script src="./_nav.js"></script>
+<script src="./_tour.js"></script>
+</body>
+</html>

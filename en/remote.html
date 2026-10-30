@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="../_lang.js"></script>
+<link rel="icon" href="../assets/app-icon.png" />
+<title>Remote Orch term — Orch term guide</title>
+<meta name="description" content="Pair the Orch term on your home PC and work PC over Tailscale to exchange agent messages and files. Tailnet Lock and ACL setup, pairing steps, identity checks, the host lock screen, and risks." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://zendy00.github.io/orch-term-pages/en/remote.html" />
+<link rel="alternate" hreflang="ko" href="https://zendy00.github.io/orch-term-pages/remote.html" />
+<link rel="alternate" hreflang="en" href="https://zendy00.github.io/orch-term-pages/en/remote.html" />
+<link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/orch-term-pages/en/remote.html" />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_app.css" />
+<link rel="stylesheet" href="../site.css" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Orch term" />
+<meta property="og:title" content="Remote Orch term — Orch term guide" />
+<meta property="og:description" content="Pair the Orch term on your home PC and work PC over Tailscale to exchange agent messages and files. Tailnet Lock and ACL setup, pairing steps, identity checks, the host lock screen, and risks." />
+<meta property="og:url" content="https://zendy00.github.io/orch-term-pages/en/remote.html" />
+<meta property="og:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="ko_KR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Remote Orch term — Orch term guide" />
+<meta name="twitter:description" content="Pair the Orch term on your home PC and work PC over Tailscale to exchange agent messages and files. Tailnet Lock and ACL setup, pairing steps, identity checks, the host lock screen, and risks." />
+<meta name="twitter:image" content="https://zendy00.github.io/orch-term-pages/assets/orch-term-banner.png" />
+</head>
+<body data-page="remote">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="index.html">
+    <span class="glyph"><img src="../assets/app-icon.png" alt="" style="border-radius:5px" /></span>
+    <img class="wm" src="../assets/orch-term-wordmark.svg" alt="Orch term" />
+  </a>
+  <span class="spacer"></span>
+  <div class="find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search features…</span><kbd>Ctrl K</kbd></div>
+  <nav class="tlinks">
+    <a class="tlink" href="https://github.com/zendy00/orch-term-pages" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <a class="tlink cta" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download</a>
+  </nav>
+</header>
+<div class="scrim"></div>
+
+<div class="doc">
+  <aside class="side" id="sidebar"></aside>
+
+  <main class="content" id="main">
+    <nav class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Flagship features</span><span class="sep">/</span><span>Remote Orch term</span></nav>
+
+    <p class="eyebrow"><span class="hash"></span> Flagship features · Remote Orch term <span class="flag">Tailscale</span></p>
+    <h1 class="page-title">Remote Orch term</h1>
+    <p class="lede">Pair the Orch term on your home PC with the one on your work PC <b>over Tailscale</b>, so the claude or codex on one PC can exchange <b>messages and files (screenshots, logs, large files)</b> with the agents on the other. Windows and macOS can be mixed freely.</p>
+
+    <div class="warn"><b>This is phase 1.</b> Screen-level remote control — a remote terminal, a remote Explorer — doesn't exist yet. Only <b>agent messages and files</b> travel for now. The feature is off on Linux (the settings section is hidden).</div>
+
+    <h2 class="sec" id="what"><span class="hash"></span> What it does</h2>
+    <ul>
+      <li>There is a <b>receiving PC (host)</b> and a <b>sending PC (client)</b>. Every Orch term can be both, and each direction is paired separately.</li>
+      <li>"Accept remote connections on this PC" is <b>off by default</b>. You have to turn it on, PC by PC, before any door opens.</li>
+      <li>When on, it accepts connections <b>only on the Tailscale address</b> (port <code>9620</code>). It never opens to the office network, the LAN, or the internet, and it won't turn on if it can't find Tailscale.</li>
+      <li>Agents on paired PCs use <code>chat_who</code> · <code>chat_send</code> · <code>chat_inbox</code> (messages) and <code>chat_send_file</code> (files) — the same tools as <a href="orchestration.html#chat">agent chat</a>.</li>
+    </ul>
+
+    <h2 class="sec" id="tailscale"><span class="hash"></span> Prep 1 — Install Tailscale</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="download"></span> Install and sign in on both PCs</div>
+        <p>Install from <a href="https://tailscale.com/download" target="_blank" rel="noopener">tailscale.com/download</a> on both PCs and sign in to the <b>same tailnet</b>. Each PC gets a Tailscale name such as <code>work-win</code> or <code>home-mac</code>. You'll use that name (or its <code>100.x.y.z</code> address) when pairing.</p>
+      </li>
+    </ol>
+
+    <h2 class="sec" id="lock"><span class="hash"></span> Prep 2 — Turn on Tailnet Lock (recommended)</h2>
+    <p>When a PC joins a tailnet, <b>Tailscale's servers help</b>. If those servers or your Tailscale account were compromised, an attacker could <b>slip a fake PC into your tailnet.</b> With <b>Tailnet Lock</b> on, a new PC can join only if <b>a PC you already trust signs it</b>, so even a compromised Tailscale server or account can't add a fake PC.</p>
+    <p>Orch term adds <b>its own authentication on top of Tailscale</b> (only paired device keys get through), so a missing Tailnet Lock is not an instant breach. But the point is <b>layers of defense</b>, so if you're turning on receiving for a work PC, we recommend turning Tailnet Lock on too. Follow Tailscale's <a href="https://tailscale.com/kb/1226/tailnet-lock" target="_blank" rel="noopener">Tailnet Lock</a> docs to enable it.</p>
+
+    <h2 class="sec" id="acl"><span class="hash"></span> Prep 3 — Narrow the scope with an ACL</h2>
+    <p>Tailscale's access rules (ACLs) can limit your home PC to <b>just the one Orch term port on the work PC</b>. You put <b>tags</b> (<code>tag:home</code>, <code>tag:work</code>) on the PCs and write rules between tags. A tag is a label you attach to a PC in the admin console; the names are up to you.</p>
+    <div class="cmdrow"><pre class="cmd">{
+  "tagOwners": { "tag:home": ["autogroup:admin"], "tag:work": ["autogroup:admin"] },
+  "acls": [
+    { "action": "accept", "src": ["tag:home"], "dst": ["tag:work:9620"] }
+  ]
+}</pre></div>
+    <p>The example lets <code>tag:home</code> PCs reach only port <code>9620</code> on <code>tag:work</code> PCs. The key line is <code>{"src":["tag:home"],"dst":["tag:work:9620"]}</code>. The port is <b>9620 in release builds</b> (dev builds add an instance number to 9620). For use in both directions, add one more rule the other way. The rule above is <b>one line added to your existing <code>acls</code> array</b>; replacing the default allow rules wholesale cuts other traffic in your tailnet. Also, tagging a device makes it owned by the tag rather than by a user, so it may need to re-authenticate.</p>
+
+    <h2 class="sec" id="pair"><span class="hash"></span> Pairing</h2>
+    <p>Pairing works <b>only when a person sitting at the receiving PC approves it</b>. There is no way to pair a new device remotely.</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="settings"></span> Receiving PC: turn on receiving and open the pairing window</div>
+        <p>Settings → Remote access → turn on "Accept remote connections on this PC" (the Tailscale address is shown). Press "Pair new device" and confirm with <b>Touch ID / Windows Hello</b>; a window opens that accepts <b>one request, for 2 minutes</b>.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="terminal"></span> Sending PC: add a remote PC</div>
+        <p>Settings → Remote access → "Add remote PC": enter the receiving PC's <b>Tailscale name</b> (or address) and a recognizable display name (e.g. <code>Work-Win</code>), then send the request.</p>
+      </li>
+      <li class="step">
+        <div class="step-h"><span class="ic" data-icon="check"></span> Compare the 6 digits and approve</div>
+        <p>Both PCs show <b>the same 6-digit number</b>. Press "Approve" <b>on the receiving PC only if the two numbers match.</b> If they differ, don't — someone may be sitting in the middle. After approval each PC appears in the other's "Registered devices" list.</p>
+      </li>
+    </ol>
+    <p class="dim">You can delete a registered device from the receiving PC's settings at any time; deleting it also cuts that device's current connection immediately.</p>
+
+    <h2 class="sec" id="chat"><span class="hash"></span> Messages — consent is asked on the sending side</h2>
+    <ul>
+      <li>When the sending PC's agent calls <code>chat_who</code>, the tabs on the paired PC appear like <code>Work-Win / claude — tab name</code>.</li>
+      <li>The first time you send, <b>the sending PC (where the person is) asks for permission.</b> The receiving PC shows no permission prompt — it only records and notifies. Permission is per (my tab, their tab) pair, survives an app restart, and disappears when either tab is closed or the device is deleted.</li>
+      <li><b>Conversations start only from the sending PC.</b> An agent on the receiving PC can only <b>reply</b> inside permitted conversations; it can't start one. That way, even a tricked agent on the receiving PC can't order around an agent on the sending PC. If the sending side denies a permission, the denial is final until that tab is closed and reopened.</li>
+      <li>The receiving tab gets one typed line carrying the <b>source PC name</b>, like <code>from: Work-Win / claude</code>. The 500-character limit and control-character stripping are the same as local chat.</li>
+      <li>If the other PC is offline, a message from the sending PC to the receiving PC isn't queued — you get an error right away (<code>peer_offline</code>). The receiving PC's <b>replies are kept</b> (up to 500 per device, 7 days) and delivered once each when the sending PC reconnects.</li>
+      <li>Messages are limited to <b>20 per minute</b> per device pair (adjustable in settings).</li>
+    </ul>
+
+    <h2 class="sec" id="files"><span class="hash"></span> Files</h2>
+    <ul>
+      <li>An agent sends <b>one file</b> with <code>chat_send_file</code>, only to a paired PC (no whole-folder sends, no outside destinations). The receiving agent gets one line with the name, size, and sha256.</li>
+      <li>Received files are stored <b>only in the inbox folder</b>: <code>remote-inbox/&lt;device name&gt;/&lt;date&gt;/</code> under the data folder. They are never opened or run automatically, and the agent is told <b>only the path</b>. macOS adds its "downloaded from the internet" warning; Windows adds the "this file came from another computer" mark.</li>
+      <li>Files go in chunks, resume after a drop, and are verified with sha256 at the end. If the receiving PC has <b>too little free disk space, it refuses before starting</b>.</li>
+      <li>A file <b>over 100 MiB</b> needs a confirmation on the PC where a person is. The <b>per-file limit is 2 GiB by default</b> (you can lower it in settings).</li>
+      <li><b>Sensitive files are blocked by default:</b> <code>~/.ssh</code>, cloud and tool credentials (<code>~/.aws</code>, <code>~/.kube</code>, …), agent settings and tokens (<code>~/.claude</code>, <code>~/.codex</code>, …), browser profiles, the Orch term data folder, and secret files like <code>.env</code>, <code>*.pem</code>, <code>id_*</code>. Symlinks are <b>followed to the real path</b> before checking, so you can't smuggle a file through a link.</li>
+    </ul>
+
+    <h2 class="sec" id="verify"><span class="hash"></span> Identity check — 12 hours and sleep</h2>
+    <ul>
+      <li>On the sending PC, you confirm with Touch ID / Windows Hello <b>every time you start a connection</b>. An agent never raises this prompt for you.</li>
+      <li>The check is valid for <b>12 hours</b>. It also expires <b>when the PC goes to sleep</b> (confirm again after waking). <b>A screen lock does not expire it</b> — agents keep working while you're away.</li>
+      <li>On expiry the connection drops and the status bar shows "Verification needed". If an agent calls <code>chat_send</code> then, it just gets an <code>auth_required</code> error. Click the status bar and confirm to reconnect.</li>
+      <li>While the check is valid, a brief network drop reconnects automatically without a new check.</li>
+    </ul>
+
+    <h2 class="sec" id="lockscreen"><span class="hash"></span> The receiving PC's lock screen</h2>
+    <p>While a sending PC is connected, the whole Orch term window on the receiving PC is covered by a <b>"Remote in use" lock screen</b> (so people in the office can't watch messages being typed into terminals). The in-app browser is hidden too.</p>
+    <ul>
+      <li>The lock screen shows the connected device's name (e.g. "Home-Mac connected") and a <b>[Disconnect all]</b> button. Disconnecting needs no identity check. After it, the sending PC <b>does not reconnect by itself</b>, and the receiving PC <b>refuses that device for 60 seconds</b>.</li>
+      <li>To keep using the receiving PC, press <b>[Keep using this PC]</b> and confirm your identity on that PC. The remote connection stays up.</li>
+      <li>You <b>can't quit the app</b> while locked (⌘Q and closing the window do nothing). Unlock or "Disconnect all" first.</li>
+      <li>For cases like testing at neighboring desks where people sit at both PCs, you can turn off "Lock screen while connected" per device. That can be done <b>only on the receiving PC, and only after an identity check</b>.</li>
+    </ul>
+
+    <h2 class="sec" id="settings"><span class="hash"></span> What you can see in settings</h2>
+    <p>Settings → Remote access covers turning receiving on, pairing a new device, the registered-device list (last connected, delete), adding a remote PC, message-rate and file-size limits, disconnect all, and the <b>audit log</b>. The audit log keeps, for <b>30 days</b>: pairings, connections, disconnects, identity checks, messages (<b>bodies are not stored</b> — length only), files (name, size, hash), and rejected connection attempts. Connections also show in the status bar.</p>
+
+    <h2 class="sec" id="risk"><span class="hash"></span> Risks and limits</h2>
+    <div class="warn"><b>If your home PC is taken over, the attacker can do whatever that PC's agents could.</b> Malware can't pass the identity check behind your back, but a PC taken over after you've confirmed looks the same as a normal connection. Its agents could order the work agents around inside permitted conversations and fetch any file the work agents can read (outside the block list). That's why access stays narrow (<code>chat</code>: messages and files) and the permissions, rate limit, lock screen, and audit log above limit the damage.</div>
+    <ul>
+      <li>Turn on <b>two-factor authentication</b> for your Tailscale account, and narrow the scope with Tailnet Lock and ACLs. If you lose a registered device, delete it on the receiving PC right away.</li>
+      <li>The safest choice for a PC with sensitive material is to leave this feature off. Receiving is off by default.</li>
+      <li><b>Check your company policy before turning it on for a work PC.</b> Security policy may forbid accepting connections from an outside PC on a corporate machine, or require prior approval. Using it without permission is your responsibility.</li>
+      <li>If the other PC's Orch term has a different remote protocol version, the connection is refused with "update the other PC".</li>
+    </ul>
+
+    <div class="related">
+      <h4>Related features</h4>
+      <div class="relchips">
+        <a class="relchip" href="orchestration.html"><span class="ri" data-icon="terminal"></span>Agent orchestration</a>
+        <a class="relchip" href="ssh.html"><span class="ri" data-icon="terminal"></span>SSH · SFTP</a>
+        <a class="relchip" href="browser.html"><span class="ri" data-icon="settings"></span>In-app browser</a>
+      </div>
+    </div>
+
+    <footer class="docfoot">
+      <span></span>
+      <span><a href="mirror.html">Next → CDP browser mirror</a></span>
+    </footer>
+  </main>
+
+  <aside class="toc" id="toc"></aside>
+</div>
+
+<script src="../_icons.js"></script>
+<script src="../_nav.js"></script>
+<script src="../_tour.js"></script>
+</body>
+</html>

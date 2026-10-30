@@ -23,6 +23,7 @@ Base URL: https://zendy00.github.io/orch-term-pages/
 - [Task AI Sharing](https://zendy00.github.io/orch-term-pages/en/task-ai-sharing.html): sharing task context with AI agents.
 - [Source Control](https://zendy00.github.io/orch-term-pages/en/source-control.html): git and source-control workflows.
 - [SSH](https://zendy00.github.io/orch-term-pages/en/ssh.html): remote shell and SSH workflows.
+- [Remote Orch term](https://zendy00.github.io/orch-term-pages/en/remote.html): pair two PCs over Tailscale to exchange agent messages and files (macOS and Windows), with Tailnet Lock, ACL, identity-check, and host lock-screen guidance.
 - [Browser Mirror](https://zendy00.github.io/orch-term-pages/en/mirror.html): visible browser mirroring for web tasks.
 
 ## Discovery Files

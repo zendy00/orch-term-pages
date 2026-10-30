@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-remote-en",
+  "name": "Remote Orch term tour",
+  "url": "https://zendy00.github.io/orch-term-pages/en/remote.html",
+  "createdAt": "2026-10-30T00:00:00Z",
+  "updatedAt": "2026-10-30T00:00:00Z",
+  "siteFonts": [
+    "'Segoe UI',system-ui,sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "Remote Orch term",
+      "description": "Agents on two paired PCs exchange messages and files over Tailscale. Receiving is off by default and opens only on the Tailscale address.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".page-title"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Remote Orch term",
+          "parentSelector": "#main",
+          "tagName": "H1"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 150,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Remote Orch term"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. Remote Orch term",
+          "position": {
+            "x": 320,
+            "y": 110
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "lock",
+      "name": "Prep 2 — Turn on Tailnet Lock (recommended)",
+      "description": "Even if Tailscale's servers or your account were compromised, a fake PC can't join the tailnet. One more layer on top of Orch term's own authentication.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#lock"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Prep 2 — Turn on Tailnet Lock (recommended)",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 300,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Prep 2 — Turn on Tailnet Lock (recommended)"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-lock",
+          "text": "2. Prep 2 — Turn on Tailnet Lock (recommended)",
+          "position": {
+            "x": 320,
+            "y": 260
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "pair",
+      "name": "Pairing",
+      "description": "Open a 2-minute window on the receiving PC with an identity check, send the request from the sending PC, and approve on the receiving PC only if both 6-digit numbers match.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#pair"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Pairing",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 450,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Pairing"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-pair",
+          "text": "3. Pairing",
+          "position": {
+            "x": 320,
+            "y": 410
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "lockscreen",
+      "name": "The receiving PC's lock screen",
+      "description": "While connected, the receiving PC is covered by a \"Remote in use\" screen, and Disconnect all needs no identity check.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#lockscreen"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "The receiving PC's lock screen",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 600,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "The receiving PC's lock screen"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-lockscreen",
+          "text": "4. The receiving PC's lock screen",
+          "position": {
+            "x": 320,
+            "y": 560
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "risk",
+      "name": "Risks and limits",
+      "description": "If your home PC is taken over, the attacker can do what its agents could. Check your company policy before turning this on for a work PC.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#risk"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "Risks and limits",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 750,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "Risks and limits"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-risk",
+          "text": "5. Risks and limits",
+          "position": {
+            "x": 320,
+            "y": 710
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}

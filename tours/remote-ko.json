@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "orchterm-docs-remote-ko",
+  "name": "원격 오크텀 둘러보기",
+  "url": "https://zendy00.github.io/orch-term-pages/remote.html",
+  "createdAt": "2026-10-30T00:00:00Z",
+  "updatedAt": "2026-10-30T00:00:00Z",
+  "siteFonts": [
+    "'Malgun Gothic','Segoe UI',system-ui,sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "hero",
+      "name": "원격 오크텀",
+      "description": "짝지은 두 PC의 에이전트가 Tailscale 위에서 메시지와 파일을 주고받습니다. 받기는 기본 꺼짐이고 Tailscale 주소에만 열립니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".page-title"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "원격 오크텀",
+          "parentSelector": "#main",
+          "tagName": "H1"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 150,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "원격 오크텀"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-hero",
+          "text": "1. 원격 오크텀",
+          "position": {
+            "x": 320,
+            "y": 110
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "lock",
+      "name": "준비 2 — Tailnet Lock 켜기 (권장)",
+      "description": "Tailscale 서버나 계정이 뚫려도 가짜 PC가 tailnet에 들어오지 못하게 합니다. 오크텀의 자체 인증 위에 한 겹 더 막는 것입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#lock"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "준비 2 — Tailnet Lock 켜기 (권장)",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 300,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "준비 2 — Tailnet Lock 켜기 (권장)"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-lock",
+          "text": "2. 준비 2 — Tailnet Lock 켜기 (권장)",
+          "position": {
+            "x": 320,
+            "y": 260
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "pair",
+      "name": "짝짓기",
+      "description": "받는 PC에서 본인 확인으로 2분 창을 열고, 하는 PC에서 요청하고, 양쪽 6자리 숫자가 같을 때만 받는 PC에서 승인합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#pair"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "짝짓기",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 450,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "짝짓기"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-pair",
+          "text": "3. 짝짓기",
+          "position": {
+            "x": 320,
+            "y": 410
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "lockscreen",
+      "name": "받는 PC의 잠금 화면",
+      "description": "연결 중에는 받는 PC 화면이 「원격 사용 중」으로 가려지고, 모두 끊기는 본인 확인 없이 누를 수 있습니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#lockscreen"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "받는 PC의 잠금 화면",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 600,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "받는 PC의 잠금 화면"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-lockscreen",
+          "text": "4. 받는 PC의 잠금 화면",
+          "position": {
+            "x": 320,
+            "y": 560
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "risk",
+      "name": "위험과 한계",
+      "description": "집 PC가 장악되면 그 PC의 에이전트가 할 수 있던 일을 공격자도 할 수 있습니다. 회사 PC에 켜기 전에 회사 정책을 확인하세요.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#risk"
+        },
+        "layer2": {
+          "kind": "text-parent",
+          "text": "위험과 한계",
+          "parentSelector": "#main",
+          "tagName": "H2"
+        },
+        "layer3": {
+          "kind": "visual-heuristic",
+          "x": 320,
+          "y": 750,
+          "width": 640,
+          "height": 44,
+          "nearbyText": [
+            "위험과 한계"
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-risk",
+          "text": "5. 위험과 한계",
+          "position": {
+            "x": 320,
+            "y": 710
+          },
+          "anchorOffset": {
+            "x": 0,
+            "y": -40
+          },
+          "style": {
+            "fontFamily": "'Malgun Gothic','Segoe UI',system-ui,sans-serif",
+            "fontSize": 15,
+            "color": "#f4f5f8",
+            "bold": true,
+            "backgroundColor": "#1c1e21",
+            "backgroundOpacity": 0.96,
+            "borderColor": "#dcab59"
+          }
+        }
+      ],
+      "autoAdvanceMs": 9000,
+      "waitForNavigation": false
+    }
+  ]
+}
