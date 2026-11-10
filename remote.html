@@ -145,6 +145,15 @@
     <h2 class="sec" id="settings"><span class="hash"></span> 설정에서 볼 수 있는 것</h2>
     <p>설정 → 원격 접속에서 받기 켜기, 새 기기 짝짓기, 등록 기기 목록(마지막 연결·삭제), 원격 PC 추가, 메시지 속도·파일 크기 한도, 모든 연결 끊기, <b>감사 기록 보기</b>를 합니다. 감사 기록에는 짝짓기·연결·끊김·본인 확인·메시지(<b>본문은 저장하지 않음</b>, 길이만)·파일(이름·크기·해시)·거절된 연결 시도가 <b>30일</b> 남습니다. 연결이 생기면 상태바에도 표시됩니다.</p>
 
+    <h2 class="sec" id="trouble"><span class="hash"></span> 문제 해결 — 사내 VPN을 켜면 연결이 안 될 때</h2>
+    <p>일부 사내 VPN(실측: Windows의 SECUI VPN)은 켜질 때 Windows 경로 표를 다시 쓰면서 Tailscale 경로(<code>100.x</code>)를 지웁니다. 그러면 Tailscale 앱에는 「연결됨」으로 보여도 상대 PC에 닿지 않습니다.</p>
+    <ul>
+      <li><b>증상</b>: 원격 PC 추가·연결이 <b>시간 초과</b>로 끝나고, <code>ping &lt;상대 100.x 주소&gt;</code>도 응답이 없습니다.</li>
+      <li><b>확인</b>: PowerShell에서 <code>Find-NetRoute -RemoteIPAddress &lt;상대 100.x 주소&gt;</code>를 실행해 나가는 인터페이스가 <b>Tailscale이 아니라 이더넷·Wi-Fi</b>로 나오면 경로가 지워진 것입니다. Tailscale 로그에 경로를 다시 거는 기록이 초당 몇 건씩 이어지기도 합니다(VPN과 경로를 두고 다투는 상태).</li>
+      <li><b>해결</b>: 사내 VPN을 끄고 <code>tailscale down</code> → <code>tailscale up</code>으로 Tailscale을 다시 올리세요. 경로가 돌아오면 바로 연결됩니다. 사내 VPN과 동시에 쓰는 방법은 VPN 정책에 달려 있어 오크텀에서 해결할 수 없습니다.</li>
+      <li>Windows 방화벽 규칙을 따로 만들 필요는 없습니다. 오크텀은 Tailscale 주소에만 포트를 열고, 막히는 원인은 방화벽이 아니라 경로입니다.</li>
+    </ul>
+
     <h2 class="sec" id="risk"><span class="hash"></span> 위험과 한계</h2>
     <div class="warn"><b>집 PC가 장악되면, 그 PC의 에이전트가 할 수 있던 일을 공격자도 할 수 있습니다.</b> 악성코드가 사용자 몰래 본인 확인을 통과할 수는 없지만, 사용자가 확인을 해 준 상태에서 장악된 PC는 정상 연결과 구분되지 않습니다. 그 PC의 에이전트가 허용된 대화로 회사 에이전트에게 일을 시킬 수 있고, 회사 에이전트가 읽을 수 있는 파일(차단 목록 밖)을 가져올 수 있습니다. 그래서 권한은 <code>chat</code>(메시지·파일)으로 좁게 두고, 위의 허용·속도 제한·잠금 화면·감사 기록으로 피해를 줄입니다.</div>
     <ul>

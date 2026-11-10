@@ -145,6 +145,15 @@
     <h2 class="sec" id="settings"><span class="hash"></span> What you can see in settings</h2>
     <p>Settings → Remote access covers turning receiving on, pairing a new device, the registered-device list (last connected, delete), adding a remote PC, message-rate and file-size limits, disconnect all, and the <b>audit log</b>. The audit log keeps, for <b>30 days</b>: pairings, connections, disconnects, identity checks, messages (<b>bodies are not stored</b> — length only), files (name, size, hash), and rejected connection attempts. Connections also show in the status bar.</p>
 
+    <h2 class="sec" id="trouble"><span class="hash"></span> Troubleshooting — when a corporate VPN breaks the connection</h2>
+    <p>Some corporate VPNs (observed: SECUI VPN on Windows) rewrite the Windows route table when they connect and drop the Tailscale routes (<code>100.x</code>). Tailscale still shows "Connected", but the other PC can't be reached.</p>
+    <ul>
+      <li><b>Symptom</b>: adding or connecting to a remote PC ends in a <b>timeout</b>, and <code>ping &lt;peer's 100.x address&gt;</code> gets no reply.</li>
+      <li><b>Check</b>: in PowerShell, run <code>Find-NetRoute -RemoteIPAddress &lt;peer's 100.x address&gt;</code>. If the outgoing interface is <b>Ethernet or Wi-Fi instead of Tailscale</b>, the route is gone. The Tailscale log may also show it re-adding routes several times a second (it's fighting the VPN over the route).</li>
+      <li><b>Fix</b>: turn the corporate VPN off, then restart Tailscale with <code>tailscale down</code> → <code>tailscale up</code>. Once the route is back, connecting works right away. Whether both can run at once depends on the VPN's policy, which Orch term can't change.</li>
+      <li>You don't need to add a Windows Firewall rule. Orch term only opens its port on the Tailscale address, and the cause here is the route, not the firewall.</li>
+    </ul>
+
     <h2 class="sec" id="risk"><span class="hash"></span> Risks and limits</h2>
     <div class="warn"><b>If your home PC is taken over, the attacker can do whatever that PC's agents could.</b> Malware can't pass the identity check behind your back, but a PC taken over after you've confirmed looks the same as a normal connection. Its agents could order the work agents around inside permitted conversations and fetch any file the work agents can read (outside the block list). That's why access stays narrow (<code>chat</code>: messages and files) and the permissions, rate limit, lock screen, and audit log above limit the damage.</div>
     <ul>
