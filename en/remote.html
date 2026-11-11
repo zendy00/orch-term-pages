@@ -56,7 +56,7 @@
     <h1 class="page-title">Remote Orch term</h1>
     <p class="lede">Pair the Orch term on your home PC with the one on your work PC <b>over Tailscale</b>, so the claude or codex on one PC can exchange <b>messages and files (screenshots, logs, large files)</b> with the agents on the other. Windows and macOS can be mixed freely.</p>
 
-    <div class="warn"><b>This is phase 1.</b> Screen-level remote control — a remote terminal, a remote Explorer — doesn't exist yet. Only <b>agent messages and files</b> travel for now. The feature is off on Linux (the settings section is hidden).</div>
+    <div class="warn"><b>Messages and files are the basics; devices with "Allow terminal" on also get a remote space.</b> Besides agent messages and files, turning on "Allow terminal" per device on the receiving PC lets the home PC view that PC's terminal tabs and its <b>files, Git, search, to-dos and notes</b> (<a href="#workspace">section below</a>). The feature is off on Linux (the settings section is hidden).</div>
 
     <h2 class="sec" id="what"><span class="hash"></span> What it does</h2>
     <ul>
@@ -125,6 +125,32 @@
       <li><b>Sensitive files are blocked by default:</b> <code>~/.ssh</code>, cloud and tool credentials (<code>~/.aws</code>, <code>~/.kube</code>, …), agent settings and tokens (<code>~/.claude</code>, <code>~/.codex</code>, …), browser profiles, the Orch term data folder, and secret files like <code>.env</code>, <code>*.pem</code>, <code>id_*</code>. Symlinks are <b>followed to the real path</b> before checking, so you can't smuggle a file through a link.</li>
     </ul>
 
+    <h2 class="sec" id="workspace"><span class="hash"></span> Viewing the host PC's files, Git, search, to-dos and notes from a remote space</h2>
+    <p>When you turn on <b>Settings → Remote access → "Allow terminal" for a device</b> on the receiving PC (e.g. the work PC; identity check required), the client PC (home PC) gets that PC's <b>remote space</b> in its title bar. While you are viewing a remote space, it is not only the terminal — <b>the sidebar and file viewing point at the host PC too.</b> There is nothing extra to turn on: "Allow terminal" <b>also covers viewing and editing files, Git changes, search, to-dos and notes</b>.</p>
+    <ul>
+      <li><b>The sidebar switches by itself.</b> Opening a remote space makes Explorer, Git, Search and To-dos show that host PC space's <b>project folder</b>, with a label like "Work-Win · space name" always visible above the sidebar. Going back to a local space restores this PC's state (expanded folders etc.) exactly. The Sessions list is not switched (it stays this PC). If a space has several projects, the default follows the host PC's active project, and you can pick another in the sidebar header (the choice stays on this PC only and does not affect the host PC).</li>
+      <li><b>Files open as "this PC only" tabs.</b> Clicking a file in Explorer, the Git changes list or search results adds a <b>dashed, yellow tab</b> to the tab strip of the remote panel you are looking at. You can switch between it and the terminal tabs, and <b>nothing appears on the host PC's screen</b> (the person at the host PC sees no tab). The tab exists only on this PC — it disappears when the app restarts, and it can't be split, moved to another panel or renamed. <code>⌘W</code>/<code>Ctrl+W</code> closes the visible "this PC only" tab (it never closes a host terminal tab).</li>
+      <li><b>Markdown and HTML reports.</b> Markdown opens in the reading view (relative images and links resolve against the same project on the host PC), and the 👁 button switches to edit mode. <b>An HTML report is shown rendered</b> — CSS, scripts and images from the same folder come along. The report runs in an isolated frame, so it <b>can't reach Orch term internals or files outside the project</b>, and outside network requests are blocked (some resources — e.g. images referenced through CSS <code>url()</code> — may appear empty). Code and text open in the usual editor.</li>
+      <li><b>You can occasionally edit and save.</b> Saving writes to the file on the host PC, with safeguards.
+        <ul>
+          <li>If the host PC's editor has <b>unsaved changes in the same file</b>, saving is refused with "The host PC editor has unsaved changes" (there is no overwrite option).</li>
+          <li>If the file changed on the host PC after you opened it, you get "Changed on the host PC in the meantime" — choose <b>Reload</b> or <b>Overwrite anyway</b>.</li>
+          <li>If it changes on the host PC while you are editing, the tab shows "Changed on the host PC". A file you haven't edited refreshes by itself every 5 seconds.</li>
+          <li>Files larger than about 900 KB open <b>read-only</b>. You can't create new files, only save existing ones. When the connection drops, the open content stays visible but becomes read-only, and unlocks when it reconnects.</li>
+        </ul>
+      </li>
+      <li><b>Git is view-only.</b> You can see the host PC project's changed files (staged and working tree) and per-file diffs; a diff opens as a "this PC only" tab. No commit, stage, push, revert, branch switch or Git graph. Changes outside the project folder (other folders of a larger repository) are not shown.</li>
+      <li><b>Search.</b> Search in files (<code>Ctrl+Shift+F</code>) searches the host PC project; clicking a result opens a "this PC only" tab at that line.</li>
+      <li><b>To-dos.</b> You see the host PC space's to-do board and can <b>add</b> items and <b>move them between columns (including Done)</b>. Changes show on the host PC's board right away, and changes made there (by agents too) appear on this PC's board within seconds. No deleting or editing of to-dos.</li>
+      <li><b>Notes.</b> While you view a remote space, the floating <b>Notes window</b> shows the host PC's notes, and the <b>"Work-Win notes / This PC notes" switch</b> at the top of the window toggles between them (default: host PC). Opening a note from the list opens a "this PC only" tab, and you can <b>write new notes and edit memo (text) notes</b>. Drawing, sequence and flowchart notes are view-only. If the host PC is editing that note, saving is refused. Notes can't be deleted.</li>
+    </ul>
+    <p><b>Not possible</b>: Git writes (commit, push…), deleting notes or to-dos, editing to-dos, creating / renaming / deleting / drag-moving files and folders, downloading files, and opening editor tabs in the host PC's terminal layout. To hand over a file, use "Files" above (<code>chat_send_file</code>).</p>
+    <ul>
+      <li><b>Sensitive files stay blocked here too.</b> Credential folders such as <code>.ssh</code>, <code>.aws</code>, <code>.kube</code>, <code>.docker</code>, <code>.gnupg</code> and secret files are left out of listings, search and opening, even if the project is outside the home folder. Symlinks that point outside the project folder are not followed.</li>
+      <li><b>Nothing is shown on the host PC's screen.</b> What you view or edit from home is recorded only in the <b>audit log</b> (action kind and project-relative path only — never file contents, search queries, or note and to-do bodies). The to-do, note and file changes themselves do show up in the host PC's board, list and files.</li>
+      <li>If the host PC runs an <b>older build</b>, you see "Update the host PC to view its files" while the terminal keeps working as before (update both sides). When the connection drops, open content stays read-only.</li>
+    </ul>
+
     <h2 class="sec" id="verify"><span class="hash"></span> Identity check — 12 hours and sleep</h2>
     <ul>
       <li>On the sending PC, you confirm with Touch ID / Windows Hello <b>every time you start a connection</b>. An agent never raises this prompt for you.</li>
@@ -158,6 +184,7 @@
     <div class="warn"><b>If your home PC is taken over, the attacker can do whatever that PC's agents could.</b> Malware can't pass the identity check behind your back, but a PC taken over after you've confirmed looks the same as a normal connection. Its agents could order the work agents around inside permitted conversations and fetch any file the work agents can read (outside the block list). That's why access stays narrow (<code>chat</code>: messages and files) and the permissions, rate limit, lock screen, and audit log above limit the damage.</div>
     <ul>
       <li>Turn on <b>two-factor authentication</b> for your Tailscale account, and narrow the scope with Tailnet Lock and ACLs. If you lose a registered device, delete it on the receiving PC right away.</li>
+      <li><b>"Allow terminal" grants a full shell with that PC user's permissions, plus viewing and editing project files.</b> Turn it on only for devices you trust. It turns off screen lock while that device is connected, and you can turn it off on the receiving PC at any time (open remote channels close immediately).</li>
       <li>The safest choice for a PC with sensitive material is to leave this feature off. Receiving is off by default.</li>
       <li><b>Check your company policy before turning it on for a work PC.</b> Security policy may forbid accepting connections from an outside PC on a corporate machine, or require prior approval. Using it without permission is your responsibility.</li>
       <li>If the other PC's Orch term has a different remote protocol version, the connection is refused with "update the other PC".</li>
