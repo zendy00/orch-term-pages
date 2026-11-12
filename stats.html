@@ -62,7 +62,7 @@
 
   <div class="stats-head">
     <h1>릴리즈 다운로드 통계</h1>
-    <p class="sub">zendy00/orch-term-pages · 정식 앱 릴리즈 에셋 누적 다운로드 — 베타·회의 모델 배포 제외 (공개 API, 실시간)</p>
+    <p class="sub">zendy00/orch-term-pages · 앱 설치 파일(exe·msi·dmg·macOS 업데이트 묶음) 누적 다운로드 — 정식+베타, 서명·매니페스트·설치 스크립트·회의 모델 배포 제외 (공개 API, 실시간)</p>
   </div>
 
   <div id="summary"></div>
@@ -81,7 +81,7 @@
 
 <script type="module">
 import {
-  sortByPublished, pickLatest, releaseDownloads, totalDownloads,
+  sortByPublished, pickLatest, pickLatestBeta, splitDownloads, releaseDownloads, totalDownloads,
   sortedAssets, isCounted, appReleases, fmtInt, fmtBytes, fmtDate,
 } from './stats.js';
 
@@ -125,12 +125,13 @@ function assetRows(r) {
   }).join('');
 }
 
-function releaseCard(r, isLatest) {
+function releaseCard(r, isLatest, isLatestBeta = false) {
   return `
-      <div class="release${isLatest ? ' is-latest' : ''}">
+      <div class="release${isLatest || isLatestBeta ? ' is-latest' : ''}">
         <div class="rh">
           <span class="tag">${esc(r.tag_name)}</span>
           ${isLatest ? '<span class="badge latest">LATEST</span>' : ''}
+          ${isLatestBeta ? '<span class="badge latest">최신 베타</span>' : ''}
           ${r.prerelease ? '<span class="badge pre">pre-release</span>' : ''}
           <span class="dl">↓ ${fmtInt(releaseDownloads(r))}</span>
           <span class="date">${fmtDate(r.published_at)}</span>
@@ -150,18 +151,24 @@ function render(releases) {
     return;
   }
   const latest = pickLatest(releases);
+  const latestBeta = pickLatestBeta(releases);
   const total = totalDownloads(releases);
+  const split = splitDownloads(releases);
+  const nStable = releases.filter((r) => !r.prerelease).length;
 
   elSummary.innerHTML = `
     <div class="summary">
-      <div class="box"><div class="num">${fmtInt(total)}</div><div class="lbl">총 다운로드</div></div>
-      <div class="box"><div class="num">${fmtInt(releases.length)}</div><div class="lbl">릴리즈 수</div></div>
+      <div class="box"><div class="num">${fmtInt(total)}</div><div class="lbl">총 다운로드 (정식 ${fmtInt(split.stable)} · 베타 ${fmtInt(split.beta)})</div></div>
+      <div class="box"><div class="num">${fmtInt(releases.length)}</div><div class="lbl">릴리즈 수 (정식 ${fmtInt(nStable)} · 베타 ${fmtInt(releases.length - nStable)})</div></div>
       <div class="box"><div class="num">${esc(latest ? latest.tag_name : '—')}</div><div class="lbl">최신 버전</div></div>
+      <div class="box"><div class="num">${esc(latestBeta ? latestBeta.tag_name : '—')}</div><div class="lbl">최신 베타</div></div>
     </div>`;
 
-  // 최신 버전만 즉시 렌더. 이전 버전들은 토글을 펼칠 때 lazy 렌더한다(초기 DOM 비용 절감).
-  const others = sortByPublished(releases).filter((r) => !(latest && r.id === latest.id));
+  // 최신 베타(정식판보다 새것)와 최신 정식판만 즉시 렌더. 이전 버전들은 토글을 펼칠 때 lazy 렌더한다(초기 DOM 비용 절감).
+  const shown = new Set([latest, latestBeta].filter(Boolean).map((r) => r.id));
+  const others = sortByPublished(releases).filter((r) => !shown.has(r.id));
   elReleases.innerHTML =
+    (latestBeta ? releaseCard(latestBeta, false, true) : '') +
     (latest ? releaseCard(latest, true) : '') +
     (others.length ? `
       <button id="toggle-older" class="older-toggle" type="button" aria-expanded="false">

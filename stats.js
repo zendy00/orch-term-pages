@@ -26,29 +26,51 @@ export function isAppRelease(release) {
   return APP_TAG.test(release.tag_name || '');
 }
 
-/** 통계 대상 릴리즈: draft·모델 배포 릴리즈·베타(prerelease) 제외. 베타(v<x.y.z>-beta.<n>)는
- *  「베타 업데이트 확인」을 켠 사람만 받는 것이라 정식 설치 통계에 섞지 않는다. */
+/** 통계 대상 릴리즈: draft·모델 배포 릴리즈 제외. 베타(v<x.y.z>-beta.<n>, prerelease)도 앱 설치라 넣는다
+ *  (합계는 `splitDownloads`로 정식/베타를 나눠 보인다). 고정 프리릴리즈 `beta-channel`은 태그가 vX.Y.Z가 아니라 빠진다. */
 export function appReleases(releases) {
-  return releases.filter((r) => !r.draft && !r.prerelease && isAppRelease(r));
+  return releases.filter((r) => !r.draft && isAppRelease(r));
 }
 
-// 실제 사용자 다운로드 통계에서 제외할 에셋 이름. latest.json은 Tauri updater 매니페스트라
-// 앱이 업데이트를 확인할 때마다 받아가 카운트를 부풀린다 — 설치 다운로드가 아니라 폴링 노이즈다.
-// install.sh는 macOS 한 줄 설치(curl … | sh)의 부트스트랩 스크립트라, 받은 뒤 다시 실제
-// 바이너리(.dmg/.app)를 내려받는다 — 둘 다 세면 한 번 설치가 이중 집계된다.
-const NON_DOWNLOAD_ASSETS = new Set(['latest.json', 'install.sh']);
+/** 최신 정식판보다 나중에 게시된 베타 중 가장 최근 것(없거나 정식판이 없으면 null — 그땐 pickLatest가 베타로 폴백한다). */
+export function pickLatestBeta(releases) {
+  const live = sortByPublished(releases.filter((r) => !r.draft));
+  const stable = live.find((r) => !r.prerelease);
+  if (!stable) return null;
+  const beta = live.find((r) => r.prerelease);
+  if (!beta) return null;
+  return new Date(beta.published_at) > new Date(stable.published_at) ? beta : null;
+}
 
-/** 이 에셋을 다운로드 통계로 집계하는가(업데이터 매니페스트는 false). */
+/** 정식·베타 다운로드 합계. */
+export function splitDownloads(releases) {
+  let stable = 0;
+  let beta = 0;
+  for (const r of releases) {
+    if (r.prerelease) beta += releaseDownloads(r);
+    else stable += releaseDownloads(r);
+  }
+  return { stable, beta };
+}
+
+// 실제 설치 파일만 다운로드로 센다(허용 목록). 그 밖은 목록엔 보이되 「미집계」:
+// - latest.json: Tauri updater 매니페스트 — 앱이 업데이트를 확인할 때마다 받아가 폴링 노이즈.
+// - install.sh: macOS 한 줄 설치 부트스트랩 — 받은 뒤 실제 바이너리를 다시 받아 이중 집계.
+// - *.sig: 업데이터 서명 — 업데이트 한 번에 설치 파일과 함께 받아져 이중 집계.
+// - *.app.tar.gz는 macOS 자동 업데이트가 받는 설치 묶음이라 센다(Windows 자동 업데이트는 setup.exe를 받아 이미 센다).
+const INSTALLER = /\.(?:exe|msi|dmg|app\.tar\.gz|AppImage|deb|rpm)$/i;
+
+/** 이 에셋을 다운로드 통계로 집계하는가(설치 파일만 true). */
 export function isCounted(asset) {
-  return !NON_DOWNLOAD_ASSETS.has(asset.name);
+  return INSTALLER.test(asset.name || '');
 }
 
-/** 다운로드로 집계할 에셋만(업데이터 매니페스트 제외). */
+/** 다운로드로 집계할 에셋만(설치 파일). */
 export function countedAssets(release) {
   return (release.assets || []).filter(isCounted);
 }
 
-/** 한 릴리즈의 에셋 다운로드 합계(업데이터 매니페스트 제외). */
+/** 한 릴리즈의 설치 파일 다운로드 합계. */
 export function releaseDownloads(release) {
   return countedAssets(release).reduce((sum, a) => sum + (a.download_count || 0), 0);
 }
