@@ -54,19 +54,42 @@
   <main class="content home" id="main">
 
     <!-- ── 히어로 ── -->
-    <section class="hero">
+    <section class="hero hero-remote">
       <div class="hero-rail"></div>
-      <p class="hero-eyebrow reveal d1"><span class="hash"></span> orchterm · multi-agent terminal workstation</p>
-      <h1 class="reveal d2">여러 AI를 한 창에서<br><span class="grad">부려 조율하는</span> 터미널.</h1>
-      <p class="sub reveal d3">터미널 · 에디터 · 브라우저를 한 워크스테이션에. 그 위에서 <b>claude·codex·agy</b>를 워커로 띄워 컨텍스트를 유지한 채 협업시키는 <b>로컬 멀티에이전트 관제탑(control plane)</b>. Windows · macOS.</p>
-      <div class="hero-cta reveal d4">
-        <a class="bigbtn primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드 · 설치</a>
-        <a class="bigbtn ghost" href="quickstart.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>빠른 시작</a>
+      <div class="hr-glow" aria-hidden="true"></div>
+      <div class="hr-grid">
+        <div class="hr-copy">
+          <a class="hero-news reveal d1" href="remote.html"><span class="nt">NEW · v0.17</span>원격 오크텀 정식 출시<span class="arr">→</span></a>
+          <h1 class="reveal d2">회사 PC의 AI를,<br><span class="grad">집에서 그대로.</span></h1>
+          <p class="sub reveal d3">Tailscale로 이은 두 PC를 짝지으면, 회사 PC에서 돌던 <b>claude·codex 터미널 탭</b>과 <b>파일·Git</b>이 집 PC 화면에 그대로 열립니다. 이어서 입력하고, 끝나면 알림을 받고, 스크린샷까지 붙여넣으세요. macOS ↔ Windows.</p>
+          <div class="hero-cta reveal d4">
+            <a class="bigbtn primary" href="remote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="8" height="7" rx="1.5"/><rect x="13.5" y="13" width="8" height="7" rx="1.5"/><path d="M10.5 7.5H15a2 2 0 0 1 2 2V13M13.5 16.5H9a2 2 0 0 1-2-2V11"/></svg>원격 오크텀 알아보기</a>
+            <a class="bigbtn ghost" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>다운로드 · 설치</a>
+          </div>
+        </div>
+        <figure class="hr-visual reveal d5">
+          <img src="./assets/remote/hero-remote.jpg" width="1600" height="1000" alt="집의 노트북과 회사의 데스크톱이 암호화된 연결로 이어져 같은 터미널을 보는 그림" />
+          <figcaption><span class="live"></span>회사 PC ⇄ 집 PC — 같은 탭, 같은 대화, 같은 프로젝트</figcaption>
+        </figure>
       </div>
+      <ul class="hr-points reveal d5">
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span><b>원격 터미널</b><span>회사 PC의 공간·탭을 열어 바로 입력. 끌어 옮기기·나누기도 로컬처럼</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><b>회사 PC 파일·Git</b><span>탐색기·Git·검색·할 일·노트가 회사 PC를 가리킴</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg></span><b>에이전트 알림</b><span>원격 AI가 끝나거나 답을 기다리면 배지와 알림</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg></span><b>이미지 붙여넣기</b><span>⌘V · Ctrl+V 한 번에 스크린샷을 회사 PC의 AI에게</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><b>안전하게</b><span>Tailscale 주소에만 열리고 받기는 기본 꺼짐. 받는 PC는 화면 잠금</span></li>
+      </ul>
+    </section>
+
+    <!-- 워크스테이션 소개 -->
+    <section class="hero-band">
+      <p class="hero-eyebrow"><span class="hash"></span> orchterm · multi-agent terminal workstation</p>
+      <h2>여러 AI를 한 창에서 <span class="grad">부려 조율하는</span> 터미널.</h2>
+      <p class="sub">터미널 · 에디터 · 브라우저를 한 워크스테이션에. 그 위에서 <b>claude·codex·agy</b>를 워커로 띄워 컨텍스트를 유지한 채 협업시키는 <b>로컬 멀티에이전트 관제탑(control plane)</b>. Windows · macOS.</p>
     </section>
 
     <!-- 히어로 스크린샷 -->
-    <div class="hero-shot reveal d5">
+    <div class="hero-shot">
       <div class="shot wide">
         <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — backend (codex) · commander (claude)</span><span class="badge ok">orchestrating</span></div>
         <div class="shot-stage">
@@ -165,9 +188,16 @@
     <section class="home-section">
       <div class="inner">
         <p class="sec-eyebrow">대형 기능</p>
-        <h2>이름값 하는 여섯 기둥</h2>
+        <h2>이름값 하는 일곱 기둥</h2>
         <p class="sec-lede">Orch term을 단순 터미널이 아니라 <b>멀티에이전트 워크스테이션</b>으로 만드는 핵심 기능들. 각 카드는 상세 사용설명으로 이어집니다.</p>
         <div class="flagship">
+          <a class="flag-card flag-new" href="remote.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="8" height="7" rx="1.5"/><rect x="13.5" y="13" width="8" height="7" rx="1.5"/><path d="M10.5 7.5H15a2 2 0 0 1 2 2V13M13.5 16.5H9a2 2 0 0 1-2-2V11"/></svg></span>
+            <h3>원격 오크텀</h3>
+            <p>Tailscale로 짝지은 회사 PC의 터미널 탭·파일·Git을 집 PC에서 그대로. 원격 AI 알림과 이미지 붙여넣기까지.</p>
+            <span class="more">→ 원격 오크텀</span>
+            <span class="meta">NEW · v0.17 · macOS ↔ Windows</span>
+          </a>
           <a class="flag-card" href="workstation.html">
             <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M13 9v11"/></svg></span>
             <h3>멀티에이전트 워크스테이션</h3>

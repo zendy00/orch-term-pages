@@ -88,23 +88,66 @@
 }</pre></div>
     <p>위 예시는 <code>tag:home</code> PC가 <code>tag:work</code> PC의 <code>9620</code> 포트로만 갈 수 있게 합니다. 핵심 한 줄은 <code>{"src":["tag:home"],"dst":["tag:work:9620"]}</code>입니다. 포트는 <b>정식 빌드에서 9620</b>입니다(개발 빌드는 9620에 인스턴스 번호가 더해집니다). 양방향으로 쓰려면 반대 방향 규칙을 한 줄 더 둡니다. 위 규칙은 <b>기존 <code>acls</code> 배열에 한 줄을 더하는 것</b>입니다. 기본 허용 규칙을 통째로 바꾸면 tailnet의 다른 통신이 끊깁니다. 또 PC에 태그를 붙이면 그 PC는 사용자가 아니라 <b>태그가 소유</b>하게 되어 다시 인증해야 할 수 있습니다.</p>
 
-    <h2 class="sec" id="pair"><span class="hash"></span> 짝짓기</h2>
-    <p>짝짓기는 <b>받는 PC 앞에 있는 사람이 직접 승인할 때만</b> 됩니다. 원격에서 새 기기를 짝짓는 길은 없습니다.</p>
-    <ol class="steps">
-      <li class="step">
-        <div class="step-h"><span class="ic" data-icon="settings"></span> 받는 PC: 받기 켜고 짝짓기 창 열기</div>
-        <p>설정 → 원격 접속 → 「이 PC로 원격 접속 받기」를 켭니다(Tailscale 주소가 표시됩니다). 「새 기기 짝짓기」를 누르고 <b>Touch ID / Windows Hello</b>로 본인 확인을 하면 <b>2분 동안, 요청 1번만</b> 받는 창이 열립니다.</p>
-      </li>
-      <li class="step">
-        <div class="step-h"><span class="ic" data-icon="terminal"></span> 하는 PC: 원격 PC 추가</div>
-        <p>설정 → 원격 접속 → 「원격 PC 추가」에 받는 PC의 <b>Tailscale 이름</b>(또는 주소)과 알아보기 쉬운 표시 이름(예: <code>회사-Win</code>)을 적고 요청합니다.</p>
-      </li>
-      <li class="step">
-        <div class="step-h"><span class="ic" data-icon="check"></span> 6자리 숫자를 비교하고 승인</div>
-        <p>두 PC 화면에 <b>같은 6자리 숫자</b>가 뜹니다. <b>받는 PC에서 두 숫자가 같을 때만</b> 「승인」을 누릅니다. 다르면 누르지 마세요 — 중간에 누가 끼어들었다는 뜻일 수 있습니다. 승인하면 양쪽 「등록 기기」 목록에 서로가 생깁니다.</p>
-      </li>
+    <h2 class="sec" id="pair"><span class="hash"></span> 처음 연결하기 — 화면으로 따라 하기</h2>
+    <p>아래는 두 PC를 <b>처음 짝짓고 원격 공간을 여는 전 과정</b>을 실제 화면으로 따라간 것입니다. 받는 PC(예: 회사 PC)와 접속하는 PC(예: 집 PC)에서 할 일을 번갈아 적었습니다. 짝짓기는 <b>받는 PC 앞에 있는 사람이 직접 승인할 때만</b> 됩니다. 원격에서 새 기기를 짝짓는 길은 없으니, 처음 한 번은 두 PC를 모두 손댈 수 있을 때 하세요.</p>
+    <div class="note"><b>시작 전에 확인</b> — ① 두 PC 모두 오크텀 <b>0.17.0 이상</b> ② 두 PC 모두 Tailscale에 <b>같은 계정(tailnet)으로 로그인</b>되어 연결됨(<a href="#tailscale">준비 1</a>) ③ 받는 PC의 Tailscale 이름이나 <code>100.x.y.z</code> 주소. 주소는 2단계 화면에 그대로 나오니 미리 몰라도 됩니다.</div>
+    <ol class="steps setup-steps">
+    <li class="step">
+      <div class="step-h"><span class="who host">받는 PC</span> 설정 → 원격 접속 열기</div>
+      <p>메뉴(☰) → 환경설정 → <b>원격 접속</b> → <b>연결하기</b> 탭. 처음에는 「이 PC로 원격 접속 받기」가 꺼져 있습니다.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-1-settings.png" alt="환경설정의 원격 접속 → 연결하기 탭" loading="lazy" /><div class="shot-cap">받기는 기본 꺼짐. 왼쪽 칸은 받는 쪽, 오른쪽 칸은 접속하는 쪽이 씁니다.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who host">받는 PC</span> 「이 PC로 원격 접속 받기」 켜기</div>
+      <p>켜면 <b>대기 중인 주소</b>가 나옵니다(<code>100.x.y.z:9620</code>와 IPv6 주소). 이 주소를 「복사」해 접속하는 PC에 넣으면 됩니다. Tailscale을 못 찾으면 켜지지 않습니다. Tailscale 앱이 연결 상태인지 보세요.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-2-receive.png" alt="받기를 켠 뒤 대기 중인 주소가 표시된 화면" loading="lazy" /><div class="shot-cap">Tailscale 주소에만 열립니다. 사내망·인터넷에는 열리지 않습니다. (주소는 예시)</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who host">받는 PC</span> 「새 기기 짝짓기…」 → 본인 확인</div>
+      <p>Touch ID(macOS) 또는 Windows Hello로 본인 확인을 하면 <b>2분 동안, 요청 1번만</b> 받는 짝짓기 창이 열립니다. 남은 시간이 표시되니 그 안에 다음 단계를 하세요. 시간이 지나면 다시 누르면 됩니다.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-3-pairwin.png" alt="짝짓기 창이 열려 남은 시간이 표시된 화면" loading="lazy" /><div class="shot-cap">「짝짓기 창이 열렸습니다」 — 이제 접속하는 PC에서 요청을 보냅니다.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">접속하는 PC</span> 주소와 표시 이름을 넣고 「추가…」</div>
+      <p>접속하는 PC의 같은 화면, 오른쪽 칸 <b>「이 PC가 접속하는 쪽이면」</b>에 받는 PC의 <b>주소(또는 Tailscale 이름)</b>와 알아보기 쉬운 <b>표시 이름</b>(예: <code>회사 PC</code>)을 넣고 「추가…」를 누릅니다. 포트(<code>:9620</code>)는 빼도 됩니다. 접속만 하는 PC는 「원격 접속 받기」를 켤 필요가 없습니다.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-4-add.png" alt="접속하는 PC에서 주소와 표시 이름을 넣은 화면" loading="lazy" /><div class="shot-cap">표시 이름은 이 PC에서만 쓰는 이름입니다. 나중에 위쪽 칩에 이 이름이 붙습니다.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who both">두 PC</span> 6자리 숫자를 비교하고, 받는 PC에서 승인</div>
+      <p>두 PC에 <b>같은 6자리 숫자</b>가 뜹니다. 두 화면의 숫자가 <b>같을 때만</b> 받는 PC에서 「승인」을 누르세요. 다르면 「거절」 — 중간에 누가 끼어들었다는 뜻일 수 있습니다. 받는 PC 창에는 요청한 기기 이름(그 PC의 컴퓨터 이름)이 나옵니다.</p>
+      <div class="fig-pair">
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-5-sas.png" alt="접속하는 PC에 6자리 숫자가 표시된 화면" loading="lazy" /><div class="shot-cap">접속하는 PC — 「회사 PC 화면에 같은 숫자가 떴는지 확인하세요」</div></div></figure>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-6-approve.png" alt="받는 PC에 같은 6자리 숫자와 승인 버튼이 표시된 화면" loading="lazy" /><div class="shot-cap">받는 PC — 숫자가 같으면 「승인」</div></div></figure>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">접속하는 PC</span> 등록 완료</div>
+      <p>「회사 PC 등록됨」이 뜨면 짝짓기는 끝입니다. 이제부터는 받는 PC 앞에 없어도 됩니다. 연결할 때마다 두 PC가 기기 키로 서로를 확인하고, 접속하는 PC에서 본인 확인을 합니다.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-7-done.png" alt="접속하는 PC에 등록 완료가 표시된 화면" loading="lazy" /><div class="shot-cap">양쪽 「기기」 탭에 서로가 등록됩니다.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who host">받는 PC</span> 원격 터미널을 쓰려면 「터미널 허용」 켜기</div>
+      <p>여기까지는 <b>에이전트 메시지·파일</b>만 됩니다. 집에서 회사 PC의 터미널 탭과 파일·Git을 보려면, 받는 PC에서 <b>기기</b> 탭 → 그 기기의 <b>「터미널 허용」</b>을 켭니다(본인 확인 필요). 이름 옆에 「터미널 허용됨」이 붙습니다. 터미널을 허용하면 그 기기가 연결된 동안 이 PC 화면 잠금은 꺼집니다(원격으로 이 PC를 써야 하므로).</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-8-terminal.png" alt="받는 PC의 기기 탭에서 터미널 허용을 켠 화면" loading="lazy" /><div class="shot-cap">이 기기를 지우려면 「삭제」 — 지금 연결도 바로 끊깁니다.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">접속하는 PC</span> 연결 → 본인 확인</div>
+      <p>접속하는 PC의 아래 상태바 <b>「원격」</b>을 누르면 등록된 PC 목록이 뜹니다. 「연결」을 누르고 Touch ID / Windows Hello로 본인 확인을 하면 연결됩니다. 본인 확인은 <b>12시간</b> 유지되고(남은 시간이 표시됨), 잠자기에서 깨면 다시 묻습니다. 연결되면 위쪽 Space 줄에 <b>「회사 PC · 연결됨」</b> 칩이 생깁니다.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-9-connect.png" alt="연결 후 위쪽에 회사 PC 칩이 생기고 상태바 원격 창에 연결됨이 표시된 화면" loading="lazy" /><div class="shot-cap">상태바 「원격 1」 · 위쪽 칩 「회사 PC · 연결됨」. 끊을 때는 「끊기」 또는 칩의 ×.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">접속하는 PC</span> 칩을 눌러 원격 공간 열기</div>
+      <p>칩을 누르면 회사 PC의 공간이 열립니다. 테두리가 청록색인 영역이 회사 PC 화면이고, 탭에 바로 입력할 수 있습니다. 이때 왼쪽 사이드바(탐색기·Git·검색·할 일)와 아래 게이지도 회사 PC를 가리킵니다(<a href="#workspace">아래 절</a>). 로컬 Space 칩을 누르면 이 PC로 돌아옵니다.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="./assets/shots/remote-setup-10-space.png" alt="원격 공간 — 회사 PC의 탐색기와 터미널이 집 PC 화면에 열린 모습" loading="lazy" /><div class="shot-cap">회사 PC의 프로젝트(왼쪽)와 터미널(가운데). 하단 게이지 앞에 「회사 PC」가 붙습니다.</div></div></figure>
+    </li>
     </ol>
-    <p class="dim">등록 기기는 받는 PC의 설정에서 언제든 삭제할 수 있고, 삭제하면 그 기기의 현재 연결도 바로 끊깁니다.</p>
+    <div class="note"><b>막힐 때</b><ul>
+      <li><b>「추가…」 뒤 응답이 없거나 연결 실패</b> — 받는 PC의 「원격 접속 받기」가 켜져 있는지, 짝짓기 창(2분)이 아직 열려 있는지, 두 PC의 Tailscale이 모두 연결 상태인지 확인하세요. 회사 PC에 사내 VPN이 켜져 있으면 <a href="#trouble">VPN 절</a>을 보세요.</li>
+      <li><b>「원격 접속 받기」가 안 켜짐</b> — Tailscale이 꺼져 있거나 로그인되지 않은 경우입니다.</li>
+      <li><b>숫자가 다름</b> — 승인하지 말고 거절한 뒤, 같은 tailnet인지 다시 확인하세요.</li>
+      <li><b>위쪽 칩에 터미널이 안 보임</b> — 받는 PC에서 그 기기의 「터미널 허용」을 켰는지 확인하세요.</li>
+    </ul></div>
+    <p class="dim">화면은 macOS에서 찍었습니다. Windows도 같은 화면이고, 본인 확인만 Windows Hello로 합니다. 등록 기기는 받는 PC의 설정에서 언제든 삭제할 수 있고, 삭제하면 그 기기의 현재 연결도 바로 끊깁니다.</p>
 
     <h2 class="sec" id="chat"><span class="hash"></span> 메시지 — 허락은 보내는 쪽에서</h2>
     <ul>

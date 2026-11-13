@@ -54,19 +54,42 @@
   <main class="content home" id="main">
 
     <!-- ── Hero ── -->
-    <section class="hero">
+    <section class="hero hero-remote">
       <div class="hero-rail"></div>
-      <p class="hero-eyebrow reveal d1"><span class="hash"></span> orchterm · multi-agent terminal workstation</p>
-      <h1 class="reveal d2">Run many AIs in one window —<br><span class="grad">orchestrate</span> them from your terminal.</h1>
-      <p class="sub reveal d3">Terminal · editor · browser in one workstation. On top of it, spin up <b>claude·codex·agy</b> as workers and have them collaborate while keeping context — a <b>local multi-agent control plane</b>. Windows · macOS.</p>
-      <div class="hero-cta reveal d4">
-        <a class="bigbtn primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download · Install</a>
-        <a class="bigbtn ghost" href="quickstart.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>Quick start</a>
+      <div class="hr-glow" aria-hidden="true"></div>
+      <div class="hr-grid">
+        <div class="hr-copy">
+          <a class="hero-news reveal d1" href="remote.html"><span class="nt">NEW · v0.17</span>Remote Orch term is here<span class="arr">→</span></a>
+          <h1 class="reveal d2">Your office AI,<br><span class="grad">right from home.</span></h1>
+          <p class="sub reveal d3">Pair two PCs over Tailscale and the <b>claude and codex terminal tabs</b>, <b>files and Git</b> running on your office PC open on your home PC as they are. Keep typing, get notified when they finish, even paste screenshots. macOS ↔ Windows.</p>
+          <div class="hero-cta reveal d4">
+            <a class="bigbtn primary" href="remote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="8" height="7" rx="1.5"/><rect x="13.5" y="13" width="8" height="7" rx="1.5"/><path d="M10.5 7.5H15a2 2 0 0 1 2 2V13M13.5 16.5H9a2 2 0 0 1-2-2V11"/></svg>Explore Remote Orch term</a>
+            <a class="bigbtn ghost" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>Download · Install</a>
+          </div>
+        </div>
+        <figure class="hr-visual reveal d5">
+          <img src="../assets/remote/hero-remote.jpg" width="1600" height="1000" alt="A home laptop and an office desktop joined by an encrypted link, showing the same terminal" />
+          <figcaption><span class="live"></span>Office PC ⇄ home PC — same tabs, same chats</figcaption>
+        </figure>
       </div>
+      <ul class="hr-points reveal d5">
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span><b>Remote terminals</b><span>Open the office PC's spaces and tabs and type right in. Drag and split like local tabs</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><b>Office files · Git</b><span>Explorer, Git, Search, To-dos and notes point at the office PC</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg></span><b>Agent alerts</b><span>A badge and a notification when a remote AI finishes or waits for you</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg></span><b>Image paste</b><span>One ⌘V / Ctrl+V sends a screenshot to the AI on the office PC</span></li>
+        <li><span class="hp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><b>Built safe</b><span>Listens only on Tailscale addresses, receiving off by default, receiving PC locks its screen</span></li>
+      </ul>
+    </section>
+
+    <!-- 워크스테이션 소개 -->
+    <section class="hero-band">
+      <p class="hero-eyebrow"><span class="hash"></span> orchterm · multi-agent terminal workstation</p>
+      <h2>The terminal that runs and <span class="grad">orchestrates many AIs</span> in one window.</h2>
+      <p class="sub">Terminal · editor · browser in one workstation. On top of it, spin up <b>claude·codex·agy</b> as workers and have them collaborate while keeping context — a <b>local multi-agent control plane</b>. Windows · macOS.</p>
     </section>
 
     <!-- Hero screenshot -->
-    <div class="hero-shot reveal d5">
+    <div class="hero-shot">
       <div class="shot wide">
         <div class="shot-chrome"><span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span><span class="t">orchterm — backend (codex) · commander (claude)</span><span class="badge ok">orchestrating</span></div>
         <div class="shot-stage">
@@ -165,9 +188,16 @@
     <section class="home-section">
       <div class="inner">
         <p class="sec-eyebrow">Flagship features</p>
-        <h2>Six pillars that earn the name</h2>
+        <h2>Seven pillars that earn the name</h2>
         <p class="sec-lede">The core features that make Orch term not just a terminal but a <b>multi-agent workstation</b>. Each card links to a detailed guide.</p>
         <div class="flagship">
+          <a class="flag-card flag-new" href="remote.html">
+            <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="8" height="7" rx="1.5"/><rect x="13.5" y="13" width="8" height="7" rx="1.5"/><path d="M10.5 7.5H15a2 2 0 0 1 2 2V13M13.5 16.5H9a2 2 0 0 1-2-2V11"/></svg></span>
+            <h3>Remote Orch term</h3>
+            <p>The terminal tabs, files and Git of an office PC paired over Tailscale, right on your home PC. Remote AI alerts and image paste included.</p>
+            <span class="more">→ Remote Orch term</span>
+            <span class="meta">NEW · v0.17 · macOS ↔ Windows</span>
+          </a>
           <a class="flag-card" href="workstation.html">
             <span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M13 9v11"/></svg></span>
             <h3>Multi-agent workstation</h3>

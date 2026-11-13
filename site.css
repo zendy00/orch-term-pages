@@ -294,6 +294,47 @@ a.fcard:hover { transform: translateY(-2px); border-color: var(--accent-line); t
 .bigbtn.ghost:hover { border-color: var(--accent-line); color: var(--text-strong); text-decoration: none; }
 .bigbtn svg { width: 17px; height: 17px; }
 
+/* ── 히어로: 원격 오크텀 홍보 (0.17) ── */
+.hero-remote { padding-bottom: 44px; }
+.hr-glow { position: absolute; inset: -20% -10% auto 30%; height: 120%; pointer-events: none;
+  background: radial-gradient(closest-side, oklch(0.77 0.115 78 / .16), transparent 70%); filter: blur(10px); }
+.hr-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); gap: 44px; align-items: center; }
+.hero-remote h1 { max-width: 15ch; word-break: keep-all; }
+.hero-remote .sub, .hr-points li { word-break: keep-all; }
+.hero-remote .sub { max-width: 46ch; }
+.hero-news { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px; padding: 5px 14px 5px 5px; border-radius: 999px;
+  border: 1px solid var(--accent-line); background: var(--accent-soft); color: var(--text-strong); font-size: 13.5px; font-weight: 600; }
+.hero-news:hover { text-decoration: none; filter: brightness(1.1); }
+.hero-news .nt { padding: 3px 10px; border-radius: 999px; background: var(--accent-grad); color: #1a1405; font-family: var(--code-font); font-size: 11.5px; font-weight: 700; letter-spacing: .02em; }
+.hero-news .arr { color: var(--accent); transition: transform var(--tap); }
+.hero-news:hover .arr { transform: translateX(3px); }
+.hr-visual { position: relative; margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--line);
+  box-shadow: 0 40px 90px -40px oklch(0.77 0.115 78 / .45), 0 0 0 1px oklch(1 0 0 / .03) inset; background: #0f1117; }
+.hr-visual img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.hr-visual figcaption { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; border-radius: 999px; background: oklch(0.16 0.01 264 / .78); backdrop-filter: blur(8px);
+  border: 1px solid var(--line); font-size: 12.5px; color: var(--text); max-width: calc(100% - 28px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hr-visual .live { width: 7px; height: 7px; border-radius: 50%; background: oklch(0.78 0.16 150); box-shadow: 0 0 0 0 oklch(0.78 0.16 150 / .6); animation: hr-pulse 2s infinite; }
+@keyframes hr-pulse { 0% { box-shadow: 0 0 0 0 oklch(0.78 0.16 150 / .55); } 70% { box-shadow: 0 0 0 9px oklch(0.78 0.16 150 / 0); } 100% { box-shadow: 0 0 0 0 oklch(0.78 0.16 150 / 0); } }
+.content .hr-points { position: relative; list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.hr-points li { display: flex; flex-direction: column; gap: 5px; padding: 16px; border-radius: var(--r-md); background: var(--bg-1); border: 1px solid var(--line-faint); }
+.hr-points .hp-ic { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; background: var(--accent-soft); color: var(--accent); margin-bottom: 4px; }
+.hr-points .hp-ic svg { width: 18px; height: 18px; }
+.hr-points b { color: var(--text-strong); font-size: 14.5px; }
+.hr-points span:not(.hp-ic) { color: var(--text-dim); font-size: 12.8px; line-height: 1.55; }
+.hero-band { padding: 56px var(--gut) 0; border-top: 1px solid var(--line-faint); }
+.hero-band h2 { word-break: keep-all; font-family: var(--display); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -.02em; color: var(--text-strong); margin: 0 0 14px; max-width: 24ch; }
+.hero-band h2 .grad { background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-band .sub { font-size: 17px; line-height: 1.6; color: var(--text-dim); font-weight: 300; max-width: 64ch; margin: 0; }
+.hero-band .sub b { color: var(--text); font-weight: 600; }
+.flag-card.flag-new { border-color: var(--accent-line); background: linear-gradient(160deg, var(--accent-soft), var(--bg-1) 60%); }
+.flag-card.flag-new::before { opacity: 1; }
+@media (max-width: 1180px) { .hr-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 980px) { .hr-grid { grid-template-columns: 1fr; gap: 30px; } }
+@media (max-width: 640px) { .hr-points { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .hr-points { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .hr-visual .live { animation: none; } }
+
 .hero-shot { margin: 50px var(--gut) 0; perspective: 1800px; }
 .hero-shot .shot { transform: rotateX(4deg); transform-origin: top center; max-width: 1080px; }
 
@@ -347,3 +388,15 @@ a.flag-card:hover::before { opacity: 1; }
   .scrim { position: fixed; inset: var(--top-h) 0 0; background: rgba(0,0,0,.5); z-index: 44; opacity: 0; pointer-events: none; transition: opacity var(--tap); }
   body.nav-open .scrim { opacity: 1; pointer-events: auto; }
 }
+
+/* ── 원격 오크텀: 화면으로 따라 하는 연결 설정 ── */
+.setup-steps .step .fig { margin: 12px 0 4px; }
+.setup-steps .shot { max-width: 682px; }
+.step-h .who { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .01em; border: 1px solid; }
+.step-h .who.host { color: oklch(0.80 0.12 180); border-color: oklch(0.80 0.12 180 / .45); background: oklch(0.80 0.12 180 / .12); }
+.step-h .who.client { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+.step-h .who.both { color: oklch(0.80 0.10 300); border-color: oklch(0.80 0.10 300 / .45); background: oklch(0.80 0.10 300 / .12); }
+.fig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 760px; align-items: start; }
+.fig-pair .fig { margin: 12px 0 4px; }
+.setup-steps ~ .note ul { margin: 6px 0 0; padding-left: 18px; }
+@media (max-width: 880px) { .fig-pair { grid-template-columns: 1fr; } }

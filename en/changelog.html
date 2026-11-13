@@ -76,10 +76,27 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0161"><span class="hash"></span> 0.16.1 — Selection translation (EN→KO) · spatial arrow-key navigation fixes</h2>
+    <h2 class="sec" id="v0170"><span class="hash"></span> 0.17.0 — Remote Orch term: your office PC's terminals and files, from home</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.16.1</span><span class="d">2026-10-27</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.17.0</span><span class="d">2026-11-13</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Remote Orch term</b> — Pair two PCs connected over Tailscale (macOS and Windows) and open the office PC's spaces and terminal tabs from home, typing straight into them. Dragging tabs, splitting panes and the right-click menu work like local ones, and you get a badge and a notification when a remote agent finishes or waits for you (<a href="remote.html">Remote Orch term</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Viewing the office PC's files</b> — While you view a remote space, Explorer, Git, Search, To-dos and notes point at the office PC. Files open as "this PC only" tabs without touching the office PC's screen, and you can read and edit Markdown, HTML reports and code. The CPU, memory and GPU gauges show the office PC's values too</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Remote image paste</b> — Paste a screenshot into a remote tab with <code>⌘V</code> / <code>Ctrl+V</code>; it is sent to the office PC and a path Codex and Claude can read is pasted (up to 20 MB)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Agent messages and files</b> — Agents on paired PCs exchange messages and files. Consent is asked on the sending side, and the receiving PC locks its screen while connected</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Tab reorder indicator</b> — Dragging a tab within a pane shows a vertical line where it will land. The To-dos MCP gains a <code>whoami</code> tool</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Tab dragging (macOS)</b> — Reordering tabs now works with a real drag, dropping on an empty tab bar no longer splits the pane, and dragging files from outside the app no longer leaves a split overlay behind</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>codex on Windows</b> — <code>codex</code> typed into a shell no longer adds to-dos to another Space, and codex in a Git Bash tab is recognized. <code>CLAUDE_CONFIG_DIR</code> and <code>CODEX_HOME</code> are followed</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Spatial arrow keys</b> — Navigation no longer stops at a To-dos board tab or jumps to the wrong window because of off-screen windows</span></li>
+      </ul>
+      <p class="cl-note">Turn Remote Orch term on under Settings → Remote access; receiving is off by default. <b>Both PCs need 0.17.0</b>. This update <b>does not interrupt running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0161"><span class="hash"></span> 0.16.1 — Selection translation (EN→KO) · spatial arrow-key navigation fixes</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.16.1</span><span class="d">2026-10-27</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Selection translation (English → Korean)</b> — Select English text, such as an AI agent's answer, and a Translate button appears; press it to see the Korean translation in a box right above. A single word shows its parts of speech and meanings (including developer senses). Works in the terminal, code editor, Markdown preview and notes, and runs on this computer's CPU — nothing is sent out (<a href="terminal.html#translate">Selection translation</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Spatial arrow-key navigation</b> — <code>Ctrl</code> (<code>⌘</code> on macOS)+<code>Alt</code>+arrow keys now reach windows that are slightly out of line and no longer skip a sidebar sitting between tab windows. The view moves to the chosen window if it isn't fully on screen</span></li>

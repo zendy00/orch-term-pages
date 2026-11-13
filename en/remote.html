@@ -88,23 +88,66 @@
 }</pre></div>
     <p>The example lets <code>tag:home</code> PCs reach only port <code>9620</code> on <code>tag:work</code> PCs. The key line is <code>{"src":["tag:home"],"dst":["tag:work:9620"]}</code>. The port is <b>9620 in release builds</b> (dev builds add an instance number to 9620). For use in both directions, add one more rule the other way. The rule above is <b>one line added to your existing <code>acls</code> array</b>; replacing the default allow rules wholesale cuts other traffic in your tailnet. Also, tagging a device makes it owned by the tag rather than by a user, so it may need to re-authenticate.</p>
 
-    <h2 class="sec" id="pair"><span class="hash"></span> Pairing</h2>
-    <p>Pairing works <b>only when a person sitting at the receiving PC approves it</b>. There is no way to pair a new device remotely.</p>
-    <ol class="steps">
-      <li class="step">
-        <div class="step-h"><span class="ic" data-icon="settings"></span> Receiving PC: turn on receiving and open the pairing window</div>
-        <p>Settings → Remote access → turn on "Accept remote connections on this PC" (the Tailscale address is shown). Press "Pair new device" and confirm with <b>Touch ID / Windows Hello</b>; a window opens that accepts <b>one request, for 2 minutes</b>.</p>
-      </li>
-      <li class="step">
-        <div class="step-h"><span class="ic" data-icon="terminal"></span> Sending PC: add a remote PC</div>
-        <p>Settings → Remote access → "Add remote PC": enter the receiving PC's <b>Tailscale name</b> (or address) and a recognizable display name (e.g. <code>Work-Win</code>), then send the request.</p>
-      </li>
-      <li class="step">
-        <div class="step-h"><span class="ic" data-icon="check"></span> Compare the 6 digits and approve</div>
-        <p>Both PCs show <b>the same 6-digit number</b>. Press "Approve" <b>on the receiving PC only if the two numbers match.</b> If they differ, don't — someone may be sitting in the middle. After approval each PC appears in the other's "Registered devices" list.</p>
-      </li>
+    <h2 class="sec" id="pair"><span class="hash"></span> First connection — a walkthrough with screenshots</h2>
+    <p>Below is the <b>whole process of pairing two PCs for the first time and opening a remote space</b>, following the real screens. Steps alternate between the receiving PC (e.g. your office PC) and the connecting PC (e.g. your home PC). Pairing works <b>only when a person sitting at the receiving PC approves it</b> — there is no way to pair a new device remotely — so do the first pairing when you can reach both PCs.</p>
+    <div class="note"><b>Before you start</b> — ① both PCs run Orch term <b>0.17.0 or later</b> ② both PCs are signed in to Tailscale <b>with the same account (tailnet)</b> and connected (<a href="#tailscale">Prep 1</a>) ③ the receiving PC's Tailscale name or <code>100.x.y.z</code> address. Step 2 shows the address, so you don't need to know it in advance.</div>
+    <ol class="steps setup-steps">
+    <li class="step">
+      <div class="step-h"><span class="who host">Receiving PC</span> Open Settings → Remote access</div>
+      <p>Menu (☰) → Settings → <b>Remote access</b> → <b>Connect</b> tab. "Accept remote connections on this PC" starts off.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-1-settings.png" alt="Remote access → Connect tab in Settings" loading="lazy" /><div class="shot-cap">Receiving is off by default. The left box is for the receiving side, the right box for the connecting side.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who host">Receiving PC</span> Turn on "Accept remote connections on this PC"</div>
+      <p>Once on, the <b>listening addresses</b> appear (<code>100.x.y.z:9620</code> and an IPv6 address). "Copy" one and enter it on the connecting PC. If Tailscale can't be found it won't turn on — check that the Tailscale app is connected.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-2-receive.png" alt="Listening addresses shown after turning receiving on" loading="lazy" /><div class="shot-cap">It listens only on Tailscale addresses, never on the office network or the internet. (Example addresses)</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who host">Receiving PC</span> "Pair new device…" → confirm it's you</div>
+      <p>Confirm with Touch ID (macOS) or Windows Hello, and a pairing window opens that accepts <b>one request, for 2 minutes</b>. The time left is shown; do the next step within it, or press the button again later.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-3-pairwin.png" alt="Pairing window open with the time left" loading="lazy" /><div class="shot-cap">"The pairing window is open" — now send the request from the connecting PC.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">Connecting PC</span> Enter the address and a display name, then "Add…"</div>
+      <p>On the connecting PC, same screen, right box <b>"If this PC connects"</b>: enter the receiving PC's <b>address (or Tailscale name)</b> and an easy <b>display name</b> (e.g. <code>Office PC</code>), then press "Add…". You can leave out the port (<code>:9620</code>). A PC that only connects doesn't need receiving turned on.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-4-add.png" alt="Address and display name entered on the connecting PC" loading="lazy" /><div class="shot-cap">The display name is used only on this PC; the chip at the top will carry it.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who both">Both PCs</span> Compare the 6 digits, approve on the receiving PC</div>
+      <p>Both PCs show <b>the same 6-digit number</b>. Press "Approve" on the receiving PC <b>only if the two match</b>. If they differ, press "Reject" — someone may be sitting in the middle. The receiving PC shows the requesting device's name (that PC's computer name).</p>
+      <div class="fig-pair">
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-5-sas.png" alt="6-digit number on the connecting PC" loading="lazy" /><div class="shot-cap">Connecting PC — "check that the same number appears on the office PC"</div></div></figure>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-6-approve.png" alt="Same 6-digit number and Approve button on the receiving PC" loading="lazy" /><div class="shot-cap">Receiving PC — "Approve" if the numbers match</div></div></figure>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">Connecting PC</span> Registered</div>
+      <p>When "Office PC registered" appears, pairing is done. From now on you don't need to be at the receiving PC: every connection checks both device keys, and the connecting PC asks you to confirm it's you.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-7-done.png" alt="Registration complete on the connecting PC" loading="lazy" /><div class="shot-cap">Each PC now lists the other under its Devices tab.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who host">Receiving PC</span> For remote terminals, turn on "Allow terminal"</div>
+      <p>So far only <b>agent messages and files</b> work. To see the office PC's terminal tabs, files and Git from home, open the <b>Devices</b> tab on the receiving PC and turn on <b>"Allow terminal"</b> for that device (confirmation required). The device gets a "Terminal allowed" tag. While that device is connected, this PC's lock screen is off (you need to use the PC remotely).</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-8-terminal.png" alt="Allow terminal turned on in the receiving PC's Devices tab" loading="lazy" /><div class="shot-cap">"Delete" removes the device and cuts its current connection right away.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">Connecting PC</span> Connect → confirm it's you</div>
+      <p>Click <b>"Remote"</b> in the connecting PC's status bar to see the registered PCs. Press "Connect" and confirm with Touch ID / Windows Hello. The confirmation lasts <b>12 hours</b> (the time left is shown) and is asked again after sleep. Once connected, an <b>"Office PC · connected"</b> chip appears in the Space strip at the top.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-9-connect.png" alt="Office PC chip at the top and Connected in the status bar remote popup" loading="lazy" /><div class="shot-cap">Status bar "Remote 1" · top chip "Office PC · connected". Disconnect with "Disconnect" or the chip's ×.</div></div></figure>
+    </li>
+    <li class="step">
+      <div class="step-h"><span class="who client">Connecting PC</span> Click the chip to open the remote space</div>
+      <p>Clicking the chip opens the office PC's space. The teal-bordered area is the office PC's screen, and you can type straight into its tabs. The left sidebar (Explorer, Git, Search, To-dos) and the gauges also point at the office PC (<a href="#workspace">section below</a>). Click a local Space chip to come back to this PC.</p>
+      <figure class="fig"><div class="shot"><img class="shot-img" src="../assets/shots/remote-setup-10-space.png" alt="Remote space — the office PC's Explorer and terminal open on the home PC" loading="lazy" /><div class="shot-cap">The office PC's project (left) and terminal (center). The bottom gauges are labelled with the office PC's name.</div></div></figure>
+    </li>
     </ol>
-    <p class="dim">You can delete a registered device from the receiving PC's settings at any time; deleting it also cuts that device's current connection immediately.</p>
+    <div class="note"><b>If you get stuck</b><ul>
+      <li><b>No answer after "Add…", or connection fails</b> — check that receiving is on, that the 2-minute pairing window is still open, and that Tailscale is connected on both PCs. If the office PC runs a corporate VPN, see the <a href="#trouble">VPN section</a>.</li>
+      <li><b>Receiving won't turn on</b> — Tailscale is off or not signed in.</li>
+      <li><b>The numbers differ</b> — don't approve; reject and recheck that both PCs are in the same tailnet.</li>
+      <li><b>No terminals behind the chip</b> — make sure "Allow terminal" is on for that device on the receiving PC.</li>
+    </ul></div>
+    <p class="dim">Screenshots were taken on macOS (UI in Korean). Windows shows the same screens; only the confirmation uses Windows Hello. You can delete a registered device from the receiving PC's settings at any time; deleting it also cuts that device's current connection immediately.</p>
 
     <h2 class="sec" id="chat"><span class="hash"></span> Messages — consent is asked on the sending side</h2>
     <ul>

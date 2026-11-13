@@ -76,10 +76,27 @@
     <p class="lede">버전별 새 기능·수정 내역입니다. <a href="auto-update.html">자동 업데이트</a>(v0.1.23부터)가 켜져 있어, 새 버전이 올라오면 타이틀바 배너로 알려주고 한 번에 받습니다. 각 릴리즈 노트는 <b>Conventional Commits</b>에서 자동 생성됩니다.</p>
     <p class="cl-note">표기 — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> 새 기능 · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> 버그 수정 · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> 성능. 날짜는 태그 생성일 기준입니다.</p>
 
-    <h2 class="sec" id="v0161"><span class="hash"></span> 0.16.1 — 선택 영역 번역(영→한) · 공간 모드 방향키 창 이동 수정</h2>
+    <h2 class="sec" id="v0170"><span class="hash"></span> 0.17.0 — 원격 오크텀: 집 PC에서 회사 PC의 터미널·파일을 그대로</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.16.1</span><span class="d">2026-10-27</span><span class="latest">최신</span></div>
+      <div class="cl-ver"><span class="v">v0.17.0</span><span class="d">2026-11-13</span><span class="latest">최신</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>원격 오크텀</b> — Tailscale로 이어진 두 PC(macOS·Windows)를 짝지어 집 PC에서 회사 PC의 공간과 터미널 탭을 열고 그대로 입력합니다. 탭 끌어 옮기기·패널 나누기·우클릭 메뉴가 로컬과 같고, 원격 에이전트가 끝나거나 답을 기다리면 배지와 알림으로 알려 줍니다(<a href="remote.html">원격 오크텀</a>)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>회사 PC 파일 보기</b> — 원격 공간을 보는 동안 탐색기·Git·검색·할 일·노트가 회사 PC를 가리킵니다. 파일은 「집 PC에서만」 탭으로 열려 회사 PC 화면을 건드리지 않고, 마크다운·HTML 보고서·코드를 보고 고칠 수 있습니다. 하단 CPU·메모리·GPU 게이지도 회사 PC 값으로 바뀝니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>원격 이미지 붙여넣기</b> — 원격 탭에 스크린샷을 <code>⌘V</code> / <code>Ctrl+V</code>로 붙여넣으면 회사 PC로 보내지고 Codex·Claude가 읽을 경로가 붙습니다(20 MB까지)</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>에이전트 메시지·파일</b> — 짝지은 PC의 에이전트끼리 메시지와 파일을 주고받습니다. 허락은 보내는 쪽에서 묻고, 받는 PC는 연결 중 화면이 잠깁니다</span></li>
+        <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>탭 순서 바꾸기 표시</b> — 같은 패널 안에서 탭을 끌면 들어갈 자리에 세로선이 보입니다. 할 일 MCP에 <code>whoami</code> 도구가 생겼습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>탭 끌기(macOS)</b> — 실제 드래그로 탭 순서가 바뀌지 않던 문제, 탭바 빈 자리에 놓으면 패널이 나뉘던 문제, 앱 밖 파일을 끌고 지나가면 분할 표시가 남던 문제를 고쳤습니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Windows codex 인식</b> — 셸에 직접 친 <code>codex</code>가 다른 Space에 할 일을 등록하거나 Git Bash 탭의 codex를 알아보지 못하던 문제를 고쳤습니다. <code>CLAUDE_CONFIG_DIR</code>·<code>CODEX_HOME</code>도 따릅니다</span></li>
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드 방향키</b> — 할 일 보드 탭에서 멈추거나 화면 밖 창 때문에 엉뚱한 창으로 가던 문제를 고쳤습니다</span></li>
+      </ul>
+      <p class="cl-note">원격 오크텀은 설정 → 원격 접속에서 켜고, 받기는 기본 꺼짐입니다. <b>두 PC 모두 0.17.0</b>이어야 합니다. 이번 업데이트는 <b>실행 중인 터미널을 끊지 않습니다</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0161"><span class="hash"></span> 0.16.1 — 선택 영역 번역(영→한) · 공간 모드 방향키 창 이동 수정</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.16.1</span><span class="d">2026-10-27</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>선택 영역 번역(영→한)</b> — AI가 영어로 답한 부분을 드래그하면 「번역」 버튼이 뜨고, 누르면 그 위에 한국어 박스를 띄웁니다. 한 단어는 품사와 뜻(개발 용어 뜻 포함)을 보여 줍니다. 터미널·코드 에디터·마크다운 미리보기·메모에서 쓸 수 있고, 이 컴퓨터의 CPU로 번역해 밖으로 보내지 않습니다(<a href="terminal.html#translate">선택 영역 번역</a>)</span></li>
         <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>공간 모드 방향키 창 이동</b> — <code>Ctrl</code>(macOS <code>⌘</code>)+<code>Alt</code>+방향키가 조금 어긋난 창도 찾아가고, 탭 창 사이에 놓인 사이드바를 건너뛰지 않습니다. 고른 창이 화면에 다 보이지 않으면 그 창으로 화면이 옮겨집니다</span></li>
