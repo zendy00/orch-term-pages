@@ -37,7 +37,7 @@
 
   /* 최신 릴리즈 버전 — 항목의 updated가 이 값과 같으면 좌측 목록에 NEW 뱃지를 단다.
      릴리즈 때 이 값을 올리고, 그 릴리즈로 내용이 바뀐 페이지에 updated를 적는다(이전 NEW는 저절로 사라진다). */
-  var LATEST = "0.17.0";
+  var LATEST = "0.17.1";
 
   var NAV = [
     { title: "시작하기", title_en: "Getting started", count: "00", items: [
@@ -51,7 +51,7 @@
       { page: "gateway",       href: "gateway.html",      label: "AI 게이트웨이",            en: "AI gateway" },
       { page: "ssh",           href: "ssh.html",          label: "SSH · SFTP",              en: "SSH · SFTP" },
       { page: "remote",        href: "remote.html",       label: "원격 오크텀",              en: "Remote Orch term", updated: "0.17.0" },
-      { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러",        en: "CDP browser mirror" }
+      { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러",        en: "CDP browser mirror", updated: "0.17.1" }
     ]},
     { title: "핵심 기능", title_en: "Core features", count: "02", items: [
       { page: "terminal",        href: "terminal.html",        label: "터미널",          en: "Terminal", updated: "0.16.1" },

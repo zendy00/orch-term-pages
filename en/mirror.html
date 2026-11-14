@@ -184,7 +184,7 @@
 
     <!-- Limits / caveats -->
     <h2 class="sec" id="limits"><span class="hash"></span> Limits · caveats</h2>
-    <p><b>Multi-agent setups are separated per Space.</b> An agent launched from an app terminal drives by looking only at its own Space's panel, and new pages also open in its own Space. That said, agents within the same Space can see each other's panels, and even if you move a terminal tab to another Space it keeps pointing at the old Space until the shell is restarted. New pages open one at a time (opening two at once rejects the second, which can be retried).</p>
+    <p><b>Multi-agent setups are separated per Space.</b> An agent launched from an app terminal drives by looking only at its own Space's panel, and new pages also open in its own Space. If you move a terminal tab to another Space, its agent immediately sees the new Space and opens pages there, and this holds after the app restarts. That said, agents within the same Space can see each other's panels. New pages open one at a time (opening two at once rejects the second, which can be retried).</p>
     <div class="warn"><b>Mirror mode uses a separate browser profile</b> — when the mirror is on, the in-app browser uses a separate profile, so logins and cookies from normal mode don't carry over to mirror mode. You'll need to log in again to sites you need in mirror mode.</div>
 
     <!-- Reference -->

@@ -76,10 +76,20 @@
     <p class="lede">New features and fixes per version. With <a href="auto-update.html">auto-update</a> (since v0.1.23) on, a new release is announced via a titlebar banner and installed in one step. Each release note is generated automatically from <b>Conventional Commits</b>.</p>
     <p class="cl-note">Legend — <span class="cl-tag feat" style="display:inline-block;vertical-align:middle">feat</span> new feature · <span class="cl-tag fix" style="display:inline-block;vertical-align:middle">fix</span> bug fix · <span class="cl-tag perf" style="display:inline-block;vertical-align:middle">perf</span> performance. Dates are based on the tag creation date.</p>
 
-    <h2 class="sec" id="v0170"><span class="hash"></span> 0.17.0 — Remote Orch term: your office PC's terminals and files, from home</h2>
+    <h2 class="sec" id="v0171"><span class="hash"></span> 0.17.1 — The in-app browser opens in the terminal tab's current Space</h2>
 
     <div class="cl-rel is-latest">
-      <div class="cl-ver"><span class="v">v0.17.0</span><span class="d">2026-11-13</span><span class="latest">Latest</span></div>
+      <div class="cl-ver"><span class="v">v0.17.1</span><span class="d">2026-11-14</span><span class="latest">Latest</span></div>
+      <ul class="cl-list">
+        <li><span class="cl-tag fix">fix</span><span class="cl-txt"><b>Browser opening in the wrong Space</b> — when an agent opens the in-app browser, it opens in the Space the agent's terminal tab currently belongs to. Fixed pages opening in another Space after restarting the app or adding or removing a Space, and in the old Space after moving the tab (<a href="mirror.html">CDP browser mirror</a>)</span></li>
+      </ul>
+      <p class="cl-note">An agent in a terminal that was already running before the update may open a page in another Space once more; start the agent in a new terminal tab. This update <b>does not end running terminals</b>.</p>
+    </div>
+
+    <h2 class="sec" id="v0170"><span class="hash"></span> 0.17.0 — Remote Orch term: your office PC's terminals and files, from home</h2>
+
+    <div class="cl-rel">
+      <div class="cl-ver"><span class="v">v0.17.0</span><span class="d">2026-11-13</span></div>
       <ul class="cl-list">
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Remote Orch term</b> — Pair two PCs connected over Tailscale (macOS and Windows) and open the office PC's spaces and terminal tabs from home, typing straight into them. Dragging tabs, splitting panes and the right-click menu work like local ones, and you get a badge and a notification when a remote agent finishes or waits for you (<a href="remote.html">Remote Orch term</a>)</span></li>
         <li><span class="cl-tag feat">feat</span><span class="cl-txt"><b>Viewing the office PC's files</b> — While you view a remote space, Explorer, Git, Search, To-dos and notes point at the office PC. Files open as "this PC only" tabs without touching the office PC's screen, and you can read and edit Markdown, HTML reports and code. The CPU, memory and GPU gauges show the office PC's values too</span></li>
