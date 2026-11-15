@@ -35,9 +35,12 @@
     changelog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3M16 3v3M4.5 7.5h15V19a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 19z"/><path d="M8 12h8M8 16h5"/></svg>'
   };
 
-  /* 최신 릴리즈 버전 — 항목의 updated가 이 값과 같으면 좌측 목록에 NEW 뱃지를 단다.
-     릴리즈 때 이 값을 올리고, 그 릴리즈로 내용이 바뀐 페이지에 updated를 적는다(이전 NEW는 저절로 사라진다). */
+  /* 최신 릴리즈 버전 — 항목의 updated가 이 값과 같은 x.y 버전대(예: 0.17.0·0.17.1)면 좌측 목록에 NEW 뱃지를 단다.
+     패치 릴리즈(0.17.1)가 나와도 그 버전대의 새 기능(0.17.0) NEW는 남고, 다음 x.y(0.18.0)에서 저절로 사라진다.
+     릴리즈 때 이 값을 올리고, 그 릴리즈로 내용이 바뀐 페이지에 updated를 적는다. */
   var LATEST = "0.17.1";
+  function minorOf(v) { return String(v || "").split(".").slice(0, 2).join("."); }
+  function isNew(updated) { return !!updated && minorOf(updated) === minorOf(LATEST); }
 
   var NAV = [
     { title: "시작하기", title_en: "Getting started", count: "00", items: [
@@ -51,7 +54,7 @@
       { page: "gateway",       href: "gateway.html",      label: "AI 게이트웨이",            en: "AI gateway" },
       { page: "ssh",           href: "ssh.html",          label: "SSH · SFTP",              en: "SSH · SFTP" },
       { page: "remote",        href: "remote.html",       label: "원격 오크텀",              en: "Remote Orch term", updated: "0.17.0" },
-      { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러",        en: "CDP browser mirror", updated: "0.17.1" }
+      { page: "mirror",        href: "mirror.html",       label: "CDP 브라우저 미러",        en: "CDP browser mirror" }
     ]},
     { title: "핵심 기능", title_en: "Core features", count: "02", items: [
       { page: "terminal",        href: "terminal.html",        label: "터미널",          en: "Terminal", updated: "0.16.1" },
@@ -95,7 +98,7 @@
       html += '<div class="side-links">';
       group.items.forEach(function (it) {
         var active = it.page === current ? " active" : "";
-        var mark = it.flag || (it.updated === LATEST ? "NEW" : "");
+        var mark = it.flag || (isNew(it.updated) ? "NEW" : "");
         var flag = mark ? ' flag' + (mark === "NEW" ? " is-new" : "") + '" data-flag="' + esc(mark) : "";
         var label = EN && it.en ? it.en : it.label;
         html += '<a class="side-link' + active + flag + '" href="' + it.href + '">'
